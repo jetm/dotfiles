@@ -1,0 +1,39 @@
+# Expand abbrevations like ~, $HOME... on console and history
+set expand-tilde on
+
+# Normal case have to hit the <Tab> key twice to produce a list of all
+# possible completions
+# A single <Tab> will suffice
+set show-all-if-ambiguous on
+
+# Result in a character being appended to any file-names returned by
+# completion, in much the same way as ls -F works
+set visible-stats on
+
+# none, visible or audible
+set bell-style none
+
+# Allow the command prompt to wrap to the next line
+set horizontal-scroll-mode Off
+
+# Useful stuff for UTF-8
+# Enable 8bit input
+set meta-flag On
+set input-meta On
+
+# Turns off 8th bit stripping
+set convert-meta Off
+
+# Keep the 8th bit for display
+set output-meta On
+
+set keymap vi-insert
+Control-A: beginning-of-line
+Control-E: end-of-line
+Control-L: clear-screen
+Control-N: next-history
+Control-P: prev-history
+
+set keymap vi-command
+
+set editing-mode vi
