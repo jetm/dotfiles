@@ -253,3 +253,6 @@ if [ -f /etc/arch-release ]; then
 
 fi
 
+if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
+    export TERM=xterm-256color
+fi
