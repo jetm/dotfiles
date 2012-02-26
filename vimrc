@@ -259,31 +259,6 @@ nnoremap <leader><space> :noh<CR>
 vnoremap <silent> gv :call VisualSearch('gv')<CR>
 map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
 
-" Commenting
-"
-" default comment symbol
-let g:StartComment="#"
-let g:EndComment=""
-
-" example of changing it for a filetype
-au FileType c let g:StartComment = "//"
-au FileType vim let g:StartComment = "\""
-au FileType xdefaults let g:StartComment = "!"
-
-" call the function on ,c
-vmap <leader>c :call CommentLines()<CR>
-
-" and the function itself
-function! CommentLines()
-  try
-    execute ":s@^".g:StartComment."@\@g"
-    execute ":s@".g:EndComment."$@@g"
-  catch
-    execute ":s@^@".g:StartComment."@g"
-    execute ":s@$@".g:EndComment."@g"
-  endtry
-endfunction
-
 " From an idea by Michael Naumann
 function! VisualSearch(direction) range
     let l:saved_reg = @"
