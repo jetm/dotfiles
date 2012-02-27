@@ -15,21 +15,24 @@ set autowrite       " auto saves changes when quitting and swiching buffer
 set autoread        " Set to auto read when a file is changed from the outside
 set hidden          " Change buffer - without saving
 set showcmd         " display incomplete commands
-set nolazyredraw    " Don't redraw while executing macros
 set magic           " Set magic on, for regular expressions
 set nobackup        " do not keep a backup file
 set sm              " show matching braces, somewhat annoying...
 set scrolloff=7     " Set 7 lines to the cursors - when moving vertical..
+set linespace=0     " No extra spaces between rows
+set scrolljump=5    " lines to scroll when cursor leaves screen
 set showmatch       " Show matching bracets when text indicator is over them
-"set timeoutlen=500  " Time between each key
 set virtualedit=all " allow the cursor to go in to "invalid" places
 set formatoptions+=1   " When wrapping paragraphs, don't end lines
                        " with 1-letter words (looks stupid)
 set matchpairs+=<:> " Allow % to bounce between angles too
 set ttyfast         " smoother changes
-"set ttyscroll=0    " turn off scrolling, didn't work well with PuTTY
+set history=1000    " Store a ton of history (default is 20)
+set shortmess+=filmnrxoOtT      " abbrev. of messages (avoids 'hit enter')
+set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
 
 " Enconding Stuff
+scriptencoding utf-8
 set encoding=utf-8
 set termencoding=utf-8
 set fileformats="unix,dos,mac"
@@ -38,8 +41,9 @@ set fileformats="unix,dos,mac"
 " even after you close and reopen a file
 if has("persistent_undo")
     set undodir=~/.vim/.undo,/tmp
-    set undolevels=1000
     set undofile
+    set undolevels=1000    "max # of changes that can be undone
+    set undoreload=10000   "max # lines to save for undo on a buffer reload
 endif
 
 " Tab Stuff
@@ -52,7 +56,7 @@ set smarttab
 
 " Indenting Stuff
 set autoindent      " always set autoindenting on
-set smartindent     " smart indent
+"set smartindent     " smart indent
 set nocindent       " No cindent
 "set copyindent
 set nostartofline   " don't jump to first character when paging
@@ -60,7 +64,7 @@ set cinkeys=0{,0},:,0#,!<Tab>,!^F " Indentation the way Emacs does it
 
 " Wrap Stuff
 set wrapscan
-set whichwrap+=<,>,h,l,b,s
+set whichwrap=b,s,h,l,<,>,[,]   " backspace and cursor keys wrap to
 
 " List Stuff
 noremap <F11> :set list!<CR>
@@ -95,11 +99,11 @@ set gdefault        " search/replace "globally" (on a line) by default
 set cmdheight=1     " The commandbar height
 set mat=2           " How many tenths of a second to blink
 set ruler           " show the cursor position all the time
+set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
 set number          " show line numbers
 set title           " show title in console title bar
 set modeline        " last lines in document sets vim mode
 set modelines=3     " number lines checked for modelines
-set shortmess=atI   " Abbreviate messages
 set titlestring=%F%m%r%h%w\ %y\ %(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)
 set guitablabel=%t
 
@@ -203,6 +207,12 @@ inoremap <A-k> <Esc>:m-2<CR>==gi
 vnoremap <A-j> :m'>+<CR>gv=gv
 vnoremap <A-k> :m-2<CR>gv=gv
 
+" Easier moving in tabs and windows
+map <C-J> <C-W>j<C-W>_
+map <C-K> <C-W>k<C-W>_
+map <C-L> <C-W>l<C-W>_
+map <C-H> <C-W>h<C-W>_
+
 " Quickly get out of insert mode without your fingers having to leave the
 " home row
 inoremap jj <Esc>
@@ -216,6 +226,13 @@ map! <F1> <Esc>
 nnoremap q: <Nop>
 nnoremap q/ <Nop>
 nnoremap q? <Nop>
+
+" Stupid shift key fixes
+cmap W w
+cmap WQ wq
+cmap wQ wq
+cmap Q q
+cmap Tabe tabe
 
 " Fix default regex handling by automatically inserting a
 " \v before any string you search for
@@ -262,6 +279,63 @@ nnoremap <leader><space> :noh<CR>
 " When you press gv you vimgrep after the selected text
 vnoremap <silent> gv :call VisualSearch('gv')<CR>
 map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
+
+" Adjust viewports to the same size
+map <Leader>= <C-w>=
+
+if has("autocmd") && exists("+omnifunc")
+    autocmd Filetype *
+        \if &omnifunc == "" |
+        \setlocal omnifunc=syntaxcomplete#Complete |
+        \endif
+endif
+
+hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
+hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
+hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
+
+" Tabularize {
+if exists(":Tabularize")
+    nmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a= :Tabularize /=<CR>
+    nmap <Leader>a: :Tabularize /:<CR>
+    vmap <Leader>a: :Tabularize /:<CR>
+    nmap <Leader>a:: :Tabularize /:\zs<CR>
+    vmap <Leader>a:: :Tabularize /:\zs<CR>
+    nmap <Leader>a, :Tabularize /,<CR>
+    vmap <Leader>a, :Tabularize /,<CR>
+    nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+    vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+
+    " The following function automatically aligns when typing a
+    " supported character
+    inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+
+    function! s:align()
+        let p = '^\s*|\s.*\s|\s*$'
+        if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+            let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+            let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+            Tabularize/|/l1
+            normal! 0
+            call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+        endif
+    endfunction
+
+endif
+" }
+
+" some convenient mappings
+inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr> <C-d>      pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+
+" automatically open and close the popup menu / preview window
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+set completeopt=menu,preview,longest
 
 " From an idea by Michael Naumann
 function! VisualSearch(direction) range
