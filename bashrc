@@ -216,7 +216,8 @@ tcalc()         # fancy way to calc
 # Other Alias
 #
 alias ll='ls -l'
-alias pong='ping -c4 www.google.com' 
+alias l.='ls -d .*'
+alias pong='ping -c4 www.google.com'
 
 # safety features
 alias cp='cp -i'
