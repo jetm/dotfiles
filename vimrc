@@ -3,10 +3,14 @@
 " Maintained by Javier Tiá <javier.tia@gmail.com>
 "
 
-" General behavior
-filetype plugin indent on
-set nocompatible    " use vim defaults
+" Setting pathogen plugin
+call pathogen#helptags()
+call pathogen#infect('~/repos/vim-plugins')
 syntax on           " syntax highlighing
+filetype plugin indent on
+
+" General behavior
+set nocompatible    " use vim defaults
 set autowrite       " auto saves changes when quitting and swiching buffer
 set autoread        " Set to auto read when a file is changed from the outside
 set hidden          " Change buffer - without saving
@@ -387,8 +391,8 @@ if v:version >= 702
     "
     " neocomplcahe Stuff
     "
-    " Disable AutoComplPop.
-    let g:acp_enableAtStartup = 0
+    " AutoComplPop like behavior.
+    let g:neocomplcache_enable_auto_select = 0
     " Use neocomplcache.
     let g:neocomplcache_enable_at_startup = 1
     " Use smartcase.
@@ -400,6 +404,7 @@ if v:version >= 702
     " Set minimum syntax keyword length.
     let g:neocomplcache_min_syntax_length = 3
     let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+    let g:neocomplcache_enable_auto_delimiter = 1
 
     " Define dictionary.
     let g:neocomplcache_dictionary_filetype_lists = {
@@ -410,9 +415,14 @@ if v:version >= 702
 
     " Define keyword.
     if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
+        let g:neocomplcache_keyword_patterns = {}
     endif
     let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+    " Enable heavy omni completion.
+    if !exists('g:neocomplcache_omni_patterns')
+        let g:neocomplcache_omni_patterns = {}
+    endif
 
     " Plugin key-mappings.
     imap <C-k>     <Plug>(neocomplcache_snippets_expand)
@@ -420,22 +430,18 @@ if v:version >= 702
     inoremap <expr><C-g>     neocomplcache#undo_completion()
     inoremap <expr><C-l>     neocomplcache#complete_common_string()
 
-    " SuperTab like snippets behavior.
-    "imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-
-    " Recommended key-mappings.
-    " <CR>: close popup and save indent.
-    inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+    " <CR>: close popup
+    " <s-CR>: close popup and save indent.
+    inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+    inoremap <expr><s-CR> pumvisible() ? neocomplcache#close_popup() "\<CR>" : "\<CR>"
     " <TAB>: completion.
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
     " <C-h>, <BS>: close popup and delete backword char.
     inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
     inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
     inoremap <expr><C-y>  neocomplcache#close_popup()
     inoremap <expr><C-e>  neocomplcache#cancel_popup()
-
-    " AutoComplPop like behavior.
-    "let g:neocomplcache_enable_auto_select = 1
 
     " Enable omni completion.
     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
@@ -443,12 +449,8 @@ if v:version >= 702
     autocmd FileType bash setlocal omnifunc=bashcomplete#Complete
     autocmd FileType shell setlocal omnifunc=shellcomplete#Complete
 
-    " Enable heavy omni completion.
-    if !exists('g:neocomplcache_omni_patterns')
-    let g:neocomplcache_omni_patterns = {}
+    " For snippet_complete marker.
+    if has('conceal')
+        set conceallevel=2 concealcursor=i
     endif
-
-    let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-    let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
-
 endif
