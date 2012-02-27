@@ -5,7 +5,7 @@
 
 " Setting pathogen plugin
 call pathogen#helptags()
-call pathogen#infect('~/repos/vim-plugins')
+call pathogen#infect('~/repos/dotfiles/vim-plugins')
 syntax on           " syntax highlighing
 filetype plugin indent on
 
