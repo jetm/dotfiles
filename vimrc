@@ -172,9 +172,6 @@ if has("autocmd")
     au FileType python set expandtab shiftwidth=4 softtabstop=4
     au FileType python set completeopt=preview
 
-    " sh stuff
-    au FileType sh set expandtab shiftwidth=2 softtabstop=4
-
     augroup myvimrchooks
         au!
         autocmd bufwritepost .vimrc source ~/.vimrc
