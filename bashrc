@@ -174,16 +174,14 @@ if [ -f ~/.git-completion ]; then
     source ~/.git-completion
 fi
 
+if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
+    export TERM=xterm-256color
+fi
+
 # Call fortune
 if [ -n "$PS1" ] && [ -x `which fortune` ]; then
     fortune
 fi
-
-# if [ -x ~/bin/tmx ]; then
-    # @TODO
-    # Only for remote ssh session
-    # tmx work
-# fi
 
 up ()           # up n is the same as cd ../..
 {
@@ -223,8 +221,6 @@ alias pong='ping -c4 www.google.com'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
-alias tranes='translate en es'
-alias tranen='translate es en'
 
 #
 # Arch Linux Stuff
@@ -254,6 +250,3 @@ if [ -f /etc/arch-release ]; then
 
 fi
 
-if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
-    export TERM=xterm-256color
-fi
