@@ -178,6 +178,12 @@ if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
     export TERM=xterm-256color
 fi
 
+if [ -x $HOME/bin/vim ] ; then
+    export EDITOR=$HOME/bin/vim
+elif ( which vim > /dev/null ) ; then
+    export EDITOR=vim
+fi
+
 # Call fortune
 if [ -n "$PS1" ] && [ -x `which fortune` ]; then
     fortune
