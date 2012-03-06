@@ -231,6 +231,12 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
+# aliases for git
+alias g='git --no-pager'
+alias gp='git -p'
+alias mg='git help'
+complete -o default -o nospace -F _git g
+
 #
 # Arch Linux Stuff
 #
