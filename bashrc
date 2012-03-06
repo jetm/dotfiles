@@ -50,8 +50,11 @@ done
 
 # History Stuff
 export HISTTIMEFORMAT="%H:%M > "
-export HISTIGNORE="&:[bf]g:ll:h:ls:clear:exit"
-export HISTSIZE=9000
+HISTIGNORE='&:[bf]g:ll:h:ls:clear:exit:\&:pwd:up:cd ..:free*:df*'
+HISTIGNORE=${HISTIGNORE}':cd ~-:cd -:cd:jobs:set -x:ls -l:top'
+HISTIGNORE=${HISTIGNORE}':%1:%2:popd:top:halt:shutdown:reboot*'
+export HISTIGNORE
+export HISTSIZE=10000
 export HISTFILESIZE=$HISTSIZE
 export HISTCONTROl=ignoreboth
 
