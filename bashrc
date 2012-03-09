@@ -177,7 +177,8 @@ if [ -f ~/.git-completion ]; then
     source ~/.git-completion
 fi
 
-if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
+if [ -n "$DISPLAY" -a "$TERM" == "xterm" -a \
+    -e /usr/share/terminfo/x/xterm-256color ]; then
     export TERM=xterm-256color
 fi
 
