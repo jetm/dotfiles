@@ -85,14 +85,19 @@ else
     endif
 endif
 
-" Completion
+" Wildmenu / Completion
 if has("wildmenu")
-    set wildignore+=*.a,*.o
-    set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
-    set wildignore+=.DS_Store,.git,.hg,.svn
-    set wildignore+=*~,*.swp,*.tmp
     set wildmenu
     set wildmode=list:longest,full
+    if has("wildignore")
+        set wildignore+=*.a,*.o
+        set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png
+        set wildignore+=.DS_Store,.git,.hg,.svn
+        set wildignore+=*~,*.swp,*.tmp
+    endif
+    if exists("&wildignorecase")
+        set wildignorecase
+    endif
 endif
 
 " Search Stuff
