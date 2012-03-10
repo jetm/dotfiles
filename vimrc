@@ -178,12 +178,6 @@ if has("autocmd")
     " Backspace to go back
     au FileType helpfile nnoremap <buffer><BS> <c-T>
 
-    " Python stuff
-    au FileType python let python_highlight_all = 1
-    au FileType python let python_slow_sync = 1
-    au FileType python set expandtab shiftwidth=4 softtabstop=4
-    au FileType python set completeopt=preview
-
     augroup myvimrchooks
         au!
         autocmd bufwritepost .vimrc source ~/.vimrc
