@@ -178,6 +178,8 @@ if has("autocmd")
     " Backspace to go back
     au FileType helpfile nnoremap <buffer><BS> <c-T>
 
+    autocmd FileType make set noexpandtab
+
     augroup myvimrchooks
         au!
         autocmd bufwritepost .vimrc source ~/.vimrc
