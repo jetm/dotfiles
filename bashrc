@@ -142,9 +142,9 @@ if ${use_color} ; then
     fi
 
     if [[ ${EUID} == 0 ]] ; then
-        PS1='\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\] '
+        PS1='\[\033[01;31m\]\h\[\033[01;34m\] \W \$\[\033[00m\]\n$ '
     else
-        PS1='[\# ${clearcase_view}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w$(__git_ps1 " (%s)")\[\033[00m\]] '
+        PS1='[\# ${clearcase_view}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w$(__git_ps1 " (%s)")\[\033[00m\]]\n$ '
         #PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] '
     fi
 
@@ -180,12 +180,6 @@ fi
 if [ -n "$DISPLAY" -a "$TERM" == "xterm" -a \
     -e /usr/share/terminfo/x/xterm-256color ]; then
     export TERM=xterm-256color
-fi
-
-if [ -x $HOME/bin/vim ] ; then
-    export EDITOR=$HOME/bin/vim
-elif ( which vim > /dev/null ) ; then
-    export EDITOR=vim
 fi
 
 # Call fortune
