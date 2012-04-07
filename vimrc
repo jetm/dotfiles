@@ -288,6 +288,10 @@ map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
 " Adjust viewports to the same size
 map <Leader>= <C-w>=
 
+" Mapping commentary Plugin
+" FIXME: Add a way to check commentary Plugin is loaded
+map <leader>c \\
+
 if has("autocmd") && exists("+omnifunc")
     autocmd Filetype *
         \if &omnifunc == "" |
