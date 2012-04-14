@@ -110,7 +110,7 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-use_color=false
+use_color=true
 
 # Set colorful PS1 only on colorful terminals.
 # dircolors --print-database uses its own built-in database
@@ -178,7 +178,7 @@ if [ -f ~/.git-completion ]; then
 fi
 
 if [ -n "$DISPLAY" -a "$TERM" == "xterm" -a \
-    -e /usr/share/terminfo/x/xterm-256color -a -z "$TMUX" ]; then
+    -e /usr/share/terminfo/x/xterm-256color ]; then
     export TERM=xterm-256color
 fi
 
