@@ -37,3 +37,6 @@ Control-P: prev-history
 set keymap vi-command
 
 set editing-mode vi
+tab: complete
+set completion-ignore-case on
+set blink-matching-paren on
