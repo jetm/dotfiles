@@ -220,12 +220,21 @@ tcalc()         # fancy way to calc
     awk "BEGIN { print $* }";
 }
 
+digga () {
+  dig +nocmd $1 any +multiline +noall +answer
+}
+
+# Copy w/ progress
+cp_p () {
+  rsync -WavP --human-readable --progress $1 $2
+}
 #
 # Other Alias
 #
 alias ll='ls -l'
 alias l.='ls -d .*'
 alias pong='ping -c4 www.google.com'
+alias ip="curl -s http://checkip.dyndns.com/ | sed 's/[^0-9\.]//g'"
 
 # safety features
 alias cp='cp -i'
