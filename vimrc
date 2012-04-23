@@ -4,8 +4,11 @@
 "
 
 " Setting pathogen plugin
-call pathogen#helptags()
-call pathogen#infect('~/repos/vim-plugins')
+if v:version > 700
+    call pathogen#helptags()
+    call pathogen#infect('~/repos/vim-plugins')
+endif
+
 syntax on           " syntax highlighing
 filetype plugin indent on
 
