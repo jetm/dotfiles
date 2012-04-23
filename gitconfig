@@ -65,6 +65,5 @@
     stash-unapply = '!git stash show -p | git apply -R'
 
 [github]
-    user = jetm
     token = TOKEN
 
