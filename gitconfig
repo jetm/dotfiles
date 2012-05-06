@@ -25,10 +25,14 @@
 
 [alias]
     br = branch
+    b  = branch -vv     # Branch verbose
     ci = commit
     co = checkout
     st = status
     ls = ls-files
+
+    # cherry-pick
+    cp = cherry-pick -x
 
     # Logs
     lgn = "!f() { git log --graph --pretty=format:'%Cred%H%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --date=relative $@ | git name-rev --stdin --name-only ; } ; f"
