@@ -36,7 +36,7 @@ set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatib
 
 " Enconding Stuff
 scriptencoding utf-8
-set encoding=utf-8
+set encoding=utf-8 nobomb       " UTF-8 without OEM
 set termencoding=utf-8
 set fileformats="unix,dos,mac"
 
