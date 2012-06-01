@@ -447,3 +447,8 @@ let perl_include_pod = 1
 
 " syntax color complex things like @{${"foo"}}
 let perl_extended_vars = 1
+
+" SuperTab settings
+let g:SuperTabDefaultCompletionType = "context"
+set completeopt=menuone,longest,preview
+
