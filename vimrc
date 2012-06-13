@@ -273,7 +273,15 @@ nmap <leader>Y "+yy
 nmap <leader>p "+p
 nmap <leader>P "+P
 nmap Y y$ " Quick yanking to the end of the line
-set pastetoggle=<F2>
+
+" Pastetoggle
+set showmode
+map <F2> :set paste<CR>
+map <F3> :set nopaste<CR>
+imap <F2> <C-O>:set paste<CR>
+imap <F3> <nop>
+set pastetoggle=<F3>
+
 set clipboard+=unnamedplus " yank and copy to X clipboard
 
 " In visual mode when you press * or # to search for the current selection
