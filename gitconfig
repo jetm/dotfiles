@@ -37,6 +37,9 @@
     # Logs
     lgn = "!f() { git log --graph --pretty=format:'%Cred%H%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --date=relative $@ | git name-rev --stdin --name-only ; } ; f"
 
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+
     # list all new commits after you fetched, with stats, but excluding merges
     lc = log ORIG_HEAD.. --stat --no-merges
 
