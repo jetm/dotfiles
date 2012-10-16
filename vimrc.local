@@ -1,0 +1,43 @@
+" Sudo to write
+map <leader>W :w !sudo tee % >/dev/null<CR>
+
+"
+" Clean extra white space
+"
+function! ShowSpaces(...)
+  let @/='\v(\s+$)|( +\ze\t)'
+  let oldhlsearch=&hlsearch
+  if !a:0
+    let &hlsearch=!&hlsearch
+  else
+    let &hlsearch=a:1
+  end
+  return oldhlsearch
+endfunction
+
+function! TrimSpaces() range
+  let oldhlsearch=ShowSpaces(1)
+  execute a:firstline.",".a:lastline."substitute ///gec"
+  let &hlsearch=oldhlsearch
+endfunction
+
+command! -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
+command! -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
+nnoremap <F12>           :ShowSpaces 1<CR>
+nnoremap <Leader><F12>   m`:TrimSpaces<CR>``
+vnoremap <Leader><S-F12> :TrimSpaces<CR>
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+au ColorScheme * highlight ExtraWhitespace guibg=red
+au BufEnter * match ExtraWhitespace /\s\+$/
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhiteSpace /\s\+$/
+
+"
+" Perl Stuff
+"
+" my perl includes pod
+let perl_include_pod = 1
+
+" syntax color complex things like @{${"foo"}}
+let perl_extended_vars = 1
