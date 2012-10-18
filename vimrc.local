@@ -1,3 +1,15 @@
+" General behavior
+set autowrite       " auto saves changes when quitting and swiching buffer
+set autoread        " Set to auto read when a file is changed from the outside
+set nobackup        " do not keep a backup file
+set magic           " Set magic on, for regular expressions
+set ttyfast         " smoother changes
+
+" Wrap Stuff
+set wrap
+set wrapscan
+set whichwrap=b,s,h,l,<,>,[,]   " backspace and cursor keys wrap to
+
 " Sudo to write
 map <leader>W :w !sudo tee % >/dev/null<CR>
 
