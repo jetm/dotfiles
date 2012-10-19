@@ -457,6 +457,17 @@ let perl_include_pod = 1
 let perl_extended_vars = 1
 
 " SuperTab settings
-let g:SuperTabDefaultCompletionType = "context"
-set completeopt=menuone,longest,preview
+
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabLongestEnhanced = 1
+let g:SuperTabClosePreviewOnPopupClose = 1
+"set completeopt=menuone,longest,preview
+
+"I've also enabled completion chaining for python files (Note: using
+"&omnifunc instead of &completefunc would be more common):
+
+"autocmd FileType python
+            "\ if &completefunc != '' |
+            "\   call SuperTabChain(&completefunc, "<c-p>") |
+            "\ endif
 
