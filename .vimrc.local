@@ -5,19 +5,22 @@ set nobackup        " do not keep a backup file
 set magic           " Set magic on, for regular expressions
 set ttyfast         " smoother changes
 
-" Sudo to write
-map <leader>W :w !sudo tee % >/dev/null<CR>
+" Wrap Stuff
+set wrap
+"set wrapscan
+"set whichwrap=b,s,h,l,<,>,[,]   " backspace and cursor keys wrap to
 
 autocmd FileType sh,awk setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 " git commits
+autocmd FileType gitcommit setlocal spell
 au BufNewFile,BufRead *.git/COMMIT_EDITMSG set tw=72 noai noshowmatch
-au BufNewFile,BufRead *.git/COMMIT_EDITMSG setlocal spell spelllang=en_us
+au BufNewFile,BufRead *.git/COMMIT_EDITMSG setlocal spell spelllang=en_us"
 
-" Wrap Stuff
-set wrap
-set showbreak=↪
+" Sudo to write
+map <leader>W :w !sudo tee % >/dev/null<CR>
 
+"
 " Clean extra white space
 "
 function! ShowSpaces(...)
