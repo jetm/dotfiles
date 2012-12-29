@@ -1,5 +1,5 @@
 [user]
-    name = Javier Tiá
+    name = Javier Tia
     email = javier.tia@gmail.com
 
 [core]
@@ -25,7 +25,6 @@
 
 [alias]
     br = branch
-    b  = branch -vv     # Branch verbose
     ci = commit
     co = checkout
     st = status
@@ -76,4 +75,7 @@
 
 [github]
     token = TOKEN
+
+[push]
+    default = simple
 
