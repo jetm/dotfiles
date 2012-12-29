@@ -1,4 +1,18 @@
 Just my dotfiles.
 
+Before use it make sure stow, oh-my-zsh and spf13-vim are installed.
+
+
+Install mydotfiles:
+
+    stow -d . --ignore="(junk|no-stow|ref|README)" -t ~ mydotfiles
+    cp no-stow/.gitconfig ~/
+
+
+Remove mydotfiles:
+
+    stow -D . -t ~ mydotfiles
+
+
 You can use it, copy, distribute... be my guest :)
 
