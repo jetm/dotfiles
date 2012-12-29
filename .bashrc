@@ -18,28 +18,15 @@ if [ -d ~/local/share/man ] ; then
     fi
 fi
 
+if [ -f /usr/share/git/git-prompt.sh ]; then
+    source /usr/share/git/git-prompt.sh
+fi
+
 unset CDPATH
 
 export HOSTFILE=$HOME/.hosts    # Put list of remote hosts in ~/.hosts
 export PAGER="less"
 export LESS="-I -j6 -M -F -X -R"
-
-# Define BROWSER and EDITOR
-if [ "$DISPLAY" ] ; then
-    for browser in iceweasel firefox mozilla ; do
-        if command -v $browser &> /dev/null ; then
-            export BROWSER=`command -v $browser`
-            break
-        fi
-    done
-else
-    for browser in w3m links ; do
-        if command -v $browser &> /dev/null ; then
-            export BROWSER=`command -v $browser`
-            break
-        fi
-    done
-fi
 
 for editor in vim vi editor ; do
     if command -v $editor &> /dev/null ; then
@@ -80,7 +67,6 @@ for LANG in en_US.utf8 en_US.UTF-8 en_US C ; do
         break
     fi
 done
-
 
 #
 # Shell opts: see bash(1)
