@@ -79,3 +79,5 @@ urxvt*foreground: #eeeeee
 *color14:     #34e2e2
 *color15:     #eeeeec
 
+*customization: -color
+XTerm*termName:  xterm-256color
