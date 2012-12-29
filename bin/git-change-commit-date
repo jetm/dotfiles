@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+# Modify the date of one specific commit
+#
+# git-change-commit-date <COMMIT> <DATE>
+#
+# Sample <DATE> format: Fri Jan 2 21:38:53 2009 -0800
+# ISO8601 and RFC822 dates will also work.
+#
+# Match up the committer date to the author date.
+#    export GIT_COMMITTER_DATE="$GIT_AUTHOR_DATE"
+
+commit="$1"
+date="$@"
+
+git filter-branch --env-filter \
+    "if test \$GIT_COMMIT = '$commit'
+     then
+         export GIT_AUTHOR_DATE
+         export GIT_COMMITTER_DATE
+         GIT_AUTHOR_DATE='$date'
+         GIT_COMMITTER_DATE='$date'
+     fi" &&
+rm -fr "$(git rev-parse --git-dir)/refs/original/"
