@@ -5,8 +5,7 @@ Before use it make sure stow, oh-my-zsh and spf13-vim are installed.
 
 Install mydotfiles:
 
-    stow -d . --ignore="(junk|no-stow|ref|README)" -t ~ mydotfiles
-    cp no-stow/.gitconfig ~/
+    stow -d . --ignore="(junk|no-stow|README)" -t ~ mydotfiles
 
 
 Remove mydotfiles:
