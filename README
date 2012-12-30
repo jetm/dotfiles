@@ -1,16 +1,14 @@
-Just my dotfiles.
-
-Before use it make sure stow, oh-my-zsh and spf13-vim are installed.
+mydotfiles: Just my dotfiles.
 
 
 Install mydotfiles:
 
-    stow -d . --ignore="(junk|no-stow|README)" -t ~ mydotfiles
+    bin/install
 
 
 Remove mydotfiles:
 
-    stow -D . -t ~ mydotfiles
+    bin/install -u
 
 
 You can use it, copy, distribute... be my guest :)
