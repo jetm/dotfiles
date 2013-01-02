@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
 
-test -d $HOME/.apple_keys && \
+set -e
+
+lsusb | grep -q "Apple.*Aluminum Keyboard"
+if [ $? -eq 0 ] && [ -f $HOME/.apple_keys ]; then
   xmodmap $HOME/.apple_keys
+fi
