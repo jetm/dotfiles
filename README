@@ -1,14 +1,14 @@
-mydotfiles: Just my dotfiles.
+Just my dotfiles.
 
 
-Install mydotfiles:
+Install dotfiles:
 
-    bin/install
+    bin/install-dotfiles
 
 
-Remove mydotfiles:
+Remove dotfiles:
 
-    bin/install -u
+    bin/install-dotfiles -u
 
 
 You can use it, copy, distribute... be my guest :)
