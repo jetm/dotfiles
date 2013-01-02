@@ -1,0 +1,2 @@
+test -d $HOME/.apple_keys && \
+  xmodmap $HOME/.apple_keys
