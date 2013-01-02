@@ -73,9 +73,6 @@
     # remove remote-tracking branches that were deleted from the remote repo
     trim = !git remote prune origin && git gc
 
-[github]
-    token = TOKEN
-
 [push]
     default = simple
 
