@@ -6,17 +6,19 @@ err()
     exit 1;
 }
 
+DOTFILES=dotfiles
+
 if which stow 2&> /dev/null; then
     err "stow is not installed"
 elif [[ ! -d $HOME/.oh-my-zsh || ! -d $HOME/.spf13-vim-3 ]]; then
     err "oh-my-zsh or spf13-vim are not installed"
-elif [ ! -d mydotfiles ]; then
-    err "No found mydotfiles dir"
+elif [ ! -d $DOTFILES ]; then
+    err "No found $DOTFILES dir"
 fi
 
 if [ "$1" = "-u" ]
 then
-    stow -D . -t ~ mydotfiles
+    stow -D . -t ~ $DOTFILES
 else
-    stow -d . --ignore="(junk|no-stow|README)" -t ~ mydotfiles
+    stow -d . --ignore="(junk|no-stow|README)" -t ~ $DOTFILES
 fi
