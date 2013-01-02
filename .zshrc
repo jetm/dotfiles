@@ -40,7 +40,12 @@ DISABLE_AUTO_TITLE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git vi-mode history-substring-search git-extras last-working-dir per-directory-history)
+plugins=(
+git
+vi-mode
+history-substring-search
+git-extras
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -49,13 +54,9 @@ source $ZSH/oh-my-zsh.sh
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then
     PATH=~/bin:"${PATH}"
-fi
-
-if [ -d /tools ] ; then
+elif [ -d /tools ] ; then
     PATH=/tools:"${PATH}"
-fi
-
-if [ -d /usr/local/bin ] ; then
+elif [ -d /usr/local/bin ] ; then
     PATH=/usr/local/bin:"${PATH}"
 fi
 
@@ -71,15 +72,6 @@ stty -ixon
 # Never beep at me
 setterm -bfreq 0
 
-# Ignore lines prefixed with '#'.
-setopt interactivecomments
-
-# Ignore duplicate in history.
-setopt hist_ignore_dups
-
-# Prevent record in history entry if preceding them with at least one space
-setopt hist_ignore_space
-
 # Nobody need flow control anymore. Troublesome feature.
 #stty -ixon
 setopt noflowcontrol
@@ -91,8 +83,6 @@ case "$(uname -o)" in
     ;;
 esac
 
-bindkey "^R" history-incremental-search-backward
-
 # 10 second wait if you do something that will delete everything.  I wish I'd had this before...
 setopt RM_STAR_WAIT
 
@@ -102,10 +92,23 @@ setopt NO_FLOW_CONTROL
 # beeps are annoying
 setopt NO_BEEP
 
+# History features
+
+bindkey "^R" history-incremental-search-backward
+
+# Ignore lines prefixed with '#'
+setopt interactivecomments
+
+# Ignore duplicate in history
+setopt hist_ignore_dups
+
+# Prevent record in history entry if preceding them with at least one space
+setopt hist_ignore_space
+
 # Killer: share history between multiple shells
 setopt SHARE_HISTORY
 
-# Pretty    Obvious.  Right?
+# Pretty Obvious. Right?
 setopt HIST_REDUCE_BLANKS
 
 # If a line starts with a space, don't save it.
@@ -120,6 +123,10 @@ setopt EXTENDED_HISTORY
 
 # Avoid problem with HEAD^
 setopt NO_NOMATCH
+
+#
+# Useful Functions
+#
 
 up()           # up n is the same as cd ../..
 {
