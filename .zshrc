@@ -15,6 +15,9 @@ ZSH_THEME="jetm"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -118,7 +121,7 @@ setopt EXTENDED_HISTORY
 # Avoid problem with HEAD^
 setopt NO_NOMATCH
 
-up ()           # up n is the same as cd ../..
+up()           # up n is the same as cd ../..
 {
   [[ $# -eq 0 ]] && cd ..
   if [[ $1 =~ ^[0-9]+$ ]] && [[ $1 -gt 0 ]]
@@ -145,7 +148,8 @@ tcalc()         # fancy way to calc
     awk "BEGIN { print $* }";
 }
 
-confirm() {
+confirm()
+{
     local answer
     echo -ne "zsh: sure you want to run '${YELLOW}$@${NC}' [yN]? "
     read -q answer
@@ -157,7 +161,8 @@ confirm() {
     fi
 }
 
-confirm_wrapper() {
+confirm_wrapper()
+{
     if [ "$1" = '--root' ]; then
         local as_root='true'
         shift
@@ -172,7 +177,8 @@ confirm_wrapper() {
 }
 
 
-has() {
+has()
+{
     local string="${1}"
     shift
     local element=''
@@ -184,7 +190,8 @@ has() {
     return 1
 }
 
-begin_with() {
+begin_with()
+{
     local string="${1}"
     shift
     local element=''
@@ -194,6 +201,5 @@ begin_with() {
         fi
     done
     return 1
-
 }
 
