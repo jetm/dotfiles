@@ -1,2 +1,2 @@
-test -x $HOME/bin/fix-apple-keyboard &&
+test -x $HOME/bin/fix-apple-keyboard && \
   source $HOME/bin/fix-apple-keyboard
