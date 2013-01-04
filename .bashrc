@@ -20,6 +20,8 @@ fi
 
 if [ -f /usr/share/git/git-prompt.sh ]; then
   source /usr/share/git/git-prompt.sh
+elif [[ -f /usr/share/doc/git/contrib/completion/git-prompt.sh ]]; then
+    source /usr/share/doc/git/contrib/completion/git-prompt.sh
 fi
 
 unset CDPATH
