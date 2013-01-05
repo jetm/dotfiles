@@ -74,5 +74,5 @@
     trim = !git remote prune origin && git gc
 
 [push]
-    default = simple
+    default = matching
 
