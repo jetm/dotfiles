@@ -15,9 +15,7 @@ ZSH_THEME="jetm"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias cp='cp -i'
-alias mv='mv -i'
-alias rm='rm -i'
+[ -f $HOME/.aliases ] && source $HOME/.aliases
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -50,6 +48,11 @@ git-extras
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
+
+if [ -n "$DISPLAY" -a "$TERM" = "xterm" -a \
+    -e /usr/share/terminfo/x/xterm-256color ]; then
+  export TERM=xterm-256color
+fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then
