@@ -3,7 +3,7 @@
     email = javier.tia@gmail.com
 
 [core]
-    pager = less -FRSX
+    pager = less -FrS
     editor = vim
     autocrlf = input
     safecrlf = true
@@ -29,6 +29,7 @@
     co = checkout
     st = status
     ls = ls-files
+    rb = rebase
 
     # cherry-pick
     cp = cherry-pick -x
