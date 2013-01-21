@@ -2,6 +2,7 @@
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
+alias vimn='vim -u NONE'
 
 #
 # Arch Linux Stuff
@@ -29,5 +30,4 @@ if [ -f /etc/arch-release ]; then
   alias pacmir='sudo pacman -Syy'                 # Force refresh of all package lists after updating /etc/pacman.d/mirrorlist
   alias pacorph='sudo pacman -Rs $(pacman -Qtdq)' # recursively removing orphans (be careful)
 fi
-
 
