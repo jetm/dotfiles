@@ -7,7 +7,6 @@
     editor = vim
     autocrlf = input
     safecrlf = true
-	gitproxy = gitproxy
 
 [color]
     ui = auto
