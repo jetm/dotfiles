@@ -49,6 +49,13 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
+# colors for ls
+if [[ -f ~/.dir_colors ]] ; then
+    eval $(dircolors -b ~/.dir_colors)
+elif [[ -f /etc/DIR_COLORS ]] ; then
+    eval $(dircolors -b /etc/DIR_COLORS)
+fi
+
 #
 # Enable 256 color capabilities for appropriate terminals
 #
