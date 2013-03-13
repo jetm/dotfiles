@@ -68,7 +68,6 @@ else
 end
 
 UnBundle 'scrooloose/nerdtree'
-"UnBundle 'godlygeek/csapprox'
 UnBundle 'jistr/vim-nerdtree-tabs'
 UnBundle 'flazz/vim-colorschemes'
 UnBundle 'mbbill/undotree'
@@ -77,7 +76,6 @@ UnBundle 'airblade/vim-gitgutter'
 UnBundle 'tpope/vim-abolish.git'
 UnBundle 'mattn/webapi-vim'
 UnBundle 'mattn/gist-vim'
-UnBundle 'scrooloose/nerdcommenter'
 UnBundle 'spf13/PIV'
 UnBundle 'arnaud-lb/vim-php-namespace'
 UnBundle 'groenewege/vim-less'
