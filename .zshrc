@@ -1,6 +1,6 @@
 if [ -z "$PS1" ] ; then
-    # If not running interactively, don't do anything
-    return
+  # If not running interactively, don't do anything
+  return
 fi
 
 # Path to your oh-my-zsh configuration.
@@ -51,9 +51,9 @@ source $ZSH/oh-my-zsh.sh
 
 # colors for ls
 if [[ -f ~/.dir_colors ]] ; then
-    eval $(dircolors -b ~/.dir_colors)
+  eval $(dircolors -b ~/.dir_colors)
 elif [[ -f /etc/DIR_COLORS ]] ; then
-    eval $(dircolors -b /etc/DIR_COLORS)
+  eval $(dircolors -b /etc/DIR_COLORS)
 fi
 
 #
@@ -71,8 +71,8 @@ if [ -n "$local256" ] || [ -n "$SEND_256_COLORS_TO_REMOTE" ]; then
 
   case "$TERM" in
     'xterm') TERM=xterm-256color;;
-    'screen') TERM=screen-256color;;
-    'Eterm') TERM=Eterm-256color;;
+  'screen') TERM=screen-256color;;
+'Eterm') TERM=Eterm-256color;;
   esac
   export TERM
 
@@ -86,11 +86,11 @@ unset local256
 
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then
-    PATH=~/bin:"${PATH}"
+  PATH=~/bin:"${PATH}"
 elif [ -d /tools ] ; then
-    PATH=/tools:"${PATH}"
+  PATH=/tools:"${PATH}"
 elif [ -d /usr/local/bin ] ; then
-    PATH=/usr/local/bin:"${PATH}"
+  PATH=/usr/local/bin:"${PATH}"
 fi
 
 unset CDPATH
@@ -111,8 +111,8 @@ setopt noflowcontrol
 
 # Fix for tmux on linux.
 case "$(uname -o)" in
-    'GNU/Linux')
-        export EVENT_NOEPOLL=1
+  'GNU/Linux')
+    export EVENT_NOEPOLL=1
     ;;
 esac
 
@@ -166,80 +166,80 @@ up()           # up n is the same as cd ../..
   [[ $# -eq 0 ]] && cd ..
   if [[ $1 =~ ^[0-9]+$ ]] && [[ $1 -gt 0 ]]
   then
-      dirs=1
-      until [[ $dirs -gt $1 ]]
-      do
-          command="${command}../"
+    dirs=1
+    until [[ $dirs -gt $1 ]]
+    do
+      command="${command}../"
       dirs=$(($dirs+1))
-      done
-      cd $command
-      command=''
+    done
+    cd $command
+    command=''
   fi
 }
 
 debug()         # debug bash script
 {
-    local script="$1"; shift
-    bash -x $(which $script) "$@"
+  local script="$1"; shift
+  bash -x $(which $script) "$@"
 }
 
 tcalc()         # fancy way to calc
 {
-    awk "BEGIN { print $* }";
+  awk "BEGIN { print $* }";
 }
 
 confirm()
 {
-    local answer
-    echo -ne "zsh: sure you want to run '${YELLOW}$@${NC}' [yN]? "
-    read -q answer
-    echo
-    if [[ "${answer}" =~ ^[Yy]$ ]]; then
-        command "${=1}" "${=@:2}"
-    else
-        return 1
-    fi
+  local answer
+  echo -ne "zsh: sure you want to run '${YELLOW}$@${NC}' [yN]? "
+  read -q answer
+  echo
+  if [[ "${answer}" =~ ^[Yy]$ ]]; then
+    command "${=1}" "${=@:2}"
+  else
+    return 1
+  fi
 }
 
 confirm_wrapper()
 {
-    if [ "$1" = '--root' ]; then
-        local as_root='true'
-        shift
-    fi
+  if [ "$1" = '--root' ]; then
+    local as_root='true'
+    shift
+  fi
 
-    local runcommand="$1"; shift
+  local runcommand="$1"; shift
 
-    if [ "${as_root}" = 'true' ] && [ "${USER}" != 'root' ]; then
-        runcommand="sudo ${runcommand}"
-    fi
-    confirm "${runcommand}" "$@"
+  if [ "${as_root}" = 'true' ] && [ "${USER}" != 'root' ]; then
+    runcommand="sudo ${runcommand}"
+  fi
+  confirm "${runcommand}" "$@"
 }
 
 
 has()
 {
-    local string="${1}"
-    shift
-    local element=''
-    for element in "$@"; do
-        if [ "${string}" = "${element}" ]; then
-            return 0
-        fi
-    done
-    return 1
+  local string="${1}"
+  shift
+  local element=''
+  for element in "$@"; do
+    if [ "${string}" = "${element}" ]; then
+      return 0
+    fi
+  done
+  return 1
 }
 
 begin_with()
 {
-    local string="${1}"
-    shift
-    local element=''
-    for element in "$@"; do
-        if [[ "${string}" =~ "^${element}" ]]; then
-            return 0
-        fi
-    done
-    return 1
+  local string="${1}"
+  shift
+  local element=''
+  for element in "$@"; do
+    if [[ "${string}" =~ "^${element}" ]]; then
+      return 0
+    fi
+  done
+  return 1
 }
 
