@@ -99,6 +99,10 @@ export HOSTFILE=$HOME/.hosts    # Put list of remote hosts in ~/.hosts
 export PAGER="less"
 export LESS="-I -j6 -M -F -X -R"
 
+# Setting for Ubuntu/Debian packaging
+export DEBFULLNAME="Javier Tia"
+export DEBEMAIL="javier.tia@gmail.com"
+
 # Turn off annoying and useless flow control keys
 stty -ixon
 
