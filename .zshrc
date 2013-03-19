@@ -103,6 +103,9 @@ export LESS="-I -j6 -M -F -X -R"
 export DEBFULLNAME="Javier Tia"
 export DEBEMAIL="javier.tia@gmail.com"
 
+# Set vim Global editor
+[ -x /usr/bin/vim ] && export EDITOR=vim
+
 # Turn off annoying and useless flow control keys
 stty -ixon
 
