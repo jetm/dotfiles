@@ -10,7 +10,7 @@ set wrap
 "set wrapscan
 "set whichwrap=b,s,h,l,<,>,[,]   " backspace and cursor keys wrap to
 
-set pastetoggle=<F10>
+set pastetoggle=<F2>
 
 autocmd FileType sh,awk,zsh setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
