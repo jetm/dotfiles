@@ -87,11 +87,17 @@ unset local256
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then
   PATH=~/bin:"${PATH}"
-elif [ -d /tools ] ; then
+fi
+
+if [ -d /tools ] ; then
   PATH=/tools:"${PATH}"
-elif [ -d /usr/local/bin ] ; then
+fi
+
+if [ -d /usr/local/bin ] ; then
   PATH=/usr/local/bin:"${PATH}"
-elif [ -x /usr/bin/ruby -a -x /usr/bin/gem ] ; then
+fi
+
+if [ -x /usr/bin/ruby -a -x /usr/bin/gem ] ; then
   PATH=$(ruby -rubygems -e "puts Gem.user_dir")/bin:"${PATH}"
 fi
 
