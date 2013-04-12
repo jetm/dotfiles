@@ -91,6 +91,8 @@ elif [ -d /tools ] ; then
   PATH=/tools:"${PATH}"
 elif [ -d /usr/local/bin ] ; then
   PATH=/usr/local/bin:"${PATH}"
+elif [ -x /usr/bin/ruby -a -x /usr/bin/gem ] ; then
+  PATH=$(ruby -rubygems -e "puts Gem.user_dir")/bin:"${PATH}"
 fi
 
 unset CDPATH
