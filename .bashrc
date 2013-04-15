@@ -10,6 +10,12 @@ if [ -d ~/bin ] ; then
   PATH=~/bin:"${PATH}"
 fi
 
+if [ -d $HOME/.rvm/bin ] ; then
+  PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+  [ -s "$HOME/.rvm/scripts/rvm" ] && \
+    . "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+fi
+
 if [ -d ~/local/share/man ] ; then
   if test -n "$MANPATH" ; then
     MANPATH=~/local/share/man:"${MANPATH}"
@@ -19,9 +25,9 @@ if [ -d ~/local/share/man ] ; then
 fi
 
 if [ -f /usr/share/git/git-prompt.sh ]; then
-  source /usr/share/git/git-prompt.sh
-elif [[ -f /usr/share/doc/git/contrib/completion/git-prompt.sh ]]; then
-    source /usr/share/doc/git/contrib/completion/git-prompt.sh
+  . /usr/share/git/git-prompt.sh
+elif [ -f /usr/share/doc/git/contrib/completion/git-prompt.sh ]; then
+  . /usr/share/doc/git/contrib/completion/git-prompt.sh
 fi
 
 unset CDPATH

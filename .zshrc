@@ -101,6 +101,10 @@ if [ -x /usr/bin/ruby -a -x /usr/bin/gem ] ; then
   PATH=$(ruby -rubygems -e "puts Gem.user_dir")/bin:"${PATH}"
 fi
 
+if [ -d $HOME/.rvm/bin ] ; then
+  PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+fi
+
 unset CDPATH
 
 export HOSTFILE=$HOME/.hosts    # Put list of remote hosts in ~/.hosts
