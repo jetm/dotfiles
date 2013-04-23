@@ -42,7 +42,6 @@ plugins=(
 git
 vi-mode
 history-substring-search
-git-extras
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -86,15 +85,15 @@ unset local256
 
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then
-  PATH=~/bin:"${PATH}"
+  PATH="${PATH}":~/bin
 fi
 
 if [ -d /tools ] ; then
-  PATH=/tools:"${PATH}"
+  PATH="${PATH}":/tools
 fi
 
 if [ -d /usr/local/bin ] ; then
-  PATH=/usr/local/bin:"${PATH}"
+  PATH="${PATH}":/usr/local/bin
 fi
 
 if [ -x /usr/bin/ruby -a -x /usr/bin/gem ] ; then
