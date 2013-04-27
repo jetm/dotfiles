@@ -32,7 +32,6 @@ Control-A: beginning-of-line
 Control-E: end-of-line
 Control-L: clear-screen
 Control-N: next-history
-Control-P: prev-history
 
 set keymap vi-command
 
@@ -40,3 +39,7 @@ set editing-mode vi
 tab: complete
 set completion-ignore-case on
 set blink-matching-paren on
+
+# Allow you to search through your history using the up and down arrows
+"\e[A": history-search-backward
+"\e[B": history-search-forward
