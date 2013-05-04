@@ -1,4 +1,3 @@
-
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
@@ -7,7 +6,7 @@ alias vimn='vim -u NONE'
 #
 # Arch Linux Stuff
 #
-if [ -f /etc/arch-release ]; then
+if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
   alias yaoug='yaourt -Syu --aur'
   alias yaoud='yaourt -Syu --devel --aur'
 
