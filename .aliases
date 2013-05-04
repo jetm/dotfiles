@@ -12,21 +12,48 @@ if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
 
   # Pacman alias examples
 
-  alias pacupg='sudo pacman -Syu'        # Synchronize with repositories before upgrading packages that are out of date on the local system.
-  alias pacin='sudo pacman -S'           # Install specific package(s) from the repositories
-  alias pacins='sudo pacman -Up'         # Install specific package not from the repositories but from a file
-  alias pacre='sudo pacman -R'           # Remove the specified package(s), retaining its configuration(s) and required dependencies
-  alias pacrem='sudo pacman -Rns'        # Remove the specified package(s), its configuration(s) and unneeded dependencies
-  alias pacrep='pacman -Si'              # Display information about a given package in the repositories
-  alias pacreps='pacman -Ss'             # Search for package(s) in the repositories
-  alias pacloc='pacman -Qi'              # Display information about a given package in the local database
-  alias paclocs='pacman -Qs'             # Search for package(s) in the local database
-  alias pacremALL='sudo pacman -Scc'     # Remove ALL packages from cache
+  # Install specific package(s) from the repositories
+  alias pacin='sudo pacman -S'
+
+  # recursively removing orphans (be careful)
+  alias pacorph='sudo pacman -Rs $(pacman -Qtdq)'
+
+  # Search for package(s) in the repositories
+  alias pacreps='pacman -Ss'
+
+  # Remove ALL packages from cache
+  alias pacremALL='sudo pacman -Scc'
+
+  # Remove the specified package(s), its configuration(s) and unneeded dependencies
+  alias pacrem='sudo pacman -Rns'
+
+  # Remove the specified package(s), retaining its configuration(s) and required dependencies
+  # alias pacre='sudo pacman -R'
+
+  # Display information about a given package in the repositories
+  # alias pacrep='pacman -Si'
+
+  # Display information about a given package in the local database
+  # alias pacloc='pacman -Qi'
+
+  # Search for package(s) in the local database
+  # alias paclocs='pacman -Qs'
+
   # Additional pacman alias examples
-  alias pacupd='sudo pacman -Sy && sudo abs'      # Update and refresh the local package and ABS databases against repositories
-  alias pacinsd='sudo pacman -S --asdeps'         # Install given package(s) as dependencies of another package
-  alias pacmir='sudo pacman -Syy'                 # Force refresh of all package lists after updating /etc/pacman.d/mirrorlist
-  alias pacorph='sudo pacman -Rs $(pacman -Qtdq)' # recursively removing orphans (be careful)
+  # Update and refresh the local package and ABS databases against repositories
+  #alias pacupd='sudo pacman -Sy && sudo abs'
+
+  # Install given package(s) as dependencies of another package
+  #alias pacinsd='sudo pacman -S --asdeps'
+
+  # Force refresh of all package lists after updating /etc/pacman.d/mirrorlist
+  #alias pacmir='sudo pacman -Syy'
+
+  # Install specific package not from the repositories but from a file
+  #alias pacins='sudo pacman -Up'
+
+  # Synchronize with repositories before upgrading packages that are out of date on the local system.
+  #alias pacupg='sudo pacman -Syu'
 fi
 
 # vim:set ts=2 sw=2 ft=sh et:
