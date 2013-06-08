@@ -79,4 +79,7 @@
     default = current
 
 [branch]
-	autosetuprebase = always
+    autosetuprebase = always
+
+[diff]
+    algorithm = patience
