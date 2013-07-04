@@ -3,6 +3,16 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias vimn='vim -u NONE'
 
+# disable shell reserved word
+disable -r time
+
+# Add format time like this:
+#
+# real    0.00s
+# user    0.00s
+# sys     0.00s
+alias time='time -f "\nreal\t%es\nuser\t%Us\nsys\t%Ss" '
+
 #
 # Arch Linux Stuff
 #
