@@ -79,7 +79,6 @@ end
 "
 " Airline settings
 "
-let g:airline_theme='simple'
 
 " unicode symbols
 let g:airline_left_sep = '»'
