@@ -1,34 +1,32 @@
 ! xev | sed -n 's/^.*keycode *\([0-9]\+\).*$/keycode \1 = /p'
 !
-! clean most of the modifiers
-clear control
-clear mod4
-clear mod1
-
 ! -----------------
 ! left side
-! ----------------
-! keycode 64 is the left alt key
-keycode 64 = Super_L
-
-! key code 133 is the left command key
+! -----------------
+! Alt command key
 keycode 133 = Alt_L Meta_L
 
-! ------------------
+! Ctrl command key
+keycode 37  = Control_L
+
+! Super command Key
+keycode 64  = Super_L
+
+! -------------------
 ! right side
 ! -------------------
-! key code 134 is the right command key
+! Alt command key
 keycode 134 = Alt_R Meta_R
 
-! keycode 108 is the right alt key
-keycode 108 = Control_R
+! Ctrl command key
+keycode 105 = Control_R
 
-add mod4 = Super_L
-add mod1 = Alt_L Meta_L
-add mod1 = Alt_R Meta_R
-add control = Control_L
-add control = Control_R
+! Super command Key
+keycode 108 = Super_R
 
+! -------------------
+! Insert + Scroll_Lock + PrintScr
+! -------------------
 keycode 191 = Insert
 keycode 192 = Scroll_Lock
 
@@ -37,3 +35,20 @@ keycode 212 = XF86MonBrightnessUp
 
 keycode 204 = XF86Eject
 
+clear Shift
+clear Lock
+clear Control
+clear Mod1
+clear Mod2
+clear Mod3
+clear Mod4
+clear Mod5
+
+add Shift   = Shift_L Shift_R
+add Lock    = Caps_Lock
+add Control = Control_L Control_R
+
+add Mod1    = Alt_L Meta_L Alt_R Meta_R
+add Mod2    = Num_Lock
+add Mod4    = Super_L Super_R
+add Mod5    = Mode_switch ISO_Level3_Shift ISO_Level3_Shift ISO_Level3_Shift
