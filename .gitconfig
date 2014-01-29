@@ -3,7 +3,7 @@
     email = javier.tia@gmail.com
 
 [core]
-    pager = less -FrS
+    pager = less -FRsX
     editor = vim
     autocrlf = input
     safecrlf = true
