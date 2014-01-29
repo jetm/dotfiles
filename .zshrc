@@ -104,6 +104,8 @@ if [ -d $HOME/.rvm/bin ] ; then
   PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 fi
 
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
 unset CDPATH
 
 export HOSTFILE=$HOME/.hosts    # Put list of remote hosts in ~/.hosts

@@ -269,3 +269,4 @@ if [ -f /etc/arch-release ]; then
 
 fi
 
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
