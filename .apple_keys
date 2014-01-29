@@ -3,26 +3,27 @@
 ! -----------------
 ! left side
 ! -----------------
-! Alt command key
-keycode 133 = Alt_L Meta_L
-
 ! Ctrl command key
-keycode 37  = Control_L
+keycode  37 = Control_L NoSymbol Control_L
 
 ! Super command Key
-keycode 64  = Super_L
+keycode  64 = Super_L NoSymbol Super_L
+
+! Alt command key
+keycode 133 = Alt_L Meta_L Alt_L Meta_L
 
 ! -------------------
 ! right side
 ! -------------------
 ! Alt command key
-keycode 134 = Alt_R Meta_R
-
-! Ctrl command key
-keycode 105 = Control_R
+!keycode 134 = Alt_R Meta_R
+keycode 134 = Super_R NoSymbol Super_R
 
 ! Super command Key
-keycode 108 = Super_R
+keycode 108 = ISO_Level3_Shift NoSymbol ISO_Level3_Shift
+
+! Ctrl command key
+keycode 105 = Control_R NoSymbol Control_R
 
 ! -------------------
 ! Insert + Scroll_Lock + PrintScr
