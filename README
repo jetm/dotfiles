@@ -3,12 +3,12 @@ Just my dotfiles.
 
 Install dotfiles:
 
-    bin/install-dotfiles
+    dotfiles/bin/install-dotfiles
 
 
 Remove dotfiles:
 
-    bin/install-dotfiles -u
+    dotfiles/bin/install-dotfiles -u
 
 
 You can use it, copy it, distribute it... be my guest :)
