@@ -4,11 +4,7 @@ set autoread        " Set to auto read when a file is changed from the outside
 set nobackup        " do not keep a backup file
 set magic           " Set magic on, for regular expressions
 set ttyfast         " smoother changes
-
-" Wrap Stuff
-set wrap
-"set wrapscan
-"set whichwrap=b,s,h,l,<,>,[,]   " backspace and cursor keys wrap to
+set wrap            " enable wrap line
 
 set pastetoggle=<F2>
 
