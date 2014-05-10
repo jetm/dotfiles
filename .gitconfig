@@ -76,7 +76,10 @@
     trim = !git remote prune origin && git gc
 
 [push]
-    default = tracking
+    default = current
+
+[pull]
+    rebase = true
 
 [branch]
     autosetuprebase = always
