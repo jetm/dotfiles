@@ -19,7 +19,7 @@ au BufNewFile,BufRead *.git/COMMIT_EDITMSG setlocal spell spelllang=en_us"
 map <leader>W :w !sudo tee % >/dev/null<CR>
 
 "
-" Clean extra white space
+" Trim trailing whitespace
 "
 function! ShowSpaces(...)
   let @/='\v(\s+$)|( +\ze\t)'
