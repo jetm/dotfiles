@@ -68,10 +68,10 @@ let perl_include_pod = 1
 " syntax color complex things like @{${"foo"}}
 let perl_extended_vars = 1
 
-if has("gui_gtk2")
-    set guifont=Andale\ Mono\ Regular\ 11,Menlo\ Regular\ 11,Consolas\ Regular\ 11,Courier\ New\ Regular\ 11
-else
-    set guifont=Andale\ Mono\ Regular:h11,Menlo\ Regular:h11,Consolas\ Regular:h11,Courier\ New\ Regular:h11
+if has("gui_running")
+    colorscheme jellybeans
+    set guifont=Monospace\ 10.7
+    set lines=60 columns=140
 end
 
 "
