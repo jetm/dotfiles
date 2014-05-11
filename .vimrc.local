@@ -78,7 +78,7 @@ end
 " YouCompleteMe settings
 "
 " Avoid to ask load ycm_extra_conf.py configuration
-"let g:ycm_confirm_extra_conf = 0
+" let g:ycm_confirm_extra_conf = 0
 
 "
 " Syntastic settings
@@ -214,10 +214,8 @@ set tags=./tags;/
 "
 " Plugins disabled
 "
-UnBundle 'godlygeek/tabular'
 UnBundle 'mattn/gist-vim'
 UnBundle 'mhinz/vim-signify'
 UnBundle 'mattn/webapi-vim'
-UnBundle 'mattn/gist-vim'
 UnBundle 'Puppet-Syntax-Highlighting'
 
