@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Reload cross-reference for .c, .cpp, .h files
+# Reload cross-reference for .c, .cpp, .h files using ctags and cscope
 #
 
 set -e
@@ -16,28 +16,15 @@ csFILES=cscope.files
 find ${CODE} -type f -not -iwholename '*.git*' -print \
   | grep -E '\.(c(pp)?|h)$' > ${CODE}/${csFILES}
 
+# Check man cscope for the meaning of each option
 cscope -u -b -q -i ${CODE}/${csFILES}
 
+# Check man ctags for the meaning of each option
 ctags \
   --extra=+q \
   --fields=+aiKmSz \
   --file-scope=yes \
   --if0=no \
-  --C-kinds=+cmefglmpstuvx \
+  --c-kinds=+cdefglmpstuvx \
   -L ${CODE}/${csFILES}
-
-# -k Kernel Mode, turns off the use of the default include dir
-#    (usually /usr/include)  when  building the database, since kernel
-#    source trees generally do not use it. NOT USED HERE!
-#
-# -u Unconditionally build the cross-reference file (assume that all
-#    files have changed).
-#
-# -b Build the cross-reference only.
-#
-# -q Enable fast symbol lookup via an inverted index. This option
-#    causes cscope to create 2 more files (default names cscope.in.out
-#    and cscope.po.out). This allows a faster symbol search algorithm
-#    that provides noticeably faster lookup performance  for large
-#    projects.
 
