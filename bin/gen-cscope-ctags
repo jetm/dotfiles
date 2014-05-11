@@ -19,7 +19,8 @@ find ${CODE} -type f -not -iwholename '*.git*' -print \
 # Check man cscope for the meaning of each option
 cscope -u -b -q -i ${CODE}/${csFILES}
 
-# Check man ctags for the meaning of each option
+# Check man ctags for the meaning of each option and run:
+# ctags --list-kinds=c, for the meaning of each letter
 ctags \
   --extra=+q \
   --fields=+aiKmSz \
