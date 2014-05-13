@@ -203,7 +203,8 @@ endif
 "
 " ctags settings
 "
-set tags=./tags;/
+" Search upward
+" set tags=./tags;.git/tags;/
 
 "
 " Plugins disabled
