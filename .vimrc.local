@@ -97,7 +97,7 @@ end
 " My settings for C development
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-au BufNewFile,BufRead,BufEnter *.c,*.h set omnifunc=ccomplete#Complete
+au BufNewFile,BufRead,BufEnter *.c,*.cpp,*.h set omnifunc=ccomplete#Complete
 
 "
 " cscope settings
