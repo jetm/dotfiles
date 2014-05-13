@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Reload cross-reference for .c, .cpp, .h files using ctags and cscope
+# Reload cross-reference for .c and .h files using ctags and cscope
 #
 
 set -e
@@ -14,7 +14,7 @@ CODE="$(readlink -e $1)"
 csFILES=cscope.files
 
 find ${CODE} -type f -not -iwholename '*.git*' -print \
-  | grep -E '\.(c(pp)?|h)$' > ${CODE}/${csFILES}
+  | grep -E '\.(c|h)$' > ${CODE}/${csFILES}
 
 # Check man cscope for the meaning of each option
 cscope -u -b -q -i ${CODE}/${csFILES}
@@ -22,10 +22,8 @@ cscope -u -b -q -i ${CODE}/${csFILES}
 # Check man ctags for the meaning of each option and run:
 # ctags --list-kinds=c, for the meaning of each letter
 ctags \
-  --extra=+q \
-  --fields=+aiKmSz \
-  --file-scope=yes \
+  --c-kinds=+defgmstuvx \
+  --file-scope=no \
   --if0=no \
-  --c-kinds=+cdefglmpstuvx \
   -L ${CODE}/${csFILES}
 
