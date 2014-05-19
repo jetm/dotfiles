@@ -70,8 +70,8 @@ let perl_extended_vars = 1
 
 if has("gui_running")
     colorscheme jellybeans
-    set guifont=Monospace\ 10.7
-    set lines=60 columns=140
+    set guifont=Ubuntu\ Mono\ 12
+    set lines=50 columns=140
 end
 
 "
