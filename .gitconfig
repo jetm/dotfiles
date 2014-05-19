@@ -61,7 +61,7 @@
     trim = !git remote prune origin && git gc
 
 [push]
-    default = current
+    default = simple
 
 [pull]
     rebase = true
