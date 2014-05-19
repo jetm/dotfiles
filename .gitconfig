@@ -41,28 +41,13 @@
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 
-    # list all new commits after you fetched, with stats, but excluding merges
-    lc = log ORIG_HEAD.. --stat --no-merges
-
     # To see what new commits have been created by the last command
     # (typically after a "git pull"), e.g.: git new ORIGIN/BRANCH
     new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
 
-    # Spelunking of the project's history
-    # First takes the name of a person or their email address
-    # The second takes a commit name
-    whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
-    whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
-
-    # simple diff ignoring line number changes
-    sortdiff = !sh -c 'git diff "$@" | grep "^[+-]" | sort --key=1.2 | uniq -u -s1'
-
     # Editing/adding conflicted files
     edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
     add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
-
-    # Finding the right commit
-    abbr = "!sh -c 'git rev-list --all | grep ^$1 | while read commit; do git --no-pager log -n1 --pretty=format:\"%H %ci %an %s%n\" $commit; done' -"
 
     # While the empty tree sha1 4b825dc642cb6eb9a060e54bf8d69288fbee4904
     # is known to git, you may need to generate it.
