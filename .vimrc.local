@@ -11,9 +11,9 @@ set pastetoggle=<F2>
 autocmd FileType sh,awk,zsh setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 " git commits
-autocmd FileType gitcommit setlocal spell
-au BufNewFile,BufRead *.git/COMMIT_EDITMSG set tw=72 noai noshowmatch
-au BufNewFile,BufRead *.git/COMMIT_EDITMSG setlocal spell spelllang=en_us"
+"autocmd FileType gitcommit setlocal spell
+"au BufNewFile,BufRead *.git/COMMIT_EDITMSG set tw=72 noai noshowmatch
+"au BufNewFile,BufRead *.git/COMMIT_EDITMSG setlocal spell spelllang=en_us"
 
 " Sudo to write
 map <leader>W :w !sudo tee % >/dev/null<CR>
