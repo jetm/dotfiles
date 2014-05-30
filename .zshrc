@@ -6,6 +6,18 @@ fi
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
+# Uncomment to change how many often would you like to wait before auto-updates
+# occur? (in days)
+# export UPDATE_ZSH_DAYS=13
+
+#
+# Enable 256 color capabilities for appropriate terminals
+#
+# Set this variable in your local shell config if you want remote
+# xterms connecting to this system, to be sent 256 colors.
+# This can be done in /etc/csh.cshrc, or in an earlier profile.d script.
+SEND_256_COLORS_TO_REMOTE=1
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -45,6 +57,8 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
+source $HOME/.zshenv
+
 # colors for ls
 if [[ -f ~/.dir_colors ]] ; then
   eval $(dircolors -b ~/.dir_colors)
@@ -69,7 +83,8 @@ case "$(uname -o)" in
     ;;
 esac
 
-# 10 second wait if you do something that will delete everything.  I wish I'd had this before...
+# 10 second wait if you do something that will delete everything.
+# I wish I'd had this before...
 setopt RM_STAR_WAIT
 
 # If I could disable Ctrl-s completely I would!
@@ -79,7 +94,6 @@ setopt NO_FLOW_CONTROL
 setopt NO_BEEP
 
 # History features
-
 bindkey "^R" history-incremental-search-backward
 
 # Ignore lines prefixed with '#'
