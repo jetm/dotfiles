@@ -57,7 +57,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
-source $HOME/.zshenv
+source $HOME/.zshenv.custom
 
 # colors for ls
 if [[ -f ~/.dir_colors ]] ; then
