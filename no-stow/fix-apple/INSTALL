@@ -1,0 +1,10 @@
+Install keyfuzz
+wget http://0pointer.de/lennart/projects/keyfuzz/keyfuzz-0.2.tar.gz
+./configure && make && make install
+
+Install configurations files:
+
+    install -D -m644 hid_apple.conf /etc/modprobe.d/hid_apple.conf
+    install -D -m644 10-apple-keyboard.rules /etc/udev/rules.d/10-apple-keyboard.rules
+    install -D -m755 fix-apple-keyboard /usr/local/bin/fix-apple-keyboard
+    install -D -m644 apple_keyboard.keyfuzz /usr/local/etc/keyfuzz/apple_keyboard.keyfuzz
