@@ -3,6 +3,9 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias vimn='vim -u NONE'
 
+# Show all targets to build
+alias make-ls-targets="make -qp | awk -F':' '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ {split(\$1,A,/ /);for(i in A)print A[i]}'"
+
 # disable shell reserved word
 disable -r time
 
