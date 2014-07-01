@@ -119,12 +119,3 @@ endif
 "
 " Search upward
 " set tags=./tags;.git/tags;/
-
-"
-" Plugins disabled
-"
-UnBundle 'mattn/gist-vim'
-UnBundle 'mhinz/vim-signify'
-UnBundle 'mattn/webapi-vim'
-UnBundle 'Puppet-Syntax-Highlighting'
-

@@ -1,5 +1,17 @@
+"
+" Extra Plugins installed
+"
 Bundle 'myusuf3/numbers.vim'
 Bundle 'c9s/perlomni.vim'
 Bundle 'tpope/vim-git'
 Bundle 'jetm/vim-cscope'
 Bundle 'tommcdo/vim-exchange'
+
+"
+" Plugins disabled
+"
+UnBundle 'mattn/gist-vim'
+UnBundle 'mhinz/vim-signify'
+UnBundle 'mattn/webapi-vim'
+UnBundle 'Puppet-Syntax-Highlighting'
+
