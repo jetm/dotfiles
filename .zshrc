@@ -4,7 +4,7 @@ if [ -z "$PS1" ] ; then
 fi
 
 # Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Uncomment to change how many often would you like to wait before auto-updates
 # occur? (in days)
