@@ -36,7 +36,7 @@
     cp = cherry-pick -x
 
     # Logs
-    lgn = "!f() { git log --graph --pretty=format:'%Cred%H%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --date=relative $@ | git name-rev --stdin --name-only ; } ; f"
+    # lgn = "!f() { git log --graph --pretty=format:'%Cred%H%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --date=relative $@ | git name-rev --stdin --name-only ; } ; f"
 
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
@@ -46,19 +46,19 @@
     new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
 
     # Editing/adding conflicted files
-    edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
-    add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+    # edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
+    # add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
 
     # While the empty tree sha1 4b825dc642cb6eb9a060e54bf8d69288fbee4904
     # is known to git, you may need to generate it.
     # git diff --check $(git empty-tree-sha1)
-    empty-tree-sha1 = hash-object -t tree /dev/null
+    # empty-tree-sha1 = hash-object -t tree /dev/null
 
     # Un-apply a Stash
     stash-unapply = '!git stash show -p | git apply -R'
 
     # remove remote-tracking branches that were deleted from the remote repo
-    trim = !git remote prune origin && git gc
+    # trim = !git remote prune origin && git gc
 
     # search and replace text in all repo: git search-replace old_name new-new
     search-replace = "!f() { git grep --null --full-name --name-only -e \"$1\" -- . | xargs -0 perl -i -p -e \"s/$1/$2/g\"; }; f $1 $2"
