@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#
+# Accepts a .c file, compile it and execute it
+#
+# It avoids me to create a Makefile file
+
+filename="${1%.*}"
+CFLAGS="-Wall -Wextra -Werror -O2 -g" make ${filename} && ./${filename}
