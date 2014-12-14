@@ -81,11 +81,7 @@ fi
 # Turn off annoying and useless flow control keys
 stty -ixon
 
-# Never beep at me
-setterm -bfreq 0
-
 # Nobody need flow control anymore. Troublesome feature.
-#stty -ixon
 setopt noflowcontrol
 
 # Fix for tmux on linux.
