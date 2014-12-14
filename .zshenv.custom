@@ -51,7 +51,8 @@ if [ -x /usr/bin/ruby -a -x /usr/bin/gem ] ; then
   PATH=$(ruby -rubygems -e "puts Gem.user_dir")/bin:"${PATH}"
 fi
 
+# Add RVM to PATH for scripting
 if [ -d ${HOME}/.rvm/bin ] ; then
-  PATH=${PATH}:${HOME}/.rvm/bin # Add RVM to PATH for scripting
+  PATH=${PATH}:${HOME}/.rvm/bin
 fi
 
