@@ -42,9 +42,12 @@
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 
-    # To see what new commits have been created by the last command
-    # (typically after a "git pull"), e.g.: git new ORIGIN/BRANCH
-    new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
+    # List new commits, of current branch, have been created by last command
+    # (typically used after a "git pull")
+    new = "!f() { ref=$(git symbolic-ref --short HEAD); git log ${ref}@{1}..${ref}@{0} \"$@\"; }; f"
+
+    # Like <git new>, but it accepts branches as parameters, e.g.: git newp origin/BRANCH
+    newp = "!f() { git log ${1}@{1}..${1}@{0} \"$@\"; }; f"
 
     # Editing/adding conflicted files
     # edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
