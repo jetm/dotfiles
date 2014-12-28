@@ -60,3 +60,9 @@ if [ -d ${HOME}/.rvm/bin ] ; then
   PATH=${PATH}:${HOME}/.rvm/bin
 fi
 
+# Add ccache
+if [ -d /usr/lib/ccache/bin ] ; then
+  PATH=/usr/lib/ccache/bin:"${PATH}"
+  typeset -U PATH
+fi
+
