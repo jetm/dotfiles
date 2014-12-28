@@ -18,6 +18,7 @@
 [merge]
     stat = true
     diff = vimdiff
+#    conflictstyle = diff3
 
 [help]
     # Automatically correct and execute mistyped commands
