@@ -64,5 +64,8 @@ fi
 if [ -d /usr/lib/ccache/bin ] ; then
   PATH=/usr/lib/ccache/bin:"${PATH}"
   typeset -U PATH
+
+  mkdir -p /dev/shm/ccache || \
+    echo 1>&2 "error: /dev/shm/ccache could not be created"
 fi
 
