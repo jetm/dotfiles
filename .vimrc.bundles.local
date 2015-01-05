@@ -6,7 +6,6 @@ Bundle 'c9s/perlomni.vim'
 Bundle 'tpope/vim-git'
 Bundle 'jetm/vim-cscope'
 Bundle 'tommcdo/vim-exchange'
-Bundle 'jiangmiao/auto-pairs'
 
 "
 " Plugins disabled
