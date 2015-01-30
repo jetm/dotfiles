@@ -50,6 +50,8 @@ au BufEnter * match ExtraWhitespace /\s\+$/
 au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhiteSpace /\s\+$/
 
+let g:spf13_keep_trailing_whitespace = 1
+
 "
 " Settings indenting colors
 "
