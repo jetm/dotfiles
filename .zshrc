@@ -63,6 +63,7 @@ git
 git-extras
 vi-mode
 history-substring-search
+systemd
 )
 
 source $ZSH/oh-my-zsh.sh
