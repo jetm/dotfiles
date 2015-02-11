@@ -80,6 +80,9 @@
     # Print the name of the current upstream tracking branch
     upstream = !git config --get branch.$(git current-branch).remote || echo origin
 
+    # Fetch all branches and rebase the current branch against upstream/master
+    rebase-against-master = !git fetch --all && git rebase $(git upstream)/master
+
 [push]
     default = simple
 
