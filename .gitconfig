@@ -89,6 +89,10 @@
 [pull]
     rebase = true
 
+[fetch]
+    # Always prune when fetching and pulling
+    prune = 1
+
 [branch]
     autosetuprebase = always
 
