@@ -24,9 +24,7 @@ SEND_256_COLORS_TO_REMOTE=1
 # time that oh-my-zsh is loaded.
 ZSH_THEME="jetm"
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# Add alias
 [ -f $HOME/.aliases ] && source $HOME/.aliases
 
 # Set to this to use case-sensitive completion
@@ -64,6 +62,7 @@ git-extras
 vi-mode
 history-substring-search
 systemd
+archlinux
 )
 
 source $ZSH/oh-my-zsh.sh

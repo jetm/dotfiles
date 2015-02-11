@@ -21,53 +21,18 @@ alias time='time -f "\nreal\t%es\nuser\t%Us\nsys\t%Ss" '
 # Arch Linux Stuff
 #
 if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
-  alias yaoug='yaourt -Syu --aur'
-  alias yaoud='yaourt -Syu --devel --aur'
 
   # Pacman alias examples
 
-  # Install specific package(s) from the repositories
-  alias pacin='sudo pacman -S'
+  # upgrade all packages
+  alias yaoud='yaourt -Syu --devel --aur'
 
   # recursively removing orphans (be careful)
   alias pacorph='sudo pacman -Rs $(pacman -Qtdq)'
 
-  # Search for package(s) in the repositories
-  alias pacreps='pacman -Ss'
-
   # Remove ALL packages from cache
   alias pacremALL='sudo pacman -Scc'
 
-  # Remove the specified package(s), its configuration(s) and unneeded dependencies
-  alias pacrem='sudo pacman -Rns'
-
-  # Remove the specified package(s), retaining its configuration(s) and required dependencies
-  # alias pacre='sudo pacman -R'
-
-  # Display information about a given package in the repositories
-  # alias pacrep='pacman -Si'
-
-  # Display information about a given package in the local database
-  # alias pacloc='pacman -Qi'
-
-  # Search for package(s) in the local database
-  # alias paclocs='pacman -Qs'
-
-  # Additional pacman alias examples
-  # Update and refresh the local package and ABS databases against repositories
-  #alias pacupd='sudo pacman -Sy && sudo abs'
-
-  # Install given package(s) as dependencies of another package
-  #alias pacinsd='sudo pacman -S --asdeps'
-
-  # Force refresh of all package lists after updating /etc/pacman.d/mirrorlist
-  #alias pacmir='sudo pacman -Syy'
-
-  # Install specific package not from the repositories but from a file
-  #alias pacins='sudo pacman -Up'
-
-  # Synchronize with repositories before upgrading packages that are out of date on the local system.
-  #alias pacupg='sudo pacman -Syu'
 fi
 
 # vim:set ts=2 sw=2 ft=sh et:
