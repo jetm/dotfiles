@@ -77,6 +77,9 @@
     # Print the name of the current branch
     current-branch = symbolic-ref --short HEAD
 
+    # Print the name of the current upstream tracking branch
+    upstream = !git config --get branch.$(git current-branch).remote || echo origin
+
 [push]
     default = simple
 
