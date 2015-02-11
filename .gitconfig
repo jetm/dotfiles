@@ -71,6 +71,9 @@
 
     last = "!f() { git log -1 \"$@\"; }; f"
 
+    # Commit any changes to files, squash them into the last commit and update its date
+    fix-up-prev-ci = !git commit --all --amend --reuse-message=HEAD --date=\"$(date)\"
+
 [push]
     default = simple
 
