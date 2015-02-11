@@ -74,6 +74,9 @@
     # Commit any changes to files, squash them into the last commit and update its date
     fix-up-prev-ci = !git commit --all --amend --reuse-message=HEAD --date=\"$(date)\"
 
+    # Print the name of the current branch
+    current-branch = symbolic-ref --short HEAD
+
 [push]
     default = simple
 
