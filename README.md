@@ -22,7 +22,7 @@ each one of them.
     * [`.git-commit-template.txt`](https://github.com/jetm/dotfiles/blob/master/.git-commit-template.txt) Template to write Git commit message.
     * [`.gitconfig`](https://github.com/jetm/dotfiles/blob/master/.gitconfig) Global Git conffiguration file.
     * [`.gitignore`](https://github.com/jetm/dotfiles/blob/master/.gitignore) Global Git untracked files to ignore.
-    * [`.gpg-agent.conf`](https://github.com/jetm/dotfiles/blob/master/.gnupg/gpg-agent.conf) GnuPG-agent daemon configuration file.
+    * [`.gnupg/gpg-agent.conf`](https://github.com/jetm/dotfiles/blob/master/.gnupg/gpg-agent.conf) GnuPG-agent daemon configuration file.
     * [`.gpg.conf`](https://github.com/jetm/dotfiles/blob/master/.gnupg/gpg.conf) GnuGP options file.
     * [`.ideavimrc`](https://github.com/jetm/dotfiles/blob/master/.ideavimrc) configuration file Vim emulation plug-in for IDEs based on the IntelliJ platform.
     * [`.inputrc`](https://github.com/jetm/dotfiles/blob/master/.inputrc) Readline initialization file.
