@@ -17,7 +17,7 @@ each one of them.
     * [`.ccache.conf`](https://github.com/jetm/dotfiles/blob/master/.ccache/ccache.conf) ccache configuration file.
     * [`.dir_colors`](https://github.com/jetm/dotfiles/blob/master/.dir_colors) Solarized color theme for the color GNU ls utility.
     * [`.dtags/mapping`](https://github.com/jetm/dotfiles/blob/master/.dtags/mapping) dtags mapping configuration file.
-    * [`.tags`](https://github.com/jetm/dotfiles/blob/master/.dtags/tags) dtags configuration file.
+    * [`.dtags/tags`](https://github.com/jetm/dotfiles/blob/master/.dtags/tags) dtags configuration file.
     * [`.gemrc`](https://github.com/jetm/dotfiles/blob/master/.gemrc) Personal RubyGems environment configuration file.
     * [`.git-commit-template.txt`](https://github.com/jetm/dotfiles/blob/master/.git-commit-template.txt) Template to write Git commit message.
     * [`.gitconfig`](https://github.com/jetm/dotfiles/blob/master/.gitconfig) Global Git conffiguration file.
