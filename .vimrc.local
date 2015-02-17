@@ -82,13 +82,6 @@ end
 " Avoid to ask load ycm_extra_conf.py configuration
 " let g:ycm_confirm_extra_conf = 0
 
-"
-" Syntastic settings
-"
-" Enable it to work with YouCompleteMe
-"let g:syntastic_check_on_open=1
-"let g:syntastic_enable_signs=1
-
 " UltiSnip settings
 "
 " Force to use Python 2, instead of Python 3
@@ -178,6 +171,14 @@ function! GoogleCppIndent()
 
     return l:orig_indent
 endfunction
+
+" Syntastic settings
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall -Wextra'
+let g:syntastic_cpp_checkers = ['gcc', 'cpplint']
 
 
 "
