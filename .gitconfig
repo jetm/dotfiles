@@ -98,3 +98,7 @@
 
 [diff]
     algorithm = patience
+
+[credential]
+    # Set the cache to timeout after 8 hour (setting is in seconds)
+    helper = cache --timeout=28800
