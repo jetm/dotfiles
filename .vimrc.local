@@ -172,7 +172,9 @@ function! GoogleCppIndent()
     return l:orig_indent
 endfunction
 
+"
 " Syntastic settings
+"
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -180,7 +182,9 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall -Wextra'
 let g:syntastic_cpp_checkers = ['gcc', 'cpplint']
 
+"
 " C Format settings
+"
 let g:clang_format#style_options = {"Standard" : "C++11"}
 " map to <Leader>cf in C++ code
 autocmd FileType c,cpp,objc nnoremap <buffer><F4> :<C-u>ClangFormat<CR>
@@ -210,4 +214,3 @@ endif
 "
 " Search upward
 " set tags=./tags;.git/tags;/
-

@@ -68,4 +68,3 @@ if [ -d /usr/lib/ccache/bin ] ; then
   mkdir -p /dev/shm/ccache || \
     echo 1>&2 "error: /dev/shm/ccache could not be created"
 fi
-
