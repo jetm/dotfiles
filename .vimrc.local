@@ -93,7 +93,7 @@ end
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Detect if the current file type is a C-like language.
-au BufNewFile,BufRead c,cpp,objc,*.mm call SetupForCLang()
+au BufNewFile,BufRead c,cpp,objc,*.mm,*.cc,*.h call SetupForCLang()
 
 " Configuration for C-like languages, based in Google C/C++ Style Guide
 function! SetupForCLang()
