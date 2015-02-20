@@ -187,6 +187,9 @@ let g:ycm_key_list_previous_completion = ['<S-TAB>', 'k']
 " Invoked :YcmShowDetailedDiagnostic
 let g:ycm_key_detailed_diagnostics = ''
 
+" Try to do the same than GoToDefinition and GoToDeclarion
+nnoremap <leader>gt :YcmCompleter GoTo<CR>
+
 " TODO: consider use this settings later
 "nnoremap <leader>pg :YcmCompleter GoTo<CR>
 "nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
