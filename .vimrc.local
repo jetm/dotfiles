@@ -178,6 +178,7 @@ let g:ycm_min_num_identifier_candidate_chars = 3
 " YCM identifier completer will also collect identifiers from tags files
 let g:ycm_collect_identifiers_from_tags_files = 1
 
+" Compile and diagnostics
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
 " Key mappings used to select completion string
@@ -191,17 +192,17 @@ let g:ycm_key_detailed_diagnostics = ''
 nnoremap <leader>gt :YcmCompleter GoTo<CR>
 
 " TODO: consider use this settings later
-"nnoremap <leader>pg :YcmCompleter GoTo<CR>
 "nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
 "nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
 
-" For a global file
+" TODO: Consider add a global file
 "let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-"let g:ycm_collect_identifiers_from_tags_files = 1
 
 "
 " Syntastic settings
 "
+" Enable this option to tell syntastic to always stick any detected errors into
+" the location-list
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -215,10 +216,12 @@ let g:syntastic_warning_symbol = '⚠'
 " C Format settings
 "
 let g:clang_format#style_options = {"Standard" : "C++11"}
-" map to <Leader>cf in C++ code
+
+" Format C++ code with F4 key
 autocmd FileType c,cpp,objc nnoremap <buffer><F4> :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc vnoremap <buffer><F4> :ClangFormat<CR>
-" if you install vim-operator-user
+
+" TODO: Consider if you install vim-operator-user
 "autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
 " Toggle auto formatting:
 "nmap <Leader>C :ClangFormatAutoToggle<CR>
@@ -244,5 +247,7 @@ endif
 " Show Tagbar with F3 key, less error than ,tt using together with tmux
 nnoremap <F3> :TagbarToggle<CR><C-w>=
 
+"
 " vim-cpp-enhanced-highlight settings
+"
 let g:cpp_class_scope_highlight = 1
