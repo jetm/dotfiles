@@ -221,3 +221,6 @@ endif
 "
 " Search upward
 " set tags=./tags;.git/tags;/
+
+" vim-cpp-enhanced-highlight settings
+let g:cpp_class_scope_highlight = 1
