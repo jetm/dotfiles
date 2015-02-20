@@ -1,14 +1,27 @@
 "
 " Extra Plugins enabled
 "
+" Relative numbers
 Bundle 'myusuf3/numbers.vim'
+
+" Perl omnicompletion for vim (including base class function and more)
 Bundle 'c9s/perlomni.vim'
+
+" Git settings for Vim
 Bundle 'tpope/vim-git'
+
+" Generate cscope files under .git/
 Bundle 'jetm/vim-cscope'
+
+" Easy text exchange operator for Vim
 Bundle 'tommcdo/vim-exchange'
+
+" Format C/C++ code
 Bundle 'kana/vim-operator-user'
 Bundle 'rhysd/vim-clang-format'
-Plugin 'octol/vim-cpp-enhanced-highlight'
+
+" Better colors for C++ files, included C++11/C++14
+Bundle 'octol/vim-cpp-enhanced-highlight'
 
 "
 " Plugins disabled
