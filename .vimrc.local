@@ -171,6 +171,10 @@ let g:ycm_confirm_extra_conf = 0
 " completion string
 let g:ycm_autoclose_preview_window_after_completion = 1
 
+" Control number of characters user needs to type before identifier-based
+" completion suggestions are trigger
+let g:ycm_min_num_identifier_candidate_chars = 3
+
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 " TODO: consider use this settings later
 "nnoremap <leader>pg :YcmCompleter GoTo<CR>
