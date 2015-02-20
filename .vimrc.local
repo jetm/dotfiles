@@ -76,18 +76,6 @@ if has("gui_running")
     set lines=50 columns=140
 end
 
-"
-" YouCompleteMe settings
-"
-" Avoid to ask load ycm_extra_conf.py configuration
-let g:ycm_confirm_extra_conf = 0
-
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
-
-" For a global file
-"let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-"let g:ycm_collect_identifiers_from_tags_files = 1
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Settings for C/C++ development
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -172,6 +160,22 @@ function! GoogleCppIndent()
 
     return l:orig_indent
 endfunction
+
+"
+" YouCompleteMe settings
+"
+" Avoid to ask load ycm_extra_conf.py configuration
+let g:ycm_confirm_extra_conf = 0
+
+nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+" TODO: consider use this settings later
+"nnoremap <leader>pg :YcmCompleter GoTo<CR>
+"nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
+"nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
+
+" For a global file
+"let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+"let g:ycm_collect_identifiers_from_tags_files = 1
 
 "
 " Syntastic settings
