@@ -182,6 +182,8 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall -Wextra'
 let g:syntastic_cpp_checkers = ['gcc', 'cpplint']
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '⚠'
 
 "
 " C Format settings
