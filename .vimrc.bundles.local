@@ -8,6 +8,7 @@ Bundle 'jetm/vim-cscope'
 Bundle 'tommcdo/vim-exchange'
 Bundle 'kana/vim-operator-user'
 Bundle 'rhysd/vim-clang-format'
+Plugin 'octol/vim-cpp-enhanced-highlight'
 
 "
 " Plugins disabled
