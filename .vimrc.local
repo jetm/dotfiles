@@ -80,13 +80,14 @@ end
 " YouCompleteMe settings
 "
 " Avoid to ask load ycm_extra_conf.py configuration
-" let g:ycm_confirm_extra_conf = 0
+let g:ycm_confirm_extra_conf = 0
 
-" UltiSnip settings
-"
-" Force to use Python 2, instead of Python 3
-"let g:UltiSnipsUsePythonVersion = 2
-"let g:UltiSnipsNoPythonWarning = 1
+nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+
+" For a global file
+"let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+let g:syntastic_always_populate_loc_list = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Settings for C/C++ development
