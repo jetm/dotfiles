@@ -241,8 +241,8 @@ endif
 "
 " ctags settings
 "
-" Search upward
-" set tags=./tags;.git/tags;/
+" Show Tagbar with F3 key, less error than ,tt using together with tmux
+nnoremap <F3> :TagbarToggle<CR><C-w>=
 
 " vim-cpp-enhanced-highlight settings
 let g:cpp_class_scope_highlight = 1
