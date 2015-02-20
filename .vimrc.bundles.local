@@ -23,6 +23,13 @@ Bundle 'rhysd/vim-clang-format'
 " Better colors for C++ files, included C++11/C++14
 Bundle 'octol/vim-cpp-enhanced-highlight'
 
+" Provides insert mode auto-completion for quotes, parenthesis, brackets
+" has more movement than spf13/vim-autoclose
+Bundle 'Raimondi/delimitMate'
+UnBundle 'spf13/vim-autoclose'
+
+
+"----------------------------------------------------------------------"
 "
 " Plugins disabled
 "
