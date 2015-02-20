@@ -184,6 +184,9 @@ nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 let g:ycm_key_list_select_completion = ['<TAB>', 'j']
 let g:ycm_key_list_previous_completion = ['<S-TAB>', 'k']
 
+" Invoked :YcmShowDetailedDiagnostic
+let g:ycm_key_detailed_diagnostics = ''
+
 " TODO: consider use this settings later
 "nnoremap <leader>pg :YcmCompleter GoTo<CR>
 "nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
