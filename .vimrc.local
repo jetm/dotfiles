@@ -10,7 +10,16 @@ set pastetoggle=<F2>
 
 autocmd FileType sh,awk,zsh setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
-" git commits
+function Maximize_Window()
+    silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
+endfunction
+
+" Maximize gvim when is open
+au GUIEnter * call Maximize_Window()
+
+"
+" git commits settings
+"
 autocmd FileType gitcommit setlocal spell
 au BufNewFile,BufRead *.git/COMMIT_EDITMSG set tw=72 noai noshowmatch
 au BufNewFile,BufRead *.git/COMMIT_EDITMSG setlocal spell spelllang=en_us
