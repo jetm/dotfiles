@@ -1,5 +1,5 @@
 " General behavior
-set autowrite       " auto saves changes when quitting and swiching buffer
+set autowrite       " auto saves changes when quitting and switching buffer
 set autoread        " Set to auto read when a file is changed from the outside
 set nobackup        " do not keep a backup file
 set magic           " Set magic on, for regular expressions
@@ -8,7 +8,14 @@ set wrap            " enable wrap line
 
 set pastetoggle=<F2>
 
-autocmd FileType sh,awk,zsh setlocal tabstop=2 shiftwidth=2 softtabstop=2
+"
+" Colors and GUI settings
+"
+if has("gui_running")
+    set background=dark
+    set guifont=Ubuntu\ Mono\ 12
+    colorscheme jellybeans "Optional gruvbox
+end
 
 function Maximize_Window()
     silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
@@ -24,7 +31,7 @@ autocmd FileType gitcommit setlocal spell
 au BufNewFile,BufRead *.git/COMMIT_EDITMSG set tw=72 noai noshowmatch
 au BufNewFile,BufRead *.git/COMMIT_EDITMSG setlocal spell spelllang=en_us
 
-" Sudo to write
+" sudo to write
 map <leader>W :w !sudo tee % >/dev/null<CR>
 
 "
@@ -70,20 +77,22 @@ let indent_guides_guide_size = 1
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=darkgrey ctermbg=236
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey ctermbg=237
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Languages settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
-" Perl Stuff
+" Shell settings
+"
+autocmd FileType sh,awk,zsh setlocal tabstop=2 shiftwidth=2 softtabstop=2
+
+"
+" Perl settings
 "
 " my perl includes pod
 let perl_include_pod = 1
 
 " syntax color complex things like @{${"foo"}}
 let perl_extended_vars = 1
-
-if has("gui_running")
-    colorscheme jellybeans
-    set guifont=Ubuntu\ Mono\ 12
-    set lines=50 columns=140
-end
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Settings for C/C++ development
