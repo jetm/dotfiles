@@ -33,6 +33,7 @@ each one of them.
     * [`.vimrc.bundles.local`](https://github.com/jetm/dotfiles/blob/master/.vimrc.bundles.local) local plugins [vim-spf13](http://vim.spf13.com/) configuration file.
     * [`.vimrc.local`](https://github.com/jetm/dotfiles/blob/master/.vimrc.local) vimrc configuration file used with [vim-spf13](http://vim.spf13.com/).
     * [`.config.xml`](https://github.com/jetm/dotfiles/blob/master/.workrave/config.xml) Workrave configuration file.
+    * [`.xscreensaver`](https://github.com/jetm/dotfiles/blob/master/.xscreensaver) Xscreensaver configuration file.
     * [`.ycm_extra_conf.py`](https://github.com/jetm/dotfiles/blob/master/.ycm_extra_conf.py) Global [YCM](http://valloric.github.io/YouCompleteMe/) configuration file.
     * [`.zlogin`](https://github.com/jetm/dotfiles/blob/master/.zlogin) Executes commands at login post-zshrc.
     * [`.zlogout`](https://github.com/jetm/dotfiles/blob/master/.zlogout) Executes commands at logout.
