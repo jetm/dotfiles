@@ -3,9 +3,9 @@ git_dotfiles_branch() {
   local d=$(git config --get user.email | grep -P -o '\@\K.*')
 
   if [[ "${br}" == "master" ]]; then
-    echo "${d}(↦⌂)"
+    echo "${d}(⌂)"
   else
-    echo "${d}(↦⚒)"
+    echo "${d}(⚒ )"
   fi
 }
 
