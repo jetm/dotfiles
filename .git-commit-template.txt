@@ -1,28 +1,32 @@
-# <type>(<scope>): <subject>
-# <body>
-# <footer>
-#
-# <type> should be one of the following:
-#
-# * feat (new feature)
-# * fix (bug fix)
-# * chg (any change as refactoring)
-# * docs (changes to documentation)
-# * test (adding missing tests, refactoring tests; no prod code change)
-# * style (formatting, cleaning whitespace...; no code change)
-# * chore (routine task; no production code change)
-#
-# <scope>: To who will be interested on this change
-#
-# <subject>: No more than 50 chars. Imperative tone, 'change' instead
-#            of 'changed'
-#
-# <body>: As <subject> use imperative tone as well. Include motivation
-#         for the change, and contrasts its implementation with
-#         previous behaviour.
-#
-# <footer>: References item to product management tool: Bug #3, CR #4
-#
-# Inspired on [1] and development on ASIC API CR Team:
-# [1] https://github.com/sparkbox/how_to/tree/master/style/git
-#
+# <type>: (If applied, this commit will...) <subject> (Max 50 char)
+# |<----  Using a Maximum Of 50 Characters  ---->|
+
+
+# Explain why this change is being made
+# |<----   Try To Limit Each Line to a Maximum Of 72 Characters   ---->|
+
+# Provide links or keys to any relevant tickets, articles or other resources
+# Example: Github issue #23
+
+# --- COMMIT END ---
+# Type can be
+#    feat (new feature)
+#    fix (bug fix)
+#    docs (changes to documentation)
+#    style (formatting, missing semi colons, etc; no code change)
+#    refactor (refactoring production code)
+#    test (adding missing tests, refactoring tests; no production code change)
+#    chore (updating grunt tasks etc; no production code change)
+# --------------------
+# Remember to
+#    Separate subject from body with a blank line
+#    Limit the subject line to 50 characters
+#    Capitalize the subject line
+#    Do not end the subject line with a period
+#    Use the imperative mood in the subject line
+#    Wrap the body at 72 characters
+#    Use the body to explain what and why vs. how
+#    Can use multiple lines with "-" for bullet points in body
+# --------------------
+# For more information about this template, check out
+# https://gist.github.com/adeekshith/cd4c95a064977cdc6c50
