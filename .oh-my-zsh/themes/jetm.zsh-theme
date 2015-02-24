@@ -1,9 +1,12 @@
 git_dotfiles_branch() {
   local br=$(cd ~/repos/dotfiles && git symbolic-ref --short HEAD)
   local d=$(git config --get user.email | grep -P -o '\@\K.*')
+  local h=$(hostname)
 
   if [[ "${br}" == "master" ]]; then
     echo "${d}(⌂)"
+  elif [[ "${h}" =~ "archy" ]]; then
+    echo "${d}(⚒)"
   else
     echo "${d}(⚒ )"
   fi
