@@ -120,9 +120,9 @@ git_super_status() {
 }
 
 # Default values for the appearance of the prompt. Configure at will.
-repo_br=$(git -C ${HOME}/repos/dotfiles symbolic-ref --short HEAD)
+dotfiles_br=$(git -C ${HOME}/repos/dotfiles symbolic-ref --short HEAD)
 
-if [[ "${repo_br}" == "master" ]]; then
+if [[ "${dotfiles_br}" == "master" ]]; then
   WHERE_I_AM="(W)"
   _WHO_TO_CALL=git_prompt_info
   ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[magenta]%}("
