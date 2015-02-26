@@ -141,9 +141,9 @@ else
   ZSH_THEME_GIT_PROMPT_AHEAD="%{↑ %G%}"
   ZSH_THEME_GIT_PROMPT_UNTRACKED="%{…%G%}"
   ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{✔ %G%}"
-  # 124 dark red
-  ZSH_THEME_GIT_PROMPT_STAGED="$FG[124]%{● %G%}"
-  ZSH_THEME_GIT_PROMPT_CONFLICTS="$FG[124]%{✖ %G%}"
+  # 088 dark red
+  ZSH_THEME_GIT_PROMPT_STAGED="$FG[088]%{● %G%}"
+  ZSH_THEME_GIT_PROMPT_CONFLICTS="$FG[088]%{✖ %G%}"
 fi
 
 PROMPT=$'%{$fg_bold[green]%}%n@%m.${WHERE_I_AM}:%{$fg[blue]%}%~%b $(${_WHO_TO_CALL})\
