@@ -136,13 +136,14 @@ else
   ZSH_THEME_GIT_PROMPT_SUFFIX=")"
   ZSH_THEME_GIT_PROMPT_SEPARATOR="|"
   ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[magenta]%}"
-  ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[red]%}%{● %G%}"
-  ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}%{✖ %G%}"
   ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}%{✚ %G%}"
   ZSH_THEME_GIT_PROMPT_BEHIND="%{↓ %G%}"
   ZSH_THEME_GIT_PROMPT_AHEAD="%{↑ %G%}"
   ZSH_THEME_GIT_PROMPT_UNTRACKED="%{…%G%}"
   ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{✔ %G%}"
+  # 124 dark red
+  ZSH_THEME_GIT_PROMPT_STAGED="$FG[124]%{● %G%}"
+  ZSH_THEME_GIT_PROMPT_CONFLICTS="$FG[124]%{✖ %G%}"
 fi
 
 PROMPT=$'%{$fg_bold[green]%}%n@%m.${WHERE_I_AM}:%{$fg[blue]%}%~%b $(${_WHO_TO_CALL})\
