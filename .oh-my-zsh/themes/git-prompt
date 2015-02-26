@@ -1,31 +1,5 @@
-# The MIT License (MIT)
-#
-# Copyright (C) 2014 Olivier Verdier
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy of
-# this software and associated documentation files (the "Software"), to deal in
-# the Software without restriction, including without limitation the rights to
-# use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-# of the Software, and to permit persons to whom the Software is furnished to do
-# so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-#
-# Copy the portion of code from:
-#
-# https://github.com/olivierverdier/zsh-git-prompt.git
-#
-# Version v0.4
-#
+# To install source this file from your .zshrc file
+
 # see documentation at http://linux.die.net/man/1/zshexpn
 # A: finds the absolute path, even if this is symlinked
 # h: equivalent to dirname
@@ -71,7 +45,7 @@ function update_current_git_vars() {
 
     if [[ "$GIT_PROMPT_EXECUTABLE" == "python" ]]; then
         local gitstatus="$__GIT_PROMPT_DIR/gitstatus.py"
-        _GIT_STATUS=`pypy ${gitstatus} 2>/dev/null`
+        _GIT_STATUS=`python ${gitstatus} 2>/dev/null`
     fi
     if [[ "$GIT_PROMPT_EXECUTABLE" == "haskell" ]]; then
         local gitstatus="$__GIT_PROMPT_DIR/dist/build/gitstatus/gitstatus"
@@ -120,31 +94,17 @@ git_super_status() {
 }
 
 # Default values for the appearance of the prompt. Configure at will.
-repo_br=$(git -C ${HOME}/repos/dotfiles symbolic-ref --short HEAD)
+ZSH_THEME_GIT_PROMPT_PREFIX="("
+ZSH_THEME_GIT_PROMPT_SUFFIX=")"
+ZSH_THEME_GIT_PROMPT_SEPARATOR="|"
+ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[magenta]%}"
+ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[red]%}%{●%G%}"
+ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}%{✖%G%}"
+ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}%{✚%G%}"
+ZSH_THEME_GIT_PROMPT_BEHIND="%{↓%G%}"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{↑%G%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{…%G%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{✔%G%}"
 
-if [[ "${repo_br}" == "master" ]]; then
-  WHERE_I_AM="(W)"
-  _WHO_TO_CALL=git_prompt_info
-  ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[blue]%}("
-  ZSH_THEME_GIT_PROMPT_SUFFIX=")%{$reset_color%}"
-  ZSH_THEME_GIT_PROMPT_DIRTY=""
-  ZSH_THEME_GIT_PROMPT_CLEAN=""
-else
-  WHERE_I_AM="(H)"
-  _WHO_TO_CALL=git_super_status
-  ZSH_THEME_GIT_PROMPT_PREFIX="("
-  ZSH_THEME_GIT_PROMPT_SUFFIX=")"
-  ZSH_THEME_GIT_PROMPT_SEPARATOR="|"
-  ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[magenta]%}"
-  ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[red]%}%{●%G%}"
-  ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}%{✖%G%}"
-  ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}%{✚%G%}"
-  ZSH_THEME_GIT_PROMPT_BEHIND="%{↓%G%}"
-  ZSH_THEME_GIT_PROMPT_AHEAD="%{↑%G%}"
-  ZSH_THEME_GIT_PROMPT_UNTRACKED="%{…%G%}"
-  ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{✔%G%}"
-fi
 
-PROMPT=$'%{$fg_bold[green]%}%n@%m.${WHERE_I_AM}:%{$fg[blue]%}%~%b $(${_WHO_TO_CALL})\
-%{$reset_color%}$ '
 
