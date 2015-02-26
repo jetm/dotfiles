@@ -123,14 +123,14 @@ git_super_status() {
 dotfiles_br=$(git -C ${HOME}/repos/dotfiles symbolic-ref --short HEAD)
 
 if [[ "${dotfiles_br}" == "master" ]]; then
-  WHERE_I_AM="(W)"
+  WHERE_I_AM="(H)"
   _WHO_TO_CALL=git_prompt_info
   ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[magenta]%}("
   ZSH_THEME_GIT_PROMPT_SUFFIX=")%{$reset_color%}"
   ZSH_THEME_GIT_PROMPT_DIRTY=""
   ZSH_THEME_GIT_PROMPT_CLEAN=""
 else
-  WHERE_I_AM="(H)"
+  WHERE_I_AM="(W)"
   _WHO_TO_CALL=git_super_status
   ZSH_THEME_GIT_PROMPT_PREFIX="("
   ZSH_THEME_GIT_PROMPT_SUFFIX=")"
