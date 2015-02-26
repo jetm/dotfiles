@@ -125,7 +125,7 @@ repo_br=$(git -C ${HOME}/repos/dotfiles symbolic-ref --short HEAD)
 if [[ "${repo_br}" == "master" ]]; then
   WHERE_I_AM="(W)"
   _WHO_TO_CALL=git_prompt_info
-  ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[blue]%}("
+  ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[magenta]%}("
   ZSH_THEME_GIT_PROMPT_SUFFIX=")%{$reset_color%}"
   ZSH_THEME_GIT_PROMPT_DIRTY=""
   ZSH_THEME_GIT_PROMPT_CLEAN=""
