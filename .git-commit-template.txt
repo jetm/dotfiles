@@ -1,0 +1,28 @@
+# <type>(<scope>): <subject>
+# <body>
+# <footer>
+#
+# <type> should be one of the following:
+#
+# * feat (new feature)
+# * fix (bug fix)
+# * chg (any change as refactoring)
+# * docs (changes to documentation)
+# * test (adding missing tests, refactoring tests; no prod code change)
+# * style (formatting, cleaning whitespace...; no code change)
+# * chore (routine task; no production code change)
+#
+# <scope>: To who will be interested on this change
+#
+# <subject>: No more than 50 chars. Imperative tone, 'change' instead
+#            of 'changed'
+#
+# <body>: As <subject> use imperative tone as well. Include motivation
+#         for the change, and contrasts its implementation with
+#         previous behaviour.
+#
+# <footer>: References item to product management tool: Bug #3, CR #4
+#
+# Inspired on [1] and development on ASIC API CR Team:
+# [1] https://github.com/sparkbox/how_to/tree/master/style/git
+#
