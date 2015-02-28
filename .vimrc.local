@@ -35,37 +35,12 @@ au BufNewFile,BufRead *.git/COMMIT_EDITMSG setlocal spell spelllang=en_us
 map <leader>W :w !sudo tee % >/dev/null<CR>
 
 "
-" Trim trailing whitespace
+" Settings trim trailing whitespace
 "
-function! ShowSpaces(...)
-  let @/='\v(\s+$)|( +\ze\t)'
-  let oldhlsearch=&hlsearch
-  if !a:0
-    let &hlsearch=!&hlsearch
-  else
-    let &hlsearch=a:1
-  end
-  return oldhlsearch
-endfunction
+nnoremap <F12> :StripWhitespace<CR>
+highlight ExtraWhitespace ctermbg=88 guifg=#870000
 
-function! TrimSpaces() range
-  let oldhlsearch=ShowSpaces(1)
-  execute a:firstline.",".a:lastline."substitute ///gec"
-  let &hlsearch=oldhlsearch
-endfunction
-
-command! -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
-command! -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
-nnoremap <F12>           :ShowSpaces 1<CR>
-nnoremap <Leader><F12>   m`:TrimSpaces<CR>``
-vnoremap <Leader><S-F12> :TrimSpaces<CR>
-
-highlight ExtraWhitespace ctermbg=red guibg=red
-au ColorScheme * highlight ExtraWhitespace guibg=red
-au BufEnter * match ExtraWhitespace /\s\+$/
-au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-au InsertLeave * match ExtraWhiteSpace /\s\+$/
-
+" I do want trim them automatically, sometimes no need to
 let g:spf13_keep_trailing_whitespace = 1
 
 "
