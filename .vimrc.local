@@ -234,6 +234,8 @@ let g:syntastic_warning_symbol = '⚠'
 " Diagnostic using cpplint
 nnoremap <F10> :SyntasticCheck cpplint<CR>
 
+" Build current file with Ctrl-c
+nnoremap <C-c> :!do-make %<CR>
 
 "
 " C Format settings
