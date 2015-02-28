@@ -35,6 +35,9 @@ Bundle 'jalcine/cmake.vim'
 " Custom colorscheme only for C/C++ & gvim
 Bundle 'morhetz/gruvbox'
 
+" Remove whitespace
+Bundle 'ntpeters/vim-better-whitespace'
+
 "----------------------------------------------------------------------"
 "
 " Plugins disabled
