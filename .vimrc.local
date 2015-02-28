@@ -226,9 +226,14 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -Wall -Wextra'
-let g:syntastic_cpp_checkers = ['gcc', 'cpplint']
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
+" No need, YCM disable them by default
+"let g:syntastic_cpp_checkers = ['gcc', 'cpplint']
+
+" Diagnostic using cpplint
+nnoremap <F10> :SyntasticCheck cpplint<CR>
+
 
 "
 " C Format settings
@@ -239,7 +244,7 @@ let g:clang_format#style_options = {"Standard" : "C++11"}
 autocmd FileType c,cpp,objc nnoremap <buffer><F4> :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc vnoremap <buffer><F4> :ClangFormat<CR>
 
-" TODO: Consider if you install vim-operator-user
+" TODO: Consider if you need to install vim-operator-user
 "autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
 " Toggle auto formatting:
 "nmap <Leader>C :ClangFormatAutoToggle<CR>
