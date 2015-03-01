@@ -39,6 +39,10 @@ Bundle 'morhetz/gruvbox'
 " Remove whitespace
 Bundle 'ntpeters/vim-better-whitespace'
 
+" Buffergator Plugin
+Bundle 'jeetsukumaran/vim-buffergator'
+
+
 "----------------------------------------------------------------------"
 "
 " Plugins disabled
