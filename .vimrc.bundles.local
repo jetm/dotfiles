@@ -31,7 +31,7 @@ UnBundle 'spf13/vim-autoclose'
 
 " Preview of plugin to support CMake, still need more work done
 " TODO: check its status need time you look on this
-Bundle 'jalcine/cmake.vim'
+"Bundle 'jalcine/cmake.vim'
 
 " Custom colorscheme only for C/C++ & gvim
 Bundle 'morhetz/gruvbox'
