@@ -47,10 +47,23 @@ Bundle 'jeetsukumaran/vim-buffergator'
 "
 " Plugins disabled
 "
+" No gist of github
 UnBundle 'mattn/gist-vim'
+
+" No git tracking
 UnBundle 'mhinz/vim-signify'
+
+" No interface to Web API
 UnBundle 'mattn/webapi-vim'
+
+" No Puppet Syntax Highlighting
 UnBundle 'Puppet-Syntax-Highlighting'
+
+" No rust
 UnBundle 'wting/rust.vim'
+
+" No toml
 UnBundle 'cespare/vim-toml'
+
+" No wildfire
 UnBundle 'gcmt/wildfire.vim'
