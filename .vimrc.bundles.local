@@ -67,3 +67,6 @@ UnBundle 'cespare/vim-toml'
 
 " No wildfire
 UnBundle 'gcmt/wildfire.vim'
+
+" No need to see the file under status line
+UnBundle 'bling/vim-bufferline'
