@@ -49,6 +49,8 @@ UnBundle 'spf13/vim-autoclose'
 " Custom colorscheme only for C/C++ & gvim
 Bundle 'morhetz/gruvbox'
 
+" Switching between companion source files (e.g. ".h" and ".cpp")
+Bundle 'derekwyatt/vim-fswitch'
 
 
 "----------------------------------------------------------------------"
