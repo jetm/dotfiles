@@ -16,6 +16,12 @@ Bundle 'jetm/vim-cscope'
 " Easy text exchange operator for Vim
 Bundle 'tommcdo/vim-exchange'
 
+" Remove whitespace
+Bundle 'ntpeters/vim-better-whitespace'
+
+" Buffergator Plugin
+Bundle 'jeetsukumaran/vim-buffergator'
+
 " Format C/C++ code
 " TODO: Consider to use vim-operator-user
 "Bundle 'kana/vim-operator-user'
@@ -36,11 +42,6 @@ UnBundle 'spf13/vim-autoclose'
 " Custom colorscheme only for C/C++ & gvim
 Bundle 'morhetz/gruvbox'
 
-" Remove whitespace
-Bundle 'ntpeters/vim-better-whitespace'
-
-" Buffergator Plugin
-Bundle 'jeetsukumaran/vim-buffergator'
 
 
 "----------------------------------------------------------------------"
