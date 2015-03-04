@@ -30,9 +30,7 @@ Bundle 'othree/eregex.vim'
 " C/C++ development plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Format C/C++ code
-" TODO: Consider to use vim-operator-user
-"Bundle 'kana/vim-operator-user'
-Bundle 'rhysd/vim-clang-format'
+Bundle 'Chiel92/vim-autoformat'
 
 " Better colors for C++ files, included C++11/C++14
 Bundle 'octol/vim-cpp-enhanced-highlight'
