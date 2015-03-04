@@ -213,18 +213,18 @@ nnoremap <F10> :SyntasticCheck cpplint<CR>
 nnoremap <C-c> :!do-make %<CR>
 
 "
-" C Format settings
+" C/C++ Format settings with vim-autoformat
 "
-let g:clang_format#style_options = {"Standard" : "C++11"}
+let g:formatprg_cpp = "clang-format"
+let g:formatprg_args_expr_cpp = '" -style=google"'
 
-" Format C++ code with F4 key
-autocmd FileType c,cpp,objc nnoremap <buffer><F4> :<C-u>ClangFormat<CR>
-autocmd FileType c,cpp,objc vnoremap <buffer><F4> :ClangFormat<CR>
+"
+" CHECK: Remember for mapping new key
+" :verbose map <KEY> is new key is not working anymore, e.g.: vimviews
+"
 
-" TODO: Consider if you need to install vim-operator-user
-"autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
-" Toggle auto formatting:
-"nmap <Leader>C :ClangFormatAutoToggle<CR>
+" Format C/C++ code with F4 key
+au FileType c,cpp,*.h nnoremap <F4> :Autoformat<CR>
 
 "
 " cscope settings
