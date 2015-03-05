@@ -172,7 +172,7 @@ let g:ycm_min_num_identifier_candidate_chars = 4
 let g:ycm_collect_identifiers_from_tags_files = 1
 
 " Compile and diagnostics
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+au FileType c,cpp,*.h nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
 " Key mappings used to select completion string
 let g:ycm_key_list_select_completion = ['<TAB>']
@@ -182,7 +182,7 @@ let g:ycm_key_list_previous_completion = ['<S-TAB>']
 let g:ycm_key_detailed_diagnostics = ''
 
 " Try to do the same than GoToDefinition and GoToDeclarion
-nnoremap <leader>gt :YcmCompleter GoTo<CR>
+au FileType c,cpp,*.h nnoremap <leader>gt :YcmCompleter GoTo<CR>
 
 " TODO: consider use this settings later
 "nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
@@ -207,10 +207,10 @@ let g:syntastic_warning_symbol = '⚠'
 "let g:syntastic_cpp_checkers = ['gcc', 'cpplint']
 
 " Diagnostic using cpplint
-nnoremap <F10> :SyntasticCheck cpplint<CR>
+au FileType c,cpp,*.h nnoremap <F10> :SyntasticCheck cpplint<CR>
 
 " Build current file with Ctrl-c
-nnoremap <C-c> :!do-make %<CR>
+au FileType c,cpp nnoremap <C-c> :!do-make %<CR>
 
 "
 " C/C++ Format settings with vim-autoformat
@@ -245,7 +245,7 @@ endif
 " ctags settings
 "
 " Show Tagbar with F3 key, less error than ,tt using together with tmux
-nnoremap <F3> :TagbarToggle<CR><C-w>=
+au FileType c,cpp,*.h nnoremap <F3> :TagbarToggle<CR><C-w>=
 
 "
 " vim-cpp-enhanced-highlight settings
@@ -260,4 +260,5 @@ au BufEnter *.h let b:fswitchdst = 'cc,cpp,c'
 au BufEnter *.cc let b:fswitchdst = 'h'
 
 " Creates a new window on the left and opens the companion file in it
-nnoremap <Leader>sv :FSSplitLeft<CR>
+au FileType c,cpp,*.h nnoremap <Leader>sv :FSSplitLeft<CR>
+
