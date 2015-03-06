@@ -50,6 +50,9 @@ Bundle 'morhetz/gruvbox'
 " Switching between companion source files (e.g. ".h" and ".cpp")
 Bundle 'derekwyatt/vim-fswitch'
 
+" Rainbow parentheses improved
+Bundle 'oblitum/rainbow'
+
 
 "----------------------------------------------------------------------"
 "
