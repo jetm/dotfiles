@@ -53,6 +53,8 @@ Bundle 'derekwyatt/vim-fswitch'
 " Rainbow parentheses improved
 Bundle 'oblitum/rainbow'
 
+" Improve c-family development environment based on Clang
+Bundle 'bbchung/clighter'
 
 "----------------------------------------------------------------------"
 "
