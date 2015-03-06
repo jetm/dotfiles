@@ -263,3 +263,12 @@ au BufEnter *.cc let b:fswitchdst = 'h'
 " Creates a new window on the left and opens the companion file in it
 au FileType c,cpp,*.h nnoremap <Leader>sv :FSSplitLeft<CR>
 
+"
+" Rainbow settings
+"
+" Only for c/cpp file type
+au FileType c,cpp call rainbow#load()
+
+" Change rainbow default colors
+let g:rainbow_ctermfgs = [ 'brown', 'Darkblue', 'darkgray', 'darkgreen' ]
+
