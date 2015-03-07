@@ -1,3 +1,0 @@
-#!/bin/env bash
-
-xss-lock -- xscreensaver-command -lock &
