@@ -3,8 +3,15 @@
 # Accepts a .c or .cpp or .cc file, compile it and execute it
 #
 # It avoids me to create a Makefile file
+#
+# It depends of github.com/ryanmjacobs/cprogram
 
-filename="${1%.*}"
-FLAGS="-Wall -Wextra -Werror -O2 -g"
-CFLAGS="${FLAGS}" CXXFLAGS="${FLAGS} -std=gnu++11" make ${filename} && ./${filename}
+filename="${1}"
+
+FLAGS="-Wall -Wextra -Werror -O0 -g"
+export CFLAGS="${FLAGS}"
+export CXXFLAGS="${FLAGS} -std=gnu++11"
+export C_CACHE_SIZE=$((10*1024*1024))  # 10 MBytes
+
+c "${filename}"
 
