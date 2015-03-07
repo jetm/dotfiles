@@ -5,6 +5,6 @@
 # It avoids me to create a Makefile file
 
 filename="${1%.*}"
-FLAGS="-std=gnu++11 -Wall -Wextra -Werror -O2 -g"
-CFLAGS="${FLAGS}" CXXFLAGS="${FLAGS}" make ${filename} && ./${filename}
+FLAGS="-Wall -Wextra -Werror -O2 -g"
+CFLAGS="${FLAGS}" CXXFLAGS="${FLAGS} -std=gnu++11" make ${filename} && ./${filename}
 
