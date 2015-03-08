@@ -73,7 +73,7 @@ UnBundle 'mattn/webapi-vim'
 UnBundle 'Puppet-Syntax-Highlighting'
 
 " No rust
-UnBundle 'wting/rust.vim'
+UnBundle 'rust-lang/rust.vim'
 
 " No toml
 UnBundle 'cespare/vim-toml'
