@@ -25,6 +25,8 @@ Bundle 'jeetsukumaran/vim-buffergator'
 " Perl/Ruby style regexp notation
 Bundle 'othree/eregex.vim'
 
+" Helpers for UNIX
+Bundle 'tpope/vim-eunuch'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " C/C++ development plugins
