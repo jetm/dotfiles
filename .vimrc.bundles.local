@@ -28,6 +28,10 @@ Bundle 'othree/eregex.vim'
 " Helpers for UNIX
 Bundle 'tpope/vim-eunuch'
 
+" Help to edit XML files
+Bundle 'sukima/xmledit'
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " C/C++ development plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
