@@ -31,6 +31,9 @@ Bundle 'tpope/vim-eunuch'
 " Help to edit XML files
 Bundle 'sukima/xmledit'
 
+" Add-on to Tim Pope's markdown.vim to highlight using Github Flavored
+" Markdown
+Bundle 'jtratner/vim-flavored-markdown'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " C/C++ development plugins
