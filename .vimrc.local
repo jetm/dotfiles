@@ -293,3 +293,11 @@ hi clighterFunctionDecl term=NONE cterm=NONE ctermbg=236 ctermfg=248 gui=NONE
 hi clighterDeclRefExprCall term=NONE cterm=NONE ctermbg=236 ctermfg=248 gui=NONE
 hi clighterMemberRefExpr term=NONE cterm=NONE ctermbg=236 ctermfg=248 gui=NONE
 hi clighterNamespace term=NONE cterm=NONE ctermbg=236 ctermfg=248 gui=NONE
+
+"
+" vim-flavored-markdown settings
+"
+augroup markdown
+    au!
+    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup END
