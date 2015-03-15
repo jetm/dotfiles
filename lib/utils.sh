@@ -61,7 +61,7 @@ extract()
 }
 
 # Repeat n times command
-repeat()
+repeat_cmd()
 {
   local i max
   max=$1; shift;
