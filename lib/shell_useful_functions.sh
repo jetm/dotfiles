@@ -15,13 +15,15 @@ pacs()
   ")"
 }
 
-mvdir ()          # Move dir Orig to Dest
+# Move dir Orig to Dest
+mvdir()
 {
   ( tar -c $1 ) | ( cd $2 && tar -x -p ) \
     && rm -rf $1
 }
 
-extract()         # Extract different compress files
+# Extract different compress files
+extract()
 {
   local e=0 i c
   for i; do
@@ -58,7 +60,8 @@ extract()         # Extract different compress files
   return $e
 }
 
-repeat()       # Repeat n times command.
+# Repeat n times command
+repeat()
 {
   local i max
   max=$1; shift;
@@ -67,7 +70,8 @@ repeat()       # Repeat n times command.
   done
 }
 
-ask()          # See 'killps' for example of use.
+# See 'killps' for example of use.
+ask()
 {
   echo -n "$@" '[y/n] ' ; read ans
   case "$ans" in
@@ -82,17 +86,20 @@ ask()          # See 'killps' for example of use.
 # Process/system related functions:
 #-------------------------------------------------------------
 
-my_ps()                 # Show my process
+# Show my process
+my_ps()
 {
   ps $@ -u $USER -o pid,%cpu,%mem,bsdtime,command ;
 }
 
-pp()                    # Id of my process
+# Id of my process
+pp()
 {
   my_ps f | awk '!/awk/ && $0~var' var=${1:-".*"} ;
 }
 
-killps()                 # Kill by process name.
+# Kill by process name
+killps()
 {
   local pid pname sig="-TERM"   # Default signal.
   if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
@@ -116,18 +123,21 @@ killps()                 # Kill by process name.
 # File & string-related functions:
 #-------------------------------------------------------------
 
-ff()        # Find a file with a pattern in name
+# Find a file with a pattern in name
+ff()
 {
   find . -type f -iname '*'$*'*' -ls ;
 }
 
-fe()        # Find a file with pattern ( in name and Execute [ on it
+# Find a file with pattern ( in name and Execute [ on it)
+fe()
 {
   find . -type f -iname '*'${1:-}'*' -exec ${2:-file} {} \;  ;
 }
 
-fstr()      # Find a pattern in a set of files and highlight them
-            # (needs a recent version of egrep)
+# Find a pattern in a set of files and highlight them
+# (needs a recent version of egrep)
+fstr()
 {
   OPTIND=1
   local case=""
@@ -156,13 +166,15 @@ fstr()      # Find a pattern in a set of files and highlight them
 
 }
 
-cuttail()       # cut last n lines in file, 10 by default
+# cut last n lines in file, 10 by default
+cuttail()
 {
   nlines=${2:-10}
   sed -n -e :a -e "1,${nlines}!{P;N;D;};N;ba" $1
 }
 
-lowercase()     # move filenames to lowercase
+# move filenames to lowercase
+lowercase()
 {
   for file ; do
     filename=${file##*/}
@@ -196,7 +208,8 @@ aa_256()
   )
 }
 
-md()            # Create a new directory and enter it
+# Create a new directory and enter it
+md()
 {
   mkdir -p "$@" && cd "$@"
 }
