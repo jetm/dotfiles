@@ -93,5 +93,3 @@ UnBundle 'gcmt/wildfire.vim'
 " No need to see the file under status line
 UnBundle 'bling/vim-bufferline'
 
-" No other plugin to comment code, already is tpope/vim-commentary
-UnBundle 'scrooloose/nerdcommenter'
