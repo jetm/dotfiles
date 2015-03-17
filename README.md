@@ -1,5 +1,8 @@
 # Javier's dotfiles and some home-made utilities
 
+My shell configuration files and some utilities. Recommended use them with zsh,
+although they work fine with bash.
+
 ## Install dotfiles:
 
 ```sh
