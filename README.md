@@ -3,7 +3,7 @@
 My shell configuration files and some utilities. Recommended use them with zsh,
 although they work fine with bash.
 
-## Install dotfiles:
+## Installation
 
 ```sh
 $ dotfiles/bin/install-dotfiles
