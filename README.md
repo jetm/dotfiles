@@ -1,5 +1,4 @@
-Just my dotfiles
-========================================================================
+# Javier's dotfiles and some home-made utilities
 
 ## Install dotfiles:
 
