@@ -306,3 +306,14 @@ augroup END
 " vim-commentary settings
 "
 autocmd FileType cmake set commentstring=#\ %s
+
+"
+" nerd-commenter settings
+"
+" Add extra space around delimiters when commenting, remove them when
+" uncommenting
+let g:NERDSpaceDelims = 1
+
+" Always remove the extra spaces when uncommenting regardless of whether
+" NERDSpaceDelims is set
+let g:NERDRemoveExtraSpaces = 1
