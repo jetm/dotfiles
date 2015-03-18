@@ -6,6 +6,8 @@ although they work fine with bash.
 ## Installation
 
 ```sh
+$ git clone git://github.com/jetm/dotfiles
+
 $ dotfiles/bin/install-dotfiles
 ```
 
