@@ -3,6 +3,12 @@
 My shell configuration files and some utilities. Recommended use them with zsh,
 although they work fine with bash.
 
+## Content
+
+* Configuration files
+    * [`.bashrc`](https://github.com/jetm/dotfiles/.bashrc) Standard initialization file, only for interactive mode.
+
+
 ## Installation
 
 ```sh
