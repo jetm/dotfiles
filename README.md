@@ -5,6 +5,9 @@ although they work fine with bash.
 
 ## Content
 
+A brief description of each configuration file. For further details, click on
+each one of them.
+
 * Configuration files
     * [`.bashrc`](https://github.com/jetm/dotfiles/.bashrc) Standard initialization file, only for interactive mode.
 
@@ -13,7 +16,6 @@ although they work fine with bash.
 
 ```sh
 $ git clone git://github.com/jetm/dotfiles
-
 $ dotfiles/bin/install-dotfiles
 ```
 
