@@ -1,3 +1,0 @@
-#!/bin/env bash
-
-sleep 2 && light-locker-command -l
