@@ -31,9 +31,6 @@ export DEBEMAIL="javier.tia@gmail.com"
 # Set vim Global editor
 [ -x /usr/bin/vim ] && export EDITOR=vim
 
-# Go settings
-[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
-
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then
   PATH="${PATH}":~/bin
@@ -75,3 +72,13 @@ if [ -S /var/run/docker.sock ]; then
   export no_proxy=${no_proxy},/var/run/docker.sock
   export NO_PROXY=${NO_PROXY},/var/run/docker.sock
 fi
+
+# Set Go settings
+if [[ -s "$HOME/.gvm/scripts/gvm" ]]; then
+  source "$HOME/.gvm/scripts/gvm"
+elif [ -x /usr/bin/go -a -d ${HOME}/go ]; then
+  export GOPATH=${HOME}/go
+  PATH=${PATH}:${HOME}/go/bin
+  typeset -U PATH
+fi
+
