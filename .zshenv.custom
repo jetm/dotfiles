@@ -58,6 +58,7 @@ fi
 # Add RVM to PATH for scripting
 if [ -d ${HOME}/.rvm/bin ] ; then
   PATH=${PATH}:${HOME}/.rvm/bin
+  typeset -U PATH
 fi
 
 # Add ccache
