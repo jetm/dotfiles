@@ -9,8 +9,7 @@ A brief description of each configuration file. For further details, click on
 each one of them.
 
 * Configuration files
-    * [`.bashrc`](https://github.com/jetm/dotfiles/.bashrc) Standard initialization file, only for interactive mode.
-
+    * [`.bashrc`](https://github.com/jetm/dotfiles/blob/master/.bashrc) Standard initialization file, only for interactive mode.
 
 ## Installation
 
