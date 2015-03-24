@@ -15,6 +15,7 @@ each one of them.
     * [`.bashrc`](https://github.com/jetm/dotfiles/blob/master/.bashrc) Standard initialization file, only for interactive mode.
     * [`.dircolors`](https://github.com/jetm/dotfiles/blob/master/.dircolors) Solarized color theme for the color GNU ls utility.
     * [`.git-commit-template`](https://github.com/jetm/dotfiles/blob/master/.git-commit-template) Template to write Git commit message.
+    * [`.gitconfig`](https://github.com/jetm/dotfiles/blob/master/.gitconfig) Global Git conffiguration file.
 
 ## Installation
 
