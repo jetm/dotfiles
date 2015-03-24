@@ -10,6 +10,7 @@ each one of them.
 
 * Configuration files
     * [`.aliases`](https://github.com/jetm/dotfiles/blob/master/.aliases) Where the aliases are living.
+    * [`.apple_keys`](https://github.com/jetm/dotfiles/blob/master/.apple_keys) Xmodmap configuration for USB aluminum Apple Keyboard.
     * [`.bashrc`](https://github.com/jetm/dotfiles/blob/master/.bashrc) Standard initialization file, only for interactive mode.
 
 ## Installation
