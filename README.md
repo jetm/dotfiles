@@ -13,6 +13,7 @@ each one of them.
     * [`.apple_keys`](https://github.com/jetm/dotfiles/blob/master/.apple_keys) Xmodmap configuration for USB aluminum Apple Keyboard.
     * [`.ccache.conf`](https://github.com/jetm/dotfiles/blob/master/.ccache/ccache.conf) ccache configuration file.
     * [`.bashrc`](https://github.com/jetm/dotfiles/blob/master/.bashrc) Standard initialization file, only for interactive mode.
+    * [`.dircolors`](https://github.com/jetm/dotfiles/blob/master/.dircolors) Solarized color theme for the color GNU ls utility.
 
 ## Installation
 
