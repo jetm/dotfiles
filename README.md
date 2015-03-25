@@ -1,11 +1,11 @@
 # Javier's dotfiles and utilities
 
-My shell configuration files and some utilities. Recommended use them with zsh,
+My shell configuration files and some useful utilities. Recommended use them with zsh,
 although they work fine with bash.
 
 ## Content
 
-A brief description of each configuration file. For further details, click on
+A brief description of each configuration file and utilities. For further details, click on
 each one of them.
 
 * Configuration files
@@ -18,6 +18,8 @@ each one of them.
     * [`.gitconfig`](https://github.com/jetm/dotfiles/blob/master/.gitconfig) Global Git conffiguration file.
     * [`.gitignore`](https://github.com/jetm/dotfiles/blob/master/.gitignore) Global Git untracked files to ignore.
     * [`.inputrc`](https://github.com/jetm/dotfiles/blob/master/.inputrc) Readline initialization file.
+
+* Useful utilities
 
 ## Installation
 
