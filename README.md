@@ -20,6 +20,7 @@ each one of them.
     * [`.inputrc`](https://github.com/jetm/dotfiles/blob/master/.inputrc) Readline initialization file.
 
 * Useful utilities
+    * [`jetm.zsh-theme`](https://github.com/jetm/dotfiles/blob/master/.oh-my-zsh/themes/jetm.zsh-theme) My own oh-my-zsh prompt theme.
 
 ## Installation
 
