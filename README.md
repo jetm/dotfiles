@@ -14,6 +14,7 @@ each one of them.
     * [`.ccache.conf`](https://github.com/jetm/dotfiles/blob/master/.ccache/ccache.conf) ccache configuration file.
     * [`.bashrc`](https://github.com/jetm/dotfiles/blob/master/.bashrc) Standard initialization file, only for interactive mode.
     * [`.dir_colors`](https://github.com/jetm/dotfiles/blob/master/.dir_colors) Solarized color theme for the color GNU ls utility.
+    * [`.gemrc`](https://github.com/jetm/dotfiles/blob/master/.gemrc) Personal RubyGems environment configuration file.
     * [`.git-commit-template.txt`](https://github.com/jetm/dotfiles/blob/master/.git-commit-template.txt) Template to write Git commit message.
     * [`.gitconfig`](https://github.com/jetm/dotfiles/blob/master/.gitconfig) Global Git conffiguration file.
     * [`.gitignore`](https://github.com/jetm/dotfiles/blob/master/.gitignore) Global Git untracked files to ignore.
