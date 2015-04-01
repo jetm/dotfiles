@@ -21,7 +21,7 @@ each one of them.
     * [`.inputrc`](https://github.com/jetm/dotfiles/blob/master/.inputrc) Readline initialization file.
     * [`.perltidyrc`](https://github.com/jetm/dotfiles/blob/master/.perltidyrc) Global perltidy command file.
     * [`.screenrc`](https://github.com/jetm/dotfiles/blob/master/.screenrc) Screen utility configuration file.
-    * [`.screen-256color`](https://github.com/jetm/dotfiles/blob/master/.terminfo/s/screen-256color)/[`.xterm-256color`](https://github.com/jetm/dotfiles/blob/master/.terminfo/x/xterm-256color) Compiled terminfo entry to support 256 colors in screen/tmux (Old OS systems like RedHat v5).
+    * [`.screen-256color`](https://github.com/jetm/dotfiles/blob/master/.terminfo/s/screen-256color)/[`.xterm-256color`](https://github.com/jetm/dotfiles/blob/master/.terminfo/x/xterm-256color) Compiled terminfo entry to support 256 colors in screen/tmux (Old OS like RedHat v5).
     * [`.tmux.conf`](https://github.com/jetm/dotfiles/blob/master/.tmux.conf) Tmux utility configuration file.
     * [`.vimrc.before.local`](https://github.com/jetm/dotfiles/blob/master/.vimrc.before.local) local vim-spf13 configuration file.
     * [`.vimrc.bundles.local`](https://github.com/jetm/dotfiles/blob/master/.vimrc.bundles.local) local plugins vim-spf13 configuration file.
@@ -34,7 +34,7 @@ each one of them.
     * [`colortest`](https://github.com/jetm/dotfiles/blob/master/bin/colortest) Script to test colors on terminal.
 
 * Miscellaneous
-    * [`jetm.zsh-theme`](https://github.com/jetm/dotfiles/blob/master/.oh-my-zsh/themes/jetm.zsh-theme) My own oh-my-zsh prompt theme.
+    * [`jetm.zsh-theme`](https://github.com/jetm/dotfiles/blob/master/.oh-my-zsh/themes/jetm.zsh-theme) My oh-my-zsh prompt theme.
 
 ## Installation
 
