@@ -18,6 +18,7 @@ each one of them.
     * [`.git-commit-template.txt`](https://github.com/jetm/dotfiles/blob/master/.git-commit-template.txt) Template to write Git commit message.
     * [`.gitconfig`](https://github.com/jetm/dotfiles/blob/master/.gitconfig) Global Git conffiguration file.
     * [`.gitignore`](https://github.com/jetm/dotfiles/blob/master/.gitignore) Global Git untracked files to ignore.
+    * [`.gpg-agent.conf`](https://github.com/jetm/dotfiles/blob/master/.gnupg/gpg-agent.conf) GnuPG-agent daemon configuration file.
     * [`.inputrc`](https://github.com/jetm/dotfiles/blob/master/.inputrc) Readline initialization file.
     * [`.perltidyrc`](https://github.com/jetm/dotfiles/blob/master/.perltidyrc) Global perltidy command file.
     * [`.screenrc`](https://github.com/jetm/dotfiles/blob/master/.screenrc) Screen utility configuration file.
