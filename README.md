@@ -34,6 +34,7 @@ each one of them.
 
 * Useful utilities
     * [`colortest`](https://github.com/jetm/dotfiles/blob/master/bin/colortest) Script to test colors on terminal.
+    * [`cpplint.py`](https://github.com/jetm/dotfiles/blob/master/bin/cppliny.py) A symlink to installed locally [cpplint](http://google-styleguide.googlecode.com/svn/trunk/cpplint/cpplint.py).
 
 * Miscellaneous
     * [`jetm.zsh-theme`](https://github.com/jetm/dotfiles/blob/master/.oh-my-zsh/themes/jetm.zsh-theme) My oh-my-zsh prompt theme.
