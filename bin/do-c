@@ -4,7 +4,7 @@
 #
 # It avoids me to create a Makefile file
 #
-# It depends of github.com/ryanmjacobs/cprogram
+# It depends of https://github.com/ryanmjacobs/cprogram
 
 filename="${1}"
 
