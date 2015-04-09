@@ -1,4 +1,8 @@
+#
 # To install source this file from your .zshrc file
+#
+# Fork it from https://github.com/olivierverdier/zsh-git-prompt
+#
 
 # see documentation at http://linux.die.net/man/1/zshexpn
 # A: finds the absolute path, even if this is symlinked
