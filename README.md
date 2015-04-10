@@ -25,9 +25,9 @@ each one of them.
     * [`.screenrc`](https://github.com/jetm/dotfiles/blob/master/.screenrc) Screen utility configuration file.
     * [`.screen-256color`](https://github.com/jetm/dotfiles/blob/master/.terminfo/s/screen-256color)/[`.xterm-256color`](https://github.com/jetm/dotfiles/blob/master/.terminfo/x/xterm-256color) Compiled terminfo entry to support 256 colors in screen/tmux (Old OS like RedHat v5).
     * [`.tmux.conf`](https://github.com/jetm/dotfiles/blob/master/.tmux.conf) Tmux utility configuration file.
-    * [`.vimrc.before.local`](https://github.com/jetm/dotfiles/blob/master/.vimrc.before.local) local vim-spf13 configuration file.
-    * [`.vimrc.bundles.local`](https://github.com/jetm/dotfiles/blob/master/.vimrc.bundles.local) local plugins vim-spf13 configuration file.
-    * [`.vimrc.local`](https://github.com/jetm/dotfiles/blob/master/.vimrc.local) vimrc configuration file used with vim-spf13.
+    * [`.vimrc.before.local`](https://github.com/jetm/dotfiles/blob/master/.vimrc.before.local) local [vim-spf13](http://vim.spf13.com/) configuration file.
+    * [`.vimrc.bundles.local`](https://github.com/jetm/dotfiles/blob/master/.vimrc.bundles.local) local plugins [vim-spf13](http://vim.spf13.com/) configuration file.
+    * [`.vimrc.local`](https://github.com/jetm/dotfiles/blob/master/.vimrc.local) vimrc configuration file used with [vim-spf13](http://vim.spf13.com/).
     * [`.ycm_extra_conf.py`](https://github.com/jetm/dotfiles/blob/master/.ycm_extra_conf.py) Global YCM configuration file.
     * [`.zshenv.custom`](https://github.com/jetm/dotfiles/blob/master/.zshenv.custom) Where environment variables are set.
     * [`.zshrc`](https://github.com/jetm/dotfiles/blob/master/.zshrc) Zsh configuration file based on oh-my-zsh.
