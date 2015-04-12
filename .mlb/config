@@ -1,0 +1,41 @@
+# See README for explanation of these settings.
+# user and pass are required except for Top Plays
+user=EMAIL
+pass=PASS
+
+show_player_command=1
+top_plays_player=
+#audio_player=mplayer -cache 64 -really-quiet
+#video_player=mplayer -cache 5000 -really-quiet
+audio_player=mpv -cache 64 -really-quiet
+video_player=mpv -cache 5000 -really-quiet
+use_librtmp=0
+flash_browser=firefox %s
+rss_browser=firefox -new-tab %s
+no_lirc=0
+max_bps=800
+min_bps=300
+speed=500
+use_nexdef=0
+adaptive_stream=1
+live_from_start=0
+favorite=la
+# favorite=det
+favorite_color=cyan
+bg_color=xterm
+coverage=home
+debug=0
+use_color=1
+show_inning_frames=1
+milbtv=0
+free_color=white
+x_display=
+blackout=
+use_wired_web=1
+wiggle_timer=0.5
+video_follow=
+time_offset=
+audio_follow=
+curses_debug=0
+postseason=1
+international=1
