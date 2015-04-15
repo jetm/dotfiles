@@ -30,7 +30,7 @@ each one of them.
     * [`.vimrc.local`](https://github.com/jetm/dotfiles/blob/master/.vimrc.local) vimrc configuration file used with [vim-spf13](http://vim.spf13.com/).
     * [`.ycm_extra_conf.py`](https://github.com/jetm/dotfiles/blob/master/.ycm_extra_conf.py) Global [YCM](http://valloric.github.io/YouCompleteMe/) configuration file.
     * [`.zshenv.custom`](https://github.com/jetm/dotfiles/blob/master/.zshenv.custom) Where environment variables are set.
-    * [`.zshrc`](https://github.com/jetm/dotfiles/blob/master/.zshrc) Zsh configuration file based on oh-my-zsh.
+    * [`.zshrc`](https://github.com/jetm/dotfiles/blob/master/.zshrc) Zsh configuration file based on [oh-my-zsh](http://ohmyz.sh/).
 
 * Useful utilities
     * [`colortest`](https://github.com/jetm/dotfiles/blob/master/bin/colortest) Script to test colors on terminal.
@@ -39,7 +39,7 @@ each one of them.
     * [`install-dotfiles`](https://github.com/jetm/dotfiles/blob/master/bin/install-dotfiles) Script to instal my dotfiles.
 
 * Miscellaneous
-    * [`jetm.zsh-theme`](https://github.com/jetm/dotfiles/blob/master/.oh-my-zsh/themes/jetm.zsh-theme) My oh-my-zsh prompt theme.
+    * [`jetm.zsh-theme`](https://github.com/jetm/dotfiles/blob/master/.oh-my-zsh/themes/jetm.zsh-theme) My [oh-my-zsh](http://ohmyz.sh/) prompt theme.
     * [`utils.sh`](https://github.com/jetm/dotfiles/blob/master/lib/utils.sh) Shell functions used frequently.
     * [`config`](https://github.com/jetm/dotfiles/blob/master/.mlb/config) Personal mlbviewer configuration.
 
