@@ -41,7 +41,7 @@ each one of them.
 * Miscellaneous
     * [`jetm.zsh-theme`](https://github.com/jetm/dotfiles/blob/master/.oh-my-zsh/themes/jetm.zsh-theme) Personal [oh-my-zsh](http://ohmyz.sh/) prompt theme.
     * [`utils.sh`](https://github.com/jetm/dotfiles/blob/master/lib/utils.sh) Shell functions used frequently.
-    * [`config`](https://github.com/jetm/dotfiles/blob/master/.mlb/config) Personal mlbviewer configuration.
+    * [`config`](https://github.com/jetm/dotfiles/blob/master/.mlb/config) Personal [mlbviewer](http://sourceforge.net/projects/mlbviewer/) configuration.
 
 ## Installation
 
