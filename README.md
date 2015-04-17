@@ -36,7 +36,7 @@ each one of them.
     * [`colortest`](https://github.com/jetm/dotfiles/blob/master/bin/colortest) Script to test colors on terminal.
     * [`cpplint.py`](https://github.com/jetm/dotfiles/blob/master/bin/cpplint.py) A symlink to installed locally [cpplint](http://google-styleguide.googlecode.com/svn/trunk/cpplint/cpplint.py).
     * [`do-c`](https://github.com/jetm/dotfiles/blob/master/bin/do-c) A wrapper around [c](https://github.com/ryanmjacobs/c).
-    * [`install-dotfiles`](https://github.com/jetm/dotfiles/blob/master/bin/install-dotfiles) Script to instal my dotfiles.
+    * [`install-dotfiles`](https://github.com/jetm/dotfiles/blob/master/bin/install-dotfiles) Script to install my dotfiles.
 
 * Miscellaneous
     * [`jetm.zsh-theme`](https://github.com/jetm/dotfiles/blob/master/.oh-my-zsh/themes/jetm.zsh-theme) Personal [oh-my-zsh](http://ohmyz.sh/) prompt theme.
