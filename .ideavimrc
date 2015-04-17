@@ -1,2 +1,8 @@
+"
+" General settings
+"
+" Yanks go on clipboard instead
+set clipboard+=unnamed
+
 " Mappings settings
 let mapleader=","
