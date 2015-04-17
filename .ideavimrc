@@ -4,5 +4,8 @@
 " Yanks go on clipboard instead
 set clipboard+=unnamed
 
+" Number of command-lines that are remembered
+set history=50
+
 " Mappings settings
 let mapleader=","
