@@ -20,7 +20,6 @@ use_nexdef=0
 adaptive_stream=1
 live_from_start=0
 favorite=la
-# favorite=det
 favorite_color=cyan
 bg_color=xterm
 coverage=home
