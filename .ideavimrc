@@ -4,6 +4,9 @@
 " Yanks go on clipboard instead
 set clipboard+=unnamed
 
+" Highlight matches with last search pattern
+set hlsearch
+
 " Number of command-lines that are remembered
 set history=50
 
