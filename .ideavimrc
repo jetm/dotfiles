@@ -7,6 +7,9 @@ set clipboard+=unnamed
 " Highlight matches with last search pattern
 set hlsearch
 
+" Ignore case in search patterns
+set ignorecase
+
 " Number of command-lines that are remembered
 set history=50
 
