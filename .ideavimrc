@@ -19,5 +19,10 @@ set smartcase
 " Number of command-lines that are remembered
 set history=50
 
-" Mappings settings
-let mapleader=","
+"
+" General Mappings settings
+"
+" No supported yet by IDEA Vim plugin
+" by default \ is the leader
+" let mapleader=","
+
