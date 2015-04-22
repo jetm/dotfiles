@@ -13,6 +13,9 @@ set ignorecase
 " Message on status line to show current mode
 set showmode
 
+" No ignore case when pattern has uppercase
+set smartcase
+
 " Number of command-lines that are remembered
 set history=50
 
