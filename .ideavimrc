@@ -26,3 +26,6 @@ set history=50
 " by default \ is the leader
 " let mapleader=","
 
+" Copy until the end of the line
+noremap Y y$
+
