@@ -29,3 +29,12 @@ set history=50
 " Copy until the end of the line
 noremap Y y$
 
+"
+" CLion Keymaps Options
+"
+
+" built in search looks better
+nnoremap / :action Find<cr>
+" but preserve ideavim search
+nnoremap g/ /
+
