@@ -2,6 +2,8 @@
 #
 # It's a wrapper arround c program
 #
+# c: Compile and execute C/C++ "scripts" in one go
+#
 # It avoids me to create a Makefile file
 #
 # It depends of https://github.com/ryanmjacobs/c
