@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# It's a wrapper arround c program
+# It's a wrapper around c program
 #
 # c: Compile and execute C/C++ "scripts" in one go
 #
