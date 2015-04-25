@@ -4,9 +4,10 @@
 #
 # c: Compile and execute C/C++ "scripts" in one go
 #
+# c project: https://github.com/ryanmjacobs/c
+#
 # It avoids me to create a Makefile file
 #
-# It depends of https://github.com/ryanmjacobs/c
 
 filename="${1}"
 
