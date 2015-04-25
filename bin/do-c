@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Accepts a .c or .cpp or .cc file, compile it and execute it
+# It's a wrapper arround c program
 #
 # It avoids me to create a Makefile file
 #
