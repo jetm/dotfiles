@@ -8,8 +8,6 @@ ServerAliveInterval 300
 Host host1
     User User1
     HostName host1.domain.com
-    # Optional
-    # ForwardX11 yes
     Compression yes
     # if you already are in secure network, e.g.: vpn, intranet
     # Ciphers arcfour,blowfish-cbc
@@ -18,8 +16,6 @@ Host host1
 Host host2
     User user2
     HostName host2.domain.com
-    # Optional
-    # ForwardX11 yes
     Compression yes
     # If you already are in secure network, e.g.: vpn, intranet
     # Ciphers arcfour,blowfish-cbc
