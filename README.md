@@ -10,7 +10,6 @@ each one of them.
 
 * Configuration files
     * [`.aliases`](https://github.com/jetm/dotfiles/blob/master/.aliases) Where the aliases are living.
-    * [`.apple_keys`](https://github.com/jetm/dotfiles/blob/master/.apple_keys) Xmodmap configuration for USB Aluminum Apple keyboard.
     * [`.ccache.conf`](https://github.com/jetm/dotfiles/blob/master/.ccache/ccache.conf) ccache configuration file.
     * [`.bashrc`](https://github.com/jetm/dotfiles/blob/master/.bashrc) Standard initialization file, only for interactive mode.
     * [`.dir_colors`](https://github.com/jetm/dotfiles/blob/master/.dir_colors) Solarized color theme for the color GNU ls utility.
