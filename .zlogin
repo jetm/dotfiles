@@ -1,0 +1,1 @@
+/home/javier/.zprezto/runcoms/zlogin
