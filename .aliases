@@ -27,9 +27,9 @@ alias time='time -f "\nreal\t%es\nuser\t%Us\nsys\t%Ss" '
 # Arch Linux Stuff
 #
 if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
-
-  # Pacman alias examples
-
+  #
+  # Pacman aliases
+  #
   # upgrade all packages
   alias yaoud='yaourt -Syu --devel --aur'
 
