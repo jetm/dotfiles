@@ -39,8 +39,6 @@ if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
   # Remove ALL packages from cache
   alias pacremALL='sudo pacman -Scc'
 
-  # Install from aur
-  alias yaoin='yaourt -Sa'
 fi
 
 # vim:set ts=2 sw=2 ft=sh et:
