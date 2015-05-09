@@ -39,6 +39,9 @@ if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
   # Remove ALL packages from cache
   alias pacremALL='sudo pacman -Scc'
 
+  # Remove the specified package(s), its configuration(s) and unneeded
+  # dependencies
+  alias pacrem='sudo pacman -Rns'
 fi
 
 # vim:set ts=2 sw=2 ft=sh et:
