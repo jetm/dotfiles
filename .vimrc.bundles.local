@@ -35,6 +35,9 @@ Bundle 'sukima/xmledit'
 " Markdown
 Bundle 'jtratner/vim-flavored-markdown'
 
+" Create a window or panel to run a command
+Bundle 'tpope/vim-dispatch'
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " C/C++ development plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
