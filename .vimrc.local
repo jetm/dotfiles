@@ -210,7 +210,7 @@ let g:syntastic_warning_symbol = '⚠'
 au FileType c,cpp,*.h nnoremap <F10> :SyntasticCheck cpplint<CR>
 
 " Build current file with Ctrl-c
-au FileType c,cpp nnoremap <C-c> :!do-c %<CR>
+au FileType c,cpp nnoremap <C-c> :Dispatch do-c %<CR>
 
 "
 " C/C++ Format settings with vim-autoformat
