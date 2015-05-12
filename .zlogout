@@ -1,8 +1,8 @@
 #
 # Executes commands at logout.
 #
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
+# Author:
+#   Javier Tia <javier.tia@gmail.com>
 #
 
 # Print the message.
