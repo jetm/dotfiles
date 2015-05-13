@@ -1,8 +1,8 @@
 #
 # Executes commands at the start of an interactive session.
 #
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
+# Author:
+#   Javier Tia <javier.tia@gmail.com>
 #
 
 # Source Prezto.
