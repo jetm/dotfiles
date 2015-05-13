@@ -1,11 +1,11 @@
 #
-# Executes commands at logout.
+# Executes commands at logout
 #
 # Author:
 #   Javier Tia <javier.tia@gmail.com>
 #
 
-# Print the message.
+# Print the message
 cat <<-EOF
 
 Good Bye!
