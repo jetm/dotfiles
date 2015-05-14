@@ -1,5 +1,5 @@
 #
-# Executes commands at login pre-zshrc.
+# Executes commands at login pre-zshrc
 #
 # Authors:
 #   Javier Tia <javier.tia@gmail.com>
