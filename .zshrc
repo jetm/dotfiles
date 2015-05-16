@@ -15,3 +15,6 @@ fi
 # Add alias
 [ -f $HOME/.aliases ] && source $HOME/.aliases
 
+# 10 second wait if you do something that will delete everything
+setopt RM_STAR_WAIT
+
