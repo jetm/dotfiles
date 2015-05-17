@@ -24,3 +24,6 @@ setopt NO_FLOW_CONTROL
 # beeps are annoying
 setopt NO_BEEP
 
+# Ignore lines prefixed with '#'
+setopt INTERACTIVECOMMENTS
+
