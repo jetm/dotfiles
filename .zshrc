@@ -21,3 +21,6 @@ setopt RM_STAR_WAIT
 # If I could disable Ctrl-s completely I would!
 setopt NO_FLOW_CONTROL
 
+# beeps are annoying
+setopt NO_BEEP
+
