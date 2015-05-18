@@ -30,3 +30,6 @@ setopt INTERACTIVECOMMENTS
 # Ignore duplicate in history
 setopt HIST_IGNORE_DUPS
 
+# Prevent record in history entry if preceding them with at least one space
+setopt HIST_IGNORE_SPACE
+
