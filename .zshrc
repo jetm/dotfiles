@@ -27,3 +27,6 @@ setopt NO_BEEP
 # Ignore lines prefixed with '#'
 setopt INTERACTIVECOMMENTS
 
+# Ignore duplicate in history
+setopt HIST_IGNORE_DUPS
+
