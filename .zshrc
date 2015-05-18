@@ -33,3 +33,6 @@ setopt HIST_IGNORE_DUPS
 # Prevent record in history entry if preceding them with at least one space
 setopt HIST_IGNORE_SPACE
 
+# Killer: share history between multiple shells
+setopt SHARE_HISTORY
+
