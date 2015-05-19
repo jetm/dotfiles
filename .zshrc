@@ -36,3 +36,6 @@ setopt HIST_IGNORE_SPACE
 # Killer: share history between multiple shells
 setopt SHARE_HISTORY
 
+# Pretty Obvious. Right?
+setopt HIST_REDUCE_BLANKS
+
