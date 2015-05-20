@@ -39,3 +39,5 @@ setopt SHARE_HISTORY
 # Pretty Obvious. Right?
 setopt HIST_REDUCE_BLANKS
 
+# If a line starts with a space, don't save it.
+setopt HIST_IGNORE_SPACE
