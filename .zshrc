@@ -45,3 +45,7 @@ setopt HIST_NO_STORE
 
 # When using a hist thing, make a newline show the change before executing it.
 setopt HIST_VERIFY
+
+# Save the time and how long a command ran
+setopt EXTENDED_HISTORY
+
