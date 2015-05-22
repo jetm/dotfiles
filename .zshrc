@@ -49,3 +49,6 @@ setopt HIST_VERIFY
 # Save the time and how long a command ran
 setopt EXTENDED_HISTORY
 
+# Avoid problem with HEAD^
+setopt NO_NOMATCH
+
