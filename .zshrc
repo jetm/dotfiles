@@ -52,3 +52,6 @@ setopt EXTENDED_HISTORY
 # Avoid problem with HEAD^
 setopt NO_NOMATCH
 
+# Now we can pipe to multiple outputs!
+setopt MULTIOS
+
