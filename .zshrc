@@ -55,3 +55,6 @@ setopt NO_NOMATCH
 # Now we can pipe to multiple outputs!
 setopt MULTIOS
 
+# History features
+bindkey "^R" history-incremental-search-backward
+
