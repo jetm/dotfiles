@@ -43,6 +43,33 @@ function prompt_sorin_pwd {
   fi
 }
 
+function prompt_sorin_git_info {
+  # Append Git status.
+  if [[ -s "$_prompt_sorin_precmd_async_data" ]]; then
+    alias typeset='typeset -g'
+    source "$_prompt_sorin_precmd_async_data"
+    RPROMPT+='${git_info:+${(e)git_info[status]}}'
+    unalias typeset
+  fi
+
+  # Reset PID.
+  _prompt_sorin_precmd_async_pid=0
+
+  # Redisplay prompt.
+  zle && zle reset-prompt
+}
+
+function prompt_sorin_precmd_async {
+  # Get Git repository information.
+  if (( $+functions[git-info] )); then
+    git-info
+    typeset -p git_info >! "$_prompt_sorin_precmd_async_data"
+  fi
+
+  # Signal completion to parent process.
+  kill -USR1 $$
+}
+
 function prompt_sorin_precmd {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
@@ -50,16 +77,23 @@ function prompt_sorin_precmd {
   # Format PWD.
   prompt_sorin_pwd
 
-  # Get Git repository information.
-  if (( $+functions[git-info] )); then
-    git-info
+  # Kill the old process of slow commands if it is still running.
+  if (( _prompt_sorin_precmd_async_pid > 0 )); then
+    kill -TERM "$_prompt_sorin_precmd_async_pid" &>/dev/null
   fi
+
+  # Compute slow commands in the background.
+  trap prompt_sorin_git_info USR1
+  prompt_sorin_precmd_async &!
+  _prompt_sorin_precmd_async_pid=$!
 }
 
 function prompt_sorin_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
+  _prompt_sorin_precmd_async_pid=0
+  _prompt_sorin_precmd_async_data="${TMPPREFIX}-prompt_sorin_data"
 
   # Load required functions.
   autoload -Uz add-zsh-hook
