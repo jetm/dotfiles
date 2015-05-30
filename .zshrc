@@ -107,3 +107,8 @@ path=(
   $path
 )
 
+# Set Ruby gems path
+if [ -x /usr/bin/ruby -a -x /usr/bin/gem ] ; then
+  PATH=$(ruby -rubygems -e "puts Gem.user_dir")/bin:"${PATH}"
+fi
+
