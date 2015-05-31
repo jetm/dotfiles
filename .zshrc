@@ -107,8 +107,15 @@ path=(
   $path
 )
 
-# Set Ruby gems path
 if [ -x /usr/bin/ruby -a -x /usr/bin/gem ] ; then
   PATH=$(ruby -rubygems -e "puts Gem.user_dir")/bin:"${PATH}"
+fi
+
+# Set ccache path
+if [ -d /usr/lib/ccache/bin ] ; then
+  PATH=/usr/lib/ccache/bin:"${PATH}"
+
+  mkdir -p /dev/shm/ccache || \
+    echo 1>&2 "error: /dev/shm/ccache could not be created"
 fi
 
