@@ -119,3 +119,9 @@ if [ -d /usr/lib/ccache/bin ] ; then
     echo 1>&2 "error: /dev/shm/ccache could not be created"
 fi
 
+# Export proxy exception for docker socket
+if [ -S /var/run/docker.sock ]; then
+  export no_proxy=${no_proxy},/var/run/docker.sock
+  export NO_PROXY=${NO_PROXY},/var/run/docker.sock
+fi
+
