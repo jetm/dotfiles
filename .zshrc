@@ -125,3 +125,11 @@ if [ -S /var/run/docker.sock ]; then
   export NO_PROXY=${NO_PROXY},/var/run/docker.sock
 fi
 
+# Set Go settings
+if [[ -s "$HOME/.gvm/scripts/gvm" ]]; then
+  source "$HOME/.gvm/scripts/gvm"
+elif [ -x /usr/bin/go -a -d ${HOME}/go ]; then
+  export GOPATH=${HOME}/go
+  PATH=${PATH}:${HOME}/go/bin
+fi
+
