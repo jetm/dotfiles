@@ -133,3 +133,14 @@ elif [ -x /usr/bin/go -a -d ${HOME}/go ]; then
   PATH=${PATH}:${HOME}/go/bin
 fi
 
+#
+# Temporary Files
+#
+
+if [[ ! -d "$TMPDIR" ]]; then
+  export TMPDIR="/tmp/$LOGNAME"
+  mkdir -p -m 700 "$TMPDIR"
+fi
+
+TMPPREFIX="${TMPDIR%/}/zsh"
+
