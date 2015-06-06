@@ -1,11 +1,11 @@
 #
-# Executes commands at the start of an interactive session.
+# Executes commands at the start of an interactive session
 #
 # Author:
 #   Javier Tia <javier.tia@gmail.com>
 #
 
-# Source Prezto.
+# Source Prezto
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
@@ -39,11 +39,11 @@ setopt SHARE_HISTORY
 # Pretty Obvious. Right?
 setopt HIST_REDUCE_BLANKS
 
-# If a line starts with a space, don't save it.
+# If a line starts with a space, don't save it
 setopt HIST_IGNORE_SPACE
 setopt HIST_NO_STORE
 
-# When using a hist thing, make a newline show the change before executing it.
+# When using a hist thing, make a newline show the change before executing it
 setopt HIST_VERIFY
 
 # Save the time and how long a command ran
@@ -90,15 +90,15 @@ export PAGER='less'
 # Paths
 #
 
-# Ensure path arrays do not contain duplicates.
+# Ensure path arrays do not contain duplicates
 typeset -gU cdpath fpath mailpath path
 
-# Set list of directories that cd searches.
+# Set list of directories that cd searches
 # cdpath=(
 #   $cdpath
 # )
 
-# Set the list of directories that Zsh searches for programs.
+# Set the list of directories that Zsh searches for programs
 path=(
   ${HOME}/bin
   ${HOME}/.rvm/bin
@@ -148,13 +148,13 @@ TMPPREFIX="${TMPDIR%/}/zsh"
 # Less
 #
 
-# Set the default Less options.
-# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
-# Remove -X and -F (exit if the content fits on one screen) to enable it.
+# Set the default Less options
+# Mouse-wheel scrolling has been disabled by -X (disable screen clearing)
+# Remove -X and -F (exit if the content fits on one screen) to enable it
 export LESS='-F -g -i -M -R -S -w -X -z-4'
 
-# Set the Less input preprocessor.
-# Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
+# Set the Less input preprocessor
+# Try both `lesspipe` and `lesspipe.sh` as either might exist on a system
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
