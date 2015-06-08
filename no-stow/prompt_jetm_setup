@@ -126,8 +126,17 @@ function prompt_sorin_setup {
     'prompt' '(%F{blue}git%f$(coalesce "%b" "%p" "%c")%s)' \
     'rprompt' '%A%B%S%a%d%m%r%U%u'
 
+  # Default values for the appearance of the prompt. Configure at will
+  dotfiles_br=$(git -C ${HOME}/repos/dotfiles symbolic-ref --short HEAD)
+
+  if [[ "${dotfiles_br}" == "master" ]]; then
+    WHERE_I_AM="H"
+  else
+    WHERE_I_AM="W"
+  fi
+
   # Define prompts.
-  PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}${_prompt_sorin_pwd}%f${git_info[rprompt]} ${git_info:+${(e)git_info[prompt]}}
+  PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}${_prompt_sorin_pwd}%f ${WHERE_I_AM}${git_info[rprompt]} ${git_info:+${(e)git_info[prompt]}}
 %(!. %B%F{1}#%f%b.)${editor_info[keymap]} '
   RPROMPT='${editor_info[overwrite]}%(?:: %F{1}⏎%f)${VIM:+" %B%F{6}V%f%b"}'
   SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
