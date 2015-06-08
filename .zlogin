@@ -1,9 +1,6 @@
 #
 # Executes commands at login post-zshrc
 #
-# Author:
-#   Javier Tia <javier.tia@gmail.com>
-#
 
 # Execute code that does not affect the current session in the background
 {
