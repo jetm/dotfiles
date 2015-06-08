@@ -52,6 +52,15 @@ function prompt_sorin_git_info {
     unalias typeset
   fi
 
+  # Default values for the appearance of the prompt. Configure at will
+  dotfiles_br=$(git -C ${HOME}/repos/dotfiles symbolic-ref --short HEAD)
+
+  if [[ "${dotfiles_br}" == "master" ]]; then
+    WHERE_I_AM="H"
+  else
+    WHERE_I_AM="W"
+  fi
+
   # Reset PID.
   _prompt_sorin_precmd_async_pid=0
 
@@ -125,15 +134,6 @@ function prompt_sorin_setup {
   zstyle ':prezto:module:git:info:keys' format \
     'prompt' '(%F{blue}git%f$(coalesce "%b" "%p" "%c")%s)' \
     'rprompt' '%A%B%S%a%d%m%r%U%u'
-
-  # Default values for the appearance of the prompt. Configure at will
-  dotfiles_br=$(git -C ${HOME}/repos/dotfiles symbolic-ref --short HEAD)
-
-  if [[ "${dotfiles_br}" == "master" ]]; then
-    WHERE_I_AM="H"
-  else
-    WHERE_I_AM="W"
-  fi
 
   # Define prompts.
   PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}${_prompt_sorin_pwd}%f ${WHERE_I_AM}${git_info[rprompt]} ${git_info:+${(e)git_info[prompt]}}
