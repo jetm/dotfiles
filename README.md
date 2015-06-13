@@ -30,6 +30,7 @@ each one of them.
     * [`.vimrc.local`](https://github.com/jetm/dotfiles/blob/master/.vimrc.local) vimrc configuration file used with [vim-spf13](http://vim.spf13.com/).
     * [`.ycm_extra_conf.py`](https://github.com/jetm/dotfiles/blob/master/.ycm_extra_conf.py) Global [YCM](http://valloric.github.io/YouCompleteMe/) configuration file.
     * [`.zlogin`](https://github.com/jetm/dotfiles/blob/master/.zlogin) Executes commands at login post-zshrc.
+    * [`.zlogout`](https://github.com/jetm/dotfiles/blob/master/.zlogout) Executes commands at logout.
     * [`.zshrc`](https://github.com/jetm/dotfiles/blob/master/.zshrc) Zsh configuration file based on prezto.
 
 * Useful utilities
