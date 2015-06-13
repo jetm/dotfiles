@@ -31,6 +31,7 @@ each one of them.
     * [`.ycm_extra_conf.py`](https://github.com/jetm/dotfiles/blob/master/.ycm_extra_conf.py) Global [YCM](http://valloric.github.io/YouCompleteMe/) configuration file.
     * [`.zlogin`](https://github.com/jetm/dotfiles/blob/master/.zlogin) Executes commands at login post-zshrc.
     * [`.zlogout`](https://github.com/jetm/dotfiles/blob/master/.zlogout) Executes commands at logout.
+    * [`.zpreztorc`](https://github.com/jetm/dotfiles/blob/master/.zpreztorc) Prezto configuration file.
     * [`.zshrc`](https://github.com/jetm/dotfiles/blob/master/.zshrc) Zsh configuration file based on prezto.
 
 * Useful utilities
