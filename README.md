@@ -1,7 +1,7 @@
 # Javier's dotfiles and utilities
 
 My shell configuration files and some useful utilities. Recommended use them with zsh,
-although they work fine with bash.
+although they should work fine with bash.
 
 ## Content
 
