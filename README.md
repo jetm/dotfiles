@@ -50,7 +50,7 @@ each one of them.
 ## Installation
 
 ```sh
-$ git clone git://github.com/jetm/dotfiles
+$ git clone https://github.com/jetm/dotfiles
 $ dotfiles/bin/install-dotfiles
 ```
 
