@@ -55,6 +55,12 @@ setopt MULTIOS
 # History features
 bindkey "^R" history-incremental-search-backward
 
+# Ctrl+right => forward word
+bindkey "^[[1;5C" forward-word
+
+# Ctrl+left => backward word
+bindkey "^[[1;5D" backward-word
+
 # Terminals with any of the following set, support 256 colors (and are local)
 local256="$COLORTERM$XTERM_VERSION$ROXTERM_ID$KONSOLE_DBUS_SESSION"
 
