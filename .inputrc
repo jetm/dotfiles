@@ -33,6 +33,12 @@ Control-E: end-of-line
 Control-L: clear-screen
 Control-N: next-history
 
+# Ctrl+right => forward word
+"\e[1;5C": forward-word
+
+# Ctrl+left  => backward word
+"\e[1;5D": backward-word
+
 set keymap vi-command
 
 set editing-mode vi
@@ -43,3 +49,4 @@ set blink-matching-paren on
 # Allow you to search through your history using the up and down arrows
 "\e[A": history-search-backward
 "\e[B": history-search-forward
+
