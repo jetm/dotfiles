@@ -33,6 +33,7 @@ each one of them.
     * [`.zlogout`](https://github.com/jetm/dotfiles/blob/master/.zlogout) Executes commands at logout.
     * [`.zpreztorc`](https://github.com/jetm/dotfiles/blob/master/.zpreztorc) Prezto configuration file.
     * [`.zprofile`](https://github.com/jetm/dotfiles/blob/master/.zprofile) Executes commands at login pre-zshrc.
+    * [`.zshenv`](https://github.com/jetm/dotfiles/blob/master/.zshenv) Define environment variables.
     * [`.zshrc`](https://github.com/jetm/dotfiles/blob/master/.zshrc) Zsh configuration file based on prezto.
 
 * Useful utilities
