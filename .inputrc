@@ -5,6 +5,7 @@ set expand-tilde on
 # possible completions
 # A single <Tab> will suffice
 set show-all-if-ambiguous on
+set show-all-if-unmodified on
 
 # Result in a character being appended to any file-names returned by
 # completion, in much the same way as ls -F works
