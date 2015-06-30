@@ -44,28 +44,30 @@ function prompt_sorin_pwd {
 }
 
 function prompt_sorin_git_info {
-  # Append Git status
-  if [[ -s "$_prompt_sorin_precmd_async_data" ]]; then
-    alias typeset='typeset -g'
-    source "$_prompt_sorin_precmd_async_data"
-    RPROMPT+='${git_info:+${(e)git_info[status]}}'
-    unalias typeset
+  if (( _prompt_sorin_precmd_async_pid > 0 )); then
+    # Append Git status.
+    if [[ -s "$_prompt_sorin_precmd_async_data" ]]; then
+      alias typeset='typeset -g'
+      source "$_prompt_sorin_precmd_async_data"
+      RPROMPT+='${git_info:+${(e)git_info[status]}}'
+      unalias typeset
+    fi
+
+    # Default values for the appearance of the prompt. Configure at will
+    dotfiles_br=$(git -C ${HOME}/repos/dotfiles symbolic-ref --short HEAD)
+
+    if [[ "${dotfiles_br}" == "master" ]]; then
+      WHERE_I_AM="H"
+    else
+      WHERE_I_AM="W"
+    fi
+
+    # Reset PID.
+    _prompt_sorin_precmd_async_pid=0
+
+    # Redisplay prompt.
+    zle && zle reset-prompt
   fi
-
-  # Default values for the appearance of the prompt. Configure at will
-  dotfiles_br=$(git -C ${HOME}/repos/dotfiles symbolic-ref --short HEAD)
-
-  if [[ "${dotfiles_br}" == "master" ]]; then
-    WHERE_I_AM="H"
-  else
-    WHERE_I_AM="W"
-  fi
-
-  # Reset PID
-  _prompt_sorin_precmd_async_pid=0
-
-  # Redisplay prompt
-  zle && zle reset-prompt
 }
 
 function prompt_sorin_precmd_async {
