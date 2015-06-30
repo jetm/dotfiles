@@ -51,3 +51,7 @@ set page-completions on
 "\e[A": history-search-backward
 "\e[B": history-search-forward
 
+# IPython needs this to appear at the bottom of the
+# file for clear-screen to work
+set keymap vi
+
