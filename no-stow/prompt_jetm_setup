@@ -77,8 +77,8 @@ function prompt_sorin_precmd_async {
     typeset -p git_info >! "$_prompt_sorin_precmd_async_data"
   fi
 
-  # Signal completion to parent process
-  kill -USR1 $$
+  # Signal completion to parent process.
+  kill -WINCH $$
 }
 
 function prompt_sorin_precmd {
