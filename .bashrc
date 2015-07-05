@@ -176,11 +176,6 @@ if [ -n "$DISPLAY" -a "$TERM" == "xterm" -a \
 export TERM=xterm-256color
 fi
 
-# Call fortune
-if [ -n "$PS1" ] && [ -x `which fortune` ]; then
-  fortune
-fi
-
 # Turn off annoying and useless flow control keys
 stty -ixon
 
