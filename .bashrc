@@ -184,9 +184,6 @@ fi
 # Turn off annoying and useless flow control keys
 stty -ixon
 
-# Never beep at me
-setterm -bfreq 0
-
 up ()           # up n is the same as cd ../..
 {
   [[ $# -eq 0 ]] && cd ..
