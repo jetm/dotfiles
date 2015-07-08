@@ -51,4 +51,9 @@ fi
 # Docker alias and functions
 #
 
+if (which docker > /dev/null); then
+  # Get images
+  alias di="docker images"
+fi
+
 # vim:set ts=2 sw=2 ft=sh et:
