@@ -47,4 +47,8 @@ if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
   alias pacin='sudo pacman -S'
 fi
 
+#
+# Docker alias and functions
+#
+
 # vim:set ts=2 sw=2 ft=sh et:
