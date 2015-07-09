@@ -53,10 +53,10 @@ fi
 
 if (which docker > /dev/null); then
   # Get images
-  alias di="docker images"
+  alias dki="docker images"
 
   # Remove all containers
-  drm() { docker rm $(docker ps -a -q); }
+  dkrm() { docker rm $(docker ps -a -q); }
 fi
 
 # vim:set ts=2 sw=2 ft=sh et:
