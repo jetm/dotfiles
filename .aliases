@@ -59,7 +59,7 @@ if (which docker > /dev/null); then
   alias dkri="docker run -i -t -P"
 
   # Remove image
-  alias drmi="docker rmi -f"
+  alias dkrmi="docker rmi -f"
 fi
 
 # vim:set ts=2 sw=2 ft=sh et:
