@@ -58,8 +58,6 @@ if (which docker > /dev/null); then
   # Run interactive container, e.g., $dkri base /bin/bash
   alias dkri="docker run -i -t -P"
 
-  # Remove all containers
-  dkrm() { docker rm $(docker ps -a -q); }
 fi
 
 # vim:set ts=2 sw=2 ft=sh et:
