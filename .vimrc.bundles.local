@@ -41,6 +41,9 @@ Bundle 'tpope/vim-dispatch'
 " Detect indentation
 Bundle 'luochen1990/indent-detector.vim'
 
+" Enhanced terminal integration for Vim
+Bundle 'wincent/terminus'
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " C/C++ development plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
