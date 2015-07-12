@@ -87,6 +87,9 @@
     spull = "!__git_spull() { git pull \"$@\" && git submodule sync --recursive && \
         git submodule update --init --recursive; }; __git_spull"
 
+    # share local repository through git://HOST/ protocol
+    serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
+
 [push]
     default = simple
 
@@ -106,3 +109,4 @@
 [credential]
     # Set the cache to timeout after 8 hour (setting is in seconds)
     helper = cache --timeout=28800
+
