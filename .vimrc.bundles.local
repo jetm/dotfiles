@@ -42,7 +42,9 @@ Bundle 'tpope/vim-dispatch'
 Bundle 'luochen1990/indent-detector.vim'
 
 " Enhanced terminal integration for Vim
-Bundle 'wincent/terminus'
+" @TODO: Disable until test tmux-plugins/vim-tmux-focus-events
+" Bundle 'wincent/terminus'
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " C/C++ development plugins
