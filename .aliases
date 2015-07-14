@@ -62,4 +62,11 @@ if (which docker > /dev/null); then
   alias dkrmi="docker rmi -f"
 fi
 
+if (which c > /dev/null); then
+  # Run files with ./file.c without chmod +x
+  alias -s c='c'
+  alias -s cc='c'
+  alias -s cpp='c'
+fi
+
 # vim:set ts=2 sw=2 ft=sh et:
