@@ -36,7 +36,9 @@ Bundle 'sukima/xmledit'
 Bundle 'jtratner/vim-flavored-markdown'
 
 " Create a window or panel to run a command
-Bundle 'tpope/vim-dispatch'
+" @TODO: Disable until tmux issue is fixed
+" Bundle 'tpope/vim-dispatch'
+
 
 " Detect indentation
 Bundle 'luochen1990/indent-detector.vim'
