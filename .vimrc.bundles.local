@@ -39,6 +39,8 @@ Bundle 'jtratner/vim-flavored-markdown'
 " @TODO: Disable until tmux issue is fixed
 " Bundle 'tpope/vim-dispatch'
 
+" Command runner for sending commands from vim to tmux pane
+Bundle 'christoomey/vim-tmux-runner'
 
 " Detect indentation
 Bundle 'luochen1990/indent-detector.vim'
