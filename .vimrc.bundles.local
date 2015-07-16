@@ -50,6 +50,9 @@ Bundle 'christoomey/vim-tmux-runner'
 " @TODO: Disable until test tmux-plugins/vim-tmux-focus-events
 " Bundle 'wincent/terminus'
 
+" Make terminal vim and tmux work better together
+Bundle 'tmux-plugins/vim-tmux-focus-events'
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " C/C++ development plugins
