@@ -53,6 +53,9 @@ Bundle 'christoomey/vim-tmux-runner'
 " Make terminal vim and tmux work better together
 Bundle 'tmux-plugins/vim-tmux-focus-events'
 
+" Vim plugin for .tmux.conf
+Bundle 'tmux-plugins/vim-tmux'
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " C/C++ development plugins
