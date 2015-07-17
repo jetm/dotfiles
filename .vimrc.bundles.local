@@ -59,6 +59,9 @@ Bundle 'tmux-plugins/vim-tmux'
 " Continuously updated session files
 Bundle 'tpope/vim-obsession'
 
+" Open URI with your favorite browser
+Bundle 'tyru/open-browser.vim'
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " C/C++ development plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
