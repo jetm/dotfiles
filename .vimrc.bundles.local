@@ -56,6 +56,8 @@ Bundle 'tmux-plugins/vim-tmux-focus-events'
 " Vim plugin for .tmux.conf
 Bundle 'tmux-plugins/vim-tmux'
 
+" Continuously updated session files
+Bundle 'tpope/vim-obsession'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " C/C++ development plugins
