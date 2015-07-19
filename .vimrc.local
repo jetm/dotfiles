@@ -213,6 +213,7 @@ au FileType c,cpp,*.h nnoremap <F10> :SyntasticCheck cpplint<CR>
 au FileType c,cpp nnoremap <C-c> :call SendFileViaVtr()<CR>
 
 function! SendFileViaVtr()
+  " Put here other definitions to be execute in a tmux pane
   let runners = {
     \ 'c': 'do-c'
     \ }
