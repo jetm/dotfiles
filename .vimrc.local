@@ -212,9 +212,6 @@ au FileType c,cpp,*.h nnoremap <F10> :SyntasticCheck cpplint<CR>
 " Build current file with Ctrl-c
 au FileType c,cpp nnoremap <C-c> :call SendFileViaVtr()<CR>
 
-let g:VtrOrientation = "h"
-let g:VtrPercentage = 50
-
 function! SendFileViaVtr()
   let runners = {
     \ 'c': 'do-c'
@@ -227,6 +224,10 @@ function! SendFileViaVtr()
     echoerr 'Unable to determine runner'
   endif
 endfunction
+
+let g:VtrOrientation = "h"
+let g:VtrPercentage = 50
+
 "
 " C/C++ Format settings with vim-autoformat
 "
