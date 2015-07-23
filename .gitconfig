@@ -31,6 +31,7 @@
     ls = ls-files
     rb = rebase
     dc = diff --cached
+    sm = submodule
 
     # cherry-pick
     cp = cherry-pick -x
