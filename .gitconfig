@@ -57,7 +57,7 @@
     # empty-tree-sha1 = hash-object -t tree /dev/null
 
     # Un-apply a Stash
-    stash-unapply = '!git stash show -p | git apply -R'
+    stash-unapply = !git stash show -p | git apply -R
 
     # remove remote-tracking branches that were deleted from the remote repo
     # trim = !git remote prune origin && git gc
