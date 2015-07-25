@@ -136,6 +136,11 @@ elif [ -x /usr/bin/go -a -d ${HOME}/go ]; then
   PATH=${PATH}:${HOME}/go/bin
 fi
 
+# Quick Command-line File Completion
+if [[ -s "$HOME/.qfc/bin/qfc.sh"  ]]; then
+  source "$HOME/.qfc/bin/qfc.sh"
+fi
+
 #
 # Temporary Files
 #
