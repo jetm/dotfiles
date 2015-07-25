@@ -99,6 +99,7 @@
 [fetch]
     # Always prune when fetching and pulling
     prune = 1
+    recurseSubmodules = on-demand
 
 [branch]
     autosetuprebase = always
