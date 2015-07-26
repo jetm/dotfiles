@@ -106,6 +106,7 @@
 
 [diff]
     algorithm = patience
+    submodule = log
 
 [credential]
     # Set the cache to timeout after 8 hour (setting is in seconds)
