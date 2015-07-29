@@ -31,6 +31,9 @@ autocmd FileType gitcommit setlocal spell
 au BufNewFile,BufRead *.git/COMMIT_EDITMSG set tw=72 noai noshowmatch
 au BufNewFile,BufRead *.git/COMMIT_EDITMSG setlocal spell spelllang=en_us
 
+" Write
+nnoremap <Leader>w :w<CR>
+
 " sudo to write
 map <leader>W :w !sudo tee % >/dev/null<CR>
 
