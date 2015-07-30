@@ -62,6 +62,10 @@ Bundle 'tpope/vim-obsession'
 " Open URI with your favorite browser
 Bundle 'tyru/open-browser.vim'
 
+" Vim plugin that allows you to visually select increasingly larger regions of
+" text using the same key combination.
+Bundle 'terryma/vim-expand-region'
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " C/C++ development plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
