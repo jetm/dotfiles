@@ -31,6 +31,9 @@ autocmd FileType gitcommit setlocal spell
 au BufNewFile,BufRead *.git/COMMIT_EDITMSG set tw=72 noai noshowmatch
 au BufNewFile,BufRead *.git/COMMIT_EDITMSG setlocal spell spelllang=en_us
 
+" Space as Leader, instead of comma
+let mapleader = "\<Space>"
+
 " Write
 nnoremap <Leader>w :w<CR>
 
