@@ -50,6 +50,8 @@ vmap <C-v> <Plug>(expand_region_shrink)
 nnoremap <CR> G
 nnoremap <BS> gg
 
+" Stop that stupid window from popping up:
+" map q: :q
 
 "
 " Settings trim trailing whitespace
