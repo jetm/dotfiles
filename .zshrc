@@ -64,6 +64,17 @@ bindkey "^[[1;5C" forward-word
 # Ctrl+left => backward word
 bindkey "^[[1;5D" backward-word
 
+# Use Ctrl-Z to switch back to Vim
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+
 # Terminals with any of the following set, support 256 colors (and are local)
 local256="$COLORTERM$XTERM_VERSION$ROXTERM_ID$KONSOLE_DBUS_SESSION"
 
