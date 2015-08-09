@@ -150,6 +150,10 @@ elif [ -x /usr/bin/go -a -d ${HOME}/go ]; then
   PATH=${PATH}:${HOME}/go/bin
 fi
 
+# Command-line fuzzy finder
+if [[ -r /etc/profile.d/fzf.zsh ]]; then
+  source /etc/profile.d/fzf.zsh
+fi
 
 #
 # Temporary Files
