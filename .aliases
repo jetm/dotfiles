@@ -13,15 +13,16 @@ alias make-ls-targets="make -qp | awk -F':' \
 
 alias update-spf13-vim="( cd $HOME/.spf13-vim-3 && git pull && \
             vim +BundleInstall! +BundleClean +q )"
+
 # disable shell reserved word
 disable -r time
 
 # Add format time like this:
 #
-# real    0.00s
+# real    0.00[h:]m:s
 # user    0.00s
 # sys     0.00s
-alias time='time -f "\nreal\t%es\nuser\t%Us\nsys\t%Ss" '
+alias time='time -f "\nreal\t%E[h:]m:s\nuser\t%Us\nsys\t%Ss" '
 
 #
 # Arch Linux Stuff
