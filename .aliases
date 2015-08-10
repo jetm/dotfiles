@@ -31,7 +31,7 @@ if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
   # Pacman aliases
   #
   # upgrade all packages
-  alias yaoud='yaourt --aur-url https://aur4.archlinux.org -Syu --devel --aur'
+  alias yaoud='yaourt -Syu --devel --aur'
 
   # recursively removing orphans (be careful)
   alias pacorph='sudo pacman -Rs $(pacman -Qtdq)'
