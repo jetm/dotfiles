@@ -78,6 +78,9 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
+#
+# Colors
+#
 # Terminals with any of the following set, support 256 colors (and are local)
 local256="$COLORTERM$XTERM_VERSION$ROXTERM_ID$KONSOLE_DBUS_SESSION"
 
