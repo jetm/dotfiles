@@ -149,7 +149,7 @@ if [ -S /var/run/docker.sock ]; then
 fi
 
 # Set Go settings
-if [[ -s "$HOME/.gvm/scripts/gvm" ]]; then
+if [[ -r "$HOME/.gvm/scripts/gvm" ]]; then
   source "$HOME/.gvm/scripts/gvm"
 elif [ -x /usr/bin/go -a -d ${HOME}/go ]; then
   export GOPATH=${HOME}/go
