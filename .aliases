@@ -46,6 +46,10 @@ if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
 
   # Install specific package(s) from the repositories
   alias pacin='sudo pacman -S'
+
+  # List packages are not in remote repositories (pacman repos and AUR)
+  alias pacremote='for p in $(pacman -Qqm); do yaourt -Ssq "$p" | \
+          grep -E -q "^$p$" || echo $p; done'
 fi
 
 #
