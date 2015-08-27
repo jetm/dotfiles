@@ -5,11 +5,13 @@
 [core]
     pager = less -FRsX
     editor = vim
-    autocrlf = input
+
+    # Verify if a command mofidies a file in the work tree
     safecrlf = true
 
-[color]
-    ui = auto
+    # No output conversion is performed
+    autocrlf = input
+
 
 [i18n]
     commitencoding = UTF-8
