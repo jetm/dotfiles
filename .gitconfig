@@ -22,7 +22,6 @@
     logOutputEncoding = utf-8
 
 [merge]
-    stat = true
     diff = vimdiff
 
 [help]
