@@ -17,8 +17,9 @@
 #    ui = auto
 
 [i18n]
-    commitencoding = UTF-8
-    logoutputencoding = UTF-8
+    # Character encoding the commit messages are converted to when running git
+    # log and friends
+    logOutputEncoding = utf-8
 
 [merge]
     stat = true
