@@ -38,12 +38,14 @@
     st = status
     ls = ls-files
     rb = rebase
-    dc = diff --cached
     sm = submodule
     mg = merge
 
     # cherry-pick
     cp = cherry-pick -x
+
+    # Changes you have staged
+    dc = diff --staged
 
     # Logs
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
