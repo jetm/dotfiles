@@ -24,6 +24,9 @@
 [merge]
     diff = vimdiff
 
+    # Only such fast-forward merges are allowed
+    ff = only
+
 [help]
     # Automatically correct and execute mistyped commands
     autocorrect = 1
