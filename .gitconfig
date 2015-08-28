@@ -12,6 +12,9 @@
     # No output conversion is performed
     autocrlf = input
 
+# Default since Git 1.8.4
+# [color]
+#    ui = auto
 
 [i18n]
     commitencoding = UTF-8
