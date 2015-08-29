@@ -56,7 +56,8 @@
     new = "!f() { ref=$(git symbolic-ref --short HEAD); \
         git log ${ref}@{1}..${ref}@{0} \"$@\"; }; f"
 
-    # Like <git new>, but it accepts branches as parameters, e.g.: git newp origin/BRANCH
+    # Like <git new>, but it accepts branches as parameters, e.g.: git newp
+    # origin/BRANCH
     newp = "!f() { git log ${1}@{1}..${1}@{0} \"$@\"; }; f"
 
     # Editing/adding conflicted files
