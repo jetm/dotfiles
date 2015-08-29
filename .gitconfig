@@ -41,7 +41,7 @@
     sm = submodule
     mg = merge
 
-    # cherry-pick
+    # Add origin commit from where picked
     cp = cherry-pick -x
 
     # Changes you have staged
