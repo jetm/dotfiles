@@ -53,7 +53,8 @@
 
     # List new commits, of current branch, have been created by last command
     # (typically used after a "git pull")
-    new = "!f() { ref=$(git symbolic-ref --short HEAD); git log ${ref}@{1}..${ref}@{0} \"$@\"; }; f"
+    new = "!f() { ref=$(git symbolic-ref --short HEAD); \
+        git log ${ref}@{1}..${ref}@{0} \"$@\"; }; f"
 
     # Like <git new>, but it accepts branches as parameters, e.g.: git newp origin/BRANCH
     newp = "!f() { git log ${1}@{1}..${1}@{0} \"$@\"; }; f"
