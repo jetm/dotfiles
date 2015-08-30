@@ -104,8 +104,9 @@
     # Fetch all branches and rebase current branch against upstream/<BRANCH>
     rb-vs = "!f() { git fetch --all && git rebase $(git upstream)/$1; }; f $1"
 
-    # Update all submodules
-    spull = "!__git_spull() { git pull \"$@\" && git submodule sync --recursive && \
+    # Update local repo and all submodules
+    spull = "!__git_spull() { git pull \"$@\" && \
+        git submodule sync --recursive && \
         git submodule update --init --recursive; }; __git_spull"
 
     # share local repository through git://HOST/ protocol
