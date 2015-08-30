@@ -15,6 +15,7 @@ if has("gui_running")
   set background=dark
   set guifont=Input\ Mono\ Narrow\ Semi-Condensed\ 11
   colorscheme jellybeans "Optional gruvbox
+  set lines=35 columns=90
 end
 
 "
