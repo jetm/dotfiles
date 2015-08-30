@@ -98,7 +98,8 @@
     current-branch = symbolic-ref --short HEAD
 
     # Print the name of the current upstream tracking branch
-    upstream = !git config --get branch.$(git current-branch).remote || echo origin
+    upstream = !git config --get branch.$(git current-branch).remote \
+        || echo origin
 
     # Fetch all branches and rebase current branch against upstream/<BRANCH>
     rb-vs = "!f() { git fetch --all && git rebase $(git upstream)/$1; }; f $1"
