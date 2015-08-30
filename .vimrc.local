@@ -44,7 +44,7 @@ nnoremap <CR> G
 nnoremap <BS> gg
 
 " Stop that stupid window from popping up:
-" map q: :q
+map q: :q
 
 "
 " Settings trim trailing whitespace
