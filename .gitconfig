@@ -121,6 +121,9 @@
     # share local repository through git://HOST/ protocol
     serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
 
+    # Checkout our changes, instead of theirs
+    ours = "!f() { git checkout --ours $@ && git add $@; }; f"
+
 [push]
     default = simple
 
