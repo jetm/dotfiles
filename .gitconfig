@@ -109,6 +109,9 @@
         git submodule sync --recursive && \
         git submodule update --init --recursive; }; __git_spull"
 
+    # Push with submodule dependency checking
+    spush = "push --recurse-submodules=on-demand"
+
     # share local repository through git://HOST/ protocol
     serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
 
