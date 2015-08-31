@@ -112,6 +112,9 @@
     # Push with submodule dependency checking
     spush = "push --recurse-submodules=on-demand"
 
+    # Show diff for all submodules
+    sdiff = !"git diff && git submodule foreach 'git diff'"
+
     # share local repository through git://HOST/ protocol
     serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
 
