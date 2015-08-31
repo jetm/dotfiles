@@ -124,6 +124,9 @@
     # Checkout our changes, instead of theirs
     ours = "!f() { git checkout --ours $@ && git add $@; }; f"
 
+    # Checkout theirs changes, instead of ours
+    theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+
 [push]
     default = simple
 
