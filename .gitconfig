@@ -115,6 +115,9 @@
     # Show diff for all submodules
     sdiff = !"git diff && git submodule foreach 'git diff'"
 
+    # Update only all submodules
+    supdate = "submodule update --remote --merge"
+
     # share local repository through git://HOST/ protocol
     serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
 
