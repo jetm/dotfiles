@@ -142,7 +142,8 @@
     prune = 1
 
 [branch]
-    autosetuprebase = always
+    # Rebase against tracking branch
+    autoSetupRebase = always
 
 [diff]
     algorithm = patience
