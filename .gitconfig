@@ -134,7 +134,8 @@
     default = simple
 
 [pull]
-    rebase = true
+    # Preserve merges when you're rebasing against origin/BRANCH
+    rebase = preserve
 
 [fetch]
     # Always prune when fetching and pulling
