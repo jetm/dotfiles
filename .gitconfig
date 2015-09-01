@@ -150,6 +150,9 @@
     # elements"
     algorithm = histogram
 
+    # Specify the format in which differences in submodules are shown. The
+    # "log" format lists the commits in the range like git-submodule summary
+    # does
     submodule = log
 
 [credential]
