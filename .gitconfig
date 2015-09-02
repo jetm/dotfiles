@@ -160,5 +160,7 @@
     helper = cache --timeout=28800
 
 [status]
+    # submodule summary will be enabled and a summary of commits for modified
+    # submodules will be shown
     submoduleSummary = true
 
