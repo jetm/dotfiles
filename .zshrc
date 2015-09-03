@@ -161,6 +161,11 @@ if [[ -r /etc/profile.d/fzf.zsh ]]; then
   source /etc/profile.d/fzf.zsh
 fi
 
+# Call Virtualenvwrapper
+if [[ -r /usr/bin/virtualenvwrapper.sh ]]; then
+  source /usr/bin/virtualenvwrapper.sh
+fi
+
 #
 # Temporary Files
 #
