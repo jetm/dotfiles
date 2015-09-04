@@ -172,3 +172,7 @@
 [rebase]
     # Enable --autosquash option by default
     autoSquash = true
+
+[gitreview]
+    # Gerrit username for Open Source projects
+    username = jetm
