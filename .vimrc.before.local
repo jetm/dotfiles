@@ -1,3 +1,6 @@
+"
+" spf13 options
+"
 " Enable only these groups of plugins
 "let g:spf13_bundle_groups=['general', 'neocomplete', 'programming', 'python', 'misc']
 
