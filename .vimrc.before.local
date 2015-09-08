@@ -21,6 +21,9 @@ let g:spf13_leader = "\<Space>"
 " Disable easier moving in tabs and windows
 "   let g:spf13_no_easyWindows = 1
 
+" Disable wrap relative motion for start/end line motions
+"   let g:spf13_no_wrapRelMotion = 1
+
 " Clear search highlighting
 "   let g:spf13_clear_search_highlight = 1
 
