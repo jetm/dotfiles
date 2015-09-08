@@ -13,6 +13,11 @@ let g:spf13_no_autochdir = 1
 " Disable views
 "   let g:spf13_no_views = 1
 
+" Leader keys
+" Space as Leader, instead of comma
+" let mapleader = "\<Space>"
+let g:spf13_leader = "\<Space>"
+
 " Clear search highlighting
 "   let g:spf13_clear_search_highlight = 1
 
