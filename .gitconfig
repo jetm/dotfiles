@@ -176,3 +176,9 @@
 [gitreview]
     # Gerrit username for Open Source projects
     username = jetm
+
+[sendemail]
+    smtpEncryption = tls
+    smtpServer = smtp.gmail.com
+    smtpUser = javier.tia@gmail.com
+    smtpServerPort = 587
