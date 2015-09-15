@@ -170,6 +170,10 @@ endfunction
 " Avoid to ask load ycm_extra_conf.py configuration
 let g:ycm_confirm_extra_conf = 0
 
+" Show the full function prototype and all the function overloads in the
+" window if the current completion is a function name
+let g:ycm_add_preview_to_completeopt = 1
+
 " Auto-close the 'preview' window after the user accepts the offered
 " completion string
 let g:ycm_autoclose_preview_window_after_completion = 1
