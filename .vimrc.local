@@ -178,6 +178,9 @@ let g:ycm_add_preview_to_completeopt = 1
 " completion string
 let g:ycm_autoclose_preview_window_after_completion = 1
 
+" Auto-close the preview window after the user leaves insert mode
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
 " Control number of characters user needs to type before identifier-based
 " completion suggestions are trigger
 let g:ycm_min_num_identifier_candidate_chars = 4
