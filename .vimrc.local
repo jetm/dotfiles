@@ -188,6 +188,9 @@ let g:ycm_min_num_identifier_candidate_chars = 4
 " YCM identifier completer will also collect identifiers from tags files
 let g:ycm_collect_identifiers_from_tags_files = 1
 
+" Diagnostics error symbol
+let g:ycm_error_symbol = '✗'
+
 " Compile and diagnostics
 au FileType c,cpp,*.h nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
