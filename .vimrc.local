@@ -191,6 +191,9 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 " Diagnostics error symbol
 let g:ycm_error_symbol = '✗'
 
+" Diagnostics warning symbol
+let g:ycm_warning_symbol = '⚠'
+
 " Compile and diagnostics
 au FileType c,cpp,*.h nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
