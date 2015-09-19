@@ -194,6 +194,8 @@ let g:ycm_error_symbol = '✗'
 " Diagnostics warning symbol
 let g:ycm_warning_symbol = '⚠'
 
+let g:ycm_always_populate_location_list = 0
+
 " Compile and diagnostics
 au FileType c,cpp,*.h nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
