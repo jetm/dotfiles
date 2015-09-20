@@ -203,8 +203,6 @@ au FileType c,cpp,*.h nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 let g:ycm_key_list_select_completion = ['<TAB>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>']
 
-" Invoked :YcmShowDetailedDiagnostic
-let g:ycm_key_detailed_diagnostics = ''
 
 " Try to do the same than GoToDefinition and GoToDeclarion
 au FileType c,cpp,*.h nnoremap <leader>gt :YcmCompleter GoTo<CR>
