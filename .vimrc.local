@@ -200,9 +200,8 @@ let g:ycm_always_populate_location_list = 0
 au FileType c,cpp,*.h nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
 " Key mappings used to select completion string
-let g:ycm_key_list_select_completion = ['<TAB>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>']
-
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<Enter>']
 
 " Try to do the same than GoToDefinition and GoToDeclarion
 au FileType c,cpp,*.h nnoremap <leader>gt :YcmCompleter GoTo<CR>
