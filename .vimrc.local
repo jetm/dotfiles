@@ -228,9 +228,6 @@ let g:syntastic_check_on_wq = 0
 
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
-" No need, YCM disable them by default
-"let g:syntastic_cpp_checkers = ['gcc', 'cpplint']
-
 " Diagnostic using cpplint
 au FileType c,cpp,*.h nnoremap <F10> :SyntasticCheck cpplint<CR>
 
