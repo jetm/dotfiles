@@ -228,8 +228,6 @@ let g:syntastic_check_on_wq = 0
 
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '⚠'
-" Diagnostic using cpplint
-au FileType c,cpp,*.h nnoremap <F10> :SyntasticCheck cpplint<CR>
 
 " Build current file with Ctrl-c
 au FileType c,cpp nnoremap <C-c> :call SendFileViaVtr()<CR>
