@@ -3,6 +3,9 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias vimn='vim -u NONE'
 
+# Show my external IP address
+alias myextip='curl ifconfig.me'
+
 # Clear Cache System
 alias clean-cache-mem="sudo sh -c 'free -h && sync && \
   echo 3 > /proc/sys/vm/drop_caches && free -h'"
