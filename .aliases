@@ -6,6 +6,9 @@ alias vimn='vim -u NONE'
 # Show my external IP address
 alias myextip='curl ifconfig.me'
 
+# Show extended information about my external IP address
+alias myextipe='curl ifinfo.io'
+
 # Clear Cache System
 alias clean-cache-mem="sudo sh -c 'free -h && sync && \
   echo 3 > /proc/sys/vm/drop_caches && free -h'"
