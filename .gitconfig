@@ -6,7 +6,7 @@
     pager = less -FRsX
     editor = vim
 
-    # Verify if a command mofidies a file in the work tree
+    # Verify if a command modifies a file in the work tree
     safecrlf = true
 
     # No output conversion is performed
