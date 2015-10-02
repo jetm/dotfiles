@@ -3,8 +3,13 @@
     email = javier.tia@gmail.com
 
 [core]
-    pager = less -FRsX
     editor = vim
+
+    # -F quit if one screen
+    # -R show ANSI colors based in RAW control characters
+    # -s squeeze blank lines
+    # -X disable termcap [de]initialization strings to terminal
+    pager = less -FRsX
 
     # Verify if a command modifies a file in the work tree
     safecrlf = true
