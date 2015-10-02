@@ -73,7 +73,7 @@ if (which docker > /dev/null); then
   alias dkrmi='docker rmi -f'
 
   # Remove all containers
-  alias dkrmALL="docker rm $(docker ps -a -q)"
+  alias dkrmALL='docker rm $(docker ps -a -q)'
 fi
 
 if (which c > /dev/null); then
