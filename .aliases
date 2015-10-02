@@ -70,7 +70,7 @@ if (which docker > /dev/null); then
   alias dkri='docker run -i -t -P'
 
   # Remove image
-  alias dkrmi="docker rmi -f"
+  alias dkrmi='docker rmi -f'
 
   # Remove all containers
   alias dkrmALL="docker rm $(docker ps -a -q)"
