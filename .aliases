@@ -67,7 +67,7 @@ if (which docker > /dev/null); then
   alias dki='docker images'
 
   # Run interactive container, e.g., $dkri base /bin/bash
-  alias dkri="docker run -i -t -P"
+  alias dkri='docker run -i -t -P'
 
   # Remove image
   alias dkrmi="docker rmi -f"
