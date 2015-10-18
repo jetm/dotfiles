@@ -11,7 +11,7 @@ Bundle 'c9s/perlomni.vim'
 Bundle 'tpope/vim-git'
 
 " Generate cscope files under .git/
-Bundle 'jetm/vim-cscope'
+" Bundle 'jetm/vim-cscope'
 
 " Easy text exchange operator for Vim
 Bundle 'tommcdo/vim-exchange'
