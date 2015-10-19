@@ -22,7 +22,6 @@ each one of them.
     * [`.ideavimrc`](https://github.com/jetm/dotfiles/blob/master/.ideavimrc) configuration file Vim emulation plug-in for IDEs based on the IntelliJ platform.
     * [`.inputrc`](https://github.com/jetm/dotfiles/blob/master/.inputrc) Readline initialization file.
     * [`.perltidyrc`](https://github.com/jetm/dotfiles/blob/master/.perltidyrc) Global perltidy command file.
-    * [`.screenrc`](https://github.com/jetm/dotfiles/blob/master/no-stow/screenrc) Screen utility configuration file.
     * [`.screen-256color`](https://github.com/jetm/dotfiles/blob/master/no-stow/terminfo/s/screen-256color)/[`.xterm-256color`](https://github.com/jetm/dotfiles/blob/master/no-stow/terminfo/x/xterm-256color) Compiled terminfo entry to support 256 colors in screen/tmux (Old OS like RedHat v5).
     * [`.tmux.conf`](https://github.com/jetm/dotfiles/blob/master/.tmux.conf) Tmux utility configuration file.
     * [`.vimrc.before.local`](https://github.com/jetm/dotfiles/blob/master/.vimrc.before.local) local [vim-spf13](http://vim.spf13.com/) configuration file.
