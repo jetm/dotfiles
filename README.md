@@ -5,7 +5,7 @@ although they should work fine with bash.
 
 ## Content
 
-A brief description of each configuration file and utilities. For further details, click on
+A brief description of each configuration file and utility. For further details, click on
 each one of them.
 
 * Configuration files
