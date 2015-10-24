@@ -19,6 +19,8 @@ Bundle 'ntpeters/vim-better-whitespace'
 " Markdown
 Bundle 'jtratner/vim-flavored-markdown'
 
+" Helpers for UNIX
+Bundle 'tpope/vim-eunuch'
 
 " Make terminal vim and tmux work better together
 Bundle 'tmux-plugins/vim-tmux-focus-events'
