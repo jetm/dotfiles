@@ -7,6 +7,8 @@ Bundle 'myusuf3/numbers.vim'
 " Wisely add "end" in ruby, endfunction/endif/more in vim script. etc...
 Bundle 'tpope/vim-endwise'
 
+" Heuristically set buffer options to detect indentation
+Bundle 'tpope/vim-sleuth'
 " Git settings for Vim
 Bundle 'tpope/vim-git'
 
