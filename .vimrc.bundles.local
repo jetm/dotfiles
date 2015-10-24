@@ -12,9 +12,6 @@ Bundle 'tpope/vim-sleuth'
 " Git settings for Vim
 Bundle 'tpope/vim-git'
 
-" Generate cscope files under .git/
-" Bundle 'jetm/vim-cscope'
-
 " Easy text exchange operator for Vim
 Bundle 'tommcdo/vim-exchange'
 
