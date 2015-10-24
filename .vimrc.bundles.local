@@ -19,9 +19,6 @@ Bundle 'ntpeters/vim-better-whitespace'
 " Markdown
 Bundle 'jtratner/vim-flavored-markdown'
 
-" Enhanced terminal integration for Vim
-" @TODO: Disable until test tmux-plugins/vim-tmux-focus-events
-" Bundle 'wincent/terminus'
 
 " Make terminal vim and tmux work better together
 Bundle 'tmux-plugins/vim-tmux-focus-events'
