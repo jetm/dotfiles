@@ -4,8 +4,8 @@
 " Relative numbers
 Bundle 'myusuf3/numbers.vim'
 
-" Perl omnicompletion for vim (including base class function and more)
-Bundle 'c9s/perlomni.vim'
+" Wisely add "end" in ruby, endfunction/endif/more in vim script. etc...
+Bundle 'tpope/vim-endwise'
 
 " Git settings for Vim
 Bundle 'tpope/vim-git'
