@@ -2,7 +2,7 @@
 " spf13 options
 "
 " Enable only these groups of plugins
-"let g:spf13_bundle_groups=['general', 'neocomplete', 'programming', 'python', 'misc']
+"let g:spf13_bundle_groups=['general', 'neocomplete', 'programming', 'python', 'misc', 'go']
 
 " Plugins groups for YouCompleteMe
 let g:spf13_bundle_groups=['general', 'youcompleteme', 'programming', 'python', 'misc']
