@@ -5,7 +5,7 @@
 "let g:spf13_bundle_groups=['general', 'neocomplete', 'programming', 'python', 'misc', 'go']
 
 " Plugins groups for YouCompleteMe
-let g:spf13_bundle_groups=['general', 'youcompleteme', 'programming', 'python', 'misc']
+let g:spf13_bundle_groups=['general', 'youcompleteme', 'programming', 'misc']
 
 " Prevent automatically changing to open file directory
 let g:spf13_no_autochdir = 1
