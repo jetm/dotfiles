@@ -15,9 +15,6 @@ Bundle 'tpope/vim-git'
 " Remove whitespace
 Bundle 'ntpeters/vim-better-whitespace'
 
-" Helpers for UNIX
-Bundle 'tpope/vim-eunuch'
-
 " Help to edit XML files
 Bundle 'sukima/xmledit'
 
