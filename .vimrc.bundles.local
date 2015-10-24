@@ -12,9 +12,6 @@ Bundle 'tpope/vim-sleuth'
 " Git settings for Vim
 Bundle 'tpope/vim-git'
 
-" Easy text exchange operator for Vim
-Bundle 'tommcdo/vim-exchange'
-
 " Remove whitespace
 Bundle 'ntpeters/vim-better-whitespace'
 
