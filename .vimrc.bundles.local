@@ -19,9 +19,6 @@ Bundle 'ntpeters/vim-better-whitespace'
 " Markdown
 Bundle 'jtratner/vim-flavored-markdown'
 
-" Command runner for sending commands from vim to tmux pane
-Bundle 'christoomey/vim-tmux-runner'
-
 " Enhanced terminal integration for Vim
 " @TODO: Disable until test tmux-plugins/vim-tmux-focus-events
 " Bundle 'wincent/terminus'
