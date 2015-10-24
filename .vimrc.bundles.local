@@ -15,9 +15,6 @@ Bundle 'tpope/vim-git'
 " Remove whitespace
 Bundle 'ntpeters/vim-better-whitespace'
 
-" Buffergator Plugin
-Bundle 'jeetsukumaran/vim-buffergator'
-
 " Perl/Ruby style regexp notation
 Bundle 'othree/eregex.vim'
 
