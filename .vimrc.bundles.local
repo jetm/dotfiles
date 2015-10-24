@@ -15,9 +15,6 @@ Bundle 'tpope/vim-git'
 " Remove whitespace
 Bundle 'ntpeters/vim-better-whitespace'
 
-" Help to edit XML files
-Bundle 'sukima/xmledit'
-
 " Add-on to Tim Pope's markdown.vim to highlight using Github Flavored
 " Markdown
 Bundle 'jtratner/vim-flavored-markdown'
