@@ -46,6 +46,9 @@ Bundle 'tyru/open-browser.vim'
 " Generate cscope files under .git/
 " Bundle 'jetm/vim-cscope'
 
+" Easy text exchange operator for Vim
+" Bundle 'tommcdo/vim-exchange'
+
 
 " Vim plugin that allows you to visually select increasingly larger regions of
 " text using the same key combination.
