@@ -43,6 +43,10 @@ Bundle 'tyru/open-browser.vim'
 " Help to edit XML files
 " Bundle 'sukima/xmledit'
 
+" Generate cscope files under .git/
+" Bundle 'jetm/vim-cscope'
+
+
 " Vim plugin that allows you to visually select increasingly larger regions of
 " text using the same key combination.
 Bundle 'terryma/vim-expand-region'
