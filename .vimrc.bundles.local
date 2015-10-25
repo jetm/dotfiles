@@ -34,6 +34,9 @@ Bundle 'tpope/vim-obsession'
 " Open URI with your favorite browser
 Bundle 'tyru/open-browser.vim'
 
+" Buffergator Plugin
+" Bundle 'jeetsukumaran/vim-buffergator'
+
 " Vim plugin that allows you to visually select increasingly larger regions of
 " text using the same key combination.
 Bundle 'terryma/vim-expand-region'
