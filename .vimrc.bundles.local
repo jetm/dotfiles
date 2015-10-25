@@ -82,6 +82,9 @@ Bundle 'octol/vim-cpp-enhanced-highlight'
 Bundle 'Raimondi/delimitMate'
 UnBundle 'spf13/vim-autoclose'
 
+" Rainbow parentheses improved
+Bundle 'oblitum/rainbow'
+
 " Preview of plugin to support CMake, still need more work done
 " TODO: check its status need time you look on this
 "Bundle 'jalcine/cmake.vim'
