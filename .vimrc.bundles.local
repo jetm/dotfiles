@@ -96,12 +96,12 @@ Bundle 'oblitum/rainbow'
 " Bundle 'derekwyatt/vim-fswitch'
 
 " Improve c-family development environment based on Clang
-Bundle 'bbchung/clighter'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Go Language
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Bundle 'fatih/vim-go'
+" Bundle 'bbchung/clighter'
 
 "----------------------------------------------------------------------"
 "
