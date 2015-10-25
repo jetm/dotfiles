@@ -56,6 +56,9 @@ Bundle 'tyru/open-browser.vim'
 " @TODO: Disable until tmux issue is fixed
 " Bundle 'tpope/vim-dispatch'
 
+" Command runner for sending commands from vim to tmux pane
+" Bundle 'christoomey/vim-tmux-runner'
+
 
 " Vim plugin that allows you to visually select increasingly larger regions of
 " text using the same key combination.
