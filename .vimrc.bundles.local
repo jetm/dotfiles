@@ -59,6 +59,9 @@ Bundle 'tyru/open-browser.vim'
 " Command runner for sending commands from vim to tmux pane
 " Bundle 'christoomey/vim-tmux-runner'
 
+" Enhanced terminal integration for Vim
+" @TODO: Disable until test tmux-plugins/vim-tmux-focus-events
+" Bundle 'wincent/terminus'
 
 " Vim plugin that allows you to visually select increasingly larger regions of
 " text using the same key combination.
