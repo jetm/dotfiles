@@ -67,9 +67,6 @@ Bundle 'tyru/open-browser.vim'
 " text using the same key combination.
 " Bundle 'terryma/vim-expand-region'
 
-" Wisely add "end" in ruby, endfunction/endif/more in vim script. etc...
-Bundle 'tpope/vim-endwise'
-
 " Heuristically set buffer options to detect indentation
 Bundle 'tpope/vim-sleuth'
 
