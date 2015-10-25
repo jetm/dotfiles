@@ -49,6 +49,9 @@ Bundle 'tyru/open-browser.vim'
 " Easy text exchange operator for Vim
 " Bundle 'tommcdo/vim-exchange'
 
+" Perl omnicompletion for vim (including base class function and more)
+" Bundle 'c9s/perlomni.vim'
+
 
 " Vim plugin that allows you to visually select increasingly larger regions of
 " text using the same key combination.
