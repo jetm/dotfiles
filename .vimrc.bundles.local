@@ -93,9 +93,6 @@ Bundle 'oblitum/rainbow'
 " Bundle 'morhetz/gruvbox'
 
 " Switching between companion source files (e.g. ".h" and ".cpp")
-
-" Rainbow parentheses improved
-Bundle 'oblitum/rainbow'
 " Bundle 'derekwyatt/vim-fswitch'
 
 " Improve c-family development environment based on Clang
