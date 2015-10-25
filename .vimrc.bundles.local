@@ -126,3 +126,5 @@ UnBundle 'gcmt/wildfire.vim'
 " No need to see the file under status line
 UnBundle 'bling/vim-bufferline'
 
+" No salt
+UnBundle 'saltstack/salt-vim'
