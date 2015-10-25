@@ -67,8 +67,6 @@ Bundle 'tyru/open-browser.vim'
 " text using the same key combination.
 " Bundle 'terryma/vim-expand-region'
 
-" Heuristically set buffer options to detect indentation
-Bundle 'tpope/vim-sleuth'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " C/C++ development plugins
