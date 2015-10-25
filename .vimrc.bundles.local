@@ -40,6 +40,9 @@ Bundle 'tyru/open-browser.vim'
 " Perl/Ruby style regexp notation
 " Bundle 'othree/eregex.vim'
 
+" Help to edit XML files
+" Bundle 'sukima/xmledit'
+
 " Vim plugin that allows you to visually select increasingly larger regions of
 " text using the same key combination.
 Bundle 'terryma/vim-expand-region'
