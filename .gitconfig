@@ -178,6 +178,10 @@
     # Enable --autosquash option by default
     autoSquash = true
 
+    # Automatically create a temporary stash before the operation begins, and
+    # apply it after the operation ends
+    autoStash = true
+
 [gitreview]
     # Gerrit username for Open Source projects
     username = jetm
