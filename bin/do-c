@@ -8,12 +8,10 @@
 # c project: https://github.com/ryanmjacobs/c
 #
 
-filename="${1}"
-
 FLAGS="-Wall -Wextra -Werror -O0 -g"
 export CFLAGS="${FLAGS}"
 export CXXFLAGS="${FLAGS} -std=gnu++11"
 export C_CACHE_SIZE=$((10*1024*1024))  # 10 MBytes
 
-c "${filename}"
+filename="${1}"
 
