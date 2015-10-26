@@ -15,4 +15,5 @@ export C_CACHE_SIZE=$((10*1024*1024))  # 10 MBytes
 
 filename="${1}"
 shift
+c "${filename}" $*
 
