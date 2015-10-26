@@ -10,7 +10,7 @@
 
 FLAGS="-Wall -Wextra -Werror -O0 -g"
 export CFLAGS="${FLAGS}"
-export CXXFLAGS="${FLAGS} -std=gnu++11"
+export CXXFLAGS="${FLAGS} -std=c++11"
 export C_CACHE_SIZE=$((10*1024*1024))  # 10 MBytes
 
 filename="${1}"
