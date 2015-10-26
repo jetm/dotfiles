@@ -32,8 +32,8 @@ nnoremap <Leader>w :w<CR>
 map <leader>W :w !sudo tee % >/dev/null<CR>
 
 " Expand selection from one character to whole file
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
+" vmap v <Plug>(expand_region_expand)
+" vmap <C-v> <Plug>(expand_region_shrink)
 
 " Jump to buffer
 nnoremap gb :ls<CR>:b<Space>
