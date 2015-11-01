@@ -9,7 +9,7 @@
 #
 
 FLAGS="-Wall -O0 -g"
-export CFLAGS="${FLAGS} -std=c11"
+export CFLAGS="${FLAGS} -std=gnu11"
 export CXXFLAGS="${FLAGS} -std=c++11"
 export C_CACHE_SIZE=$((10*1024*1024))  # 10 MBytes
 
