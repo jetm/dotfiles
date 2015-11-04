@@ -20,6 +20,7 @@
 [pager]
     # Call attention to areas of interest without being visually distracting
     log = diff-highlight | less
+    show = diff-highlight | less
 
 # Default since Git 1.8.4
 # [color]
