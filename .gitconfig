@@ -17,6 +17,10 @@
     # No output conversion is performed
     autocrlf = input
 
+[pager]
+    # Call attention to areas of interest without being visually distracting
+    log = diff-highlight | less
+
 # Default since Git 1.8.4
 # [color]
 #    ui = auto
