@@ -19,7 +19,7 @@
 
 [pager]
     # Call attention to areas of interest without being visually distracting
-    log = diff-highlight | less
+    log = /usr/share/git/diff-highlight/diff-highlight | less
     show = diff-highlight | less
     diff = diff-highlight | less
 
