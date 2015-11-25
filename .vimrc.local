@@ -35,9 +35,6 @@ map <leader>W :w !sudo tee % >/dev/null<CR>
 " vmap v <Plug>(expand_region_expand)
 " vmap <C-v> <Plug>(expand_region_shrink)
 
-" Jump to buffer with CtrlP
-nmap <leader>b :CtrlPBuffer<CR>
-
 " Type 12<Enter> to go to line 12
 " Hit Enter to go to end of file
 " Hit Backspace to go to beginning of file
