@@ -44,6 +44,9 @@ nmap <leader>b :BuffergatorOpen<CR>
 " Close current buffer
 nmap <leader>B :bp <BAR> bd #<CR>
 
+" updated when the buffer list changes
+let g:buffergator_autoupdate = 1
+
 " Expand selection from one character to whole file
 " vmap v <Plug>(expand_region_expand)
 " vmap <C-v> <Plug>(expand_region_shrink)
