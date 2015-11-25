@@ -53,6 +53,9 @@ let g:buffergator_viewport_split_policy = 'B'
 " Avoid autoexpand
 let g:buffergator_autoexpand_on_split = 0
 
+" height of the Buffergator window in any horizontal splitting mode
+let g:buffergator_hsplit_size = 5
+
 " Expand selection from one character to whole file
 " vmap v <Plug>(expand_region_expand)
 " vmap <C-v> <Plug>(expand_region_shrink)
