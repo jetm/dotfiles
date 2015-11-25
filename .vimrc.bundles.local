@@ -35,7 +35,7 @@ Bundle 'tpope/vim-obsession'
 Bundle 'tyru/open-browser.vim'
 
 " Buffergator Plugin
-" Bundle 'jeetsukumaran/vim-buffergator'
+Bundle 'jeetsukumaran/vim-buffergator'
 
 " Perl/Ruby style regexp notation
 " Bundle 'othree/eregex.vim'
