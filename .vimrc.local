@@ -41,6 +41,9 @@ let g:buffergator_suppress_keymaps = 1
 " View the entire list of buffers open
 nmap <leader>b :BuffergatorOpen<CR>
 
+" Close current buffer
+nmap <leader>B :bp <BAR> bd #<CR>
+
 " Expand selection from one character to whole file
 " vmap v <Plug>(expand_region_expand)
 " vmap <C-v> <Plug>(expand_region_shrink)
