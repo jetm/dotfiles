@@ -34,7 +34,7 @@ Bundle 'tpope/vim-obsession'
 " Open URI with your favorite browser
 Bundle 'tyru/open-browser.vim'
 
-" Buffergator Plugin
+" List, select and switch between buffers
 Bundle 'jeetsukumaran/vim-buffergator'
 
 " Perl/Ruby style regexp notation
