@@ -64,6 +64,9 @@ bindkey "^[[1;5C" forward-word
 # Ctrl+left => backward word
 bindkey "^[[1;5D" backward-word
 
+# Bind Ctrl+Backspace to delete a previous word
+bindkey '^H' backward-kill-word
+
 # Use Ctrl-Z to switch back to Vim
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
