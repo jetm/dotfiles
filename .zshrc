@@ -81,6 +81,9 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
+# View manpage while editing a command
+bindkey -M vicmd 'K' run-help
+
 #
 # Colors
 #
