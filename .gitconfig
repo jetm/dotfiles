@@ -157,8 +157,7 @@
     autoSetupRebase = always
 
 [diff]
-    # Extends the patience algorithm to "support low-occurrence common
-    # elements"
+    # Extends patience and myers to get the best of both algorithms
     algorithm = histogram
 
     # Specify the format in which differences in submodules are shown. The
