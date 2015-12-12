@@ -71,9 +71,6 @@ Bundle 'jeetsukumaran/vim-buffergator'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " C/C++ development plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Format C/C++ code
-Bundle 'Chiel92/vim-autoformat'
-
 " Better colors for C++ files, included C++11/C++14
 Bundle 'octol/vim-cpp-enhanced-highlight'
 
@@ -81,6 +78,9 @@ Bundle 'octol/vim-cpp-enhanced-highlight'
 " has more movement than spf13/vim-autoclose
 Bundle 'Raimondi/delimitMate'
 UnBundle 'spf13/vim-autoclose'
+
+" Format C/C++ code
+" Bundle 'Chiel92/vim-autoformat'
 
 " Rainbow parentheses improved - Disabled by luochen1990/rainbow
 " Bundle 'oblitum/rainbow'
