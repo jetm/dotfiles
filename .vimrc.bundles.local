@@ -131,3 +131,6 @@ UnBundle 'saltstack/salt-vim'
 
 " No Nerdtree
 UnBundle 'scrooloose/nerdtree'
+
+" No vim-nerdtree-tabs
+UnBundle 'jistr/vim-nerdtree-tabs'
