@@ -77,6 +77,11 @@ map q: :q
 nnoremap <F12> :StripWhitespace<CR>
 highlight ExtraWhitespace ctermbg=88 guifg=#870000
 
+"
+" vim-autoformat General settings
+"
+noremap <C-F> :Autoformat<CR>
+
 " I do want trim them automatically, sometimes no need to
 let g:spf13_keep_trailing_whitespace = 1
 
@@ -110,7 +115,11 @@ let perl_extended_vars = 1
 " Settings for C/C++ development
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" vim-autoformat Google C/C++ Code Style
+let g:formatdef_clangformat = "'clang-format -lines='.a:firstline.':'.a:lastline.' --assume-filename='.bufname('%').' -style=Google'"
+
 " Detect if the current file type is a C-like language.
+
 au BufNewFile,BufRead c,cpp,objc,*.mm,*.cc,*.h call SetupForCLang()
 
 " Configuration for C-like languages, based in Google C/C++ Style Guide
@@ -276,13 +285,6 @@ endfunction
 let g:VtrOrientation = "h"
 let g:VtrPercentage = 50
 
-"
-" C/C++ Format settings with vim-autoformat
-"
-" let g:formatdef_clangformat = "'clang-format -lines='.a:firstline.':'.a:lastline.' --assume-filename='.bufname('%').' -style=Google'"
-
-" Format C/C++ code with F4 key
-" au FileType c,cpp,*.h nnoremap <F4> :Autoformat<CR>
 
 "
 " cscope settings
