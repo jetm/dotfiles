@@ -315,11 +315,11 @@ let g:cpp_experimental_template_highlight = 1
 " fswitch settings
 "
 " handles files with .cc extension, .cc first before .cpp
-au BufEnter *.h let b:fswitchdst = 'cc,cpp,c'
-au BufEnter *.cc let b:fswitchdst = 'h'
+" au BufEnter *.h let b:fswitchdst = 'cc,cpp,c'
+" au BufEnter *.cc let b:fswitchdst = 'h'
 
 " Creates a new window on the left and opens the companion file in it
-au FileType c,cpp,*.h nnoremap <Leader>sv :FSSplitLeft<CR>
+" au FileType c,cpp,*.h nnoremap <Leader>sv :FSSplitLeft<CR>
 
 "
 " Rainbow settings
