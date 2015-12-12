@@ -119,8 +119,8 @@ let perl_extended_vars = 1
 let g:formatdef_clangformat = "'clang-format -lines='.a:firstline.':'.a:lastline.' --assume-filename='.bufname('%').' -style=Google'"
 
 " Detect if the current file type is a C-like language.
-
-au BufNewFile,BufRead c,cpp,objc,*.mm,*.cc,*.h call SetupForCLang()
+" Disable temporary - I might not need it anymore
+" au BufNewFile,BufRead c,cpp,objc,*.mm,*.cc,*.h call SetupForCLang()
 
 " Configuration for C-like languages, based in Google C/C++ Style Guide
 function! SetupForCLang()
