@@ -37,6 +37,9 @@ Bundle 'tyru/open-browser.vim'
 " List, select and switch between buffers
 Bundle 'jeetsukumaran/vim-buffergator'
 
+" Format several type of code
+Bundle 'Chiel92/vim-autoformat'
+
 " Perl/Ruby style regexp notation
 " Bundle 'othree/eregex.vim'
 
@@ -78,9 +81,6 @@ Bundle 'octol/vim-cpp-enhanced-highlight'
 " has more movement than spf13/vim-autoclose
 Bundle 'Raimondi/delimitMate'
 UnBundle 'spf13/vim-autoclose'
-
-" Format C/C++ code
-" Bundle 'Chiel92/vim-autoformat'
 
 " Rainbow parentheses improved - Disabled by luochen1990/rainbow
 " Bundle 'oblitum/rainbow'
