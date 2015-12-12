@@ -274,8 +274,7 @@ let g:VtrPercentage = 50
 "
 " C/C++ Format settings with vim-autoformat
 "
-let g:formatprg_cpp = "clang-format"
-let g:formatprg_args_expr_cpp = '" -style=google"'
+let g:formatdef_clangformat = "'clang-format -lines='.a:firstline.':'.a:lastline.' --assume-filename='.bufname('%').' -style=Google'"
 
 "
 " CHECK: Remember for mapping new key
