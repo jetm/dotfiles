@@ -137,3 +137,6 @@ UnBundle 'jistr/vim-nerdtree-tabs'
 
 " No undotree
 UnBundle 'mbbill/undotree'
+
+" No spf13 vim-colors
+UnBundle 'spf13/vim-colors'
