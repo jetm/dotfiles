@@ -134,3 +134,6 @@ UnBundle 'scrooloose/nerdtree'
 
 " No vim-nerdtree-tabs
 UnBundle 'jistr/vim-nerdtree-tabs'
+
+" No undotree
+UnBundle 'mbbill/undotree'
