@@ -3,8 +3,8 @@ set autowrite       " auto saves changes when quitting and switching buffer
 set autoread        " Set to auto read when a file is changed from the outside
 set nobackup        " do not keep a backup file
 set magic           " Set magic on, for regular expressions
-"set ttyfast         " smoother changes
 set wrap            " enable wrap line
+set ttyfast         " smoother changes in terminals
 
 "
 " CHECK: Remember for mapping new key
