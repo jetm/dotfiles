@@ -50,7 +50,8 @@ flags = [
 # language that the files to be compiled are written in. This is mostly
 # relevant for c++ headers.
 # For a C project, you would set this to 'c' instead of 'c++'.
-'-x', 'c++',
+#  '-x', 'c++',
+'-x', 'c',
 # For current project
 '-I', 'include',
 ]
