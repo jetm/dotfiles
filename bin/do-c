@@ -8,7 +8,8 @@
 # c project: https://github.com/ryanmjacobs/c
 #
 
-FLAGS="-Wall -O0 -g -lapr-1 -pthread"
+# Link APR, thread and math libraries
+FLAGS="-Wall -O0 -g -lapr-1 -pthread -lm"
 export CFLAGS="${FLAGS} -std=gnu11"
 export CXXFLAGS="${FLAGS} -std=gnu++11"
 export C_CACHE_SIZE=$((10*1024*1024))  # 10 MBytes
