@@ -82,6 +82,12 @@ highlight ExtraWhitespace ctermbg=88 guifg=#870000
 "
 noremap <C-F> :Autoformat<CR>
 
+" C/C++ Code Style based on Google
+let g:formatdef_clangformat = "'clang-format -lines='.a:firstline.':'.a:lastline.' --assume-filename='.bufname('%').' -style=\"{BasedOnStyle: Google, AlignTrailingComments: true, '.(&textwidth ? 'ColumnLimit: '.&textwidth.', ' : '').(&expandtab ? 'UseTab: Never, IndentWidth: '.shiftwidth() : 'UseTab: Always').'}\"'"
+
+let g:formatters_c = ['clangformat']
+let g:formatters_cpp = ['clangformat']
+
 " I do want trim them automatically, sometimes no need to
 let g:spf13_keep_trailing_whitespace = 1
 
