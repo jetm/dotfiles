@@ -1,0 +1,45 @@
+#
+# AStyle configuration to simulate Google C/C++ Style Code
+#
+
+# Indent a C Type
+--mode=c
+
+# Google bracket style
+--style=google
+
+# Block indentation two spaces
+indent=spaces=2
+
+# Maximum of # spaces to indent a continuation line
+max-instatement-indent=80
+
+# Indent 'switch' blocks so that the 'case X:' statements are indented in the
+# switch block. The entire case block is indented
+indent-switches
+
+# Indent 'class' and 'struct' access modifiers, 'public:', 'protected:' and
+# 'private:', one half indent
+indent-modifiers
+
+# Do not retain a backup of the original file. The original file is purged
+# after it is formatted
+suffix=none
+
+# Don't break one-line blocks
+keep-one-line-blocks
+
+# Don't break complex statements and multiple statements residing on a single
+# line
+keep-one-line-statements
+
+# Attach a pointer or reference operator (*, &, or ^) to the variable name
+# (right)
+align-pointer=name
+
+# Insert space padding after parent headers only (e.g. 'if', 'for',
+# 'while'...)
+pad-header
+
+# Insert space padding around operators
+pad-oper
