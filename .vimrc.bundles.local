@@ -82,6 +82,9 @@ Bundle 'octol/vim-cpp-enhanced-highlight'
 Bundle 'Raimondi/delimitMate'
 UnBundle 'spf13/vim-autoclose'
 
+" Switching between companion source files (e.g. ".h" and ".cpp")
+Bundle 'derekwyatt/vim-fswitch'
+
 " Rainbow parentheses improved - Disabled by luochen1990/rainbow
 " Bundle 'oblitum/rainbow'
 
@@ -91,9 +94,6 @@ UnBundle 'spf13/vim-autoclose'
 
 " Custom colorscheme only for C/C++ & gvim
 " Bundle 'morhetz/gruvbox'
-
-" Switching between companion source files (e.g. ".h" and ".cpp")
-" Bundle 'derekwyatt/vim-fswitch'
 
 " Improve c-family development environment based on Clang
 " Bundle 'bbchung/clighter'
