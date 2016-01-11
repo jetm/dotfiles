@@ -136,6 +136,8 @@ path=(
   $path
 )
 
+# Set Ruby Gem path
+# It might changes is RVM is used
 if [ -x /usr/bin/ruby -a -x /usr/bin/gem ] ; then
   PATH=$(ruby -rubygems -e "puts Gem.user_dir")/bin:"${PATH}"
 fi
