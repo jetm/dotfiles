@@ -77,6 +77,13 @@ function prompt_sorin_precmd_async {
     typeset -p git_info >! "$_prompt_sorin_precmd_async_data"
   fi
 
+  # Uncomment when RVM is used
+  # Get Ruby version
+  # if (( $+functions[ruby-info] )); then
+    # ruby-info
+    # typeset -p ruby_info >>! "$_prompt_sorin_precmd_async_data"
+  # fi
+
   # Signal completion to parent process
   kill -WINCH $$
 }
@@ -136,6 +143,12 @@ function prompt_sorin_setup {
   zstyle ':prezto:module:git:info:keys' format \
     'prompt' '(%F{blue}git%f$(coalesce "%b" "%p" "%c")%s)' \
     'rprompt' '%A%B%S%a%d%m%r%U%u'
+
+  # Uncomment when RVM is used
+  # %v - ruby version
+  # zstyle ':prezto:module:ruby:info:version' format '(rvm:%v)'
+
+  # Put ${ruby_info[version]} at the end of PROMPT
 
   # Define prompts
   PROMPT='${SSH_TTY:+"%F{9}%n%f%F{7}@%f%F{3}%m%f "}%F{4}${_prompt_sorin_pwd}%f ${WHERE_I_AM}${git_info[rprompt]} ${git_info:+${(e)git_info[prompt]}}
