@@ -40,6 +40,9 @@ Bundle 'jeetsukumaran/vim-buffergator'
 " Format several type of code
 Bundle 'Chiel92/vim-autoformat'
 
+" Look up for documentation
+Bundle 'keith/investigate.vim'
+
 " Perl/Ruby style regexp notation
 " Bundle 'othree/eregex.vim'
 
