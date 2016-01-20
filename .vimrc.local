@@ -78,7 +78,10 @@ nnoremap <F12> :StripWhitespace<CR>
 highlight ExtraWhitespace ctermbg=88 guifg=#870000
 
 "
+" investigate settings
 "
+let g:investigate_command_for_python = '/usr/bin/zeal --query ^s'
+nnoremap gz :!zeal --query "<cword>"&<CR><CR>
 
 " I do want trim them automatically, sometimes no need to
 let g:spf13_keep_trailing_whitespace = 1
