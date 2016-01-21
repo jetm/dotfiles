@@ -23,6 +23,10 @@ if has("gui_running")
   set lines=35 columns=90
 end
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Key mapping general settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 "
 " git commits settings
 "
