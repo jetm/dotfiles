@@ -43,14 +43,14 @@ Bundle 'Chiel92/vim-autoformat'
 " Look up for documentation
 Bundle 'keith/investigate.vim'
 
+" Generate cscope and ctags files under .git/
+Bundle 'jetm/vim-cscope-ctags'
+
 " Perl/Ruby style regexp notation
 " Bundle 'othree/eregex.vim'
 
 " Help to edit XML files
 " Bundle 'sukima/xmledit'
-
-" Generate cscope files under .git/
-" Bundle 'jetm/vim-cscope'
 
 " Easy text exchange operator for Vim
 " Bundle 'tommcdo/vim-exchange'
