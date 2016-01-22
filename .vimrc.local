@@ -389,4 +389,10 @@ let g:NERDSpaceDelims = 1
 " NERDSpaceDelims is set
 let g:NERDRemoveExtraSpaces = 1
 
+"
+" vim-cscope-ctags plugin settings
+"
+" Enable debug message
+let g:cscope_ctags_verbose = 1
+
 " vim:tw=78:ts=2:sw=2
