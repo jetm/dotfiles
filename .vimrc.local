@@ -41,7 +41,7 @@ nnoremap <Leader>w :w<CR>
 map <leader>W :w !sudo tee % >/dev/null<CR>
 
 "
-" Buffergator Settings
+" Buffergator plugin settings
 "
 
 " No use default keymaps
@@ -66,7 +66,7 @@ let g:buffergator_autoexpand_on_split = 0
 let g:buffergator_hsplit_size = 5
 
 "
-" Expand Region Settings
+" Expand Region plugin settings
 "
 " Expand selection from one character to whole file
 " vmap v <Plug>(expand_region_expand)
@@ -82,7 +82,7 @@ nnoremap <F12> :StripWhitespace<CR>
 highlight ExtraWhitespace ctermbg=88 guifg=#870000
 
 "
-" investigate settings
+" investigate plugin settings
 "
 let g:investigate_command_for_python = '/usr/bin/zeal --query ^s'
 nnoremap gz :!zeal --query "<cword>"&<CR><CR>
@@ -202,7 +202,7 @@ function! GoogleCppIndent()
 endfunction
 
 "
-" YouCompleteMe settings
+" YouCompleteMe plugin settings
 "
 " Avoid to ask load ycm_extra_conf.py configuration
 let g:ycm_confirm_extra_conf = 0
@@ -251,9 +251,9 @@ au FileType c,cpp,*.h nnoremap <leader>gt :YcmCompleter GoTo<CR>
 "let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 "
-" Syntastic settings
+" Syntastic plugin settings
 "
-" Recommended settings
+" Recommended plugin settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -308,13 +308,13 @@ endif
 au FileType c,cpp,*.h nnoremap <F3> :TagbarToggle<CR><C-w>=
 
 "
-" vim-cpp-enhanced-highlight settings
+" vim-cpp-enhanced-highlight plugin settings
 "
 let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_template_highlight = 1
 
 "
-" fswitch settings
+" fswitch plugin settings
 "
 " handles files with .cc extension, .cc first before .cpp
 au BufEnter *.h let b:fswitchdst = 'cc,cpp,c'
@@ -324,7 +324,7 @@ au BufEnter *.cc let b:fswitchdst = 'h'
 au FileType c,cc,cpp,*.h nnoremap <Leader>s :FSHere<CR>
 
 "
-" Rainbow settings
+" Rainbow plugin settings
 "
 " Only for c/cpp file type
 au FileType c,cpp call rainbow#load()
@@ -333,7 +333,7 @@ au FileType c,cpp call rainbow#load()
 let g:rainbow_ctermfgs = [ 'brown', 'Darkblue', 'darkgray', 'darkgreen' ]
 
 "
-" clighter settings
+" clighter plugin settings
 "
 " TODO: Enable it when there is not conflict con CtrlP plugin
 let g:clighter_autostart = 0
@@ -355,7 +355,7 @@ hi clighterMemberRefExpr term=NONE cterm=NONE ctermbg=236 ctermfg=248 gui=NONE
 hi clighterNamespace term=NONE cterm=NONE ctermbg=236 ctermfg=248 gui=NONE
 
 "
-" vim-autoformat General settings
+" vim-autoformat plugin settings
 "
 noremap <C-F> :Autoformat<CR>
 
@@ -366,7 +366,7 @@ let g:formatters_cpp = ['clangformat']
 let g:formatdef_clangformat = "'clang-format -lines='.a:firstline.':'.a:lastline.' --assume-filename='.bufname('%').' -style=\"{BasedOnStyle: Google, AlignTrailingComments: true, '.(&textwidth ? 'ColumnLimit: '.&textwidth.', ' : '').(&expandtab ? 'UseTab: Never, IndentWidth: '.shiftwidth() : 'UseTab: Always').'}\"'"
 
 "
-" vim-flavored-markdown settings
+" vim-flavored-markdown plugin settings
 "
 augroup markdown
   au!
@@ -374,12 +374,12 @@ augroup markdown
 augroup END
 
 "
-" vim-commentary settings
+" vim-commentary plugin settings
 "
 autocmd FileType cmake set commentstring=#\ %s
 
 "
-" nerd-commenter settings
+" nerd-commenter plugin settings
 "
 " Add extra space around delimiters when commenting, remove them when
 " uncommenting
