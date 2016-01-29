@@ -76,8 +76,9 @@ let g:buffergator_hsplit_size = 5
 map q: :q
 
 "
-" Settings trim trailing whitespace
+" better-whitespace plugin settings
 "
+" trim trailing whitespace
 nnoremap <F12> :StripWhitespace<CR>
 highlight ExtraWhitespace ctermbg=88 guifg=#870000
 
