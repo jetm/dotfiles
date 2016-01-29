@@ -92,7 +92,7 @@ nnoremap gz :!zeal --query "<cword>"&<CR><CR>
 let g:spf13_keep_trailing_whitespace = 1
 
 "
-" Settings indenting colors
+" Indenting colors settings
 "
 let g:indent_guides_auto_colors = 0
 let indent_guides_color_change_percent = 10
