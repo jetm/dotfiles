@@ -118,28 +118,28 @@ let perl_include_pod = 1
 let perl_extended_vars = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Settings for C/C++ development
+" C/C++ development settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Detect if the current file type is a C-like language.
+" Detect if the current file type is a C-like language
 au BufNewFile,BufRead c,cpp,objc,*.mm,*.cc,*.h call SetupForCLang()
 
 " Configuration for C-like languages, based in Google C/C++ Style Guide
 function! SetupForCLang()
-  " Highlight lines longer than 80 characters.
+  " Highlight lines longer than 80 characters
   " au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
-  " Alternately, uncomment these lines to wrap at 80 characters.
+  " Alternately, uncomment these lines to wrap at 80 characters
   setlocal textwidth=80
   setlocal wrap
 
-  " Use 2 spaces for indentation.
+  " Use 2 spaces for indentation
   setlocal shiftwidth=2
   setlocal tabstop=2
   setlocal softtabstop=2
   setlocal expandtab
 
-  " Configure auto-indentation formatting.
+  " Configure auto-indentation formatting
   setlocal cindent
   setlocal cinoptions=h1,l1,g1,t0,i4,+4,(0,w1,W4
   setlocal indentexpr=GoogleCppIndent()
