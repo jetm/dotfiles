@@ -247,12 +247,12 @@ let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 
 " Goto function declaration
-nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+au FileType c,cpp,*.h nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
 
 " Try to do the same than GoToDefinition and GoToDeclarion
 " It doesn't work
 " au FileType c,cpp,*.h nnoremap <leader>gt :YcmCompleter GoTo<CR>
-" nnoremap <leader>gc :YcmCompleter GoToDefinition<CR>
+" au FileType c,cpp,*.h nnoremap <leader>gc :YcmCompleter GoToDefinition<CR>
 
 " TODO: Consider add a global file
 "let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
