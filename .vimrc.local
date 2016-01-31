@@ -341,7 +341,7 @@ let g:rainbow_ctermfgs = [ 'brown', 'Darkblue', 'darkgray', 'darkgreen' ]
 "
 " clighter plugin settings
 "
-" TODO: Enable it when there is not conflict con CtrlP plugin
+" TODO: Enable it when there is not conflict with CtrlP plugin
 let g:clighter_autostart = 0
 let g:clighter_libclang_file = '/usr/lib64/libclang.so'
 let g:clighter_cursor_hl_mode = 1
