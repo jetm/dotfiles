@@ -109,6 +109,11 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey ctermbg=237
 autocmd FileType sh,awk,zsh setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 "
+" Makefile settings
+"
+autocmd FileType make set tabstop=2 softtabstop=2 shiftwidth=2 noexpandtab
+
+"
 " Perl settings
 "
 " my perl includes pod
