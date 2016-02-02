@@ -9,7 +9,7 @@
 #
 
 # Link APR, thread and math libraries
-FLAGS="-Wall -Wextra -O0 -g -lapr-1 -pthread -lm"
+FLAGS="-Wall -Wextra -O0 -lapr-1 -pthread -lm"
 export CFLAGS="${FLAGS} -std=gnu11"
 export CXXFLAGS="${FLAGS} -std=gnu++11"
 export C_CACHE_SIZE=$((10*1024*1024))  # 10 MBytes
