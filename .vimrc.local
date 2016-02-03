@@ -7,9 +7,6 @@ set wrap            " enable wrap line
 set ttyfast         " smoother changes in terminals
 
 "
-" CHECK: Remember for mapping new key
-" :verbose map <KEY> is new key is not working anymore, e.g.: vimviews
-"
 
 set pastetoggle=<F2>
 
@@ -28,11 +25,9 @@ end
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "
-" git commits settings
+" CHECK: Remember for mapping new key
+" :verbose map <KEY> is new key is not working anymore, e.g.: vimviews
 "
-autocmd FileType gitcommit setlocal spell
-au BufNewFile,BufRead *.git/COMMIT_EDITMSG set tw=72 noai noshowmatch
-au BufNewFile,BufRead *.git/COMMIT_EDITMSG setlocal spell spelllang=en_us
 
 " Write
 nnoremap <Leader>w :w<CR>
