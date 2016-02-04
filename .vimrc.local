@@ -7,10 +7,6 @@ set wrap            " enable wrap line
 set ttyfast         " smoother changes in terminals
 
 "
-
-set pastetoggle=<F2>
-
-"
 " Colors and GUI settings
 "
 if has("gui_running")
@@ -34,6 +30,10 @@ nnoremap <Leader>w :w<CR>
 
 " sudo to write
 map <leader>W :w !sudo tee % >/dev/null<CR>
+
+
+" F2 to toggle paste
+set pastetoggle=<F2>
 
 "
 " Easymotion plugin settings
