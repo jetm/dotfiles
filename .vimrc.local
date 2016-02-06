@@ -31,6 +31,8 @@ nnoremap <Leader>w :w<CR>
 " sudo to write
 map <leader>W :w !sudo tee % >/dev/null<CR>
 
+" Stop that stupid window from popping up:
+map q: :q
 
 " F2 to toggle paste
 set pastetoggle=<F2>
@@ -85,9 +87,6 @@ let g:buffergator_hsplit_size = 5
 " Expand selection from one character to whole file
 " vmap v <Plug>(expand_region_expand)
 " vmap <C-v> <Plug>(expand_region_shrink)
-
-" Stop that stupid window from popping up:
-map q: :q
 
 "
 " better-whitespace plugin settings
