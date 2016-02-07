@@ -116,6 +116,14 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey ctermbg=237
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Languages settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"
+" git commits settings
+"
+autocmd FileType gitcommit setlocal spell
+au BufNewFile,BufRead *.git/COMMIT_EDITMSG set tw=72 noai noshowmatch
+au BufNewFile,BufRead *.git/COMMIT_EDITMSG setlocal spell spelllang=en_us
+
 "
 " Shell settings
 "
