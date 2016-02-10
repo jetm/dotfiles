@@ -112,8 +112,9 @@
     upstream = !git config --get branch.$(git current-branch).remote \
         || echo origin
 
-    # Fetch all branches and rebase current branch against upstream/<BRANCH>
-    rb-vs = "!f() { git fetch --all && git rebase $(git upstream)/$1; }; f $1"
+    # Pull chosen branch and rebase current branch against to chosen branch
+    rb-vs = "!f() { git checkout $1 && git pull && \
+                    git checkout - && git rebase -; }; f $1"
 
     # Update local repo and all submodules
     spull = "!__git_spull() { git pull \"$@\" && \
