@@ -34,4 +34,4 @@ CHECKERS="\
   -enable-checker security.insecureAPI.strcpy
 "
 
-scan-build ${CHECKERS} make
+scan-build ${CHECKERS} "$@"
