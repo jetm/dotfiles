@@ -192,6 +192,10 @@
     # Show patch mode when use `git stash show`
     showPatch = true
 
+[interactive]
+    # Enable single key presses in Interactive Mode
+    singlekey = true
+
 [gitreview]
     # Gerrit username for Open Source projects
     username = jetm
