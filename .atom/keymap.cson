@@ -2,6 +2,9 @@
 'atom-text-editor':
   'ctrl-p': 'fuzzy-finder:toggle-file-finder'
 
+"atom-workspace":
+  "ctrl-tab": "tab-switcher:next"
+
 # vim-mode settings
 'atom-text-editor.vim-mode:not(.insert-mode)':
   'space w': 'core:save'
