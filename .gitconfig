@@ -33,7 +33,8 @@
     logOutputEncoding = utf-8
 
 [merge]
-    diff = vimdiff
+    # Use vimdiff to resolv conflicts
+    tool = vimdiff
 
     # Only such fast-forward merges are allowed
     ff = only
