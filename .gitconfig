@@ -42,6 +42,10 @@
     # Only such fast-forward merges are allowed
     ff = only
 
+[mergetool]
+    # No prompt before each invocation of the merge resolution program
+    prompt = false
+
 [help]
     # Automatically correct and execute mistyped commands
     autocorrect = 1
