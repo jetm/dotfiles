@@ -9,7 +9,6 @@
 'atom-text-editor.vim-mode:not(.insert-mode)':
   'space w': 'core:save'
   'g q': 'autoflow:reflow-selection'
-  'space space w': 'jumpy:toggle'
   'space b': 'fuzzy-finder:toggle-buffer-finder'
   'f12': 'whitespace:remove-trailing-whitespace'
   'ctrl-f': 'clang-format:format'
@@ -32,7 +31,6 @@
 'atom-text-editor.vim-mode-plus.normal-mode':
   'space w': 'core:save'
   'g q': 'hard-wrap:reflow-selection'
-  'space space w': 'jumpy:toggle'
   'space b': 'fuzzy-finder:toggle-buffer-finder'
   'f12': 'whitespace:remove-trailing-whitespace'
   'ctrl-f': 'clang-format:format'
