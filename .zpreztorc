@@ -33,7 +33,8 @@ zstyle ':prezto:load' pmodule \
   'command-not-found' \
   'history-substring-search' \
   'prompt' \
-  'git'
+  'git' \
+  'git-extras'
 
 #
 # Editor
