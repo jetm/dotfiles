@@ -180,8 +180,8 @@ if [ -d ${HOME}/.local/bin ] ; then
 fi
 
 # Add Coverity to PATH
-if [ -d ${HOME}/coverity/cov-analysis-linux64-7.7.0/bin ] ; then
-  PATH=${HOME}/coverity/cov-analysis-linux64-7.7.0/bin:"${PATH}"
+if [ -d ${HOME}/coverity/cov-analysis-linux64-8.0.0/bin ] ; then
+  PATH=${HOME}/coverity/cov-analysis-linux64-8.0.0/bin:"${PATH}"
 fi
 
 #
