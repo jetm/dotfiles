@@ -19,9 +19,9 @@
 
 [pager]
     # Call attention to areas of interest without being visually distracting
-    log = /usr/share/git/diff-highlight/diff-highlight | less
-    show = /usr/share/git/diff-highlight/diff-highlight | less
-    diff = /usr/share/git/diff-highlight/diff-highlight | less
+    log = diff-so-fancy | less --tabs=2 -RFX
+    show = diff-so-fancy | less --tabs=2 -RFX
+    diff = diff-so-fancy | less --tabs=2 -RFX
 
 # Default since Git 1.8.4
 # [color]
