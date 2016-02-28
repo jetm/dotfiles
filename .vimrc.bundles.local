@@ -46,9 +46,6 @@ Bundle 'keith/investigate.vim'
 " Generate cscope and ctags files under .git/
 Bundle 'jetm/vim-cscope-ctags'
 
-" Themes colors for vim-airline
-Bundle 'vim-airline/vim-airline-themes'
-
 " Creates and auto-loads ctags, cscope, and pycscope database
 " Keep it as future reference for jetm/vim-cscop
 " Bundle 'JCLiang/vim-cscope-utils'
