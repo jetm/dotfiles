@@ -23,9 +23,6 @@
     show = diff-so-fancy | less --tabs=2 -RFX
     diff = diff-so-fancy | less --tabs=2 -RFX
 
-# Default since Git 1.8.4
-# [color]
-#    ui = auto
 
 [i18n]
     # Character encoding the commit messages are converted to when running git
