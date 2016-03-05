@@ -24,6 +24,7 @@ each one of them.
     * [`.ideavimrc`](https://github.com/jetm/dotfiles/blob/master/.ideavimrc) configuration file Vim emulation plug-in for IDEs based on the IntelliJ platform.
     * [`.inputrc`](https://github.com/jetm/dotfiles/blob/master/.inputrc) Readline initialization file.
     * [`.perltidyrc`](https://github.com/jetm/dotfiles/blob/master/.perltidyrc) Global perltidy command file.
+    * [`.psd.conf`](https://github.com/jetm/dotfiles/blob/master/.psd/psd.conf) Profile-Sync-Daemon configuration file.
     * [`.tmux.conf`](https://github.com/jetm/dotfiles/blob/master/.tmux.conf) Tmux utility configuration file.
     * [`.vimrc.before.local`](https://github.com/jetm/dotfiles/blob/master/.vimrc.before.local) local [vim-spf13](http://vim.spf13.com/) configuration file.
     * [`.vimrc.bundles.local`](https://github.com/jetm/dotfiles/blob/master/.vimrc.bundles.local) local plugins [vim-spf13](http://vim.spf13.com/) configuration file.
