@@ -417,6 +417,10 @@ let g:NERDSpaceDelims = 1
 " NERDSpaceDelims is set
 let g:NERDRemoveExtraSpaces = 1
 
+" Always use alternative delimiter
+let g:NERD_c_alt_style = 1
+let g:NERDCustomDelimiters = {'c': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' }}
+
 "
 " vim-cscope-ctags plugin settings
 "
