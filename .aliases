@@ -83,4 +83,14 @@ if (which c > /dev/null); then
   alias -s cpp='c'
 fi
 
+#
+# Fix prezto alias for dtags
+#
+if (command -v dtags > /dev/null 2>&1); then
+  unalias d
+  unalias e
+  alias v='${(z)VISUAL:-${(z)EDITOR}}'
+  source <(dtags shell zsh)
+fi
+
 # vim:set ts=2 sw=2 ft=sh et:
