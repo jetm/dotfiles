@@ -62,7 +62,7 @@ fi
 # Docker alias and functions
 #
 
-if (which docker > /dev/null); then
+if (command -v docker > /dev/null 2>&1); then
   # Get images
   alias dki='docker images'
 
@@ -76,7 +76,10 @@ if (which docker > /dev/null); then
   alias dkrmALL='docker rm $(docker ps -a -q)'
 fi
 
-if (which c > /dev/null); then
+#
+# C alias
+#
+if (command -v c > /dev/null 2>&1); then
   # Run files with ./file.c without chmod +x
   alias -s c='c'
   alias -s cc='c'
