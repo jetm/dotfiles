@@ -30,7 +30,8 @@
 
 'atom-text-editor.vim-mode-plus.normal-mode':
   'space w': 'core:save'
-  'g q': 'hard-wrap:reflow-selection'
+  #'g q': 'hard-wrap:reflow-selection'
+  'g q': 'autoflow:reflow-selection'
   'space b': 'fuzzy-finder:toggle-buffer-finder'
   'f12': 'whitespace:remove-trailing-whitespace'
   'ctrl-f': 'clang-format:format'
@@ -47,7 +48,8 @@
   'ctrl-j': 'vim-mode-plus:move-line-down'
   'ctrl-l': 'editor:indent-selected-rows'
   'ctrl-h': 'editor:outdent-selected-rows'
-  'g q': 'hard-wrap:reflow-selection'
+  #'g q': 'hard-wrap:reflow-selection'
+  'g q': 'autoflow:reflow-selection'
 
 # Autocomplete
 'atom-text-editor.autocomplete-active':
