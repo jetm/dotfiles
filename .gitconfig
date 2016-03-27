@@ -34,7 +34,7 @@
     tool = vimdiff
 
     # Add ||||||| marker and the original text before the ======= marker
-    conflictstyle = diff3
+    # conflictstyle = diff3
 
     # Only such fast-forward merges are allowed
     ff = only
