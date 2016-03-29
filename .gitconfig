@@ -135,8 +135,9 @@
     # Update only all submodules
     supdate = "submodule update --remote --merge"
 
-    # share local repository through git://HOST/ protocol
-    serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
+    # Share local repositories through git://HOST/ protocol
+    # It must be run where are the .git repositories
+    serve = !git daemon --base-path=. --export-all --reuseaddr --informative-errors --verbose
 
     # Checkout our changes, instead of theirs
     ours = "!f() { git checkout --ours $@ && git add $@; }; f"
