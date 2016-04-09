@@ -56,6 +56,9 @@ if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
   # List packages are not in remote repositories (pacman repos and AUR)
   alias pacremote='for p in $(pacman -Qqm); do yaourt -Ssq "$p" | \
           grep -E -q "^$p$" || echo $p; done'
+
+  # Update checksum package, build and generate .SCRINFO file
+  alias pacaur='updpkgsums && makepkg -Csf && mksrcinfo'
 fi
 
 #
