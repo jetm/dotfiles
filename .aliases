@@ -37,10 +37,13 @@ if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
   #
   # Pacman aliases
   #
-  # upgrade all packages
-  alias yaoud='yaourt -Syu --devel --aur'
 
-  # recursively removing orphans (be careful)
+  if (command -v yaourt > /dev/null 2>&1); then
+    # Upgrade all packages
+    alias yaoud='yaourt -Syu --devel --aur'
+  fi
+
+  # Recursively removing orphans (be careful)
   alias pacorph='sudo pacman -Rs $(pacman -Qtdq)'
 
   # Remove ALL packages from cache
