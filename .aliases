@@ -41,6 +41,10 @@ if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
   if (command -v yaourt > /dev/null 2>&1); then
     # Upgrade all packages
     alias yaoud='yaourt -Syu --devel --aur'
+
+    # List packages are not in remote repositories (pacman repos and AUR)
+    alias pacremote='for p in $(pacman -Qqm); do yaourt -Ssq "$p" | \
+            grep -E -q "^$p$" || echo $p; done'
   fi
 
   # Recursively removing orphans (be careful)
@@ -55,10 +59,6 @@ if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
 
   # Install specific package(s) from the repositories
   alias pacin='sudo pacman -S'
-
-  # List packages are not in remote repositories (pacman repos and AUR)
-  alias pacremote='for p in $(pacman -Qqm); do yaourt -Ssq "$p" | \
-          grep -E -q "^$p$" || echo $p; done'
 
   # Update checksum package, build and generate .SCRINFO file
   alias pacaur='updpkgsums && makepkg -Csf && mksrcinfo'
