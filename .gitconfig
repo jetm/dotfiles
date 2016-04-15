@@ -145,6 +145,10 @@
     # Checkout theirs changes, instead of ours
     theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
 
+    # Summarizes commits, sort based on numbers commits and show each author
+    # email
+    score = shortlog -n -s -e
+
 [push]
     # In centralized workflow, work like upstream with an added safety to
     # refuse to push if the upstream branch’s name is different from the local
