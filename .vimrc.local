@@ -265,6 +265,9 @@ let g:ycm_warning_symbol = '⚠'
 
 let g:ycm_always_populate_location_list = 0
 
+" Force the use of Python 3 interpreter for ycmd. YCM is built for Python 3
+let g:ycm_server_python_interpreter = '/usr/bin/python3'
+
 " Compile and diagnostics
 au FileType c,cpp,*.h nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
