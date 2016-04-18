@@ -97,11 +97,11 @@ fi
 #
 # Fix prezto alias for dtags
 #
-if (command -v dtags > /dev/null 2>&1); then
+if (command -v dtags-activate > /dev/null 2>&1); then
   unalias d
   unalias e
   alias v='${(z)VISUAL:-${(z)EDITOR}}'
-  source <(dtags shell zsh)
+  source <(dtags-activate zsh)
 fi
 
 #
