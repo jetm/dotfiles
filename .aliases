@@ -108,7 +108,7 @@ fi
 # Extra Git alias
 #
 if (command -v git > /dev/null 2>&1); then
-  alias gcM='git commit --no-verify --message'
+  alias gcv='git commit --no-verify'
 fi
 
 # vim:set ts=2 sw=2 ft=sh et:
