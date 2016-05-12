@@ -108,7 +108,17 @@ fi
 # Extra Git alias
 #
 if (command -v git > /dev/null 2>&1); then
+  # Run commit without hooks
   alias gcv='git commit --no-verify'
+
+  # Get to the top of a git tree
+  cdp() {
+    TEMP_PWD=$(pwd);
+    while ! [ -d .git ]; do
+    cd ..;
+    done
+    OLDPWD=$TEMP_PWD;
+  }
 fi
 
 # vim:set ts=2 sw=2 ft=sh et:
