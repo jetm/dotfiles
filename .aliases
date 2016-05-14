@@ -121,4 +121,10 @@ if (command -v git > /dev/null 2>&1); then
   }
 fi
 
+if (command -v thefuck > /dev/null 2>&1); then
+  alias fix='TF_CMD=$(TF_ALIAS=fix PYTHONIOENCODING=utf-8 \
+    TF_SHELL_ALIASES=$(alias) thefuck $(fc -ln -1 | tail -n 1)) \
+    && eval $TF_CMD && print -s $TF_CMD'
+fi
+
 # vim:set ts=2 sw=2 ft=sh et:
