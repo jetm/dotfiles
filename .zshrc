@@ -165,8 +165,8 @@ elif [ -x /usr/bin/go -a -d ${HOME}/go ]; then
 fi
 
 # Command-line fuzzy finder
-if [[ -r /etc/profile.d/fzf.zsh ]]; then
-  source /etc/profile.d/fzf.zsh
+if [[ -r /usr/share/fzf/key-bindings.zsh ]]; then
+  source /usr/share/fzf/key-bindings.zsh
 fi
 
 # Call Virtualenvwrapper
