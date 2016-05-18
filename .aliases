@@ -64,6 +64,11 @@ if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
     # Update checksum package, build and generate .SCRINFO file
     alias aurgen='updpkgsums && makepkg -Csf && mksrcinfo'
   fi
+
+  if (command -v pacaur > /dev/null 2>&1); then
+    # Upgrade all packages
+    alias paud='pacaur -Syu --devel'
+  fi
 fi
 
 #
