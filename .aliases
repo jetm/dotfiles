@@ -71,6 +71,9 @@ if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
 
     # Install specific package(s) from local and AUR
     alias pain='pacaur -S'
+
+    # Install specific package from source package
+    alias pains='pacaur -U'
   fi
 fi
 
