@@ -68,6 +68,9 @@ if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
   if (command -v pacaur > /dev/null 2>&1); then
     # Upgrade all packages
     alias paud='pacaur -Syu --devel'
+
+    # Install specific package(s) from local and AUR
+    alias pain='pacaur -S'
   fi
 fi
 
