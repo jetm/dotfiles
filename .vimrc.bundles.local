@@ -46,6 +46,9 @@ Bundle 'keith/investigate.vim'
 " Generate cscope and ctags files under .git/
 Bundle 'jetm/vim-cscope-ctags'
 
+" Vim plugin that provides additional text objects
+Bundle 'wellle/targets.vim'
+
 " Creates and auto-loads ctags, cscope, and pycscope database
 " Keep it as future reference for jetm/vim-cscop
 " Bundle 'JCLiang/vim-cscope-utils'
