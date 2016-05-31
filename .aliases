@@ -57,9 +57,6 @@ if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
   # dependencies
   alias parem='sudo pacman -Rns'
 
-  # Install specific package(s) from the repositories
-  alias pacin='sudo pacman -S'
-
   if (command -v updpkgsums > /dev/null 2>&1); then
     # Update checksum package, build and generate .SCRINFO file
     alias aurgen='updpkgsums && makepkg -Csf && mksrcinfo'
