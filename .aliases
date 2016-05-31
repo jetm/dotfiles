@@ -43,7 +43,7 @@ if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
     alias yaoud='yaourt -Syu --devel --aur'
 
     # List packages are not in remote repositories (pacman repos and AUR)
-    alias pacremote='for p in $(pacman -Qqm); do yaourt -Ssq "$p" | \
+    alias paremote='for p in $(pacman -Qqm); do yaourt -Ssq "$p" | \
             grep -E -q "^$p$" || echo $p; done'
   fi
 
