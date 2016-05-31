@@ -55,7 +55,7 @@ if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
 
   # Remove the specified package(s), its configuration(s) and unneeded
   # dependencies
-  alias pacrem='sudo pacman -Rns'
+  alias parem='sudo pacman -Rns'
 
   # Install specific package(s) from the repositories
   alias pacin='sudo pacman -S'
