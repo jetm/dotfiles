@@ -48,7 +48,7 @@ if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
   fi
 
   # Recursively removing orphans (be careful)
-  alias pacorph='sudo pacman -Rs $(pacman -Qtdq)'
+  alias paorph='sudo pacman -Rs $(pacman -Qtdq)'
 
   # Remove ALL packages from cache
   alias pacremALL='sudo pacman -Scc'
