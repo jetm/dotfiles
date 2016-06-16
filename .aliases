@@ -18,7 +18,7 @@ alias make-ls-targets="make -qp | awk -F':' \
   '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ {split(\$1,A,/ /);for(i in A)print A[i]}'"
 
 alias update-spf13-vim="( cd $HOME/.spf13-vim-3 && git pull && \
-            vim +BundleInstall! +BundleClean +q )"
+            vim +PluginInstall! +PluginClean +q )"
 
 # disable shell reserved word
 disable -r time
