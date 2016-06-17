@@ -121,6 +121,7 @@ fi
 if (command -v git > /dev/null 2>&1); then
   # Run commit without hooks
   alias gcv='git commit --no-verify'
+  alias gcs='git commit --signoff'
 
   # Get to the top of a git tree
   cdp() {
