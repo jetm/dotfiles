@@ -103,8 +103,8 @@
         f $1 $2"
 
     # show local commits
-    lc = "!f() { ref=$(git symbolic-ref --short HEAD); \
-        git log origin/${ref}..${ref} \"$@\"; }; f"
+    lc = "!f() { ref=$(git current-branch); git log \
+        origin/${ref}..${ref} \"$@\"; }; f"
 
     last = "!f() { git log -1 \"$@\"; }; f"
 
