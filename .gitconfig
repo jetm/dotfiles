@@ -206,6 +206,10 @@
     # Enable single key presses in Interactive Mode
     singlekey = true
 
+[commit]
+    # A boolean or int to specify the level of verbose with git commit
+    verbose = true
+
 [gitreview]
     # Gerrit username for Open Source projects
     username = jetm
@@ -215,3 +219,4 @@
     smtpServer = smtp.gmail.com
     smtpUser = javier.tia@gmail.com
     smtpServerPort = 587
+
