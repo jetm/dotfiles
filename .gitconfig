@@ -118,7 +118,7 @@
         || echo origin
 
     # Pull chosen branch and rebase current branch against to chosen branch
-    rb-vs = "!f() { git fetch origin/$1 && git rebase origin/$1; }; f $1"
+    rb-vs = "!f() { git fetch origin && git rebase origin/$1; }; f $1"
 
     # Update local repo and all submodules
     spull = "!__git_spull() { git pull \"$@\" && \
