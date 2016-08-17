@@ -143,7 +143,7 @@
     ours = "!f() { git checkout --ours -- $@ && git add $@; }; f"
 
     # Checkout theirs changes, instead of ours
-    theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+    theirs = "!f() { git checkout --theirs -- $@ && git add $@; }; f"
 
     # Summarizes commits, sort based on numbers commits and show each author
     # email
