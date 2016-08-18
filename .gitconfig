@@ -145,6 +145,10 @@
     # Checkout theirs changes, leaves/gets ours changes
     theirs = "!f() { git checkout --theirs -- $@ && git add $@; }; f"
 
+    # Show ours changes
+    show-ours = !git-show :3:"${1}"
+
+
     # Summarizes commits, sort based on numbers commits and show each author
     # email
     score = shortlog -n -s -e
