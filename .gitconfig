@@ -139,10 +139,10 @@
     serve = !git daemon --base-path=. --export-all --reuseaddr \
         --informative-errors --verbose
 
-    # Checkout our changes, instead of theirs
+    # Checkout our changes, leaves/gets theirs changes
     ours = "!f() { git checkout --ours -- $@ && git add $@; }; f"
 
-    # Checkout theirs changes, instead of ours
+    # Checkout theirs changes, leaves/gets ours changes
     theirs = "!f() { git checkout --theirs -- $@ && git add $@; }; f"
 
     # Summarizes commits, sort based on numbers commits and show each author
