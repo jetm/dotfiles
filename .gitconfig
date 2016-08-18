@@ -148,6 +148,8 @@
     # Show ours changes
     show-ours = !git-show :3:"${1}"
 
+    # Show theirs changes
+    show-theirs = !git-show :2:"${1}"
 
     # Summarizes commits, sort based on numbers commits and show each author
     # email
