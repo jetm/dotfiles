@@ -144,10 +144,16 @@ fi
 
 # Set ccache path
 if [ -d /usr/lib/ccache/bin ] ; then
-  PATH=/usr/lib/ccache/bin:"${PATH}"
+  PATH="/usr/lib/ccache/bin:${PATH}"
 
   mkdir -p /dev/shm/ccache || \
     echo 1>&2 "error: /dev/shm/ccache could not be created"
+
+  # Enable gcc + ccache + colorsgcc
+  # if [ -d /usr/lib/colorgcc/bin ] ; then
+    # PATH="/usr/lib/colorgcc/bin:${PATH}"
+    # export CCACHE_PATH="/usr/bin"
+  # fi
 fi
 
 # Export proxy exception for docker socket
