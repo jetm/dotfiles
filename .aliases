@@ -36,7 +36,7 @@ alias time='time -f "\nreal\t%E[h:]m:s\nuser\t%Us\nsys\t%Ss" '
 #
 # Arch Linux Stuff
 #
-if [ -f /etc/arch-release -o -f /etc/manjaro-release ]; then
+if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
   #
   # Pacman aliases
   #
