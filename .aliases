@@ -149,4 +149,14 @@ if (command -v thefuck > /dev/null 2>&1); then
   }
 fi
 
+#
+# Useful Functions
+#
+
+# debug bash script
+debug() {
+  local script="$1"; shift
+  bash -x "$(which "${script}")" "$@"
+}
+
 # vim:set ts=2 sw=2 ft=sh et:
