@@ -14,8 +14,10 @@ alias clean-cache-mem="sudo sh -c 'free -h && sync && \
   echo 3 > /proc/sys/vm/drop_caches && free -h'"
 
 # Show all targets to build
-alias make-ls-targets="make -qp | awk -F':' \
-  '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ {split(\$1,A,/ /);for(i in A)print A[i]}'"
+make-ls-targets() {
+  make -qp | awk -F':' \
+    '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ {split(\$1,A,/ /);for(i in A)print A[i]}'
+}
 
 alias update-spf13-vim="( cd $HOME/.spf13-vim-3 && git pull && \
             vim +PluginInstall! +PluginClean +q )"
