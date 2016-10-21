@@ -130,6 +130,7 @@ if (command -v git > /dev/null 2>&1); then
   # Run commit without hooks
   alias gcv='git commit --no-verify'
   alias gcs='git commit --verbose --signoff'
+  alias gcra='git commit --amend --reset-author --no-edit'
 
   # Get to the top of a git tree
   cdp() {
