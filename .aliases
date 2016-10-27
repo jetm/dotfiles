@@ -23,6 +23,13 @@ update-spf13-vim() {
   ( cd "$HOME"/.spf13-vim-3 && git pull && vim +PluginInstall! +PluginClean +q )
 }
 
+# parallel make
+_pm() {
+  local NUMCPUS
+  NUMCPUS=$(grep -c '^processor' /proc/cpuinfo)
+  time nice make -j"${NUMCPUS}" --load-average="${NUMCPUS}"
+}
+
 # disable shell reserved word
 disable -r time
 
