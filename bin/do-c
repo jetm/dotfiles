@@ -9,7 +9,7 @@
 #
 
 # Link APR, thread and math libraries
-# Check for stack overflow error -D_FORTIFY_SOURCE
+# Check for stack overflow error -D_FORTIFY_SOURCE -lcriterion
 FLAGS="-Wall -Wextra -g -lapr-1 -pthread -lm"
 export CFLAGS="${FLAGS} -std=gnu11"
 export CXXFLAGS="${FLAGS} -std=gnu++11"
