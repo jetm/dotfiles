@@ -26,7 +26,8 @@ update-spf13-vim() {
 # parallel make
 _pm() {
   local NUMCPUS
-  NUMCPUS=$(grep -c '^processor' /proc/cpuinfo)
+  # get number of processors plus one
+  NUMCPUS=$(( $(getconf _NPROCESSORS_ONLN) + 1 ))
   time nice make -j"${NUMCPUS}" --load-average="${NUMCPUS}"
 }
 
