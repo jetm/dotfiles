@@ -159,7 +159,12 @@
     pam = !BRANCH=$(git branch | fzf) && git checkout ${BRANCH}
 
     # Select a file to add in Git
-    pamadd = !FILES=$(git status -s | awk '{ print $2 }' | fzf -x -m) && git add --all ${FILES}
+    pamadd = !FILES=$(git status -s | awk '{ print $2 }' | fzf -x -m) \
+                && git add --all ${FILES}
+
+    # Select a file to edit with Vim
+    pamvim = !FILES=$(git status -s | awk '{ print $2 }' | fzf -x -m) \
+                && vim ${FILES}
 
 [push]
     # In centralized workflow, work like upstream with an added safety to
