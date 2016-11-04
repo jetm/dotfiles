@@ -155,6 +155,9 @@
     # email
     score = shortlog -n -s -e
 
+    # Select a branch to checkout
+    pam = !BRANCH=$(git branch | fzf) && git checkout ${BRANCH}
+
 [push]
     # In centralized workflow, work like upstream with an added safety to
     # refuse to push if the upstream branch’s name is different from the local
