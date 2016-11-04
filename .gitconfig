@@ -158,6 +158,9 @@
     # Select a branch to checkout
     pam = !BRANCH=$(git branch | fzf) && git checkout ${BRANCH}
 
+    # Select a file to add in Git
+    pamadd = !FILES=$(git status -s | awk '{ print $2 }' | fzf -x -m) && git add --all ${FILES}
+
 [push]
     # In centralized workflow, work like upstream with an added safety to
     # refuse to push if the upstream branch’s name is different from the local
