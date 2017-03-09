@@ -38,6 +38,7 @@
 
     # Only such fast-forward merges are allowed
     ff = only
+    renamelimit = 3000
 
 [mergetool]
     # No prompt before each invocation of the merge resolution program
