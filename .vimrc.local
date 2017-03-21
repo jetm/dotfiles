@@ -436,4 +436,12 @@ let g:NERDCustomDelimiters = {'c': { 'left': '//', 'leftAlt': '/*', 'rightAlt': 
 " Add language of source file of tags, useful for YCM
 let g:cscope_utils_ctags_extra_args = ["--fields=+l"]
 
+"
+" Neovim settings
+"
+if has('nvim')
+  let g:python_host_prog = '/usr/bin/python2'
+  let g:python3_host_prog = '/usr/bin/python'
+endif
+
 " vim:tw=78:ts=2:sw=2
