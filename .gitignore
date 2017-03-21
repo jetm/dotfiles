@@ -2,3 +2,11 @@
 .*.swp
 *.dtags/mapping.*
 data-coverity/
+
+.mutt/
+bin/asic-lab.vpn
+bin/auth.txt
+bin/do-asic
+bin/exercism
+bin/git-change-author
+bin/vpn-pulse-hpe
