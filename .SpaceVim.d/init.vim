@@ -1,7 +1,7 @@
 " If you want to add some custom plugins, use these options:
-"let g:spacevim_custom_plugins = [
-    "\ ['joshdick/onedark.vim', {'merge' : '1'}],
-    "\ ]
+let g:spacevim_custom_plugins = [
+    \ ['sheerun/vim-polyglot'],
+    \ ]
 
 " Here are some basic customizations, please refer to the
 " ~/.SpaceVim.d/init.vim
