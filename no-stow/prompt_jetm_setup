@@ -141,7 +141,7 @@ function prompt_sorin_setup {
   zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{3}*%f%%b'
   zstyle ':prezto:module:git:info:untracked' format ' %%B%F{7}…%f%%b'
   zstyle ':prezto:module:git:info:keys' format \
-    'prompt' '(%F{blue}git %f$(coalesce "%b" "%p" "%c")%s)' \
+    'prompt' '(%F{blue}git%f$(coalesce "%b" "%p" "%c")%s)' \
     'rprompt' '%A%B%S%a%d%m%r%U%u'
 
   # Uncomment when RVM is used and add ruby to zpreztorc file
