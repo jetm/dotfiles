@@ -70,3 +70,12 @@ let g:ycm_warning_symbol = '⚠'
 " Force the use of Python 3 interpreter for ycmd. YCM is built for Python 3
 let g:ycm_server_python_interpreter = '/usr/bin/python3'
 
+"
+" Syntastic plugin settings
+"
+" Diagnostics error symbol
+let g:syntastic_error_symbol = '✗'
+
+" Diagnostics warning symbol
+let g:syntastic_warning_symbol = '⚠'
+
