@@ -69,7 +69,7 @@ let g:ycm_error_symbol = '✗'
 let g:ycm_warning_symbol = '⚠'
 
 " Force the use of Python 3 interpreter for ycmd. YCM is built for Python 3
-let g:ycm_server_python_interpreter = '/usr/bin/python3'
+let g:ycm_python_binary_path = '/usr/bin/python3'
 
 "
 " Syntastic plugin settings
