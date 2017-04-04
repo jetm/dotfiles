@@ -1,16 +1,17 @@
+" Here are some basic customizations, please refer to the
+" ~/.SpaceVim.d/init.vim
+
 " If you want to add some custom plugins, use these options:
 let g:spacevim_custom_plugins = [
   \ ['sheerun/vim-polyglot'],
   \ ['vitalk/vim-shebang'],
-  \ ['Valloric/YouCompleteMe'],
-  \ ['octol/vim-cpp-enhanced-highlight'],
+  \ ['Valloric/YouCompleteMe', {'on_ft':'c'}],
+  \ ['octol/vim-cpp-enhanced-highlight', {'on_ft':'c'}],
   \ ]
 
 " Disable plugins
 "let g:spacevim_disabled_plugins = ['vim-foo', 'vim-bar']
 
-" Here are some basic customizations, please refer to the
-" ~/.SpaceVim.d/init.vim
 " file for all possible options:
 let g:spacevim_default_indent = 3
 let g:spacevim_max_column     = 80
