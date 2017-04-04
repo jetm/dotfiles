@@ -3,6 +3,7 @@ let g:spacevim_custom_plugins = [
   \ ['sheerun/vim-polyglot'],
   \ ['vitalk/vim-shebang'],
   \ ['Valloric/YouCompleteMe'],
+  \ ['octol/vim-cpp-enhanced-highlight'],
   \ ]
 
 " Here are some basic customizations, please refer to the
