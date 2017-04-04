@@ -1,7 +1,8 @@
 " If you want to add some custom plugins, use these options:
 let g:spacevim_custom_plugins = [
-    \ ['sheerun/vim-polyglot'],
-    \ ]
+  \ ['sheerun/vim-polyglot'],
+  \ ['vitalk/vim-shebang'],
+  \ ]
 
 " Here are some basic customizations, please refer to the
 " ~/.SpaceVim.d/init.vim
