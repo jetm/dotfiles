@@ -6,6 +6,9 @@ let g:spacevim_custom_plugins = [
   \ ['octol/vim-cpp-enhanced-highlight'],
   \ ]
 
+" Disable plugins
+"let g:spacevim_disabled_plugins = ['vim-foo', 'vim-bar']
+
 " Here are some basic customizations, please refer to the
 " ~/.SpaceVim.d/init.vim
 " file for all possible options:
