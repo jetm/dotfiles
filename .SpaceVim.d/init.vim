@@ -79,3 +79,13 @@ let g:syntastic_error_symbol = '✗'
 " Diagnostics warning symbol
 let g:syntastic_warning_symbol = '⚠'
 
+"
+" Rainbow plugin settings
+"
+" Only for c/cpp file type
+au FileType c,cpp call rainbow#load()
+
+" Change rainbow default colors
+let g:rainbow_ctermfgs = [ 'brown', 'Darkblue', 'darkgray', 'darkgreen' ]
+
+" vim:tw=78:ts=2:sw=2
