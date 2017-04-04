@@ -2,6 +2,7 @@
 let g:spacevim_custom_plugins = [
   \ ['sheerun/vim-polyglot'],
   \ ['vitalk/vim-shebang'],
+  \ ['Valloric/YouCompleteMe'],
   \ ]
 
 " Here are some basic customizations, please refer to the
