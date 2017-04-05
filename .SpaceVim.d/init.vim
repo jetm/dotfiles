@@ -84,4 +84,17 @@ let g:syntastic_error_symbol = '✗'
 " Diagnostics warning symbol
 let g:syntastic_warning_symbol = '⚠'
 
+"
+" Code Formatting
+"
+" Configure clang-format
+let g:neoformat_c_clangformat = {
+    \ 'exe': 'clang-format',
+    \ 'args': ['-style=file'],
+    \ 'stdin': 1,
+    \ 'no_append': 1,
+    \ }
+
+let g:neoformat_enabled_c = ['clangformat']
+
 " vim:tw=78:ts=2:sw=2
