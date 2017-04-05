@@ -7,6 +7,7 @@ let g:spacevim_custom_plugins = [
   \ ['vitalk/vim-shebang'],
   \ ['Valloric/YouCompleteMe', {'on_ft':'c'}],
   \ ['octol/vim-cpp-enhanced-highlight', {'on_ft':'c'}],
+  \ ['igankevich/mesonic'],
   \ ]
 
 " Disable plugins
