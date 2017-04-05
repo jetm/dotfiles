@@ -75,6 +75,9 @@ let g:ycm_python_binary_path = '/usr/bin/python3'
 "
 " Syntastic plugin settings
 "
+" Load Syntatic
+let g:spacevim_enable_neomake = 0
+
 " Diagnostics error symbol
 let g:syntastic_error_symbol = '✗'
 
