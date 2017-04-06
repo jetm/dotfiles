@@ -27,7 +27,7 @@ end
 " Set Atom colorscheme
 let g:spacevim_colorscheme = 'onedark'
 
- " Disable vimfile in welcome window
+" Disable vimfile in welcome window
 let g:spacevim_enable_vimfiler_welcome = 0
 
 "
