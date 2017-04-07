@@ -64,6 +64,9 @@
     # Changes you have staged
     dc = diff --staged
 
+    # Changes you have staged using difftool by default
+    dic = difftool --staged
+
     # Print the name of the current branch
     current-branch = symbolic-ref --short HEAD
 
