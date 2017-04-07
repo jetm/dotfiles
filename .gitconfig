@@ -155,6 +155,8 @@
     # Show theirs changes
     show-theirs = !git-show :2:"${1}"
 
+    show-tool = "!f() { git difftool $1^ $1; }; f"
+
     # Summarizes commits, sort based on numbers commits and show each author
     # email
     score = shortlog -n -s -e
