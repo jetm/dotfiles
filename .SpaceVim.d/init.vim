@@ -1,6 +1,10 @@
 " Here are some basic customizations, please refer to the
 " ~/.SpaceVim.d/init.vim
 
+"
+" SpaceVim settings:
+"
+
 " If you want to add some custom plugins, use these options:
 let g:spacevim_custom_plugins = [
   \ ['sheerun/vim-polyglot'],
@@ -29,6 +33,9 @@ let g:spacevim_colorscheme = 'onedark'
 
 " Disable vimfile in welcome window
 let g:spacevim_enable_vimfiler_welcome = 0
+
+" Enable lint on the fly
+let g:spacevim_lint_on_the_fly = 1
 
 "
 " nerd-commenter plugin settings
