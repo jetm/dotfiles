@@ -9,7 +9,6 @@
 let g:spacevim_custom_plugins = [
   \ ['sheerun/vim-polyglot', {'merged' : 0}],
   \ ['vitalk/vim-shebang'],
-  \ ['Valloric/YouCompleteMe', {'on_ft':'c'}],
   \ ['octol/vim-cpp-enhanced-highlight', {'on_ft':'c'}],
   \ ['igankevich/mesonic'],
   \ ]
@@ -36,6 +35,22 @@ let g:spacevim_enable_vimfiler_welcome = 0
 
 " Enable lint on the fly
 let g:spacevim_lint_on_the_fly = 1
+
+"
+" YouCompleteMe plugin settings
+"
+
+" Enable YCM in SpaceVim
+let g:spacevim_enable_ycm = 1
+
+" Diagnostics error symbol
+let g:ycm_error_symbol = '✗'
+
+" Diagnostics warning symbol
+let g:ycm_warning_symbol = '⚠'
+
+" Force the use of Python 3 interpreter for ycmd. YCM is built for Python 3
+let g:ycm_python_binary_path = '/usr/bin/python3'
 
 "
 " nerd-commenter plugin settings
@@ -65,19 +80,6 @@ let g:NERDTrimTrailingWhitespace = 1
 " Always use alternative delimiter
 let g:NERD_c_alt_style = 1
 let g:NERDCustomDelimiters = {'c': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' }}
-
-"
-" YouCompleteMe plugin settings
-"
-
-" Diagnostics error symbol
-let g:ycm_error_symbol = '✗'
-
-" Diagnostics warning symbol
-let g:ycm_warning_symbol = '⚠'
-
-" Force the use of Python 3 interpreter for ycmd. YCM is built for Python 3
-let g:ycm_python_binary_path = '/usr/bin/python3'
 
 "
 " Syntastic plugin settings
