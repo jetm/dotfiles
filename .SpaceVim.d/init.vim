@@ -14,7 +14,8 @@ let g:spacevim_custom_plugins = [
   \ ]
 
 " Disable plugins
-"let g:spacevim_disabled_plugins = ['vim-foo', 'vim-bar']
+let g:spacevim_disabled_plugins = [
+  \ ]
 
 " file for all possible options:
 let g:spacevim_default_indent = 3
