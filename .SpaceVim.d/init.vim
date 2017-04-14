@@ -7,7 +7,7 @@
 
 " If you want to add some custom plugins, use these options:
 let g:spacevim_custom_plugins = [
-  \ ['sheerun/vim-polyglot'],
+  \ ['sheerun/vim-polyglot', {'merged' : 0}],
   \ ['vitalk/vim-shebang'],
   \ ['Valloric/YouCompleteMe', {'on_ft':'c'}],
   \ ['octol/vim-cpp-enhanced-highlight', {'on_ft':'c'}],
