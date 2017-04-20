@@ -21,9 +21,6 @@ let g:spacevim_disabled_plugins = [
 let g:spacevim_default_indent = 3
 let g:spacevim_max_column     = 80
 
-" use space as `<Leader>`
-let mapleader = "\<space>"
-
 if has("gui_running")
   let g:spacevim_guifont = 'Input\ Mono\ Narrow\ Semi-Condensed\ 11'
 end
