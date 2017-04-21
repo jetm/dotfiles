@@ -107,7 +107,5 @@ let g:neoformat_enabled_c = ['clangformat']
 "
 " Misc
 "
-" sudo to write
-map <leader>W :w !sudo tee % >/dev/null<CR>
 
 " vim:tw=78:ts=2:sw=2
