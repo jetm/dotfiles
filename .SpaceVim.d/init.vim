@@ -66,6 +66,24 @@ let g:neomake_cpp_clang_args = ["-std=c++11"]
 "let g:neomake_cpp_clang_args = ["-std=c++11"]
 
 "
+" Syntastic plugin settings
+"
+" Load Syntatic
+"let g:spacevim_enable_neomake = 0
+
+" Disable syntastic
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+" Diagnostics error symbol
+"let g:syntastic_error_symbol = '✗'
+
+" Diagnostics warning symbol
+"let g:syntastic_warning_symbol = '⚠'
+
+"
 " nerd-commenter plugin settings
 "
 " Add extra space around delimiters when commenting, remove them when
@@ -93,18 +111,6 @@ let g:NERDTrimTrailingWhitespace = 1
 " Always use alternative delimiter
 let g:NERD_c_alt_style = 1
 let g:NERDCustomDelimiters = {'c': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' }}
-
-"
-" Syntastic plugin settings
-"
-" Load Syntatic
-"let g:spacevim_enable_neomake = 0
-
-" Diagnostics error symbol
-"let g:syntastic_error_symbol = '✗'
-
-" Diagnostics warning symbol
-"let g:syntastic_warning_symbol = '⚠'
 
 "
 " Code Formatting
