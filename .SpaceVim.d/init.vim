@@ -55,6 +55,17 @@ let g:ycm_warning_symbol = '⚠'
 let g:ycm_python_binary_path = '/usr/bin/python3'
 
 "
+" Enable check C++11 syntax in neomake
+"
+" Use clang
+let g:neomake_cpp_enable_markers=['clang']
+let g:neomake_cpp_clang_args = ["-std=c++11"]
+
+" Use gcc
+"let g:neomake_cpp_enable_markers=['g++']
+"let g:neomake_cpp_clang_args = ["-std=c++11"]
+
+"
 " nerd-commenter plugin settings
 "
 " Add extra space around delimiters when commenting, remove them when
