@@ -39,7 +39,10 @@ let g:spacevim_lint_on_the_fly = 1
 " YouCompleteMe plugin settings
 "
 
-" Enable YCM in SpaceVim
+" Enable neomake, instead of syntastic
+let g:spacevim_enable_neomake = 1
+
+" Enable YCM as C/C++ completer
 let g:spacevim_enable_ycm = 1
 
 " Diagnostics error symbol
