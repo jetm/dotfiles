@@ -10,3 +10,5 @@ bin/do-asic
 bin/exercism
 bin/git-change-author
 bin/vpn-pulse-hpe
+
+.SpaceVim.d/.netrwhist
