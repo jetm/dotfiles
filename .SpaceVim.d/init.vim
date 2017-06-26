@@ -29,6 +29,16 @@ end
 " Set Atom colorscheme
 let g:spacevim_colorscheme = 'onedark'
 
+" Neo dark colorscheme settings
+"
+" let g:spacevim_colorscheme = 'neodark'
+" let g:neodark#terminal_transparent = 1
+" let g:neodark#background = '#282C34'
+" let g:neodark#solid_vertsplit = 1
+" let g:lightline = {}
+" let g:lightline.colorscheme = 'neodark'
+
+
 " Disable vimfile in welcome window
 let g:spacevim_enable_vimfiler_welcome = 0
 
