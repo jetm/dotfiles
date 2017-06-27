@@ -18,9 +18,8 @@ let g:spacevim_custom_plugins = [
 let g:spacevim_disabled_plugins = [
   \ ]
 
-" file for all possible options:
-let g:spacevim_default_indent = 3
-let g:spacevim_max_column     = 80
+" Change the max number of columns for SpaceVim
+let g:spacevim_max_column  = 80
 
 if has("gui_running")
   let g:spacevim_guifont = 'Input\ Mono\ Narrow\ Semi-Condensed\ 11'
