@@ -176,6 +176,12 @@
     pr = "!f() { git fetch -fu ${2:-upstream} refs/pull/$1/head:pr/$1 \
            && git checkout pr/$1; }; f"
 
+    # Clean all Github Pull Request
+    pr-clean = "!git checkout dev ; \
+        git for-each-ref refs/heads/pr/* --format=\"%(refname)\" \
+        | while read ref ; do branch=${ref#refs/heads/}; \
+        git branch -D $branch ; done"
+
 [push]
     # In centralized workflow, work like upstream with an added safety to
     # refuse to push if the upstream branch’s name is different from the local
