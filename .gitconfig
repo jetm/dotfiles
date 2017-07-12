@@ -172,6 +172,10 @@
     pamvim = !FILES=$(git status -s | awk '{ print $2 }' | fzf -x -m) \
                 && vim ${FILES}
 
+    # Pull Github Pull Request
+    pr = "!f() { git fetch -fu ${2:-upstream} refs/pull/$1/head:pr/$1 \
+           && git checkout pr/$1; }; f"
+
 [push]
     # In centralized workflow, work like upstream with an added safety to
     # refuse to push if the upstream branch’s name is different from the local
