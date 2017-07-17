@@ -271,4 +271,3 @@
     smtpServer = smtp.gmail.com
     smtpUser = javier.tia@gmail.com
     smtpServerPort = 587
-
