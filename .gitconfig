@@ -182,6 +182,11 @@
         | while read ref ; do branch=${ref#refs/heads/}; \
         git branch -D $branch ; done"
 
+    # Use it when there is not diff-so-fancy
+    olog = !git --no-pager log
+    oshow = !git --no-pager show
+    odiff = !git --no-pager diff
+
 [push]
     # In centralized workflow, work like upstream with an added safety to
     # refuse to push if the upstream branch’s name is different from the local
