@@ -187,6 +187,10 @@
     oshow = !git --no-pager show
     odiff = !git --no-pager diff
 
+    # tells git to check whether the remote repo is the same as the one you're
+    # trying to push up
+    please = push --force-with-lease
+
 [push]
     # In centralized workflow, work like upstream with an added safety to
     # refuse to push if the upstream branch’s name is different from the local
