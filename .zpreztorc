@@ -29,6 +29,7 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
+  'fasd' \
   'syntax-highlighting' \
   'command-not-found' \
   'history-substring-search' \
