@@ -170,4 +170,8 @@ debug() {
   bash -x "$(which "${script}")" "$@"
 }
 
+dut() {
+  du -ahcd1 "$1" 2> /dev/null
+}
+
 # vim:set ts=2 sw=2 ft=sh et:
