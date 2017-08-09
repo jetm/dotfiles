@@ -170,8 +170,9 @@ debug() {
   bash -x "$(which "${script}")" "$@"
 }
 
+# Calculate space for each directory and files
 dut() {
-  du -ahcd1 "$1" 2> /dev/null
+  du -ahd1 "$1" 2> /dev/null
 }
 
 # vim:set ts=2 sw=2 ft=sh et:
