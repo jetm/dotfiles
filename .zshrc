@@ -138,15 +138,23 @@ path=(
   $path
 )
 
+add_path() {
+  local new_entry="$1"
+  case ":$PATH:" in
+    *":${new_entry}:"*) :;; # already there
+    *) PATH="${new_entry}:$PATH";; # Add new entry
+  esac
+}
+
 # Set Ruby Gem path
 # It might changes is RVM is used
 if [ -x /usr/bin/ruby -a -x /usr/bin/gem ] ; then
-  PATH=$(ruby -rubygems -e "puts Gem.user_dir")/bin:"${PATH}"
+  add_path $(ruby -rubygems -e "puts Gem.user_dir")/bin
 fi
 
 # Set ccache path
 if [ -d /usr/lib/ccache/bin ] ; then
-  PATH="/usr/lib/ccache/bin:${PATH}"
+  add_path /usr/lib/ccache/bin
 
   mkdir -p /dev/shm/ccache || \
     echo 1>&2 "error: /dev/shm/ccache could not be created"
@@ -169,7 +177,7 @@ if [[ -r "$HOME/.gvm/scripts/gvm" ]]; then
   source "$HOME/.gvm/scripts/gvm"
 elif [ -x /usr/bin/go -a -d ${HOME}/go ]; then
   export GOPATH=${HOME}/go
-  PATH=${PATH}:${HOME}/go/bin
+  add_path ${HOME}/go/bin
 fi
 
 # Command-line fuzzy finder
@@ -184,12 +192,12 @@ fi
 
 # Add pipsi BIN path
 if [ -d ${HOME}/.local/bin ] ; then
-  PATH=${HOME}/.local/bin:"${PATH}"
+  add_path ${HOME}/.local/bin
 fi
 
 # Add Coverity to PATH
 if [ -d ${HOME}/coverity/cov-analysis-linux64-8.0.0/bin ] ; then
-  PATH=${HOME}/coverity/cov-analysis-linux64-8.0.0/bin:"${PATH}"
+  add_path ${HOME}/coverity/cov-analysis-linux64-8.0.0/bin
 fi
 
 #
