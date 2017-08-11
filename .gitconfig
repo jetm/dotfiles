@@ -210,20 +210,10 @@
     autoSetupRebase = always
 
 [diff]
-    # Extends patience and myers to get the best of both algorithms
-    algorithm = histogram
-
     # Specify the format in which differences in submodules are shown. The
     # "log" format lists the commits in the range like git-submodule summary
     # does
     submodule = log
-
-    # Shift diff hunk boundaries to make patches easier to read
-    # Require: git v2.11+
-    indentHeuristic = true
-
-    # Use icdiff tool
-    tool = icdiff
 
 [difftool]
     prompt = false
