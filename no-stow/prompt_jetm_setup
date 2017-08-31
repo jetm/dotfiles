@@ -83,7 +83,7 @@ function prompt_jetm_precmd {
   # Handle updating git data. We also clear the git prompt data if we're in a
   # different git root now.
   if (( $+functions[git-dir] )); then
-    local new_git_root="$(git-dir 2>/dev/null)"
+    local new_git_root="$(git-dir 2> /dev/null)"
     if [[ $new_git_root != $_jetm_cur_git_root ]]; then
       _prompt_jetm_git=''
       _jetm_cur_git_root=$new_git_root
@@ -97,7 +97,7 @@ function prompt_jetm_precmd {
 function prompt_jetm_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
-  prompt_opts=(cr percent subst)
+  prompt_opts=(cr percent sp subst)
   _prompt_jetm_precmd_async_pid=0
   _prompt_jetm_precmd_async_data=$(mktemp "${TMPDIR:-/tmp}/jetm-prompt-async-XXXXXXXXXX")
 
@@ -152,7 +152,7 @@ function prompt_jetm_preview {
   local +h RPROMPT=''
   local +h SPROMPT=''
 
-  editor-info 2>/dev/null
+  editor-info 2> /dev/null
   prompt_preview_theme 'jetm'
 }
 
