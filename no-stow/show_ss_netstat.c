@@ -23,7 +23,7 @@ int main(void) {
     while (fgets(ss_line, sizeof(ss_line) - 1, fp) != NULL &&
            ++n_lines <= N_LINES) {
         char **line = NULL;
-        char *p = strtok(ss_line, " ");
+        char *p = strtok(ss_line, " \n");
 
         // index of each string that no is a space
         int columns = 0;
@@ -36,7 +36,7 @@ int main(void) {
             }
 
             line[columns - 1] = p;
-            p = strtok(NULL, " ");
+            p = strtok(NULL, " \n");
         }
 
         // realloc one extra element for the last NULL
@@ -51,7 +51,7 @@ int main(void) {
         //     printf ("line[%d] = %s\n", i, line[i]);
         // }
 
-        if (columns > 4 && line[0] && line[5] && line[6]) {
+        if (columns > 6 && line[0] && line[5] && line[6]) {
             // print network family
             printf("%s  ", line[0]);
             // printf ("line[%d] = %s\n", 0, line[0]);
