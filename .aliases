@@ -29,7 +29,7 @@ make-ls-targets() {
 _pm() {
   local NUMCPUS
   # get number of processors plus one
-  NUMCPUS=$(( $(getconf _NPROCESSORS_ONLN) + 1 ))
+  NUMCPUS=$(( $(getconf _NPROCESSORS_ONLN) + 2 ))
   time nice make -j"${NUMCPUS}" --load-average="${NUMCPUS}"
 }
 
