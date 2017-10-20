@@ -46,6 +46,7 @@ let g:spacevim_custom_plugins = [
   \ ['octol/vim-cpp-enhanced-highlight', {'on_ft':'c'}],
   \ ['igankevich/mesonic'],
   \ ['benmills/vimux'],
+  \ ['junegunn/fzf.vim'],
   \ ]
 
 " Disable plugins
