@@ -88,7 +88,7 @@ let g:spacevim_enable_neomake = 0
 let g:spacevim_enable_ale = 1
 
 " Enable YCM as C/C++ completer
-let g:spacevim_enable_ycm = 1
+let g:spacevim_enable_ycm = 0
 
 " Diagnostics error symbol
 let g:ycm_error_symbol = '✗'
