@@ -83,8 +83,9 @@ let g:spacevim_lint_on_the_fly = 1
 " YouCompleteMe plugin settings
 "
 
-" Enable neomake, instead of syntastic
-let g:spacevim_enable_neomake = 1
+" Enable ale, instead of syntastic
+let g:spacevim_enable_neomake = 0
+let g:spacevim_enable_ale = 1
 
 " Enable YCM as C/C++ completer
 let g:spacevim_enable_ycm = 1
