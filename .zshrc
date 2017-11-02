@@ -54,6 +54,9 @@ setopt NO_NOMATCH
 # Now we can pipe to multiple outputs!
 setopt MULTIOS
 
+# Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
+export KEYTIMEOUT=1
+
 #
 # Key bindings
 #
