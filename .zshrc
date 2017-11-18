@@ -203,6 +203,11 @@ if [ -d ${HOME}/coverity/cov-analysis-linux64-8.0.0/bin ] ; then
   add_path ${HOME}/coverity/cov-analysis-linux64-8.0.0/bin
 fi
 
+# Add completion for exercism
+if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
+  source ~/.config/exercism/exercism_completion.zsh
+fi
+
 #
 # Temporary Files
 #
