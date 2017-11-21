@@ -2,6 +2,10 @@
 " SpaceVim settings:
 "
 
+" Disable plugins
+let g:spacevim_disabled_plugins = [
+  \ ]
+
 " If you want to add some custom plugins, use these options:
 let g:spacevim_custom_plugins = [
   \ ['sheerun/vim-polyglot', {'merged' : 0}],
@@ -12,32 +16,26 @@ let g:spacevim_custom_plugins = [
   \ ['junegunn/fzf.vim'],
   \ ]
 
-" Disable plugins
-let g:spacevim_disabled_plugins = [
-  \ ]
-
 " Change the max number of columns for SpaceVim
-let g:spacevim_max_column  = 80
+let g:spacevim_max_column = 80
 
 if has("gui_running")
   let g:spacevim_guifont = 'Input\ Mono\ Narrow\ Semi-Condensed\ 11'
 end
 
-" Set Atom colorscheme
-let g:spacevim_colorscheme = 'onedark'
-
-" Neo dark colorscheme settings
-"
-" let g:spacevim_colorscheme = 'neodark'
-" let g:neodark#terminal_transparent = 1
-" let g:neodark#background = '#282C34'
-" let g:neodark#solid_vertsplit = 1
-" let g:lightline = {}
-" let g:lightline.colorscheme = 'neodark'
-
-
 " Disable vimfile in welcome window
 let g:spacevim_enable_vimfiler_welcome = 0
+
+"
+" Neo dark colorscheme settings
+"
+" Set Atom colorscheme
+let g:spacevim_colorscheme = 'onedark'
+let g:neodark#terminal_transparent = 1
+let g:neodark#background = '#282C34'
+let g:neodark#solid_vertsplit = 1
+let g:lightline = {}
+let g:lightline.colorscheme = 'neodark'
 
 "
 " Checker settings
