@@ -100,10 +100,12 @@
     # remove remote-tracking branches that were deleted from the remote repo
     # trim = !git remote prune origin && git gc
 
-    # search and replace text in all repo: git search-replace old_name new-new
+    # search and replace text in the current repo:
+    #
+    #   git search-replace old_name new-new
     search-replace = "!f() { \
         git grep -F --null --full-name --name-only -e \"$1\" -- . | \
-        xargs -0 perl -i -p -e \"s/\\Q$1\\E/$2/g\"; }; \
+        xargs -0 perl -i -p -e \"s#\\Q$1\\E#$2#g\"; }; \
         f $1 $2"
 
     # show local commits
