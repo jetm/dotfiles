@@ -14,6 +14,7 @@ let g:spacevim_custom_plugins = [
   \ ['igankevich/mesonic'],
   \ ['benmills/vimux'],
   \ ['junegunn/fzf.vim'],
+  \ ['kergoth/vim-bitbake'],
   \ ]
 
 " Change the max number of columns for SpaceVim
