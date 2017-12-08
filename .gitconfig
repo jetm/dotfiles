@@ -17,6 +17,9 @@
     # No output conversion is performed
     autocrlf = input
 
+    # Notice trailing whitespace and space before tab
+    whitespace = trailing-space,space-before-tab
+
 [pager]
     # Call attention to areas of interest without being visually distracting
     log = diff-so-fancy | less --tabs=4 -RFX
@@ -267,3 +270,7 @@
     smtpServer = smtp.gmail.com
     smtpUser = javier.tia@gmail.com
     smtpServerPort = 587
+
+[apply]
+    # Tells git apply how to handle whitespaces
+    whitespace = fix
