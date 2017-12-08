@@ -15,6 +15,7 @@ let g:spacevim_custom_plugins = [
   \ ['benmills/vimux'],
   \ ['junegunn/fzf.vim'],
   \ ['kergoth/vim-bitbake'],
+  \ ['vivien/vim-linux-coding-style'],
   \ ]
 
 " Change the max number of columns for SpaceVim
@@ -116,6 +117,14 @@ call SpaceVim#layers#load('lang#c',
   \   'libclang_path' : '/usr/lib/libclang.so',
   \ }
   \ )
+
+"
+" Apply Linux coding style to specific paths
+"
+let g:linuxsty_patterns = [
+  \ "/home/tiamarin/repos/linux-stable",
+  \ "/home/javier/repos/linux-stable"
+  \ ]
 
 "
 " Misc
