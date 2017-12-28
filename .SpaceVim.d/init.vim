@@ -55,27 +55,16 @@ let g:spacevim_lint_on_the_fly = 1
 "
 
 " Enable YCM as C/C++ completer
-let g:spacevim_enable_ycm = 0
+" let g:spacevim_enable_ycm = 0
 
 " Diagnostics error symbol
-let g:ycm_error_symbol = '✗'
+" let g:ycm_error_symbol = '✗'
 
 " Diagnostics warning symbol
-let g:ycm_warning_symbol = '⚠'
+" let g:ycm_warning_symbol = '⚠'
 
 " Force the use of Python 3 interpreter for ycmd. YCM is built for Python 3
-let g:ycm_python_binary_path = '/usr/bin/python3'
-
-"
-" Enable check C++11 syntax in neomake
-"
-" Use clang
-"let g:neomake_cpp_enable_markers=['clang']
-"let g:neomake_cpp_clang_args = ["-std=c++11"]
-
-" Use gcc
-"let g:neomake_cpp_enable_markers=['g++']
-"let g:neomake_cpp_clang_args = ["-std=c++11"]
+" let g:ycm_python_binary_path = '/usr/bin/python3'
 
 "
 " Syntastic plugin settings
@@ -89,22 +78,16 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
-" Diagnostics error symbol
-"let g:syntastic_error_symbol = '✗'
-
-" Diagnostics warning symbol
-"let g:syntastic_warning_symbol = '⚠'
-
 "
 " Code Formatting
 "
 " Configure clang-format
 let g:neoformat_c_clangformat = {
-    \ 'exe': 'clang-format',
-    \ 'args': ['-style=file'],
-    \ 'stdin': 1,
-    \ 'no_append': 1,
-    \ }
+  \ 'exe': 'clang-format',
+  \ 'args': ['-style=file'],
+  \ 'stdin': 1,
+  \ 'no_append': 1,
+  \ }
 
 let g:neoformat_enabled_c = ['clangformat']
 
