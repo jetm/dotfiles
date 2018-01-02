@@ -51,22 +51,6 @@ let g:spacevim_enable_ale = 1
 let g:spacevim_lint_on_the_fly = 1
 
 "
-" YouCompleteMe plugin settings
-"
-
-" Enable YCM as C/C++ completer
-" let g:spacevim_enable_ycm = 0
-
-" Diagnostics error symbol
-" let g:ycm_error_symbol = '✗'
-
-" Diagnostics warning symbol
-" let g:ycm_warning_symbol = '⚠'
-
-" Force the use of Python 3 interpreter for ycmd. YCM is built for Python 3
-" let g:ycm_python_binary_path = '/usr/bin/python3'
-
-"
 " Syntastic plugin settings
 "
 " Load Syntatic
