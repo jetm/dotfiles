@@ -53,6 +53,7 @@ let g:spacevim_lint_on_the_fly = 1
 "
 " Code Formatting
 "
+
 " Configure clang-format
 let g:neoformat_c_clangformat = {
   \ 'exe': 'clang-format',
@@ -72,16 +73,15 @@ let g:linuxsty_patterns = [
   \ ]
 
 "
+" Misc
+"
+
 " Set Python X version to 3
 " pythonx looks for python3, instead of python3/dyn
 " (Arch Linux python version)
-"
 if has('python3') || has('python3/dyn')
   set pyx=3
 endif
 
-"
-" Misc
-"
 
 " vim:tw=78:ts=2:sw=2
