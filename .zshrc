@@ -89,6 +89,14 @@ bindkey '^Z' fancy-ctrl-z
 # View manpage while editing a command
 bindkey -M vicmd 'K' run-help
 
+# copy current line to clipboard in Vi Insert mode with Ctrl-ay
+function _copy-to-clipboard {
+    print -rn -- $BUFFER | xclip
+    [ -n "$TMUX" ] && tmux display-message 'Line copied to clipboard!'
+}
+zle -N _copy-to-clipboard
+bindkey -M viins "^ay" _copy-to-clipboard
+
 #
 # Colors
 #
