@@ -51,18 +51,6 @@ let g:spacevim_enable_ale = 1
 let g:spacevim_lint_on_the_fly = 1
 
 "
-" Syntastic plugin settings
-"
-" Load Syntatic
-"let g:spacevim_enable_neomake = 0
-
-" Disable syntastic
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
-"
 " Code Formatting
 "
 " Configure clang-format
