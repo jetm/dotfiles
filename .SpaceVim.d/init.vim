@@ -92,16 +92,6 @@ let g:neoformat_c_clangformat = {
 let g:neoformat_enabled_c = ['clangformat']
 
 "
-" lang#c configuration
-"
-call SpaceVim#layers#load('lang#c',
-  \ {
-  \   'enable_libclang' : 1,
-  \   'libclang_path' : '/usr/lib/libclang.so',
-  \ }
-  \ )
-
-"
 " Apply Linux coding style to specific paths
 "
 let g:linuxsty_patterns = [
