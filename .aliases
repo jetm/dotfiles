@@ -75,7 +75,7 @@ if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
 
   if (command -v updpkgsums > /dev/null 2>&1); then
     # Update checksum package, build and generate .SCRINFO file
-    alias aurgen='updpkgsums && makepkg -Csf && mksrcinfo'
+    alias aurgen='updpkgsums && makepkg -Csf && makepkg --printsrcinfo >! .SRCINFO'
   fi
 
   if (command -v pacaur > /dev/null 2>&1); then
