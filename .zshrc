@@ -157,10 +157,11 @@ add_path() {
   esac
 }
 
-# Set Ruby Gem path
-# It might changes is RVM is used
+# Set Ruby Gem bin and home path
+# It might changes if RVM is used
 if [ -x /usr/bin/ruby -a -x /usr/bin/gem ] ; then
-  add_path $(ruby -rubygems -e "puts Gem.user_dir")/bin
+  add_path $(ruby -e 'print Gem.user_dir')/bin
+  export GEM_HOME=${HOME}/.gem
 fi
 
 # Set ccache path
