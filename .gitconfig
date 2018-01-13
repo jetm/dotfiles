@@ -5,24 +5,20 @@
 [core]
     editor = vim
 
+    # diff-so-fancy to call attention to areas of interest without being
+    # visually distracting
+    # less options
     # -F quit if one screen
     # -R show ANSI colors based in RAW control characters
     # -s squeeze blank lines
     # -X disable termcap [de]initialization strings to terminal
-    pager = less -FRsX
+    pager = diff-so-fancy | less --tabs=4 -RFX
 
     # Verify if a command modifies a file in the work tree
     safecrlf = true
 
     # No output conversion is performed
     autocrlf = input
-
-[pager]
-    # Call attention to areas of interest without being visually distracting
-    log = diff-so-fancy | less --tabs=4 -RFX
-    show = diff-so-fancy | less --tabs=4 -RFX
-    diff = diff-so-fancy | less --tabs=4 -RFX
-    difftool = true
 
 [i18n]
     # Character encoding the commit messages are converted to when running git
@@ -192,6 +188,10 @@
     # tells git to check whether the remote repo is the same as the one you're
     # trying to push up
     please = push --force-with-lease
+
+    # For raw patches, a shortcut for a 'normal' diff to save as a patch for
+    # emailing or later application
+    patch = !git --no-pager diff --no-color
 
 [push]
     # In centralized workflow, work like upstream with an added safety to
