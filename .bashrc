@@ -24,12 +24,6 @@ if [ -d ~/local/share/man ] ; then
   fi
 fi
 
-if [ -f /usr/share/git/git-prompt.sh ]; then
-  . /usr/share/git/git-prompt.sh
-elif [ -f /usr/share/doc/git/contrib/completion/git-prompt.sh ]; then
-  . /usr/share/doc/git/contrib/completion/git-prompt.sh
-fi
-
 unset CDPATH
 
 export HOSTFILE=$HOME/.hosts    # Put list of remote hosts in ~/.hosts
@@ -99,11 +93,6 @@ shopt -s no_empty_cmd_completion
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
-  debian_chroot=$(cat /etc/debian_chroot)
-fi
-
 use_color=true
 
 # Set colorful PS1 only on colorful terminals.
@@ -160,17 +149,6 @@ fi
 # Try to keep environment pollution down, EPA loves us.
 unset use_color safe_term match_lhs
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ]; then
-  . /etc/bash_completion
-fi
-
-if [ -f ~/.git-completion ]; then
-  source ~/.git-completion
-fi
-
 if [ -n "$DISPLAY" -a "$TERM" == "xterm" -a \
   -e /usr/share/terminfo/x/xterm-256color ]; then
 export TERM=xterm-256color
@@ -214,6 +192,7 @@ digga () {
 cp_p () {
   rsync -WavP --human-readable --progress $1 $2
 }
+
 #
 # Other Alias
 #
@@ -228,37 +207,8 @@ alias mv='mv -i'
 alias rm='rm -i'
 
 # aliases for git
-alias g='git --no-pager'
-alias gp='git -p'
-alias mg='git help'
+alias g='git'
+alias gnp='git --no-pager'
 complete -o default -o nospace -F _git g
-
-#
-# Arch Linux Stuff
-#
-if [ -f /etc/arch-release ]; then
-  complete -cf pacman
-  alias yaoug='yaourt -Syu --aur'
-  alias yaoud='yaourt -Syu --devel --aur'
-
-  # Pacman alias examples
-  export PACMAN=pacman-color
-  alias pacupg='sudo pacman -Syu'        # Synchronize with repositories before upgrading packages that are out of date on the local system.
-  alias pacin='sudo pacman -S'           # Install specific package(s) from the repositories
-  alias pacins='sudo pacman -Up'         # Install specific package not from the repositories but from a file
-  alias pacre='sudo pacman -R'           # Remove the specified package(s), retaining its configuration(s) and required dependencies
-  alias pacrem='sudo pacman -Rns'        # Remove the specified package(s), its configuration(s) and unneeded dependencies
-  alias pacrep='pacman -Si'              # Display information about a given package in the repositories
-  alias pacreps='pacman -Ss'             # Search for package(s) in the repositories
-  alias pacloc='pacman -Qi'              # Display information about a given package in the local database
-  alias paclocs='pacman -Qs'             # Search for package(s) in the local database
-  alias pacremALL='sudo pacman -Scc'     # Remove ALL packages from cache
-  # Additional pacman alias examples
-  alias pacupd='sudo pacman -Sy && sudo abs'      # Update and refresh the local package and ABS databases against repositories
-  alias pacinsd='sudo pacman -S --asdeps'         # Install given package(s) as dependencies of another package
-  alias pacmir='sudo pacman -Syy'                 # Force refresh of all package lists after updating /etc/pacman.d/mirrorlist
-  alias pacorph='sudo pacman -Rs $(pacman -Qtdq)' # recursively removing orphans (be careful)
-
-fi
 
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
