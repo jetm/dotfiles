@@ -21,6 +21,10 @@
     # No output conversion is performed
     autocrlf = input
 
+[pager]
+    # Move between files with n/N keys
+    diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
+
 [i18n]
     # Character encoding the commit messages are converted to when running git
     # log and friends
