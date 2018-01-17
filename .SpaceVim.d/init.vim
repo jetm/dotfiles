@@ -16,6 +16,7 @@ let g:spacevim_custom_plugins = [
   \ ['junegunn/fzf.vim'],
   \ ['kergoth/vim-bitbake'],
   \ ['vivien/vim-linux-coding-style'],
+  \ ['ConradIrwin/vim-bracketed-paste'],
   \ ]
 
 " Change the max number of columns for SpaceVim
