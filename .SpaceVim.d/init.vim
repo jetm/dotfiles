@@ -29,6 +29,9 @@ end
 " Disable vimfile in welcome window
 let g:spacevim_enable_vimfiler_welcome = 0
 
+" Set default indent to 4 spaces
+let g:spacevim_default_indent = 4
+
 "
 " Neo dark colorscheme settings
 "
