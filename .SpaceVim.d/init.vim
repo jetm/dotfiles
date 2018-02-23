@@ -14,9 +14,9 @@ let g:spacevim_custom_plugins = [
   \ ['igankevich/mesonic'],
   \ ['benmills/vimux'],
   \ ['junegunn/fzf.vim'],
-  \ ['kergoth/vim-bitbake'],
   \ ['vivien/vim-linux-coding-style'],
   \ ['ConradIrwin/vim-bracketed-paste'],
+  \ ['jetm/vim-bitbake'],
   \ ]
 
 " Change the max number of columns for SpaceVim
@@ -37,6 +37,7 @@ let g:spacevim_default_indent = 4
 "
 " Set Atom colorscheme
 let g:spacevim_colorscheme = 'onedark'
+" let g:spacevim_colorscheme = 'one'
 let g:neodark#terminal_transparent = 1
 let g:neodark#background = '#282C34'
 let g:neodark#solid_vertsplit = 1
@@ -93,5 +94,10 @@ if has('python3') || has('python3/dyn')
   set pyx=3
 endif
 
+" Make visible special characters as tab, spaces, eol
+set list
+set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:␣,trail:·,
+set showbreak=↪\ 
+" eol:↲,
 
 " vim:tw=78:ts=2:sw=2
