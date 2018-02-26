@@ -97,6 +97,7 @@ endif
 " Make visible special characters as tab, spaces, eol
 set list
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:␣,trail:·,
+set fillchars=vert:│,fold:·
 set showbreak=↪\ 
 " eol:↲,
 
