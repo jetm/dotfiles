@@ -44,6 +44,9 @@ let g:neodark#solid_vertsplit = 1
 let g:lightline = {}
 let g:lightline.colorscheme = 'neodark'
 
+" Enable Version Control layer
+call SpaceVim#layers#load('VersionControl')
+
 "
 " Checker settings
 "
