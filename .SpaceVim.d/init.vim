@@ -58,10 +58,7 @@ let g:spacevim_enable_ale = 1
 " Enable lint on the fly
 let g:spacevim_lint_on_the_fly = 1
 
-" Put back Vim f keymap to quickly find char and + keymap for quicker move to
-" any character
-let g:spacevim_unite_leader = '-'
-let g:spacevim_denite_leader = '_'
+" + keymap for quicker move to any character
 nmap + <Plug>(easymotion-prefix)s
 
 "
