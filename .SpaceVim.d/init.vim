@@ -17,7 +17,24 @@ let g:spacevim_custom_plugins = [
   \ ['vivien/vim-linux-coding-style'],
   \ ['ConradIrwin/vim-bracketed-paste'],
   \ ['jetm/vim-bitbake'],
+  \ ['joshdick/onedark.vim'],
   \ ]
+
+"
+" Neo dark colorscheme settings
+"
+" Set Atom colorscheme
+let g:spacevim_colorscheme = 'onedark'
+
+" let g:spacevim_colorscheme = 'one'
+" Alternative one dark scheme
+" \ ['rakr/vim-one'],
+
+let g:neodark#terminal_transparent = 1
+let g:neodark#background = '#282C34'
+let g:neodark#solid_vertsplit = 1
+let g:lightline = {}
+let g:lightline.colorscheme = 'neodark'
 
 " Change the max number of columns for SpaceVim
 let g:spacevim_max_column = 80
@@ -31,18 +48,6 @@ let g:spacevim_enable_vimfiler_welcome = 0
 
 " Set default indent to 4 spaces
 let g:spacevim_default_indent = 4
-
-"
-" Neo dark colorscheme settings
-"
-" Set Atom colorscheme
-let g:spacevim_colorscheme = 'onedark'
-" let g:spacevim_colorscheme = 'one'
-let g:neodark#terminal_transparent = 1
-let g:neodark#background = '#282C34'
-let g:neodark#solid_vertsplit = 1
-let g:lightline = {}
-let g:lightline.colorscheme = 'neodark'
 
 " Enable Version Control layer
 call SpaceVim#layers#load('VersionControl')
