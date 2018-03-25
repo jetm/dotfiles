@@ -13,11 +13,10 @@ let g:spacevim_custom_plugins = [
   \ ['octol/vim-cpp-enhanced-highlight', {'on_ft':'c'}],
   \ ['igankevich/mesonic'],
   \ ['benmills/vimux'],
-  \ ['junegunn/fzf.vim'],
   \ ['vivien/vim-linux-coding-style'],
   \ ['ConradIrwin/vim-bracketed-paste'],
   \ ['jetm/vim-bitbake'],
-  \ ['joshdick/onedark.vim'],
+  \ ['joshdick/onedark.vim', {'loadconf': 1, 'merged': 0}],
   \ ]
 
 "
@@ -51,6 +50,9 @@ let g:spacevim_default_indent = 4
 
 " Enable Version Control layer
 call SpaceVim#layers#load('VersionControl')
+
+" Enable search file layer, add CtrlP
+call SpaceVim#layers#load('denite')
 
 "
 " Checker settings
