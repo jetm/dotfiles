@@ -34,7 +34,8 @@ zstyle ':prezto:load' pmodule \
   'history-substring-search' \
   'prompt' \
   'git' \
-  'git-extras'
+  'git-extras' \
+  'rsync'
 
 #
 # Editor

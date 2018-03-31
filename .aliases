@@ -1,14 +1,3 @@
-alias cp='cp -i'
-alias mv='mv -i'
-alias rm='rm -i'
-alias vimn='vim -u NONE'
-
-# Show my external IP address
-alias myextip='curl ifconfig.me'
-
-# Show extended information about my external IP address
-alias myextipe='curl ifinfo.io'
-
 # Clear RAM Memory Cache, Buffer and Swap Space
 clean-cache-mem() {
   sudo sh -c "free -h && \
@@ -111,47 +100,6 @@ if (command -v docker > /dev/null 2>&1); then
   alias dkrmALL='docker rm $(docker ps -a -q)'
 fi
 
-#
-# C alias
-#
-if (command -v c > /dev/null 2>&1); then
-  # Run files with ./file.c without chmod +x
-  alias -s c='c'
-  alias -s cc='c'
-  alias -s cpp='c'
-fi
-
-#
-# Fix prezto alias for dtags
-#
-
-
-if (command -v dtags-activate > /dev/null 2>&1); then
-  unalias d
-  unalias e
-  alias v='${(z)VISUAL:-${(z)EDITOR}}'
-  eval "$(dtags-activate zsh)"
-fi
-
-#
-# Extra Git alias
-#
-if (command -v git > /dev/null 2>&1); then
-  # Run commit without hooks
-  alias gcv='git commit --no-verify'
-  alias gcs='git commit --verbose --signoff'
-  alias gcra='git commit --amend --reset-author --no-edit'
-
-  # Get to the top of a git tree
-  cdp() {
-    TEMP_PWD=$(pwd);
-    while ! [ -d .git ]; do
-    cd ..;
-    done
-    OLDPWD=$TEMP_PWD;
-  }
-fi
-
 if (command -v thefuck > /dev/null 2>&1); then
   fix(){
     TF_CMD=$(TF_ALIAS=fix PYTHONIOENCODING=utf-8 \
@@ -168,11 +116,6 @@ fi
 debug() {
   local script="$1"; shift
   bash -x "$(which "${script}")" "$@"
-}
-
-# Calculate space for each directory and files
-dut() {
-  du -ahd1 "$1" 2> /dev/null
 }
 
 # Remove duplicates PATH
