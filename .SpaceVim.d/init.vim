@@ -48,6 +48,9 @@ let g:spacevim_enable_vimfiler_welcome = 0
 " Set default indent to 4 spaces
 let g:spacevim_default_indent = 4
 
+" Disable expanding tab in spaces
+let g:spacevim_expand_tab = 0
+
 " Enable Version Control layer
 call SpaceVim#layers#load('VersionControl')
 
