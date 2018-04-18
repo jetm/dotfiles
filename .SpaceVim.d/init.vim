@@ -39,7 +39,7 @@ let g:lightline.colorscheme = 'neodark'
 let g:spacevim_max_column = 80
 
 if has("gui_running")
-  let g:spacevim_guifont = 'Input\ Mono\ Narrow\ Semi-Condensed\ 11'
+  let guifont = 'Input\ Mono\ Narrow\ Semi-Condensed\ 11'
 end
 
 " Disable vimfile in welcome window
