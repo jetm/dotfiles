@@ -44,6 +44,7 @@ let g:spacevim_enable_vimfiler_welcome = 0
 let g:spacevim_default_indent = 4
 
 " Disable expanding tab in spaces
+" Commented until is reforced again
 " let g:spacevim_expand_tab = 0
 
 " Enable Version Control layer
@@ -104,6 +105,12 @@ let g:neoformat_c_clangformat = {
   \ }
 
 let g:neoformat_enabled_c = ['clangformat']
+
+" Run Neoformat on Save
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
 
 "
 " Misc
