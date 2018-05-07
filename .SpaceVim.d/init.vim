@@ -113,6 +113,20 @@ augroup fmt
 augroup END
 
 "
+" Indentation settings
+"
+" Make visible special characters as tab, spaces, eol
+set list
+set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:␣,trail:·,
+" eol:↲,
+set fillchars=vert:│,fold:·
+set showbreak=↪\ 
+
+" Specify a character to be used as indent line. From SpaceVim ui is '┊'
+" It has an effect over fillchars due to Yggdroot/indentLine plugin
+let g:indentLine_char = '│'
+
+"
 " Misc
 "
 
@@ -122,12 +136,5 @@ augroup END
 if has('python3') || has('python3/dyn')
   set pyx=3
 endif
-
-" Make visible special characters as tab, spaces, eol
-set list
-set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:␣,trail:·,
-set fillchars=vert:│,fold:·
-set showbreak=↪\ 
-" eol:↲,
 
 " vim:tw=78:ts=2:sw=2
