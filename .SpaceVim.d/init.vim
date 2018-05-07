@@ -49,8 +49,15 @@ let g:spacevim_default_indent = 4
 " Enable Version Control layer
 call SpaceVim#layers#load('VersionControl')
 
-" Enable search file layer, add CtrlP
-call SpaceVim#layers#load('denite')
+" Enable searching file layer, add CtrlP keybind.
+" Use fzf instead of Unite (fails sometimes)
+call SpaceVim#layers#load('fzf')
+
+" Enable cscope
+call SpaceVim#layers#load('cscope')
+
+" @TODO: test more or use cscope or global instead
+" call SpaceVim#layers#load('tags')
 
 "
 " Checker settings
