@@ -2,16 +2,15 @@
 
 set -e
 
-INDEXFILES=cscope.files
-
 [ -z $1 ] && {
     echo >&2 "error: a directory with sources is required"
     exit 1
 }
 
-find -H $1 -name '*.c' -o -name '*.h' -o -name '*.a' > $INDEXFILES
+INDEXFILES=cscope.files
 
 echo "Generating cscope files..."
+find -H $1 -name '*.c' -o -name '*.h' -o -name '*.a' > $INDEXFILES
 cscope -b -q -i$INDEXFILES
 # -b  Build the cross-reference only
 # -q  Enable fast symbol lookup via an inverted index
