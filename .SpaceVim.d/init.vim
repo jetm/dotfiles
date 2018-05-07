@@ -11,9 +11,6 @@ let g:spacevim_custom_plugins = [
   \ ['sheerun/vim-polyglot', {'merged' : 0}],
   \ ['vitalk/vim-shebang'],
   \ ['octol/vim-cpp-enhanced-highlight', {'on_ft':'c'}],
-  \ ['igankevich/mesonic'],
-  \ ['benmills/vimux'],
-  \ ['vivien/vim-linux-coding-style'],
   \ ['ConradIrwin/vim-bracketed-paste'],
   \ ['jetm/vim-bitbake'],
   \ ['joshdick/onedark.vim', {'loadconf': 1, 'merged': 0}],
@@ -38,9 +35,7 @@ let g:lightline.colorscheme = 'neodark'
 " Change the max number of columns for SpaceVim
 let g:spacevim_max_column = 80
 
-if has("gui_running")
-  let guifont = 'Input\ Mono\ Narrow\ Semi-Condensed\ 11'
-end
+let guifont = 'Input\ Mono\ Narrow\ Semi-Condensed\ 11'
 
 " Disable vimfile in welcome window
 let g:spacevim_enable_vimfiler_welcome = 0
@@ -49,7 +44,7 @@ let g:spacevim_enable_vimfiler_welcome = 0
 let g:spacevim_default_indent = 4
 
 " Disable expanding tab in spaces
-let g:spacevim_expand_tab = 0
+" let g:spacevim_expand_tab = 0
 
 " Enable Version Control layer
 call SpaceVim#layers#load('VersionControl')
@@ -84,14 +79,6 @@ let g:neoformat_c_clangformat = {
   \ }
 
 let g:neoformat_enabled_c = ['clangformat']
-
-"
-" Apply Linux coding style to specific paths
-"
-let g:linuxsty_patterns = [
-  \ "/home/tiamarin/repos/linux-stable",
-  \ "/home/javier/repos/linux-stable"
-  \ ]
 
 "
 " Misc
