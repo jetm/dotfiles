@@ -99,9 +99,6 @@ let g:spacevim_enable_ale = 1
 " Enable lint on the fly
 let g:spacevim_lint_on_the_fly = 1
 
-" + keymap for quicker move to any character
-nmap + <Plug>(easymotion-prefix)s
-
 "
 " Code Formatting
 "
@@ -135,6 +132,12 @@ set showbreak=↪\
 " Specify a character to be used as indent line. From SpaceVim ui is '┊'
 " It has an effect over fillchars due to Yggdroot/indentLine plugin
 let g:indentLine_char = '│'
+
+"
+" Movement
+"
+" + keymap for quicker move to any character
+nmap + <Plug>(easymotion-prefix)s
 
 "
 " Misc
