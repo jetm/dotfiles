@@ -109,11 +109,6 @@ match_lhs=""
   && match_lhs=$(dircolors --print-database)
 [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]] && use_color=true
 
-if [ -n "${CLEARCASE_ROOT}" ] ; then
-  clearcase_view=${CLEARCASE_ROOT#/view/}
-  clearcase_view="(${clearcase_view/${USER}_/+}) "
-fi
-
 if ${use_color} ; then
   # Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
   if type -P dircolors >/dev/null ; then
@@ -177,15 +172,6 @@ debug()         # debug bash script
 {
   local script="$1"; shift
   bash -x $(which $script) "$@"
-}
-
-tcalc()         # fancy way to calc
-{
-  awk "BEGIN { print $* }";
-}
-
-digga () {
-  dig +nocmd $1 any +multiline +noall +answer
 }
 
 # Copy w/ progress
