@@ -35,7 +35,9 @@ let g:lightline.colorscheme = 'neodark'
 " Change the max number of columns for SpaceVim
 let g:spacevim_max_column = 80
 
-let guifont = 'Input\ Mono\ Narrow\ Semi-Condensed\ 11'
+if has("gui-running")
+  let guifont = 'Input\ Mono\ Narrow\ Semi-Condensed\ 11'
+end
 
 " Disable vimfile in welcome window
 let g:spacevim_enable_vimfiler_welcome = 0
