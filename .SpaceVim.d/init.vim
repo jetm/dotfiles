@@ -20,7 +20,7 @@ let g:spacevim_custom_plugins = [
 " SpaceVim keybinding
 "
 " Default is \ key
-let mapleader = "\<space>"
+" let mapleader = "\<space>"
 
 "
 " Spacevim colorscheme settings
@@ -120,10 +120,12 @@ let g:neoformat_c_clangformat = {
 let g:neoformat_enabled_c = ['clangformat']
 
 " Run Neoformat on Save
-augroup fmt
-  autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
-augroup END
+" doesn't works well with YCM
+" augroup fmt
+  " autocmd!
+  " autocmd BufWritePre * undojoin | Neoformat
+" augroup END
+nnoremap F2 :Neoformat<CR>
 
 "
 " Indentation settings
@@ -144,6 +146,7 @@ let g:indentLine_char = '│'
 "
 " + keymap for quicker move to any character
 nmap + <Plug>(easymotion-prefix)s
+
 " Next/Prev buffer
 nnoremap L :bnext<CR>
 nnoremap H :bprev<CR>
