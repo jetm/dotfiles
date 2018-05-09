@@ -125,7 +125,7 @@ let g:neoformat_enabled_c = ['clangformat']
   " autocmd!
   " autocmd BufWritePre * undojoin | Neoformat
 " augroup END
-nnoremap F2 :Neoformat<CR>
+noremap <silent> <F4> :silent Neoformat<CR>
 
 "
 " Indentation settings
@@ -150,8 +150,6 @@ nmap + <Plug>(easymotion-prefix)s
 " Next/Prev buffer
 nnoremap L :bnext<CR>
 nnoremap H :bprev<CR>
-
-nnoremap <C-n> :noh<CR>
 
 
 "
