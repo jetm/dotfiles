@@ -33,105 +33,20 @@ noremap Y y$
 "
 " CLion Keymaps Options
 "
-
-" built-in navigation to navigated items works better
-noremap <c-c> :action Back<CR>
-noremap <c-c> :action Forward<CR>
-
-" Join Lines
-noremap J :action EditorJoinLines<CR>
-
-" w
-noremap <leader>w :action<CR>
-
-" error description
-noremap <leader>e :action ShowErrorDescription<CR>
-
-" return
-noremap <leader>r :action Rerun<CR>
-
-" usage
-noremap <leader>u :action ShowUsages<CR>
-
-" import
-noremap <leader>i :action Maven.Reimport<CR>
-
-" open file path
-noremap <leader>o :action ShowFilePath<CR>
-
-" show projects
-noremap <leader>p :action ManageRecentProjects<CR>
+" Start filling as you will be use them. Use :actionlist [pattern] to look for
+" actions
 
 " ace jump
-noremap <leader>a <ESC>:action emacsIDEAs.AceJump<CR>
-
-" structure
-noremap <leader>s :action FileStructurePopup<CR>
-
-" debug option
-noremap <leader>d :action ChooseDebugConfiguration<CR>
-
-" g
-noremap <leader>g :action Generate<CR>
-
-" hide all
-noremap <leader>h :action HideAllWindows<CR>
-
-" jump to next error
-noremap <leader>j :action GotoNextError<CR>
-
-" jump to previous error
-noremap <leader>k :action GotoPreviousError<CR>
-
-" light up
-noremap <leader>l :action HighlightUsagesInFile<CR>
-
-" y
-noremap gy :action CopyReference<CR>
-
-" intention
-noremap gi <ESC>:action ShowIntentionActions<CR>
-
-" param info
-noremap gp <ESC>:action ParameterInfo<CR>
-
-" goto source
-noremap gs :action GotoImplementation<CR>
-
-" goto declaration
-noremap gd :action GotoDeclaration<CR>
-
-" goto file
-noremap gf <ESC>:action GotoFile<CR>
-
-" g
-"noremap gg :action MUST_NOT_BE_CHANGED!!!<CR>
-
-" hierarchy
-noremap ghc :action CallHierarchy<CR>
-noremap ght :action TypeHierarchy<CR>
-noremap ghm :action MethodHierarchy<CR>
-
-" compile
-noremap gc :action CompileDirty<CR>
-
-" b
-noremap gb :action FindBugs.CurrentFileAction<CR>
-
-" goto method
-noremap gm :action GotoSymbol<CR>
+noremap <leader>, <ESC>:action AceAction<CR>
 
 " refresh
 noremap <leader>r :source ~/.ideavimrc<CR>
 
-" git flow
-noremap <leader>[ :action Gitflow.OpenGitflowPopup<CR>
+" Join Lines
+nnoremap J :action EditorJoinLines<CR>
 
-" Vcs
-noremap <leader>] :action Vcs.QuickListPopupAction<CR>
-nnoremap [c :action VcsShowPrevChangeMarker<CR>
-nnoremap ]c :action VcsShowNextChangeMarker<CR>
-
+" replace
+noremap ' :action Replace<CR>
 
 " global replace
 noremap g' :action ReplaceInPath<CR>
@@ -141,19 +56,7 @@ nnoremap / :action Find<CR>
 
 " but preserve ideavim search global find
 noremap g/ :action FindInPath<CR>
-noremap / :action Find<CR>
 
-" replace
-noremap ' :action Replace<CR>
-
-" unimpaired mappings
-nnoremap [<space> O<esc>j
-nnoremap ]<space> o<esc>k
-nnoremap [q :action PreviousOccurence<CR>
-nnoremap ]q :action NextOccurence<CR>
-
-" previous method
-nnoremap [m :action MethodUp<CR>
-
-" next method
-nnoremap ]m :action MethodDown<CR>
+" built-in navigation to navigated items works better
+noremap <c-o> :action Back<CR>
+noremap <c-i> :action Forward<CR>
