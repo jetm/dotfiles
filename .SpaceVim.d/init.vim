@@ -17,7 +17,13 @@ let g:spacevim_custom_plugins = [
   \ ]
 
 "
-" Neo dark colorscheme settings
+" SpaceVim keybinding
+"
+" Default is \ key
+let mapleader = "\<space>"
+
+"
+" Spacevim colorscheme settings
 "
 " Set Atom colorscheme
 let g:spacevim_colorscheme = 'onedark'
@@ -89,7 +95,7 @@ au BufEnter /* call LoadCscope()
 " call SpaceVim#layers#load('tags')
 
 "
-" Checker settings
+" SpaceVim Checker settings
 "
 
 " Enable ale, instead of syntastic
@@ -134,10 +140,16 @@ set showbreak=↪\
 let g:indentLine_char = '│'
 
 "
-" Movement
+" Movement and keymaps
 "
 " + keymap for quicker move to any character
 nmap + <Plug>(easymotion-prefix)s
+" Next/Prev buffer
+nnoremap L :bnext<CR>
+nnoremap H :bprev<CR>
+
+nnoremap <C-n> :noh<CR>
+
 
 "
 " Misc
