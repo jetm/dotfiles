@@ -55,6 +55,9 @@ let g:spacevim_default_indent = 4
 " Commented until is reforced again
 " let g:spacevim_expand_tab = 0
 
+"
+" SpaceVim layer settings
+"
 " Enable Version Control layer
 call SpaceVim#layers#load('VersionControl')
 
@@ -104,6 +107,41 @@ let g:spacevim_enable_ale = 1
 
 " Enable lint on the fly
 let g:spacevim_lint_on_the_fly = 1
+
+"
+" SpaceVim YouCompleMe settings
+"
+" let g:spacevim_enable_ycm = 1
+
+" Disable SpaceVim checkers to use YCM own checker
+" let g:spacevim_enable_neomake = 0
+" let g:spacevim_enable_ale = 0
+" let g:spacevim_lint_on_the_fly = 0
+
+" Avoid confirm load ycm extra conf
+" let g:ycm_confirm_extra_conf = 0
+" let g:ycm_global_ycm_extra_conf = '~/.ycm_c_conf.py'
+
+" It seems works
+" let g:spacevim_snippet_engine = 'ultisnips'
+
+" Diagnostics error symbol
+" let g:ycm_error_symbol = '✗'
+
+" Diagnostics warning symbol
+" let g:ycm_warning_symbol = '⚠'
+
+" Open in new tab GoTo* commands result
+" let g:ycm_goto_buffer_command = 'new-tab'
+
+" autocmd FileType c map <buffer> <leader>go :YcmCompleter GoTo<CR>
+" autocmd FileType c map <buffer> <leader>gd :YcmCompleter GoToDeclaration<CR>
+" autocmd FileType c map <buffer> <leader>gh :YcmCompleter GoToInclude<CR>
+" autocmd FileType c map <buffer> <leader>gt :YcmCompleter GetType<CR>
+" autocmd FileType c map <buffer> <leader>gD :YcmCompleter GetDoc<CR>
+" autocmd FileType c map <buffer> <leader>gf :YcmCompleter FixIt<CR>
+" autocmd FileType c map <buffer> <leader>ge :YcmShowDetailedDiagnostic<CR>
+" autocmd FileType c map <buffer> <leader>gc :YcmCompleter GoToDefinition<CR>
 
 "
 " Code Formatting
