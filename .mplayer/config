@@ -1,2 +1,0 @@
-# disable screensaver
-heartbeat-cmd="xscreensaver-command -deactivate >&- 2>&- &"
