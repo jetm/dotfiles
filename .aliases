@@ -22,6 +22,11 @@ _pm() {
   time nice make -j"${NUMCPUS}" --load-average="${NUMCPUS}"
 }
 
+do-cmake() {
+  ( rm -rf build && mkdir build && cd build && cmake ../ ) && \
+    cmake --build build
+}
+
 # disable shell reserved word
 disable -r time
 
