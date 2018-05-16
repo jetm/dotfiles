@@ -14,6 +14,7 @@ let g:spacevim_custom_plugins = [
   \ ['ConradIrwin/vim-bracketed-paste'],
   \ ['jetm/vim-bitbake'],
   \ ['joshdick/onedark.vim', {'loadconf': 1, 'merged': 0}],
+  \ ['junegunn/fzf.vim', {'merged' : 0}],
   \ ]
 
 "
@@ -65,13 +66,13 @@ call SpaceVim#layers#load('VersionControl')
 " Use fzf instead of Unite (fails sometimes)
 call SpaceVim#layers#load('fzf')
 
-" fzf use ripgrep for grep
+" fzf use ripgrep for grepping
 let g:rg_command = '
-  \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
+  \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore
+  \ --hidden --follow --color "always"
   \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
   \ -g "!{.git,node_modules,vendor}/*" '
-
-command! -bang -nargs=* F call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Grep call fzf#vim#grep(g:rg_command. shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
 " Enable cscope
 call SpaceVim#layers#load('cscope')
