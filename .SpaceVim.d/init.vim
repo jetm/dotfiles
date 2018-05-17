@@ -79,7 +79,8 @@ command! -bang -nargs=* Grep call fzf#vim#grep(g:rg_command. shellescape(<q-args
 " Tags section
 "
 
-let g:gen_tags#verbose = 1
+" enable only for debugging
+" let g:gen_tags#verbose = 1
 let g:gen_tags#ctags_auto_gen = 1
 let g:gen_tags#gtags_auto_gen = 1
 
