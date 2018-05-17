@@ -15,6 +15,7 @@ let g:spacevim_custom_plugins = [
   \ ['jetm/vim-bitbake'],
   \ ['joshdick/onedark.vim', {'loadconf': 1, 'merged': 0}],
   \ ['junegunn/fzf.vim', {'merged' : 0}],
+  \ ['jsfaint/gen_tags.vim', {'merged' : 0}],
   \ ]
 
 "
@@ -74,28 +75,15 @@ let g:rg_command = '
   \ -g "!{.git,node_modules,vendor}/*" '
 command! -bang -nargs=* Grep call fzf#vim#grep(g:rg_command. shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
-" Enable cscope
-call SpaceVim#layers#load('cscope')
+"
+" Tags section
+"
 
-" Allow cscope behave like ctags(C-] and g])
-set cscopetag
+let g:gen_tags#verbose = 1
+let g:gen_tags#ctags_auto_gen = 1
+let g:gen_tags#gtags_auto_gen = 1
 
-" Autoloading Cscope Database
-function! LoadCscope()
-  let db = findfile("cscope.out", ".;")
-  if (!empty(db))
-    let path = strpart(db, 0, match(db, "/cscope.out$"))
-    set nocscopeverbose " suppress 'duplicate connection' error
-    exe "cs add " . db . " " . path
-    set cscopeverbose
-  " else add the database pointed to by environment variable
-  elseif $CSCOPE_DB != ""
-    cs add $CSCOPE_DB
-  endif
-endfunction
-au BufEnter /* call LoadCscope()
-
-" @TODO: test more or use cscope or global instead
+" @TODO: test tags layer when it's stable
 " call SpaceVim#layers#load('tags')
 
 "
