@@ -15,7 +15,7 @@ let g:spacevim_custom_plugins = [
   \ ['jetm/vim-bitbake'],
   \ ['joshdick/onedark.vim', {'loadconf': 1, 'merged': 0}],
   \ ['junegunn/fzf.vim', {'merged' : 0}],
-  \ ['jsfaint/gen_tags.vim', {'merged' : 0}],
+  \ ['jetm/gen_tags.vim', {'merged' : 0}],
   \ ]
 
 "
@@ -81,8 +81,11 @@ command! -bang -nargs=* Grep call fzf#vim#grep(g:rg_command. shellescape(<q-args
 
 " enable only for debugging
 " let g:gen_tags#verbose = 1
-let g:gen_tags#ctags_auto_gen = 1
-let g:gen_tags#gtags_auto_gen = 1
+" let g:gen_tags#ctags_auto_gen = 1
+" let g:gen_tags#gtags_auto_gen = 1
+" WIP - TODO gtag
+let s:tags_files = expand('$HOME/tmp/tags.files')
+let g:gen_tags#ctags_opts = "-L" . s:tags_files
 
 " @TODO: test tags layer when it's stable
 " call SpaceVim#layers#load('tags')
