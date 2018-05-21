@@ -14,6 +14,7 @@ BASE_FLAGS = [
     '-fexceptions',
     '-ferror-limit=10000',
     '-DNDEBUG',
+    '-D_GNU_SOURCE',
     '-std=gnu11',
     '-xc',
     '-I/usr/lib',
