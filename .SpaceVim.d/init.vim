@@ -75,6 +75,11 @@ let g:rg_command = '
   \ -g "!{.git,node_modules,vendor}/*" '
 command! -bang -nargs=* Grep call fzf#vim#grep(g:rg_command. shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 
+" Use fd instead of default tool from fzf
+if executable('fd')
+  let $FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+endif
+
 "
 " Tags settings
 "
