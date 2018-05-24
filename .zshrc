@@ -195,6 +195,12 @@ fi
 # Command-line fuzzy finder
 if [[ -r /usr/share/fzf/key-bindings.zsh ]]; then
   source /usr/share/fzf/key-bindings.zsh
+
+  if (command -v fd > /dev/null 2>&1); then
+    local _FD="fd --hidden --follow --exclude '.git'"
+    export FZF_CTRL_T_COMMAND="${_FD} --type f"
+    export FZF_ALT_C_COMMAND="${_FD} --type d"
+  fi
 fi
 
 # Call Virtualenvwrapper
@@ -243,3 +249,4 @@ if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
 
+# vim:set ts=2 sw=2 et:
