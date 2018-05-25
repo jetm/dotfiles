@@ -67,13 +67,21 @@ call SpaceVim#layers#load('VersionControl')
 " Use fzf instead of Unite (fails sometimes)
 call SpaceVim#layers#load('fzf')
 
-" fzf use ripgrep for grepping
-let g:rg_command = '
-  \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore
-  \ --hidden --follow --color "always"
-  \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
-  \ -g "!{.git,node_modules,vendor}/*" '
-command! -bang -nargs=* Grep call fzf#vim#grep(g:rg_command. shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+" Use ripgrep with fzf for grepping
+if executable('rg')
+  let g:rg_command = '
+    \ rg --column --line-number --no-heading --fixed-strings --ignore-case
+    \ --hidden --follow --color "always"
+    \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
+    \ -g "!{.git,node_modules,vendor}/*" '
+  command! -bang -nargs=* Rg
+    \ call fzf#vim#grep(
+    \   g:rg_command. shellescape(<q-args>).'| tr -d "\017"', 1,
+    \   <bang>0 ? fzf#vim#with_preview('up:60%')
+    \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+    \   <bang>0
+    \ )
+endif
 
 " Use fd instead of default tool from fzf
 if executable('fd')
