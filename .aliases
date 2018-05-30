@@ -45,18 +45,6 @@ if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
   # Pacman aliases
   #
 
-  if (command -v yaourt > /dev/null 2>&1); then
-    # Upgrade all packages
-    alias yaoud='yaourt -Syu --devel --aur'
-
-    # List packages are not in remote repositories (pacman repos and AUR)
-    paremote() {
-      for p in $(pacman -Qqm); do
-        yaourt -Ssq "$p" | grep -E -q "^$p$" || echo "$p"
-      done
-    }
-  fi
-
   # Recursively removing orphans (be careful)
   alias paorph='sudo pacman -Rs $(pacman -Qtdq)'
 
@@ -72,18 +60,18 @@ if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
     alias aurgen='updpkgsums && makepkg -Csf && makepkg --printsrcinfo >! .SRCINFO'
   fi
 
-  if (command -v pacaur > /dev/null 2>&1); then
+  if (command -v yay > /dev/null 2>&1); then
     # Upgrade all packages
-    alias paud='pacaur -Syu --devel'
+    alias paud='yay -Syu --devel'
 
     # Install specific package(s) from local and AUR
-    alias pain='pacaur -S'
+    alias pain='yay -S'
 
     # Install specific package from source package
-    alias pains='pacaur -U'
+    alias pains='yay -U'
 
     # Search for package(s) for local and AUR
-    alias pasp='pacaur -Ss'
+    alias pasp='yay'
   fi
 fi
 
