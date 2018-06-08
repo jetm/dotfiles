@@ -62,7 +62,7 @@ if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
 
   if (command -v yay > /dev/null 2>&1); then
     # Upgrade all packages
-    alias paud='sudo pacman -Syu && yay -Syu --devel'
+    alias paud='yay -Syu --devel'
 
     # Install specific package(s) from local and AUR
     alias pain='yay -S'
