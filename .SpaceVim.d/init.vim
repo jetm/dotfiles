@@ -62,6 +62,7 @@ let g:spacevim_default_indent = 4
 "
 " Enable Version Control layer
 call SpaceVim#layers#load('VersionControl')
+call SpaceVim#layers#load('git')
 
 " Enable searching file layer, add CtrlP keybind.
 " Use fzf instead of Unite (fails sometimes)
