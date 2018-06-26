@@ -1,0 +1,25 @@
+session_name: Work dev
+windows:
+  - window_name: HOME
+    layout: even-horizontal
+    panes:
+      - shell_command:
+        - cd ~/repos/dotfiles
+      - shell_command:
+        - cd ~/.SpaceVim
+  - window_name: HALON
+    layout: tiled
+    start_directory: ~/repos/github-hpe/dockerfiles/halon/
+    panes:
+      - shell_command:          # pane no. 1
+        - cd ~/repos/halon-ws/halon
+      - shell_command:          # pane no. 2
+        - ./run-docker-halon
+      - shell_command:          # pane no. 3
+        - ./run-docker-halon
+      - shell_command:          # pane no. 4
+        - ./run-docker-halon
+  - window_name: AUR
+    start_directory: ~/repos/aur
+    panes:
+    - blank
