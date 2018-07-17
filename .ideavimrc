@@ -25,7 +25,7 @@ set surround
 "
 " General Mappings settings
 "
-let mapleader=<Space>
+let mapleader=" "
 
 " Copy until the end of the line
 noremap Y y$
