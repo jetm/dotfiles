@@ -1,0 +1,13 @@
+session_name: Home dev
+windows:
+  - window_name: HOME
+    layout: even-horizontal
+    panes:
+      - shell_command:
+        - cd ~/repos/dotfiles
+      - shell_command:
+        - cd ~/.SpaceVim
+  - window_name: AUR
+    start_directory: ~/repos/aur
+    panes:
+    - blank
