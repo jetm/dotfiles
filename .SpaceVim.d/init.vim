@@ -15,9 +15,24 @@ let g:spacevim_custom_plugins = [
   \ ['jetm/vim-bitbake'],
   \ ['joshdick/onedark.vim', {'loadconf': 1, 'merged': 0}],
   \ ['junegunn/fzf.vim', {'merged' : 0}],
-  \ ['jetm/gen_tags.vim', {'merged' : 0}],
-  \ ]
+  \ ['justinmk/vim-syntax-extra']
+\ ]
 
+" Uncomment as completion alternative to YCM
+"  \ ['lyuts/vim-rtags'],
+"  \ ['jetm/gen_tags.vim', {'merged' : 0}],
+
+" Uncomment to add syntax coloring
+  " \ ['jeaye/color_coded',
+  " \   {
+      " \ 'build':
+      " \ {
+        " \   'unix': 'rm -f CMakeCache.txt && cmake . && make && make install',
+      " \ },
+      " \ 'autoload': { 'filetypes' : ['c', 'cpp'] },
+      " \ 'build_commands' : ['cmake', 'make']
+  " \   }
+  " \ ]
 "
 " SpaceVim keybinding
 "
