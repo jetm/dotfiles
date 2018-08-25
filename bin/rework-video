@@ -33,8 +33,12 @@ do-sub() {
     temp="${newfile}.srt"
   elif [ -f "${newfile}_en.srt" ]; then
     temp="${newfile}_en.srt"
+  elif [ -f "${newfile}.en.srt" ]; then
+    temp="${newfile}.en.srt"
   elif [ -f "${newfile}_eng.srt" ]; then
     temp="${newfile}_eng.srt"
+  elif [ -f "${newfile}.eng.srt" ]; then
+    temp="${newfile}.eng.srt"
   fi
 
   if [ ! -f "${temp}" ]; then
@@ -76,32 +80,47 @@ set-video-codec() {
 check-prog HandBrakeCLI
 check-prog mediainfo
 
+#
+# Input
+#
 origfile="$1"
+
+#
+# Output
+#
 dirfile=$(dirname -- "$1")
 filename=$(basename -- "$1")
 output_dir="${dirfile}/stage"
-output="${output_dir}/${filename}"
+# Without extension
+filename="${filename%.*}"
+output="${output_dir}/${filename}.mkv"
 
-do-sub "${origfile}"
+# do-sub "${origfile}"
 do-stage "${dirfile}"
 set-video-codec "${origfile}"
 
 # Recommended settings for x264 and x265 encoders:
 #
-# RF 18-22 for 480p/576p Standard Definition
-# RF 19-23 for 720p High Definition
-# RF 20-24 for 1080p Full High Definition
-# RF 22-28 for 2160p 4K Ultra High Definition
+# RF 18-22 for 480p/576p SD (Standard Definition)
+# RF 19-23 for 720p      HD (High Definition)
+# RF 20-24 for 1080p    FHD (Full High Definition)
+# RF 22-28 for 2160p 4K UHD (Ultra High Definition)
 #
 # 22 is your go-to number in "Constant Quality" if you want low file size by ok
 # quality. Use 23 or even 24 if you really need a low file size, 21 if you are
 # looking for the best mix of quality and low files size (i.e. low file size is
 # important, but not your primary goal).
 #
+# Resolution and Bitrate:
+#  480p    848x480   410 kbps
+#  720p   1280x720   920 kbps or 800
+# 1080p  1920x1080  1600 kbps or 2k
+
 # Typical video resolutions:
-# --width 1920 --height 1080
-# --width 1280 --height 720
+#
 # --width 854 --height 480
+# --width 1280 --height 720
+# --width 1920 --height 1080
 #
 # Subtitle seems doesn't work well with handbrake
 #
@@ -109,15 +128,15 @@ set-video-codec "${origfile}"
 # --srt-lang eng \
 # --srt-default 1 \
 #
-# --width 854 --height 480 \
 # --stop-at duration:300 \
-# --encoder x265
+# audio bitrate
+# --ab 256
 
 # run handbrake
 HandBrakeCLI \
   --encoder "${encoder}" \
   --format av_mkv \
-  --quality 25 \
+  --quality 22 \
   --aencoder copy \
   --input "${origfile}" \
   --output "${output}"
