@@ -176,14 +176,14 @@
                 && vim ${FILES}
 
     # Pull Github Pull Request
-    pr = "!f() { git fetch -fu ${2:-upstream} refs/pull/$1/head:pr/$1 \
-           && git checkout pr/$1; }; f"
+    ; pr = "!f() { git fetch -fu ${2:-upstream} refs/pull/$1/head:pr/$1 \
+           ; && git checkout pr/$1; }; f"
 
     # Clean all Github Pull Request
-    pr-clean = "!git checkout dev ; \
-        git for-each-ref refs/heads/pr/* --format=\"%(refname)\" \
-        | while read ref ; do branch=${ref#refs/heads/}; \
-        git branch -D $branch ; done"
+    ; pr-clean = "!git checkout dev ; \
+        ; git for-each-ref refs/heads/pr/* --format=\"%(refname)\" \
+        ; | while read ref ; do branch=${ref#refs/heads/}; \
+        ; git branch -D $branch ; done"
 
     # Use it when there is not diff-so-fancy
     olog = !git --no-pager log
