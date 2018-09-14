@@ -27,6 +27,20 @@ do-cmake() {
     cmake --build build
 }
 
+aurgen() {
+  if { [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; } && \
+    (command -v updpkgsums > /dev/null 2>&1) && \
+    (command -v namcap > /dev/null 2>&1);
+  then
+    # Validate PKGBUILD, update checksum package, build and generate .SCRINFO
+    # file
+    namcap PKGBUILD && \
+      updpkgsums && \
+      makepkg --cleanbuild --syncdeps --force && \
+      makepkg --printsrcinfo >! .SRCINFO
+  fi
+}
+
 # disable shell reserved word
 disable -r time
 
@@ -54,11 +68,6 @@ if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
   # Remove the specified package(s), its configuration(s) and unneeded
   # dependencies
   alias parem='sudo pacman -Rns'
-
-  if (command -v updpkgsums > /dev/null 2>&1); then
-    # Update checksum package, build and generate .SCRINFO file
-    alias aurgen='updpkgsums && makepkg -Csf && makepkg --printsrcinfo >! .SRCINFO'
-  fi
 
   if (command -v yay > /dev/null 2>&1); then
     # Upgrade all packages
