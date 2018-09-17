@@ -28,10 +28,17 @@ do-cmake() {
 }
 
 aurgen() {
-  if { [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; } && \
-    (command -v updpkgsums > /dev/null 2>&1) && \
-    (command -v namcap > /dev/null 2>&1);
-  then
+  if (! command -v updpkgsums > /dev/null 2>&1); then
+    echo 2> "error: updpkgsums is not installed"
+    return 1
+  fi
+
+  if (! command -v namcap > /dev/null 2>&1); then
+    echo 2> "error: namcap is not installed"
+    return 1
+  fi
+
+  if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
     # Validate PKGBUILD, update checksum package, build and generate .SCRINFO
     # file
     namcap PKGBUILD && \

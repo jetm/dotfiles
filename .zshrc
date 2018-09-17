@@ -193,8 +193,13 @@ elif [ -x /usr/bin/go -a -d ${HOME}/go ]; then
 fi
 
 # Command-line fuzzy finder
-if [[ -r /usr/share/fzf/key-bindings.zsh ]]; then
+if { [ -r /usr/share/fzf/key-bindings.zsh ] && \
+    (command -v fzf > /dev/null 2>&1); }; then
   source /usr/share/fzf/key-bindings.zsh
+
+  if (command -v bat > /dev/null 2>&1); then
+    alias preview="fzf --preview 'bat --color \"always\" {}'"
+  fi
 
   if (command -v fd > /dev/null 2>&1); then
     local _FD="fd --hidden --follow --exclude '.git'"
