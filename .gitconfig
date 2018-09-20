@@ -56,6 +56,10 @@
     st = status
     ls = ls-files
     rb = rebase
+    rba = rebase --abort
+    rbc = rebase --continue
+    cpa = rebase --abort
+    cpc = rebase --continue
 
     # Add origin commit from where picked
     cp = cherry-pick -x
