@@ -49,6 +49,15 @@
 [[layers]]
   name = 'fzf'
 
+[[layers]]
+  name = 'sudo'
+
+[[layers]]
+  name = 'tmux'
+
+[[layers]]
+  name = 'format'
+
 [[custom_plugins]]
   name = "joshdick/onedark.vim"
   loadconf = 1
