@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 err()
 {
@@ -6,19 +6,19 @@ err()
     exit 1;
 }
 
-DOTFILES=dotfiles
+DOTFILES="${HOME}/dotfiles"
 
-if which stow 2&> /dev/null; then
+if command -v stow 2&> /dev/null; then
     err "stow is not installed"
-elif [[ ! -d $HOME/.oh-my-zsh || ! -d $HOME/.spf13-vim-3 ]]; then
-    err "oh-my-zsh or spf13-vim are not installed"
-elif [ ! -d $DOTFILES ]; then
-    err "No found $DOTFILES dir"
+elif [[ ! -d ${HOME}/.zprezto || ! -d ${HOME}/.SpaceVim ]]; then
+    err "zprezto or SpaceVim are not installed"
+elif [ ! -d "${DOTFILES}" ]; then
+    err "No found ${DOTFILES} dir"
 fi
 
 if [ "$1" = "-u" ]
 then
-    stow -D . -t ~ $DOTFILES
+    stow -D . -t ~ "${DOTFILES}"
 else
-    stow -d . --ignore="(junk|no-stow|README)" -t ~ $DOTFILES
+    stow -d . --ignore="(junk|no-stow|README)" -t ~ "${DOTFILES}"
 fi
