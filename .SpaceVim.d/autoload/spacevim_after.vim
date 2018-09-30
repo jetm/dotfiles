@@ -62,10 +62,12 @@ set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:␣,trail:·,
 " eol:↲,
 set fillchars=vert:│,fold:·
 set showbreak=↪\ 
+set list lcs=tab:\|\ 
 
 " Specify a character to be used as indent line. From SpaceVim ui is '┊'
 " It has an effect over fillchars due to Yggdroot/indentLine plugin
 let g:indentLine_char = '│'
+IndentLinesReset
 
 "
 " Movement and keymaps
@@ -76,16 +78,5 @@ nmap + <Plug>(easymotion-prefix)s
 " Next/Prev buffer
 nnoremap L :bnext<CR>
 nnoremap H :bprev<CR>
-
-"
-" Misc
-"
-
-" Set Python X version to 3
-" pythonx looks for python3, instead of python3/dyn
-" (Arch Linux python version)
-if has('python3') || has('python3/dyn')
-  set pyx=3
-endif
 
 " vim:tw=78:ts=2:sw=2

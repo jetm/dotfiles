@@ -7,7 +7,7 @@
   background = "dark"
   guifont = 'Input\ Mono\ Narrow\ Semi-Condensed\ 11'
   max_column = 80
-  default_indent = 4
+  # default_indent = 4
 
   # Disable guicolors in basic mode, many terminal do not support 24bit
   # true colors
@@ -27,20 +27,12 @@
   # only color will be changed when switch modes.
   enable_statusline_display_mode = false
 
-  bootstrap_after = "jetm#after"
+  bootstrap_after = "spacevim_after#after"
+  bootstrap_before = "spacevim_before#before"
 
 #
 # Layers
 #
-
-[[layers]]
-  name = 'core'
-
-[[layers]]
-  name = 'default'
-
-[[layers]]
-  name = 'ui'
 
 # Enable autocomplete layer
 [[layers]]
@@ -97,15 +89,7 @@
   merged = 0
 
 [[custom_plugins]]
-  name = "sheerun/vim-polyglot"
-  merge = 0
-
-[[custom_plugins]]
   name = 'tpope/vim-eunuch'
-
-[[custom_plugins]]
-  name = 'octol/vim-cpp-enhanced-highlight'
-  on_ft = 'c'
 
 [[custom_plugins]]
   name = 'ConradIrwin/vim-bracketed-paste'
@@ -114,9 +98,19 @@
   name = 'jetm/vim-bitbake'
 
 [[custom_plugins]]
-  name = 'justinmk/vim-syntax-extra'
-
-[[custom_plugins]]
   name = 'Yggdroot/indentLine'
   merged = 0
 
+[[custom_plugins]]
+  name = "sheerun/vim-polyglot"
+  merge = 0
+  # if = "!index(['markdown'],&filetype)"
+
+# These are 
+# [[custom_plugins]]
+  # name = 'octol/vim-cpp-enhanced-highlight'
+  # on_ft = 'c'
+
+# Vim syntax highlighting for c, bison, flex
+# [[custom_plugins]]
+  # name = 'justinmk/vim-syntax-extra'
