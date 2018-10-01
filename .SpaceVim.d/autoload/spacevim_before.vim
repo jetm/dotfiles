@@ -11,3 +11,6 @@ let g:polyglot_disabled = ['markdown']
 if has('python3') || has('python3/dyn')
   set pyx=3
 endif
+
+" Change header to type C. Default is cpp
+au BufRead,BufNewFile *.h setlocal filetype=c
