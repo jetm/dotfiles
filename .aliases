@@ -56,7 +56,7 @@ disable -r time
 # real    0.00[h:]m:s
 # user    0.00s
 # sys     0.00s
-alias time='time -f "\nreal\t%E[h:]m:s\nuser\t%Us\nsys\t%Ss" '
+alias time='time -f "\nreal\t%E[h:]m:s.ms\nuser\t%Us\nsys\t%Ss" '
 
 #
 # Arch Linux Stuff
