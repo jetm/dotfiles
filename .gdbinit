@@ -1,0 +1,1 @@
+/usr/share/gdb-dashboard/.gdbinit
