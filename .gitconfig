@@ -31,17 +31,26 @@
     logOutputEncoding = utf-8
 
 [merge]
-    # Use vimdiff to resolv conflicts
-    tool = vimdiff
+    tool = clion
 
     # Add ||||||| marker and the original text before the ======= marker
     # conflictstyle = diff3
 
-    # Only such fast-forward merges are allowed
-    ff = only
+    # Only fast-forward merges are allowed
+    ; ff = only
+
+    # Extend rename limit
     renamelimit = 3000
 
-[mergetool]
+[mergetool "clion"]
+    cmd = clion merge \
+        $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") \
+        $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE") \
+        $(cd $(dirname "$BASE") && pwd)/$(basename "$BASE") \
+        $(cd $(dirname "$MERGED") && pwd)/$(basename "$MERGED")
+    trustExitCode = true
+
+[mergetool "vimdiff"]
     # No prompt before each invocation of the merge resolution program
     prompt = false
 
