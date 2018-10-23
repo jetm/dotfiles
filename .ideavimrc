@@ -19,6 +19,9 @@ set smartcase
 " Number of command-lines that are remembered
 set history=1000
 
+" Multiple action cursors
+set multiple-cursors
+
 " vim surround
 set surround
 
