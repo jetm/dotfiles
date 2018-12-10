@@ -254,4 +254,8 @@ if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
 
+if (command -v keychain > /dev/null 2>&1); then
+  eval $(keychain --eval --quiet ~/.ssh/id_rsa)
+fi
+
 # vim:set ts=2 sw=2 et:
