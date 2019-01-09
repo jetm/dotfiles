@@ -150,6 +150,8 @@ path=(
 )
 
 add_path() {
+  if [ ! -d "$1" ] && return 0
+
   local new_entry="$1"
   case ":$PATH:" in
     *":${new_entry}:"*) :;; # already there
@@ -178,16 +180,8 @@ if [ -d /usr/lib/ccache/bin ] ; then
   # fi
 fi
 
-# Export proxy exception for docker socket
-if [ -S /var/run/docker.sock ]; then
-  export no_proxy=${no_proxy},/var/run/docker.sock
-  export NO_PROXY=${NO_PROXY},/var/run/docker.sock
-fi
-
 # Set Go settings
-if [[ -r "$HOME/.gvm/scripts/gvm" ]]; then
-  source "$HOME/.gvm/scripts/gvm"
-elif [ -x /usr/bin/go -a -d ${HOME}/go ]; then
+if [ -x /usr/bin/go -a -d ${HOME}/go ]; then
   export GOPATH=${HOME}/go
   add_path ${HOME}/go/bin
 fi
