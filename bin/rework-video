@@ -141,6 +141,12 @@ HandBrakeCLI \
   --input "${origfile}" \
   --output "${output}"
 
+# Reduce size to 720p
+# HandBrakeCLI \
+  # --encoder "${encoder}" \
+  # --width 1280 --height 720 \
+  # --input "${origfile}" \
+  # --output "${output}"
 
 # Embeded subtitle inside of mkv
 # filename=$(basename -- "${origfile}")
