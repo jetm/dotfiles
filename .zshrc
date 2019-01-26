@@ -171,7 +171,7 @@ if [ -d /usr/lib/ccache/bin ] ; then
   add_path /usr/lib/ccache/bin
 
   mkdir -p /dev/shm/ccache || \
-    echo 1>&2 "error: /dev/shm/ccache could not be created"
+    echo "error: /dev/shm/ccache could not be created" 1>&2
 
   # Enable gcc + ccache + colorsgcc
   # if [ -d /usr/lib/colorgcc/bin ] ; then
