@@ -24,6 +24,11 @@ if test -d /usr/lib/ccache/bin
     or echo "error: /dev/shm/ccache could not be created" 1>&2 
 end
 
+# Set bin settings
+if test -d $HOME/bin
+  set --universal fish_user_paths $HOME/bin $fish_user_paths
+end
+
 # Command-line fuzzy finder
 if type -q fzf
   if type -q bat
