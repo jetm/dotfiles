@@ -1,6 +1,7 @@
 alias e vim
 abbr -a giA git add --patch
 abbr -a gbD git branch -D
+abbr -a gg git grep
 
 # Clear RAM Memory Cache, Buffer and Swap Space
 function clean-cache-mem
