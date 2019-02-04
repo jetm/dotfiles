@@ -7,7 +7,7 @@
   background = "dark"
   guifont = 'Input\ Mono\ Narrow\ Semi-Condensed\ 11'
   max_column = 80
-  # default_indent = 4
+  default_indent = 4
 
   # Disable guicolors in basic mode, many terminal do not support 24bit
   # true colors
