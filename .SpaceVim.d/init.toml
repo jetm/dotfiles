@@ -66,8 +66,8 @@
 [[layers]]
   name = 'checkers'
 
-[[layers]]
-  name = 'lang#c'
+# [[layers]]
+  # name = 'lang#c'
 
 [[layers]]
   name = 'lang#sh'
