@@ -1,4 +1,4 @@
-alias e vim
+abbr -a e vim
 abbr -a giA git add --patch
 abbr -a gbD git branch -D
 abbr -a gg git grep
