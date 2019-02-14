@@ -44,9 +44,18 @@ if type -q fzf
   end
 end
 
-if type -q keychain
-  set CMD keychain --eval --quiet ~/.ssh/id_rsa
-  eval $CMD
+# keychain settings
+if status --is-interactive
+  if type -q keychain
+    keychain --quiet --agents ssh id_rsa
+  end
+end
+
+begin
+    set -l HOSTNAME (hostname)
+    if test -f ~/.keychain/$HOSTNAME-fish
+        source ~/.keychain/$HOSTNAME-fish
+    end
 end
 
 # vim:set ts=2 sw=2 ft=fish et:
