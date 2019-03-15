@@ -2,7 +2,7 @@
 " General settings
 "
 " Yanks go on clipboard instead
-set clipboard+=unnamed
+" set clipboard+=unnamed
 
 " Highlight matches with last search pattern
 set hlsearch
@@ -63,3 +63,13 @@ noremap g/ :action FindInPath<CR>
 " built-in navigation to navigated items works better
 noremap <c-o> :action Back<CR>
 noremap <c-i> :action Forward<CR>
+
+" Add system clipboard support
+nnoremap yy "+yy
+vnoremap y "+y
+nnoremap p "+p
+vnoremap p "+p
+nnoremap P "+P
+vnoremap P "+P
+nnoremap dd "+dd
+vnoremap d "+d
