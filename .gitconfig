@@ -55,6 +55,9 @@
     # No prompt before each invocation of the merge resolution program
     prompt = false
 
+[mergetool "bc"]
+    trustExitCode = true
+
 [help]
     # Automatically correct and execute mistyped commands
     autocorrect = 1
@@ -200,6 +203,9 @@
 [difftool "icdiff"]
     # Show the file labels correctly
     cmd = icdiff --line-numbers -L \"$BASE\" -L \"$REMOTE\" \"$LOCAL\" \"$REMOTE\"
+
+[difftool "bc"]
+    trustExitCode = true
 
 [credential]
     # Set the cache to timeout after 8 hour (setting is in seconds)
