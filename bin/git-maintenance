@@ -7,7 +7,7 @@ git fsck --full
 git reflog expire --expire=now --all
 
 # Pack unpacked objects in a repository
-git repack -a -d -l 
+git repack -a -d --window-memory 100m --max-pack-size 200m
 
 # Cleanup unnecessary files and optimize the local repository and prune all
 # unreachable objects from the object database
