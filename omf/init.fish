@@ -58,4 +58,15 @@ begin
     end
 end
 
+#
+# Python environment
+#
+set --erase PYTHONPATH
+
+# Set bitbake path
+set BB_PYTHONPATH /usr/lib/python3.7/site-packages/bb
+if test -d $BB_PYTHONPATH
+  set --global --export PYTHONPATH $BB_PYTHONPATH $PYTHONPATH
+end
+
 # vim:set ts=2 sw=2 ft=fish et:
