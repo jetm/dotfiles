@@ -21,7 +21,7 @@ if test -d /usr/lib/ccache/bin
   set --universal fish_user_paths /usr/lib/ccache/bin $fish_user_paths
 
   mkdir -p /dev/shm/ccache
-    or echo "error: /dev/shm/ccache could not be created" 1>&2 
+    or echo "error: /dev/shm/ccache could not be created" 1>&2
 end
 
 # Set bin settings
@@ -61,12 +61,15 @@ end
 #
 # Python environment
 #
-set --erase PYTHONPATH
+# set --erase PYTHONPATH
 
-# Set bitbake path
-set BB_PYTHONPATH /usr/lib/python3.7/site-packages/bb
-if test -d $BB_PYTHONPATH
-  set --global --export PYTHONPATH $BB_PYTHONPATH $PYTHONPATH
+# Set Bitbake Python path
+set BITBAKE_PYTHON_PATH /usr/lib/python3.7/site-packages/bb
+if test -d $BITBAKE_PYTHON_PATH
+  and not contains $BITBAKE_PYTHON_PATH $PYTHONPATH
+  set --export --universal PYTHONPATH \
+    $BITBAKE_PYTHON_PATH \
+    $PYTHONPATH
 end
 
 # vim:set ts=2 sw=2 ft=fish et:
