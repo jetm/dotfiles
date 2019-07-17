@@ -79,4 +79,6 @@ nmap + <Plug>(easymotion-prefix)s
 nnoremap L :bnext<CR>
 nnoremap H :bprev<CR>
 
+autocmd BufWritePre * %s/\s\+$//e
+
 " vim:tw=78:ts=2:sw=2
