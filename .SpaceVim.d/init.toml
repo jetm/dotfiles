@@ -29,6 +29,7 @@
 
   bootstrap_after = "spacevim_after#after"
   bootstrap_before = "spacevim_before#before"
+  enable_vimfiler_welcome = false
 
 #
 # Layers
@@ -105,7 +106,7 @@
   merge = 0
   # if = "!index(['markdown'],&filetype)"
 
-# These are 
+# These are
 # [[custom_plugins]]
   # name = 'octol/vim-cpp-enhanced-highlight'
   # on_ft = 'c'

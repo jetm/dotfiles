@@ -1,3 +1,5 @@
+let g:spacevim_disabled_plugins = ['vim-startify']
+
 " Disable markdown plugin. I need to learn how to use it
 let g:polyglot_disabled = ['markdown']
 
