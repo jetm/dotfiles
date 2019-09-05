@@ -181,7 +181,7 @@
 
 [pull]
     # Preserve merges when you're rebasing against origin/BRANCH
-    rebase = preserve
+    rebase = merges
 
 [fetch]
     # Always prune when fetching and pulling
