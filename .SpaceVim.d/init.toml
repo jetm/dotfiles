@@ -94,8 +94,9 @@
 [[custom_plugins]]
   name = 'ConradIrwin/vim-bracketed-paste'
 
-# [[custom_plugins]]
+[[custom_plugins]]
   # name = 'jetm/vim-bitbake'
+  name = 'kergoth/vim-bitbake'
 
 [[custom_plugins]]
   name = 'Yggdroot/indentLine'
