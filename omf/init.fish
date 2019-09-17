@@ -10,23 +10,29 @@ set --global --export PAGER 'less'
 set --global --export LESS '-F -g -i -M -R -S -w -X -z-4'
 
 # Set Go settings
-if test -d $HOME/go/bin
+set GO_PATH $HOME/go/bin
+if test -d $GO_PATH
   if type -q go
-    set --universal fish_user_paths $HOME/go/bin $fish_user_paths
+    contains $GO_PATH $fish_user_paths
+    or set --universal fish_user_paths $GO_PATH $fish_user_paths
   end
 end
 
 # Set ccache path
-if test -d /usr/lib/ccache/bin
-  set --universal fish_user_paths /usr/lib/ccache/bin $fish_user_paths
+set CCACHE_PATH /usr/lib/ccache/bin
+if test -d $CCACHE_PATH
+  contains $CCACHE_PATH $fish_user_paths
+  or set --universal fish_user_paths $CCACHE_PATH $fish_user_paths
 
   mkdir -p /dev/shm/ccache
     or echo "error: /dev/shm/ccache could not be created" 1>&2
 end
 
 # Set bin settings
-if test -d $HOME/bin
-  set --universal fish_user_paths $HOME/bin $fish_user_paths
+set HOME_BIN $HOME/bin
+if test -d $HOME_BIN
+  contains $HOME_BIN $fish_user_paths
+  or set --universal fish_user_paths $HOME_BIN $fish_user_paths
 end
 
 # Command-line fuzzy finder
