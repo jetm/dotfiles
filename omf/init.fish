@@ -9,6 +9,8 @@ set --global --export PAGER 'less'
 # Remove -X and -F (exit if the content fits on one screen) to enable it
 set --global --export LESS '-F -g -i -M -R -S -w -X -z-4'
 
+set --global hist_ignore_dups
+
 # Set Go settings
 set GO_PATH $HOME/go/bin
 if test -d $GO_PATH
