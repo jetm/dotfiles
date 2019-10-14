@@ -1,4 +1,6 @@
+package autovenv
 package bass
 package https://github.com/jhillyerd/plugin-git
+package virtualfish
 theme default
 theme pure
