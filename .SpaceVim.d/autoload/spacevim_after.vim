@@ -81,4 +81,12 @@ nnoremap H :bprev<CR>
 
 autocmd BufWritePre * %s/\s\+$//e
 
+"
+" CtrlSpace plugin
+"
+if executable("ag")
+  let g:CtrlSpaceGlobCommand = 'fd --hidden --follow --type f '
+endif
+nnoremap <silent><C-p> :CtrlSpace O<CR>
+
 " vim:tw=78:ts=2:sw=2
