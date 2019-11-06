@@ -44,17 +44,10 @@ if test -d $HOME_BIN
 end
 
 # Command-line fuzzy finder
-if type -q fzf
-  if type -q bat
-    function preview --description 'preview files in fzf'
-      fzf --preview 'bat --color \"always\" {}'
-    end
-  end
-
+if type -q sk
   if type -q fd
-    set _FD "fd --hidden --follow --exclude '.git'"
-    set --global --export FZF_CTRL_T_COMMAND "$_FD --type f"
-    set --global --export FZF_ALT_C_COMMAND "$_FD --type d"
+    set --global --export SKIM_CTRL_T_COMMAND "fd --type f --follow"
+    set --global --export SKIM_ALT_C_COMMAND "fd --type d --follow"
   end
 end
 

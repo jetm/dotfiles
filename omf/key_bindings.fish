@@ -1,5 +1,5 @@
 fish_vi_key_bindings
-fzf_key_bindings
+skim_key_bindings
 
 # control-left control-right keybindings, include vi mode
 bind \e\[1\;5C forward-word
