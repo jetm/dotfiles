@@ -79,13 +79,6 @@ if test -d $BITBAKE_PYTHON_PATH
     $PYTHONPATH
 end
 
-# Set Python Modules Path for Halon tests
-# set HALON_TEST $HOME/repos/halon-ws/halon/halon-test
-# set --universal PYTHONPATH \
-  # $HALON_TEST/libraries/hpe_topology_lib_communication/lib \
-  # $PYTHONPATH
-# set --universal PYTHONPATH \
-  # $HALON_TEST/libraries/hpe_topology_common/lib \
-  # $PYTHONPATH
+xset -b
 
 # vim:set ts=2 sw=2 ft=fish et:
