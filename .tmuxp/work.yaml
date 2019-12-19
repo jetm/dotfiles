@@ -19,6 +19,19 @@ windows:
         - ./run-docker-halon
       - shell_command:          # pane no. 4
         - ./run-docker-halon
+  - window_name: BUILD_LOG
+    layout: tiled
+    panes:
+      - shell_command:          # pane no. 1
+        # - tail -F /disk/ws/tiamarin/docker-logs/cron_git_update.out
+        - tail -f /disk/ws/tiamarin/docker-logs/cron_sync_vm_to_pc.out
+      - shell_command:          # pane no. 2
+        - tail -F /disk/ws/tiamarin/docker-logs/cron_speedway.out
+      - shell_command:          # pane no. 3
+        - tail -F /disk/ws/tiamarin/docker-logs/cron_halon_opengrok.out
+      - shell_command:          # pane no. 4
+        # - tail -F /disk/ws/tiamarin/docker-logs/cron_topflite.out
+        - cd ~/repos/github-hpe/dockerfiles/halon/
   - window_name: AUR
     start_directory: ~/repos/aur
     panes:

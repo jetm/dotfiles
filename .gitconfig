@@ -1,10 +1,10 @@
 # vim:set ts=4 sw=4 et:
 [user]
     name = Javier Tiá
-    email = javier.tia@gmail.com
+    email = javier.tia@hpe.com
 
 [core]
-    editor = vim
+    editor = nvim
 
     # diff-so-fancy to call attention to areas of interest without being
     # visually distracting
@@ -13,18 +13,16 @@
     # -R show ANSI colors based in RAW control characters
     # -s squeeze blank lines
     # -X disable termcap [de]initialization strings to terminal
-    pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta --dark
 
     # Verify if a command modifies a file in the work tree
-    safecrlf = true
+    ; safecrlf = true
 
     # No output conversion is performed
-    autocrlf = input
+    ; autocrlf = input
 
-[pager]
-    # Move between files with n/N keys
-    diff = diff-so-fancy | less --tabs=4 -RFX \
-        --pattern '^(Date|added|deleted|modified): '
+    # gitproxy is a script to allow clone git:// repositories
+    ; gitproxy = gitproxy
 
 [i18n]
     # Character encoding the commit messages are converted to when running git
@@ -41,7 +39,7 @@
     ; ff = only
 
     # Extend rename limit
-    renamelimit = 3000
+    renamelimit = 0
 
 [mergetool "clion"]
     cmd = clion merge \
@@ -74,7 +72,8 @@
     co = checkout
     cob = checkout -b
 
-    st = status -s -b
+    st = status
+    sts = status -s -b
 
     # Rebase
     rb = rebase
@@ -93,7 +92,8 @@
     ls = ls-files
 
     # Logs
-    lol = log --graph --decorate --pretty=oneline --abbrev-commit --date=relative
+    lol = log --topo-order --pretty=format:'%C(green)%h%C(reset) %s%C(red)%d%C(reset)'
+    lg = log --topo-order --pretty=format:'%C(bold)Commit:%C(reset) %C(green)%H%C(red)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ai (%ar)%C(reset)%n%+B'
 
     # List new commits, of current branch, have been created by last command
     # (typically used after a "git pull")
@@ -235,12 +235,24 @@
     # A boolean or int to specify the level of verbose with git commit
     verbose = true
 
+#
+# VM settings
+#
 [gitreview]
-    # Gerrit username for Open Source projects
-    username = jetm
+    # Gerrit username
+    username = javier.tia
 
 [sendemail]
-    smtpEncryption = tls
-    smtpServer = smtp.gmail.com
-    smtpUser = javier.tia@gmail.com
     smtpServerPort = 587
+    smtpserver = smtp3.hpe.com
+
+[http]
+    proxy = http://web-proxy.rose.hpecorp.net:8080
+    sslverify = false
+
+; [feature]
+    ; experimental = true
+    ; manyFiles = true
+;
+; [protocol]
+    ; version = 2

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+[ -d /run/media/"${USER}"/BACKUP/halon-ws/ ] || { echo 2> No BACKUP; exit 1; }
+
+echo "Saving halon docker image"
+docker save -o /disk/ws/tiamarin/repos_ro/halon-latest-docker.gz halon:latest
+
+rsync -a --progress --delete --exclude=build* --exclude=images \
+    /home/"${USER}"/repos/halon-ws/aruba \
+    /home/"${USER}"/repos/halon-ws/halon \
+    /home/"${USER}"/repos/halon-ws/infra_saruman \
+    /home/"${USER}"/repos/halon-ws/Python3.4.3 \
+    /home/"${USER}"/repos/halon-ws/release \
+    /home/"${USER}"/repos/halon-ws/tools \
+    /home/"${USER}"/repos/halon-ws/warp \
+    /disk/ws/"${USER}"/halon-dl-dir \
+    /disk/ws/"${USER}"/halon-sstate-cache \
+    /disk/ws/"${USER}"/repos_ro/halon-latest-docker.gz \
+  /run/media/"${USER}"/BACKUP/halon-ws/

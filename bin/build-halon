@@ -1,0 +1,161 @@
+#!/bin/bash
+#
+# Brief description here
+#
+# Usage:
+#
+#  LOG_LEVEL=7 ./build-halon -p ${PLATFORM}
+#
+
+# Global variables
+START=$(date --iso-8601=seconds)
+export START
+
+START_DATE=$(date)
+
+__HALON_REPO=/ws/tiamarin/halon
+GIT="git -C ${__HALON_REPO}"
+FLOCK='flock --exclusive /tmp/build-halon.lock'
+
+#
+# START Functions
+#
+
+check-param() {
+  local param="$1"
+  shift
+  local msg="$*"
+  if [ -z "${param}" ]; then
+    echo >&2 "error: ${msg}"
+    return 1
+  fi
+  return 0
+}
+
+env_halon() {
+  export web_proxy=http://web-proxy.rose.hpecorp.net:8088
+  export http_proxy=http://web-proxy.rose.hpecorp.net:8088
+  export ftp_proxy=http://web-proxy.houston.hpecorp.net:8080
+  export https_proxy=http://web-proxy.rose.hpecorp.net:8088
+  export no_proxy=localhost,127.0.0.1,localhost6,::1,.localdomain,.hpecorp.net
+
+  export PYTHONPATH=/users/tiamarin/.local/lib/python3.4/site-packages:/users/tiamarin/.local/lib/python3.4/site-packages:
+  export _=/usr/bin/env
+
+  export HPE_REPO_DIR=/ws/tiamarin/halon
+  export HPE_PRE_REPO_PATH=/aruba/halon/infra/coverity/cov-analysis-linux64-8.0.0/bin:/users/tiamarin/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/pnb/software/attools/bin/Python3.4.3/bin:/pnb/software/attools/bin/ActivePython-2.7/bin:/aruba/halon/infra:/aruba/halon/tools:/tools/halon:/tools:/snap/bin:/sw/slickedit/Latest/bin:/users/tiamarin/.fzf/bin
+
+  export SSTATE_DIR=/ws/tiamarin/cache/sstate
+  export DL_DIR=/ws/tiamarin/cache/downloads
+}
+
+do-bitbake() {
+  # shellcheck disable=1091
+  source tools/srcMe
+  initbb "${PLATFORM}"
+  bitbake arubaoscx-disk-image
+}
+
+ubc() {
+  check-param "${1}" "missing platform name"
+  local PLATFORM=${1}
+  local DEFAULT_PLATFORM=speedway
+
+  # Update only for speedway, so all platforms can be use same hash
+  if [[ "${PLATFORM}" == "${DEFAULT_PLATFORM}" ]]; then
+    info "Start Git pulling master"
+    ${FLOCK} bash -c "${GIT} pull"
+    echo
+    info "Removing build-${DEFAULT_PLATFORM}"
+    rm -rf build-${DEFAULT_PLATFORM}
+  fi
+
+  env_halon
+
+  # Go to HALON repo for src
+  info "Going to ${__HALON_REPO}"
+  cd "${__HALON_REPO}"
+
+  info "Removing build-${PLATFORM}"
+  rm -rf build-"${PLATFORM}"
+
+  # Build disk image platform
+  info "Start building ${PLATFORM}"
+  # do-bitbake
+  hb pbuild "${PLATFORM}"
+  info "End building ${PLATFORM}"
+  echo
+
+  # Run UT
+  # ${FLOCK} run-mod-ut "${__HALON_REPO}" "${PLATFORM}"
+
+  # Required?
+  local PLATFORM_WORKSPACE="${__HALON_REPO}/build-${PLATFORM}/tmp"
+  info "Start cleaning ${PLATFORM_WORKSPACE}..."
+  if [ -d "${PLATFORM_WORKSPACE}" ]; then
+    rm -rf "${PLATFORM_WORKSPACE}"
+  fi
+  echo
+
+  # Cleaning obsolete sstate/download files
+  # hb clean -d
+  # info "Start cleaning state/download files..."
+  # cleanup-yocto-cache
+  # echo
+
+  info "Get last Git hash"
+  ${GIT} log -1 --oneline
+  echo
+}
+
+halon_main() {
+  local PLATFORM=${1}
+  local branch
+  branch="$(${GIT} symbolic-ref --short HEAD)"
+
+  if [[ "${branch}" != "master" ]]; then
+    ${FLOCK} bash -c "${GIT} stash"
+    ${FLOCK} bash -c "${GIT} checkout master"
+    ubc "${PLATFORM}"
+  else
+    ubc "${PLATFORM}"
+  fi
+}
+
+#
+# END Functions
+#
+
+#
+# Main
+#
+source build-halon-main.sh
+
+### Validation
+# Error out if the things required for your script are not present
+#
+[[ "${arg_p:-}" ]] || \
+  help "Setting a platform with -p or --platform is required"
+PLATFORM="${arg_p}"
+
+[[ "${LOG_LEVEL:-}" ]] || \
+  emergency "Cannot continue without LOG_LEVEL."
+
+FILE_SIGN="/tmp/cron_${PLATFORM}.err"
+export FILE_SIGN
+
+# shellcheck disable=SC2154
+[ -f "${FILE_SIGN}" ] && \
+  emergency "error: ${__base} is locked. Remove ${FILE_SIGN} before run"
+
+
+echo "START BUILD ${PLATFORM} at ${START_DATE}"
+echo
+
+halon_main "${PLATFORM}"
+
+#
+# END Main
+#
+
+# vim:set ts=2 sw=2 et:

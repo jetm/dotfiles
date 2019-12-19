@@ -1,0 +1,10 @@
+#!/bin/bash
+
+PLATFORM=$1
+EMAIL=jetm@hpe.com
+
+# Avoiding to captch err output, so it's captched by cron and sent by email
+build-vswitch --no-color -p "${PLATFORM}" | \
+  tee /tmp/cron_"${PLATFORM}".out | \
+  tac | \
+  mail -s "$(date): ${PLATFORM} Build" ${EMAIL}

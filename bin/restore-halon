@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [[ ! -d /run/media/${USER}/BACKUP/halon-ws/ ]]; then
+    echo 2> "No BACKUP"
+    exit 1
+fi
+
+rsync -a --progress --delete --exclude=build* --exclude=images \
+    /run/media/"${USER}"/BACKUP/halon-ws/aruba \
+    /run/media/"${USER}"/BACKUP/halon-ws/halon \
+    /run/media/"${USER}"/BACKUP/halon-ws/infra_saruman \
+    /run/media/"${USER}"/BACKUP/halon-ws/Python3.4.3 \
+    /run/media/"${USER}"/BACKUP/halon-ws/release \
+    /run/media/"${USER}"/BACKUP/halon-ws/tools \
+    /run/media/"${USER}"/BACKUP/halon-ws/warp \
+  /home/tiamarin/repos/halon-ws/
+
+rsync -a --progress --delete \
+    /run/media/"${USER}"/BACKUP/halon-ws/halon-dl-dir \
+    /run/media/"${USER}"/BACKUP/halon-ws/halon-sstate-cache \
+  /disk/ws/tiamarin/

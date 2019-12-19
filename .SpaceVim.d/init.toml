@@ -36,10 +36,10 @@
 #
 
 # Enable autocomplete layer
-[[layers]]
-  name = 'autocomplete'
-  auto-completion-return-key-behavior = "complete"
-  auto-completion-tab-key-behavior = "smart"
+# [[layers]]
+  # name = 'autocomplete'
+  # auto-completion-return-key-behavior = "complete"
+  # auto-completion-tab-key-behavior = "smart"
 
 [[layers]]
   name = 'shell'
@@ -77,6 +77,9 @@
   ]
 
 [[layers]]
+  name = "fzf"
+
+[[layers]]
   name = "ctrlspace"
 
 #
@@ -104,7 +107,7 @@
 
 [[custom_plugins]]
   name = "sheerun/vim-polyglot"
-  merge = 0
+  merged = 0
   # if = "!index(['markdown'],&filetype)"
 
 # These are

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+__HALON_REPO=$1
+PLATFORM=$2
+GIT="git -C ${__HALON_REPO}"
+
+remove_colors() {
+  sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"
+}
+
+clean-mod-ut-tests() {
+  local MODULE=$1
+  echo "Start cleaning ${MODULE} ops-tests directory..."
+  ${GIT} clean --quiet -xdff \
+    "${__HALON_REPO}/halon-src/${MODULE}/ops-tests"
+}
+
+run-ut() {
+  local PLATFORM=$1
+  local MODULE=$2
+  hb utest -p "${PLATFORM}" "${MODULE}" | remove_colors
+  clean-mod-ut-tests "${MODULE}"
+}
+
+# Run UTs
+for MODULE in mac-mgmt l2mac-mgrd; do
+  echo "Start testing ${MODULE} in ${PLATFORM}"
+    run-ut "${PLATFORM}" "${MODULE}"
+  echo
+done
+
