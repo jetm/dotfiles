@@ -1,14 +1,28 @@
 #!/usr/bin/bash
 
-# Verifies the connectivity and validity of the objects in the database
-git fsck --full
+set -e
 
-# Manage reflog information
-git reflog expire --expire=now --all
+for d in "$@"; do
+    cd "${d}"
+    echo "Run Git maintenance in ${d}"
+    # Verifies the connectivity and validity of the objects in the database
+    echo "fsck"
+    git fsck --full
 
-# Pack unpacked objects in a repository
-git repack -a -d --window-memory 100m --max-pack-size 200m
+    # Manage reflog information
+    echo "reflog"
+    git reflog expire --expire=now --all
+    echo
 
-# Cleanup unnecessary files and optimize the local repository and prune all
-# unreachable objects from the object database
-git gc --prune=now --aggressive
+    # Cleanup unnecessary files
+    # Prune all unreachable objects from the object database
+    echo "gc"
+    git gc --prune=now
+    echo
+
+    # Pack unpacked objects in a repository
+    echo "repack"
+    # git repack -a -d --window-memory 25m --max-pack-size 50m
+    git repack -adf
+    echo
+done

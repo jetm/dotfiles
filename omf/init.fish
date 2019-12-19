@@ -11,6 +11,12 @@ set --global --export LESS '-F -g -i -M -R -S -w -X -z-4'
 
 set --global hist_ignore_dups
 
+# Set Coverity path
+set COV_PATH $HOME/coverity/cov-analysis-linux64-2018.06/bin
+if test -d $COV_PATH
+  set --universal fish_user_paths $COV_PATH $fish_user_paths
+end
+
 # Set Go settings
 set GO_PATH $HOME/go/bin
 if test -d $GO_PATH
@@ -79,5 +85,14 @@ if test -d $BITBAKE_PYTHON_PATH
     $BITBAKE_PYTHON_PATH \
     $PYTHONPATH
 end
+
+# Set Python Modules Path for Halon tests
+# set HALON_TEST $HOME/repos/halon-ws/halon/halon-test
+# set --universal PYTHONPATH \
+  # $HALON_TEST/libraries/hpe_topology_lib_communication/lib \
+  # $PYTHONPATH
+# set --universal PYTHONPATH \
+  # $HALON_TEST/libraries/hpe_topology_common/lib \
+  # $PYTHONPATH
 
 # vim:set ts=2 sw=2 ft=fish et:

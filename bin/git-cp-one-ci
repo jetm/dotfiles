@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+HALON_REPO=/home/tiamarin/repos/halon-ws/halon/.git
+
+git --git-dir=${HALON_REPO} format-patch --keep-subject -1 --stdout HEAD \
+  | ssh hpnsw4260 'cd /ws/tiamarin/halon && git am --3way --keep'

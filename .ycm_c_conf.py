@@ -42,7 +42,6 @@ HEADER_DIRECTORIES = [
 
 BUILD_DIRECTORY = 'build'
 
-
 def IsHeaderFile(filename):
     extension = os.path.splitext(filename)[1]
     return extension in HEADER_EXTENSIONS

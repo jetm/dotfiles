@@ -8,30 +8,6 @@ let g:lightline = {}
 let g:lightline.colorscheme = 'neodark'
 
 "
-" fzf configuration
-"
-" Use ripgrep with fzf for grepping
-if executable('rg')
-  let g:rg_command = '
-    \ rg --column --line-number --no-heading --fixed-strings --ignore-case
-    \ --hidden --follow --color "always"
-    \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,go,hs,rb,conf}"
-    \ -g "!{.git,node_modules,vendor}/*" '
-  command! -bang -nargs=* Rg
-    \ call fzf#vim#grep(
-    \   g:rg_command. shellescape(<q-args>).'| tr -d "\017"', 1,
-    \   <bang>0 ? fzf#vim#with_preview('up:60%')
-    \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-    \   <bang>0
-    \ )
-endif
-
-" Use fd instead of default tool from fzf
-if executable('fd')
-  let $FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-endif
-
-"
 " Code Formatting
 "
 
@@ -61,8 +37,8 @@ set list
 set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:␣,trail:·,
 " eol:↲,
 set fillchars=vert:│,fold:·
-set showbreak=↪\ 
-set list lcs=tab:\|\ 
+set showbreak=↪\
+set list lcs=tab:\|\
 
 " Specify a character to be used as indent line. From SpaceVim ui is '┊'
 " It has an effect over fillchars due to Yggdroot/indentLine plugin
@@ -73,7 +49,7 @@ IndentLinesReset
 " Movement and keymaps
 "
 " + keymap for quicker move to any character
-nmap + <Plug>(easymotion-prefix)s
+nmap <Leader>w <Plug>(easymotion-prefix)s
 
 " Next/Prev buffer
 nnoremap L :bnext<CR>
@@ -84,9 +60,36 @@ autocmd BufWritePre * %s/\s\+$//e
 "
 " CtrlSpace plugin
 "
-if executable("ag")
-  let g:CtrlSpaceGlobCommand = 'fd --hidden --follow --type f '
-endif
-nnoremap <silent><C-p> :CtrlSpace O<CR>
+" if executable("ag")
+  " let g:CtrlSpaceGlobCommand = 'fd --hidden --follow --type f '
+" endif
+" nnoremap <silent><C-p> :CtrlSpace O<CR>
+
+"
+" fzf
+"
+
+" CtrlP compatibility
+nnoremap <silent><C-p>:ProjectFilesPreview<CR>
+let g:fzf_preview_command = "bat --style=numbers --color=always {-1}"
+let g:fzf_preview_layout = 'belowright'
+let g:fzf_preview_filelist_command = 'rg --files --hidden --follow --glob "!.git/*" --glob "!vendor/"'
+
+"Uses ripgrep to recursively search files under the current directory
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
+
+" fzf window layout
+let g:fzf_preview_layout = ''
 
 " vim:tw=78:ts=2:sw=2

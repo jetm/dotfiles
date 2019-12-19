@@ -1,0 +1,102 @@
+alias vim=nvim
+alias python3=python3.7
+
+# Abbreviation
+abbrev-alias --init
+
+# General
+abbrev-alias --global e="nvim"
+abbrev-alias --global vim="nvim"
+abbrev-alias --global vimdiff="nvim -d"
+abbrev-alias --global _="sudo"
+#
+# Git
+#
+abbrev-alias --global g="git"
+
+# Branch (b)
+abbrev-alias --global gb='git branch'
+abbrev-alias --global gbc='git checkout -b'
+abbrev-alias --global gbd='git branch -D'
+abbrev-alias --global gbv='git branch --verbose'
+abbrev-alias --global gbm='git branch -M'
+
+# Commit (c)
+abbrev-alias --global gc='git commit --verbose'
+abbrev-alias --global gca='git commit --verbose --all'
+abbrev-alias --global gcf='git commit --amend --reuse-message HEAD'
+abbrev-alias --global gcF='git commit --amend --verbose'
+abbrev-alias --global gco='git checkout'
+abbrev-alias --global gcO='git checkout --patch'
+abbrev-alias --global gcb='git checkout -b'
+abbrev-alias --global gcp='git cherry-pick --ff'
+abbrev-alias --global gcs='git show'
+abbrev-alias --global gcr='git revert'
+
+# Conflict (C)
+
+# Data (d)
+abbrev-alias --global gd='git ls-files'
+
+# Fetch (f)
+abbrev-alias --global gf='git fetch'
+abbrev-alias --global gfa='git fetch --all'
+abbrev-alias --global gfc='git clone'
+abbrev-alias --global gfm='git pull'
+
+# Grep (g)
+abbrev-alias --global gg='git grep'
+abbrev-alias --global ggl='git grep --files-with-matches'
+
+# Index (i)
+abbrev-alias --global gia='git add'
+abbrev-alias --global giA='git add --patch'
+abbrev-alias --global gid='git diff'
+abbrev-alias --global giD='git diff --cached'
+
+# Log (l)
+abbrev-alias --global gl='git lg'
+abbrev-alias --global gll='git lol'
+
+# Merge (m)
+
+# Push (p)
+abbrev-alias --global gp='git push'
+abbrev-alias --global gpp='git push --force-with-lease'
+abbrev-alias --global gpr='git publish -t'
+
+# Rebase (r)
+abbrev-alias --global gr='git rebase'
+abbrev-alias --global gra='git rebase --abort'
+abbrev-alias --global grc='git rebase --continue'
+abbrev-alias --global gri='git rebase --interactive'
+abbrev-alias --global grs='git rebase --skip'
+
+# Remote (R)
+abbrev-alias --global gR='git remote'
+abbrev-alias --global gRl='git remote --verbose'
+abbrev-alias --global gRa='git remote add'
+abbrev-alias --global gRx='git remote rm'
+abbrev-alias --global gRm='git remote rename'
+abbrev-alias --global gRu='git remote update'
+abbrev-alias --global gRp='git remote prune'
+abbrev-alias --global gRs='git remote show'
+
+# Stash (s)
+abbrev-alias --global gs='git stash'
+abbrev-alias --global gsa='git stash apply'
+abbrev-alias --global gsx='git stash drop'
+abbrev-alias --global gsl='git stash list'
+abbrev-alias --global gsp='git stash pop'
+abbrev-alias --global gss='git stash show'
+
+# Tag (t)
+abbrev-alias --global gt='git tag'
+
+# Working Copy (w)
+abbrev-alias --global gws='git status'
+abbrev-alias --global gwS='git status --short'
+abbrev-alias --global gwc='git clean -xdffn'
+abbrev-alias --global gwC='git clean -xdff'
+abbrev-alias --global gwx='git rm -r'
+abbrev-alias --global gwX='git rm -rf'
