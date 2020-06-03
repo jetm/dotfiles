@@ -254,3 +254,11 @@ if [[ $(lsb_release -i) = *Ubuntu* ]]; then
     remove_PATH_duplicates
     unalias bb
 fi
+
+export PATH="$HOME/.poetry/bin:$PATH"
+
+ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/ssh-auth-sock.$HOSTNAME"
+
+source /users/tiamarin/.config/broot/launcher/bash/br
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -5,6 +5,8 @@ call plug#begin('~/.vim/plugged')
 
 " Sensible vim defaults
 Plug 'tpope/vim-sensible'
+Plug 'lambdalisue/suda.vim'
+let g:suda_smart_edit = 1
 
 "
 "========= UI =========
@@ -32,7 +34,8 @@ Plug 'nathanaelkane/vim-indent-guides'
 
 Plug 'ryanoasis/vim-devicons'
 
-Plug 'zefei/vim-wintabs'
+" Plug 'jlanzarotta/bufexplorer'
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 
 Plug 'mhinz/vim-startify'
 
@@ -56,6 +59,9 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'osyo-manga/vim-over'
 Plug 'farmergreg/vim-lastplace'
 
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-unimpaired'
+
 "
 "========= Text manipulation =========
 "
@@ -78,7 +84,7 @@ Plug 'kana/vim-smartinput'
 Plug 'tpope/vim-surround'
 
 Plug 'tpope/vim-repeat'
-Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter', { 'on' : '<Plug>NERDCommenterToggle' }
 
 Plug 'brooth/far.vim'
 
@@ -114,7 +120,7 @@ Plug 'autozimu/LanguageClient-neovim', {
 
 Plug 'WolfgangMehner/bash-support'
 
-"Formats a file using formatter defined for its filetype
+" Formats a file using formatter defined for its filetype
 Plug 'sbdchd/neoformat'
 
 " Better diffing
@@ -314,11 +320,6 @@ nnoremap < <<_
 " http://stackoverflow.com/a/8064607/127816
 vnoremap . :normal .<CR>
 
-" For when you forget to sudo. Really Write the file
-cmap w!! w !sudo tee % >/dev/null
-
-nmap <leader>c <Plug>NERDCommenterToggle
-
 "move between vim panes with Ctrl-J
 nnoremap <C-J> <C-W>j
 nnoremap <C-K> <C-W>k
@@ -329,9 +330,6 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 nmap - <Plug>(choosewin)
-
-map <C-H> <Plug>(wintabs_previous)
-map <C-L> <Plug>(wintabs_next)
 
 " Tab for next completion
 inoremap <silent><expr> <Tab>
@@ -350,7 +348,19 @@ nnoremap <C-p> :Files<cr>
 " leader key
 let mapleader = "\<Space>"
 
-nmap <leader>c <Plug>NERDCommenterToggle
+let g:clap_theme = 'material_design_dark'
+nnoremap <leader><Space> :Clap<CR>
+nnoremap <leader>b :Clap buffers<CR>
+" nnoremap <leader>B :Clap blines<CR>
+" nnoremap <leader>f :Clap files<CR>
+" nnoremap <leader>g :Clap git_files<CR>
+" nnoremap <leader>l :Clap lines<CR>
+
+nmap <leader>c <Plug>NERDCommenterToggle<CR>
+vmap <leader>c <Plug>NERDCommenterToggle<CR>
+
+" Search filenames with FZF
+noremap <leader>f :Files<cr>
 
 " C-r: Easier search and replace
 nnoremap <leader>r :<C-u>call <SID>VSetSearch()<CR>:,$s/<C-R>=@/<CR>//gc<left><left><left>
@@ -361,21 +371,11 @@ function! s:VSetSearch() abort
     let @s = temp
 endfunction
 
-" Find merge conflict markers
-noremap <SID>FindMergeConflictMarker /\v^[<\|=>]{7}( .*\|$)<CR>
-map <leader>fx <SID>FindMergeConflictMarker
+" Override highlight group name of complex or compound words. (default:
+" 'SpelunkerComplexOrCompoundWord')
+let g:spelunker_complex_or_compound_word_group = 'SpelunkerComplexOrCompoundWord'
 
-" Search in files with ripgrep
-nmap     <leader>sf <Plug>CtrlSFPrompt
-vmap     <leader>sf <Plug>CtrlSFVwordPath
-vmap     <leader>sF <Plug>CtrlSFVwordExec
-nmap     <leader>sn <Plug>CtrlSFCwordPath
-nmap     <leader>sp <Plug>CtrlSFPwordPath
-nnoremap <leader>so :CtrlSFOpen<CR>
-nnoremap <leader>st :CtrlSFToggle<CR>
-
-" Search filenames with FZF
-noremap <leader>f :Files<cr>
+" nmap <leader>ew <Plug>(spelunker-correct-from-list)
 
 map f <Plug>Sneak_f
 map F <Plug>Sneak_F
@@ -396,27 +396,40 @@ noremap <leader>- :sp<cr><C-W>j<cr>
 
 " write & quit
 noremap <leader>Q :q!<cr>
-noremap <leader>q :q<cr>
-noremap <leader>x :x<cr>
-noremap <leader>z :xall<cr>
+" noremap <leader>q :q<cr>
+" noremap <leader>x :x<cr>
+" noremap <leader>z :xall<cr>
 
 " remove search highlighting
-nnoremap <leader><space> :noh<cr>
+nnoremap <leader><space>n :noh<cr>
 
-" Reload vimr configuration file
-nnoremap <leader>vr :source $MYVIMRC<cr>
+" Reload vimrc configuration file
+" nnoremap <leader>vr :source $MYVIMRC<cr>
 
-nnoremap <silent> <leader>gs :Gstatus<CR>
-nnoremap <silent> <leader>gd :Gdiff<CR>
-nnoremap <silent> <leader>gc :Gcommit<CR>
-nnoremap <silent> <leader>gia :Git add -p %<CR>
-nnoremap <silent> <leader>gfm :Gpull<CR>
+noremap <leader>q :bdelete<cr>
+
+" nnoremap <silent> <leader>gs :Gstatus<CR>
+" nnoremap <silent> <leader>gd :Gdiff<CR>
+" nnoremap <silent> <leader>gc :Gcommit<CR>
+" nnoremap <silent> <leader>gia :Git add -p %<CR>
+" nnoremap <silent> <leader>gfm :Gpull<CR>
 
 map <leader>tc <Plug>(wintabs_close)
 map <leader>tu <Plug>(wintabs_undo)
-map <leader>wc <Plug>(wintabs_close_window)
+" map <leader>wc <Plug>(wintabs_close_window)
 command! Tabc WintabsCloseVimtab
 command! Tabo WintabsOnlyVimtab
+
+" Search in files with ripgrep
+nmap     <leader>sf <Plug>CtrlSFPrompt
+" vmap     <leader>sf <Plug>CtrlSFVwordPath
+" vmap     <leader>sF <Plug>CtrlSFVwordExec
+" nmap     <leader>sn <Plug>CtrlSFCwordPath
+" nmap     <leader>sp <Plug>CtrlSFPwordPath
+" nnoremap <leader>so :CtrlSFOpen<CR>
+" nnoremap <leader>st :CtrlSFToggle<CR>
+
+map <leader>W :w suda://%
 
 "
 " ================================= Searching =================================
@@ -424,7 +437,7 @@ command! Tabo WintabsOnlyVimtab
 let g:fzf_preview_gitfiles_command = "git status --short --untracked-files=all | awk '{if (substr($0,2,1) !~ / /) print $2}'"
 let g:fzf_layout = { 'down': '~40%' }
 
-autocmd! User FzfStatusLine call lightline#update_once()
+autocmd! User FzfStatusLine call lightline#update()
 
 " Command override (with preview)
 command! -bang -nargs=? -complete=dir Files
@@ -447,8 +460,7 @@ au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 "
 " =============================== Comments ===============================
 "
-
-" Add spaces after comment delimiters by default
+" Add spaces after comment delimiters
 let g:NERDSpaceDelims = 1
 
 " Use compact syntax for prettified multi-line comments
@@ -481,9 +493,13 @@ let g:comfortable_motion_air_drag = 2.0
 " Asynchronous Lint Engine
 set completeopt-=preview
 set omnifunc=ale#completion#OmniFunc
+
 let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
   \ 'sh': ['shfmt'],
+  \ 'gitcommit': [],
+  \ 'diff': [],
+  \ 'gitsendemail': [],
   \ }
 
 let g:ale_linters = {
@@ -686,12 +702,19 @@ augroup spelunker
   autocmd FileType gitcommit call spelunker#check()
 augroup END
 
-" Override highlight group name of complex or compound words. (default:
-" 'SpelunkerComplexOrCompoundWord')
-let g:spelunker_complex_or_compound_word_group = 'SpelunkerComplexOrCompoundWord'
-
-nmap <leader>ew <Plug>(spelunker-correct-from-list)
-
 " Far options
 set lazyredraw
 set regexpengine=1
+
+let g:clap_provider_dotfiles = {
+      \ 'source': [
+      \    '~/.vimrc',
+      \    '~/.zsh/01-jetm-zpreztorc.zsh',
+      \    '~/.zsh/02-jetm-prezto.zsh',
+      \    '~/.zsh/03-vm-settings.zsh',
+      \    '~/.zsh/04-hstr.zsh',
+      \    '~/.zshrc',
+      \    '~/.tmux.conf',
+      \ ],
+      \ 'sink': 'e',
+      \ }
