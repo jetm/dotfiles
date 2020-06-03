@@ -17,6 +17,7 @@ zplug "agkozak/zsh-z"
 zplug "momo-lab/zsh-abbrev-alias"
 zplug "wfxr/forgit"
 zplug "MichaelAquilina/zsh-auto-notify"
+zplug "romkatv/powerlevel10k"
 
 # Custom zsh configuration
 zplug "${HOME}/.zsh", \
@@ -31,9 +32,15 @@ if ! zplug check --verbose; then
     fi
 fi
 
-# Then, source plugins and add commands to $PATH
+# Then, source plugins and add cjommands to $PATH
 zplug load # --verbose
 
 source ~/.zsh/skim-key-bindings
 source ~/.zsh/abbr-alias
 source ~/.zsh/git-extras-completion
+
+source /users/tiamarin/.config/broot/launcher/bash/br
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

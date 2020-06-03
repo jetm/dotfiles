@@ -32,3 +32,14 @@ if [[ $(lsb_release -i) = *Ubuntu* ]]; then
    remove_PATH_duplicates
    unalias bb
 fi
+
+function mvI() {
+  if [ "$#" -ne 1 ] || [ ! -f "$1" ]; then
+    command mv "$@"
+    return
+  fi
+
+  newfilename="$1"
+  vared newfilename
+  command mv -v -- "$1" "$newfilename"
+}
