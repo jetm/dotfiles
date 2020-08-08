@@ -8,7 +8,8 @@ abbrev-alias --init
 abbrev-alias --global e="nvim"
 abbrev-alias --global vim="nvim"
 abbrev-alias --global vimdiff="nvim -d"
-abbrev-alias --global _="sudo"
+abbrev-alias --global fdi="fd -t f -o $USER -l -d 1 . /aruba/pub"
+
 #
 # Git
 #
