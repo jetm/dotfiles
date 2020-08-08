@@ -5,6 +5,8 @@ call plug#begin('~/.vim/plugged')
 
 " Sensible vim defaults
 Plug 'tpope/vim-sensible'
+
+" An alternative sudo.vim
 Plug 'lambdalisue/suda.vim'
 let g:suda_smart_edit = 1
 
@@ -13,91 +15,125 @@ let g:suda_smart_edit = 1
 "
 Plug 'joshdick/onedark.vim'
 
+" Status UI
 Plug 'itchyny/lightline.vim'
 Plug 'taohexxx/lightline-buffer'
 
-" Shows indent guides
+" Shows indent guides with columns
 Plug 'Yggdroot/indentLine'
 
-Plug 'junegunn/rainbow_parentheses.vim'
-
-Plug 'machakann/vim-highlightedyank'
-
-" Motion plugin - jump to a location based on two characters
-Plug 'justinmk/vim-sneak'
-Plug 'easymotion/vim-easymotion'
-
-" Allows alignment of several lines around vim text objs
-Plug 'junegunn/vim-easy-align'
-
+" A Vim plugin for visually displaying indent levels in code
 Plug 'nathanaelkane/vim-indent-guides'
 
+" Simpler Rainbow Parentheses
+Plug 'junegunn/rainbow_parentheses.vim'
+
+" Make the yanked region apparent!
+Plug 'machakann/vim-highlightedyank'
+
+" Sneak is invoked with s followed by exactly two characters
+Plug 'justinmk/vim-sneak'
+
+" Plug 'mhinz/vim-startify'
+" Plug 't9md/vim-choosewin'
+
+" Vim motions on speed! Untested
+" Plug 'easymotion/vim-easymotion'
+
+" Allows alignment of several lines around vim text objs
+" Plug 'junegunn/vim-easy-align'
+
+" Vim Space Controller
+" Plug 'vim-ctrlspace/vim-ctrlspace'
+
+" Adds file type icons to Vim plugins such as: NERDTree, vim-airline, CtrlP,
+" unite, Denite, lightline, vim-startify and many more
 Plug 'ryanoasis/vim-devicons'
 
 " Plug 'jlanzarotta/bufexplorer'
+" Modern performant generic finder and dispatcher for Vim and NeoVim
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 
-Plug 'mhinz/vim-startify'
-
-"Fuzzy searching of files using FZF
+" Fuzzy searching of files using FZF
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'yuki-ycino/fzf-preview.vim'
 
+" Plugin for vim to enabling opening a file in a given line
 Plug 'bogado/file-line'
-Plug 't9md/vim-choosewin'
 
+" An ack.vim alternative mimics Ctrl-Shift-F on Sublime Text 2
 Plug 'dyng/ctrlsf.vim'
+
+" Improved vim spelling plugin
 Plug 'kamykn/spelunker.vim'
+
+" Popup-menu for spelunker
+Plug 'kamykn/popup-menu.nvim'
 
 " Smooth scroll
 Plug 'yuttie/comfortable-motion.vim'
-" Plug 'vim-ctrlspace/vim-ctrlspace'
 
-Plug 'tmhedberg/matchit'
+"Improved incremental searching for Vim
 Plug 'haya14busa/incsearch.vim'
+
+" substitute preview
 Plug 'osyo-manga/vim-over'
+
+" Intelligently reopen files at your last edit position in Vim
 Plug 'farmergreg/vim-lastplace'
 
-Plug 'tpope/vim-vinegar'
+" vinegar.vim: Combine with netrw to create a delicious salad dressing
+" Plug 'tpope/vim-vinegar'
+
+" unimpaired.vim: Pairs of handy bracket mappings
 Plug 'tpope/vim-unimpaired'
 
 "
 "========= Text manipulation =========
 "
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-indent'
-Plug 'kana/vim-textobj-entire'
-Plug 'kana/vim-textobj-syntax'
-Plug 'kana/vim-textobj-datetime'
-Plug 'kana/vim-textobj-indent'
-Plug 'kana/vim-operator-user'
-Plug 'kana/vim-operator-replace'
+" Plug 'kana/vim-textobj-user'
+" Plug 'kana/vim-textobj-indent'
+" Plug 'kana/vim-textobj-entire'
+" Plug 'kana/vim-textobj-syntax'
+" Plug 'kana/vim-textobj-datetime'
+" Plug 'kana/vim-textobj-indent'
+" Plug 'kana/vim-operator-user'
+" Plug 'kana/vim-operator-replace'
+"
+" Plug 'thinca/vim-textobj-comment'
+" Plug 'thinca/vim-textobj-between'
+"
+" Plug 'rhysd/vim-textobj-anyblock'
 
-Plug 'thinca/vim-textobj-comment'
-Plug 'thinca/vim-textobj-between'
+" Vim plugin, insert or delete brackets, parens, quotes in pair
+Plug 'jiangmiao/auto-pairs'
 
-Plug 'rhysd/vim-textobj-anyblock'
-
-Plug 'kana/vim-smartinput'
-
+" Quoting/parenthesizing made simple
 Plug 'tpope/vim-surround'
 
+" Enable repeating supported plugin maps with "."
 Plug 'tpope/vim-repeat'
+
+" Vim plugin for intensely nerdy commenting powers
 Plug 'scrooloose/nerdcommenter', { 'on' : '<Plug>NERDCommenterToggle' }
 
+" Find And Replace plugin options
 Plug 'brooth/far.vim'
 
+" Vim mapping for sorting a range of text
 " Allows sorting via `gs` motion
-Plug 'christoomey/vim-sort-motion'
+" Plug 'christoomey/vim-sort-motion'
 
-Plug 'terryma/vim-multiple-cursors'
+" Multiple cursors plugin for vim/neovim
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
+" Make terminal vim and tmux work better together.
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
 "========= Languages =========
 
-"Asychronous Lint Engine, on the fly linting of files
+" Asychronous Lint Engine, on the fly linting of files
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -107,10 +143,13 @@ else
 endif
 let g:deoplete#enable_at_startup = 1
 
+" Check syntax in Vim asynchronously and fix files, with Language Server
+" Protocol (LSP) support
 Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
 
-Plug 'romainl/vim-qf'
+" Tame the quickfix window
+" Plug 'romainl/vim-qf'
 
 " language server
 Plug 'autozimu/LanguageClient-neovim', {
@@ -123,26 +162,33 @@ Plug 'WolfgangMehner/bash-support'
 " Formats a file using formatter defined for its filetype
 Plug 'sbdchd/neoformat'
 
-" Better diffing
+" Better Diff options for Vim
 Plug 'chrisbra/vim-diff-enhanced'
 
+" Helpers for UNIX
+" :SudoWrite: Write a privileged file with sudo.
+" :SudoEdit: Edit a privileged file with sudo.
+" New files created with a shebang line are automatically made executable
 Plug 'tpope/vim-eunuch'
 
-" Better paste
+" Handles bracketed-paste-mode in vim (aka. automatic `:set paste`)
 Plug 'ConradIrwin/vim-bracketed-paste'
 
+" Add support to bitbake
 Plug 'kergoth/vim-bitbake'
 
-" Conflict with many plugins
-"Plug 'sheerun/vim-polyglot'
+" YAML support
 Plug 'avakhov/vim-yaml'
+
+" Dockerfile support
 Plug 'ekalinin/Dockerfile.vim'
+
+" Rainbow Parentheses Improved, shorter code, no level limit, smooth and fast,
+" powerful configuration
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
-"========= SCM/Git =========
-Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-signify'
+" Weapon to fight against conflicts in Vim
 Plug 'rhysd/conflict-marker.vim'
 
 call plug#end()
@@ -326,10 +372,10 @@ nnoremap <C-K> <C-W>k
 nnoremap <C-L> <C-W>l
 nnoremap <C-H> <C-W>h
 
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
+" xmap ga <Plug>(EasyAlign)
+" nmap ga <Plug>(EasyAlign)
 
-nmap - <Plug>(choosewin)
+" nmap - <Plug>(choosewin)
 
 " Tab for next completion
 inoremap <silent><expr> <Tab>
@@ -384,7 +430,7 @@ map T <Plug>Sneak_T
 nnoremap <leader>w <Plug>(easymotion-prefix)s
 
 " Search marks
-noremap <leader>m :Marks<cr>
+" noremap <leader>m :Marks<cr>
 
 " Yank & put from clipboard register
 noremap <leader>y "+y
@@ -414,11 +460,11 @@ noremap <leader>q :bdelete<cr>
 " nnoremap <silent> <leader>gia :Git add -p %<CR>
 " nnoremap <silent> <leader>gfm :Gpull<CR>
 
-map <leader>tc <Plug>(wintabs_close)
-map <leader>tu <Plug>(wintabs_undo)
+" map <leader>tc <Plug>(wintabs_close)
+" map <leader>tu <Plug>(wintabs_undo)
 " map <leader>wc <Plug>(wintabs_close_window)
-command! Tabc WintabsCloseVimtab
-command! Tabo WintabsOnlyVimtab
+" command! Tabc WintabsCloseVimtab
+" command! Tabo WintabsOnlyVimtab
 
 " Search in files with ripgrep
 nmap     <leader>sf <Plug>CtrlSFPrompt
@@ -551,12 +597,6 @@ let g:LanguageClient_diagnosticsDisplay = {
     \ },
   \ }
 
-if has('clipboard')
-  if has('unnamedplus')  " When possible use + register for copy-paste
-    set clipboard=unnamed,unnamedplus
-  endif
-endif
-
 " Instead of reverting the cursor to the last position in the buffer, we
 " set it to the first line when editing a git commit message
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
@@ -660,49 +700,77 @@ let g:indent_guides_start_level = 2
 " It has an effect over fillchars due to Yggdroot/indentLine plugin
 let g:indentLine_char = '│'
 
+"
+" Improved vim spelling plugin
+"
+set nospell
+
 " Enable spelunker.vim. (default: 1)
 " 1: enable
 " 0: disable
 let g:enable_spelunker_vim = 1
 
-" Enable spelunker.vim on readonly files or buffer. (default: 0)
-" 1: enable
-" 0: disable
-let g:enable_spelunker_vim_on_readonly = 0
+if exists('g:enable_spelunker_vim') && g:enable_spelunker_vim
+    set nospell
+    map zw Zw
+    map zl Zl
 
-" Check spelling for words longer than set characters. (default: 4)
-let g:spelunker_target_min_char_len = 4
+    " Spellcheck type: (default: 1) 1: File is checked for spelling mistakes when opening and saving. This
+    " may take a bit of time on large files.
+    " 2: Spellcheck displayed words in buffer. Fast and dynamic. The waiting time
+    " depends on the setting of CursorHold `set updatetime=1000`.
+    let g:spelunker_check_type = 2
 
-" Max amount of word suggestions. (default: 15)
-let g:spelunker_max_suggest_words = 15
+    " Highlight type: (default: 1)
+    " 1: Highlight all types (SpellBad, SpellCap, SpellRare, SpellLocal).
+    " 2: Highlight only SpellBad.
+    " FYI: https://vim-jp.org/vimdoc-en/spell.html#spell-quickstart
+    let g:spelunker_highlight_type = 1
 
-" Max amount of highlighted words in buffer. (default: 100)
-let g:spelunker_max_hi_words_each_buf = 100
+    " Disable email-like words checking. (default: 0)
+    let g:spelunker_disable_email_checking = 1
 
-" Spellcheck type: (default: 1)
-" 1: File is checked for spelling mistakes when opening and saving. This
-" may take a bit of time on large files.
-" 2: Spellcheck displayed words in buffer. Fast and dynamic. The waiting time
-" depends on the setting of CursorHold `set updatetime=1000`.
-let g:spelunker_check_type = 1
+    " Disable account name checking, e.g. @foobar, foobar@. (default: 0)
+    " NOTE: Spell checking is also disabled for JAVA annotations.
+    let g:spelunker_disable_account_name_checking = 1
 
-" Highlight type: (default: 1)
-" 1: Highlight all types (SpellBad, SpellCap, SpellRare, SpellLocal).
-" 2: Highlight only SpellBad.
-" FYI: https://vim-jp.org/vimdoc-en/spell.html#spell-quickstart
-let g:spelunker_highlight_type = 1
+    " Disable default autogroup. (default: 0)
+    let g:spelunker_disable_auto_group = 0
 
-" Disable default autogroup. (default: 0)
-let g:spelunker_disable_auto_group = 1
+    " Disable acronym checking. (default: 0)
+    let g:spelunker_disable_acronym_checking = 1
 
-" Create own custom autogroup to enable spelunker.vim for specific filetypes.
-augroup spelunker
-  autocmd!
-  " Setting for g:spelunker_check_type = 1:
-  autocmd FileType gitcommit call spelunker#check()
-augroup END
+    " Disable checking words in backtick/backquote. (default: 0)
+    let g:spelunker_disable_backquoted_checking = 1
 
-" Far options
+    " Disable default autogroup. (default: 0)
+    let g:spelunker_disable_auto_group = 1
+
+    " Create own custom autogroup to enable spelunker.vim for specific filetypes.
+    augroup spelunker
+      autocmd!
+      " Setting for g:spelunker_check_type = 1:
+      autocmd BufWinEnter,BufWritePost gitcommit call spelunker#check()
+
+      " Setting for g:spelunker_check_type = 2:
+      autocmd CursorHold gitcommit call spelunker#check_displayed_words()
+    augroup END
+else
+    set spell
+end
+set spelllang=en
+set spellfile=$HOME/.en.utf-8.add
+
+function! s:regen()
+    let spellfiles = split(&spellfile, ',')
+    for spellfile in spellfiles
+        execute 'mkspell! ' . spellfile
+    endfor
+endfunction
+
+command! RegenSpellFiles call s:regen()
+
+" Find And Replace plugin options
 set lazyredraw
 set regexpengine=1
 

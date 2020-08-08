@@ -27,6 +27,11 @@ alias gerrit-code-nos="ssh -p 29418 javier.tia@code-nos.rose.rdlabs.hpecorp.net"
 # __PYTHON_PATH=$(python -c "import site, os; print(os.path.join(site.USER_BASE, 'lib', 'python3.4', 'site-packages'))"):$PYTHONPATH
 # export PYTHONPATH="${__PYTHON_PATH}"
 
+LOCAL_PATH=/usr/local/bin
+if [ -d ${LOCAL_PATH} ]; then
+  PATH=${LOCAL_PATH}:"${PATH}"
+fi
+
 if [[ $(lsb_release -i) = *Ubuntu* ]]; then
    source /aruba/halon/infra/halon.profile
    remove_PATH_duplicates

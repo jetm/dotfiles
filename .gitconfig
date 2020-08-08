@@ -13,7 +13,7 @@
     # -R show ANSI colors based in RAW control characters
     # -s squeeze blank lines
     # -X disable termcap [de]initialization strings to terminal
-	pager = delta --dark
+    pager = delta
 
     # Verify if a command modifies a file in the work tree
     ; safecrlf = true
@@ -23,6 +23,13 @@
 
     # gitproxy is a script to allow clone git:// repositories
     ; gitproxy = gitproxy
+
+[delta]
+    line-numbers = falseh
+    syntax-theme = DarkNeon
+
+[interactive]
+    diffFilter = delta --color-only
 
 [i18n]
     # Character encoding the commit messages are converted to when running git
