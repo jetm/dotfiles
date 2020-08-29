@@ -66,10 +66,10 @@ Plug 'bogado/file-line'
 Plug 'dyng/ctrlsf.vim'
 
 " Improved vim spelling plugin
-Plug 'kamykn/spelunker.vim'
+" Plug 'kamykn/spelunker.vim'
 
 " Popup-menu for spelunker
-Plug 'kamykn/popup-menu.nvim'
+" Plug 'kamykn/popup-menu.nvim'
 
 " Smooth scroll
 Plug 'yuttie/comfortable-motion.vim'
@@ -98,8 +98,8 @@ Plug 'tpope/vim-unimpaired'
 " Plug 'kana/vim-textobj-syntax'
 " Plug 'kana/vim-textobj-datetime'
 " Plug 'kana/vim-textobj-indent'
-" Plug 'kana/vim-operator-user'
 " Plug 'kana/vim-operator-replace'
+" Plug 'kana/vim-operator-user'
 "
 " Plug 'thinca/vim-textobj-comment'
 " Plug 'thinca/vim-textobj-between'
@@ -115,8 +115,12 @@ Plug 'tpope/vim-surround'
 " Enable repeating supported plugin maps with "."
 Plug 'tpope/vim-repeat'
 
+" Vim comment plugin: supported operator/non-operator mappings, repeatable by
+" dot-command, 300+ filetypes. Errors with git rebase
+" Plug 'tyru/caw.vim'
+
 " Vim plugin for intensely nerdy commenting powers
-Plug 'scrooloose/nerdcommenter', { 'on' : '<Plug>NERDCommenterToggle' }
+Plug 'preservim/nerdcommenter' , { 'on' : '<Plug>NERDCommenterToggle' }
 
 " Find And Replace plugin options
 Plug 'brooth/far.vim'
@@ -128,8 +132,11 @@ Plug 'brooth/far.vim'
 " Multiple cursors plugin for vim/neovim
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
-" Make terminal vim and tmux work better together.
+" Make terminal vim and tmux work better together
 Plug 'tmux-plugins/vim-tmux-focus-events'
+
+" Seamless integration for vim and tmux's clipboard
+Plug 'roxma/vim-tmux-clipboard'
 
 "========= Languages =========
 
@@ -274,7 +281,6 @@ set showbreak=↪\
 " Prevents inserting two spaces after punctuation on a join (J)
 set nojoinspaces
 
-set statusline+=%{fugitive#statusline()} " Git Hotness
 
 " Backup
 set backup
@@ -402,8 +408,30 @@ nnoremap <leader>b :Clap buffers<CR>
 " nnoremap <leader>g :Clap git_files<CR>
 " nnoremap <leader>l :Clap lines<CR>
 
-nmap <leader>c <Plug>NERDCommenterToggle<CR>
-vmap <leader>c <Plug>NERDCommenterToggle<CR>
+" caw settings
+" let g:caw_no_default_keymappings = 1
+" nmap <leader>c <Plug>(caw:hatpos:toggle)
+" vmap <leader>c <Plug>(caw:hatpos:toggle)
+
+let g:NERDCreateDefaultMappings = 0
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not
+let g:NERDToggleCheckAllLines = 1
+
+nmap <leader>c <Plug>NERDCommenterToggle
+vmap <leader>c <Plug>NERDCommenterToggle
 
 " Search filenames with FZF
 noremap <leader>f :Files<cr>
@@ -416,12 +444,6 @@ function! s:VSetSearch() abort
     let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
     let @s = temp
 endfunction
-
-" Override highlight group name of complex or compound words. (default:
-" 'SpelunkerComplexOrCompoundWord')
-let g:spelunker_complex_or_compound_word_group = 'SpelunkerComplexOrCompoundWord'
-
-" nmap <leader>ew <Plug>(spelunker-correct-from-list)
 
 map f <Plug>Sneak_f
 map F <Plug>Sneak_F
@@ -467,8 +489,8 @@ noremap <leader>q :bdelete<cr>
 " command! Tabo WintabsOnlyVimtab
 
 " Search in files with ripgrep
-nmap     <leader>sf <Plug>CtrlSFPrompt
-" vmap     <leader>sf <Plug>CtrlSFVwordPath
+" nmap     <leader>sf <Plug>CtrlSFPrompt
+vmap     <leader>sf <Plug>CtrlSFVwordPath
 " vmap     <leader>sF <Plug>CtrlSFVwordExec
 " nmap     <leader>sn <Plug>CtrlSFCwordPath
 " nmap     <leader>sp <Plug>CtrlSFPwordPath
@@ -606,7 +628,7 @@ let g:lightline = {
 \ 'active': {
 \   'left': [
 \              ['mode', 'paste'],
-\              ['fugitive', 'readonly', 'filename', 'modified'],
+\              ['readonly', 'filename', 'modified'],
 \           ],
 \   'right': [
 \              ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
@@ -643,7 +665,6 @@ let g:lightline = {
 \ },
 \ 'component_function': {
 \   'bufferinfo': 'lightline#buffer#bufferinfo',
-\   'fugitive':   'LightlineFugitive',
 \   'ale': 'LightlineALE',
 \ },
 \ 'component': {
@@ -686,89 +707,10 @@ let g:lightline#ale#indicator_warnings = "\uf071 "
 let g:lightline#ale#indicator_errors = "\uf05e "
 let g:lightline#ale#indicator_ok = "\uf00c "
 
-" fugitive
-function! LightlineFugitive()
-  if exists('*fugitive#head')
-    let l:branch = fugitive#head()
-    return l:branch !=# '' ? "\ue0a0 ".l:branch : ''
-  endif
-  return ''
-endfunction
-
 " vim-indent-guides
 let g:indent_guides_start_level = 2
 " It has an effect over fillchars due to Yggdroot/indentLine plugin
 let g:indentLine_char = '│'
-
-"
-" Improved vim spelling plugin
-"
-set nospell
-
-" Enable spelunker.vim. (default: 1)
-" 1: enable
-" 0: disable
-let g:enable_spelunker_vim = 1
-
-if exists('g:enable_spelunker_vim') && g:enable_spelunker_vim
-    set nospell
-    map zw Zw
-    map zl Zl
-
-    " Spellcheck type: (default: 1) 1: File is checked for spelling mistakes when opening and saving. This
-    " may take a bit of time on large files.
-    " 2: Spellcheck displayed words in buffer. Fast and dynamic. The waiting time
-    " depends on the setting of CursorHold `set updatetime=1000`.
-    let g:spelunker_check_type = 2
-
-    " Highlight type: (default: 1)
-    " 1: Highlight all types (SpellBad, SpellCap, SpellRare, SpellLocal).
-    " 2: Highlight only SpellBad.
-    " FYI: https://vim-jp.org/vimdoc-en/spell.html#spell-quickstart
-    let g:spelunker_highlight_type = 1
-
-    " Disable email-like words checking. (default: 0)
-    let g:spelunker_disable_email_checking = 1
-
-    " Disable account name checking, e.g. @foobar, foobar@. (default: 0)
-    " NOTE: Spell checking is also disabled for JAVA annotations.
-    let g:spelunker_disable_account_name_checking = 1
-
-    " Disable default autogroup. (default: 0)
-    let g:spelunker_disable_auto_group = 0
-
-    " Disable acronym checking. (default: 0)
-    let g:spelunker_disable_acronym_checking = 1
-
-    " Disable checking words in backtick/backquote. (default: 0)
-    let g:spelunker_disable_backquoted_checking = 1
-
-    " Disable default autogroup. (default: 0)
-    let g:spelunker_disable_auto_group = 1
-
-    " Create own custom autogroup to enable spelunker.vim for specific filetypes.
-    augroup spelunker
-      autocmd!
-      " Setting for g:spelunker_check_type = 1:
-      autocmd BufWinEnter,BufWritePost gitcommit call spelunker#check()
-
-      " Setting for g:spelunker_check_type = 2:
-      autocmd CursorHold gitcommit call spelunker#check_displayed_words()
-    augroup END
-else
-    set spell
-end
-set spelllang=en
-set spellfile=$HOME/.en.utf-8.add
-
-function! s:regen()
-    let spellfiles = split(&spellfile, ',')
-    for spellfile in spellfiles
-        execute 'mkspell! ' . spellfile
-    endfor
-endfunction
-
-command! RegenSpellFiles call s:regen()
 
 " Find And Replace plugin options
 set lazyredraw
