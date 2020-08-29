@@ -1,13 +1,61 @@
+#
 # Key bindings
-# ------------
+#
+# History features
+bindkey "^R" history-incremental-search-backward
+
+# Ctrl+right => forward word
+bindkey "^[[1;5C" forward-word
+
+# Ctrl+left => backward word
+bindkey "^[[1;5D" backward-word
+
+# Bind Ctrl+Backspace to delete a previous word
+bindkey '^H' backward-kill-word
+
+# Use Ctrl-Z to switch back to Vim
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
+# View manpage while editing a command
+bindkey -M vicmd 'K' run-help
+
+# copy current line to clipboard in Vi Insert mode with Ctrl-ay
+function _copy-to-clipboard {
+    print -rn -- $BUFFER | xclip
+    [ -n "$TMUX" ] && tmux display-message 'Line copied to clipboard!'
+}
+zle -N _copy-to-clipboard
+bindkey -M viins "^ay" _copy-to-clipboard
+
+# same behavior from bash for vi-mode
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
+#
+# Skim
+#
 # copied and modified from https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh
 if [[ $- == *i* ]]; then
 
 # CTRL-T - Paste the selected file path(s) into the command line
 __fsel() {
-  local cmd="fd --type f --follow --hidden --exclude '.git' || git ls-tree -r --name-only HEAD || rg --files"
-  export SKIM_CTRL_T_COMMAND="${cmd}"
-  setopt localoptions pipefail 2> /dev/null
+  local cmd="${SKIM_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+    -o -type f -print \
+    -o -type d -print \
+    -o -type l -print 2> /dev/null | cut -b3-"}"
+  setopt localoptions pipefail no_aliases 2> /dev/null
   eval "$cmd" | SKIM_DEFAULT_OPTIONS="--height ${SKIM_TMUX_HEIGHT:-40%} --reverse $SKIM_DEFAULT_OPTIONS $SKIM_CTRL_T_OPTS" $(__skimcmd) -m "$@" | while read item; do
     echo -n "${(q)item} "
   done
@@ -46,8 +94,9 @@ zle -N skim-redraw-prompt
 
 # ALT-C - cd into the selected directory
 skim-cd-widget() {
-  local cmd="${SKIM_ALT_C_COMMAND:-"fd --type d --follow --hidden"}"
-  setopt localoptions pipefail 2> /dev/null
+  local cmd="${SKIM_ALT_C_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+    -o -type d -print 2> /dev/null | cut -b3-"}"
+  setopt localoptions pipefail no_aliases 2> /dev/null
   local dir="$(eval "$cmd" | SKIM_DEFAULT_OPTIONS="--height ${SKIM_TMUX_HEIGHT:-40%} --reverse $SKIM_DEFAULT_OPTIONS $SKIM_ALT_C_OPTS" $(__skimcmd) -m)"
   if [[ -z "$dir" ]]; then
     zle redisplay
@@ -82,3 +131,8 @@ zle     -N   skim-history-widget
 bindkey '^R' skim-history-widget
 
 fi
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down

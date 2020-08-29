@@ -1,28 +1,32 @@
+# Profiling
+# zmodload zsh/zprof
+
 export ZPLUG_HOME="${HOME}/.zplug"
 source "${ZPLUG_HOME}/init.zsh"
 
-zmodload zsh/zprof
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
-zplug "zplug/zplug"
+# Plugins
+# zplug "modules/environment", from:prezto
+# zplug "modules/editor",      from:prezto
+# zplug "modules/directory",   from:prezto
+# zplug "modules/terminal",    from:prezto
+# zplug "modules/utility",     from:prezto
+zplug "modules/ssh",         from:prezto
 
-#
-# Prezto framework
-#
-zplug "jetm/prezto", \
-  use:"init.zsh", \
-  hook-build:"ln -s ${ZPLUG_HOME}/repos/jetm/prezto ~/.zprezto"
-
-zplug "zsh-users/zsh-autosuggestions"
-zplug "agkozak/zsh-z"
-zplug "momo-lab/zsh-abbrev-alias"
-zplug "wfxr/forgit"
+zplug "zsh-users/zsh-completions", lazy:true, defer:0
+zplug "zsh-users/zsh-autosuggestions", defer:1, on:"zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting", defer:1, on:"zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-history-substring-search", defer:2, on:"zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-history-substring-search", on:"zdharma/fast-syntax-highlighting"
+zplug "zdharma/fast-syntax-highlighting", use:fast-highlight
+zplug "b4b4r07/zsh-vimode-visual", defer:3
+zplug "b4b4r07/enhancd", use:init.sh
 zplug "MichaelAquilina/zsh-auto-notify"
-zplug "romkatv/powerlevel10k"
-
-# Custom zsh configuration
-zplug "${HOME}/.zsh", \
-  use:"*.zsh", \
-  from:local
+zplug "chrissicool/zsh-256color", defer:3
+zplug "hlissner/zsh-autopair", defer:3
+zplug "momo-lab/zsh-abbrev-alias", \
+  hook-load: "source ${ZPLUG_REPOS}/momo-lab/zsh-abbrev-alias/abbrev-alias.plugin.zsh"
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -32,15 +36,8 @@ if ! zplug check --verbose; then
     fi
 fi
 
-# Then, source plugins and add cjommands to $PATH
+# Custom zsh configuration
+zplug "${HOME}/.zsh", use:"*.zsh", from:local, defer:3
+
+# Then, source plugins and add commands to $PATH
 zplug load # --verbose
-
-source ~/.zsh/skim-key-bindings
-source ~/.zsh/abbr-alias
-source ~/.zsh/git-extras-completion
-
-source /users/tiamarin/.config/broot/launcher/bash/br
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

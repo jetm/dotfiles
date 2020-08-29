@@ -1,0 +1,26 @@
+prompt_order = [
+    "directory",
+    "username",
+    "hostname",
+    "git_branch",
+    "git_commit",
+    "git_state",
+    "git_status",
+    "docker_context",
+    "package",
+    "python",
+    "rust",
+    "env_var",
+    "cmd_duration",
+    "custom",
+    "line_break",
+    "jobs",
+    "character",
+]
+
+[git_status]
+staged_count.enabled = true
+
+[cmd_duration]
+min_time = 5_000
+prefix = "took "

@@ -219,18 +219,18 @@ fi
 #
 # VM settings
 #
-HPE_PROXY=http://web-proxy.rose.hpecorp.net:8088
+# HPE_PROXY=http://web-proxy.rose.hpecorp.net:8088
 
 # All variables in lowercase
-export http_proxy="${HPE_PROXY}"
-export https_proxy="${HPE_PROXY}"
-export ftp_proxy="${HPE_PROXY}"
+# export http_proxy="${HPE_PROXY}"
+# export https_proxy="${HPE_PROXY}"
+# export ftp_proxy="${HPE_PROXY}"
 
 # All variables in UPPERCASE
-export HTTP_PROXY="${HPE_PROXY}"
-export HTTPS_PROXY="${HPE_PROXY}"
-export FTP_PROXY="${HPE_PROXY}"
-export no_proxy='localhost,127.0.0.1,localhost6,::1,.localdomain,hpecorp.net'
+# export HTTP_PROXY="${HPE_PROXY}"
+# export HTTPS_PROXY="${HPE_PROXY}"
+# export FTP_PROXY="${HPE_PROXY}"
+# export no_proxy='localhost,127.0.0.1,localhost6,::1,.localdomain,hpecorp.net'
 
 # aliases for git
 alias g='git'
@@ -257,7 +257,7 @@ fi
 
 export PATH="$HOME/.poetry/bin:$PATH"
 
-ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/ssh-auth-sock.$HOSTNAME"
+# ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/ssh-auth-sock.$HOSTNAME"
 
 source /users/tiamarin/.config/broot/launcher/bash/br
 
