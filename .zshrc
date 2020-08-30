@@ -36,10 +36,11 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
-zinit light zsh-users/zsh-syntax-highlighting
+# zinit light zsh-users/zsh-syntax-highlighting
 zinit ice wait"0"; zinit load zdharma/history-search-multi-word
 zinit ice wait"!0"; zinit light zsh-users/zsh-autosuggestions
-zinit ice wait"!0"; zinit light zdharma/fast-syntax-highlighting
+zinit ice wait'!0'; zinit light zsh-users/zsh-history-substring-search
+zinit ice wait"!1"; zinit light zdharma/fast-syntax-highlighting
 
 # enhancd
 # -------------------------------
