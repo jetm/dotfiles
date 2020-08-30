@@ -5,55 +5,72 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Profiling
-# zmodload zsh/zprof
+function load_PZT_mod() {
+    zinit ice silent; zinit snippet PZT::modules/$1
+}
 
-export ZPLUG_HOME="${HOME}/.zplug"
-source "${ZPLUG_HOME}/init.zsh"
+function load_PZT_mod_async() {
+    zinit ice silent; zinit ice wait"0"; zinit snippet PZT::modules/$1
+}
 
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-
-#
-# Plugins
-#
-# zplug "modules/environment", from:prezto
-# zplug "modules/editor",      from:prezto
-# zplug "modules/directory",   from:prezto
-# zplug "modules/terminal",    from:prezto
-zstyle ':prezto:*:*' case-sensitive 'yes'
-zstyle ':prezto:*:*' color 'yes'
-zplug "modules/completion",    from:prezto
-zplug "modules/ssh",         from:prezto
-zplug "modules/utility",     from:prezto
-
-zplug "zsh-users/zsh-completions", lazy:true, defer:0
-# zplug "marlonrichert/zsh-autocomplete", as:plugin, defer:0
-zplug "zsh-users/zsh-autosuggestions", defer:1, on:"zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting", defer:1, on:"zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-history-substring-search", defer:2, on:"zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-history-substring-search", on:"zdharma/fast-syntax-highlighting"
-zplug "zdharma/fast-syntax-highlighting", use:fast-highlight
-zplug "b4b4r07/zsh-vimode-visual", defer:3
-zplug "b4b4r07/enhancd", use:init.sh
-zplug "MichaelAquilina/zsh-auto-notify"
-zplug "hlissner/zsh-autopair", defer:3
-zplug "momo-lab/zsh-abbrev-alias", \
-  hook-load: "source ${ZPLUG_REPOS}/momo-lab/zsh-abbrev-alias/abbrev-alias.plugin.zsh"
-zplug "romkatv/powerlevel10k", as:theme, depth:1
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
+### Added by Zinit's installer
+if [[ ! -f ${HOME}/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "${HOME}/.zinit" && command chmod g-rwX "${HOME}/.zinit"
+    command git clone https://github.com/zdharma/zinit "${HOME}/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
-# Custom zsh configuration
-zplug "${HOME}/.zsh", use:"*.zsh", from:local, defer:3
+source "${HOME}/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-# Then, source plugins and add commands to $PATH
-zplug load # --verbose
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zinit-zsh/z-a-rust \
+    zinit-zsh/z-a-as-monitor \
+    zinit-zsh/z-a-patch-dl \
+    zinit-zsh/z-a-bin-gem-node
+
+### End of Zinit's installer chunk
+
+zinit light zsh-users/zsh-syntax-highlighting
+zinit ice wait"0"; zinit load zdharma/history-search-multi-word
+zinit ice wait"!0"; zinit light zsh-users/zsh-autosuggestions
+zinit ice wait"!0"; zinit light zdharma/fast-syntax-highlighting
+
+# enhancd
+# -------------------------------
+zinit ice as"program" src"init.sh" \
+  atload"source ${HOME}/.zsh/zsh-enhancd.conf"
+zinit load b4b4r07/enhancd
+
+# zplug "MichaelAquilina/zsh-auto-notify"
+zinit light hlissner/zsh-autopair
+
+zinit ice wait lucid \
+    atload"source ${HOME}/.zsh/zsh-abbr-alias.conf"
+zinit light momo-lab/zsh-abbrev-alias
+
+# zinit snippet PZT::modules/helper/init.zsh
+zstyle ':prezto:*:*' case-sensitive 'yes'
+zstyle ':prezto:*:*' color 'yes'
+zstyle ':prezto:module:editor' key-bindings 'vi'
+zstyle ':prezto:module:editor' dot-expansion 'yes'
+load_PZT_mod environment
+load_PZT_mod terminal
+load_PZT_mod editor
+load_PZT_mod directory
+load_PZT_mod spectrum
+load_PZT_mod history
+load_PZT_mod utility
+load_PZT_mod completion
+
+# load personal configs
+for config (${HOME}/.zsh/*.zsh) source ${config}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+zinit ice depth=1; zinit light romkatv/powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

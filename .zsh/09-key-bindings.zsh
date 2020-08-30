@@ -2,7 +2,7 @@
 # Key bindings
 #
 # History features
-bindkey "^R" history-incremental-search-backward
+# bindkey "^R" history-incremental-search-backward
 
 # Ctrl+right => forward word
 bindkey "^[[1;5C" forward-word
@@ -10,11 +10,11 @@ bindkey "^[[1;5C" forward-word
 # Ctrl+left => backward word
 bindkey "^[[1;5D" backward-word
 
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
+# bindkey "$terminfo[kcuu1]" history-substring-search-up
+# bindkey "$terminfo[kcud1]" history-substring-search-down
 
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
+# bindkey -M vicmd 'k' history-substring-search-up
+# bindkey -M vicmd 'j' history-substring-search-down
 
 # Use Ctrl-Z to switch back to Vim
 fancy-ctrl-z () {
@@ -115,21 +115,21 @@ zle     -N    skim-cd-widget
 bindkey '\ec' skim-cd-widget
 
 # CTRL-R - Paste the selected command from history into the command line
-skim-history-widget() {
-  local selected num
-  setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
-  selected=( $(fc -rl 1 |
-    SKIM_DEFAULT_OPTIONS="--height ${SKIM_TMUX_HEIGHT:-40%} $SKIM_DEFAULT_OPTIONS -n2..,.. --tiebreak=score,index $SKIM_CTRL_R_OPTS --query=${(qqq)LBUFFER} -m" $(__skimcmd)) )
-  local ret=$?
-  if [ -n "$selected" ]; then
-    num=$selected[1]
-    if [ -n "$num" ]; then
-      zle vi-fetch-history -n $num
-    fi
-  fi
-  zle reset-prompt
-  return $ret
-}
+# skim-history-widget() {
+#   local selected num
+#   setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
+#   selected=( $(fc -rl 1 |
+#     SKIM_DEFAULT_OPTIONS="--height ${SKIM_TMUX_HEIGHT:-40%} $SKIM_DEFAULT_OPTIONS -n2..,.. --tiebreak=score,index $SKIM_CTRL_R_OPTS --query=${(qqq)LBUFFER} -m" $(__skimcmd)) )
+#   local ret=$?
+#   if [ -n "$selected" ]; then
+#     num=$selected[1]
+#     if [ -n "$num" ]; then
+#       zle vi-fetch-history -n $num
+#     fi
+#   fi
+#   zle reset-prompt
+#   return $ret
+# }
 
-zle     -N   skim-history-widget
-bindkey '^R' skim-history-widget
+# zle     -N   skim-history-widget
+# bindkey '^R' skim-history-widget
