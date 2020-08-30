@@ -1,3 +1,6 @@
+# Disable the newline at the start of the prompt
+add_newline = false
+
 prompt_order = [
     "directory",
     "username",
@@ -6,8 +9,6 @@ prompt_order = [
     "git_commit",
     "git_state",
     "git_status",
-    "docker_context",
-    "package",
     "python",
     "rust",
     "env_var",
@@ -18,9 +19,138 @@ prompt_order = [
     "character",
 ]
 
+[hostname]
+style = "dimmed green"
+
+[kubernetes]
+disabled = true
+
+[directory]
+disabled = false
+prefix = ""
+truncate_to_repo = false
+style = "fg:#94bdff"
+
+[git_branch]
+disabled = false
+style = "green"
+prefix = ""
+
+[git_commit]
+disabled = false
+
+[git_state]
+disabled = false
+
 [git_status]
-staged_count.enabled = true
+untracked_count = true
+stashed_count = true
+modified_count = true
+staged_count = true
+show_sync_count = true
+deleted_count = true
+style = "fg:#94bdff"
+
+[hg_branch]
+disabled = true
+
+[docker_context]
+disabled = true
+
+[package]
+disabled = true
+
+[dotnet]
+disabled = true
+
+[elixir]
+disabled = true
+
+[elm]
+disabled = true
+
+[erlang]
+disabled = true
+
+[golang]
+disabled = true
+
+[java]
+disabled = true
+
+[julia]
+disabled = true
+
+[nim]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[ocaml]
+disabled = true
+
+[php]
+disabled = true
+
+[purescript]
+disabled = true
+
+[python]
+disabled = true
+
+[ruby]
+disabled = true
+
+[rust]
+disabled = true
+
+[terraform]
+disabled = true
+
+[zig]
+disabled = true
+
+[nix_shell]
+disabled = true
+
+[conda]
+disabled = true
+
+[memory_usage]
+disabled = true
+
+[aws]
+disabled = true
+
+[env_var]
+disabled = true
+
+[crystal]
+disabled = true
 
 [cmd_duration]
-min_time = 5_000
-prefix = "took "
+error_symbol = "✗"
+use_symbol_for_status = true
+
+[custom]
+disabled = true
+
+[line_break]
+disabled = false
+
+[jobs]
+disabled = false
+
+[battery]
+disabled = true
+
+[username]
+style = "none"
+disabled = true
+
+[time]
+disabled = false
+
+[character]
+disabled = false
