@@ -13,14 +13,18 @@ source "${ZPLUG_HOME}/init.zsh"
 
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
+#
 # Plugins
+#
 # zplug "modules/environment", from:prezto
 # zplug "modules/editor",      from:prezto
 # zplug "modules/directory",   from:prezto
 # zplug "modules/terminal",    from:prezto
-# zplug "modules/utility",     from:prezto
+zstyle ':prezto:*:*' case-sensitive 'yes'
+zstyle ':prezto:*:*' color 'yes'
 zplug "modules/completion",    from:prezto
 zplug "modules/ssh",         from:prezto
+zplug "modules/utility",     from:prezto
 
 zplug "zsh-users/zsh-completions", lazy:true, defer:0
 # zplug "marlonrichert/zsh-autocomplete", as:plugin, defer:0
@@ -32,7 +36,6 @@ zplug "zdharma/fast-syntax-highlighting", use:fast-highlight
 zplug "b4b4r07/zsh-vimode-visual", defer:3
 zplug "b4b4r07/enhancd", use:init.sh
 zplug "MichaelAquilina/zsh-auto-notify"
-zplug "chrissicool/zsh-256color", defer:3
 zplug "hlissner/zsh-autopair", defer:3
 zplug "momo-lab/zsh-abbrev-alias", \
   hook-load: "source ${ZPLUG_REPOS}/momo-lab/zsh-abbrev-alias/abbrev-alias.plugin.zsh"
