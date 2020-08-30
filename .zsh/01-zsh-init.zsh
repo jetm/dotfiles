@@ -11,8 +11,8 @@ fi
 
 # If I could disable Ctrl-s completely I would!
 setopt NO_FLOW_CONTROL
-stty ixany
-stty ixoff -ixon
+# stty ixany
+# stty ixoff -ixon
 
 # beeps are annoying
 setopt NO_BEEP
