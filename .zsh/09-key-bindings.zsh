@@ -10,8 +10,11 @@ bindkey "^[[1;5C" forward-word
 # Ctrl+left => backward word
 bindkey "^[[1;5D" backward-word
 
-# Bind Ctrl+Backspace to delete a previous word
-bindkey '^H' backward-kill-word
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
 # Use Ctrl-Z to switch back to Vim
 fancy-ctrl-z () {
@@ -47,7 +50,6 @@ bindkey -M vicmd v edit-command-line
 # Skim
 #
 # copied and modified from https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh
-if [[ $- == *i* ]]; then
 
 # CTRL-T - Paste the selected file path(s) into the command line
 __fsel() {
@@ -108,6 +110,7 @@ skim-cd-widget() {
   zle skim-redraw-prompt
   return $ret
 }
+
 zle     -N    skim-cd-widget
 bindkey '\ec' skim-cd-widget
 
@@ -127,12 +130,6 @@ skim-history-widget() {
   zle reset-prompt
   return $ret
 }
+
 zle     -N   skim-history-widget
 bindkey '^R' skim-history-widget
-
-fi
-
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
