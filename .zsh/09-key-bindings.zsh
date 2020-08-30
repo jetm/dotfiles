@@ -1,5 +1,5 @@
 #
-# Key bindings
+# Global Key Bindings
 #
 # History features
 # bindkey "^R" history-incremental-search-backward
@@ -53,10 +53,8 @@ bindkey -M vicmd v edit-command-line
 
 # CTRL-T - Paste the selected file path(s) into the command line
 __fsel() {
-  local cmd="${SKIM_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
-    -o -type f -print \
-    -o -type d -print \
-    -o -type l -print 2> /dev/null | cut -b3-"}"
+  local cmd="git ls-tree -r --name-only HEAD || fd --type f --hidden --exclude '.git' || rg --files"
+  export SKIM_CTRL_T_COMMAND="${cmd}"
   setopt localoptions pipefail no_aliases 2> /dev/null
   eval "$cmd" | SKIM_DEFAULT_OPTIONS="--height ${SKIM_TMUX_HEIGHT:-40%} --reverse $SKIM_DEFAULT_OPTIONS $SKIM_CTRL_T_OPTS" $(__skimcmd) -m "$@" | while read item; do
     echo -n "${(q)item} "
@@ -133,3 +131,5 @@ bindkey '\ec' skim-cd-widget
 
 # zle     -N   skim-history-widget
 # bindkey '^R' skim-history-widget
+
+# vim:set ts=2 sw=2 et:
