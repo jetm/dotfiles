@@ -83,34 +83,34 @@ zle     -N   skim-file-widget
 bindkey '^T' skim-file-widget
 
 # Ensure precmds are run after cd
-skim-redraw-prompt() {
-  local precmd
-  for precmd in $precmd_functions; do
-    $precmd
-  done
-  zle reset-prompt
-}
-zle -N skim-redraw-prompt
+# skim-redraw-prompt() {
+#   local precmd
+#   for precmd in $precmd_functions; do
+#     $precmd
+#   done
+#   zle reset-prompt
+# }
+# zle -N skim-redraw-prompt
 
 # ALT-C - cd into the selected directory
-skim-cd-widget() {
-  local cmd="${SKIM_ALT_C_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
-    -o -type d -print 2> /dev/null | cut -b3-"}"
-  setopt localoptions pipefail no_aliases 2> /dev/null
-  local dir="$(eval "$cmd" | SKIM_DEFAULT_OPTIONS="--height ${SKIM_TMUX_HEIGHT:-40%} --reverse $SKIM_DEFAULT_OPTIONS $SKIM_ALT_C_OPTS" $(__skimcmd) -m)"
-  if [[ -z "$dir" ]]; then
-    zle redisplay
-    return 0
-  fi
-  cd "$dir"
-  unset dir # ensure this doesn't end up appearing in prompt expansion
-  local ret=$?
-  zle skim-redraw-prompt
-  return $ret
-}
-
-zle     -N    skim-cd-widget
-bindkey '\ec' skim-cd-widget
+# skim-cd-widget() {
+#   local cmd="${SKIM_ALT_C_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+#     -o -type d -print 2> /dev/null | cut -b3-"}"
+#   setopt localoptions pipefail no_aliases 2> /dev/null
+#   local dir="$(eval "$cmd" | SKIM_DEFAULT_OPTIONS="--height ${SKIM_TMUX_HEIGHT:-40%} --reverse $SKIM_DEFAULT_OPTIONS $SKIM_ALT_C_OPTS" $(__skimcmd) -m)"
+#   if [[ -z "$dir" ]]; then
+#     zle redisplay
+#     return 0
+#   fi
+#   cd "$dir"
+#   unset dir # ensure this doesn't end up appearing in prompt expansion
+#   local ret=$?
+#   zle skim-redraw-prompt
+#   return $ret
+# }
+#
+# zle     -N    skim-cd-widget
+# bindkey '\ec' skim-cd-widget
 
 # CTRL-R - Paste the selected command from history into the command line
 # skim-history-widget() {
