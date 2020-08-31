@@ -29,11 +29,11 @@ zinit light-mode for \
 ### End of Zinit's installer chunk
 
 z_ice() {
-    zinit ice lucid "$@"
+    zinit ice lucid silent "$@"
 }
 
 load_PZT_mod() {
-    z_ice silent
+    z_ice
     zinit snippet PZT::modules/$1
 }
 
@@ -50,7 +50,7 @@ zi0c() {
 }
 
 zi0a
-zinit load zdharma/history-search-multi-word
+zinit light zdharma/history-search-multi-word
 
 zi0b
 zinit light zsh-users/zsh-autosuggestions
@@ -67,7 +67,6 @@ zinit light hlissner/zsh-autopair
 zi0c
 zinit light zdharma/fast-syntax-highlighting
 
-# zinit load b4b4r07/enhancd
 # zinit snippet PZT::modules/helper/init.zsh
 zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
