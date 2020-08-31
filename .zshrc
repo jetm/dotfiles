@@ -5,14 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-function load_PZT_mod() {
-    zinit ice silent; zinit snippet PZT::modules/$1
-}
-
-function load_PZT_mod_async() {
-    zinit ice silent; zinit ice wait"0"; zinit snippet PZT::modules/$1
-}
-
 ### Added by Zinit's installer
 if [[ ! -f ${HOME}/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
@@ -36,25 +28,46 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
-# zinit light zsh-users/zsh-syntax-highlighting
-zinit ice wait"0"; zinit load zdharma/history-search-multi-word
-zinit ice wait"!0"; zinit light zsh-users/zsh-autosuggestions
-zinit ice wait'!0'; zinit light zsh-users/zsh-history-substring-search
-zinit ice wait"!1"; zinit light zdharma/fast-syntax-highlighting
+z_ice() {
+    zinit ice lucid "$@"
+}
 
-# enhancd
-# -------------------------------
-zinit ice as"program" src"init.sh" \
-  atload"source ${HOME}/.zsh/zsh-enhancd.conf"
-zinit load b4b4r07/enhancd
+load_PZT_mod() {
+    z_ice silent
+    zinit snippet PZT::modules/$1
+}
 
-# zplug "MichaelAquilina/zsh-auto-notify"
-zinit light hlissner/zsh-autopair
+zi0a() {
+    z_ice wait'0' "$@"
+}
 
-zinit ice wait lucid \
-    atload"source ${HOME}/.zsh/zsh-abbr-alias.conf"
+zi0b() {
+    z_ice wait'!0' "$@"
+}
+
+zi0c() {
+    z_ice wait'!1' "$@"
+}
+
+zi0a
+zinit load zdharma/history-search-multi-word
+
+zi0b
+zinit light zsh-users/zsh-autosuggestions
+
+zi0b
+zinit light zsh-users/zsh-history-substring-search
+
+zi0b atload"source ${HOME}/.zsh/zsh-abbr-alias.conf"
 zinit light momo-lab/zsh-abbrev-alias
 
+zi0b
+zinit light hlissner/zsh-autopair
+
+zi0c
+zinit light zdharma/fast-syntax-highlighting
+
+# zinit load b4b4r07/enhancd
 # zinit snippet PZT::modules/helper/init.zsh
 zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
@@ -66,6 +79,7 @@ load_PZT_mod terminal
 load_PZT_mod editor
 load_PZT_mod directory
 load_PZT_mod spectrum
+load_PZT_mod ssh
 load_PZT_mod history
 load_PZT_mod utility
 load_PZT_mod completion
@@ -73,6 +87,7 @@ load_PZT_mod completion
 # load personal configs
 for config (${HOME}/.zsh/*.zsh) source ${config}
 
+# Powerlevel10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+zinit ice depth=1 atload"!source ${HOME}/.p10k.zsh"
+zinit light romkatv/powerlevel10k
