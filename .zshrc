@@ -74,10 +74,10 @@ zstyle ':prezto:module:editor' key-bindings 'vi'
 zstyle ':prezto:module:editor' dot-expansion 'yes'
 zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa_home' 'swbuildn'
 load_PZT_mod environment
-load_PZT_mod terminal
+# load_PZT_mod terminal
+# load_PZT_mod directory
+# load_PZT_mod spectrum
 load_PZT_mod editor
-load_PZT_mod directory
-load_PZT_mod spectrum
 load_PZT_mod ssh
 load_PZT_mod history
 load_PZT_mod utility
@@ -90,3 +90,5 @@ for config (${HOME}/.zsh/*.zsh) source ${config}
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 zinit ice depth=1 atload"!source ${HOME}/.p10k.zsh"
 zinit light romkatv/powerlevel10k
+
+# vim:set ts=2 sw=2 et:
