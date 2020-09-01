@@ -34,17 +34,11 @@ Plug 'machakann/vim-highlightedyank'
 " Sneak is invoked with s followed by exactly two characters
 Plug 'justinmk/vim-sneak'
 
-" Plug 'mhinz/vim-startify'
-" Plug 't9md/vim-choosewin'
-
 " Vim motions on speed! Untested
 " Plug 'easymotion/vim-easymotion'
 
 " Allows alignment of several lines around vim text objs
 " Plug 'junegunn/vim-easy-align'
-
-" Vim Space Controller
-" Plug 'vim-ctrlspace/vim-ctrlspace'
 
 " Adds file type icons to Vim plugins such as: NERDTree, vim-airline, CtrlP,
 " unite, Denite, lightline, vim-startify and many more
@@ -65,12 +59,6 @@ Plug 'bogado/file-line'
 " An ack.vim alternative mimics Ctrl-Shift-F on Sublime Text 2
 Plug 'dyng/ctrlsf.vim'
 
-" Improved vim spelling plugin
-" Plug 'kamykn/spelunker.vim'
-
-" Popup-menu for spelunker
-" Plug 'kamykn/popup-menu.nvim'
-
 " Smooth scroll
 Plug 'yuttie/comfortable-motion.vim'
 
@@ -82,9 +70,6 @@ Plug 'osyo-manga/vim-over'
 
 " Intelligently reopen files at your last edit position in Vim
 Plug 'farmergreg/vim-lastplace'
-
-" vinegar.vim: Combine with netrw to create a delicious salad dressing
-" Plug 'tpope/vim-vinegar'
 
 " unimpaired.vim: Pairs of handy bracket mappings
 Plug 'tpope/vim-unimpaired'
