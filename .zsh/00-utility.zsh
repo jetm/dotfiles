@@ -40,4 +40,25 @@ add_path() {
   fi
 }
 
+aurgen() {
+  if (! command -v updpkgsums > /dev/null 2>&1); then
+    echo "error: updpkgsums is not installed" 1>&2
+    return 1
+  fi
+
+  if (! command -v namcap > /dev/null 2>&1); then
+    echo "error: namcap is not installed" 1>&2
+    return 1
+  fi
+
+  if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
+    # Validate PKGBUILD, update checksum package, build and generate .SCRINFO
+    # file
+    namcap PKGBUILD && \
+      updpkgsums && \
+      makepkg --cleanbuild --syncdeps --force && \
+      makepkg --printsrcinfo >! .SRCINFO
+  fi
+}
+
 # vim:set ts=2 sw=2 et:
