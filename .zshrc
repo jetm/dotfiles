@@ -28,26 +28,15 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
-z_ice() {
-    zinit ice lucid silent "$@"
-}
+z_ice() { zinit ice lucid silent "$@" }
 
-load_PZT_mod() {
-    z_ice
-    zinit snippet PZT::modules/$1
-}
+load_PZT_mod() { z_ice; zinit snippet PZT::modules/$1 }
 
-zi0a() {
-    z_ice wait'0' "$@"
-}
+zi0a() { z_ice wait'0' "$@" }
 
-zi0b() {
-    z_ice wait'!0' "$@"
-}
+zi0b() { z_ice wait'!0' "$@" }
 
-zi0c() {
-    z_ice wait'!1' "$@"
-}
+zi0c() { z_ice wait'!1' "$@" }
 
 zi0a
 zinit light zdharma/history-search-multi-word
@@ -67,28 +56,28 @@ zinit light hlissner/zsh-autopair
 zi0c
 zinit light zdharma/fast-syntax-highlighting
 
-# zinit snippet PZT::modules/helper/init.zsh
 zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
 zstyle ':prezto:module:editor' key-bindings 'vi'
 zstyle ':prezto:module:editor' dot-expansion 'yes'
 zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa_home' 'swbuildn'
 load_PZT_mod environment
-# load_PZT_mod terminal
-# load_PZT_mod directory
-# load_PZT_mod spectrum
 load_PZT_mod editor
 load_PZT_mod ssh
 load_PZT_mod history
 load_PZT_mod utility
 load_PZT_mod completion
 
-# load personal configs
+# Load personal configs
 for config (${HOME}/.zsh/*.zsh) source ${config}
 
+#
 # Powerlevel10k
+#
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 zinit ice depth=1 atload"!source ${HOME}/.p10k.zsh"
 zinit light romkatv/powerlevel10k
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # vim:set ts=2 sw=2 et:
