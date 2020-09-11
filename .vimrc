@@ -77,19 +77,37 @@ Plug 'tpope/vim-unimpaired'
 "
 "========= Text manipulation =========
 "
-" Plug 'kana/vim-textobj-user'
-" Plug 'kana/vim-textobj-indent'
+" Needed by vim-expand-region
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-line'
 " Plug 'kana/vim-textobj-entire'
 " Plug 'kana/vim-textobj-syntax'
 " Plug 'kana/vim-textobj-datetime'
-" Plug 'kana/vim-textobj-indent'
 " Plug 'kana/vim-operator-replace'
 " Plug 'kana/vim-operator-user'
 "
 " Plug 'thinca/vim-textobj-comment'
 " Plug 'thinca/vim-textobj-between'
-"
 " Plug 'rhysd/vim-textobj-anyblock'
+
+" Expand selection
+Plug 'terryma/vim-expand-region'
+xmap v <Plug>(expand_region_expand)
+xmap V <Plug>(expand_region_shrink)
+let g:expand_region_text_objects = {
+      \ 'iw'  :0,
+      \ 'iW'  :0,
+      \ 'i"'  :0,
+      \ 'i''' :0,
+      \ 'i]'  :1,
+      \ 'ib'  :1,
+      \ 'iB'  :1,
+      \ 'il'  :1,
+      \ 'ii'  :1,
+      \ 'ip'  :0,
+      \ 'ie'  :0,
+      \ }
 
 " Vim plugin, insert or delete brackets, parens, quotes in pair
 Plug 'jiangmiao/auto-pairs'
@@ -128,22 +146,21 @@ Plug 'roxma/vim-tmux-clipboard'
 " Asychronous Lint Engine, on the fly linting of files
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
 endif
 let g:deoplete#enable_at_startup = 1
 
+Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+
 " Check syntax in Vim asynchronously and fix files, with Language Server
 " Protocol (LSP) support
+let g:ale_completion_enabled = 0
 Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
 
 " Tame the quickfix window
 " Plug 'romainl/vim-qf'
 
-" language server
+" LSP language server
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
@@ -181,6 +198,7 @@ Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
 " Weapon to fight against conflicts in Vim
+" [x and ]x mappings are defined as default
 Plug 'rhysd/conflict-marker.vim'
 
 call plug#end()
@@ -544,10 +562,9 @@ let g:choosewin_overlay_enable = 1
 let g:comfortable_motion_friction = 80.0
 let g:comfortable_motion_air_drag = 2.0
 
-" Asynchronous Lint Engine
-set completeopt-=preview
-set omnifunc=ale#completion#OmniFunc
-
+"
+" Ale settings
+"
 let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
   \ 'sh': ['shfmt'],
@@ -567,9 +584,6 @@ let g:ale_sign_info = '➟'
 let g:ale_sign_column_always = 1
 let g:ale_warn_about_trailing_blank_lines = 1
 let g:ale_warn_about_trailing_whitespace = 1
-let g:ale_close_preview_on_insert = 1
-let g:ale_completion_max_suggestions = 10
-let g:ale_completion_enabled = 0
 
 " language server
 " ----------

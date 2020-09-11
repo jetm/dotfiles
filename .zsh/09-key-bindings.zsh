@@ -52,35 +52,54 @@ bindkey -M vicmd v edit-command-line
 # copied and modified from https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh
 
 # CTRL-T - Paste the selected file path(s) into the command line
-__fsel() {
-  local cmd="git ls-tree -r --name-only HEAD || fd --type f --hidden --exclude '.git' || rg --files"
-  export SKIM_CTRL_T_COMMAND="${cmd}"
-  setopt localoptions pipefail no_aliases 2> /dev/null
-  eval "$cmd" | SKIM_DEFAULT_OPTIONS="--height ${SKIM_TMUX_HEIGHT:-40%} --reverse $SKIM_DEFAULT_OPTIONS $SKIM_CTRL_T_OPTS" $(__skimcmd) -m "$@" | while read item; do
-    echo -n "${(q)item} "
-  done
-  local ret=$?
-  echo
-  return $ret
-}
+# __fsel() {
+#   local cmd="git ls-tree -r --name-only HEAD || fd --type f --hidden --exclude '.git' || rg --files"
+#   export SKIM_CTRL_T_COMMAND="${cmd}"
+#   setopt localoptions pipefail no_aliases 2> /dev/null
+#   eval "$cmd" | SKIM_DEFAULT_OPTIONS="--height ${SKIM_TMUX_HEIGHT:-40%} --reverse $SKIM_DEFAULT_OPTIONS $SKIM_CTRL_T_OPTS" $(__skimcmd) -m "$@" | while read item; do
+#     echo -n "${(q)item} "
+#   done
+#   local ret=$?
+#   echo
+#   return $ret
+# }
+#
+# __skim_use_tmux__() {
+#   [ -n "$TMUX_PANE" ] && [ "${SKIM_TMUX:-0}" != 0 ] && [ ${LINES:-40} -gt 15 ]
+# }
+#
+# __skimcmd() {
+#   __skim_use_tmux__ &&
+#     echo "sk-tmux -d${SKIM_TMUX_HEIGHT:-40%}" || echo "sk"
+# }
+#
+# skim-file-widget() {
+#   LBUFFER="${LBUFFER}$(__fsel)"
+#   local ret=$?
+#   zle reset-prompt
+#   return $ret
+# }
+# zle     -N   skim-file-widget
+# bindkey '^T' skim-file-widget
 
-__skim_use_tmux__() {
-  [ -n "$TMUX_PANE" ] && [ "${SKIM_TMUX:-0}" != 0 ] && [ ${LINES:-40} -gt 15 ]
-}
-
-__skimcmd() {
-  __skim_use_tmux__ &&
-    echo "sk-tmux -d${SKIM_TMUX_HEIGHT:-40%}" || echo "sk"
-}
-
-skim-file-widget() {
-  LBUFFER="${LBUFFER}$(__fsel)"
-  local ret=$?
+# Bind C-f to search for and insert a file with fzy
+insert_fzy_path() {
+  emulate -L zsh
+  local selected_path already_typed_path words
+  words=("${(s/ /)LBUFFER}")
+  already_typed_path="${words[-1]}"
+  fd_cmd="fd --type file --type symlink --hidden --exclude '.git'"
+  fzy_cmd="| fzy -l20 --query='${already_typed_path}'"
+  cmd="${fd_cmd} ${fzy_cmd}"
+  selected_path=$(eval "${cmd}") || return
+  if [[ "${already_typed_path}" != '' ]]; then
+    zle backward-delete-word
+  fi
+  zle -U "${(q)selected_path}"
   zle reset-prompt
-  return $ret
 }
-zle     -N   skim-file-widget
-bindkey '^T' skim-file-widget
+zle -N insert-fzy-path insert_fzy_path
+bindkey "^t" insert-fzy-path
 
 # Ensure precmds are run after cd
 # skim-redraw-prompt() {
