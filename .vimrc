@@ -126,7 +126,7 @@ Plug 'tpope/vim-repeat'
 Plug 'preservim/nerdcommenter' , { 'on' : '<Plug>NERDCommenterToggle' }
 
 " Find And Replace plugin options
-Plug 'brooth/far.vim'
+" Plug 'brooth/far.vim'
 
 " Vim mapping for sorting a range of text
 " Allows sorting via `gs` motion
@@ -624,55 +624,55 @@ let g:LanguageClient_diagnosticsDisplay = {
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
 let g:lightline = {
-\ 'colorscheme': 'onedark',
-\ 'active': {
-\   'left': [
-\              ['mode', 'paste'],
-\              ['readonly', 'filename', 'modified'],
-\           ],
-\   'right': [
-\              ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
-\              ['lineinfo'],
-\              ['percent'],
-\              ['fileformat', 'fileencoding', 'filetype', 'charvaluehex'],
-\            ]
-\ },
-\ 'tabline': {
-\   'left': [
-\             ['bufferinfo'],
-\             ['separator_tab'],
-\             ['bufferbefore', 'buffercurrent', 'bufferafter']
-\           ],
-\   'right': [['close']],
-\ },
-\ 'component_expand': {
-\   'buffercurrent': 'lightline#buffer#buffercurrent',
-\   'bufferbefore': 'lightline#buffer#bufferbefore',
-\   'bufferafter': 'lightline#buffer#bufferafter',
-\   'linter_checking': 'lightline#ale#checking',
-\   'linter_warnings': 'lightline#ale#warnings',
-\   'linter_errors': 'lightline#ale#errors',
-\   'linter_ok': 'lightline#ale#ok',
-\ },
-\ 'component_type': {
-\   'buffercurrent': 'tabsel',
-\   'bufferbefore': 'raw',
-\   'bufferafter': 'raw',
-\   'linter_checking': 'left',
-\   'linter_warnings': 'warning',
-\   'linter_errors': 'error',
-\   'linter_ok': 'left',
-\ },
-\ 'component_function': {
-\   'bufferinfo': 'lightline#buffer#bufferinfo',
-\   'ale': 'LightlineALE',
-\ },
-\ 'component': {
-\   'separator_tab': '',
-\ },
-\ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-\ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
-\}
+    \ 'colorscheme': 'onedark',
+    \ 'active': {
+    \   'left': [
+    \              ['mode', 'paste'],
+    \              ['readonly', 'filename', 'modified'],
+    \           ],
+    \   'right': [
+    \              ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
+    \              ['lineinfo'],
+    \              ['percent'],
+    \              ['fileformat', 'fileencoding', 'filetype', 'charvaluehex'],
+    \            ]
+    \ },
+    \ 'tabline': {
+    \   'left': [
+    \             ['bufferinfo'],
+    \             ['separator_tab'],
+    \             ['bufferbefore', 'buffercurrent', 'bufferafter']
+    \           ],
+    \   'right': [['close']],
+    \ },
+    \ 'component_expand': {
+    \   'buffercurrent': 'lightline#buffer#buffercurrent',
+    \   'bufferbefore': 'lightline#buffer#bufferbefore',
+    \   'bufferafter': 'lightline#buffer#bufferafter',
+    \   'linter_checking': 'lightline#ale#checking',
+    \   'linter_warnings': 'lightline#ale#warnings',
+    \   'linter_errors': 'lightline#ale#errors',
+    \   'linter_ok': 'lightline#ale#ok',
+    \ },
+    \ 'component_type': {
+    \   'buffercurrent': 'tabsel',
+    \   'bufferbefore': 'raw',
+    \   'bufferafter': 'raw',
+    \   'linter_checking': 'left',
+    \   'linter_warnings': 'warning',
+    \   'linter_errors': 'error',
+    \   'linter_ok': 'left',
+    \ },
+    \ 'component_function': {
+    \   'bufferinfo': 'lightline#buffer#bufferinfo',
+    \   'ale': 'LightlineALE',
+    \ },
+    \ 'component': {
+    \   'separator_tab': '',
+    \ },
+    \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+    \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
+    \}
 
 " lightline-buffer ui settings
 " replace these symbols with ascii characters if your environment does not
@@ -717,14 +717,14 @@ set lazyredraw
 set regexpengine=1
 
 let g:clap_provider_dotfiles = {
-      \ 'source': [
-      \    '~/.vimrc',
-      \    '~/.zsh/01-jetm-zpreztorc.zsh',
-      \    '~/.zsh/02-jetm-prezto.zsh',
-      \    '~/.zsh/03-vm-settings.zsh',
-      \    '~/.zsh/04-hstr.zsh',
-      \    '~/.zshrc',
-      \    '~/.tmux.conf',
-      \ ],
-      \ 'sink': 'e',
-      \ }
+    \ 'source': [
+    \    '~/.vimrc',
+    \    '~/.zsh/01-jetm-zpreztorc.zsh',
+    \    '~/.zsh/02-jetm-prezto.zsh',
+    \    '~/.zsh/03-vm-settings.zsh',
+    \    '~/.zsh/04-hstr.zsh',
+    \    '~/.zshrc',
+    \    '~/.tmux.conf',
+    \ ],
+    \ 'sink': 'e',
+    \ }
