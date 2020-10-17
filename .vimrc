@@ -32,10 +32,14 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'machakann/vim-highlightedyank'
 
 " Sneak is invoked with s followed by exactly two characters
-Plug 'justinmk/vim-sneak'
+" Plug 'justinmk/vim-sneak'
 
 " Vim motions on speed! Untested
-" Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
+
+"Improved incremental searching for Vim
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-easymotion.vim'
 
 " Allows alignment of several lines around vim text objs
 " Plug 'junegunn/vim-easy-align'
@@ -61,9 +65,6 @@ Plug 'dyng/ctrlsf.vim'
 
 " Smooth scroll
 Plug 'yuttie/comfortable-motion.vim'
-
-"Improved incremental searching for Vim
-Plug 'haya14busa/incsearch.vim'
 
 " substitute preview
 Plug 'osyo-manga/vim-over'
@@ -113,7 +114,8 @@ let g:expand_region_text_objects = {
 Plug 'jiangmiao/auto-pairs'
 
 " Quoting/parenthesizing made simple
-Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-surround'
+Plug 'machakann/vim-sandwich'
 
 " Enable repeating supported plugin maps with "."
 Plug 'tpope/vim-repeat'
@@ -201,6 +203,9 @@ let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTo
 " [x and ]x mappings are defined as default
 Plug 'rhysd/conflict-marker.vim'
 
+" Generate table of contents for Markdown files
+Plug 'mzlogin/vim-markdown-toc'
+
 call plug#end()
 
 "
@@ -285,7 +290,6 @@ set showbreak=↪\
 " Prevents inserting two spaces after punctuation on a join (J)
 set nojoinspaces
 
-
 " Backup
 set backup
 set undofile
@@ -323,9 +327,6 @@ unlet g:conf_dir
 "========================== Key mapping ============================
 "
 
-" Hit jj in insert mode to trigger ESC
-inoremap jj <ESC>
-
 " Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
 noremap k gk
@@ -355,41 +356,24 @@ inoremap <Right> <nop>
 " Start new line
 inoremap <S-Return> <C-o>o
 
-" in Visual mode, hitting . applies the same action to all lines
-vnoremap . :norm.<CR>
-
-" Make TAB work in normal & visual modes
-nnoremap <tab> %
-vnoremap <tab> %
-
 " Visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv|
 
-" Use tab for indenting in visual mode
-xnoremap <Tab> >gv|
-xnoremap <S-Tab> <gv
-nnoremap > >>_
-nnoremap < <<_
-
 " Allow using the repeat operator with a visual selection (!)
 " http://stackoverflow.com/a/8064607/127816
+" in Visual mode, hitting . applies the same action to all lines
 vnoremap . :normal .<CR>
 
-"move between vim panes with Ctrl-J
+" Move between vim panes with Ctrl-J
 nnoremap <C-J> <C-W>j
 nnoremap <C-K> <C-W>k
 nnoremap <C-L> <C-W>l
 nnoremap <C-H> <C-W>h
 
-" xmap ga <Plug>(EasyAlign)
-" nmap ga <Plug>(EasyAlign)
-
-" nmap - <Plug>(choosewin)
-
 " Tab for next completion
 inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" : "\<TAB>"
+    \ pumvisible() ? "\<C-n>" : "\<TAB>"
 " S-Tab for previous
 inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 inoremap <silent><expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
@@ -404,41 +388,11 @@ nnoremap <C-p> :Files<cr>
 " leader key
 let mapleader = "\<Space>"
 
-let g:clap_theme = 'material_design_dark'
 nnoremap <leader><Space> :Clap<CR>
 nnoremap <leader>b :Clap buffers<CR>
-" nnoremap <leader>B :Clap blines<CR>
-" nnoremap <leader>f :Clap files<CR>
-" nnoremap <leader>g :Clap git_files<CR>
-" nnoremap <leader>l :Clap lines<CR>
-
-" caw settings
-" let g:caw_no_default_keymappings = 1
-" nmap <leader>c <Plug>(caw:hatpos:toggle)
-" vmap <leader>c <Plug>(caw:hatpos:toggle)
-
-let g:NERDCreateDefaultMappings = 0
-
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
-
-" Enable NERDCommenterToggle to check all selected lines is commented or not
-let g:NERDToggleCheckAllLines = 1
 
 nmap <leader>c <Plug>NERDCommenterToggle
 vmap <leader>c <Plug>NERDCommenterToggle
-
-" Search filenames with FZF
-noremap <leader>f :Files<cr>
 
 " C-r: Easier search and replace
 nnoremap <leader>r :<C-u>call <SID>VSetSearch()<CR>:,$s/<C-R>=@/<CR>//gc<left><left><left>
@@ -449,59 +403,37 @@ function! s:VSetSearch() abort
     let @s = temp
 endfunction
 
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-map t <Plug>Sneak_t
-map T <Plug>Sneak_T
-nnoremap <leader>w <Plug>(easymotion-prefix)s
-
-" Search marks
-" noremap <leader>m :Marks<cr>
-
-" Yank & put from clipboard register
-noremap <leader>y "+y
-noremap <leader>p "+p
-
-" Splits vertical & horizontal
-noremap <leader>= :vsp<cr><C-W>l<cr>
-noremap <leader>- :sp<cr><C-W>j<cr>
-
-" write & quit
-noremap <leader>Q :q!<cr>
-" noremap <leader>q :q<cr>
-" noremap <leader>x :x<cr>
-" noremap <leader>z :xall<cr>
-
 " remove search highlighting
-nnoremap <leader><space>n :noh<cr>
-
-" Reload vimrc configuration file
-" nnoremap <leader>vr :source $MYVIMRC<cr>
+nnoremap <silent><C-L> :noh<CR>
 
 noremap <leader>q :bdelete<cr>
 
-" nnoremap <silent> <leader>gs :Gstatus<CR>
-" nnoremap <silent> <leader>gd :Gdiff<CR>
-" nnoremap <silent> <leader>gc :Gcommit<CR>
-" nnoremap <silent> <leader>gia :Git add -p %<CR>
-" nnoremap <silent> <leader>gfm :Gpull<CR>
-
-" map <leader>tc <Plug>(wintabs_close)
-" map <leader>tu <Plug>(wintabs_undo)
-" map <leader>wc <Plug>(wintabs_close_window)
-" command! Tabc WintabsCloseVimtab
-" command! Tabo WintabsOnlyVimtab
-
 " Search in files with ripgrep
-" nmap     <leader>sf <Plug>CtrlSFPrompt
-vmap     <leader>sf <Plug>CtrlSFVwordPath
-" vmap     <leader>sF <Plug>CtrlSFVwordExec
-" nmap     <leader>sn <Plug>CtrlSFCwordPath
-" nmap     <leader>sp <Plug>CtrlSFPwordPath
-" nnoremap <leader>so :CtrlSFOpen<CR>
-" nnoremap <leader>st :CtrlSFToggle<CR>
+vmap <leader>sf <Plug>CtrlSFVwordPath
 
 map <leader>W :w suda://%
+
+" You can use other keymappings like <C-l> instead of <CR> if you want to
+" use these mappings as default search and sometimes want to move cursor with
+" EasyMotion.
+function! s:incsearch_config(...) abort
+  return incsearch#util#deepextend(deepcopy({
+  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  \   'keymap': {
+  \     "\<CR>": '<Over>(easymotion)'
+  \   },
+  \   'is_expr': 0
+  \ }), get(a:, 1, {}))
+endfunction
+
+noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
+
+" Jump to anywhere you want with minimal keystrokes, with just two keys
+" binding
+map <leader>f <Plug>(easymotion-overwin-f2)
+
+" Turn on case-insensitive feature
+let g:EasyMotion_smartcase = 1
 
 "
 " ================================= Searching =================================
@@ -513,7 +445,7 @@ autocmd! User FzfStatusLine call lightline#update()
 
 " Command override (with preview)
 command! -bang -nargs=? -complete=dir Files
-            \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 "
 " =============================== Python files ===============================
@@ -535,6 +467,8 @@ au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 " Add spaces after comment delimiters
 let g:NERDSpaceDelims = 1
 
+let g:NERDCreateDefaultMappings = 0
+
 " Use compact syntax for prettified multi-line comments
 let g:NERDCompactSexyComs = 1
 
@@ -542,22 +476,21 @@ let g:NERDCompactSexyComs = 1
 " indentation
 let g:NERDDefaultAlign = 'left'
 
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-let g:comfortable_motion_scroll_down_key = "j"
-let g:comfortable_motion_scroll_up_key = "k"
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not
+let g:NERDToggleCheckAllLines = 1
 
 let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
 let g:lastplace_ignore_buftype = "quickfix"
 
-let g:sneak#label = 1
 
-" if you want to use overlay feature
-let g:choosewin_overlay_enable = 1
+let g:comfortable_motion_scroll_down_key = "j"
+let g:comfortable_motion_scroll_up_key = "k"
 
 let g:comfortable_motion_friction = 80.0
 let g:comfortable_motion_air_drag = 2.0
@@ -716,15 +649,4 @@ let g:indentLine_char = '│'
 set lazyredraw
 set regexpengine=1
 
-let g:clap_provider_dotfiles = {
-    \ 'source': [
-    \    '~/.vimrc',
-    \    '~/.zsh/01-jetm-zpreztorc.zsh',
-    \    '~/.zsh/02-jetm-prezto.zsh',
-    \    '~/.zsh/03-vm-settings.zsh',
-    \    '~/.zsh/04-hstr.zsh',
-    \    '~/.zshrc',
-    \    '~/.tmux.conf',
-    \ ],
-    \ 'sink': 'e',
-    \ }
+let g:clap_theme = 'material_design_dark'
