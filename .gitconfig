@@ -22,7 +22,7 @@
     ; autocrlf = input
 
     # gitproxy is a script to allow clone git:// repositories
-    ; gitproxy = gitproxy
+    gitproxy = gitproxy
 
 [delta]
     line-numbers = falseh
@@ -253,9 +253,9 @@
     smtpServerPort = 587
     smtpserver = smtp3.hpe.com
 
-[http]
-    proxy = http://web-proxy.rose.hpecorp.net:8080
-    sslverify = false
+; [http]
+;     proxy = http://web-proxy.rose.hpecorp.net:8080
+;     sslverify = false
 
 ; [feature]
     ; experimental = true

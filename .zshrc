@@ -53,6 +53,10 @@ zinit light momo-lab/zsh-abbrev-alias
 zi0b
 zinit light hlissner/zsh-autopair
 
+zinit ice as"program" pick"$ZPFX/bin/git-*" \
+  src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX"
+zinit light tj/git-extras
+
 zi0c
 zinit light zdharma/fast-syntax-highlighting
 
