@@ -7,11 +7,11 @@ fi
 
 ### Added by Zinit's installer
 if [[ ! -f ${HOME}/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "${HOME}/.zinit" && command chmod g-rwX "${HOME}/.zinit"
-    command git clone https://github.com/zdharma/zinit "${HOME}/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+  print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+  command mkdir -p "${HOME}/.zinit" && command chmod g-rwX "${HOME}/.zinit"
+  command git clone https://github.com/zdharma/zinit "${HOME}/.zinit/bin" && \
+    print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+    print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
 source "${HOME}/.zinit/bin/zinit.zsh"
@@ -21,10 +21,10 @@ autoload -Uz _zinit
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
-    zinit-zsh/z-a-rust \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node
+  zinit-zsh/z-a-rust \
+  zinit-zsh/z-a-as-monitor \
+  zinit-zsh/z-a-patch-dl \
+  zinit-zsh/z-a-bin-gem-node
 
 ### End of Zinit's installer chunk
 
@@ -59,6 +59,12 @@ zinit light tj/git-extras
 
 zi0c
 zinit light zdharma/fast-syntax-highlighting
+
+zinit ice from"gh-r" as"program" bpick"*linux_amd64*"
+zinit load junegunn/fzf
+
+zi0c
+zinit snippet 'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
 
 zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
