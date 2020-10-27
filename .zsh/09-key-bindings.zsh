@@ -46,31 +46,56 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
+export FZF_CTRL_T_COMMAND="fd --type f --hidden --exclude '.git'"
+
 #
 # Skim
 #
 # copied and modified from https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh
 
+# The code at the top and the bottom of this file is the same as in completion.zsh.
+# Refer to that file for explanation.
+# if 'zmodload' 'zsh/parameter' 2>'/dev/null' && (( ${+options} )); then
+#   __skim_key_bindings_options="options=(${(j: :)${(kv)options[@]}})"
+# else
+#   () {
+#     __skim_key_bindings_options="setopt"
+#     'local' '__skim_opt'
+#     for __skim_opt in "${(@)${(@f)$(set -o)}%% *}"; do
+#       if [[ -o "$__skim_opt" ]]; then
+#         __skim_key_bindings_options+=" -o $__skim_opt"
+#       else
+#         __skim_key_bindings_options+=" +o $__skim_opt"
+#       fi
+#     done
+#   }
+# fi
+#
+# 'emulate' 'zsh' '-o' 'no_aliases'
+#
+# {
+#
+# [[ -o interactive ]] || return 0
+
 # CTRL-T - Paste the selected file path(s) into the command line
 # __fsel() {
-#   local cmd="git ls-tree -r --name-only HEAD || fd --type f --hidden --exclude '.git' || rg --files"
-#   export SKIM_CTRL_T_COMMAND="${cmd}"
+#   local cmd="git ls-tree -r --name-only HEAD || fd --type f --hidden --exclude '.git'"
 #   setopt localoptions pipefail no_aliases 2> /dev/null
+#   REPORTTIME_=$REPORTTIME
+#   unset REPORTTIME
 #   eval "$cmd" | SKIM_DEFAULT_OPTIONS="--height ${SKIM_TMUX_HEIGHT:-40%} --reverse $SKIM_DEFAULT_OPTIONS $SKIM_CTRL_T_OPTS" $(__skimcmd) -m "$@" | while read item; do
 #     echo -n "${(q)item} "
 #   done
 #   local ret=$?
 #   echo
+#   REPORTTIME=$REPORTTIME_
+#   unset REPORTTIME_
 #   return $ret
 # }
 #
-# __skim_use_tmux__() {
-#   [ -n "$TMUX_PANE" ] && [ "${SKIM_TMUX:-0}" != 0 ] && [ ${LINES:-40} -gt 15 ]
-# }
-#
 # __skimcmd() {
-#   __skim_use_tmux__ &&
-#     echo "sk-tmux -d${SKIM_TMUX_HEIGHT:-40%}" || echo "sk"
+#   [ -n "$TMUX_PANE" ] && { [ "${SKIM_TMUX:-0}" != 0 ] || [ -n "$SKIM_TMUX_OPTS" ]; } &&
+#     echo "sk-tmux ${SKIM_TMUX_OPTS:--d${SKIM_TMUX_HEIGHT:-40%}} -- " || echo "sk"
 # }
 #
 # skim-file-widget() {
@@ -80,26 +105,7 @@ bindkey -M vicmd v edit-command-line
 #   return $ret
 # }
 # zle     -N   skim-file-widget
-# bindkey '^T' skim-file-widget
-
-# Bind C-f to search for and insert a file with fzy
-insert_fzy_path() {
-  emulate -L zsh
-  local selected_path already_typed_path words
-  words=("${(s/ /)LBUFFER}")
-  already_typed_path="${words[-1]}"
-  fd_cmd="fd --type file --type symlink --hidden --exclude '.git'"
-  fzy_cmd="| fzy -l20 --query='${already_typed_path}'"
-  cmd="${fd_cmd} ${fzy_cmd}"
-  selected_path=$(eval "${cmd}") || return
-  if [[ "${already_typed_path}" != '' ]]; then
-    zle backward-delete-word
-  fi
-  zle -U "${(q)selected_path}"
-  zle reset-prompt
-}
-zle -N insert-fzy-path insert_fzy_path
-bindkey "^t" insert-fzy-path
+# bindkey '^t' skim-file-widget
 
 # Ensure precmds are run after cd
 # skim-redraw-prompt() {
@@ -111,23 +117,51 @@ bindkey "^t" insert-fzy-path
 # }
 # zle -N skim-redraw-prompt
 
+# Bind C-f to search for and insert a file with fzy
+# insert-fzy-path() {
+#   emulate -L zsh
+#   local selected_path already_typed_path words
+#   words=("${(s/ /)LBUFFER}")
+#   already_typed_path="${words[-1]}"
+#   fd_cmd="fd --type file --type symlink --hidden --exclude '.git'"
+#   fzy_cmd="| fzy -l20 --query='${already_typed_path}'"
+#   cmd="${fd_cmd} ${fzy_cmd}"
+#   selected_path=$(eval "${cmd}") || { zle reset-prompt; return; }
+#   if [[ "${already_typed_path}" != '' ]]; then
+#     zle backward-delete-word
+#   fi
+#   zle -U "${(q)selected_path}"
+#   zle reset-prompt
+# }
+# zle -N insert-fzy-path
+# bindkey "^t" insert-fzy-path
+
 # ALT-C - cd into the selected directory
 # skim-cd-widget() {
 #   local cmd="${SKIM_ALT_C_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
 #     -o -type d -print 2> /dev/null | cut -b3-"}"
 #   setopt localoptions pipefail no_aliases 2> /dev/null
-#   local dir="$(eval "$cmd" | SKIM_DEFAULT_OPTIONS="--height ${SKIM_TMUX_HEIGHT:-40%} --reverse $SKIM_DEFAULT_OPTIONS $SKIM_ALT_C_OPTS" $(__skimcmd) -m)"
+#   REPORTTIME_=$REPORTTIME
+#   unset REPORTTIME
+#   local dir="$(eval "$cmd" | SKIM_DEFAULT_OPTIONS="--height ${SKIM_TMUX_HEIGHT:-40%} --reverse $SKIM_DEFAULT_OPTIONS $SKIM_ALT_C_OPTS" $(__skimcmd) --no-multi)"
+#   REPORTTIME=$REPORTTIME_
+#   unset REPORTTIME_
 #   if [[ -z "$dir" ]]; then
 #     zle redisplay
 #     return 0
 #   fi
-#   cd "$dir"
-#   unset dir # ensure this doesn't end up appearing in prompt expansion
+#   if [ -z "$BUFFER" ]; then
+#     BUFFER="cd ${(q)dir}"
+#     zle accept-line
+#   else
+#     print -sr "cd ${(q)dir}"
+#     cd "$dir"
+#   fi
 #   local ret=$?
+#   unset dir # ensure this doesn't end up appearing in prompt expansion
 #   zle skim-redraw-prompt
 #   return $ret
 # }
-#
 # zle     -N    skim-cd-widget
 # bindkey '\ec' skim-cd-widget
 
@@ -135,8 +169,8 @@ bindkey "^t" insert-fzy-path
 # skim-history-widget() {
 #   local selected num
 #   setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
-#   selected=( $(fc -rl 1 |
-#     SKIM_DEFAULT_OPTIONS="--height ${SKIM_TMUX_HEIGHT:-40%} $SKIM_DEFAULT_OPTIONS -n2..,.. --tiebreak=score,index $SKIM_CTRL_R_OPTS --query=${(qqq)LBUFFER} -m" $(__skimcmd)) )
+#   selected=( $(fc -rl 1 | perl -ne 'print if !$seen{(/^\s*[0-9]+\**\s+(.*)/, $1)}++' |
+#     SKIM_DEFAULT_OPTIONS="--height ${SKIM_TMUX_HEIGHT:-40%} $SKIM_DEFAULT_OPTIONS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $SKIM_CTRL_R_OPTS --query=${(qqq)LBUFFER} --no-multi" $(__skimcmd)) )
 #   local ret=$?
 #   if [ -n "$selected" ]; then
 #     num=$selected[1]
@@ -147,8 +181,12 @@ bindkey "^t" insert-fzy-path
 #   zle reset-prompt
 #   return $ret
 # }
-
 # zle     -N   skim-history-widget
 # bindkey '^R' skim-history-widget
+#
+# } always {
+#   eval $__skim_key_bindings_options
+#   'unset' '__skim_key_bindings_options'
+# }
 
 # vim:set ts=2 sw=2 et:

@@ -53,7 +53,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 
 " Fuzzy searching of files using FZF
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'yuki-ycino/fzf-preview.vim'
 
@@ -97,18 +97,18 @@ Plug 'terryma/vim-expand-region'
 xmap v <Plug>(expand_region_expand)
 xmap V <Plug>(expand_region_shrink)
 let g:expand_region_text_objects = {
-      \ 'iw'  :0,
-      \ 'iW'  :0,
-      \ 'i"'  :0,
-      \ 'i''' :0,
-      \ 'i]'  :1,
-      \ 'ib'  :1,
-      \ 'iB'  :1,
-      \ 'il'  :1,
-      \ 'ii'  :1,
-      \ 'ip'  :0,
-      \ 'ie'  :0,
-      \ }
+    \ 'iw'  :0,
+    \ 'iW'  :0,
+    \ 'i"'  :0,
+    \ 'i''' :0,
+    \ 'i]'  :1,
+    \ 'ib'  :1,
+    \ 'iB'  :1,
+    \ 'il'  :1,
+    \ 'ii'  :1,
+    \ 'ip'  :0,
+    \ 'ie'  :0,
+    \ }
 
 " Vim plugin, insert or delete brackets, parens, quotes in pair
 Plug 'jiangmiao/auto-pairs'
@@ -205,6 +205,10 @@ Plug 'rhysd/conflict-marker.vim'
 
 " Generate table of contents for Markdown files
 Plug 'mzlogin/vim-markdown-toc'
+
+
+" A lightweight Vim/Neovim plugin to display buffers and tabs in the tabline
+Plug 'pacha/vem-tabline'
 
 call plug#end()
 
