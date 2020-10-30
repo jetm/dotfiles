@@ -53,18 +53,64 @@ zinit light momo-lab/zsh-abbrev-alias
 zi0b
 zinit light hlissner/zsh-autopair
 
-zinit ice as"program" pick"$ZPFX/bin/git-*" \
-  src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX"
-zinit light tj/git-extras
-
 zi0c
 zinit light zdharma/fast-syntax-highlighting
 
-zinit ice from"gh-r" as"program" bpick"*linux_amd64*"
-zinit load junegunn/fzf
+zi0c as"program" \
+  pick"$ZPFX/bin/git-*" \
+  src"etc/git-extras-completion.zsh" \
+  make"PREFIX=$ZPFX"
+zinit light tj/git-extras
 
 zi0c
-zinit snippet 'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
+zinit snippet \
+  'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
+
+zi0c from"gh-r" as"command" \
+  pick"fd/fd" \
+  mv"fd* -> fd"
+zinit light sharkdp/fd
+
+zi0c from"gh-r" as"command" \
+  pick"bat/bat" \
+  mv"bat* -> bat"
+zinit light sharkdp/bat
+
+zi0c from"gh-r" as"command" \
+  pick"rg/rg" \
+  mv"rg* -> rg"
+zinit light BurntSushi/ripgrep
+
+zi0c from"gh-r" as"program" \
+  bpick"*linux_amd64*"
+zinit light junegunn/fzf
+
+zi0c from"gh-r" as"program" \
+  mv"sd-* -> sd" \
+  sbin"sd*"
+zinit light chmln/sd
+
+zi0c from"gh-r" as"program" \
+  pick"build/x86_64-unknown-linux-musl/broot" \
+  ver"latest"
+zinit light Canop/broot
+
+zi0c from"gh-r" as"program" \
+  bpick="*linux*gnu*" \
+  pick="dust*/dust"
+zinit light bootandy/dust
+
+zi0c from"gh-r" as"command" \
+  bpick"$PICK" \
+  pick"delta/delta" \
+  mv"delta* -> delta"
+zinit light dandavison/delta
+
+zi0c from"gh-r" as"command" \
+  bpick"$PICK" \
+  pick"hyperfine/hyperfine" \
+  mv"hyperfine* -> hyperfine"
+zinit light sharkdp/hyperfine
 
 zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
