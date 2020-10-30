@@ -76,9 +76,9 @@ zi0c from"gh-r" as"command" \
   mv"bat* -> bat"
 zinit light sharkdp/bat
 
-zi0c from"gh-r" as"command" \
-  pick"rg/rg" \
-  mv"rg* -> rg"
+zi0c from"gh-r" as"program" \
+  mv"ripgrep* -> rg" \
+  pick"rg/rg"
 zinit light BurntSushi/ripgrep
 
 zi0c from"gh-r" as"program" \
