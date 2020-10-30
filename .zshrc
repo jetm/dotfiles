@@ -112,6 +112,37 @@ zi0c from"gh-r" as"command" \
   mv"hyperfine* -> hyperfine"
 zinit light sharkdp/hyperfine
 
+zi0c from"gh-r" as"program" \
+  mv"shfmt* -> shfmt"
+zinit light mvdan/sh
+
+zi0c from"gh-r" as"program" \
+  bpick"*linux-musl*"
+zinit light pemistahl/grex
+
+zi0c from"gh-r" as"program" \
+  bpick"*x86_64-linux-gnu*" \
+  mv"shellharden-* -> shellharden" \
+  sbin"shellharden*"
+zinit light anordal/shellharden
+
+zi0c from"gh-r" as"program" \
+  bpick"*x86_64*-linux-musl*" \
+  sbin"sk"
+zinit light lotabout/skim
+
+zi0c from"gh-r" as"program" \
+  bpick"*linux-x86_64-musl*" \
+  mv"tldr-* -> tldr" \
+  sbin"tldr*"
+zinit light dbrgn/tealdeer
+
+zi0c from"gh-r" as"program" \
+  bpick"*x86_64*-linux-musl*" \
+  mv"zoxide-* -> zoxide" \
+  sbin"zoxide*"
+zinit light ajeetdsouza/zoxide
+
 zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
 zstyle ':prezto:module:editor' key-bindings 'vi'
