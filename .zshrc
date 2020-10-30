@@ -143,6 +143,12 @@ zi0c from"gh-r" as"program" \
   sbin"zoxide*"
 zinit light ajeetdsouza/zoxide
 
+zi0c from"gh-r" as"program" \
+  bpick"*linux.x86_64*" \
+  mv"shellcheck-*/shellcheck -> shellcheck" \
+  sbin"shellcheck"
+zinit light koalaman/shellcheck
+
 zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
 zstyle ':prezto:module:editor' key-bindings 'vi'
@@ -165,6 +171,6 @@ for config (${HOME}/.zsh/*.zsh) source ${config}
 zinit ice depth=1 atload"!source ${HOME}/.p10k.zsh"
 zinit light romkatv/powerlevel10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # vim:set ts=2 sw=2 et:
