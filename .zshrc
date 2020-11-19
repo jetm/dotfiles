@@ -22,8 +22,6 @@ autoload -Uz _zinit
 # (this is currently required for annexes)
 zinit light-mode for \
   zinit-zsh/z-a-rust \
-  zinit-zsh/z-a-as-monitor \
-  zinit-zsh/z-a-patch-dl \
   zinit-zsh/z-a-bin-gem-node
 
 ### End of Zinit's installer chunk
@@ -148,6 +146,35 @@ zi0c from"gh-r" as"program" \
   mv"shellcheck-*/shellcheck -> shellcheck" \
   sbin"shellcheck"
 zinit light koalaman/shellcheck
+
+zinit ice wait from"gitlab" as"program" \
+  pick"target/release/cn" \
+  atclone"cargo build --release" \
+  atpull"%atclone"
+zinit light arijit79/cn
+
+# Install rbenv
+zinit ice wait lucid from'gh' as'program'\
+  pick'bin/rbenv' \
+  atclone'src/configure && make -C src; libexec/rbenv init - > .zinitrc.zsh' \
+  atpull'%atclone' \
+  src'.zinitrc.zsh' \
+  nocompile'!'
+zinit light rbenv/rbenv
+
+# install ruby-build
+zinit ice wait lucid from'gh' as'program' \
+  pick'bin/ruby-build' \
+zinit light rbenv/ruby-build
+
+# install rbenv-each plugin
+zinit ice wait lucid from'gh' as'program' \
+  pick'bin/rbenv-each' \
+zinit light rbenv/rbenv-each
+
+path=($HOME/.rbenv/bin(N-/) $path)
+zi0a has"rbenv"
+zinit light htlsne/zinit-rbenv
 
 zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
