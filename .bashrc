@@ -106,10 +106,10 @@ debug() {
     bash -x "$(command -v "$script")" "$@"
 }
 
-COV_PATH=/aruba/halon/infra/coverity/cov-analysis-linux64-8.0.0/bin
-if [ -d ${COV_PATH} ]; then
-    PATH=${COV_PATH}:"${PATH}"
-fi
+# COV_PATH=/aruba/halon/infra/coverity/cov-analysis-linux64-8.0.0/bin
+# if [ -d ${COV_PATH} ]; then
+#     PATH=${COV_PATH}:"${PATH}"
+# fi
 
 # add user base to python path
 # __PYTHON_PATH=$(python -c "import site, os; print(os.path.join(site.USER_BASE, 'lib', 'python3.4', 'site-packages'))"):$PYTHONPATH
@@ -120,25 +120,25 @@ if [ -d ~/bin ]; then
     PATH=~/bin:"${PATH}"
 fi
 
-NODE_GLOBAL_PATH=$HOME/.npm-global/bin
-if [ -d "${NODE_GLOBAL_PATH}" ]; then
-    PATH="${NODE_GLOBAL_PATH}:${PATH}"
-fi
+# NODE_GLOBAL_PATH=$HOME/.npm-global/bin
+# if [ -d "${NODE_GLOBAL_PATH}" ]; then
+#     PATH="${NODE_GLOBAL_PATH}:${PATH}"
+# fi
 
-RUST_GLOBAL_PATH=$HOME/.cargo/bin
-if [ -d "${RUST_GLOBAL_PATH}" ]; then
-    PATH="${RUST_GLOBAL_PATH}:${PATH}"
-fi
-
-LOCAL_PATH=$HOME/.local/bin
-if [ -d "${LOCAL_PATH}" ]; then
-    PATH="${LOCAL_PATH}:${PATH}"
-fi
-
-CABAL_PATH=$HOME/.cabal/bin
-if [ -d "${CABAL_PATH}" ]; then
-    PATH="${CABAL_PATH}:${PATH}"
-fi
+# RUST_GLOBAL_PATH=$HOME/.cargo/bin
+# if [ -d "${RUST_GLOBAL_PATH}" ]; then
+#     PATH="${RUST_GLOBAL_PATH}:${PATH}"
+# fi
+#
+# LOCAL_PATH=$HOME/.local/bin
+# if [ -d "${LOCAL_PATH}" ]; then
+#     PATH="${LOCAL_PATH}:${PATH}"
+# fi
+#
+# CABAL_PATH=$HOME/.cabal/bin
+# if [ -d "${CABAL_PATH}" ]; then
+#     PATH="${CABAL_PATH}:${PATH}"
+# fi
 
 #
 # Other Alias
@@ -254,8 +254,6 @@ if [[ $(lsb_release -i) = *Ubuntu* ]]; then
     remove_PATH_duplicates
     unalias bb
 fi
-
-export PATH="$HOME/.poetry/bin:$PATH"
 
 # ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/ssh-auth-sock.$HOSTNAME"
 

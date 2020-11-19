@@ -48,7 +48,6 @@ Plug 'haya14busa/incsearch-easymotion.vim'
 " unite, Denite, lightline, vim-startify and many more
 Plug 'ryanoasis/vim-devicons'
 
-" Plug 'jlanzarotta/bufexplorer'
 " Modern performant generic finder and dispatcher for Vim and NeoVim
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 
@@ -206,9 +205,40 @@ Plug 'rhysd/conflict-marker.vim'
 " Generate table of contents for Markdown files
 Plug 'mzlogin/vim-markdown-toc'
 
-
 " A lightweight Vim/Neovim plugin to display buffers and tabs in the tabline
 Plug 'pacha/vem-tabline'
+
+" Builtin terminal in the floating/popup window
+Plug 'voldikss/vim-floaterm'
+let g:floaterm_keymap_toggle = '<F11>'
+let g:floaterm_width = 0.9
+let g:floaterm_height = 0.9
+
+Plug 'tpope/vim-endwise'
+
+" A powerful grammar checker for Vim using LanguageTool
+" Plug 'rhysd/vim-grammarous'
+" let g:grammarous#use_location_list = 1
+" let g:grammarous#show_first_error = 1
+" map <space>rr <Plug>(grammarous-open-info-window)
+
+" Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+" let g:Lf_ShortcutF = '<c-p>'
+" noremap <Leader>lm :LeaderfMru<cr>
+" noremap <Leader>lf :LeaderfFunctionAll!<cr>
+" noremap <Leader>ll :LeaderfLineAll<cr>
+"
+" let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+"
+" let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+" let g:Lf_WorkingDirectoryMode = 'Ac'
+" let g:Lf_WindowHeight = 0.30
+" let g:Lf_CacheDirectory = expand('~/.vim/cache')
+" let g:Lf_HideHelp = 1
+" let g:Lf_StlColorscheme = 'powerline'
+" let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+" let g:Lf_WindowPosition = 'popup'
+" let g:Lf_PreviewInPopup = 1
 
 call plug#end()
 
@@ -392,7 +422,7 @@ nnoremap <C-p> :Files<cr>
 " leader key
 let mapleader = "\<Space>"
 
-nnoremap <leader><Space> :Clap<CR>
+nnoremap <leader><leader> :Clap<CR>
 nnoremap <leader>b :Clap buffers<CR>
 
 nmap <leader>c <Plug>NERDCommenterToggle
@@ -413,7 +443,8 @@ nnoremap <silent><C-L> :noh<CR>
 noremap <leader>q :bdelete<cr>
 
 " Search in files with ripgrep
-vmap <leader>sf <Plug>CtrlSFVwordPath
+nmap <leader>g <Plug>CtrlSFPrompt
+vmap <leader>gw <Plug>CtrlSFVwordPath
 
 map <leader>W :w suda://%
 
@@ -435,6 +466,9 @@ noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
 " Jump to anywhere you want with minimal keystrokes, with just two keys
 " binding
 map <leader>f <Plug>(easymotion-overwin-f2)
+
+" Disable default mappings
+let g:EasyMotion_do_mapping = 0
 
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
@@ -492,7 +526,6 @@ let g:NERDToggleCheckAllLines = 1
 let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
 let g:lastplace_ignore_buftype = "quickfix"
 
-
 let g:comfortable_motion_scroll_down_key = "j"
 let g:comfortable_motion_scroll_up_key = "k"
 
@@ -512,6 +545,7 @@ let g:ale_fixers = {
 
 let g:ale_linters = {
   \ 'sh': ['shellcheck'],
+  \ 'gitcommit': ['proselint', 'write-good', 'gitlint'],
   \ }
 
 let g:ale_sign_error = "\uf05e"
@@ -526,7 +560,7 @@ let g:ale_warn_about_trailing_whitespace = 1
 " ----------
 " LanguageClient-neovim
 let g:LanguageClient_serverCommands = {
-  \ 'sh': ['language_server'],
+  \ 'sh': ['bash-language-server', 'start']
   \ }
 
 let g:LanguageClient_diagnosticsDisplay = {
