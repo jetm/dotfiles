@@ -195,9 +195,8 @@ for config (${HOME}/.zsh/*.zsh) source ${config}
 # Powerlevel10k
 #
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 zinit ice depth=1 atload"!source ${HOME}/.p10k.zsh"
 zinit light romkatv/powerlevel10k
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # vim:set ts=2 sw=2 et:

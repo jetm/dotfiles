@@ -556,8 +556,9 @@ let g:ale_sign_column_always = 1
 let g:ale_warn_about_trailing_blank_lines = 1
 let g:ale_warn_about_trailing_whitespace = 1
 
+"
 " language server
-" ----------
+"
 " LanguageClient-neovim
 let g:LanguageClient_serverCommands = {
   \ 'sh': ['bash-language-server', 'start']
