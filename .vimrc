@@ -31,9 +31,6 @@ Plug 'junegunn/rainbow_parentheses.vim'
 " Make the yanked region apparent!
 Plug 'machakann/vim-highlightedyank'
 
-" Sneak is invoked with s followed by exactly two characters
-" Plug 'justinmk/vim-sneak'
-
 " Vim motions on speed! Untested
 Plug 'easymotion/vim-easymotion'
 
@@ -41,15 +38,13 @@ Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 
-" Allows alignment of several lines around vim text objs
-" Plug 'junegunn/vim-easy-align'
-
 " Adds file type icons to Vim plugins such as: NERDTree, vim-airline, CtrlP,
 " unite, Denite, lightline, vim-startify and many more
 Plug 'ryanoasis/vim-devicons'
 
 " Modern performant generic finder and dispatcher for Vim and NeoVim
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
 " Fuzzy searching of files using FZF
 Plug 'junegunn/fzf'
@@ -58,9 +53,6 @@ Plug 'yuki-ycino/fzf-preview.vim'
 
 " Plugin for vim to enabling opening a file in a given line
 Plug 'bogado/file-line'
-
-" An ack.vim alternative mimics Ctrl-Shift-F on Sublime Text 2
-Plug 'dyng/ctrlsf.vim'
 
 " Smooth scroll
 Plug 'yuttie/comfortable-motion.vim'
@@ -74,6 +66,10 @@ Plug 'farmergreg/vim-lastplace'
 " unimpaired.vim: Pairs of handy bracket mappings
 Plug 'tpope/vim-unimpaired'
 
+" Weapon to fight against conflicts in Vim
+" [x and ]x mappings are defined as default
+Plug 'rhysd/conflict-marker.vim'
+
 "
 "========= Text manipulation =========
 "
@@ -81,15 +77,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-line'
-" Plug 'kana/vim-textobj-entire'
-" Plug 'kana/vim-textobj-syntax'
-" Plug 'kana/vim-textobj-datetime'
-" Plug 'kana/vim-operator-replace'
-" Plug 'kana/vim-operator-user'
-"
-" Plug 'thinca/vim-textobj-comment'
-" Plug 'thinca/vim-textobj-between'
-" Plug 'rhysd/vim-textobj-anyblock'
 
 " Expand selection
 Plug 'terryma/vim-expand-region'
@@ -113,25 +100,13 @@ let g:expand_region_text_objects = {
 Plug 'jiangmiao/auto-pairs'
 
 " Quoting/parenthesizing made simple
-" Plug 'tpope/vim-surround'
 Plug 'machakann/vim-sandwich'
 
 " Enable repeating supported plugin maps with "."
 Plug 'tpope/vim-repeat'
 
-" Vim comment plugin: supported operator/non-operator mappings, repeatable by
-" dot-command, 300+ filetypes. Errors with git rebase
-" Plug 'tyru/caw.vim'
-
 " Vim plugin for intensely nerdy commenting powers
 Plug 'preservim/nerdcommenter' , { 'on' : '<Plug>NERDCommenterToggle' }
-
-" Find And Replace plugin options
-" Plug 'brooth/far.vim'
-
-" Vim mapping for sorting a range of text
-" Allows sorting via `gs` motion
-" Plug 'christoomey/vim-sort-motion'
 
 " Multiple cursors plugin for vim/neovim
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -142,7 +117,9 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 " Seamless integration for vim and tmux's clipboard
 Plug 'roxma/vim-tmux-clipboard'
 
+"
 "========= Languages =========
+"
 
 " Asychronous Lint Engine, on the fly linting of files
 if has('nvim')
@@ -157,9 +134,6 @@ Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 let g:ale_completion_enabled = 0
 Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
-
-" Tame the quickfix window
-" Plug 'romainl/vim-qf'
 
 " LSP language server
 Plug 'autozimu/LanguageClient-neovim', {
@@ -198,10 +172,6 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
-" Weapon to fight against conflicts in Vim
-" [x and ]x mappings are defined as default
-Plug 'rhysd/conflict-marker.vim'
-
 " Generate table of contents for Markdown files
 Plug 'mzlogin/vim-markdown-toc'
 
@@ -214,6 +184,7 @@ let g:floaterm_keymap_toggle = '<F11>'
 let g:floaterm_width = 0.9
 let g:floaterm_height = 0.9
 
+" Wisely add 'end' in ruby, endfunction/endif/more in vim script
 Plug 'tpope/vim-endwise'
 
 " A powerful grammar checker for Vim using LanguageTool
@@ -221,24 +192,6 @@ Plug 'tpope/vim-endwise'
 " let g:grammarous#use_location_list = 1
 " let g:grammarous#show_first_error = 1
 " map <space>rr <Plug>(grammarous-open-info-window)
-
-" Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-" let g:Lf_ShortcutF = '<c-p>'
-" noremap <Leader>lm :LeaderfMru<cr>
-" noremap <Leader>lf :LeaderfFunctionAll!<cr>
-" noremap <Leader>ll :LeaderfLineAll<cr>
-"
-" let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
-"
-" let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
-" let g:Lf_WorkingDirectoryMode = 'Ac'
-" let g:Lf_WindowHeight = 0.30
-" let g:Lf_CacheDirectory = expand('~/.vim/cache')
-" let g:Lf_HideHelp = 1
-" let g:Lf_StlColorscheme = 'powerline'
-" let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
-" let g:Lf_WindowPosition = 'popup'
-" let g:Lf_PreviewInPopup = 1
 
 call plug#end()
 
@@ -405,12 +358,16 @@ nnoremap <C-K> <C-W>k
 nnoremap <C-L> <C-W>l
 nnoremap <C-H> <C-W>h
 
-" Tab for next completion
-inoremap <silent><expr> <Tab>
-    \ pumvisible() ? "\<C-n>" : "\<TAB>"
-" S-Tab for previous
-inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-inoremap <silent><expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 " CtrlP compatibility
 nnoremap <C-p> :Files<cr>
@@ -428,29 +385,16 @@ nnoremap <leader>b :Clap buffers<CR>
 nmap <leader>c <Plug>NERDCommenterToggle
 vmap <leader>c <Plug>NERDCommenterToggle
 
-" C-r: Easier search and replace
-nnoremap <leader>r :<C-u>call <SID>VSetSearch()<CR>:,$s/<C-R>=@/<CR>//gc<left><left><left>
-function! s:VSetSearch() abort
-    let temp = @s
-    norm! gv"sy
-    let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
-    let @s = temp
-endfunction
-
 " remove search highlighting
 nnoremap <silent><C-L> :noh<CR>
 
 noremap <leader>q :bdelete<cr>
 
 " Search in files with ripgrep
-nmap <leader>g <Plug>CtrlSFPrompt
-vmap <leader>gw <Plug>CtrlSFVwordPath
+nmap <leader>g :Leaderf! rg -e %s
+nmap <leader>gw :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 
-map <leader>W :w suda://%
-
-" You can use other keymappings like <C-l> instead of <CR> if you want to
-" use these mappings as default search and sometimes want to move cursor with
-" EasyMotion.
+" EasyMotion
 function! s:incsearch_config(...) abort
   return incsearch#util#deepextend(deepcopy({
   \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
@@ -461,7 +405,7 @@ function! s:incsearch_config(...) abort
   \ }), get(a:, 1, {}))
 endfunction
 
-noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
+noremap <silent><expr> / incsearch#go(<SID>incsearch_config())
 
 " Jump to anywhere you want with minimal keystrokes, with just two keys
 " binding
@@ -689,3 +633,55 @@ set lazyredraw
 set regexpengine=1
 
 let g:clap_theme = 'material_design_dark'
+
+" === LeaderF settings === "
+
+" Behaviour
+let g:Lf_DefaultExternalTool = 'rg'
+let g:Lf_WorkingDirectoryMode = "Ac"
+let g:Lf_NoChdir = 1
+let g:Lf_HideHelp = 1
+
+" Statusline
+let g:Lf_StlColorscheme = 'gruvbox_material'
+let g:Lf_StlSeparator = { 'left': '', 'right': '' }
+
+" Popup windows
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
+let g:Lf_PopupPreviewPosition = 'bottom'
+let g:Lf_PopupColorscheme = 'gruvbox_material'
+let g:Lf_PopupPosition = [10, 0]
+let g:Lf_PopupWidth = 0.85
+let g:Lf_PopupHeight = 0.4
+let g:Lf_PreviewPopupWidth = 10
+
+" Enable preview for specific types
+let g:Lf_PreviewResult = {
+    \ 'File': 0,
+    \ 'Buffer': 0,
+    \ 'Mru': 0,
+    \ 'Tag': 0,
+    \ 'BufTag': 1,
+    \ 'Function': 1,
+    \ 'Line': 0,
+    \ 'Colorscheme': 0,
+    \ 'Rg': 1,
+    \ 'Gtags': 0
+\}
+
+" Disable default bindings
+let g:Lf_ShortcutF = 0
+let g:Lf_ShortcutB = 0
+
+let g:Lf_WildIgnore = {
+    \ 'dir': ['.svn','.git','.hg', '.idea', '.project'],
+    \ 'file': ['*.sw?','~$*','*.bak', '*.tmp', '*.temp', 'tags']
+\}
+
+let g:Lf_RgConfig = [
+    \ "--glob=!git/*",
+    \ "--glob=!tags",
+    \ "--glob=!.svn/",
+    \ "--glob=!.idea/*",
+\]

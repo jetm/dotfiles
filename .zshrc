@@ -147,6 +147,11 @@ zi0c from"gh-r" as"program" \
   sbin"shellcheck"
 zinit light koalaman/shellcheck
 
+zi0c from"gh-r" as"program" \
+  bpick"*linux_x86_64.tar.gz" \
+  pick"glow"
+zinit load charmbracelet/glow
+
 zinit ice wait from"gitlab" as"program" \
   pick"target/release/cn" \
   atclone"cargo build --release" \
