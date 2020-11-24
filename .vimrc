@@ -391,7 +391,7 @@ nnoremap <silent><C-L> :noh<CR>
 noremap <leader>q :bdelete<cr>
 
 " Search in files with ripgrep
-nmap <leader>g :Leaderf! rg -e %s
+nmap <leader>g :Leaderf! rg -e
 nmap <leader>gw :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 
 " EasyMotion
