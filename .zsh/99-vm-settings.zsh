@@ -14,8 +14,6 @@ export HTTPS_PROXY="${HPE_PROXY}"
 export FTP_PROXY="${HPE_PROXY}"
 export no_proxy="127.0.0.1,localhost,rose.rdlabs.hpecorp.net,in.rdlabs.hpecorp.net,sg.rdlabs.hpecorp.net,stash.arubanetworks.com,jira.arubanetworks.com,confluence.arubanetworks.com,acp-ci.arubanetworks.com,cloudcop.arubathena.com"
 
-export EDITOR="nvim"
-
 alias gerrit-code-nos="ssh -p 29418 javier.tia@code-nos.rose.rdlabs.hpecorp.net"
 
 if [[ $(lsb_release -i) = *Ubuntu* ]]; then
