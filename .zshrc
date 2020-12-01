@@ -152,11 +152,11 @@ zi0c from"gh-r" as"program" \
   pick"glow"
 zinit load charmbracelet/glow
 
-zinit ice wait from"gitlab" as"program" \
-  pick"target/release/cn" \
-  atclone"cargo build --release" \
-  atpull"%atclone"
-zinit light arijit79/cn
+# zinit ice wait from"gitlab" as"program" \
+#   pick"target/release/cn" \
+#   atclone"cargo build --release" \
+#   atpull"%atclone"
+# zinit light arijit79/cn
 
 # Install rbenv
 zinit ice wait lucid from'gh' as'program'\
