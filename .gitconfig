@@ -250,7 +250,8 @@
     username = javier.tia
 
 [sendemail]
-    smtpServerPort = 587
+    smtpServerPort = 25
+    ; smtpserver = G9W8453.americas.hpqcorp.net
     smtpserver = smtp3.hpe.com
 
 ; [http]
