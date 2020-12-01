@@ -172,9 +172,6 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
-" Generate table of contents for Markdown files
-Plug 'mzlogin/vim-markdown-toc'
-
 " A lightweight Vim/Neovim plugin to display buffers and tabs in the tabline
 Plug 'pacha/vem-tabline'
 
@@ -192,6 +189,13 @@ Plug 'tpope/vim-endwise'
 " let g:grammarous#use_location_list = 1
 " let g:grammarous#show_first_error = 1
 " map <space>rr <Plug>(grammarous-open-info-window)
+
+" Generate table of contents for Markdown files
+Plug 'mzlogin/vim-markdown-toc'
+
+" Delete buffers and close files in Vim without closing your windows or
+" messing up your layout. Like Bclose.vim, but rewritten and well maintained
+Plug 'moll/vim-bbye'
 
 call plug#end()
 
@@ -392,13 +396,16 @@ vmap <leader>c <Plug>NERDCommenterToggle
 " remove search highlighting
 nnoremap <silent><C-L> :noh<CR>
 
-noremap <leader>q :bdelete<cr>
+" noremap <leader>q :bdelete<cr>
+noremap <leader>q :Bwipeout<CR>
 
 " Search in files with ripgrep
 nmap <leader>g :Leaderf! rg -e
 nmap <leader>gw :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 
-" EasyMotion
+" You can use other keymappings like <C-l> instead of <CR> if you want to
+" use these mappings as default search and sometimes want to move cursor with
+" EasyMotion.
 function! s:incsearch_config(...) abort
   return incsearch#util#deepextend(deepcopy({
   \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
@@ -420,6 +427,15 @@ let g:EasyMotion_do_mapping = 0
 
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
+
+" VemTabline settings
+nmap <leader>1 :VemTablineGo 1<CR>
+nmap <leader>2 :VemTablineGo 2<CR>
+nmap <leader>3 :VemTablineGo 3<CR>
+nmap <leader>4 :VemTablineGo 4<CR>
+nmap <leader>5 :VemTablineGo 5<CR>
+
+let g:vem_tabline_show_number = 'index'
 
 "
 " ================================= Searching =================================
