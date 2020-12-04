@@ -181,6 +181,11 @@ path=($HOME/.rbenv/bin(N-/) $path)
 zi0a has"rbenv"
 zinit light htlsne/zinit-rbenv
 
+zi0c depth'1' from'gh' as"program" \
+  pick"ranger.py" \
+  atload"alias ranger=ranger.py"
+zinit light ranger/ranger
+
 zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
 zstyle ':prezto:module:editor' key-bindings 'vi'
