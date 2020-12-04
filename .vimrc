@@ -8,10 +8,9 @@ Plug 'tpope/vim-sensible'
 
 " An alternative sudo.vim
 Plug 'lambdalisue/suda.vim'
-let g:suda_smart_edit = 1
 
 "
-"========= UI =========
+" UI
 "
 Plug 'joshdick/onedark.vim'
 
@@ -71,7 +70,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'rhysd/conflict-marker.vim'
 
 "
-"========= Text manipulation =========
+" Text manipulation
 "
 " Needed by vim-expand-region
 Plug 'kana/vim-textobj-user'
@@ -80,21 +79,6 @@ Plug 'kana/vim-textobj-line'
 
 " Expand selection
 Plug 'terryma/vim-expand-region'
-xmap v <Plug>(expand_region_expand)
-xmap V <Plug>(expand_region_shrink)
-let g:expand_region_text_objects = {
-    \ 'iw'  :0,
-    \ 'iW'  :0,
-    \ 'i"'  :0,
-    \ 'i''' :0,
-    \ 'i]'  :1,
-    \ 'ib'  :1,
-    \ 'iB'  :1,
-    \ 'il'  :1,
-    \ 'ii'  :1,
-    \ 'ip'  :0,
-    \ 'ie'  :0,
-    \ }
 
 " Vim plugin, insert or delete brackets, parens, quotes in pair
 Plug 'jiangmiao/auto-pairs'
@@ -118,20 +102,19 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'roxma/vim-tmux-clipboard'
 
 "
-"========= Languages =========
+" Languages
 "
 
 " Asychronous Lint Engine, on the fly linting of files
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
-let g:deoplete#enable_at_startup = 1
 
+" Tabnine
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 
 " Check syntax in Vim asynchronously and fix files, with Language Server
 " Protocol (LSP) support
-let g:ale_completion_enabled = 0
 Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
 
@@ -139,8 +122,9 @@ Plug 'maximbaz/lightline-ale'
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
-    \ }
+\}
 
+" LSP bash
 Plug 'WolfgangMehner/bash-support'
 
 " Formats a file using formatter defined for its filetype
@@ -170,16 +154,12 @@ Plug 'ekalinin/Dockerfile.vim'
 " Rainbow Parentheses Improved, shorter code, no level limit, smooth and fast,
 " powerful configuration
 Plug 'luochen1990/rainbow'
-let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
 " A lightweight Vim/Neovim plugin to display buffers and tabs in the tabline
 Plug 'pacha/vem-tabline'
 
 " Builtin terminal in the floating/popup window
 Plug 'voldikss/vim-floaterm'
-let g:floaterm_keymap_toggle = '<F11>'
-let g:floaterm_width = 0.9
-let g:floaterm_height = 0.9
 
 " Wisely add 'end' in ruby, endfunction/endif/more in vim script
 Plug 'tpope/vim-endwise'
@@ -200,7 +180,7 @@ Plug 'moll/vim-bbye'
 call plug#end()
 
 "
-"========================== Colours & UI settings ============================
+" Colours & UI settings
 "
 scriptencoding utf-8
 
@@ -223,7 +203,7 @@ set background=dark
 colorscheme onedark
 
 "
-"========================== Buffers & Files ============================
+" Buffers & Files
 "
 " indent
 set autoindent
@@ -315,7 +295,7 @@ unlet g:undo_dir
 unlet g:conf_dir
 
 "
-"========================== Key mapping ============================
+" Key mapping
 "
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
@@ -383,8 +363,6 @@ nnoremap <C-p> :Files<cr>
 "
 " Leader key shortcuts
 "
-
-" leader key
 let mapleader = "\<Space>"
 
 nnoremap <leader><leader> :Clap<CR>
@@ -394,18 +372,17 @@ nmap <leader>c <Plug>NERDCommenterToggle
 vmap <leader>c <Plug>NERDCommenterToggle
 
 " remove search highlighting
-nnoremap <silent><C-L> :noh<CR>
+nnoremap <leader><BS> :noh<CR>
 
-" noremap <leader>q :bdelete<cr>
 noremap <leader>q :Bwipeout<CR>
 
 " Search in files with ripgrep
 nmap <leader>g :Leaderf! rg -e
 nmap <leader>gw :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 
-" You can use other keymappings like <C-l> instead of <CR> if you want to
-" use these mappings as default search and sometimes want to move cursor with
-" EasyMotion.
+"
+" EasyMotion
+"
 function! s:incsearch_config(...) abort
   return incsearch#util#deepextend(deepcopy({
   \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
@@ -428,7 +405,9 @@ let g:EasyMotion_do_mapping = 0
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
 
+"
 " VemTabline settings
+"
 nmap <leader>1 :VemTablineGo 1<CR>
 nmap <leader>2 :VemTablineGo 2<CR>
 nmap <leader>3 :VemTablineGo 3<CR>
@@ -438,7 +417,7 @@ nmap <leader>5 :VemTablineGo 5<CR>
 let g:vem_tabline_show_number = 'index'
 
 "
-" ================================= Searching =================================
+" Searching
 "
 let g:fzf_preview_gitfiles_command = "git status --short --untracked-files=all | awk '{if (substr($0,2,1) !~ / /) print $2}'"
 let g:fzf_layout = { 'down': '~40%' }
@@ -450,7 +429,7 @@ command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 "
-" =============================== Python files ===============================
+" Python files
 "
 au FileType python set autoindent
 au FileType python set smartindent
@@ -458,13 +437,20 @@ au FileType python set tabstop=4 shiftwidth=4 expandtab
 au FileType python set textwidth=79  " PEP-8
 
 "
-" =============================== YAML files ===============================
+" YAML files
 "
 " two space tabs for YAML
 au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 "
-" =============================== Comments ===============================
+" Git commit
+"
+" Instead of reverting the cursor to the last position in the buffer, we
+" set it to the first line when editing a git commit message
+au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])"
+
+"
+" Comments
 "
 " Add spaces after comment delimiters
 let g:NERDSpaceDelims = 1
@@ -487,30 +473,23 @@ let g:NERDCommentEmptyLines = 1
 " Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
 
-let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
-let g:lastplace_ignore_buftype = "quickfix"
-
-let g:comfortable_motion_scroll_down_key = "j"
-let g:comfortable_motion_scroll_up_key = "k"
-
-let g:comfortable_motion_friction = 80.0
-let g:comfortable_motion_air_drag = 2.0
-
 "
 " Ale settings
 "
+let g:ale_completion_enabled = 0
+
 let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
   \ 'sh': ['shfmt'],
   \ 'gitcommit': [],
   \ 'diff': [],
   \ 'gitsendemail': [],
-  \ }
+\}
 
 let g:ale_linters = {
   \ 'sh': ['shellcheck'],
   \ 'gitcommit': ['proselint', 'write-good', 'gitlint'],
-  \ }
+\}
 
 let g:ale_sign_error = "\uf05e"
 let g:ale_sign_warning = "\uf071"
@@ -521,12 +500,12 @@ let g:ale_warn_about_trailing_blank_lines = 1
 let g:ale_warn_about_trailing_whitespace = 1
 
 "
-" language server
+" Language Server
 "
 " LanguageClient-neovim
 let g:LanguageClient_serverCommands = {
   \ 'sh': ['bash-language-server', 'start']
-  \ }
+\}
 
 let g:LanguageClient_diagnosticsDisplay = {
   \ 1: {
@@ -553,11 +532,7 @@ let g:LanguageClient_diagnosticsDisplay = {
     \ 'signText': "\uf05a",
     \ 'signTexthl': 'ALEInfoSign',
     \ },
-  \ }
-
-" Instead of reverting the cursor to the last position in the buffer, we
-" set it to the first line when editing a git commit message
-au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+\}
 
 let g:lightline = {
     \ 'colorscheme': 'onedark',
@@ -608,12 +583,9 @@ let g:lightline = {
     \ },
     \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
     \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
-    \}
+\}
 
 " lightline-buffer ui settings
-" replace these symbols with ascii characters if your environment does not
-" support unicode
-" ---------------------------------------------------
 let g:lightline_buffer_logo = "\ue62b "
 let g:lightline_buffer_readonly_icon = "\ufafa"
 let g:lightline_buffer_modified_icon = "\ufac1"
@@ -643,19 +615,19 @@ let g:lightline#ale#indicator_warnings = "\uf071 "
 let g:lightline#ale#indicator_errors = "\uf05e "
 let g:lightline#ale#indicator_ok = "\uf00c "
 
+"
 " vim-indent-guides
+"
 let g:indent_guides_start_level = 2
+
 " It has an effect over fillchars due to Yggdroot/indentLine plugin
 let g:indentLine_char = '│'
 
-" Find And Replace plugin options
-set lazyredraw
-set regexpengine=1
-
 let g:clap_theme = 'material_design_dark'
 
-" === LeaderF settings === "
-
+"
+" LeaderF settings
+"
 " Behaviour
 let g:Lf_DefaultExternalTool = 'rg'
 let g:Lf_WorkingDirectoryMode = "Ac"
@@ -706,4 +678,57 @@ let g:Lf_RgConfig = [
     \ "--glob=!.idea/*",
 \]
 
+"
+" deoplete
+"
+let g:python3_host_prog = "/usr/bin/python3.7"
+let g:deoplete#enable_at_startup = 1
+
+" For Tabnine
 call deoplete#custom#option('prev_completion_mode', 'mirror')
+
+"
+" vim-floaterm
+"
+let g:floaterm_open_command = 'tabe'
+let g:floaterm_keymap_toggle = '<F11>'
+let g:floaterm_width = 0.98
+let g:floaterm_height = 0.4
+
+let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
+let g:lastplace_ignore_buftype = "quickfix"
+
+let g:comfortable_motion_scroll_down_key = "j"
+let g:comfortable_motion_scroll_up_key = "k"
+
+let g:comfortable_motion_friction = 80.0
+let g:comfortable_motion_air_drag = 2.0
+
+" Find And Replace plugin options
+set lazyredraw
+set regexpengine=1
+
+"
+" Text expantion
+"
+xmap v <Plug>(expand_region_expand)
+xmap V <Plug>(expand_region_shrink)
+
+let g:expand_region_text_objects = {
+    \ 'iw'  :0,
+    \ 'iW'  :0,
+    \ 'i"'  :0,
+    \ 'i''' :0,
+    \ 'i]'  :1,
+    \ 'ib'  :1,
+    \ 'iB'  :1,
+    \ 'il'  :1,
+    \ 'ii'  :1,
+    \ 'ip'  :0,
+    \ 'ie'  :0,
+    \ }
+
+" Set to 0 if you want to enable it later via :RainbowToggle
+let g:rainbow_active = 1
+
+let g:suda_smart_edit = 1
