@@ -150,8 +150,8 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
-alias e=nvim
-export EDITOR='nvim'
+alias e=vim
+export EDITOR='vim'
 alias ..='cd ..'
 
 # for t in $(cat /tmp/LEVEL2_8400); do TS_SOCKET=/ws/tiamarin/logs/ridley/l2/ridley.l2.socket TMPDIR=/ws/tiamarin/logs/ridley/l2 TS_SAVELIST=/ws/tiamarin/logs/ridley/l2/ridley.l2.ts-savelist ts -L 'LEVEL2_8400' ht -t $t -h 8400ANY -e jetm@hpe.com -y -waitForResults -i /aruba/pub/ridley-tiamarin-linux-yocto-4-4-93.swi; done
