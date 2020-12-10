@@ -1,3 +1,8 @@
+if !has('nvim')
+    " Stop sourcing here if regular vim is sourcing this file
+    finish
+endif
+
 let g:vimrc_author='Javier Tia'
 let g:vimrc_email='javier.tia@hpe.com'
 
@@ -21,6 +26,9 @@ Plug 'taohexxx/lightline-buffer'
 " Shows indent guides with columns
 Plug 'Yggdroot/indentLine'
 
+" Indent guides on blank lines for Neovim
+Plug 'lukas-reineke/indent-blankline.nvim'
+
 " A Vim plugin for visually displaying indent levels in code
 Plug 'nathanaelkane/vim-indent-guides'
 
@@ -32,6 +40,9 @@ Plug 'machakann/vim-highlightedyank'
 
 " Vim motions on speed! Untested
 Plug 'easymotion/vim-easymotion'
+
+" Lightning fast left-right movement in Vim
+Plug 'unblevable/quick-scope'
 
 "Improved incremental searching for Vim
 Plug 'haya14busa/incsearch.vim'
@@ -732,3 +743,9 @@ let g:expand_region_text_objects = {
 let g:rainbow_active = 1
 
 let g:suda_smart_edit = 1
+
+"
+" quick-scope
+"
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
