@@ -188,6 +188,9 @@ Plug 'mzlogin/vim-markdown-toc'
 " messing up your layout. Like Bclose.vim, but rewritten and well maintained
 Plug 'moll/vim-bbye'
 
+" Very small plugin to easily stage lines
+Plug 'neworld/vim-git-hunk-editor'
+
 call plug#end()
 
 "
@@ -394,17 +397,6 @@ nmap <leader>gw :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 "
 " EasyMotion
 "
-function! s:incsearch_config(...) abort
-  return incsearch#util#deepextend(deepcopy({
-  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {
-  \     "\<CR>": '<Over>(easymotion)'
-  \   },
-  \   'is_expr': 0
-  \ }), get(a:, 1, {}))
-endfunction
-
-noremap <silent><expr> / incsearch#go(<SID>incsearch_config())
 
 " Jump to anywhere you want with minimal keystrokes, with just two keys
 " binding
