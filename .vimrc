@@ -167,19 +167,17 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'luochen1990/rainbow'
 
 " A lightweight Vim/Neovim plugin to display buffers and tabs in the tabline
-Plug 'pacha/vem-tabline'
+" Better looking, but has issues with buffers numbers
+" Plug 'pacha/vem-tabline'
+"
+" Forget Vim tabs – now you can have buffer tabs
+Plug 'ap/vim-buftabline'
 
 " Builtin terminal in the floating/popup window
 Plug 'voldikss/vim-floaterm'
 
 " Wisely add 'end' in ruby, endfunction/endif/more in vim script
 Plug 'tpope/vim-endwise'
-
-" A powerful grammar checker for Vim using LanguageTool
-" Plug 'rhysd/vim-grammarous'
-" let g:grammarous#use_location_list = 1
-" let g:grammarous#show_first_error = 1
-" map <space>rr <Plug>(grammarous-open-info-window)
 
 " Generate table of contents for Markdown files
 Plug 'mzlogin/vim-markdown-toc'
@@ -409,15 +407,29 @@ let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 
 "
-" VemTabline settings
+" vem-tabline settings
+" It has issues with buffer numbering
+" nmap <leader>1 :VemTablineGo 1<CR>
+" nmap <leader>2 :VemTablineGo 2<CR>
+" nmap <leader>3 :VemTablineGo 3<CR>
+" nmap <leader>4 :VemTablineGo 4<CR>
+" nmap <leader>5 :VemTablineGo 5<CR>
 "
-nmap <leader>1 :VemTablineGo 1<CR>
-nmap <leader>2 :VemTablineGo 2<CR>
-nmap <leader>3 :VemTablineGo 3<CR>
-nmap <leader>4 :VemTablineGo 4<CR>
-nmap <leader>5 :VemTablineGo 5<CR>
+" let g:vem_tabline_show_number = 'buffnr'
 
-let g:vem_tabline_show_number = 'index'
+"
+" vim-buftabline settings
+"
+let g:buftabline_show = 1
+let g:buftabline_indicators = 1
+let g:buftabline_separators = 1
+" 0 - none, 1 - buffer, 2 - ordinal
+let g:buftabline_numbers = 2
+nmap <leader>1 <Plug>BufTabLine.Go(1)
+nmap <leader>2 <Plug>BufTabLine.Go(2)
+nmap <leader>3 <Plug>BufTabLine.Go(3)
+nmap <leader>4 <Plug>BufTabLine.Go(4)
+nmap <leader>5 <Plug>BufTabLine.Go(5)
 
 "
 " Searching
@@ -430,14 +442,6 @@ autocmd! User FzfStatusLine call lightline#update()
 " Command override (with preview)
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-"
-" Python files
-"
-au FileType python set autoindent
-au FileType python set smartindent
-au FileType python set tabstop=4 shiftwidth=4 expandtab
-au FileType python set textwidth=79  " PEP-8
 
 "
 " YAML files
@@ -483,10 +487,10 @@ let g:ale_completion_enabled = 0
 
 let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \ 'sh': ['shfmt'],
-  \ 'gitcommit': [],
   \ 'diff': [],
+  \ 'gitcommit': [],
   \ 'gitsendemail': [],
+  \ 'sh': ['shfmt'],
 \}
 
 let g:ale_linters = {
@@ -626,8 +630,6 @@ let g:indent_guides_start_level = 2
 " It has an effect over fillchars due to Yggdroot/indentLine plugin
 let g:indentLine_char = '│'
 
-let g:clap_theme = 'material_design_dark'
-
 "
 " LeaderF settings
 "
@@ -741,3 +743,5 @@ let g:suda_smart_edit = 1
 "
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+let g:clap_theme = 'material_design_dark'
