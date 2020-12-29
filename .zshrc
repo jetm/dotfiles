@@ -56,9 +56,6 @@ zinit ice  \
   pick"bin/git-undo" as"program"
 zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-undo
 
-zi0c
-zinit light zdharma/fast-syntax-highlighting
-
 zi0c from'gh-r' as"program" \
   has"git" \
   bpick"*linux-amd64*" \
@@ -67,6 +64,9 @@ zi0c from'gh-r' as"program" \
     mv ./man/*.1 $ZPFX/share/man/man1; \
     rm -rf ./man"
 zinit light git-lfs/git-lfs
+
+zi0c
+zinit light zdharma/fast-syntax-highlighting
 
 zi0c from"gh-r" as"command" \
   pick"fd/fd" \
