@@ -22,6 +22,7 @@ autoload -Uz _zinit
 # (this is currently required for annexes)
 zinit light-mode for \
   zinit-zsh/z-a-rust \
+  zinit-zsh/z-a-readurl \
   zinit-zsh/z-a-bin-gem-node
 
 ### End of Zinit's installer chunk
@@ -51,18 +52,21 @@ zinit light momo-lab/zsh-abbrev-alias
 zi0b
 zinit light hlissner/zsh-autopair
 
+zinit ice  \
+  pick"bin/git-undo" as"program"
+zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-undo
+
 zi0c
 zinit light zdharma/fast-syntax-highlighting
 
-zi0c as"program" \
-  pick"$ZPFX/bin/git-*" \
-  src"etc/git-extras-completion.zsh" \
-  make"PREFIX=$ZPFX"
-zinit light tj/git-extras
-
-zi0c
-zinit snippet \
-  'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
+zi0c from'gh-r' as"program" \
+  has"git" \
+  bpick"*linux-amd64*" \
+  atclone"PREFIX=$ZPFX ./install.sh; \
+    rm -f ./install.sh ./*.md; \
+    mv ./man/*.1 $ZPFX/share/man/man1; \
+    rm -rf ./man"
+zinit light git-lfs/git-lfs
 
 zi0c from"gh-r" as"command" \
   pick"fd/fd" \
@@ -82,6 +86,11 @@ zinit light BurntSushi/ripgrep
 zi0c from"gh-r" as"program" \
   bpick"*linux_amd64*"
 zinit light junegunn/fzf
+
+zi0c
+zinit snippet "https://github.com/junegunn/fzf/blob/master/shell/completion.zsh"
+zi0c
+zinit snippet "https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh"
 
 zi0c from"gh-r" as"program" \
   mv"sd-* -> sd" \
@@ -152,12 +161,6 @@ zi0c from"gh-r" as"program" \
   pick"glow"
 zinit load charmbracelet/glow
 
-# zinit ice wait from"gitlab" as"program" \
-#   pick"target/release/cn" \
-#   atclone"cargo build --release" \
-#   atpull"%atclone"
-# zinit light arijit79/cn
-
 # Install rbenv
 zinit ice wait lucid from'gh' as'program'\
   pick'bin/rbenv' \
@@ -185,6 +188,10 @@ zi0c depth'1' from'gh' as"program" \
   pick"ranger.py" \
   atload"alias ranger=ranger.py"
 zinit light ranger/ranger
+
+zi0c from"gh-r" as"program" \
+  pick"lazydocker"
+zinit light jesseduffield/lazydocker
 
 zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'

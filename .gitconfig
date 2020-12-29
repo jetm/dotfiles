@@ -70,31 +70,26 @@
 [alias]
     # Branch
     br = branch -vv
-    brd = branch -D
 
     # Commit
     ci = commit
 
     # Checkout
     co = checkout
-    cob = checkout -b
 
     st = status
     sts = status -s -b
 
     # Rebase
     rb = rebase
-    rba = rebase --abort
-    rbc = rebase --continue
 
     # Add origin commit from where picked
     cp = cherry-pick -x
 
-    # Changes you have staged
-    dc = diff --staged
-
     # Print the name of the current branch
     current = symbolic-ref --short HEAD
+
+    last = lg -1 HEAD
 
     ls = ls-files
 
@@ -153,11 +148,6 @@
     add-unmerged = "!f() { git diff --name-only --diff-filter=U ; }; \
         git add `f`"
 
-    rh  = "!f() { git reset --hard HEAD~$1; }; f"
-	rhh = "!f() { git reset --hard $1; }; f"
-	rs  = "!f() { git reset --soft HEAD~$1; }; f"
-	rsh = "!f() { git reset --soft $1; }; f"
-
     # search and replace text in the current repo:
     #
     #   git search-replace old_name new-new path
@@ -169,10 +159,6 @@
     # its date
     fixup-prev-ci = !git commit --all --amend --reuse-message=HEAD \
         --date=\"$(date)\"
-
-    # Select a file to edit with Vim
-    pamvim = !FILES=$(git status -s | awk '{ print $2 }' | fzf -x -m) \
-                && vim ${FILES}
 
 [push]
     # In centralized workflow, work like upstream with an added safety to

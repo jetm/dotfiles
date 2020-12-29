@@ -117,9 +117,7 @@ Plug 'roxma/vim-tmux-clipboard'
 "
 
 " Asychronous Lint Engine, on the fly linting of files
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-endif
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Tabnine
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
@@ -137,6 +135,15 @@ Plug 'autozimu/LanguageClient-neovim', {
 
 " LSP bash
 Plug 'WolfgangMehner/bash-support'
+
+" Go development plugin for Vim
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+" Track the Snippets engine
+Plug 'SirVer/ultisnips'
+
+" Snippets are separated from the engine
+Plug 'honza/vim-snippets'
 
 " Formats a file using formatter defined for its filetype
 Plug 'sbdchd/neoformat'
@@ -188,6 +195,13 @@ Plug 'moll/vim-bbye'
 
 " Very small plugin to easily stage lines
 Plug 'neworld/vim-git-hunk-editor'
+
+" Provide operator motions to quickly replace text
+Plug 'svermeulen/vim-subversive'
+
+" Perform all your vim insert mode completions with Tab
+Plug 'ervandew/supertab'
+let g:SuperTabDefaultCompletionType = "<c-n>"
 
 call plug#end()
 
@@ -354,21 +368,6 @@ nnoremap <C-K> <C-W>k
 nnoremap <C-L> <C-W>l
 nnoremap <C-H> <C-W>h
 
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <expr><C-h>
-    \ deoplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS>
-    \ deoplete#smart_close_popup()."\<C-h>"
-
-inoremap <silent><expr> <TAB>
-    \ pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<TAB>" :
-    \ deoplete#manual_complete()
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
 " CtrlP compatibility
 nnoremap <C-p> :Files<cr>
 
@@ -430,6 +429,14 @@ nmap <leader>2 <Plug>BufTabLine.Go(2)
 nmap <leader>3 <Plug>BufTabLine.Go(3)
 nmap <leader>4 <Plug>BufTabLine.Go(4)
 nmap <leader>5 <Plug>BufTabLine.Go(5)
+
+" vim-subversive - s for substitute
+nmap s <plug>(SubversiveSubstitute)
+nmap ss <plug>(SubversiveSubstituteLine)
+nmap S <plug>(SubversiveSubstituteToEndOfLine)
+nmap <leader>s <plug>(SubversiveSubstituteRange)
+xmap <leader>s <plug>(SubversiveSubstituteRange)
+nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
 
 "
 " Searching
@@ -496,6 +503,7 @@ let g:ale_fixers = {
 let g:ale_linters = {
   \ 'sh': ['shellcheck'],
   \ 'gitcommit': ['proselint', 'write-good', 'gitlint'],
+  \ 'go': ['gopls'],
 \}
 
 let g:ale_sign_error = "\uf05e"
@@ -684,15 +692,6 @@ let g:Lf_RgConfig = [
 \]
 
 "
-" deoplete
-"
-let g:python3_host_prog = "/usr/bin/python3.7"
-let g:deoplete#enable_at_startup = 1
-
-" For Tabnine
-call deoplete#custom#option('prev_completion_mode', 'mirror')
-
-"
 " vim-floaterm
 "
 let g:floaterm_open_command = 'tabe'
@@ -745,3 +744,44 @@ let g:suda_smart_edit = 1
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 let g:clap_theme = 'material_design_dark'
+
+"
+" vim-go
+"
+" Show by default 4 spaces for a tab
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+
+" Enable autocompletion
+call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+
+" Disable mappings
+let g:go_def_mapping_enabled = 0
+
+"
+" deoplete
+"
+let g:deoplete#enable_at_startup = 1
+
+call deoplete#custom#option({
+\   'auto_complete_delay': 100,
+\   'smart_case': v:false,
+\   'ignore_case': v:true,
+\ })
+
+let g:python3_host_prog = "/usr/bin/python3.7"
+
+"
+" tabnine
+"
+call deoplete#custom#var('tabnine', {
+    \ 'max_num_results': 5,
+\})
+
+call deoplete#custom#option('prev_completion_mode', 'mirror')
+
+"
+" ultisnips
+"
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<c-b>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
