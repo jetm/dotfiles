@@ -20,10 +20,12 @@ autoload -Uz _zinit
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
-zinit light-mode for \
-  zinit-zsh/z-a-rust \
-  zinit-zsh/z-a-readurl \
-  zinit-zsh/z-a-bin-gem-node
+
+zinit id-as'z-a-rust' light-mode for zinit-zsh/z-a-rust
+zinit id-as'z-a-path-dl' light-mode for zinit-zsh/z-a-patch-dl
+zinit id-as'z-a-readurl' light-mode for zinit-zsh/z-a-readurl
+zinit id-as'z-a-gen-mod-node' light-mode for zinit-zsh/z-a-bin-gem-node
+zinit id-as'z-a-as-monitor' light-mode for zinit-zsh/z-a-as-monitor
 
 ### End of Zinit's installer chunk
 
@@ -37,161 +39,292 @@ zi0b() { z_ice wait'!0' "$@" }
 
 zi0c() { z_ice wait'!1' "$@" }
 
-zi0a
+zi0a id-as'history-search-multi-word'
 zinit light zdharma/history-search-multi-word
 
-zi0b
+zi0b id-as'zsh-autosuggestions'
 zinit light zsh-users/zsh-autosuggestions
 
-zi0b
+zi0b id-as'zsh-history-substring-search'
 zinit light zsh-users/zsh-history-substring-search
 
-zi0b atload"source ${HOME}/.zsh/zsh-abbr-alias.conf"
+zi0b id-as'zsh-abbrev-alias' \
+ atload"source ${HOME}/.zsh/zsh-abbr-alias.conf"
 zinit light momo-lab/zsh-abbrev-alias
 
-zi0b
+zi0b id-as'zsh-autopair'
 zinit light hlissner/zsh-autopair
 
-zinit ice  \
-  pick"bin/git-undo" as"program"
-zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-undo
-
-zi0c from'gh-r' as"program" \
-  has"git" \
-  bpick"*linux-amd64*" \
-  atclone"PREFIX=$ZPFX ./install.sh; \
-    rm -f ./install.sh ./*.md; \
-    mv ./man/*.1 $ZPFX/share/man/man1; \
-    rm -rf ./man"
-zinit light git-lfs/git-lfs
-
-zi0c
+zi0c id-as'fast-syntax-highlighting'
 zinit light zdharma/fast-syntax-highlighting
 
-zi0c from"gh-r" as"command" \
-  pick"fd/fd" \
-  mv"fd* -> fd"
-zinit light sharkdp/fd
+zi0c id-as'git-reauthor' \
+  as'command' \
+  pick'bin/git-reauthor'
+zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-reauthor
 
-zi0c from"gh-r" as"command" \
-  pick"bat/bat" \
-  mv"bat* -> bat"
-zinit light sharkdp/bat
+zi0c id-as'git-squash' \
+  as'command' \
+  pick'bin/git-squash'
+zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-squash
 
-zi0c from"gh-r" as"program" \
-  mv"ripgrep* -> rg" \
-  pick"rg/rg"
-zinit light BurntSushi/ripgrep
+zi0c id-as'git-undo' \
+  as'command' \
+  pick'bin/git-undo'
+zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-undo
 
-zi0c from"gh-r" as"program" \
-  bpick"*linux_amd64*"
-zinit light junegunn/fzf
+zinit wait lucid id-as"fzf-tab" has"fzf" for @Aloxaf/fzf-tab
 
-zi0c
-zinit snippet "https://github.com/junegunn/fzf/blob/master/shell/completion.zsh"
-zi0c
-zinit snippet "https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh"
-
-zi0c from"gh-r" as"program" \
-  mv"sd-* -> sd" \
-  sbin"sd*"
-zinit light chmln/sd
-
-zi0c from"gh-r" as"program" \
-  pick"build/x86_64-unknown-linux-musl/broot" \
-  ver"latest"
-zinit light Canop/broot
-
-zi0c from"gh-r" as"program" \
-  bpick="*linux*gnu*" \
-  pick="dust*/dust"
-zinit light bootandy/dust
-
-zi0c from"gh-r" as"command" \
+zi0c id-as'delta' \
+  from'gh-r' \
+  as'command' \
   bpick"$PICK" \
-  pick"delta/delta" \
-  mv"delta* -> delta"
+  pick'delta/delta' \
+  mv'delta* -> delta'
 zinit light dandavison/delta
 
-zi0c from"gh-r" as"command" \
-  bpick"$PICK" \
-  pick"hyperfine/hyperfine" \
-  mv"hyperfine* -> hyperfine"
-zinit light sharkdp/hyperfine
-
-zi0c from"gh-r" as"program" \
-  mv"shfmt* -> shfmt"
-zinit light mvdan/sh
-
-zi0c from"gh-r" as"program" \
-  bpick"*linux-musl*"
-zinit light pemistahl/grex
-
-zi0c from"gh-r" as"program" \
-  bpick"*x86_64-linux-gnu*" \
-  mv"shellharden-* -> shellharden" \
-  sbin"shellharden*"
-zinit light anordal/shellharden
-
-zi0c from"gh-r" as"program" \
-  bpick"*x86_64*-linux-musl*" \
-  sbin"sk"
-zinit light lotabout/skim
-
-zi0c from"gh-r" as"program" \
-  bpick"*linux-x86_64-musl*" \
-  mv"tldr-* -> tldr" \
-  sbin"tldr*"
-zinit light dbrgn/tealdeer
-
-zi0c from"gh-r" as"program" \
-  bpick"*x86_64*-linux-musl*" \
-  mv"zoxide-* -> zoxide" \
-  sbin"zoxide*"
-zinit light ajeetdsouza/zoxide
-
-zi0c from"gh-r" as"program" \
-  bpick"*linux.x86_64*" \
-  mv"shellcheck-*/shellcheck -> shellcheck" \
-  sbin"shellcheck"
+zi0c id-as'shellcheck' \
+  from'gh-r' \
+   as'program' \
+  bpick'*linux.x86_64*' \
+  mv'shellcheck-*/shellcheck -> shellcheck' \
+  sbin'shellcheck'
 zinit light koalaman/shellcheck
 
-zi0c from"gh-r" as"program" \
-  bpick"*linux_x86_64.tar.gz" \
-  pick"glow"
-zinit load charmbracelet/glow
+zi0c id-as'tldr' \
+  from'gh-r' \
+  as'program' \
+  bpick'*linux-x86_64-musl*' \
+  mv'tldr-* -> tldr' \
+  sbin'tldr*'
+zinit light dbrgn/tealdeer
 
-# Install rbenv
-zinit ice wait lucid from'gh' as'program'\
-  pick'bin/rbenv' \
-  atclone'src/configure && make -C src; libexec/rbenv init - > .zinitrc.zsh' \
-  atpull'%atclone' \
-  src'.zinitrc.zsh' \
-  nocompile'!'
-zinit light rbenv/rbenv
+zi0b id-as'tldr-completion' \
+  has'tldr' \
+  mv'tldr* -> _tldr' \
+  as'completion'
+zinit snippet https://github.com/dbrgn/tealdeer/blob/master/zsh_tealdeer
 
-# install ruby-build
-zinit ice wait lucid from'gh' as'program' \
-  pick'bin/ruby-build' \
-zinit light rbenv/ruby-build
+zi0c id-as'cht.sh' \
+  as'command' \
+  has'rlwrap' \
+  pick'cht.sh' \
+  atload'export CHTSH="$XDG_CONFIG_HOME"'
+zinit snippet https://cht.sh/:cht.sh
 
-# install rbenv-each plugin
-zinit ice wait lucid from'gh' as'program' \
-  pick'bin/rbenv-each' \
-zinit light rbenv/rbenv-each
+zi0b id-as"cht-completion" \
+  has'rlwrap' \
+  mv'cht* -> _cht' \
+  as'completion'
+zinit snippet https://cheat.sh/:zsh
 
-path=($HOME/.rbenv/bin(N-/) $path)
-zi0a has"rbenv"
-zinit light htlsne/zinit-rbenv
+zinit id-as"hacker-laws-cli" \
+ nocompile \
+ atclone'go build' \
+ atpull"%atclone" \
+ pick"hacker-laws-cli" \
+ as"program" \
+ for @umutphp/hacker-laws-cli
 
-zi0c depth'1' from'gh' as"program" \
-  pick"ranger.py" \
-  atload"alias ranger=ranger.py"
-zinit light ranger/ranger
+if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
 
-zi0c from"gh-r" as"program" \
-  pick"lazydocker"
-zinit light jesseduffield/lazydocker
+  zinit pack"default" for zsh
+
+  zi0c id-as'navi' \
+    from'gh-r' \
+    as'program' \
+    pick'navi' \
+    atload'eval "$(navi widget zsh)";'
+  zinit light denisidoro/navi
+
+  zi0c id-as'glow' \
+    from'gh-r' \
+    as'program' \
+    bpick'*linux_x86_64.tar.gz' \
+    pick'glow'
+  zinit light charmbracelet/glow
+
+  zi0c id-as'git-lfs' \
+    from'gh-r' \
+    as'program' \
+    has'git' \
+    bpick'*linux-amd64*' \
+    atclone"PREFIX=$ZPFX ./install.sh; \
+      rm -f ./install.sh ./*.md; \
+      mv ./man/*.1 $ZPFX/share/man/man1; \
+      rm -rf ./man"
+  zinit light git-lfs/git-lfs
+
+  zi0c id-as'shellharden' \
+    from'gh-r' \
+    as'program' \
+    bpick'*x86_64-linux-gnu*' \
+    mv'shellharden-* -> shellharden' \
+    sbin'shellharden*'
+  zinit light anordal/shellharden
+
+  zi0c id-as'dust' \
+    from'gh-r' \
+    as'program' \
+    bpick'*linux*gnu*' \
+    pick'dust*/dust' \
+    mv'dust* -> dust'
+  zinit light bootandy/dust
+
+  zi0c id-as'shfmt' \
+    from'gh-r' \
+    as'program' \
+    mv'shfmt* -> shfmt'
+  zinit light mvdan/sh
+
+  zi0c id-as'ranger' \
+    from'gh' \
+    as'program' \
+    depth'1' \
+    pick'ranger.py' \
+    atload'alias ranger=ranger.py'
+  zinit light ranger/ranger
+
+  zi0c id-as'fd' \
+    from'gh-r' \
+    as'command' \
+    pick'fd/fd' \
+    mv'fd* -> fd'
+  zinit light sharkdp/fd
+
+  zi0c id-as'ripgrep' \
+    from'gh-r' \
+    as'program' \
+    mv'ripgrep* -> rg' \
+    atclone"mv rg/doc/rg.1 $ZPFX/man/man1" \
+    pick'rg/rg'
+  zinit light BurntSushi/ripgrep
+
+  # Zinit pack is outdated and key-bindings doesn't work. Configuration is in
+  # key-bindings.zsh file
+  zi0c id-as'fzf' \
+    from"gh-r" \
+    as"program" \
+    bpick"*linux_amd64*"
+  zinit light junegunn/fzf
+
+  zi0c id-as'fzf-key-bindings'
+  zinit snippet 'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
+
+  zinit id-as"nvim" \
+    nocompile \
+    make!"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
+    atload'export EDITOR="nvim"' \
+    for @neovim/neovim
+
+  zinit id-as"git" \
+    mv"%ID% -> git.tar.gz" \
+    atclone"ziextract --move git.tar.gz" \
+    atpull"%atclone" \
+    make"prefix=$ZPFX install install-doc" \
+    dlink="/git/git/archive/v%VERSION%.tar.gz" \
+    as"readurl|command" \
+    for https://github.com/git/git/releases/
+
+  install_asdf_plugins() {
+    #  # https://github.com/kennyp/asdf-golang
+    #  golang \
+    #  # https://github.com/asdf-vm/asdf-nodejs
+    #  nodejs \
+    #  issues with nodejs binaries are not found
+    #  export ASDF_NPM_DEFAULT_PACKAGES_FILE="$ASDF_DATA_DIR/npm-packages"; \
+    #  export NODEJS_CONFIGURE_OPTIONS="prefix=/users/tiamarin/.asdf/npm-packages ";' \
+    local plugins_list_to_install=( \
+      # https://github.com/asdf-vm/asdf-ruby.git
+      ruby \
+      # https://github.com/code-lever/asdf-rust
+      rust \
+    )
+    local installed_plugins=$(asdf plugin list)
+    for plugin in $plugins_list_to_install; do
+      if [[ "$installed_plugins" != *"$plugin"* ]]; then
+        command asdf plugin add $plugin
+        print -P "%F{blue}Added plugin for %K{white} $plugin %k and now installing the latest version...%f"
+        if [[ "$plugin" == "nodejs" ]]; then
+          bash -c "$ASDF_DATA_DIR/plugins/nodejs/bin/import-release-team-keyring"
+        fi
+        command asdf install $plugin latest
+        command asdf global $plugin latest
+        command asdf reshim $plugin
+        print -P "%F{green}Finished installing the lastest version with asdf %K{white} $plugin %k%f."
+      fi
+    done
+  }
+
+  zinit id-as"asdf" \
+    atinit'export ASDF_DATA_DIR="$HOME/.asdf"; \
+      export ASDF_CONFIG_FILE="$ASDF_DATA_DIR/.asdfrc";' \
+    src"asdf.sh" \
+    atload'install_asdf_plugins; unfunction install_asdf_plugins' \
+    for @asdf-vm/asdf
+
+  zinit id-as"cargo-completion" \
+    has'cargo' \
+    mv"cargo* -> _cargo" \
+    as"completion" \
+    for https://github.com/rust-lang/cargo/blob/master/src/etc/_cargo
+fi
+
+# zi0c id-as'grex' \
+#   from'gh-r' \
+#   as'program' \
+#   bpick'*linux-musl*'
+# zinit light pemistahl/grex
+
+# zi0c id-as'broot' \
+#   from'gh-r' \
+#   as'program' \
+#   pick'build/x86_64-unknown-linux-musl/broot' \
+#   ver'latest'
+# zinit light Canop/broot
+
+# zi0c id-as'sd' \
+#   from'gh-r' \
+#   as'program' \
+#   mv'sd-* -> sd' \
+#   sbin'sd*'
+# zinit light chmln/sd
+
+# zi0c id-as'hyperfine' \
+#   from'gh-r' \
+#   as'command' \
+#   bpick"$PICK" \
+#   pick'hyperfine/hyperfine' \
+#   mv'hyperfine* -> hyperfine'
+# zinit light sharkdp/hyperfine
+
+# zi0c id-as'skim' \
+#   from'gh-r' \
+#   as'program' \
+#   bpick'*x86_64*-linux-musl*' \
+#   sbin'sk'
+# zinit light lotabout/skim
+
+# zi0c id-as'zoxidse' \
+#   from'gh-r' \
+#   as'program' \
+#   bpick'*x86_64*-linux-musl*' \
+#   mv'zoxide-* -> zoxide' \
+#   sbin'zoxide*'
+# zinit light ajeetdsouza/zoxide
+
+# zi0c id-as'bat' \
+#   from'gh-r' \
+#   as'command' \
+#   pick'bat/bat' \
+#   mv'bat* -> bat'
+# zinit light sharkdp/bat
+
+# zi0c id-as'lazydoker' \
+#   from'gh-r' \
+#   as'program' \
+#   pick'lazydocker'
+# zinit light jesseduffield/lazydocker
 
 zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
@@ -211,9 +344,9 @@ for config (${HOME}/.zsh/*.zsh) source ${config}
 #
 # Powerlevel10k
 #
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-zinit ice depth=1 atload"!source ${HOME}/.p10k.zsh"
+zinit ice lucid nocd id-as'p10k' atload"!source ${HOME}/.p10k.zsh"
 zinit light romkatv/powerlevel10k
 
 # vim:set ts=2 sw=2 et:
