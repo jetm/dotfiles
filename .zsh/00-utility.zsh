@@ -61,12 +61,8 @@ aurgen() {
   fi
 }
 
-# =========================================================================== #
 # `quote` - pick a random quote from http://www.quotationspage.com/
-# --------------------------------------------------------------
-# NOTE: Inspired by and borrowed from OMZ plugin:
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/rand-quote/rand-quote.plugin.zsh
-# =========================================================================== #
 quote() {
   emulate -L zsh
   # make the GET request and extract the output
@@ -81,11 +77,8 @@ quote() {
   fi
 }
 
-# =========================================================================== #
 # Colorize the `man` pages
-# ------------------------
 # https://www.howtogeek.com/683134/how-to-display-man-pages-in-color-on-linux/
-# =========================================================================== #
 function man() {
   autoload -Uz colors
   colors
@@ -106,10 +99,8 @@ function man() {
   command man "$@"
 }
 
-# =========================================================================== #
 # `where $1` - ($1 - name of the command) show the location of the executable
-#        file and completion if this command have them
-# =========================================================================== #
+# file and completion if this command have them
 where() {
   if (( $+commands[$1] )); then
     print -P "%F{blue}Executable file location:%f $(which $1)"
@@ -123,9 +114,7 @@ where() {
   fi
 }
 
-# =========================================================================== #
 # `palette` - print palette and color codes (for percentage expansion)
-# =========================================================================== #
 palette() {
   local colors
   if [[ $1 == "background" || $1 == "bg" ]]; then
@@ -140,11 +129,9 @@ palette() {
   print -Pc $colors
 }
 
-# =========================================================================== #
-# `where_zsh` - find the mentioned word ($1) anywhere in Zsh configuration.
-#       It can be alias, command, commented word or anything. It will
-#       use best available searching tool
-# =========================================================================== #
+# `where_zsh` - find the mentioned word ($1) anywhere in Zsh configuration
+#  It can be alias, command, commented word or anything. It will use best
+#  available searching tool
 where_zsh() {
   local searcher_cmd
   if (( $+commands[ag] )); then
@@ -164,7 +151,7 @@ where_zsh() {
   results="$(zsh -ixc : 2>&1 | $searcher_cmd $1)"
   if [ $results ]; then
     print -P "%F{green}Found in:%f"
-    print -l $results | nl | h $1
+    print -l $results | nl
   else
     print -P "%F{red}It wasn't defined or mentioned anywhere in Zsh configurations.%f"
   fi

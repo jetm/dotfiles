@@ -78,7 +78,14 @@ zi0c id-as'git-undo' \
   pick'bin/git-undo'
 zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-undo
 
-zinit wait lucid id-as"fzf-tab" has"fzf" for @Aloxaf/fzf-tab
+zi0c id-as'git-reset-file' \
+  as'command' \
+  pick'bin/git-reset-file'
+zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-reset-file
+
+zi0c id-as'fzf-tab' \
+  has'fzf'
+zinit light Aloxaf/fzf-tab
 
 zi0c id-as'delta' \
   from'gh-r' \
