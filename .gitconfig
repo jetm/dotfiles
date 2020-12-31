@@ -68,30 +68,10 @@
     autocorrect = 1
 
 [alias]
-    # Branch
-    br = branch -vv
-
-    # Commit
-    ci = commit
-
-    # Checkout
-    co = checkout
-
-    st = status
-    sts = status -s -b
-
-    # Rebase
-    rb = rebase
-
-    # Add origin commit from where picked
-    cp = cherry-pick -x
-
     # Print the name of the current branch
     current = symbolic-ref --short HEAD
 
-    last = lg -1 HEAD
-
-    ls = ls-files
+    last = lg -1
 
     # Logs
     lol = log --topo-order --pretty=format:'%C(green)%h%C(reset) %s%C(red)%d%C(reset)'
