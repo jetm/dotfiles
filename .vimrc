@@ -59,7 +59,6 @@ Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 " Fuzzy searching of files using FZF
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'yuki-ycino/fzf-preview.vim'
 
 " Plugin for vim to enabling opening a file in a given line
 Plug 'bogado/file-line'
@@ -437,18 +436,6 @@ nmap S <plug>(SubversiveSubstituteToEndOfLine)
 nmap <leader>s <plug>(SubversiveSubstituteRange)
 xmap <leader>s <plug>(SubversiveSubstituteRange)
 nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
-
-"
-" Searching
-"
-let g:fzf_preview_gitfiles_command = "git status --short --untracked-files=all | awk '{if (substr($0,2,1) !~ / /) print $2}'"
-let g:fzf_layout = { 'down': '~40%' }
-
-autocmd! User FzfStatusLine call lightline#update()
-
-" Command override (with preview)
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 "
 " YAML files

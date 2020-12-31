@@ -39,6 +39,8 @@ zi0b() { z_ice wait'!0' "$@" }
 
 zi0c() { z_ice wait'!1' "$@" }
 
+zinit light MichaelAquilina/zsh-you-should-use
+
 zi0a id-as'history-search-multi-word'
 zinit light zdharma/history-search-multi-word
 
@@ -57,6 +59,9 @@ zinit light hlissner/zsh-autopair
 
 zi0c id-as'fast-syntax-highlighting'
 zinit light zdharma/fast-syntax-highlighting
+
+zi0c id-as'zsh-ls-color'
+zinit light xPMo/zsh-ls-colors
 
 zi0c id-as'git-reauthor' \
   as'command' \
@@ -119,12 +124,19 @@ zi0b id-as"cht-completion" \
 zinit snippet https://cheat.sh/:zsh
 
 zinit id-as"hacker-laws-cli" \
- nocompile \
- atclone'go build' \
- atpull"%atclone" \
- pick"hacker-laws-cli" \
- as"program" \
- for @umutphp/hacker-laws-cli
+  nocompile \
+  atclone'go build' \
+  atpull"%atclone" \
+  pick"hacker-laws-cli" \
+  as"program" \
+  for @umutphp/hacker-laws-cli
+
+# Missing extending all the history. Try after a while
+# Remember to add bindkey '\C-r' _histdb-isearch and make sure fzf bindings are
+# not overwrite it
+# zi0c id-as'zsh-histdb' \
+#   src'histdb-interactive.zsh'
+# zinit light larkery/zsh-histdb
 
 if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
 
@@ -268,6 +280,17 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     mv"cargo* -> _cargo" \
     as"completion" \
     for https://github.com/rust-lang/cargo/blob/master/src/etc/_cargo
+
+  zinit id-as'lsd' \
+    from'gh-r' \
+    as'program' \
+    mv'lsd* -> lsd' \
+    pick'lsd/lsd' \
+    for @Peltoche/lsd
+
+  zi0c id-as'forgit' \
+    atinit'source $ZDOTDIR/zinit/atinit/forgit.zsh'
+  zinit light wfxr/forgit
 fi
 
 # zi0c id-as'grex' \

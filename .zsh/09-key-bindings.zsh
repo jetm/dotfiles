@@ -51,7 +51,6 @@ FZF_DEFAULT_OPTS+='--layout=reverse '
 FZF_DEFAULT_OPTS+='--info=inline '
 FZF_DEFAULT_OPTS+='--height=50% '
 FZF_DEFAULT_OPTS+='--multi '
-FZF_DEFAULT_OPTS+='--border '
 FZF_DEFAULT_OPTS+='--preview-window=:hidden '
 FZF_DEFAULT_OPTS+='--preview="[ -f {} ] && cat {} || ([[ -d {}  ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200" '
 FZF_DEFAULT_OPTS+='--prompt="∼ " '
@@ -72,6 +71,13 @@ export FZF_DEFAULT_OPTS
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND --type d"
 export FZF_COMPLETION_TRIGGER="@@"
+
+# export FZF_CTRL_T_OPTS="--ansi --exact --exit-0 --inline-info --layout=default --multi --no-height --select-1 --preview-window down:40%:noborder --preview 'xargs bat --line-range :150 --style=changes,numbers,snip --wrap=never 2> /dev/null'"
+
+export FZF_CTRL_R_OPTS='--ansi --exact --exit-0 --inline-info --layout=default --multi --no-height --select-1'
+
+# export FZF_ALT_C_COMMAND='fd --exclude '.git' --hidden --no-ignore-vcs --type d'
+# export FZF_ALT_C_OPTS="--ansi --exact --exit-0 --inline-info --layout=default --multi --no-height --select-1 --preview-window=down:40%:noborder --preview 'exa --color=always --color-scale --group --git --icons --long --tree {} | head -150'"
 
 #
 # Skim
