@@ -384,7 +384,7 @@ vmap <leader>c <Plug>NERDCommenterToggle
 " remove search highlighting
 nnoremap <leader><BS> :noh<CR>
 
-noremap <leader>q :Bwipeout<CR>
+nnoremap <leader>q :Bwipeout<CR>
 
 " Search in files with ripgrep
 nmap <leader>g :Leaderf! rg -e
@@ -396,7 +396,7 @@ nmap <leader>gw :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 
 " Jump to anywhere you want with minimal keystrokes, with just two keys
 " binding
-map <leader>f <Plug>(easymotion-overwin-f2)
+nmap <leader>f <Plug>(easymotion-overwin-f2)
 
 " Disable default mappings
 let g:EasyMotion_do_mapping = 0
