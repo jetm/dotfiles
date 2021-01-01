@@ -288,16 +288,28 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     as"completion" \
     for https://github.com/rust-lang/cargo/blob/master/src/etc/_cargo
 
-  zinit id-as'lsd' \
-    from'gh-r' \
-    as'program' \
-    mv'lsd* -> lsd' \
-    pick'lsd/lsd' \
-    for @Peltoche/lsd
-
   zi0c id-as'forgit' \
     atinit'source $ZDOTDIR/zinit/atinit/forgit.zsh'
   zinit light wfxr/forgit
+
+  zinit id-as"exa" \
+    from"gh-r" \
+    as"program" \
+    mv"exa-* -> exa" \
+    for @ogham/exa
+
+  zinit id-as"exa-completions" \
+    as"completion" \
+    has"exa" \
+    mv"exa* -> _exa" \
+    for https://github.com/ogham/exa/blob/master/completions/completions.zsh
+
+  # zinit id-as'lsd' \
+  #   from'gh-r' \
+  #   as'program' \
+  #   mv'lsd* -> lsd' \
+  #   pick'lsd/lsd' \
+  #   for @Peltoche/lsd
 fi
 
 # zi0c id-as'grex' \
