@@ -39,6 +39,7 @@ zi0b() { z_ice wait'!0' "$@" }
 
 zi0c() { z_ice wait'!1' "$@" }
 
+zi0a id-as'zsh-you-should-use'
 zinit light MichaelAquilina/zsh-you-should-use
 
 zi0a id-as'history-search-multi-word'
@@ -124,18 +125,18 @@ zi0c id-as'cht.sh' \
   atload'export CHTSH="$XDG_CONFIG_HOME"'
 zinit snippet https://cht.sh/:cht.sh
 
-zi0b id-as"cht-completion" \
+zi0b id-as'cht-completion' \
   has'rlwrap' \
   mv'cht* -> _cht' \
   as'completion'
 zinit snippet https://cheat.sh/:zsh
 
-zinit id-as"hacker-laws-cli" \
+zinit id-as'hacker-laws-cli' \
+  as'program' \
   nocompile \
   atclone'go build' \
-  atpull"%atclone" \
-  pick"hacker-laws-cli" \
-  as"program" \
+  atpull'%atclone' \
+  pick'hacker-laws-cli' \
   for @umutphp/hacker-laws-cli
 
 # Missing extending all the history. Try after a while
@@ -289,7 +290,8 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     for https://github.com/rust-lang/cargo/blob/master/src/etc/_cargo
 
   zi0c id-as'forgit' \
-    atinit'source $ZDOTDIR/zinit/atinit/forgit.zsh'
+    atinit'source $ZDOTDIR/zinit/atinit/forgit.zsh' \
+    atload'export FORGIT_NO_ALIASES=1'
   zinit light wfxr/forgit
 
   zinit id-as"exa" \
@@ -368,6 +370,9 @@ fi
 #   pick'lazydocker'
 # zinit light jesseduffield/lazydocker
 
+#
+# prezto
+#
 zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
 zstyle ':prezto:module:editor' key-bindings 'vi'
@@ -377,8 +382,16 @@ load_PZT_mod environment
 load_PZT_mod editor
 load_PZT_mod ssh
 load_PZT_mod history
-load_PZT_mod utility
 load_PZT_mod completion
+
+#
+# fzf-tab
+#
+zstyle ':completion:*' format '[%d]'
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ":completion:*:git-checkout:*" sort false
+zstyle ':fzf-tab:complete:cd:*' extra-opts --preview=$extract'exa -1 --color=always $realpath'
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 # Load personal configs
 for config (${HOME}/.zsh/*.zsh) source ${config}
@@ -388,7 +401,7 @@ for config (${HOME}/.zsh/*.zsh) source ${config}
 #
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-zinit ice lucid nocd id-as'p10k' atload"!source ${HOME}/.p10k.zsh"
+zinit ice lucid nocd id-as'p10k' depth=1 atload"!source ${HOME}/.p10k.zsh"
 zinit light romkatv/powerlevel10k
 
 # vim:set ts=2 sw=2 et:

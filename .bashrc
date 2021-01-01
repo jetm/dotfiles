@@ -259,4 +259,4 @@ fi
 
 source /users/tiamarin/.config/broot/launcher/bash/br
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
