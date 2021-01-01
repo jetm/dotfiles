@@ -139,6 +139,11 @@ zinit id-as'hacker-laws-cli' \
   pick'hacker-laws-cli' \
   for @umutphp/hacker-laws-cli
 
+zi0c id-as'forgit' \
+  atinit'source $ZDOTDIR/zinit/atinit/forgit.zsh' \
+  atload'export FORGIT_NO_ALIASES=1'
+zinit light wfxr/forgit
+
 # Missing extending all the history. Try after a while
 # Remember to add bindkey '\C-r' _histdb-isearch and make sure fzf bindings are
 # not overwrite it
@@ -288,11 +293,6 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     mv"cargo* -> _cargo" \
     as"completion" \
     for https://github.com/rust-lang/cargo/blob/master/src/etc/_cargo
-
-  zi0c id-as'forgit' \
-    atinit'source $ZDOTDIR/zinit/atinit/forgit.zsh' \
-    atload'export FORGIT_NO_ALIASES=1'
-  zinit light wfxr/forgit
 
   zinit id-as"exa" \
     from"gh-r" \
