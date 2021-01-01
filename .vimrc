@@ -444,11 +444,10 @@ nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
 au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 "
-" Git commit
+" vim-lastplace
 "
-" Instead of reverting the cursor to the last position in the buffer, we
-" set it to the first line when editing a git commit message
-au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])"
+let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
+let g:lastplace_ignore_buftype = "quickfix"
 
 "
 " Comments
@@ -685,9 +684,6 @@ let g:floaterm_open_command = 'tabe'
 let g:floaterm_keymap_toggle = '<F11>'
 let g:floaterm_width = 0.98
 let g:floaterm_height = 0.4
-
-let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
-let g:lastplace_ignore_buftype = "quickfix"
 
 let g:comfortable_motion_scroll_down_key = "j"
 let g:comfortable_motion_scroll_up_key = "k"
