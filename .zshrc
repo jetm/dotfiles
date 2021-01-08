@@ -252,8 +252,6 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     for https://github.com/git/git/releases/
 
   install_asdf_plugins() {
-    #  # https://github.com/kennyp/asdf-golang
-    #  golang \
     #  # https://github.com/asdf-vm/asdf-nodejs
     #  nodejs \
     #  issues with nodejs binaries are not found
@@ -264,6 +262,8 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
       ruby \
       # https://github.com/code-lever/asdf-rust
       rust \
+      # https://github.com/kennyp/asdf-golang
+      golang \
     )
     local installed_plugins=$(asdf plugin list)
     for plugin in $plugins_list_to_install; do
@@ -306,6 +306,14 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     mv"exa* -> _exa" \
     for https://github.com/ogham/exa/blob/master/completions/completions.zsh
 
+  zi0c id-as'sd' \
+    from'gh-r' \
+    as'program' \
+    mv'sd-* -> sd' \
+    sbin'sd*'
+  zinit light chmln/sd
+
+  # Replaced by exa
   # zinit id-as'lsd' \
   #   from'gh-r' \
   #   as'program' \
@@ -326,13 +334,6 @@ fi
 #   pick'build/x86_64-unknown-linux-musl/broot' \
 #   ver'latest'
 # zinit light Canop/broot
-
-# zi0c id-as'sd' \
-#   from'gh-r' \
-#   as'program' \
-#   mv'sd-* -> sd' \
-#   sbin'sd*'
-# zinit light chmln/sd
 
 # zi0c id-as'hyperfine' \
 #   from'gh-r' \
