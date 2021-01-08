@@ -397,6 +397,10 @@ zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 # Load personal configs
 for config (${HOME}/.zsh/*.zsh) source ${config}
 
+if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
+  [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+fi
+
 #
 # Powerlevel10k
 #
