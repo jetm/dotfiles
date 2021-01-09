@@ -1,71 +1,6 @@
-# vim:set ts=4 sw=4 et:
 [user]
     name = Javier Tiá
     email = javier.tia@hpe.com
-
-[core]
-    editor = nvim
-
-    # diff-so-fancy to call attention to areas of interest without being
-    # visually distracting
-    # less options
-    # -F quit if one screen
-    # -R show ANSI colors based in RAW control characters
-    # -s squeeze blank lines
-    # -X disable termcap [de]initialization strings to terminal
-    pager = delta
-
-    # Verify if a command modifies a file in the work tree
-    ; safecrlf = true
-
-    # No output conversion is performed
-    ; autocrlf = input
-
-    # gitproxy is a script to allow clone git:// repositories
-    gitproxy = gitproxy
-
-[delta]
-    line-numbers = falseh
-    syntax-theme = DarkNeon
-
-[interactive]
-    diffFilter = delta --color-only
-
-[i18n]
-    # Character encoding the commit messages are converted to when running git
-    # log and friends
-    logOutputEncoding = utf-8
-
-[merge]
-    tool = clion
-
-    # Add ||||||| marker and the original text before the ======= marker
-    # conflictstyle = diff3
-
-    # Only fast-forward merges are allowed
-    ; ff = only
-
-    # Extend rename limit
-    renamelimit = 0
-
-[mergetool "clion"]
-    cmd = clion merge \
-        $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") \
-        $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE") \
-        $(cd $(dirname "$BASE") && pwd)/$(basename "$BASE") \
-        $(cd $(dirname "$MERGED") && pwd)/$(basename "$MERGED")
-    trustExitCode = true
-
-[mergetool "vimdiff"]
-    # No prompt before each invocation of the merge resolution program
-    prompt = false
-
-[mergetool "bc"]
-    trustExitCode = true
-
-[help]
-    # Automatically correct and execute mistyped commands
-    autocorrect = 1
 
 [alias]
     # Print the name of the current branch
@@ -121,6 +56,7 @@
     # Editing/adding conflicted files
     edit-unmerged = "!f() { git diff --name-only --diff-filter=U ; }; \
         ${EDITOR} `f`"
+
     add-unmerged = "!f() { git diff --name-only --diff-filter=U ; }; \
         git add `f`"
 
@@ -129,11 +65,22 @@
     fixup-prev-ci = !git commit --all --amend --reuse-message=HEAD \
         --date=\"$(date)\"
 
-[push]
-    # In centralized workflow, work like upstream with an added safety to
-    # refuse to push if the upstream branch’s name is different from the local
-    # one
-    default = simple
+[core]
+    # gitproxy is a script to allow clone git:// repositories
+    gitproxy = gitproxy
+
+[i18n]
+    # Character encoding the commit messages are converted to when running git
+    # log and friends
+    logOutputEncoding = utf-8
+
+[merge]
+    # Extend rename limit
+    renamelimit = 0
+
+[help]
+    # Automatically correct and execute mistyped commands
+    autocorrect = 1
 
 [pull]
     # Preserve merges when you're rebasing against origin/BRANCH
@@ -152,16 +99,6 @@
     # "log" format lists the commits in the range like git-submodule summary
     # does
     submodule = log
-
-[difftool]
-    prompt = false
-
-[difftool "icdiff"]
-    # Show the file labels correctly
-    cmd = icdiff --line-numbers -L \"$BASE\" -L \"$REMOTE\" \"$LOCAL\" \"$REMOTE\"
-
-[difftool "bc"]
-    trustExitCode = true
 
 [credential]
     # Set the cache to timeout after 8 hour (setting is in seconds)
@@ -189,13 +126,44 @@
     # Show patch mode when use `git stash show`
     showPatch = true
 
+[commit]
+    # A boolean or int to specify the level of verbose with git commit
+    verbose = true
+
 [interactive]
     # Enable single key presses in Interactive Mode
     singlekey = true
 
-[commit]
-    # A boolean or int to specify the level of verbose with git commit
-    verbose = true
+#
+# delta
+#
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    line-numbers = falseh
+    syntax-theme = DarkNeon
+
+[core]
+    pager = delta
+
+#
+# nvim
+#
+[core]
+    editor = nvim
+[diff]
+    tool = nvimdiff
+[difftool]
+    prompt = false
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[merge]
+    tool = nvimdiff
+[mergetool]
+    prompt = true
+[mergetool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'"
 
 #
 # VM settings
@@ -219,3 +187,5 @@
 ;
 ; [protocol]
     ; version = 2
+
+# vim:set ts=4 sw=4 et:
