@@ -1,7 +1,3 @@
-[user]
-    name = Javier Tiá
-    email = javier.tia@hpe.com
-
 [alias]
     # Print the name of the current branch
     current = symbolic-ref --short HEAD
@@ -20,10 +16,6 @@
     # Like <git new>, but it accepts branches as parameters, e.g.: git newp
     # origin/BRANCH
     newp = "!f() { git log ${1}@{1}..${1}@{0} \"$@\"; }; f"
-
-    # Print the name of the current upstream tracking branch
-    upstream = !git config --get branch.$(git current-branch).remote \
-        || echo origin
 
     # Update local repo and all submodules
     spull = "!__git_spull() { git pull \"$@\" && \
@@ -54,20 +46,13 @@
     # Editing
     #
     # Editing/adding conflicted files
-    edit-unmerged = "!f() { git diff --name-only --diff-filter=U ; }; \
-        ${EDITOR} `f`"
+    edit-unmerged = "!f() { git diff --name-only --diff-filter=U ; }; ${EDITOR} `f`"
 
-    add-unmerged = "!f() { git diff --name-only --diff-filter=U ; }; \
-        git add `f`"
+    add-unmerged = "!f() { git diff --name-only --diff-filter=U ; }; git add `f`"
 
     # Commit any files changes, squash them into the last commit and update
     # its date
-    fixup-prev-ci = !git commit --all --amend --reuse-message=HEAD \
-        --date=\"$(date)\"
-
-[core]
-    # gitproxy is a script to allow clone git:// repositories
-    gitproxy = gitproxy
+    fixup-prev-ci = !git commit --all --amend --reuse-message=HEAD --date=\"$(date)\"
 
 [i18n]
     # Character encoding the commit messages are converted to when running git
@@ -168,6 +153,14 @@
 #
 # VM settings
 #
+[user]
+    name = Javier Tiá
+    email = javier.tia@hpe.com
+
+[core]
+    # gitproxy is a script to allow clone git:// repositories
+    gitproxy = gitproxy
+
 [gitreview]
     # Gerrit username
     username = javier.tia
