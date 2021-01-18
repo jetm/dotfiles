@@ -487,7 +487,7 @@ let g:ale_fixers = {
 
 let g:ale_linters = {
   \ 'sh': ['shellcheck'],
-  \ 'gitcommit': ['proselint', 'write-good', 'gitlint'],
+  \ 'gitcommit': ['git-lint'],
   \ 'go': ['gopls'],
 \}
 
