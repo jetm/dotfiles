@@ -8,7 +8,7 @@ let g:vimrc_email='javier.tia@hpe.com'
 
 call plug#begin('~/.vim/plugged')
 
-" Sensible vim defaults
+" Defaults everyone can agree on
 Plug 'tpope/vim-sensible'
 
 " An alternative sudo.vim
@@ -202,6 +202,9 @@ Plug 'svermeulen/vim-subversive'
 Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
+" Plugin to move lines and selections up and down
+" With Alt-hjkl
+Plug 'matze/vim-move'
 call plug#end()
 
 "
@@ -213,6 +216,7 @@ scriptencoding utf-8
 if has('filterpipe')
   set noshelltemp
 endif
+
 if !has('nvim') && has('patch-7.4.1770')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -231,7 +235,6 @@ colorscheme onedark
 " Buffers & Files
 "
 " indent
-set autoindent
 set smartindent
 set cindent
 
@@ -241,19 +244,14 @@ set wildmenu
 " do not break words
 set linebreak
 
-" Automatically read a file changed outside of vim
-set autoread
-
 set hidden
 
-set incsearch
 set hlsearch
 set wildignorecase
 
 set mouse=a
 
 set matchtime=0
-set ruler
 set showmatch
 set showmode
 
@@ -264,10 +262,11 @@ set tabstop=4     " default to tabs = 4 spaces (normally overridden by FileType 
 set shiftwidth=4  " when shifting with <</>>, by default shift by this amount
 set softtabstop=4 " control columns used when TAB is hit in insert mode
 set expandtab     " Convert tabs to spaces
+set shiftround
 
 " When searching, ignore case if the search string is all lowercase, but make it
 set smartcase
-set ignorecase "case sensitive if there is an uppercase character
+set ignorecase " case sensitive if there is an uppercase character
 
 " Set "hybrid" line number mode - display the current line number, but relative
 " line numbers for all other lines
@@ -370,6 +369,9 @@ nnoremap <C-H> <C-W>h
 " CtrlP compatibility
 nnoremap <C-p> :Files<cr>
 
+" Use <C-l> to clear the highlighting of :set hlsearch.
+nnoremap <silent><C-l> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+
 "
 " Leader key shortcuts
 "
@@ -380,9 +382,6 @@ nnoremap <leader>b :Clap buffers<CR>
 
 nmap <leader>c <Plug>NERDCommenterToggle
 vmap <leader>c <Plug>NERDCommenterToggle
-
-" remove search highlighting
-nnoremap <leader><BS> :noh<CR>
 
 nnoremap <leader>q :Bwipeout<CR>
 
