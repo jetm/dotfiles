@@ -312,6 +312,19 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     sbin'sd*'
   zinit light chmln/sd
 
+  zi0c id-as'jq' \
+    from'gh-r'  \
+    as'program'  \
+    bpick'*linux64' \
+    mv'jq-* -> jq'
+  zinit load stedolan/jq
+
+  zi0c id-as'fx' \
+    from'gh-r' \
+    as'program' \
+    mv'fx* -> fx'
+  zinit light antonmedv/fx
+
   # Replaced by exa
   # zinit id-as'lsd' \
   #   from'gh-r' \
