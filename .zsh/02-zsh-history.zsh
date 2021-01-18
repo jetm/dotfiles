@@ -14,7 +14,7 @@
 #
 # Based on prezto
 #
-    # BANG_HIST treats the ! character specially during expansion
+# BANG_HIST treats the ! character specially during expansion
 setopt EXTENDED_HISTORY  # writes the history file in the :start:elapsed;command format
 setopt SHARE_HISTORY  # shares history between all sessions. Note that SHARE_HISTORY, INC_APPEND_HISTORY, and INC_APPEND_HISTORY_TIME are mutually exclusive
 setopt HIST_EXPIRE_DUPS_FIRST  # expires a duplicate event first when trimming history
@@ -36,11 +36,3 @@ setopt HIST_VERIFY  # does not execute immediately upon history expansion
 # setopt histverify               # edit a recalled history line before executing
 # setopt append_history           # Dont overwrite history
 setopt hist_reduce_blanks       # Remove superfluous blanks
-
-# HSTR configuration
-# export HSTR_CONFIG=hicolor       # get more colors
-# Must before hstr to replace ctrl-r keybinding
-# Command-line fuzzy finder
-# alias hh=hstr                    # hh to be alias for hstr
-# export HSTR_CONFIG=hicolor,substring-matching,skip-favorites-comments
-# bindkey -s "\C-r" "\C-a hstr -- \C-j"     # bind hstr to Ctrl-r (for Vi mode check doc)

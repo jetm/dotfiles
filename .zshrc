@@ -144,6 +144,17 @@ zi0c id-as'forgit' \
   atload'export FORGIT_NO_ALIASES=1'
 zinit light wfxr/forgit
 
+# Zinit pack is outdated and key-bindings doesn't work. Configuration is in
+# key-bindings.zsh file
+zi0c id-as'fzf' \
+  from"gh-r" \
+  as"program" \
+  bpick"*linux_amd64*"
+zinit light junegunn/fzf
+
+zi0c id-as'fzf-key-bindings'
+zinit snippet 'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
+
 # Missing extending all the history. Try after a while
 # Remember to add bindkey '\C-r' _histdb-isearch and make sure fzf bindings are
 # not overwrite it
@@ -152,7 +163,6 @@ zinit light wfxr/forgit
 # zinit light larkery/zsh-histdb
 
 if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
-
   zinit pack"default" for zsh
 
   zi0c id-as'navi' \
@@ -224,17 +234,6 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     atclone"mv rg/doc/rg.1 $ZPFX/man/man1" \
     pick'rg/rg'
   zinit light BurntSushi/ripgrep
-
-  # Zinit pack is outdated and key-bindings doesn't work. Configuration is in
-  # key-bindings.zsh file
-  zi0c id-as'fzf' \
-    from"gh-r" \
-    as"program" \
-    bpick"*linux_amd64*"
-  zinit light junegunn/fzf
-
-  zi0c id-as'fzf-key-bindings'
-  zinit snippet 'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
 
   zinit id-as"nvim" \
     nocompile \
@@ -396,10 +395,6 @@ zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 # Load personal configs
 for config (${HOME}/.zsh/*.zsh) source ${config}
-
-if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
-  [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
-fi
 
 #
 # Powerlevel10k
