@@ -31,13 +31,14 @@ zinit id-as'z-a-as-monitor' light-mode for zinit-zsh/z-a-as-monitor
 
 z_ice() { zinit ice lucid silent "$@" }
 
-load_PZT_mod() { z_ice; zinit snippet PZT::modules/$1 }
-
 zi0a() { z_ice wait'0' "$@" }
 
 zi0b() { z_ice wait'!0' "$@" }
 
 zi0c() { z_ice wait'!1' "$@" }
+
+zi0a id-as'zsh-thefuck'
+zinit light laggardkernel/zsh-thefuck
 
 zi0a id-as'zsh-you-should-use'
 zinit light MichaelAquilina/zsh-you-should-use
@@ -384,27 +385,22 @@ fi
 # zinit light jesseduffield/lazydocker
 
 #
-# prezto
+# prezto plugins
 #
+# Required here before prezto are loaded
+load_PZT_mod() { z_ice; zinit snippet PZT::modules/$1 }
+
 zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
 zstyle ':prezto:module:editor' key-bindings 'vi'
 zstyle ':prezto:module:editor' dot-expansion 'yes'
 zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa_home' 'swbuildn'
+load_PZT_mod helper/init.zsh
 load_PZT_mod environment
 load_PZT_mod editor
 load_PZT_mod ssh
 load_PZT_mod history
 load_PZT_mod completion
-
-#
-# fzf-tab
-#
-zstyle ':completion:*' format '[%d]'
-zstyle ':completion:*:descriptions' format '[%d]'
-zstyle ":completion:*:git-checkout:*" sort false
-zstyle ':fzf-tab:complete:cd:*' extra-opts --preview=$extract'exa -1 --color=always $realpath'
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 # Load personal configs
 for config (${HOME}/.zsh/*.zsh) source ${config}
