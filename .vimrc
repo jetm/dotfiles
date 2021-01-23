@@ -205,6 +205,7 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " Plugin to move lines and selections up and down
 " With Alt-hjkl
 Plug 'matze/vim-move'
+
 call plug#end()
 
 "
@@ -212,9 +213,16 @@ call plug#end()
 "
 scriptencoding utf-8
 
-" shell
-if has('filterpipe')
-  set noshelltemp
+" inside tmux
+if exists('$TMUX') && $TERM != 'xterm-kitty'
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+endif
+
+" inside neovim
+if has('nvim')
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=2
 endif
 
 if !has('nvim') && has('patch-7.4.1770')
@@ -231,61 +239,60 @@ endif
 set background=dark
 colorscheme onedark
 
-"
-" Buffers & Files
-"
-" indent
-set smartindent
-set cindent
+highlight clear SignColumn  " SignColumn should match background
 
-" show wildmenu
-set wildmenu
-
-" do not break words
-set linebreak
-
-set hidden
-
-set hlsearch
-set wildignorecase
-
-set mouse=a
-
-set matchtime=0
-set showmatch
-set showmode
-
-" Do not wrap lone lines
-set nowrap
-
-set tabstop=4     " default to tabs = 4 spaces (normally overridden by FileType settings)
-set shiftwidth=4  " when shifting with <</>>, by default shift by this amount
-set softtabstop=4 " control columns used when TAB is hit in insert mode
-set expandtab     " Convert tabs to spaces
-set shiftround
-
-" When searching, ignore case if the search string is all lowercase, but make it
-set smartcase
-set ignorecase " case sensitive if there is an uppercase character
-
-" Set "hybrid" line number mode - display the current line number, but relative
-" line numbers for all other lines
-:set relativenumber
-:set number
-
-" Highlight current line
-:set cursorline
+set shortmess=atOI " No help Uganda information, and overwrite read messages to avoid PRESS ENTER prompts
+set ignorecase     " Case insensitive search
+set smartcase      " ... but case sensitive when uc present
+set smartindent    " Do smart autoindenting when starting a new line
+set autoindent     " Set it on because smartindent
+set nowrap         " Do not wrap long lines
+set autowrite      " Automatically write a file when leaving a modified buffer
+set mousehide      " Hide the mouse cursor while typing
+set mouse=a        " Enable mouse in all modes
+set hidden         " Allow buffer switching without saving
+set ruler          " Show the ruler
+set showcmd        " Show partial commands in status line and Selected characters/lines in visual mode
+set showmode       " Show current mode in command-line
+set showmatch      " Show matching brackets/parentthesis
+set matchtime=0    " Hide matching time
+set linespace=0    " No extra spaces between rows
+set linebreak      " do not break words
+set cursorline     " Highlight current line
+set nojoinspaces   " Prevents inserting two spaces after punctuation on a join (J)
+set number         " Show Line numbers
+set relativenumber " Show relative Line numbers
+set tabstop=4      " default to tabs = 4 spaces (normally overridden by FileType settings)
+set softtabstop=4  " control columns used when TAB is hit in insert mode
+set shiftwidth=4   " when shifting with <</>>, by default shift by this amount
+set shiftround     " Round indent to multiple of 'shiftwidth'
+set expandtab      " Convert tabs to spaces
 
 " Display whitespace characters
 set list
-set listchars=tab:→\ ,extends:↷,precedes:↶,nbsp:␣,trail:· " eol:↲,
+set listchars=tab:→\ ,trail:·,extends:↷,precedes:↶,nbsp:␣ "eol:↵,
 set fillchars=vert:│,fold:·
-set showbreak=↪\
 
-" Prevents inserting two spaces after punctuation on a join (J)
-set nojoinspaces
+set winminheight=0
+set wildmode=list:longest,full
+set wildignore+=*swp,*.class,*.pyc,*.png,*.jpg,*.gif,*.zip
+set wildignore+=*/tmp/*,*.o,*.obj,*.so     " Unix
 
+set whichwrap+=<,>,h,l  " Allow backspace and cursor keys to cross line boundaries
+
+set termencoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+
+if has('unnamedplus')
+  set clipboard=unnamedplus,unnamed
+else
+  set clipboard+=unnamed
+endif
+
+"
 " Backup
+"
 set backup
 set undofile
 set undolevels=1000
@@ -298,19 +305,19 @@ let g:swap_dir = g:data_dir . 'swap'
 let g:undo_dir = g:data_dir . 'undofile'
 let g:conf_dir = g:data_dir . 'conf'
 if finddir(g:data_dir) ==# ''
-    silent call mkdir(g:data_dir, 'p', 0700)
+  silent call mkdir(g:data_dir, 'p', 0700)
 endif
 if finddir(g:backup_dir) ==# ''
-    silent call mkdir(g:backup_dir, 'p', 0700)
+  silent call mkdir(g:backup_dir, 'p', 0700)
 endif
 if finddir(g:swap_dir) ==# ''
-    silent call mkdir(g:swap_dir, 'p', 0700)
+  silent call mkdir(g:swap_dir, 'p', 0700)
 endif
 if finddir(g:undo_dir) ==# ''
-    silent call mkdir(g:undo_dir, 'p', 0700)
+  silent call mkdir(g:undo_dir, 'p', 0700)
 endif
 if finddir(g:conf_dir) ==# ''
-    silent call mkdir(g:conf_dir, 'p', 0700)
+  silent call mkdir(g:conf_dir, 'p', 0700)
 endif
 unlet g:data_dir
 unlet g:backup_dir
@@ -322,9 +329,11 @@ unlet g:conf_dir
 " Key mapping
 "
 
-" Wrapped lines goes down/up to next row, rather than next line in file.
-noremap j gj
-noremap k gk
+" Treat long lines as break lines (useful when moving around in them)
+nmap j gj
+nmap k gk
+vmap j gj
+vmap k gk
 
 " Remove keybinding for Ex Mode
 nnoremap Q <nop>
@@ -347,9 +356,6 @@ inoremap <Up>    <nop>
 inoremap <Down>  <nop>
 inoremap <Left>  <nop>
 inoremap <Right> <nop>
-
-" Start new line
-inoremap <S-Return> <C-o>o
 
 " Visual shifting (does not exit Visual mode)
 vnoremap < <gv
@@ -383,7 +389,7 @@ nnoremap <leader>b :Clap buffers<CR>
 nmap <leader>c <Plug>NERDCommenterToggle
 vmap <leader>c <Plug>NERDCommenterToggle
 
-nnoremap <leader>q :Bwipeout<CR>
+nnoremap <silent> <leader>q :Bwipeout<CR>
 
 " Search in files with ripgrep
 nmap <leader>g :Leaderf! rg -e
@@ -767,3 +773,5 @@ call deoplete#custom#option('prev_completion_mode', 'mirror')
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<c-b>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
+
+" vim:set ts=2 sw=2 et:
