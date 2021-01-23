@@ -1,18 +1,6 @@
-# Javier's dotfiles and utilities
+# Javier's dotfiles
 
-My shell configuration files and some useful utilities. Recommended use them with zsh,
-although they should work fine with bash.
-
-```sh
-$ git clone https://github.com/jetm/dotfiles
-$ dotfiles/bin/install-dotfiles
-```
-
-## Remove dotfiles:
-
-```sh
-$ dotfiles/bin/install-dotfiles -u
-```
+My shell configuration files and some useful utilities. 
 
 ## LICENSE
 
