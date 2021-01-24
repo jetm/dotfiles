@@ -284,12 +284,6 @@ set termencoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 
-if has('unnamedplus')
-  set clipboard=unnamedplus,unnamed
-else
-  set clipboard+=unnamed
-endif
-
 "
 " Backup
 "
