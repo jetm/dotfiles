@@ -19,9 +19,8 @@ Plug 'lambdalisue/suda.vim'
 "
 Plug 'joshdick/onedark.vim'
 
-" Status UI
-Plug 'itchyny/lightline.vim'
-Plug 'taohexxx/lightline-buffer'
+" vim statusline like spacemacs, lightline replacement
+Plug 'glepnir/spaceline.vim'
 
 " Shows indent guides with columns
 Plug 'Yggdroot/indentLine'
@@ -49,8 +48,9 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 
 " Adds file type icons to Vim plugins such as: NERDTree, vim-airline, CtrlP,
-" unite, Denite, lightline, vim-startify and many more
-Plug 'ryanoasis/vim-devicons'
+" unite, Denite, lightline, vim-startify and many more Lua `fork` of
+" vim-devicons for neovim
+Plug 'kyazdani42/nvim-web-devicons'
 
 " Modern performant generic finder and dispatcher for Vim and NeoVim
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
@@ -124,7 +124,6 @@ Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 " Check syntax in Vim asynchronously and fix files, with Language Server
 " Protocol (LSP) support
 Plug 'dense-analysis/ale'
-Plug 'maximbaz/lightline-ale'
 
 " LSP language server
 Plug 'autozimu/LanguageClient-neovim', {
@@ -534,86 +533,12 @@ let g:LanguageClient_diagnosticsDisplay = {
     \ },
 \}
 
-let g:lightline = {
-    \ 'colorscheme': 'onedark',
-    \ 'active': {
-    \   'left': [
-    \              ['mode', 'paste'],
-    \              ['readonly', 'filename', 'modified'],
-    \           ],
-    \   'right': [
-    \              ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
-    \              ['lineinfo'],
-    \              ['percent'],
-    \              ['fileformat', 'fileencoding', 'filetype', 'charvaluehex'],
-    \            ]
-    \ },
-    \ 'tabline': {
-    \   'left': [
-    \             ['bufferinfo'],
-    \             ['separator_tab'],
-    \             ['bufferbefore', 'buffercurrent', 'bufferafter']
-    \           ],
-    \   'right': [['close']],
-    \ },
-    \ 'component_expand': {
-    \   'buffercurrent': 'lightline#buffer#buffercurrent',
-    \   'bufferbefore': 'lightline#buffer#bufferbefore',
-    \   'bufferafter': 'lightline#buffer#bufferafter',
-    \   'linter_checking': 'lightline#ale#checking',
-    \   'linter_warnings': 'lightline#ale#warnings',
-    \   'linter_errors': 'lightline#ale#errors',
-    \   'linter_ok': 'lightline#ale#ok',
-    \ },
-    \ 'component_type': {
-    \   'buffercurrent': 'tabsel',
-    \   'bufferbefore': 'raw',
-    \   'bufferafter': 'raw',
-    \   'linter_checking': 'left',
-    \   'linter_warnings': 'warning',
-    \   'linter_errors': 'error',
-    \   'linter_ok': 'left',
-    \ },
-    \ 'component_function': {
-    \   'bufferinfo': 'lightline#buffer#bufferinfo',
-    \   'ale': 'LightlineALE',
-    \ },
-    \ 'component': {
-    \   'separator_tab': '',
-    \ },
-    \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-    \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
-\}
-
-" lightline-buffer ui settings
-let g:lightline_buffer_logo = "\ue62b "
-let g:lightline_buffer_readonly_icon = "\ufafa"
-let g:lightline_buffer_modified_icon = "\ufac1"
-let g:lightline_buffer_git_icon = "\ue0a0 "
-let g:lightline_buffer_ellipsis_icon = '..'
-let g:lightline_buffer_expand_left_icon = '◀ '
-let g:lightline_buffer_expand_right_icon = ' ▶'
-let g:lightline_buffer_active_buffer_left_icon = ''
-let g:lightline_buffer_active_buffer_right_icon = ''
-let g:lightline_buffer_separator_icon = '  '
-
-" lightline-buffer function settings
-let g:lightline_buffer_show_bufnr = 1
-let g:lightline_buffer_rotate = 0
-let g:lightline_buffer_fname_mod = ':t'
-let g:lightline_buffer_excludes = ['vimfiler']
-
-let g:lightline_buffer_maxflen = 30
-let g:lightline_buffer_maxfextlen = 3
-let g:lightline_buffer_minflen = 16
-let g:lightline_buffer_minfextlen = 3
-let g:lightline_buffer_reservelen = 20
-
-" lightline-ale
-let g:lightline#ale#indicator_checking = " \uf110 "
-let g:lightline#ale#indicator_warnings = "\uf071 "
-let g:lightline#ale#indicator_errors = "\uf05e "
-let g:lightline#ale#indicator_ok = "\uf00c "
+"
+" spaceline statusline
+"
+let g:spaceline_seperate_style = 'curve'
+let g:spaceline_diagnostic_tool = 'ale'
+let g:spaceline_colorscheme = 'one'
 
 "
 " vim-indent-guides
