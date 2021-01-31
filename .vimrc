@@ -605,7 +605,7 @@ let g:Lf_RgConfig = [
 " vim-floaterm
 "
 let g:floaterm_open_command = 'tabe'
-let g:floaterm_keymap_toggle = '<F11>'
+let g:floaterm_keymap_toggle = "<Leader>'"
 let g:floaterm_width = 0.98
 let g:floaterm_height = 0.4
 
