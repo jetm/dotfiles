@@ -1,6 +1,6 @@
 if !has('nvim')
-    " Stop sourcing here if regular vim is sourcing this file
-    finish
+  " Stop sourcing here if regular vim is sourcing this file
+  finish
 endif
 
 let g:vimrc_author='Javier Tia'
@@ -63,9 +63,6 @@ Plug 'junegunn/fzf.vim'
 " Plugin for vim to enabling opening a file in a given line
 Plug 'bogado/file-line'
 
-" Smooth scroll
-Plug 'yuttie/comfortable-motion.vim'
-
 " substitute preview
 Plug 'osyo-manga/vim-over'
 
@@ -116,10 +113,14 @@ Plug 'roxma/vim-tmux-clipboard'
 "
 
 " Asychronous Lint Engine, on the fly linting of files
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Tabnine
-Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+" Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+
+" Nodejs extension host for vim & neovim, load extensions like VSCode and host
+" language servers
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Check syntax in Vim asynchronously and fix files, with Language Server
 " Protocol (LSP) support
@@ -127,8 +128,8 @@ Plug 'dense-analysis/ale'
 
 " LSP language server
 Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
+  \ 'branch': 'next',
+  \ 'do': 'bash install.sh',
 \}
 
 " LSP bash
@@ -157,6 +158,9 @@ Plug 'tpope/vim-eunuch'
 
 " Handles bracketed-paste-mode in vim (aka. automatic `:set paste`)
 Plug 'ConradIrwin/vim-bracketed-paste'
+
+" Pasting in Vim with indentation adjusted to destination context
+Plug 'sickill/vim-pasta'
 
 " Add support to bitbake
 Plug 'kergoth/vim-bitbake'
@@ -205,6 +209,11 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " With Alt-hjkl
 Plug 'matze/vim-move'
 
+" Switch between single-line and multiline forms of code
+" gS to split a one-liner into multiple lines
+" gJ (with the cursor on the first line of a block) to join a block into a single-line statement
+Plug 'AndrewRadev/splitjoin.vim'
+
 call plug#end()
 
 "
@@ -212,27 +221,33 @@ call plug#end()
 "
 scriptencoding utf-8
 
-" inside tmux
-if exists('$TMUX') && $TERM != 'xterm-kitty'
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
+" switch cursor to line when in insert mode, and block when not
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+  \,sm:block-blinkwait175-blinkoff150-blinkon175
+
+if &term =~ '256color'
+  " disable background color erase
+  set t_ut=
 endif
 
-" inside neovim
-if has('nvim')
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=2
-endif
+" highlight conflicts
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
-if !has('nvim') && has('patch-7.4.1770')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
-
-if exists('+termguicolors')
+" enable 24 bit color support if supported
+if (has("termguicolors"))
+  if (!(has("nvim")))
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  endif
   set termguicolors
-elseif exists('+guicolors')
-  set guicolors
+endif
+
+if (has('nvim'))
+  " show results of substition as they're happening
+  " but don't open a split
+  set inccommand=nosplit
 endif
 
 set background=dark
@@ -240,44 +255,45 @@ colorscheme onedark
 
 highlight clear SignColumn  " SignColumn should match background
 
-set shortmess=atOI " No help Uganda information, and overwrite read messages to avoid PRESS ENTER prompts
-set ignorecase     " Case insensitive search
-set smartcase      " ... but case sensitive when uc present
-set smartindent    " Do smart autoindenting when starting a new line
-set autoindent     " Set it on because smartindent
-set nowrap         " Do not wrap long lines
-set autowrite      " Automatically write a file when leaving a modified buffer
-set mousehide      " Hide the mouse cursor while typing
-set mouse=a        " Enable mouse in all modes
-set hidden         " Allow buffer switching without saving
-set ruler          " Show the ruler
-set showcmd        " Show partial commands in status line and Selected characters/lines in visual mode
-set showmode       " Show current mode in command-line
-set showmatch      " Show matching brackets/parentthesis
-set matchtime=0    " Hide matching time
-set linespace=0    " No extra spaces between rows
-set linebreak      " do not break words
-set cursorline     " Highlight current line
-set nojoinspaces   " Prevents inserting two spaces after punctuation on a join (J)
-set number         " Show Line numbers
-set relativenumber " Show relative Line numbers
-set tabstop=4      " default to tabs = 4 spaces (normally overridden by FileType settings)
-set softtabstop=4  " control columns used when TAB is hit in insert mode
-set shiftwidth=4   " when shifting with <</>>, by default shift by this amount
-set shiftround     " Round indent to multiple of 'shiftwidth'
-set expandtab      " Convert tabs to spaces
+set autowrite                               " Automatically write a file when leaving a modified buffer
+set cursorline                              " Highlight current line
+set emoji                                   " enable emojis
+set expandtab smarttab                      " tab key actions
+set hidden                                  " Allow buffer switching without saving
+set ignorecase smartcase                    " Case insensitive search, but case sensitive when uc present
+set linebreak                               " do not break words
+set linespace=0                             " No extra spaces between rows
+set matchtime=0                             " Hide matching time
+set mouse=a                                 " enable mouse scrolling
+set mousehide                               " Hide the mouse cursor while typing
+set nojoinspaces                            " Prevents inserting two spaces after punctuation on a join (J)
+set nolazyredraw                            " don't redraw while executing macros
+set nowrap                                  " Do not wrap long lines
+set number relativenumber                   " enable numbers on the left, current line is 0
+set regexpengine=1                          "  Use the old engine, new is for debugging
+set ruler                                   " Show the ruler
+set shiftround                              " Round indent to multiple of 'shiftwidth'
+set shortmess=atOI                          " No help Uganda information, and overwrite read messages to avoid PRESS ENTER prompts
+set showcmd                                 " Show partial commands in status line and Selected characters/lines in visual mode
+set showmatch                               " Show matching brackets/parentthesis
+set showmode                                " Show current mode in command-line
+set showtabline=2                           " always show tabline
+set smartindent autoindent                  " Do smart autoindenting when starting a new line
+set tabstop=4 softtabstop=4 shiftwidth=4    " tab width
+set ttyfast                                 " faster redrawing
 
 " Display whitespace characters
 set list
-set listchars=tab:→\ ,trail:·,extends:↷,precedes:↶,nbsp:␣ "eol:↵,
+set listchars=tab:→\ ,trail:·,extends:↷,precedes:↶,nbsp:␣
 set fillchars=vert:│,fold:·
 
 set winminheight=0
 set wildmode=list:longest,full
 set wildignore+=*swp,*.class,*.pyc,*.png,*.jpg,*.gif,*.zip
-set wildignore+=*/tmp/*,*.o,*.obj,*.so     " Unix
+set wildignore+=*/tmp/*,*.o,*.obj,*.so
 
-set whichwrap+=<,>,h,l  " Allow backspace and cursor keys to cross line boundaries
+" Allow backspace and cursor keys to cross line boundaries
+set whichwrap+=<,>,h,l
 
 set termencoding=utf-8
 set fileencoding=utf-8
@@ -322,11 +338,11 @@ unlet g:conf_dir
 " Key mapping
 "
 
-" Treat long lines as break lines (useful when moving around in them)
-nmap j gj
-nmap k gk
-vmap j gj
-vmap k gk
+" moving up and down work as you would expect
+nnoremap <silent> j gj
+nnoremap <silent> k gk
+nnoremap <silent> ^ g^
+nnoremap <silent> $ g$
 
 " Remove keybinding for Ex Mode
 nnoremap Q <nop>
@@ -388,6 +404,17 @@ nnoremap <silent> <leader>q :Bwipeout<CR>
 nmap <leader>g :Leaderf! rg -e
 nmap <leader>gw :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
 
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
 "
 " EasyMotion
 "
@@ -436,16 +463,15 @@ xmap <leader>s <plug>(SubversiveSubstituteRange)
 nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
 
 "
+" shellharden
+"
+nmap <silent> <F7> :%!shellharden --replace ''<CR>
+
+"
 " YAML files
 "
 " two space tabs for YAML
 au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-
-"
-" vim-lastplace
-"
-let g:lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
-let g:lastplace_ignore_buftype = "quickfix"
 
 "
 " Comments
@@ -478,17 +504,26 @@ let g:ale_completion_enabled = 0
 
 let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \ 'sh': ['shfmt'],
   \ 'diff': [],
   \ 'gitcommit': [],
   \ 'gitsendemail': [],
-  \ 'sh': ['shfmt'],
-\}
+  \}
+
+autocmd BufNewFile,BufRead /ws/tiamarin/halon*/*
+  \ let g:ale_fixers = {
+  \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \   'sh': [],
+  \   'diff': [],
+  \   'gitcommit': [],
+  \   'gitsendemail': []
+  \}
 
 let g:ale_linters = {
   \ 'sh': ['shellcheck'],
   \ 'gitcommit': ['git-lint'],
   \ 'go': ['gopls'],
-\}
+  \}
 
 let g:ale_sign_error = "\uf05e"
 let g:ale_sign_warning = "\uf071"
@@ -504,7 +539,7 @@ let g:ale_warn_about_trailing_whitespace = 1
 " LanguageClient-neovim
 let g:LanguageClient_serverCommands = {
   \ 'sh': ['bash-language-server', 'start']
-\}
+  \}
 
 let g:LanguageClient_diagnosticsDisplay = {
   \ 1: {
@@ -531,7 +566,7 @@ let g:LanguageClient_diagnosticsDisplay = {
     \ 'signText': "\uf05a",
     \ 'signTexthl': 'ALEInfoSign',
     \ },
-\}
+  \}
 
 "
 " spaceline statusline
@@ -573,33 +608,33 @@ let g:Lf_PreviewPopupWidth = 10
 
 " Enable preview for specific types
 let g:Lf_PreviewResult = {
-    \ 'File': 0,
-    \ 'Buffer': 0,
-    \ 'Mru': 0,
-    \ 'Tag': 0,
-    \ 'BufTag': 1,
-    \ 'Function': 1,
-    \ 'Line': 0,
-    \ 'Colorscheme': 0,
-    \ 'Rg': 1,
-    \ 'Gtags': 0
-\}
+  \ 'File': 0,
+  \ 'Buffer': 0,
+  \ 'Mru': 0,
+  \ 'Tag': 0,
+  \ 'BufTag': 1,
+  \ 'Function': 1,
+  \ 'Line': 0,
+  \ 'Colorscheme': 0,
+  \ 'Rg': 1,
+  \ 'Gtags': 0
+  \}
 
 " Disable default bindings
 let g:Lf_ShortcutF = 0
 let g:Lf_ShortcutB = 0
 
 let g:Lf_WildIgnore = {
-    \ 'dir': ['.svn','.git','.hg', '.idea', '.project'],
-    \ 'file': ['*.sw?','~$*','*.bak', '*.tmp', '*.temp', 'tags']
-\}
+  \ 'dir': ['.svn','.git','.hg', '.idea', '.project'],
+  \ 'file': ['*.sw?','~$*','*.bak', '*.tmp', '*.temp', 'tags']
+  \}
 
 let g:Lf_RgConfig = [
-    \ "--glob=!git/*",
-    \ "--glob=!tags",
-    \ "--glob=!.svn/",
-    \ "--glob=!.idea/*",
-\]
+  \ "--glob=!git/*",
+  \ "--glob=!tags",
+  \ "--glob=!.svn/",
+  \ "--glob=!.idea/*",
+  \]
 
 "
 " vim-floaterm
@@ -615,10 +650,6 @@ let g:comfortable_motion_scroll_up_key = "k"
 let g:comfortable_motion_friction = 80.0
 let g:comfortable_motion_air_drag = 2.0
 
-" Find And Replace plugin options
-set lazyredraw
-set regexpengine=1
-
 "
 " Text expantion
 "
@@ -626,18 +657,18 @@ xmap v <Plug>(expand_region_expand)
 xmap V <Plug>(expand_region_shrink)
 
 let g:expand_region_text_objects = {
-    \ 'iw'  :0,
-    \ 'iW'  :0,
-    \ 'i"'  :0,
-    \ 'i''' :0,
-    \ 'i]'  :1,
-    \ 'ib'  :1,
-    \ 'iB'  :1,
-    \ 'il'  :1,
-    \ 'ii'  :1,
-    \ 'ip'  :0,
-    \ 'ie'  :0,
-    \ }
+  \ 'iw'  :0,
+  \ 'iW'  :0,
+  \ 'i"'  :0,
+  \ 'i''' :0,
+  \ 'i]'  :1,
+  \ 'ib'  :1,
+  \ 'iB'  :1,
+  \ 'il'  :1,
+  \ 'ii'  :1,
+  \ 'ip'  :0,
+  \ 'ie'  :0,
+  \ }
 
 " Set to 0 if you want to enable it later via :RainbowToggle
 let g:rainbow_active = 1
@@ -650,6 +681,9 @@ let g:suda_smart_edit = 1
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
+"
+" Clap
+"
 let g:clap_theme = 'material_design_dark'
 
 "
@@ -658,33 +692,58 @@ let g:clap_theme = 'material_design_dark'
 " Show by default 4 spaces for a tab
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 
-" Enable autocompletion
-call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
-
 " Disable mappings
 let g:go_def_mapping_enabled = 0
+
 
 "
 " deoplete
 "
-let g:deoplete#enable_at_startup = 1
-
-call deoplete#custom#option({
-\   'auto_complete_delay': 100,
-\   'smart_case': v:false,
-\   'ignore_case': v:true,
-\ })
-
-let g:python3_host_prog = "/usr/bin/python3.7"
-
+" let g:deoplete#enable_at_startup = 1
+"
+" call deoplete#custom#option({
+"   \   'auto_complete_delay': 100,
+"   \   'smart_case': v:false,
+"   \   'ignore_case': v:true,
+"   \ })
+"
+" Enable autocompletion
+" call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+"
 "
 " tabnine
 "
-call deoplete#custom#var('tabnine', {
-    \ 'max_num_results': 5,
-\})
+" call deoplete#custom#var('tabnine', {
+"   \ 'max_num_results': 5,
+"   \})
+"
+" call deoplete#custom#option('prev_completion_mode', 'mirror')
 
-call deoplete#custom#option('prev_completion_mode', 'mirror')
+"
+" coc
+"
+let g:coc_global_extensions = [
+  \ 'coc-cmake',
+  \ 'coc-yaml',
+  \ 'coc-pairs',
+  \ 'coc-sh',
+  \ 'coc-vimlsp',
+  \ 'coc-ultisnips',
+  \ 'coc-explorer',
+  \ 'coc-diagnostic',
+  \ 'coc-floaterm',
+  \ 'coc-tabnine'
+  \ ]
+
+" Highlight the symbol and its references when holding the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Add (Neo)Vim's native statusline support
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+inoremap <silent><expr> <c-space> coc#refresh()
 
 "
 " ultisnips
@@ -692,5 +751,7 @@ call deoplete#custom#option('prev_completion_mode', 'mirror')
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<c-b>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
+
+let g:python3_host_prog = "/usr/bin/python3.7"
 
 " vim:set ts=2 sw=2 et:
