@@ -18,6 +18,40 @@ source "${HOME}/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
+### End of Zinit's installer chunk
+
+z_ice() { zinit ice lucid silent "$@" }
+zi0a() { z_ice wait'0' "$@" }
+zi0b() { z_ice wait'!0' "$@" }
+zi0c() { z_ice wait'!1' "$@" }
+zi0d() { z_ice wait'!2' "$@" }
+
+#
+# prezto plugins
+#
+# Required here before prezto are loaded
+load_PZT_mod() { z_ice; zinit snippet PZT::modules/$1 }
+
+zstyle ':prezto:*:*' case-sensitive 'yes'
+zstyle ':prezto:*:*' color 'yes'
+zstyle ':prezto:module:editor' key-bindings 'vi'
+zstyle ':prezto:module:editor' dot-expansion 'yes'
+zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa_home' 'swbuildn'
+load_PZT_mod helper/init.zsh
+load_PZT_mod environment
+load_PZT_mod editor
+load_PZT_mod ssh
+load_PZT_mod history
+load_PZT_mod completion
+
+#
+# Powerlevel10k
+#
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+zinit ice lucid nocd id-as'p10k' depth=1 atload"!source ${HOME}/.p10k.zsh"
+zinit light romkatv/powerlevel10k
+
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 
@@ -26,16 +60,6 @@ zinit id-as'z-a-path-dl' light-mode for zinit-zsh/z-a-patch-dl
 zinit id-as'z-a-readurl' light-mode for zinit-zsh/z-a-readurl
 zinit id-as'z-a-gen-mod-node' light-mode for zinit-zsh/z-a-bin-gem-node
 zinit id-as'z-a-as-monitor' light-mode for zinit-zsh/z-a-as-monitor
-
-### End of Zinit's installer chunk
-
-z_ice() { zinit ice lucid silent "$@" }
-
-zi0a() { z_ice wait'0' "$@" }
-
-zi0b() { z_ice wait'!0' "$@" }
-
-zi0c() { z_ice wait'!1' "$@" }
 
 zi0a id-as'zsh-thefuck'
 zinit light laggardkernel/zsh-thefuck
@@ -84,10 +108,6 @@ zi0c id-as'git-reset-file' \
   as'command' \
   pick'bin/git-reset-file'
 zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-reset-file
-
-zi0c id-as'fzf-tab' \
-  has'fzf'
-zinit light Aloxaf/fzf-tab
 
 zi0c id-as'delta' \
   from'gh-r' \
@@ -141,20 +161,25 @@ zinit id-as'hacker-laws-cli' \
   for @umutphp/hacker-laws-cli
 
 zi0c id-as'forgit' \
-  atinit'source $ZDOTDIR/zinit/atinit/forgit.zsh' \
   atload'export FORGIT_NO_ALIASES=1'
 zinit light wfxr/forgit
 
 # Zinit pack is outdated and key-bindings doesn't work. Configuration is in
 # key-bindings.zsh file
-zi0c id-as'fzf' \
+zi0b id-as'fzf' \
   from"gh-r" \
   as"program" \
+  has"fd" \
   bpick"*linux_amd64*"
 zinit light junegunn/fzf
 
-zi0c id-as'fzf-key-bindings'
+zi0c id-as'fzf-key-bindings' \
+  has'fzf'
 zinit snippet 'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
+
+zi0c id-as'fzf-tab' \
+  has'fzf'
+zinit light Aloxaf/fzf-tab
 
 # Missing extending all the history. Try after a while
 # Remember to add bindkey '\C-r' _histdb-isearch and make sure fzf bindings are
@@ -236,20 +261,28 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     pick'rg/rg'
   zinit light BurntSushi/ripgrep
 
-  zinit id-as"nvim" \
+  zinit id-as'nvim' \
     nocompile \
     make!"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
     atload'export EDITOR="nvim"' \
     for @neovim/neovim
 
-  zinit id-as"git" \
+  zinit id-as'git' \
     mv"%ID% -> git.tar.gz" \
-    atclone"ziextract --move git.tar.gz" \
-    atpull"%atclone" \
+    atclone'ziextract --move git.tar.gz' \
+    atpull'%atclone' \
     make"prefix=$ZPFX install install-doc" \
     dlink="/git/git/archive/v%VERSION%.tar.gz" \
-    as"readurl|command" \
+    as'readurl|command' \
     for https://github.com/git/git/releases/
+
+  zinit id-as'parallel' \
+    as'program' \
+    nocompile \
+    atclone"ziextract --auto --move && ./configure --disable-documentation --prefix=$ZPFX" \
+    atpull'%atclone' \
+    make'install' \
+    for https://ftp.gnu.org/gnu/parallel/parallel-latest.tar.bz2
 
   install_asdf_plugins() {
     #  # https://github.com/asdf-vm/asdf-nodejs
@@ -326,6 +359,25 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     mv'fx* -> fx'
   zinit light antonmedv/fx
 
+  zi0c id-as'hss' \
+    from'gh-r' \
+    as'program' \
+    mv'hss-Linux-x86_64 -> hss'
+  zinit light six-ddc/hss
+
+  zi0c id-as'bat' \
+    from'gh-r' \
+    as'command' \
+    pick'bat/bat' \
+    mv'bat* -> bat'
+  zinit light sharkdp/bat
+
+  zi0c id-as'duf' \
+    from'gh-r' \
+    bpick'*linux_x86_64.tar.gz' \
+    as'command'
+  zinit light muesli/duf
+
   # Replaced by exa
   # zinit id-as'lsd' \
   #   from'gh-r' \
@@ -371,46 +423,18 @@ fi
 #   sbin'zoxide*'
 # zinit light ajeetdsouza/zoxide
 
-# zi0c id-as'bat' \
-#   from'gh-r' \
-#   as'command' \
-#   pick'bat/bat' \
-#   mv'bat* -> bat'
-# zinit light sharkdp/bat
-
 # zi0c id-as'lazydoker' \
 #   from'gh-r' \
 #   as'program' \
 #   pick'lazydocker'
 # zinit light jesseduffield/lazydocker
 
-#
-# prezto plugins
-#
-# Required here before prezto are loaded
-load_PZT_mod() { z_ice; zinit snippet PZT::modules/$1 }
-
-zstyle ':prezto:*:*' case-sensitive 'yes'
-zstyle ':prezto:*:*' color 'yes'
-zstyle ':prezto:module:editor' key-bindings 'vi'
-zstyle ':prezto:module:editor' dot-expansion 'yes'
-zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa_home' 'swbuildn'
-load_PZT_mod helper/init.zsh
-load_PZT_mod environment
-load_PZT_mod editor
-load_PZT_mod ssh
-load_PZT_mod history
-load_PZT_mod completion
-
 # Load personal configs
-for config (${HOME}/.zsh/*.zsh) source ${config}
+# for config (${HOME}/.zsh/*.zsh) source ${config}
 
-#
-# Powerlevel10k
-#
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-zinit ice lucid nocd id-as'p10k' depth=1 atload"!source ${HOME}/.p10k.zsh"
-zinit light romkatv/powerlevel10k
+# extensions in dotfiles
+zi0d id-as'dotfiles-extensions' \
+  multisrc'*.zsh'
+zinit light "${HOME}/.zsh"
 
 # vim:set ts=2 sw=2 et:
