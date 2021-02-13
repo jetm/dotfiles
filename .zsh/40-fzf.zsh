@@ -16,7 +16,7 @@ FZF_DEFAULT_OPTS+=' --bind "ctrl-y:execute-silent(echo {+} | xargs -n1 tmux set-
 FZF_DEFAULT_OPTS+=' --bind "ctrl-e:execute(nvim {} < /dev/tty > /dev/tty)+abort"'
 FZF_DEFAULT_OPTS+=' --bind "ctrl-j:preview-page-down"'
 FZF_DEFAULT_OPTS+=' --bind "ctrl-k:preview-page-up"'
-
+FZF_DEFAULT_OPTS+=' --bind "ctrl-o:execute-multi(nvim -p {} < /dev/tty > /dev/tty)"'
 export FZF_DEFAULT_OPTS
 export FZF_COMPLETION_TRIGGER="@@"
 
@@ -28,6 +28,5 @@ FORGIT_FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS}"
 FORGIT_FZF_DEFAULT_OPTS+=' --preview-window=:down:80%:nohidden'
 export FORGIT_FZF_DEFAULT_OPTS
 
-FORGIT_DIFF_FZF_OPTS="${FORGIT_FZF_DEFAULT_OPTS}"
 FORGIT_DIFF_FZF_OPTS+=' --bind="ctrl-e:execute(nvim {-1} < /dev/tty > /dev/tty)+abort"'
 export FORGIT_DIFF_FZF_OPTS
