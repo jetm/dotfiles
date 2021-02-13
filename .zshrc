@@ -119,7 +119,7 @@ zinit light dandavison/delta
 
 zi0c id-as'shellcheck' \
   from'gh-r' \
-   as'program' \
+  as'program' \
   bpick'*linux.x86_64*' \
   mv'shellcheck-*/shellcheck -> shellcheck' \
   sbin'shellcheck'
@@ -161,7 +161,7 @@ zinit id-as'hacker-laws-cli' \
   for @umutphp/hacker-laws-cli
 
 zi0c id-as'forgit' \
-  atload'export FORGIT_NO_ALIASES=1'
+  atinit'export FORGIT_NO_ALIASES=1'
 zinit light wfxr/forgit
 
 # Zinit pack is outdated and key-bindings doesn't work. Configuration is in
@@ -415,7 +415,7 @@ fi
 #   sbin'sk'
 # zinit light lotabout/skim
 
-# zi0c id-as'zoxidse' \
+# zi0c id-as'zoxide' \
 #   from'gh-r' \
 #   as'program' \
 #   bpick'*x86_64*-linux-musl*' \
@@ -429,10 +429,7 @@ fi
 #   pick'lazydocker'
 # zinit light jesseduffield/lazydocker
 
-# Load personal configs
-# for config (${HOME}/.zsh/*.zsh) source ${config}
-
-# extensions in dotfiles
+# extensions dotfiles
 zi0d id-as'dotfiles-extensions' \
   multisrc'*.zsh'
 zinit light "${HOME}/.zsh"

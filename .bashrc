@@ -106,39 +106,10 @@ debug() {
     bash -x "$(command -v "$script")" "$@"
 }
 
-# COV_PATH=/aruba/halon/infra/coverity/cov-analysis-linux64-8.0.0/bin
-# if [ -d ${COV_PATH} ]; then
-#     PATH=${COV_PATH}:"${PATH}"
-# fi
-
-# add user base to python path
-# __PYTHON_PATH=$(python -c "import site, os; print(os.path.join(site.USER_BASE, 'lib', 'python3.4', 'site-packages'))"):$PYTHONPATH
-# export PYTHONPATH="${__PYTHON_PATH}"
-
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ]; then
     PATH=~/bin:"${PATH}"
 fi
-
-# NODE_GLOBAL_PATH=$HOME/.npm-global/bin
-# if [ -d "${NODE_GLOBAL_PATH}" ]; then
-#     PATH="${NODE_GLOBAL_PATH}:${PATH}"
-# fi
-
-# RUST_GLOBAL_PATH=$HOME/.cargo/bin
-# if [ -d "${RUST_GLOBAL_PATH}" ]; then
-#     PATH="${RUST_GLOBAL_PATH}:${PATH}"
-# fi
-#
-# LOCAL_PATH=$HOME/.local/bin
-# if [ -d "${LOCAL_PATH}" ]; then
-#     PATH="${LOCAL_PATH}:${PATH}"
-# fi
-#
-# CABAL_PATH=$HOME/.cabal/bin
-# if [ -d "${CABAL_PATH}" ]; then
-#     PATH="${CABAL_PATH}:${PATH}"
-# fi
 
 #
 # Other Alias
@@ -189,9 +160,6 @@ export HISTIGNORE
 shopt -s histreedit # reedit a history substitution line if it failed
 shopt -s histverify # edit a recalled history line before executing
 
-# HSTR configuration - add this to ~/.bashrc
-alias hh=hstr              # hh to be alias for hstr
-export HSTR_CONFIG=hicolor # get more colors
 shopt -s histappend        # append new history items to .bash_history
 export HISTCONTROL=ignoreboth:erasedups:ignorespace
 export HISTFILESIZE=10000       # increase history file size (default is 500)
@@ -199,38 +167,9 @@ export HISTSIZE=${HISTFILESIZE} # increase history size (default is 500)
 # ensure synchronization between Bash memory and history file
 export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
 
-# if this is interactive shell, then bind hstr to Ctrl-r (for Vi mode check doc)
-if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
-
-# if this is interactive shell, then bind 'kill last command' to Ctrl-x k
-# if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
-
-#
-# Ctrl-r
-#
-if (command -v sk >/dev/null 2>&1); then
-    if (command -v fd >/dev/null 2>&1); then
-        if [ -f /ws/tiamarin/shell-goodies/skim/shell/key-bindings.bash ]; then
-            source /ws/tiamarin/shell-goodies/skim/shell/key-bindings.bash
-        fi
-    fi
-fi
-
 #
 # VM settings
 #
-# HPE_PROXY=http://web-proxy.rose.hpecorp.net:8088
-
-# All variables in lowercase
-# export http_proxy="${HPE_PROXY}"
-# export https_proxy="${HPE_PROXY}"
-# export ftp_proxy="${HPE_PROXY}"
-
-# All variables in UPPERCASE
-# export HTTP_PROXY="${HPE_PROXY}"
-# export HTTPS_PROXY="${HPE_PROXY}"
-# export FTP_PROXY="${HPE_PROXY}"
-# export no_proxy='localhost,127.0.0.1,localhost6,::1,.localdomain,hpecorp.net'
 
 # aliases for git
 alias g='git'
@@ -244,10 +183,6 @@ if [ -f "$HOME"/.git-completion.bash ]; then
 fi
 
 alias fix-code-format='git --no-pager diff --name-only HEAD~ HEAD | grep "\.[ch]$" | xargs clang-format -i -style=file'
-
-if [ -f /usr/share/autojump/autojump.sh ]; then
-    source /usr/share/autojump/autojump.sh
-fi
 
 if [[ $(lsb_release -i) = *Ubuntu* ]]; then
     source /aruba/halon/infra/halon.profile
