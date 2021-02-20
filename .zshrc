@@ -54,7 +54,6 @@ zinit light romkatv/powerlevel10k
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
-
 zinit id-as'z-a-rust' light-mode for zinit-zsh/z-a-rust
 zinit id-as'z-a-path-dl' light-mode for zinit-zsh/z-a-patch-dl
 zinit id-as'z-a-readurl' light-mode for zinit-zsh/z-a-readurl
@@ -77,7 +76,7 @@ zi0b id-as'zsh-history-substring-search'
 zinit light zsh-users/zsh-history-substring-search
 
 zi0b id-as'zsh-abbrev-alias' \
- atload"source ${HOME}/.zsh/zsh-abbr-alias.conf"
+  atload"source ${HOME}/.zsh/zsh-abbr-alias.conf"
 zinit light momo-lab/zsh-abbrev-alias
 
 zi0b id-as'zsh-autopair'
@@ -377,6 +376,11 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     bpick'*linux_x86_64.tar.gz' \
     as'command'
   zinit light muesli/duf
+
+  zi0c id-as'git-interactive-rebase-tool' \
+    as'program' \
+    cargo'!git-interactive-rebase-tool'
+  zinit light MitMaro/git-interactive-rebase-tool
 
   # Replaced by exa
   # zinit id-as'lsd' \

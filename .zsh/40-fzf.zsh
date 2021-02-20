@@ -28,5 +28,5 @@ FORGIT_FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS}"
 FORGIT_FZF_DEFAULT_OPTS+=' --preview-window=:down:80%:nohidden'
 export FORGIT_FZF_DEFAULT_OPTS
 
-FORGIT_DIFF_FZF_OPTS+=' --bind="ctrl-e:execute(nvim {-1} < /dev/tty > /dev/tty)+abort"'
+FORGIT_DIFF_FZF_OPTS+=' --bind="ctrl-e:execute(nvim {-1} < /dev/tty > /dev/tty)"'
 export FORGIT_DIFF_FZF_OPTS

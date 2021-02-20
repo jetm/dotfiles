@@ -170,6 +170,9 @@
     ; smtpserver = G9W8453.americas.hpqcorp.net
     smtpserver = smtp3.hpe.com
 
+[sequence]
+    editor = /users/tiamarin/.zinit/plugins/git-interactive-rebase-tool/bin/interactive-rebase-tool
+
 ; [http]
 ;     proxy = http://web-proxy.rose.hpecorp.net:8080
 ;     sslverify = false
