@@ -180,6 +180,11 @@ zi0c id-as'fzf-tab' \
   has'fzf'
 zinit light Aloxaf/fzf-tab
 
+zi0c id-as'git-interactive-rebase-tool' \
+  as'program' \
+  cargo'!git-interactive-rebase-tool'
+zinit light MitMaro/git-interactive-rebase-tool
+
 # Missing extending all the history. Try after a while
 # Remember to add bindkey '\C-r' _histdb-isearch and make sure fzf bindings are
 # not overwrite it
@@ -189,6 +194,15 @@ zinit light Aloxaf/fzf-tab
 
 if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zinit pack"default" for zsh
+
+  zinit id-as'git' \
+    mv"%ID% -> git.tar.gz" \
+    atclone'ziextract --move git.tar.gz' \
+    atpull'%atclone' \
+    make"USE_LIBPCRE2=1 prefix=$ZPFX install install-doc" \
+    dlink="/git/git/archive/v%VERSION%.tar.gz" \
+    as'readurl|command' \
+    for https://github.com/git/git/releases/
 
   zi0c id-as'navi' \
     from'gh-r' \
@@ -265,15 +279,6 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     make!"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
     atload'export EDITOR="nvim"' \
     for @neovim/neovim
-
-  zinit id-as'git' \
-    mv"%ID% -> git.tar.gz" \
-    atclone'ziextract --move git.tar.gz' \
-    atpull'%atclone' \
-    make"prefix=$ZPFX install install-doc" \
-    dlink="/git/git/archive/v%VERSION%.tar.gz" \
-    as'readurl|command' \
-    for https://github.com/git/git/releases/
 
   zinit id-as'parallel' \
     as'program' \
@@ -376,11 +381,6 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     bpick'*linux_x86_64.tar.gz' \
     as'command'
   zinit light muesli/duf
-
-  zi0c id-as'git-interactive-rebase-tool' \
-    as'program' \
-    cargo'!git-interactive-rebase-tool'
-  zinit light MitMaro/git-interactive-rebase-tool
 
   # Replaced by exa
   # zinit id-as'lsd' \

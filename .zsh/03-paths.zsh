@@ -23,3 +23,11 @@ export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 if [ -d "${HOME}/go" ]; then
   export GOPATH=${HOME}/go
 fi
+
+# Remove unwanted PATHs
+path=( ${path[@]:#*ActivePython-2.7*} )
+path=( ${path[@]:#*Python3.4.3*} )
+path=( ${path[@]:#*slickedit*} )
+path=( ${path[@]:#*ntl_tools*} )
+path=( ${path[@]:#/tools} )
+path=( ${path[@]:#/tools/halon} )
