@@ -523,6 +523,7 @@ let g:ale_linters = {
   \ 'sh': ['shellcheck'],
   \ 'gitcommit': ['git-lint'],
   \ 'go': ['gopls'],
+  \ 'python': ['pylint'],
   \}
 
 let g:ale_sign_error = "\uf05e"
