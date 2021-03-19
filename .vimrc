@@ -3,9 +3,6 @@ if !has('nvim')
   finish
 endif
 
-let g:vimrc_author='Javier Tia'
-let g:vimrc_email='javier.tia@hpe.com'
-
 call plug#begin('~/.vim/plugged')
 
 " Defaults everyone can agree on
@@ -52,13 +49,10 @@ Plug 'haya14busa/incsearch-easymotion.vim'
 " vim-devicons for neovim
 Plug 'kyazdani42/nvim-web-devicons'
 
-" Modern performant generic finder and dispatcher for Vim and NeoVim
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
-Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
-
 " Fuzzy searching of files using FZF
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-peekaboo'
 
 " Plugin for vim to enabling opening a file in a given line
 Plug 'bogado/file-line'
@@ -103,7 +97,7 @@ Plug 'preservim/nerdcommenter' , { 'on' : '<Plug>NERDCommenterToggle' }
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " Make terminal vim and tmux work better together
-Plug 'tmux-plugins/vim-tmux-focus-events'
+" Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " Seamless integration for vim and tmux's clipboard
 Plug 'roxma/vim-tmux-clipboard'
@@ -111,12 +105,6 @@ Plug 'roxma/vim-tmux-clipboard'
 "
 " Languages
 "
-
-" Asychronous Lint Engine, on the fly linting of files
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-" Tabnine
-" Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 
 " Nodejs extension host for vim & neovim, load extensions like VSCode and host
 " language servers
@@ -257,30 +245,30 @@ highlight clear SignColumn  " SignColumn should match background
 
 set autowrite                               " Automatically write a file when leaving a modified buffer
 set cursorline                              " Highlight current line
-set emoji                                   " enable emojis
-set expandtab smarttab                      " tab key actions
+set emoji                                   " Enable emojis
+set expandtab smarttab                      " Tab key actions
 set hidden                                  " Allow buffer switching without saving
 set ignorecase smartcase                    " Case insensitive search, but case sensitive when uc present
-set linebreak                               " do not break words
+set linebreak                               " Do not break words
 set linespace=0                             " No extra spaces between rows
 set matchtime=0                             " Hide matching time
-set mouse=a                                 " enable mouse scrolling
+set mouse=a                                 " Enable mouse scrolling
 set mousehide                               " Hide the mouse cursor while typing
 set nojoinspaces                            " Prevents inserting two spaces after punctuation on a join (J)
-set nolazyredraw                            " don't redraw while executing macros
+set nolazyredraw                            " Don't redraw while executing macros
 set nowrap                                  " Do not wrap long lines
-set number relativenumber                   " enable numbers on the left, current line is 0
-set regexpengine=1                          "  Use the old engine, new is for debugging
+set number relativenumber                   " Enable numbers on the left, current line is 0
+set regexpengine=1                          " Use the old engine, new is for debugging
 set ruler                                   " Show the ruler
 set shiftround                              " Round indent to multiple of 'shiftwidth'
 set shortmess=atOI                          " No help Uganda information, and overwrite read messages to avoid PRESS ENTER prompts
 set showcmd                                 " Show partial commands in status line and Selected characters/lines in visual mode
 set showmatch                               " Show matching brackets/parentthesis
 set showmode                                " Show current mode in command-line
-set showtabline=2                           " always show tabline
+set showtabline=2                           " Always show tabline
 set smartindent autoindent                  " Do smart autoindenting when starting a new line
-set tabstop=4 softtabstop=4 shiftwidth=4    " tab width
-set ttyfast                                 " faster redrawing
+set tabstop=4 softtabstop=4 shiftwidth=4    " Tab width
+set ttyfast                                 " Faster redrawing
 
 " Display whitespace characters
 set list
@@ -382,7 +370,8 @@ nnoremap <C-L> <C-W>l
 nnoremap <C-H> <C-W>h
 
 " CtrlP compatibility
-nnoremap <C-p> :Files<cr>
+" fzf.vim is quicker than fzf.preview
+nnoremap <silent> <C-p> :Files<CR>
 
 " Use <C-l> to clear the highlighting of :set hlsearch.
 nnoremap <silent><C-l> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
@@ -392,17 +381,15 @@ nnoremap <silent><C-l> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR>
 "
 let mapleader = "\<Space>"
 
-nnoremap <leader><leader> :Clap<CR>
-nnoremap <leader>b :Clap buffers<CR>
+nnoremap <leader>b :Buffers<CR>
 
 nmap <leader>c <Plug>NERDCommenterToggle
 vmap <leader>c <Plug>NERDCommenterToggle
 
 nnoremap <silent> <leader>q :Bwipeout<CR>
 
-" Search in files with ripgrep
-nmap <leader>g :Leaderf! rg -e
-nmap <leader>gw :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+" Grep with fzf-preview is better than fzf.vim and Clap
+nnoremap <leader>gw :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -453,6 +440,10 @@ nmap <leader>2 <Plug>BufTabLine.Go(2)
 nmap <leader>3 <Plug>BufTabLine.Go(3)
 nmap <leader>4 <Plug>BufTabLine.Go(4)
 nmap <leader>5 <Plug>BufTabLine.Go(5)
+nmap <leader>6 <Plug>BufTabLine.Go(6)
+nmap <leader>7 <Plug>BufTabLine.Go(7)
+nmap <leader>8 <Plug>BufTabLine.Go(8)
+nmap <leader>9 <Plug>BufTabLine.Go(9)
 
 " vim-subversive - s for substitute
 nmap s <plug>(SubversiveSubstitute)
@@ -674,6 +665,9 @@ let g:expand_region_text_objects = {
 " Set to 0 if you want to enable it later via :RainbowToggle
 let g:rainbow_active = 1
 
+"
+" Smartedit
+"
 let g:suda_smart_edit = 1
 
 "
@@ -696,44 +690,21 @@ autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 " Disable mappings
 let g:go_def_mapping_enabled = 0
 
-
-"
-" deoplete
-"
-" let g:deoplete#enable_at_startup = 1
-"
-" call deoplete#custom#option({
-"   \   'auto_complete_delay': 100,
-"   \   'smart_case': v:false,
-"   \   'ignore_case': v:true,
-"   \ })
-"
-" Enable autocompletion
-" call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
-"
-"
-" tabnine
-"
-" call deoplete#custom#var('tabnine', {
-"   \ 'max_num_results': 5,
-"   \})
-"
-" call deoplete#custom#option('prev_completion_mode', 'mirror')
-
 "
 " coc
 "
 let g:coc_global_extensions = [
   \ 'coc-cmake',
-  \ 'coc-yaml',
+  \ 'coc-diagnostic',
+  \ 'coc-explorer',
+  \ 'coc-floaterm',
+  \ 'coc-fzf-preview',
   \ 'coc-pairs',
   \ 'coc-sh',
-  \ 'coc-vimlsp',
+  \ 'coc-tabnine',
   \ 'coc-ultisnips',
-  \ 'coc-explorer',
-  \ 'coc-diagnostic',
-  \ 'coc-floaterm',
-  \ 'coc-tabnine'
+  \ 'coc-vimlsp',
+  \ 'coc-yaml',
   \ ]
 
 " Highlight the symbol and its references when holding the cursor
@@ -753,6 +724,17 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<c-b>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
 
+"
+" peekaboo
+"
+let g:peekaboo_window = 'vert bo 50new'
+
+"
+" VM settings
+"
 let g:python3_host_prog = "/usr/bin/python3.7"
+
+let g:vimrc_author='Javier Tia'
+let g:vimrc_email='javier.tia@hpe.com'
 
 " vim:set ts=2 sw=2 et:
