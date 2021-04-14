@@ -69,6 +69,9 @@ zinit light MichaelAquilina/zsh-you-should-use
 zi0a id-as'history-search-multi-word'
 zinit light zdharma/history-search-multi-word
 
+# zi0b id-as'fzf-tab'
+# zinit light Aloxaf/fzf-tab
+
 zi0b id-as'zsh-autosuggestions'
 zinit light zsh-users/zsh-autosuggestions
 
@@ -163,23 +166,6 @@ zi0c id-as'forgit' \
   atinit'export FORGIT_NO_ALIASES=1'
 zinit light wfxr/forgit
 
-# Zinit pack is outdated and key-bindings doesn't work. Configuration is in
-# key-bindings.zsh file
-zi0b id-as'fzf' \
-  from"gh-r" \
-  as"program" \
-  has"fd" \
-  bpick"*linux_amd64*"
-zinit light junegunn/fzf
-
-zi0c id-as'fzf-key-bindings' \
-  has'fzf'
-zinit snippet 'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
-
-zi0c id-as'fzf-tab' \
-  has'fzf'
-zinit light Aloxaf/fzf-tab
-
 zi0c id-as'git-interactive-rebase-tool' \
   as'program' \
   cargo'!git-interactive-rebase-tool'
@@ -194,6 +180,19 @@ zinit light MitMaro/git-interactive-rebase-tool
 
 if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zinit pack"default" for zsh
+
+  # Zinit pack is outdated and key-bindings doesn't work. Configuration is in
+  # key-bindings.zsh file
+  zi0c id-as'fzf' \
+    from"gh-r" \
+    as"program" \
+    has"fd" \
+    bpick"*linux_amd64*"
+  zinit light junegunn/fzf
+
+  zi0c id-as'fzf-key-bindings' \
+    has'fzf'
+  zinit snippet 'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
 
   zinit id-as'git' \
     mv"%ID% -> git.tar.gz" \
@@ -274,8 +273,18 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     pick'rg/rg'
   zinit light BurntSushi/ripgrep
 
-  zinit id-as'nvim' \
+  zinit id-as'ugrep' \
+    as'program' \
     nocompile \
+    atclone"./build.sh --prefix=$ZPFX" \
+    atpull'%atclone' \
+    make'install' \
+    for @Genivia/ugrep
+
+  zinit id-as'nvim' \
+    as'program' \
+    nocompile \
+    atclone"./build.sh --prefix=$ZPFX" \
     make!"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
     atload'export EDITOR="nvim"' \
     for @neovim/neovim
