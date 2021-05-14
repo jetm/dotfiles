@@ -390,6 +390,13 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     as'command'
   zinit light muesli/duf
 
+  zi0c id-as'htop' \
+    as"program" \
+    atclone"./autogen.sh && ./configure && make && \\
+      ln -sf ${HOME}/.zinit/plugins/hishamhm---htop/htop.1.in ${HOME}/.zinit/man/man1" \
+    atpull"%atclone" pick"htop"
+  zinit light hishamhm/htop
+
   # Replaced by exa
   # zinit id-as'lsd' \
   #   from'gh-r' \
