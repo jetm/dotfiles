@@ -389,7 +389,8 @@ vmap <leader>c <Plug>NERDCommenterToggle
 nnoremap <silent> <leader>q :Bwipeout<CR>
 
 " Grep with fzf-preview is better than fzf.vim and Clap
-nnoremap <leader>gw :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
+nnoremap <leader>g  :CocSearch -S -L<Space>
+nnoremap <leader>gw :CocSearch -S -L <C-R>=expand("<cword>")<CR><CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)

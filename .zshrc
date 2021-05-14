@@ -69,6 +69,18 @@ zinit light MichaelAquilina/zsh-you-should-use
 zi0a id-as'history-search-multi-word'
 zinit light zdharma/history-search-multi-word
 
+# Zinit pack is outdated and key-bindings doesn't work. Configuration is in
+# key-bindings.zsh file
+zi0c id-as'fzf' \
+  from"gh-r" \
+  as"program" \
+  has"fd" \
+  bpick"*linux_amd64*"
+zinit light junegunn/fzf
+
+zi0c id-as'fzf-key-bindings'
+zinit snippet 'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
+
 # zi0b id-as'fzf-tab'
 # zinit light Aloxaf/fzf-tab
 
@@ -180,19 +192,6 @@ zinit light MitMaro/git-interactive-rebase-tool
 
 if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zinit pack"default" for zsh
-
-  # Zinit pack is outdated and key-bindings doesn't work. Configuration is in
-  # key-bindings.zsh file
-  zi0c id-as'fzf' \
-    from"gh-r" \
-    as"program" \
-    has"fd" \
-    bpick"*linux_amd64*"
-  zinit light junegunn/fzf
-
-  zi0c id-as'fzf-key-bindings' \
-    has'fzf'
-  zinit snippet 'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
 
   zinit id-as'git' \
     mv"%ID% -> git.tar.gz" \
