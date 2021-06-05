@@ -84,6 +84,7 @@
     # "log" format lists the commits in the range like git-submodule summary
     # does
     submodule = log
+    colorMoved = default
 
 [credential]
     # Set the cache to timeout after 8 hour (setting is in seconds)
@@ -126,11 +127,14 @@
     diffFilter = delta --color-only
 
 [delta]
-    line-numbers = falseh
-    syntax-theme = DarkNeon
+    line-numbers = false
+    ; syntax-theme = Nord
 
-[core]
-    pager = delta
+[pager]
+    diff = delta --dark
+    log = delta --dark
+    reflog = delta --dark
+    show = delta --dark
 
 #
 # nvim

@@ -183,6 +183,12 @@ zi0c id-as'git-interactive-rebase-tool' \
   cargo'!git-interactive-rebase-tool'
 zinit light MitMaro/git-interactive-rebase-tool
 
+zi0c id-as'enhancd' \
+  as'program' \
+  src'init.sh' \
+  atload"source ${HOME}/.zsh/enchancd.conf"
+zinit load b4b4r07/enhancd
+
 # Missing extending all the history. Try after a while
 # Remember to add bindkey '\C-r' _histdb-isearch and make sure fzf bindings are
 # not overwrite it
@@ -194,12 +200,12 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zinit pack"default" for zsh
 
   zinit id-as'git' \
-    mv"%ID% -> git.tar.gz" \
-    atclone'ziextract --move git.tar.gz' \
-    atpull'%atclone' \
-    make"USE_LIBPCRE2=1 prefix=$ZPFX install install-doc" \
-    dlink="/git/git/archive/v%VERSION%.tar.gz" \
     as'readurl|command' \
+    mv"%ID% -> git.zip" \
+    atclone'ziextract --move git.zip' \
+    atpull'%atclone' \
+    make"USE_LIBPCRE2=1 -j$[$(nproc) + 1] prefix=$ZPFX install install-doc" \
+    dlink"/git/git/archive/refs/tags/v%VERSION%.zip" \
     for https://github.com/git/git/releases/
 
   zi0c id-as'navi' \
@@ -397,6 +403,21 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     atpull"%atclone" pick"htop"
   zinit light hishamhm/htop
 
+  zi0c id-as'nnn' \
+    from'github' \
+    as'program'  \
+    sbin'nnn' \
+    make='O_NERD=1 O_PCRE=1' \
+    src'misc/quitcd/quitcd.bash_zsh'
+  zinit light jarun/nnn
+
+  zi0c id-as'broot' \
+    from'gh-r' \
+    as'program' \
+    pick'build/x86_64-unknown-linux-musl/broot' \
+    ver'latest'
+  zinit light Canop/broot
+
   # Replaced by exa
   # zinit id-as'lsd' \
   #   from'gh-r' \
@@ -411,13 +432,6 @@ fi
 #   as'program' \
 #   bpick'*linux-musl*'
 # zinit light pemistahl/grex
-
-# zi0c id-as'broot' \
-#   from'gh-r' \
-#   as'program' \
-#   pick'build/x86_64-unknown-linux-musl/broot' \
-#   ver'latest'
-# zinit light Canop/broot
 
 # zi0c id-as'hyperfine' \
 #   from'gh-r' \
