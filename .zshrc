@@ -302,6 +302,11 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     make'install' \
     for https://ftp.gnu.org/gnu/parallel/parallel-latest.tar.bz2
 
+  # zi0c id-as'zeno' \
+  #   depth"1" \
+  #   blockf
+  # zinit light yuki-yano/zeno.zsh
+
   install_asdf_plugins() {
     #  # https://github.com/asdf-vm/asdf-nodejs
     #  nodejs \
@@ -315,6 +320,8 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
       rust \
       # https://github.com/kennyp/asdf-golang
       golang \
+      # https://github.com/Stratus3D/asdf-lua.git
+      lua
     )
     local installed_plugins=$(asdf plugin list)
     for plugin in $plugins_list_to_install; do
@@ -417,6 +424,12 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     pick'build/x86_64-unknown-linux-musl/broot' \
     ver'latest'
   zinit light Canop/broot
+
+  zi0c id-as'deno' \
+    as"program" \
+    atclone"curl -fsSL https://deno.land/x/install/install.sh | DENO_INSTALL=$ZPFX sh" \
+    atpull"%atclone"
+  zinit light denoland/deno_install
 
   # Replaced by exa
   # zinit id-as'lsd' \
