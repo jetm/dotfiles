@@ -16,17 +16,34 @@ Plug 'lambdalisue/suda.vim'
 "
 Plug 'joshdick/onedark.vim'
 
-" vim statusline like spacemacs, lightline replacement
-Plug 'glepnir/spaceline.vim'
+" treesitter
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'romgrk/nvim-treesitter-context'
 
-" Shows indent guides with columns
-Plug 'Yggdroot/indentLine'
+" Apply fast colors
+Plug 'norcalli/nvim-colorizer.lua'
+
+" Replace fzf
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
+" vim statusline like spacemacs, lightline replacement
+" Plug 'glepnir/spaceline.vim'
+Plug 'glepnir/galaxyline.nvim', {'branch': 'main'}
+
+" Icons in completation mode
+Plug 'onsails/lspkind-nvim'
+
+" Git
+Plug 'lewis6991/gitsigns.nvim'
+
+" Smooth scroll
+Plug 'karb94/neoscroll.nvim'
 
 " Indent guides on blank lines for Neovim
-Plug 'lukas-reineke/indent-blankline.nvim'
-
-" A Vim plugin for visually displaying indent levels in code
-Plug 'nathanaelkane/vim-indent-guides'
+Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
 
 " Simpler Rainbow Parentheses
 Plug 'junegunn/rainbow_parentheses.vim'
@@ -50,21 +67,16 @@ Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'kyazdani42/nvim-web-devicons'
 
 " Fuzzy searching of files using FZF
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-peekaboo'
 
 " Plugin for vim to enabling opening a file in a given line
-Plug 'bogado/file-line'
+Plug 'wsdjeg/vim-fetch'
 
 " substitute preview
 Plug 'osyo-manga/vim-over'
 
 " Intelligently reopen files at your last edit position in Vim
 Plug 'farmergreg/vim-lastplace'
-
-" unimpaired.vim: Pairs of handy bracket mappings
-Plug 'tpope/vim-unimpaired'
 
 " Weapon to fight against conflicts in Vim
 " [x and ]x mappings are defined as default
@@ -82,7 +94,7 @@ Plug 'kana/vim-textobj-line'
 Plug 'terryma/vim-expand-region'
 
 " Vim plugin, insert or delete brackets, parens, quotes in pair
-Plug 'jiangmiao/auto-pairs'
+Plug 'windwp/nvim-autopairs'
 
 " Quoting/parenthesizing made simple
 Plug 'machakann/vim-sandwich'
@@ -106,34 +118,29 @@ Plug 'roxma/vim-tmux-clipboard'
 " Languages
 "
 
-" Nodejs extension host for vim & neovim, load extensions like VSCode and host
-" language servers
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Quickstart configurations for the Nvim LSP client
+Plug 'neovim/nvim-lspconfig'
 
-" Check syntax in Vim asynchronously and fix files, with Language Server
-" Protocol (LSP) support
+" Neovim completion
+Plug 'hrsh7th/nvim-compe'
+
+" tabnine using nvim-compe
+Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
+
+" Fix files
 Plug 'dense-analysis/ale'
 
-" LSP language server
-Plug 'autozimu/LanguageClient-neovim', {
-  \ 'branch': 'next',
-  \ 'do': 'bash install.sh',
-\}
-
-" LSP bash
-Plug 'WolfgangMehner/bash-support'
+" Linter to replace ale
+Plug 'mfussenegger/nvim-lint'
 
 " Go development plugin for Vim
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Track the Snippets engine
-Plug 'SirVer/ultisnips'
-
-" Snippets are separated from the engine
-Plug 'honza/vim-snippets'
-
-" Formats a file using formatter defined for its filetype
-Plug 'sbdchd/neoformat'
+" Plug 'SirVer/ultisnips'
+Plug 'rafamadriz/friendly-snippets'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 
 " Better Diff options for Vim
 Plug 'chrisbra/vim-diff-enhanced'
@@ -163,15 +170,8 @@ Plug 'ekalinin/Dockerfile.vim'
 " powerful configuration
 Plug 'luochen1990/rainbow'
 
-" A lightweight Vim/Neovim plugin to display buffers and tabs in the tabline
-" Better looking, but has issues with buffers numbers
-" Plug 'pacha/vem-tabline'
-"
-" Forget Vim tabs – now you can have buffer tabs
-Plug 'ap/vim-buftabline'
-
-" Builtin terminal in the floating/popup window
-Plug 'voldikss/vim-floaterm'
+" Neovim tabline plugin
+Plug 'romgrk/barbar.nvim'
 
 " Wisely add 'end' in ruby, endfunction/endif/more in vim script
 Plug 'tpope/vim-endwise'
@@ -179,19 +179,11 @@ Plug 'tpope/vim-endwise'
 " Generate table of contents for Markdown files
 Plug 'mzlogin/vim-markdown-toc'
 
-" Delete buffers and close files in Vim without closing your windows or
-" messing up your layout. Like Bclose.vim, but rewritten and well maintained
-Plug 'moll/vim-bbye'
-
 " Very small plugin to easily stage lines
 Plug 'neworld/vim-git-hunk-editor'
 
 " Provide operator motions to quickly replace text
 Plug 'svermeulen/vim-subversive'
-
-" Perform all your vim insert mode completions with Tab
-Plug 'ervandew/supertab'
-let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " Plugin to move lines and selections up and down
 " With Alt-hjkl
@@ -371,7 +363,7 @@ nnoremap <C-H> <C-W>h
 
 " CtrlP compatibility
 " fzf.vim is quicker than fzf.preview
-nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-p> :Telescope find_files find_command=fd,--hidden,--follow,--type,file<CR>
 
 " Use <C-l> to clear the highlighting of :set hlsearch.
 nnoremap <silent><C-l> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
@@ -381,27 +373,10 @@ nnoremap <silent><C-l> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR>
 "
 let mapleader = "\<Space>"
 
-nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>b :Telescope buffers<CR>
 
 nmap <leader>c <Plug>NERDCommenterToggle
 vmap <leader>c <Plug>NERDCommenterToggle
-
-nnoremap <silent> <leader>q :Bwipeout<CR>
-
-" Grep with fzf-preview is better than fzf.vim and Clap
-nnoremap <leader>g  :CocSearch -S -L<Space>
-nnoremap <leader>gw :CocSearch -S -L <C-R>=expand("<cword>")<CR><CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 "
 " EasyMotion
@@ -418,35 +393,24 @@ let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 
 "
-" vem-tabline settings
-" It has issues with buffer numbering
-" nmap <leader>1 :VemTablineGo 1<CR>
-" nmap <leader>2 :VemTablineGo 2<CR>
-" nmap <leader>3 :VemTablineGo 3<CR>
-" nmap <leader>4 :VemTablineGo 4<CR>
-" nmap <leader>5 :VemTablineGo 5<CR>
+" barbar
 "
-" let g:vem_tabline_show_number = 'buffnr'
+nnoremap <silent> <leader>1 :BufferGoto 1<CR>
+nnoremap <silent> <leader>2 :BufferGoto 2<CR>
+nnoremap <silent> <leader>3 :BufferGoto 3<CR>
+nnoremap <silent> <leader>4 :BufferGoto 4<CR>
+nnoremap <silent> <leader>5 :BufferGoto 5<CR>
+nnoremap <silent> <leader>6 :BufferGoto 6<CR>
+nnoremap <silent> <leader>7 :BufferGoto 7<CR>
+nnoremap <silent> <leader>8 :BufferGoto 8<CR>
+nnoremap <silent> <leader>9 :BufferGoto 9<CR>
+
+" nnoremap <silent> <leader>q :Bwipeout<CR>
+nnoremap <silent> <leader>q :BufferClose<CR>
 
 "
-" vim-buftabline settings
-"
-let g:buftabline_show = 1
-let g:buftabline_indicators = 1
-let g:buftabline_separators = 1
-" 0 - none, 1 - buffer, 2 - ordinal
-let g:buftabline_numbers = 2
-nmap <leader>1 <Plug>BufTabLine.Go(1)
-nmap <leader>2 <Plug>BufTabLine.Go(2)
-nmap <leader>3 <Plug>BufTabLine.Go(3)
-nmap <leader>4 <Plug>BufTabLine.Go(4)
-nmap <leader>5 <Plug>BufTabLine.Go(5)
-nmap <leader>6 <Plug>BufTabLine.Go(6)
-nmap <leader>7 <Plug>BufTabLine.Go(7)
-nmap <leader>8 <Plug>BufTabLine.Go(8)
-nmap <leader>9 <Plug>BufTabLine.Go(9)
-
 " vim-subversive - s for substitute
+"
 nmap s <plug>(SubversiveSubstitute)
 nmap ss <plug>(SubversiveSubstituteLine)
 nmap S <plug>(SubversiveSubstituteToEndOfLine)
@@ -493,6 +457,8 @@ let g:NERDToggleCheckAllLines = 1
 " Ale settings
 "
 let g:ale_completion_enabled = 0
+let g:ale_disable_lsp = 1
+let g:ale_fix_on_save = 1
 
 let g:ale_fixers = {
   \ '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -504,144 +470,22 @@ let g:ale_fixers = {
 
 autocmd BufNewFile,BufRead /ws/tiamarin/halon*/*
   \ let g:ale_fixers = {
-  \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \   'sh': [],
-  \   'diff': [],
-  \   'gitcommit': [],
-  \   'gitsendemail': []
-  \}
-
-let g:ale_linters = {
-  \ 'sh': ['shellcheck'],
-  \ 'gitcommit': ['git-lint'],
-  \ 'go': ['gopls'],
-  \ 'python': ['pylint'],
-  \}
-
-let g:ale_sign_error = "\uf05e"
-let g:ale_sign_warning = "\uf071"
-let g:ale_fix_on_save = 1
-let g:ale_sign_info = '➟'
-let g:ale_sign_column_always = 1
-let g:ale_warn_about_trailing_blank_lines = 1
-let g:ale_warn_about_trailing_whitespace = 1
-
-"
-" Language Server
-"
-" LanguageClient-neovim
-let g:LanguageClient_serverCommands = {
-  \ 'sh': ['bash-language-server', 'start']
-  \}
-
-let g:LanguageClient_diagnosticsDisplay = {
-  \ 1: {
-    \ 'name': 'Error',
-    \ 'texthl': 'ALEError',
-    \ 'signText':  "\uf05e",
-    \ 'signTexthl': 'Error',
-    \ },
-  \ 2: {
-    \ 'name': 'Warning',
-    \ 'texthl': 'ALEWarning',
-    \ 'signText':  "\uf071",
-    \ 'signTexthl': 'ALEWarningSign',
-    \ },
-  \ 3: {
-    \ 'name': 'Information',
-    \ 'texthl': 'ALEInfo',
-    \ 'signText': "\uf05a",
-    \ 'signTexthl': 'ALEInfoSign',
-    \ },
-  \ 4: {
-    \ 'name': 'Hint',
-    \ 'texthl': 'ALEInfo',
-    \ 'signText': "\uf05a",
-    \ 'signTexthl': 'ALEInfoSign',
-    \ },
+  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \ 'sh': [],
+  \ 'diff': [],
+  \ 'gitcommit': [],
+  \ 'gitsendemail': []
   \}
 
 "
-" spaceline statusline
+" indent-blankline
 "
-let g:spaceline_seperate_style = 'curve'
-let g:spaceline_diagnostic_tool = 'ale'
-let g:spaceline_colorscheme = 'one'
-
-"
-" vim-indent-guides
-"
-let g:indent_guides_start_level = 2
-
-" It has an effect over fillchars due to Yggdroot/indentLine plugin
-let g:indentLine_char = '│'
-
-"
-" LeaderF settings
-"
-" Behaviour
-let g:Lf_DefaultExternalTool = 'rg'
-let g:Lf_WorkingDirectoryMode = "Ac"
-let g:Lf_NoChdir = 1
-let g:Lf_HideHelp = 1
-
-" Statusline
-let g:Lf_StlColorscheme = 'gruvbox_material'
-let g:Lf_StlSeparator = { 'left': '', 'right': '' }
-
-" Popup windows
-let g:Lf_WindowPosition = 'popup'
-let g:Lf_PreviewInPopup = 1
-let g:Lf_PopupPreviewPosition = 'bottom'
-let g:Lf_PopupColorscheme = 'gruvbox_material'
-let g:Lf_PopupPosition = [10, 0]
-let g:Lf_PopupWidth = 0.85
-let g:Lf_PopupHeight = 0.4
-let g:Lf_PreviewPopupWidth = 10
-
-" Enable preview for specific types
-let g:Lf_PreviewResult = {
-  \ 'File': 0,
-  \ 'Buffer': 0,
-  \ 'Mru': 0,
-  \ 'Tag': 0,
-  \ 'BufTag': 1,
-  \ 'Function': 1,
-  \ 'Line': 0,
-  \ 'Colorscheme': 0,
-  \ 'Rg': 1,
-  \ 'Gtags': 0
-  \}
-
-" Disable default bindings
-let g:Lf_ShortcutF = 0
-let g:Lf_ShortcutB = 0
-
-let g:Lf_WildIgnore = {
-  \ 'dir': ['.svn','.git','.hg', '.idea', '.project'],
-  \ 'file': ['*.sw?','~$*','*.bak', '*.tmp', '*.temp', 'tags']
-  \}
-
-let g:Lf_RgConfig = [
-  \ "--glob=!git/*",
-  \ "--glob=!tags",
-  \ "--glob=!.svn/",
-  \ "--glob=!.idea/*",
-  \]
-
-"
-" vim-floaterm
-"
-let g:floaterm_open_command = 'tabe'
-let g:floaterm_keymap_toggle = "<Leader>'"
-let g:floaterm_width = 0.98
-let g:floaterm_height = 0.4
-
-let g:comfortable_motion_scroll_down_key = "j"
-let g:comfortable_motion_scroll_up_key = "k"
-
-let g:comfortable_motion_friction = 80.0
-let g:comfortable_motion_air_drag = 2.0
+let g:indent_blankline_char = '│'
+let g:indent_blankline_use_treesitter = v:true
+let g:indent_blankline_filetype_exclude = ['help']
+let g:indent_blankline_show_current_context = v:true
+let g:indent_blankline_context_patterns = ['class', 'function', 'method', 'while', 'closure', 'for']
+let g:indent_blankline_viewport_buffer = 50
 
 "
 " Text expantion
@@ -678,11 +522,6 @@ let g:suda_smart_edit = 1
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 "
-" Clap
-"
-let g:clap_theme = 'material_design_dark'
-
-"
 " vim-go
 "
 " Show by default 4 spaces for a tab
@@ -690,40 +529,6 @@ autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 
 " Disable mappings
 let g:go_def_mapping_enabled = 0
-
-"
-" coc
-"
-let g:coc_global_extensions = [
-  \ 'coc-cmake',
-  \ 'coc-diagnostic',
-  \ 'coc-explorer',
-  \ 'coc-floaterm',
-  \ 'coc-fzf-preview',
-  \ 'coc-pairs',
-  \ 'coc-sh',
-  \ 'coc-tabnine',
-  \ 'coc-ultisnips',
-  \ 'coc-vimlsp',
-  \ 'coc-yaml',
-  \ ]
-
-" Highlight the symbol and its references when holding the cursor
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Add (Neo)Vim's native statusline support
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-inoremap <silent><expr> <c-space> coc#refresh()
-
-"
-" ultisnips
-"
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<c-b>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
 
 "
 " peekaboo
@@ -737,5 +542,26 @@ let g:python3_host_prog = "/usr/bin/python3.7"
 
 let g:vimrc_author='Javier Tia'
 let g:vimrc_email='javier.tia@hpe.com'
+
+"
+" Colorizer
+"
+" enable plugin despite file having no extension
+autocmd FileType * ColorizerAttachToBuffer
+
+" Expand
+imap <expr> <C-j> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-j>'
+smap <expr> <C-j> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-j>'
+
+"
+" spaceline statusline
+"
+" let g:spaceline_seperate_style = 'curve'
+" let g:spaceline_colorscheme = 'one'
+
+"
+" Lua config
+"
+lua require('config')
 
 " vim:set ts=2 sw=2 et:
