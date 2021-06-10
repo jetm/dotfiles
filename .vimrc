@@ -15,14 +15,14 @@ Plug 'lambdalisue/suda.vim'
 " UI
 "
 Plug 'joshdick/onedark.vim'
+" Apply fast colors
+Plug 'norcalli/nvim-colorizer.lua'
+
 
 " treesitter
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'romgrk/nvim-treesitter-context'
-
-" Apply fast colors
-Plug 'norcalli/nvim-colorizer.lua'
 
 " Replace fzf
 Plug 'nvim-lua/popup.nvim'
@@ -31,12 +31,12 @@ Plug 'nvim-telescope/telescope.nvim'
 
 " vim statusline like spacemacs, lightline replacement
 " Plug 'glepnir/spaceline.vim'
-Plug 'glepnir/galaxyline.nvim', {'branch': 'main'}
+" spaceline is slower than galaxyline and feline
+" Galaxyline lacks of nice configurations, like feline has
+" Plug 'glepnir/galaxyline.nvim', {'branch': 'main'}
+Plug 'famiu/feline.nvim'
 
-" Icons in completation mode
-Plug 'onsails/lspkind-nvim'
-
-" Git
+" Git features and provider for feline
 Plug 'lewis6991/gitsigns.nvim'
 
 " Smooth scroll
@@ -65,6 +65,9 @@ Plug 'haya14busa/incsearch-easymotion.vim'
 " unite, Denite, lightline, vim-startify and many more Lua `fork` of
 " vim-devicons for neovim
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'yamatsum/nvim-nonicons'
+
+Plug 'kyazdani42/nvim-tree.lua'
 
 " Fuzzy searching of files using FZF
 Plug 'junegunn/vim-peekaboo'
@@ -120,6 +123,7 @@ Plug 'roxma/vim-tmux-clipboard'
 
 " Quickstart configurations for the Nvim LSP client
 Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
 
 " Neovim completion
 Plug 'hrsh7th/nvim-compe'
@@ -363,7 +367,7 @@ nnoremap <C-H> <C-W>h
 
 " CtrlP compatibility
 " fzf.vim is quicker than fzf.preview
-nnoremap <silent> <C-p> :Telescope find_files find_command=fd,--hidden,--follow,--type,file<CR>
+nnoremap <silent> <C-p> :Telescope find_files find_command=fd,--hidden,--follow,--type,file,--exclude,.git<CR>
 
 " Use <C-l> to clear the highlighting of :set hlsearch.
 nnoremap <silent><C-l> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
