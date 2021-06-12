@@ -5,11 +5,11 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+"
+" Basic settings
+"
 " Defaults everyone can agree on
 Plug 'tpope/vim-sensible'
-
-" An alternative sudo.vim
-Plug 'lambdalisue/suda.vim'
 
 "
 " UI
@@ -18,6 +18,16 @@ Plug 'joshdick/onedark.vim'
 " Apply fast colors
 Plug 'norcalli/nvim-colorizer.lua'
 
+" Neovim tabline plugin
+Plug 'romgrk/barbar.nvim'
+
+" Adds file type icons to Vim plugins such as: NERDTree, vim-airline, CtrlP,
+" unite, Denite, lightline, vim-startify and many more Lua `fork` of
+" vim-devicons for neovim
+Plug 'kyazdani42/nvim-web-devicons'
+
+" Icon set using nonicons for neovim plugins and settings
+Plug 'yamatsum/nvim-nonicons'
 
 " treesitter
 Plug 'nvim-treesitter/nvim-treesitter'
@@ -34,10 +44,9 @@ Plug 'nvim-telescope/telescope.nvim'
 " spaceline is slower than galaxyline and feline
 " Galaxyline lacks of nice configurations, like feline has
 " Plug 'glepnir/galaxyline.nvim', {'branch': 'main'}
-Plug 'famiu/feline.nvim'
-
-" Git features and provider for feline
-Plug 'lewis6991/gitsigns.nvim'
+" Plug 'famiu/feline.nvim'
+" lualine has better structure and theme, it's more like spaceline
+Plug 'hoob3rt/lualine.nvim'
 
 " Smooth scroll
 Plug 'karb94/neoscroll.nvim'
@@ -45,45 +54,71 @@ Plug 'karb94/neoscroll.nvim'
 " Indent guides on blank lines for Neovim
 Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
 
-" Simpler Rainbow Parentheses
-Plug 'junegunn/rainbow_parentheses.vim'
+" Rainbow Parentheses Improved, shorter code, no level limit, smooth and fast,
+" powerful configuration
+Plug 'luochen1990/rainbow'
 
-" Make the yanked region apparent!
-Plug 'machakann/vim-highlightedyank'
-
-" Vim motions on speed! Untested
+"
+" Motions
+"
+" Vim motions on speed
 Plug 'easymotion/vim-easymotion'
 
 " Lightning fast left-right movement in Vim
 Plug 'unblevable/quick-scope'
 
-"Improved incremental searching for Vim
-Plug 'haya14busa/incsearch.vim'
-Plug 'haya14busa/incsearch-easymotion.vim'
-
-" Adds file type icons to Vim plugins such as: NERDTree, vim-airline, CtrlP,
-" unite, Denite, lightline, vim-startify and many more Lua `fork` of
-" vim-devicons for neovim
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'yamatsum/nvim-nonicons'
-
-Plug 'kyazdani42/nvim-tree.lua'
-
-" Fuzzy searching of files using FZF
-Plug 'junegunn/vim-peekaboo'
-
 " Plugin for vim to enabling opening a file in a given line
 Plug 'wsdjeg/vim-fetch'
-
-" substitute preview
-Plug 'osyo-manga/vim-over'
 
 " Intelligently reopen files at your last edit position in Vim
 Plug 'farmergreg/vim-lastplace'
 
+"
+" Search/Replace
+"
+" Improved incremental searching for Vim
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-easymotion.vim'
+
+" substitute preview
+Plug 'osyo-manga/vim-over'
+
+"
+" Copy/Paste
+"
+" Clipboard manager
+Plug 'junegunn/vim-peekaboo'
+
+" Seamless integration for vim and tmux's clipboard
+Plug 'roxma/vim-tmux-clipboard'
+
+" Handles bracketed-paste-mode in vim (aka. automatic `:set paste`)
+Plug 'ConradIrwin/vim-bracketed-paste'
+
+" Make the yanked region apparent!
+Plug 'machakann/vim-highlightedyank'
+
+" Pasting in Vim with indentation adjusted to destination context
+Plug 'sickill/vim-pasta'
+
+" Make terminal vim and tmux work better together
+" Plug 'tmux-plugins/vim-tmux-focus-events'
+
+"
+" Diff/Git
+"
 " Weapon to fight against conflicts in Vim
 " [x and ]x mappings are defined as default
 Plug 'rhysd/conflict-marker.vim'
+
+" Git features and provider for feline
+Plug 'lewis6991/gitsigns.nvim'
+
+" Better Diff options for Vim
+Plug 'chrisbra/vim-diff-enhanced'
+
+" Very small plugin to easily stage lines
+Plug 'neworld/vim-git-hunk-editor'
 
 "
 " Text manipulation
@@ -95,6 +130,9 @@ Plug 'kana/vim-textobj-line'
 
 " Expand selection
 Plug 'terryma/vim-expand-region'
+
+" Multiple cursors plugin for vim/neovim
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " Vim plugin, insert or delete brackets, parens, quotes in pair
 Plug 'windwp/nvim-autopairs'
@@ -108,95 +146,70 @@ Plug 'tpope/vim-repeat'
 " Vim plugin for intensely nerdy commenting powers
 Plug 'preservim/nerdcommenter' , { 'on' : '<Plug>NERDCommenterToggle' }
 
-" Multiple cursors plugin for vim/neovim
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-
-" Make terminal vim and tmux work better together
-" Plug 'tmux-plugins/vim-tmux-focus-events'
-
-" Seamless integration for vim and tmux's clipboard
-Plug 'roxma/vim-tmux-clipboard'
+" Switch between single-line and multiline forms of code
+" gS to split a one-liner into multiple lines
+" gJ (with the cursor on the first line of a block) to join a block into a single-line statement
+" Plug 'AndrewRadev/splitjoin.vim'
 
 "
-" Languages
+" Completion
 "
-
-" Quickstart configurations for the Nvim LSP client
-Plug 'neovim/nvim-lspconfig'
-Plug 'kabouzeid/nvim-lspinstall'
-
 " Neovim completion
 Plug 'hrsh7th/nvim-compe'
 
 " tabnine using nvim-compe
 Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
 
-" Fix files
+"
+"
+" Linter/LSP
+"
+
+" Quickstart configurations for the Nvim LSP client
+Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
+
+" Fixers for files
 Plug 'dense-analysis/ale'
 
 " Linter to replace ale
 Plug 'mfussenegger/nvim-lint'
 
-" Go development plugin for Vim
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"
+" Languages support
+"
+" Wisely add if/fi, for/end in several languages
+Plug 'tpope/vim-endwise'
 
-" Track the Snippets engine
+" bitbake support
+Plug 'kergoth/vim-bitbake'
+
+" Markdown support
+" Generate table of contents for Markdown files
+Plug 'mzlogin/vim-markdown-toc'
+
+"
+" Snippets
+"
 " Plug 'SirVer/ultisnips'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 
-" Better Diff options for Vim
-Plug 'chrisbra/vim-diff-enhanced'
+"
+" File modifications
+"
+" An alternative sudo.vim
+Plug 'lambdalisue/suda.vim'
 
-" Helpers for UNIX
-" :SudoWrite: Write a privileged file with sudo.
-" :SudoEdit: Edit a privileged file with sudo.
 " New files created with a shebang line are automatically made executable
 Plug 'tpope/vim-eunuch'
 
-" Handles bracketed-paste-mode in vim (aka. automatic `:set paste`)
-Plug 'ConradIrwin/vim-bracketed-paste'
+" File manager
+Plug 'kyazdani42/nvim-tree.lua'
 
-" Pasting in Vim with indentation adjusted to destination context
-Plug 'sickill/vim-pasta'
-
-" Add support to bitbake
-Plug 'kergoth/vim-bitbake'
-
-" YAML support
-Plug 'avakhov/vim-yaml'
-
-" Dockerfile support
-Plug 'ekalinin/Dockerfile.vim'
-
-" Rainbow Parentheses Improved, shorter code, no level limit, smooth and fast,
-" powerful configuration
-Plug 'luochen1990/rainbow'
-
-" Neovim tabline plugin
-Plug 'romgrk/barbar.nvim'
-
-" Wisely add 'end' in ruby, endfunction/endif/more in vim script
-Plug 'tpope/vim-endwise'
-
-" Generate table of contents for Markdown files
-Plug 'mzlogin/vim-markdown-toc'
-
-" Very small plugin to easily stage lines
-Plug 'neworld/vim-git-hunk-editor'
-
-" Provide operator motions to quickly replace text
-Plug 'svermeulen/vim-subversive'
-
-" Plugin to move lines and selections up and down
-" With Alt-hjkl
-Plug 'matze/vim-move'
-
-" Switch between single-line and multiline forms of code
-" gS to split a one-liner into multiple lines
-" gJ (with the cursor on the first line of a block) to join a block into a single-line statement
-Plug 'AndrewRadev/splitjoin.vim'
+" A neovim lua plugin to help easily manage multiple terminal windows
+Plug 'akinsho/nvim-toggleterm.lua'
 
 call plug#end()
 
@@ -412,15 +425,14 @@ nnoremap <silent> <leader>9 :BufferGoto 9<CR>
 " nnoremap <silent> <leader>q :Bwipeout<CR>
 nnoremap <silent> <leader>q :BufferClose<CR>
 
-"
-" vim-subversive - s for substitute
-"
-nmap s <plug>(SubversiveSubstitute)
-nmap ss <plug>(SubversiveSubstituteLine)
-nmap S <plug>(SubversiveSubstituteToEndOfLine)
-nmap <leader>s <plug>(SubversiveSubstituteRange)
-xmap <leader>s <plug>(SubversiveSubstituteRange)
-nmap <leader>ss <plug>(SubversiveSubstituteWordRange)
+" NvimTree {{{
+
+nnoremap <leader>tt <cmd>NvimTreeToggle<cr>
+nnoremap <leader>tf <cmd>NvimTreeFindFile<cr>
+
+" Don't disable netrw because it's used by Neovim for downloading spell files
+let g:nvim_tree_disable_netrw = 0
+let g:nvim_tree_hijack_netrw = 1
 
 "
 " shellharden
@@ -540,14 +552,6 @@ let g:go_def_mapping_enabled = 0
 let g:peekaboo_window = 'vert bo 50new'
 
 "
-" VM settings
-"
-let g:python3_host_prog = "/usr/bin/python3.7"
-
-let g:vimrc_author='Javier Tia'
-let g:vimrc_email='javier.tia@hpe.com'
-
-"
 " Colorizer
 "
 " enable plugin despite file having no extension
@@ -567,5 +571,13 @@ smap <expr> <C-j> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-j>'
 " Lua config
 "
 lua require('config')
+
+"
+" VM settings
+"
+let g:python3_host_prog = "/usr/bin/python3.7"
+
+let g:vimrc_author='Javier Tia'
+let g:vimrc_email='javier.tia@hpe.com'
 
 " vim:set ts=2 sw=2 et:
