@@ -91,25 +91,8 @@ properties.force_inactive.buftypes = {
 
 -- LEFT
 
--- vi-mode
-components.left.active[1] = {
-    provider = '',
-    hl = function()
-        local val = {}
-
-        val.bg = vi_mode_utils.get_mode_color()
-        val.fg = 'black'
-        val.style = 'bold'
-
-        return val
-    end,
-    right_sep = {
-        str = ' ',
-        hl = { bg = 'gutter_gray' },
-    },
-}
 -- vi-symbol
-components.left.active[2] = {
+components.left.active[1] = {
     provider = function()
         return vi_mode_text[vi_mode_utils.get_vim_mode()]
     end,
@@ -125,11 +108,49 @@ components.left.active[2] = {
         hl = { bg = 'gutter_gray' },
     },
 }
--- filename
-components.left.active[3] = {
-    provider = function()
-        return vim.fn.expand("%:F")
-    end,
+
+local function file_readonly()
+    if vim.bo.filetype == 'help' then
+        return ''
+    end
+
+    if vim.bo.readonly == true then
+        return '  '
+    end
+
+    return ''
+end
+
+local function get_current_file_name()
+    local file = vim.api.nvim_exec([[
+        if winwidth(0) < 50
+            echo expand('%:t')
+        elseif winwidth(0) > 150
+            echo expand('%')
+        else
+            echo pathshorten(expand('%'))
+        endif
+    ]], true)
+
+    if vim.fn.empty(file) == 1 then
+        return ''
+    end
+
+    if string.len(file_readonly()) ~= 0 then
+        return file .. file_readonly()
+    end
+
+    if vim.bo.modifiable then
+        if vim.bo.modified then
+            return file .. '  '
+        end
+    end
+
+    return file .. ' '
+end
+
+components.left.active[2] = {
+    provider = get_current_file_name,
     hl = {
         fg = 'white',
         bg = 'bg',
@@ -141,7 +162,7 @@ components.left.active[3] = {
     },
 }
 -- gitBranch
-components.left.active[4] = {
+components.left.active[3] = {
     provider = 'git_branch',
     hl = {
         fg = 'yellow',
@@ -150,7 +171,7 @@ components.left.active[4] = {
     }
 }
 -- diffAdd
-components.left.active[5] = {
+components.left.active[4] = {
     provider = 'git_diff_added',
     hl = {
         fg = 'green',
@@ -159,7 +180,7 @@ components.left.active[5] = {
     }
 }
 -- diffModfified
-components.left.active[6] = {
+components.left.active[5] = {
     provider = 'git_diff_changed',
     hl = {
         fg = 'orange',
@@ -168,7 +189,7 @@ components.left.active[6] = {
     }
 }
 -- diffRemove
-components.left.active[7] = {
+components.left.active[6] = {
     provider = 'git_diff_removed',
     hl = {
         fg = 'red',
@@ -198,6 +219,7 @@ components.mid.active[2] = {
     enabled = function() return lsp.diagnostics_exist('Error') end,
     hl = {
         fg = 'red',
+        bg = 'bg',
         style = 'bold'
     }
 }
@@ -207,6 +229,7 @@ components.mid.active[3] = {
     enabled = function() return lsp.diagnostics_exist('Warning') end,
     hl = {
         fg = 'yellow',
+        bg = 'bg',
         style = 'bold'
     }
 }
@@ -216,6 +239,7 @@ components.mid.active[4] = {
     enabled = function() return lsp.diagnostics_exist('Hint') end,
     hl = {
         fg = 'cyan',
+        bg = 'bg',
         style = 'bold'
     }
 }
@@ -225,6 +249,7 @@ components.mid.active[5] = {
     enabled = function() return lsp.diagnostics_exist('Information') end,
     hl = {
         fg = 'skyblue',
+        bg = 'bg',
         style = 'bold'
     }
 }
@@ -283,23 +308,23 @@ components.right.active[2] = {
         hl = { bg = 'gutter_gray' },
     },
 }
--- fileSize
-components.right.active[3] = {
-    provider = 'file_size',
-    enabled = function() return vim.fn.getfsize(vim.fn.expand('%:t')) > 0 end,
-    hl = {
-        fg = 'skyblue',
-        bg = 'bg',
-        style = 'bold'
-    },
-    right_sep = {
-        str = ' ',
-        hl = { bg = 'gutter_gray' },
-    },
-}
+
+local function file_osinfo()
+    local os = vim.bo.fileformat:upper()
+    local icon
+    if os == 'UNIX' then
+        icon = ' '
+    elseif os == 'MAC' then
+        icon = ' '
+    else
+        icon = ' '
+    end
+    return icon .. os
+end
+
 -- fileFormat
-components.right.active[4] = {
-    provider = function() return '' .. vim.bo.fileformat:upper() .. '' end,
+components.right.active[3] = {
+    provider = file_osinfo,
     hl = {
         fg = 'white',
         bg = 'bg',
@@ -311,7 +336,7 @@ components.right.active[4] = {
     },
 }
 -- fileEncode
-components.right.active[5] = {
+components.right.active[4] = {
     provider = 'file_encoding',
     hl = {
         fg = 'white',
@@ -324,7 +349,7 @@ components.right.active[5] = {
     },
 }
 -- lineInfo
-components.right.active[6] = {
+components.right.active[5] = {
     provider = 'position',
     hl = {
         fg = 'white',
@@ -337,7 +362,7 @@ components.right.active[6] = {
     },
 }
 -- linePercent
-components.right.active[7] = {
+components.right.active[6] = {
     provider = 'line_percentage',
     hl = {
         fg = 'white',
@@ -350,7 +375,7 @@ components.right.active[7] = {
     },
 }
 -- scrollBar
-components.right.active[8] = {
+components.right.active[7] = {
     provider = 'scroll_bar',
     hl = {
         fg = 'yellow',
