@@ -14,7 +14,14 @@ Plug 'tpope/vim-sensible'
 "
 " UI
 "
-Plug 'joshdick/onedark.vim'
+" Plug 'navarasu/onedark.nvim'
+
+if has('nvim-0.5.0')
+  Plug 'ii14/onedark.nvim'
+else
+  Plug 'joshdick/onedark.vim'
+endif
+
 " Apply fast colors
 Plug 'norcalli/nvim-colorizer.lua'
 
@@ -30,7 +37,8 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'yamatsum/nvim-nonicons'
 
 " treesitter
-Plug 'nvim-treesitter/nvim-treesitter'
+" We recommend updating the parsers on update
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'romgrk/nvim-treesitter-context'
 
@@ -39,12 +47,8 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
-" vim statusline like spacemacs, lightline replacement
-" Plug 'glepnir/spaceline.vim'
-" spaceline is slower than galaxyline and feline
+" spaceline is slower
 " Galaxyline lacks of nice configurations, like feline has
-" Plug 'glepnir/galaxyline.nvim', {'branch': 'main'}
-" Plug 'famiu/feline.nvim'
 " lualine has better structure and theme, it's more like spaceline
 Plug 'hoob3rt/lualine.nvim'
 
@@ -56,13 +60,18 @@ Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
 
 " Rainbow Parentheses Improved, shorter code, no level limit, smooth and fast,
 " powerful configuration
-Plug 'luochen1990/rainbow'
+" Plug 'luochen1990/rainbow'
+
+" Try it later after another neovim version
+" Rainbow parentheses for neovim using tree-sitter
+Plug 'p00f/nvim-ts-rainbow'
 
 "
 " Motions
 "
 " Vim motions on speed
-Plug 'easymotion/vim-easymotion'
+" Plug 'easymotion/vim-easymotion'
+Plug 'phaazon/hop.nvim'
 
 " Lightning fast left-right movement in Vim
 Plug 'unblevable/quick-scope'
@@ -71,14 +80,13 @@ Plug 'unblevable/quick-scope'
 Plug 'wsdjeg/vim-fetch'
 
 " Intelligently reopen files at your last edit position in Vim
-Plug 'farmergreg/vim-lastplace'
+" Plug 'farmergreg/vim-lastplace'
 
 "
 " Search/Replace
 "
 " Improved incremental searching for Vim
 Plug 'haya14busa/incsearch.vim'
-Plug 'haya14busa/incsearch-easymotion.vim'
 
 " substitute preview
 Plug 'osyo-manga/vim-over'
@@ -89,20 +97,11 @@ Plug 'osyo-manga/vim-over'
 " Clipboard manager
 Plug 'junegunn/vim-peekaboo'
 
-" Seamless integration for vim and tmux's clipboard
-Plug 'roxma/vim-tmux-clipboard'
-
 " Handles bracketed-paste-mode in vim (aka. automatic `:set paste`)
 Plug 'ConradIrwin/vim-bracketed-paste'
 
-" Make the yanked region apparent!
-Plug 'machakann/vim-highlightedyank'
-
 " Pasting in Vim with indentation adjusted to destination context
 Plug 'sickill/vim-pasta'
-
-" Make terminal vim and tmux work better together
-" Plug 'tmux-plugins/vim-tmux-focus-events'
 
 "
 " Diff/Git
@@ -117,22 +116,12 @@ Plug 'lewis6991/gitsigns.nvim'
 " Better Diff options for Vim
 Plug 'chrisbra/vim-diff-enhanced'
 
-" Very small plugin to easily stage lines
-Plug 'neworld/vim-git-hunk-editor'
-
 "
 " Text manipulation
 "
-" Needed by vim-expand-region
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-indent'
-Plug 'kana/vim-textobj-line'
 
 " Expand selection
 Plug 'terryma/vim-expand-region'
-
-" Multiple cursors plugin for vim/neovim
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " Vim plugin, insert or delete brackets, parens, quotes in pair
 Plug 'windwp/nvim-autopairs'
@@ -145,6 +134,10 @@ Plug 'tpope/vim-repeat'
 
 " Vim plugin for intensely nerdy commenting powers
 Plug 'preservim/nerdcommenter' , { 'on' : '<Plug>NERDCommenterToggle' }
+
+" A comment toggler for Neovim, written in Lua, replace nerdcommenter
+" It's not ready yet
+" Plug 'terrortylor/nvim-comment'
 
 " Switch between single-line and multiline forms of code
 " gS to split a one-liner into multiple lines
@@ -169,8 +162,9 @@ Plug 'tzachar/compe-tabnine', { 'do': './install.sh' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'kabouzeid/nvim-lspinstall'
 
-" Fixers for files
-Plug 'dense-analysis/ale'
+" Replacing ale, as it's big for just removing whitespaces and do formatting
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'mhartington/formatter.nvim'
 
 " Linter to replace ale
 Plug 'mfussenegger/nvim-lint'
@@ -178,6 +172,8 @@ Plug 'mfussenegger/nvim-lint'
 "
 " Languages support
 "
+Plug 'sheerun/vim-polyglot'
+
 " Wisely add if/fi, for/end in several languages
 Plug 'tpope/vim-endwise'
 
@@ -211,14 +207,21 @@ Plug 'kyazdani42/nvim-tree.lua'
 " A neovim lua plugin to help easily manage multiple terminal windows
 Plug 'akinsho/nvim-toggleterm.lua'
 
+"
+" Buffers
+"
+" Delete buffers and close files in Vim without closing your windows or
+" messing up your layout. Like Bclose.vim, but rewritten and well maintained
+" Plug 'moll/vim-bbye'
+
 call plug#end()
 
 "
-" Colours & UI settings
+" Colours
 "
-scriptencoding utf-8
+" Explicitly tell vim that the terminal supports 256 colors
+set t_Co=256
 
-set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 " switch cursor to line when in insert mode, and block when not
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
@@ -229,9 +232,6 @@ if &term =~ '256color'
   set t_ut=
 endif
 
-" highlight conflicts
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
 " enable 24 bit color support if supported
 if (has("termguicolors"))
   if (!(has("nvim")))
@@ -241,17 +241,27 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-if (has('nvim'))
-  " show results of substition as they're happening
-  " but don't open a split
-  set inccommand=nosplit
-endif
-
 set background=dark
 colorscheme onedark
 
-highlight clear SignColumn  " SignColumn should match background
+"
+" highlight
+"
+" SignColumn should match background
+highlight clear SignColumn
 
+" Highlight Yanked Region
+augroup highlight_yank
+  autocmd!
+  au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
+augroup END
+
+" highlight conflicts
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+"
+" General settings
+"
 set autowrite                               " Automatically write a file when leaving a modified buffer
 set cursorline                              " Highlight current line
 set emoji                                   " Enable emojis
@@ -292,9 +302,12 @@ set wildignore+=*/tmp/*,*.o,*.obj,*.so
 " Allow backspace and cursor keys to cross line boundaries
 set whichwrap+=<,>,h,l
 
-set termencoding=utf-8
-set fileencoding=utf-8
-set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+if (has('nvim'))
+  " show results of substition as they're happening
+  " but don't open a split
+  set inccommand=nosplit
+endif
+
 
 "
 " Backup
@@ -331,20 +344,25 @@ unlet g:swap_dir
 unlet g:undo_dir
 unlet g:conf_dir
 
+" Go to the last edited place
+autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
 "
-" Key mapping
+" Key mappings
 "
 
 " moving up and down work as you would expect
 nnoremap <silent> j gj
 nnoremap <silent> k gk
-nnoremap <silent> ^ g^
-nnoremap <silent> $ g$
+
+" move one line up and one line down
+nnoremap <silent> <M-j> :move +1<CR>
+nnoremap <silent> <M-k> :move -2<CR>
 
 " Remove keybinding for Ex Mode
-nnoremap Q <nop>
+nnoremap Q :q<CR>
 
-" Yank from the cursor to the end of the line, to be consistent with C and D.
+" Yank from the cursor to the end of the line, to be consistent with C and D
 nnoremap Y y$
 
 " Helper for saving file
@@ -394,20 +412,13 @@ nnoremap <leader>b :Telescope buffers<CR>
 
 nmap <leader>c <Plug>NERDCommenterToggle
 vmap <leader>c <Plug>NERDCommenterToggle
+" nmap <silent><leader>c :CommentToggle<CR>
+" vmap <silent><leader>c :CommentToggle<CR>
 
 "
-" EasyMotion
+" Hop
 "
-
-" Jump to anywhere you want with minimal keystrokes, with just two keys
-" binding
-nmap <leader>f <Plug>(easymotion-overwin-f2)
-
-" Disable default mappings
-let g:EasyMotion_do_mapping = 0
-
-" Turn on case-insensitive feature
-let g:EasyMotion_smartcase = 1
+nmap <leader>s :HopChar2<CR>
 
 "
 " barbar
@@ -422,22 +433,33 @@ nnoremap <silent> <leader>7 :BufferGoto 7<CR>
 nnoremap <silent> <leader>8 :BufferGoto 8<CR>
 nnoremap <silent> <leader>9 :BufferGoto 9<CR>
 
-" nnoremap <silent> <leader>q :Bwipeout<CR>
+" barbar buffer close still has some issues. Try later
 nnoremap <silent> <leader>q :BufferClose<CR>
+" nnoremap <silent> <leader>q :Bwipeout<CR>
 
-" NvimTree {{{
-
+"
+" NvimTree
+"
 nnoremap <leader>tt <cmd>NvimTreeToggle<cr>
 nnoremap <leader>tf <cmd>NvimTreeFindFile<cr>
-
-" Don't disable netrw because it's used by Neovim for downloading spell files
-let g:nvim_tree_disable_netrw = 0
-let g:nvim_tree_hijack_netrw = 1
 
 "
 " shellharden
 "
 nmap <silent> <F7> :%!shellharden --replace ''<CR>
+
+"
+" vsnip
+"
+" Expand
+imap <expr> <C-j> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-j>'
+smap <expr> <C-j> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-j>'
+
+"
+" expand_region
+"
+xmap v <Plug>(expand_region_expand)
+xmap V <Plug>(expand_region_shrink)
 
 "
 " YAML files
@@ -470,28 +492,14 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDToggleCheckAllLines = 1
 
 "
-" Ale settings
+" vim-better-whitespace
 "
-let g:ale_completion_enabled = 0
-let g:ale_disable_lsp = 1
-let g:ale_fix_on_save = 1
-
-let g:ale_fixers = {
-  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \ 'sh': ['shfmt'],
-  \ 'diff': [],
-  \ 'gitcommit': [],
-  \ 'gitsendemail': [],
-  \}
-
-autocmd BufNewFile,BufRead /ws/tiamarin/halon*/*
-  \ let g:ale_fixers = {
-  \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-  \ 'sh': [],
-  \ 'diff': [],
-  \ 'gitcommit': [],
-  \ 'gitsendemail': []
-  \}
+let g:better_whitespace_ctermcolor = ''
+let g:better_whitespace_guicolor = ''
+let g:better_whitespace_enabled = 0
+let g:strip_only_modified_lines = 1
+let g:strip_whitespace_confirm = 0
+let g:strip_whitespace_on_save = 1
 
 "
 " indent-blankline
@@ -506,9 +514,6 @@ let g:indent_blankline_viewport_buffer = 50
 "
 " Text expantion
 "
-xmap v <Plug>(expand_region_expand)
-xmap V <Plug>(expand_region_shrink)
-
 let g:expand_region_text_objects = {
   \ 'iw'  :0,
   \ 'iW'  :0,
@@ -543,9 +548,6 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " Show by default 4 spaces for a tab
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 
-" Disable mappings
-let g:go_def_mapping_enabled = 0
-
 "
 " peekaboo
 "
@@ -557,18 +559,8 @@ let g:peekaboo_window = 'vert bo 50new'
 " enable plugin despite file having no extension
 autocmd FileType * ColorizerAttachToBuffer
 
-" Expand
-imap <expr> <C-j> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-j>'
-smap <expr> <C-j> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-j>'
-
 "
-" spaceline statusline
-"
-" let g:spaceline_seperate_style = 'curve'
-" let g:spaceline_colorscheme = 'one'
-
-"
-" Lua config
+" Lua init configuration
 "
 lua require('config')
 

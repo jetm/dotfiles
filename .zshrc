@@ -183,11 +183,20 @@ zi0c id-as'git-interactive-rebase-tool' \
   cargo'!git-interactive-rebase-tool'
 zinit light MitMaro/git-interactive-rebase-tool
 
-zi0c id-as'enhancd' \
-  as'program' \
-  src'init.sh' \
-  atload"source ${HOME}/.zsh/enchancd.conf"
-zinit load b4b4r07/enhancd
+zi0c id-as'zoxide' \
+  from"gh-r" \
+  as"command" \
+  mv"zoxide* -> zoxide" \
+  bpick"*x86_64-unknown-linux*" \
+  pick"zoxide/zoxide" \
+  atload"source <(zoxide init zsh)"
+zinit light ajeetdsouza/zoxide
+
+# zi0c id-as'enhancd' \
+#   as'program' \
+#   src'init.sh' \
+#   atload"source ${HOME}/.zsh/enchancd.conf"
+# zinit load b4b4r07/enhancd
 
 # Missing extending all the history. Try after a while
 # Remember to add bindkey '\C-r' _histdb-isearch and make sure fzf bindings are
@@ -308,11 +317,11 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   # zinit light yuki-yano/zeno.zsh
 
   install_asdf_plugins() {
-    #  # https://github.com/asdf-vm/asdf-nodejs
-    #  nodejs \
-    #  issues with nodejs binaries are not found
-    #  export ASDF_NPM_DEFAULT_PACKAGES_FILE="$ASDF_DATA_DIR/npm-packages"; \
-    #  export NODEJS_CONFIGURE_OPTIONS="prefix=/users/tiamarin/.asdf/npm-packages ";' \
+    # # https://github.com/asdf-vm/asdf-nodejs
+    # nodejs \
+    # issues with nodejs binaries are not found
+    # export ASDF_NPM_DEFAULT_PACKAGES_FILE="$ASDF_DATA_DIR/npm-packages"; \
+    # export NODEJS_CONFIGURE_OPTIONS="prefix=/users/tiamarin/.asdf/npm-packages ";' \
     local plugins_list_to_install=( \
       # https://github.com/asdf-vm/asdf-ruby.git
       ruby \
@@ -460,14 +469,6 @@ fi
 #   bpick'*x86_64*-linux-musl*' \
 #   sbin'sk'
 # zinit light lotabout/skim
-
-# zi0c id-as'zoxide' \
-#   from'gh-r' \
-#   as'program' \
-#   bpick'*x86_64*-linux-musl*' \
-#   mv'zoxide-* -> zoxide' \
-#   sbin'zoxide*'
-# zinit light ajeetdsouza/zoxide
 
 # zi0c id-as'lazydoker' \
 #   from'gh-r' \
