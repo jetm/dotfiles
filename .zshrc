@@ -287,21 +287,25 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     pick'rg/rg'
   zinit light BurntSushi/ripgrep
 
-  zinit id-as'ugrep' \
+  zi0c id-as'ugrep' \
     as'program' \
     nocompile \
     atclone"./build.sh --prefix=$ZPFX" \
     atpull'%atclone' \
-    make'install' \
-    for @Genivia/ugrep
+    make'install'
+  zinit light Genivia/ugrep
 
-  zinit id-as'nvim' \
+  #  atclone"./build.sh --prefix=$ZPFX" \
+  #  nocompile \
+  zi0c id-as'nvim' \
     as'program' \
-    nocompile \
-    atclone"./build.sh --prefix=$ZPFX" \
-    make!"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
-    atload'export EDITOR="nvim"' \
-    for @neovim/neovim
+    make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
+    atload'export EDITOR="nvim"'
+  zinit light neovim/neovim
+
+  # zi0c id-as'nvim' \
+  #   from"gh-r" \ as"program" \ mv"nvim* -> nvim" \ pick"nvim/bin/nvim" \ bpick"*linux64*" \ ver"nightly" zinit 
+  # light neovim/neovim
 
   zinit id-as'parallel' \
     as'program' \
