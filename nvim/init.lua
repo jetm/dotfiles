@@ -6,213 +6,10 @@ local opt = vim.opt -- to set options
 local api = vim.api
 local wo = vim.wo
 
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+require('plugins')
 
-if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({
-        'git', 'clone', 'https://github.com/wbthomason/packer.nvim',
-        install_path
-    })
-    api.nvim_command 'packadd packer.nvim'
-end
-
-require('packer').startup(function(use)
-    -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
-
-    use 'ii14/onedark.nvim'
-    -- use 'joshdick/onedark.vim'
-
-    -- Apply fast colors
-    use {'norcalli/nvim-colorizer.lua'}
-
-    -- Neovim tabline plugin
-    use {'romgrk/barbar.nvim'}
-
-    use 'kyazdani42/nvim-web-devicons'
-    -- Icon set using nonicons for neovim plugins and settings
-    use {'yamatsum/nvim-nonicons'}
-
-    -- We recommend updating the parsers on update
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-
-    use 'nvim-treesitter/nvim-treesitter-textobjects'
-
-    use {"romgrk/nvim-treesitter-context"}
-
-    -- Replace fzf
-    use 'nvim-lua/popup.nvim'
-    use 'nvim-lua/plenary.nvim'
-    use {'nvim-telescope/telescope.nvim'}
-
-    -- spaceline is slower
-    -- Galaxyline lacks of nice configurations, like feline has
-    -- lualine has better structure and theme, it's more like spaceline
-    use {'hoob3rt/lualine.nvim'}
-
-    -- Smooth scroll
-    use 'karb94/neoscroll.nvim'
-
-    -- Indent guides on blank lines for Neovim
-    use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
-
-    -- Rainbow Parentheses Improved, shorter code, no level limit, smooth and fast,
-    -- powerful configuration
-    -- use 'luochen1990/rainbow'
-
-    -- Try it later after another neovim version
-    use {'p00f/nvim-ts-rainbow'}
-
-    -- An Nvim lua plugin that dims your inactive windows
-    use 'sunjon/shade.nvim'
-
-    --
-    -- Motions
-    --
-    -- Vim motions on speed
-    use {"phaazon/hop.nvim"}
-
-    -- Lightning fast left-right movement in Vim
-    use {"unblevable/quick-scope"}
-
-    -- usein for vim to enabling opening a file in a given line
-    use 'wsdjeg/vim-fetch'
-
-    use {
-        'ethanholz/nvim-lastplace',
-        config = function()
-            require'nvim-lastplace'.setup {
-                lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
-                lastplace_ignore_filetype = {
-                    "gitcommit", "gitrebase", "svn", "hgcommit"
-                },
-                lastplace_open_folds = true
-            }
-        end
-    }
-
-    --
-    -- Search/Replace
-    --
-
-    -- Hlsearch Lens for Neovim. Replace incsearch.vim
-    use 'kevinhwang91/nvim-hlslens'
-
-    -- substitute preview
-    use 'osyo-manga/vim-over'
-
-    --
-    -- Copy/Paste
-    --
-
-    -- dynamically show content of vim registers
-    use 'gennaro-tedesco/nvim-peekup'
-
-    -- Handles bracketed-paste-mode in vim (aka. automatic `:set paste`)
-    use 'ConradIrwin/vim-bracketed-paste'
-
-    -- Pasting in Vim with indentation adjusted to destination context
-    use 'sickill/vim-pasta'
-
-    --
-    -- Diff/Git
-    --
-    -- Weapon to fight against conflicts in Vim
-    -- [x and ]x mappings are defined as default
-    use 'rhysd/conflict-marker.vim'
-
-    -- Git features and provider for feline
-    use {"lewis6991/gitsigns.nvim"}
-
-    -- Better Diff options for Vim
-    use 'chrisbra/vim-diff-enhanced'
-
-    --
-    -- Text manipulation
-    --
-
-    -- Expand selection
-    use 'terryma/vim-expand-region'
-
-    -- Vim plugin, insert or delete brackets, parens, quotes in pair
-    use {"windwp/nvim-autopairs"}
-
-    -- Quoting/parenthesizing made simple
-    use 'machakann/vim-sandwich'
-
-    -- Enable repeating supported plugin maps with ".--
-    use 'tpope/vim-repeat'
-
-    -- Vim plugin for intensely nerdy commenting powers
-    use 'preservim/nerdcommenter'
-
-    -- Switch between single-line and multiline forms of code
-    -- gS to split a one-liner into multiple lines
-    -- gJ (with the cursor on the first line of a block) to join a block into a single-line statement
-    -- use 'AndrewRadev/splitjoin.vim'
-
-    --
-    -- Completion
-    --
-    -- Neovim completion
-    use {'hrsh7th/nvim-compe'}
-
-    -- tabnine using nvim-compe
-    use {'tzachar/compe-tabnine', run = './install.sh'}
-
-    --
-    --
-    -- Linter/LSP
-    --
-
-    -- Quickstart configurations for the Nvim LSP client
-    use {'neovim/nvim-lspconfig'}
-    use {'kabouzeid/nvim-lspinstall'}
-
-    -- Replacing ale, as it's big for just removing whitespaces and do formatting
-    use 'ntpeters/vim-better-whitespace'
-    use {'mhartington/formatter.nvim'}
-
-    -- Linter to replace ale
-    use 'mfussenegger/nvim-lint'
-
-    --
-    -- Languages support
-    --
-    use 'sheerun/vim-polyglot'
-
-    -- Wisely add if/fi, for/end in several languages
-    use 'tpope/vim-endwise'
-
-    -- bitbake support
-    use 'kergoth/vim-bitbake'
-
-    -- Markdown support
-    -- Generate table of contents for Markdown files
-    use 'mzlogin/vim-markdown-toc'
-
-    --
-    -- Snippets
-    --
-    use {'rafamadriz/friendly-snippets'}
-    use {"hrsh7th/vim-vsnip"}
-    use {"hrsh7th/vim-vsnip-integ"}
-
-    --
-    -- File modifications
-    --
-    -- An alternative sudo.vim
-    use 'lambdalisue/suda.vim'
-
-    -- New files created with a shebang line are automatically made executable
-    use 'tpope/vim-eunuch'
-
-    -- File manager
-    use {"kyazdani42/nvim-tree.lua"}
-
-    -- A neovim lua plugin to help easily manage multiple terminal windows
-    use {'akinsho/nvim-toggleterm.lua'}
-end)
+-- run :PackerCompile whenever plugins.lua is updated
+vim.cmd('autocmd BufWritePost plugins.lua PackerCompile')
 
 --
 -- Colors
@@ -234,34 +31,34 @@ cmd 'au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=2
 --
 -- General settings
 --
-
+opt.autoindent = true -- Do smart autoindenting when starting a new line
 opt.autowrite = true -- Automatically write a file when leaving a modified buffer
 opt.cursorline = true -- Highlight current line
+opt.clipboard = "unnamedplus" -- Copy paste between vim and everything else
 opt.emoji = true -- Enable emojis
-opt.expandtab = true
-opt.smarttab = true -- Tab key actions
 opt.hidden = true -- Allow buffer switching without saving
 opt.ignorecase = true
-opt.smartcase = true -- Case insensitive search, but case sensitive when uc present
 opt.linebreak = true -- Do not break words
 opt.linespace = 0 -- No extra spaces between rows
 opt.matchtime = 0 -- Hide matching time
 opt.mouse = 'a' -- Enable mouse scrolling
 opt.number = true
-opt.relativenumber = true -- Enable numbers on the left, current line is 0
 opt.regexpengine = 1 -- Use the old engine, new is for debugging
+opt.relativenumber = true -- Enable numbers on the left, current line is 0
 opt.ruler = true -- Show the ruler
 opt.shiftround = true -- Round indent to multiple of 'shiftwidth'
+opt.shiftwidth = 4
 opt.shortmess = 'atOI' -- No help Uganda information, and overwrite read messages to avoid PRESS ENTER prompts
 opt.showcmd = true -- Show partial commands in status line and Selected characters/lines in visual mode
 opt.showmatch = true -- Show matching brackets/parentthesis
 opt.showmode = true -- Show current mode in command-line
 opt.showtabline = 2 -- Always show tabline
+opt.smartcase = true -- Case insensitive search, but case sensitive when uc present
 opt.smartindent = true
-opt.autoindent = true -- Do smart autoindenting when starting a new line
-opt.tabstop = 4 -- Tab width
+opt.smarttab = true -- Tab key actions
+opt.expandtab = true
 opt.softtabstop = 4
-opt.shiftwidth = 4
+opt.tabstop = 4 -- Tab width
 
 wo.list = true
 opt.listchars = 'tab:→ ,trail:·'
@@ -435,7 +232,7 @@ local icons = require("nvim-nonicons")
 --
 -- LSP
 --
--- require('lsp-settings')
+require('lsp-settings')
 
 --
 -- nvim-compe
@@ -472,9 +269,8 @@ require("compe").setup({
         nvim_lua = true,
         ultisnips = {kind = "﬌", true},
         vsnip = {kind = "﬌", true},
-        spell = true,
-        tags = true,
-        tmux = true
+        spell = false,
+        tags = true
     }
 })
 
@@ -512,8 +308,9 @@ _G.s_tab_complete = function()
     end
 end
 
---  mappings
-
+--
+-- completions mappings
+--
 api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
@@ -532,30 +329,6 @@ end
 api.nvim_set_keymap("i", "<CR>", "v:lua.completions()", {expr = true})
 
 --
--- tmux-complete
---
-do
-    local compe = require "compe"
-    local Source = {}
-
-    function Source.get_metadata(_)
-        return {priority = 10, dup = 0, menu = "[Tmux]"}
-    end
-
-    function Source.determine(_, context)
-        return compe.helper.determine(context)
-    end
-
-    function Source.complete(_, context)
-        fn["tmuxcomplete#async#gather_candidates"](function(items)
-            context.callback({items = items})
-        end)
-    end
-
-    compe.register_source("tmux", Source)
-end
-
---
 -- nvim-treesitter
 --
 require("nvim-treesitter.configs").setup({
@@ -563,7 +336,8 @@ require("nvim-treesitter.configs").setup({
         "bash", "c", "comment", "cpp", "dockerfile", "go", "json", "jsonc",
         "lua", "python", "regex", "yaml"
     },
-    -- highlight = {enable = true}, -- problems with onedark
+    -- Disabling highlight. Still has problems with shell and other languages
+    highlight = {enable = false, use_languagetree = true},
     indent = {enable = true},
     rainbow = {
         enable = true,
@@ -616,7 +390,15 @@ remap('i', '<CR>', 'v:lua.MUtils.completion_confirm()',
 -- colorizer
 --
 -- Attaches to every FileType mode
-require("colorizer").setup()
+require("colorizer").setup({'*'}, {
+    RGB = true, -- #RGB hex codes
+    RRGGBB = true, -- #RRGGBB hex codes
+    RRGGBBAA = true, -- #RRGGBBAA hex codes
+    rgb_fn = true, -- CSS rgb() and rgba() functions
+    hsl_fn = true, -- CSS hsl() and hsla() functions
+    css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+    css_fn = true -- Enable all CSS *functions*: rgb_fn, hsl_fn
+})
 
 --
 -- barbar
@@ -832,15 +614,9 @@ require"formatter".setup({
         yaml = {prettier},
         sh = {shfmt},
         bash = {shfmt},
-        zsh = {shfmt},
         lua = {luaformat}
     }
 })
-
---
--- nvim-comment
---
--- require('nvim_comment').setup({create_mappings = false})
 
 --
 -- hop
