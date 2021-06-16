@@ -192,6 +192,14 @@ zi0c id-as'zoxide' \
   atload"source <(zoxide init zsh)"
 zinit light ajeetdsouza/zoxide
 
+zi0c id-as'fpp' \
+  from"gh" \
+  as"program" \
+  nocompile \
+  atinit"sed -i 's/python3/python3.7/g' fpp" \
+  pick"fpp"
+zinit light facebook/pathpicker
+
 # zi0c id-as'enhancd' \
 #   as'program' \
 #   src'init.sh' \
@@ -295,8 +303,6 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     make'install'
   zinit light Genivia/ugrep
 
-  #  atclone"./build.sh --prefix=$ZPFX" \
-  #  nocompile \
   zi0c id-as'nvim' \
     as'program' \
     make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
