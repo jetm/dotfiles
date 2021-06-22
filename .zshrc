@@ -200,18 +200,19 @@ zi0c id-as'fpp' \
   pick"fpp"
 zinit light facebook/pathpicker
 
+zi0c id-as'mcfly' \
+  from"gh-r" \
+  as"command" \
+  bpick"*x86_64-unknown-linux*" \
+  pick"mcfly" \
+  atload"export MCFLY_KEY_SCHEME=vim MCFLY_FUZZY=true; source <(mcfly init zsh)"
+zinit light cantino/mcfly
+
 # zi0c id-as'enhancd' \
 #   as'program' \
 #   src'init.sh' \
 #   atload"source ${HOME}/.zsh/enchancd.conf"
 # zinit load b4b4r07/enhancd
-
-# Missing extending all the history. Try after a while
-# Remember to add bindkey '\C-r' _histdb-isearch and make sure fzf bindings are
-# not overwrite it
-# zi0c id-as'zsh-histdb' \
-#   src'histdb-interactive.zsh'
-# zinit light larkery/zsh-histdb
 
 if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zinit pack"default" for zsh
@@ -308,10 +309,6 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
     atload'export EDITOR="nvim"'
   zinit light neovim/neovim
-
-  # zi0c id-as'nvim' \
-  #   from"gh-r" \ as"program" \ mv"nvim* -> nvim" \ pick"nvim/bin/nvim" \ bpick"*linux64*" \ ver"nightly" zinit 
-  # light neovim/neovim
 
   zinit id-as'parallel' \
     as'program' \
@@ -472,13 +469,6 @@ fi
 #   pick'hyperfine/hyperfine' \
 #   mv'hyperfine* -> hyperfine'
 # zinit light sharkdp/hyperfine
-
-# zi0c id-as'skim' \
-#   from'gh-r' \
-#   as'program' \
-#   bpick'*x86_64*-linux-musl*' \
-#   sbin'sk'
-# zinit light lotabout/skim
 
 # zi0c id-as'lazydoker' \
 #   from'gh-r' \
