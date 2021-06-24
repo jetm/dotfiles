@@ -20,10 +20,13 @@ end
 
 require('packer').startup(function(use)
     -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
+    use {'wbthomason/packer.nvim'}
 
-    use 'ii14/onedark.nvim'
+    use {'ii14/onedark.nvim'}
     -- use 'joshdick/onedark.vim'
+
+    -- Neovim plugin that allows you to easily write your .vimrc in lua or any lua based language
+    use {'svermeulen/vimpeccable'}
 
     -- Apply fast colors
     use {'norcalli/nvim-colorizer.lua'}
@@ -38,12 +41,12 @@ require('packer').startup(function(use)
 
     -- We recommend updating the parsers on update
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-    use 'nvim-treesitter/nvim-treesitter-textobjects'
+    use {'nvim-treesitter/nvim-treesitter-textobjects'}
     use {"romgrk/nvim-treesitter-context"}
 
     -- Replace fzf
-    use 'nvim-lua/popup.nvim'
-    use 'nvim-lua/plenary.nvim'
+    use {'nvim-lua/popup.nvim'}
+    use {'nvim-lua/plenary.nvim'}
     use {'nvim-telescope/telescope.nvim'}
 
     -- spaceline is slower
@@ -52,7 +55,7 @@ require('packer').startup(function(use)
     use {'hoob3rt/lualine.nvim'}
 
     -- Smooth scroll
-    use 'karb94/neoscroll.nvim'
+    use {'karb94/neoscroll.nvim'}
 
     -- Indent guides on blank lines for Neovim
     use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
@@ -72,7 +75,7 @@ require('packer').startup(function(use)
     use {'ggandor/lightspeed.nvim'}
 
     -- usein for vim to enabling opening a file in a given line
-    use 'wsdjeg/vim-fetch'
+    use {'wsdjeg/vim-fetch'}
 
     -- Go to the last edited place
     use {
@@ -88,33 +91,36 @@ require('packer').startup(function(use)
         end
     }
 
+    -- Peek lines just when you intend
+    use {'nacro90/numb.nvim'}
+
     --
     -- Search/Replace
     --
     -- Hlsearch Lens for Neovim. Replace incsearch.vim
-    use 'kevinhwang91/nvim-hlslens'
+    use {'kevinhwang91/nvim-hlslens'}
 
     -- Substitute preview
-    use 'osyo-manga/vim-over'
+    use {'osyo-manga/vim-over'}
 
     --
     -- Copy/Paste
     --
     -- Dynamically show content of vim registers
-    use 'gennaro-tedesco/nvim-peekup'
+    use {'gennaro-tedesco/nvim-peekup'}
 
     -- Handles bracketed-paste-mode in vim (aka. automatic `:set paste`)
-    use 'ConradIrwin/vim-bracketed-paste'
+    use {'ConradIrwin/vim-bracketed-paste'}
 
     -- Pasting in Vim with indentation adjusted to destination context
-    use 'sickill/vim-pasta'
+    use {'sickill/vim-pasta'}
 
     --
     -- Diff/Git
     --
     -- Weapon to fight against conflicts in Vim
     -- [x and ]x mappings are defined as default
-    use 'rhysd/conflict-marker.vim'
+    use {'rhysd/conflict-marker.vim'}
 
     -- Git features and provider for feline
     use {"lewis6991/gitsigns.nvim"}
@@ -123,19 +129,19 @@ require('packer').startup(function(use)
     -- Text manipulation
     --
     -- Expand selection
-    use 'terryma/vim-expand-region'
+    use {'terryma/vim-expand-region'}
 
     -- Vim plugin, insert or delete brackets, parens, quotes in pair
     use {"windwp/nvim-autopairs"}
 
     -- Quoting/parenthesizing made simple
-    use 'machakann/vim-sandwich'
+    use {'machakann/vim-sandwich'}
 
-    -- Enable repeating supported plugin maps with .
-    use 'tpope/vim-repeat'
+    -- Enable repeating supported plugin maps with '.'
+    use {'tpope/vim-repeat'}
 
     -- Vim plugin for intensely nerdy commenting powers
-    use 'preservim/nerdcommenter'
+    use {'preservim/nerdcommenter'}
 
     -- Switch between single-line and multiline forms of code
     -- gS to split a one-liner into multiple lines
@@ -160,22 +166,22 @@ require('packer').startup(function(use)
     use {'kabouzeid/nvim-lspinstall'}
 
     -- Replacing ale, as it's big for just removing whitespaces and do formatting
-    use 'ntpeters/vim-better-whitespace'
+    use {'ntpeters/vim-better-whitespace'}
     use {'mhartington/formatter.nvim'}
 
     -- Linter to replace ale
-    use 'mfussenegger/nvim-lint'
+    use {'mfussenegger/nvim-lint'}
 
     --
     -- Languages support
     --
-    use 'sheerun/vim-polyglot'
+    use {'sheerun/vim-polyglot'}
 
     -- Wisely add if/fi, for/end in several languages
-    use 'tpope/vim-endwise'
+    use {'tpope/vim-endwise'}
 
     -- bitbake support
-    use 'kergoth/vim-bitbake'
+    use {'kergoth/vim-bitbake'}
 
     -- Markdown support
     -- Generate table of contents for Markdown files
@@ -192,13 +198,13 @@ require('packer').startup(function(use)
     -- File modifications
     --
     -- An alternative sudo.vim
-    use 'lambdalisue/suda.vim'
+    use {'lambdalisue/suda.vim'}
 
     -- New files created with a shebang line are automatically made executable
-    use 'tpope/vim-eunuch'
+    use {'tpope/vim-eunuch'}
 
     -- File manager
-    use {"kyazdani42/nvim-tree.lua", opt = true}
+    use {"kyazdani42/nvim-tree.lua"}
 
     -- A neovim lua plugin to help easily manage multiple terminal windows
     use {'akinsho/nvim-toggleterm.lua'}
@@ -666,3 +672,11 @@ g.indent_blankline_viewport_buffer = 50
 -- Smartedit
 --
 g.suda_smart_edit = 1
+
+--
+-- numb
+--
+require('numb').setup {
+    show_numbers = true, -- Enable 'number' for the window while peeking
+    show_cursorline = true -- Enable 'cursorline' for the window while peeking
+}
