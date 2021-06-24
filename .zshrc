@@ -208,11 +208,11 @@ zi0c id-as'mcfly' \
   atload"export MCFLY_KEY_SCHEME=vim MCFLY_FUZZY=true; source <(mcfly init zsh)"
 zinit light cantino/mcfly
 
-zinit id-as"exa" \
+zi0c id-as'exa' \
   from"gh-r" \
   as"program" \
-  mv"exa-* -> exa" \
-  for @ogham/exa
+  mv"exa-* -> exa"
+zinit light ogham/exa
 
 zinit id-as"exa-completions" \
   as"completion" \
