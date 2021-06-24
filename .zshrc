@@ -208,6 +208,171 @@ zi0c id-as'mcfly' \
   atload"export MCFLY_KEY_SCHEME=vim MCFLY_FUZZY=true; source <(mcfly init zsh)"
 zinit light cantino/mcfly
 
+zinit id-as"exa" \
+  from"gh-r" \
+  as"program" \
+  mv"exa-* -> exa" \
+  for @ogham/exa
+
+zinit id-as"exa-completions" \
+  as"completion" \
+  has"exa" \
+  mv"exa* -> _exa" \
+  for https://github.com/ogham/exa/blob/master/completions/completions.zsh
+
+zi0c id-as'sd' \
+  from'gh-r' \
+  as'program' \
+  mv'sd-* -> sd' \
+  sbin'sd*'
+zinit light chmln/sd
+
+zi0c id-as'jq' \
+  from'gh-r'  \
+  as'program'  \
+  bpick'*linux64' \
+  mv'jq-* -> jq'
+zinit load stedolan/jq
+
+zi0c id-as'fx' \
+  from'gh-r' \
+  as'program' \
+  mv'fx* -> fx'
+zinit light antonmedv/fx
+
+zi0c id-as'hss' \
+  from'gh-r' \
+  as'program' \
+  mv'hss-Linux-x86_64 -> hss'
+zinit light six-ddc/hss
+
+zi0c id-as'bat' \
+  from'gh-r' \
+  as'command' \
+  pick'bat/bat' \
+  mv'bat* -> bat'
+zinit light sharkdp/bat
+
+zi0c id-as'duf' \
+  from'gh-r' \
+  bpick'*linux_x86_64.tar.gz' \
+  as'command'
+zinit light muesli/duf
+
+zi0c id-as'htop' \
+  as"program" \
+  atclone"./autogen.sh && ./configure && make && \\
+    ln -sf ${HOME}/.zinit/plugins/hishamhm---htop/htop.1.in ${HOME}/.zinit/man/man1" \
+  atpull"%atclone" pick"htop"
+zinit light hishamhm/htop
+
+zi0c id-as'nnn' \
+  from'github' \
+  as'program'  \
+  sbin'nnn' \
+  make='O_NERD=1 O_PCRE=1' \
+  src'misc/quitcd/quitcd.bash_zsh'
+zinit light jarun/nnn
+
+zi0c id-as'broot' \
+  from'gh-r' \
+  as'program' \
+  pick'build/x86_64-unknown-linux-musl/broot' \
+  ver'latest'
+zinit light Canop/broot
+
+zi0c id-as'navi' \
+  from'gh-r' \
+  as'program' \
+  pick'navi' \
+  atload'eval "$(navi widget zsh)";'
+zinit light denisidoro/navi
+
+zi0c id-as'glow' \
+  from'gh-r' \
+  as'program' \
+  bpick'*linux_x86_64.tar.gz' \
+  pick'glow'
+zinit light charmbracelet/glow
+
+zi0c id-as'git-lfs' \
+  from'gh-r' \
+  as'program' \
+  has'git' \
+  bpick'*linux-amd64*' \
+  atclone"PREFIX=$ZPFX ./install.sh; \
+    rm -f ./install.sh ./*.md; \
+    mv ./man/*.1 $ZPFX/share/man/man1; \
+    rm -rf ./man"
+zinit light git-lfs/git-lfs
+
+zi0c id-as'shellharden' \
+  from'gh-r' \
+  as'program' \
+  bpick'*x86_64-linux-gnu*' \
+  mv'shellharden-* -> shellharden' \
+  sbin'shellharden*'
+zinit light anordal/shellharden
+
+zi0c id-as'dust' \
+  from'gh-r' \
+  as'program' \
+  bpick'*linux*gnu*' \
+  pick'dust*/dust' \
+  mv'dust* -> dust'
+zinit light bootandy/dust
+
+zi0c id-as'shfmt' \
+  from'gh-r' \
+  as'program' \
+  mv'shfmt* -> shfmt'
+zinit light mvdan/sh
+
+zi0c id-as'ranger' \
+  from'gh' \
+  as'program' \
+  depth'1' \
+  pick'ranger.py' \
+  atload'alias ranger=ranger.py'
+zinit light ranger/ranger
+
+zi0c id-as'fd' \
+  from'gh-r' \
+  as'command' \
+  pick'fd/fd' \
+  mv'fd* -> fd'
+zinit light sharkdp/fd
+
+zi0c id-as'ripgrep' \
+  from'gh-r' \
+  as'program' \
+  mv'ripgrep* -> rg' \
+  atclone"mv rg/doc/rg.1 $ZPFX/man/man1" \
+  pick'rg/rg'
+zinit light BurntSushi/ripgrep
+
+zi0c id-as'ugrep' \
+  as'program' \
+  nocompile \
+  atclone"./build.sh --prefix=$ZPFX" \
+  atpull'%atclone' \
+  make'install'
+zinit light Genivia/ugrep
+
+zinit id-as'parallel' \
+  as'program' \
+  nocompile \
+  atclone"ziextract --auto --move && ./configure --disable-documentation --prefix=$ZPFX" \
+  atpull'%atclone' \
+  make'install' \
+  for https://ftp.gnu.org/gnu/parallel/parallel-latest.tar.bz2
+
+zi0c id-as'nvim' \
+  as'program' \
+  make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
+  atload'export EDITOR="nvim"'
+zinit light neovim/neovim
+
 # zi0c id-as'enhancd' \
 #   as'program' \
 #   src'init.sh' \
@@ -225,103 +390,6 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     make"USE_LIBPCRE2=1 -j$[$(nproc) + 1] prefix=$ZPFX install install-doc" \
     dlink"/git/git/archive/refs/tags/v%VERSION%.zip" \
     for https://github.com/git/git/releases/
-
-  zi0c id-as'navi' \
-    from'gh-r' \
-    as'program' \
-    pick'navi' \
-    atload'eval "$(navi widget zsh)";'
-  zinit light denisidoro/navi
-
-  zi0c id-as'glow' \
-    from'gh-r' \
-    as'program' \
-    bpick'*linux_x86_64.tar.gz' \
-    pick'glow'
-  zinit light charmbracelet/glow
-
-  zi0c id-as'git-lfs' \
-    from'gh-r' \
-    as'program' \
-    has'git' \
-    bpick'*linux-amd64*' \
-    atclone"PREFIX=$ZPFX ./install.sh; \
-      rm -f ./install.sh ./*.md; \
-      mv ./man/*.1 $ZPFX/share/man/man1; \
-      rm -rf ./man"
-  zinit light git-lfs/git-lfs
-
-  zi0c id-as'shellharden' \
-    from'gh-r' \
-    as'program' \
-    bpick'*x86_64-linux-gnu*' \
-    mv'shellharden-* -> shellharden' \
-    sbin'shellharden*'
-  zinit light anordal/shellharden
-
-  zi0c id-as'dust' \
-    from'gh-r' \
-    as'program' \
-    bpick'*linux*gnu*' \
-    pick'dust*/dust' \
-    mv'dust* -> dust'
-  zinit light bootandy/dust
-
-  zi0c id-as'shfmt' \
-    from'gh-r' \
-    as'program' \
-    mv'shfmt* -> shfmt'
-  zinit light mvdan/sh
-
-  zi0c id-as'ranger' \
-    from'gh' \
-    as'program' \
-    depth'1' \
-    pick'ranger.py' \
-    atload'alias ranger=ranger.py'
-  zinit light ranger/ranger
-
-  zi0c id-as'fd' \
-    from'gh-r' \
-    as'command' \
-    pick'fd/fd' \
-    mv'fd* -> fd'
-  zinit light sharkdp/fd
-
-  zi0c id-as'ripgrep' \
-    from'gh-r' \
-    as'program' \
-    mv'ripgrep* -> rg' \
-    atclone"mv rg/doc/rg.1 $ZPFX/man/man1" \
-    pick'rg/rg'
-  zinit light BurntSushi/ripgrep
-
-  zi0c id-as'ugrep' \
-    as'program' \
-    nocompile \
-    atclone"./build.sh --prefix=$ZPFX" \
-    atpull'%atclone' \
-    make'install'
-  zinit light Genivia/ugrep
-
-  zi0c id-as'nvim' \
-    as'program' \
-    make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
-    atload'export EDITOR="nvim"'
-  zinit light neovim/neovim
-
-  zinit id-as'parallel' \
-    as'program' \
-    nocompile \
-    atclone"ziextract --auto --move && ./configure --disable-documentation --prefix=$ZPFX" \
-    atpull'%atclone' \
-    make'install' \
-    for https://ftp.gnu.org/gnu/parallel/parallel-latest.tar.bz2
-
-  # zi0c id-as'zeno' \
-  #   depth"1" \
-  #   blockf
-  # zinit light yuki-yano/zeno.zsh
 
   install_asdf_plugins() {
     # # https://github.com/asdf-vm/asdf-nodejs
@@ -368,93 +436,25 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     as"completion" \
     for https://github.com/rust-lang/cargo/blob/master/src/etc/_cargo
 
-  zinit id-as"exa" \
-    from"gh-r" \
-    as"program" \
-    mv"exa-* -> exa" \
-    for @ogham/exa
-
-  zinit id-as"exa-completions" \
-    as"completion" \
-    has"exa" \
-    mv"exa* -> _exa" \
-    for https://github.com/ogham/exa/blob/master/completions/completions.zsh
-
-  zi0c id-as'sd' \
-    from'gh-r' \
-    as'program' \
-    mv'sd-* -> sd' \
-    sbin'sd*'
-  zinit light chmln/sd
-
-  zi0c id-as'jq' \
-    from'gh-r'  \
-    as'program'  \
-    bpick'*linux64' \
-    mv'jq-* -> jq'
-  zinit load stedolan/jq
-
-  zi0c id-as'fx' \
-    from'gh-r' \
-    as'program' \
-    mv'fx* -> fx'
-  zinit light antonmedv/fx
-
-  zi0c id-as'hss' \
-    from'gh-r' \
-    as'program' \
-    mv'hss-Linux-x86_64 -> hss'
-  zinit light six-ddc/hss
-
-  zi0c id-as'bat' \
-    from'gh-r' \
-    as'command' \
-    pick'bat/bat' \
-    mv'bat* -> bat'
-  zinit light sharkdp/bat
-
-  zi0c id-as'duf' \
-    from'gh-r' \
-    bpick'*linux_x86_64.tar.gz' \
-    as'command'
-  zinit light muesli/duf
-
-  zi0c id-as'htop' \
-    as"program" \
-    atclone"./autogen.sh && ./configure && make && \\
-      ln -sf ${HOME}/.zinit/plugins/hishamhm---htop/htop.1.in ${HOME}/.zinit/man/man1" \
-    atpull"%atclone" pick"htop"
-  zinit light hishamhm/htop
-
-  zi0c id-as'nnn' \
-    from'github' \
-    as'program'  \
-    sbin'nnn' \
-    make='O_NERD=1 O_PCRE=1' \
-    src'misc/quitcd/quitcd.bash_zsh'
-  zinit light jarun/nnn
-
-  zi0c id-as'broot' \
-    from'gh-r' \
-    as'program' \
-    pick'build/x86_64-unknown-linux-musl/broot' \
-    ver'latest'
-  zinit light Canop/broot
-
   zi0c id-as'deno' \
     as"program" \
     atclone"curl -fsSL https://deno.land/x/install/install.sh | DENO_INSTALL=$ZPFX sh" \
     atpull"%atclone"
   zinit light denoland/deno_install
-
-  # Replaced by exa
-  # zinit id-as'lsd' \
-  #   from'gh-r' \
-  #   as'program' \
-  #   mv'lsd* -> lsd' \
-  #   pick'lsd/lsd' \
-  #   for @Peltoche/lsd
 fi
+
+# zi0c id-as'zeno' \
+#   depth"1" \
+#   blockf
+# zinit light yuki-yano/zeno.zsh
+
+# Replaced by exa
+# zinit id-as'lsd' \
+#   from'gh-r' \
+#   as'program' \
+#   mv'lsd* -> lsd' \
+#   pick'lsd/lsd' \
+#   for @Peltoche/lsd
 
 # zi0c id-as'grex' \
 #   from'gh-r' \
