@@ -215,6 +215,12 @@ zi0c id-as"exa" \
   pick'bin/exa'
 zinit light ogham/exa
 
+zinit id-as"exa-completions" \
+  as"completion" \
+  has"exa" \
+  mv"exa* -> _exa" \
+  for https://github.com/ogham/exa/blob/master/completions/completions.zsh
+
 zi0c id-as'sd' \
   from'gh-r' \
   as'program' \
