@@ -3,10 +3,21 @@ local api = vim.api
 local cmd = vim.cmd -- to execute Vim commands e.g. cmd('pwd')
 local fn = vim.fn -- to call Vim functions e.g. fn.bufnr()
 local g = vim.g -- a table to access global variables
-local opt = vim.opt -- to set options
+local o = vim.o -- to set options
 
--- run :PackerCompile whenever plugins.lua is updated
-vim.cmd('autocmd BufWritePost plugins.lua PackerCompile')
+--
+-- Colors
+--
+-- Putting here before onedar plugin is downloaded. I should be using setup and
+-- config, but it seems packer has issues
+if fn.exists('+termguicolors') == 1 then
+    cmd [[
+        let &t_8f = "\\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\\<Esc>[48;2;%lu;%lu;%lum"
+    ]]
+    o.termguicolors = true
+end
+cmd [[colorscheme onedark]]
 
 require('packer').startup(function(use)
     -- Packer can manage itself
@@ -217,7 +228,7 @@ require('lsp-settings')
 --
 -- nvim-compe
 --
-opt.completeopt = "menuone,noinsert,noselect"
+o.completeopt = "menuone,noinsert,noselect"
 
 require("compe").setup({
     enabled = true,

@@ -1,33 +1,19 @@
 local vim = vim
 local cmd = vim.cmd -- to execute Vim commands e.g. cmd('pwd')
-local g = vim.g -- a table to access global variables
-local o = vim.o -- to set options
 local fn = vim.fn -- to call Vim functions e.g. fn.bufnr()
-local api = vim.api
 
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-
 if fn.empty(fn.glob(install_path)) > 0 then
     fn.system({
         'git', 'clone', 'https://github.com/wbthomason/packer.nvim',
         install_path
     })
-    api.nvim_command 'packadd packer.nvim'
 end
 
---
--- Colors
---
-cmd [[
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
-]]
+cmd [[packadd packer.nvim]]
 
-o.background = 'dark'
-cmd [[colorscheme onedark]]
+-- run :PackerCompile whenever plugins.lua is updated
+cmd [[autocmd BufWritePost plugins.lua PackerCompile]]
 
 --
 -- Plugins settings
@@ -37,7 +23,7 @@ require('plugins')
 --
 -- General settings
 --
-o.autoindent = true -- Do smart autoindenting when starting a new line
+local o = vim.o -- to set options
 o.autowrite = true -- Automatically write a file when leaving a modified buffer
 o.cursorline = true -- Highlight current line
 o.emoji = true -- Enable emojis
@@ -50,16 +36,13 @@ o.mouse = 'a' -- Enable mouse scrolling
 o.number = true
 o.regexpengine = 1 -- Use the old engine, new is for debugging
 o.relativenumber = true -- Enable numbers on the left, current line is 0
-o.ruler = true -- Show the ruler
 o.shiftround = true -- Round indent to multiple of 'shiftwidth'
 o.shortmess = 'atOI' -- No help Uganda information, and overwrite read messages to avoid PRESS ENTER prompts
-o.showcmd = true -- Show partial commands in status line and Selected characters/lines in visual mode
 o.showmatch = true -- Show matching brackets/parentthesis
 o.showmode = true -- Show current mode in command-line
 o.showtabline = 2 -- Always show tabline
 o.smartcase = true -- Case insensitive search, but case sensitive when uc present
 o.smartindent = true
-o.smarttab = true -- Tab key actions
 o.expandtab = true
 o.softtabstop = 4
 o.shiftwidth = o.softtabstop
@@ -114,6 +97,7 @@ cmd [[
 --
 -- Key Mappings
 --
+local g = vim.g -- a table to access global variables
 g.mapleader = ' '
 
 local vimp = require('vimp')
