@@ -146,6 +146,8 @@ vimp.nnoremap('<C-H>', '<C-W>h')
 
 -- CtrlP compatibility
 -- fzf.vim is quicker than fzf.preview
+-- Telescope is async
+-- Testing snap
 vimp.nnoremap('<C-p>',
               ':Telescope find_files find_command=fd,--hidden,--exclude,.git<CR>')
 

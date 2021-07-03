@@ -49,6 +49,7 @@ require('packer').startup(function(use)
     use {'nvim-lua/popup.nvim'}
     use {'nvim-lua/plenary.nvim'}
     use {'nvim-telescope/telescope.nvim'}
+    -- use {'camspiers/snap'}
 
     -- spaceline is slower
     -- Galaxyline lacks of nice configurations, like feline has
@@ -59,13 +60,10 @@ require('packer').startup(function(use)
     use {'karb94/neoscroll.nvim'}
 
     -- Indent guides on blank lines for Neovim
-    use {'lukas-reineke/indent-blankline.nvim', branch = 'lua'}
+    use {'lukas-reineke/indent-blankline.nvim'}
 
     -- Rainbow Parentheses Improved, shorter code, no level limit, smooth and fast,
     -- powerful configuration
-    -- use 'luochen1990/rainbow'
-
-    -- Try it later after another neovim version
     use {'p00f/nvim-ts-rainbow'}
 
     --
@@ -92,9 +90,6 @@ require('packer').startup(function(use)
         end
     }
 
-    -- Peek lines just when you intend
-    use {'nacro90/numb.nvim'}
-
     --
     -- Search/Replace
     --
@@ -115,6 +110,11 @@ require('packer').startup(function(use)
 
     -- Pasting in Vim with indentation adjusted to destination context
     use {'sickill/vim-pasta'}
+
+    -- seamless integration for vim and tmux's clipboard
+    -- Allows to copy between multiple neovim instances
+    -- tmux.nvim needs a lot configuration
+    use {'roxma/vim-tmux-clipboard'}
 
     --
     -- Diff/Git
@@ -152,7 +152,7 @@ require('packer').startup(function(use)
     --
     -- Completion
     --
-    -- Neovim completion
+    -- Neovim completion. It has more features compared to completion.nvim
     use {'hrsh7th/nvim-compe'}
 
     -- tabnine using nvim-compe
@@ -209,10 +209,6 @@ require('packer').startup(function(use)
 
     -- A neovim lua plugin to help easily manage multiple terminal windows
     use {'akinsho/nvim-toggleterm.lua'}
-
-    -- seamless integration for vim and tmux's clipboard
-    -- Allows to copy between multiple neovim instances
-    use {'roxma/vim-tmux-clipboard'}
 end)
 
 --
@@ -675,9 +671,79 @@ g.indent_blankline_viewport_buffer = 50
 g.suda_smart_edit = 1
 
 --
--- numb
+-- snap
 --
-require('numb').setup {
-    show_numbers = true, -- Enable 'number' for the window while peeking
-    show_cursorline = true -- Enable 'cursorline' for the window while peeking
-}
+-- local snap = require("snap")
+--
+-- local git_file = snap.get"producer.git.file".args {
+--     "--cached", "--others", "--exclude-standard"
+-- }
+--
+-- local smart_file =
+--     snap.get "consumer.try"(git_file, snap.get "producer.fd.file")
+--
+-- -- Defaults
+-- local function create(config)
+--     return snap.create(config, {
+--         reverse = true,
+--         mappings = {
+--             ["next-page"] = {"<C-f>", "<PageDown>"},
+--             ["prev-page"] = {"<C-b>", "<PageUp>"}
+--         }
+--     })
+-- end
+
+-- Files
+-- snap.register.map("n", "<Space><Space>", create(function()
+--     return {
+--         producer = snap.get "consumer.fzf"(smart_file),
+--         select = snap.get"select.file".select,
+--         multiselect = snap.get"select.file".multiselect
+--     }
+-- end))
+
+-- Grep
+-- snap.register.map("n", "<Space>g", create(function()
+--     return {
+--         producer = snap.get "consumer.limit"(10000,
+--                                              snap.get "producer.ripgrep.vimgrep"),
+--         select = snap.get"select.vimgrep".select,
+--         multiselect = snap.get"select.vimgrep".multiselect,
+--         views = {snap.get "preview.vimgrep"}
+--     }
+-- end))
+
+-- Old files
+-- snap.register.map("n", "<Space>of", create(function()
+--     return {
+--         producer = snap.get "consumer.fzf"(snap.get "producer.vim.oldfile"),
+--         select = snap.get"select.file".select,
+--         multiselect = snap.get"select.file".multiselect,
+--         views = {snap.get "preview.file"}
+--     }
+-- end))
+
+-- Grep with post-filtering
+-- Have missing files issues
+-- snap.register.map("n", "<Space>g", create(function()
+--     return {
+--         producer = snap.get "consumer.limit"(10000,
+--                                              snap.get "producer.ripgrep.vimgrep"),
+--         steps = {
+--             {consumer = snap.get "consumer.fzf", config = {prompt = "FZF>"}}
+--         },
+--         select = snap.get"select.file".select,
+--         multiselect = snap.get"select.file".multiselect,
+--         views = {snap.get "preview.file"}
+--     }
+-- end))
+
+-- Vim help
+-- snap.register.map("n", "<Space>h", create(function ()
+--   return {
+--     prompt = "Help>",
+--     producer = snap.get"consumer.fzf"(snap.get"producer.vim.help"),
+--     select = snap.get"select.help".select,
+--     views = {snap.get"preview.help"},
+--   }
+-- end))

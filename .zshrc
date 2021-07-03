@@ -69,6 +69,9 @@ zinit light MichaelAquilina/zsh-you-should-use
 zi0a id-as'history-search-multi-word'
 zinit light zdharma/history-search-multi-word
 
+zi0a id-as'zsh-autocomplete'
+zinit light marlonrichert/zsh-autocomplete
+
 # Zinit pack is outdated and key-bindings doesn't work. Configuration is in
 # key-bindings.zsh file
 zi0c id-as'fzf' \
@@ -200,13 +203,14 @@ zi0c id-as'fpp' \
   pick"fpp"
 zinit light facebook/pathpicker
 
-zi0c id-as'mcfly' \
-  from"gh-r" \
-  as"command" \
-  bpick"*x86_64-unknown-linux*" \
-  pick"mcfly" \
-  atload"export MCFLY_KEY_SCHEME=vim MCFLY_FUZZY=true; source <(mcfly init zsh)"
-zinit light cantino/mcfly
+# no good integration with zsh-autocomplete
+# zi0c id-as'mcfly' \
+#   from"gh-r" \
+#   as"command" \
+#   bpick"*x86_64-unknown-linux*" \
+#   pick"mcfly" \
+#   atload"export MCFLY_KEY_SCHEME=vim MCFLY_FUZZY=true; source <(mcfly init zsh)"
+# zinit light cantino/mcfly
 
 zi0c id-as"exa" \
   from"gh-r" \
@@ -362,17 +366,12 @@ zinit id-as'parallel' \
   make'install' \
   for https://ftp.gnu.org/gnu/parallel/parallel-latest.tar.bz2
 
-zi0c id-as'nvim' \
-  as'program' \
-  make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
-  atload'export EDITOR="nvim"'
-zinit light neovim/neovim
-
-# zi0c id-as'enhancd' \
+# Wait to 0.6.0 release
+# zi0c id-as'nvim' \
 #   as'program' \
-#   src'init.sh' \
-#   atload"source ${HOME}/.zsh/enchancd.conf"
-# zinit load b4b4r07/enhancd
+#   make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
+#   atload'export EDITOR="nvim"'
+# zinit light neovim/neovim
 
 if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zinit pack"default" for zsh
