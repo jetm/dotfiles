@@ -42,3 +42,20 @@ if (( $#commands[(i)lesspipe(|.sh)] )); then
 fi
 
 export EDITOR=nvim
+
+#
+# zsh-autocomplete
+#
+zstyle ':autocomplete:*' min-delay 0.4  # number of seconds (float)
+# 0.0: Start autocompletion immediately when you stop typing.
+# 0.4: Wait 0.4 seconds for more keyboard input before showing completions.
+#
+zstyle ':autocomplete:*' min-input 2  # number of characters (integer)
+# 0: Show completions immediately on each new command line.
+# 1: Wait for at least 1 character of input.
+
+zstyle ':autocomplete:*' fzf-completion yes
+# no:  Tab uses Zsh's completion system only.
+# yes: Tab first tries Fzf's completion, then falls back to Zsh's.
+# ⚠️ NOTE: This can NOT be changed at runtime and requires that you have
+# installed Fzf's shell extensions.
