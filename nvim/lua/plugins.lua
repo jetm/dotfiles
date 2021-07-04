@@ -588,12 +588,9 @@ local function luaformat() return {exe = 'lua-format', stdin = true} end
 api.nvim_exec([[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost * FormatWrite
+  autocmd BufWritePost * silent! FormatWrite
 augroup END
 ]], true)
-
--- FIME: monkey patch over the print function, to silent all prints
-require('formatter.util').print = function() end
 
 require"formatter".setup({
     logging = false,
