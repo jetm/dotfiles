@@ -175,7 +175,7 @@
     smtpserver = smtp3.hpe.com
 
 [sequence]
-    editor = ~/.zinit/polaris/bin/git-interactive-rebase-tool
+    editor = interactive-rebase-tool
 
 ; [http]
 ;     proxy = http://web-proxy.rose.hpecorp.net:8080
