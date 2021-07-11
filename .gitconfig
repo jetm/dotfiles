@@ -154,38 +154,9 @@
 [mergetool "nvimdiff"]
     cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'"
 
-#
-# VM settings
-#
-[user]
-    name = Javier Tiá
-    email = javier.tia@hpe.com
-
-[core]
-    # gitproxy is a script to allow clone git:// repositories
-    gitproxy = gitproxy
-
-[gitreview]
-    # Gerrit username
-    username = javier.tia
-
-[sendemail]
-    smtpServerPort = 25
-    ; smtpserver = G9W8453.americas.hpqcorp.net
-    smtpserver = smtp3.hpe.com
-
 [sequence]
     editor = interactive-rebase-tool
 
-; [http]
-;     proxy = http://web-proxy.rose.hpecorp.net:8080
-;     sslverify = false
-
-; [feature]
-    ; experimental = true
-    ; manyFiles = true
-;
-; [protocol]
-    ; version = 2
-
-# vim:set ts=4 sw=4 et:
+[user]
+    name = Javier Tiá
+    email = javier.tia@gmail.com

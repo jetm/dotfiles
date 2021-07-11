@@ -17,8 +17,3 @@ require('plugins.suda')
 require('plugins.barbar')
 require('plugins.vim-better-whitespace')
 -- require('plugins.snap')
-
---
--- VM settings
---
-vim.g.python3_host_prog = "/usr/bin/python3.7"
