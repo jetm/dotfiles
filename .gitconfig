@@ -175,7 +175,7 @@
     smtpserver = smtp3.hpe.com
 
 [sequence]
-    editor = /users/tiamarin/.zinit/plugins/git-interactive-rebase-tool/bin/interactive-rebase-tool
+    editor = ~/.zinit/polaris/bin/git-interactive-rebase-tool
 
 ; [http]
 ;     proxy = http://web-proxy.rose.hpecorp.net:8080
