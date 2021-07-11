@@ -188,6 +188,7 @@ zi0c id-as'forgit' \
 zinit light wfxr/forgit
 
 zi0c id-as'git-interactive-rebase-tool' \
+  ver'2.1.0' \
   as'command' \
   rustup cargo'!git-interactive-rebase-tool' \
   pick'bin/interactive-rebase-tool'
