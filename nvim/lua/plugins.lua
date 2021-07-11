@@ -342,9 +342,11 @@ require("telescope").setup({
         mappings = {i = {["<esc>"] = actions.close}},
         prompt_prefix = "🔍 ",
         selection_caret = " ",
-        entry_prefix = "  ",
+        entry_prefix = " ",
+        previewer = false,
         set_env = {['COLORTERM'] = 'truecolor'} -- default = nil,
-    }
+    },
+    pickers = {find_files = {previewer = false}}
 })
 
 --

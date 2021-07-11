@@ -49,8 +49,14 @@ load_PZT_mod completion
 #
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-zinit ice lucid nocd id-as'p10k' depth=1 atload"!source ${HOME}/.p10k.zsh"
+zinit ice lucid nocd id-as'p10k' \
+  depth=1 \
+  atload"!source ${HOME}/.p10k.zsh"
 zinit light romkatv/powerlevel10k
+
+zinit ice depth=1 id-as'zsh-vi-mode' \
+  atload"ZVM_VI_SURROUND_BINDKEY=s-prefix; ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT"
+zinit light jeffreytse/zsh-vi-mode
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
@@ -182,8 +188,8 @@ zi0c id-as'forgit' \
 zinit light wfxr/forgit
 
 zi0c id-as'git-interactive-rebase-tool' \
-  as'program' \
-  cargo'!git-interactive-rebase-tool'
+  as'command' \
+  rustup cargo'!git-interactive-rebase-tool'
 zinit light MitMaro/git-interactive-rebase-tool
 
 zi0c id-as'zoxide' \
@@ -203,20 +209,11 @@ zi0c id-as'fpp' \
   pick"fpp"
 zinit light facebook/pathpicker
 
-# no good integration with zsh-autocomplete
-# zi0c id-as'mcfly' \
-#   from"gh-r" \
-#   as"command" \
-#   bpick"*x86_64-unknown-linux*" \
-#   pick"mcfly" \
-#   atload"export MCFLY_KEY_SCHEME=vim MCFLY_FUZZY=true; source <(mcfly init zsh)"
-# zinit light cantino/mcfly
-
 zi0c id-as"exa" \
   from"gh-r" \
   as"program" \
   pick'bin/exa' \
-  mv"completions/exa.zsh -> _exa"
+  mv"completions/_exa -> _exa"
 zinit light ogham/exa
 
 zi0c id-as'sd' \
@@ -366,12 +363,26 @@ zinit id-as'parallel' \
   make'install' \
   for https://ftp.gnu.org/gnu/parallel/parallel-latest.tar.bz2
 
-# Wait to 0.6.0 release
-# zi0c id-as'nvim' \
-#   as'program' \
-#   make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
-#   atload'export EDITOR="nvim"'
-# zinit light neovim/neovim
+# Release 0.5.0
+zi0c id-as'nvim' \
+  ver'v0.5.0' \
+  as'program' \
+  make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
+  atload'export EDITOR="nvim"'
+zinit light neovim/neovim
+
+# zi0c id-as'difftastic' \
+#   cargo'!difftastic'
+# zinit light wilfred/difftastic
+
+# no good integration with zsh-autocomplete
+# zi0c id-as'mcfly' \
+#   from"gh-r" \
+#   as"command" \
+#   bpick"*x86_64-unknown-linux*" \
+#   pick"mcfly" \
+#   atload"export MCFLY_KEY_SCHEME=vim MCFLY_FUZZY=true; source <(mcfly init zsh)"
+# zinit light cantino/mcfly
 
 if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zinit pack"default" for zsh
