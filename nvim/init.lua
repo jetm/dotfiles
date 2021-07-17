@@ -61,7 +61,7 @@ vim.opt.listchars = {tab = '→ ', trail = '·', nbsp = '␣'}
 
 -- Highlight when it yanks
 cmd [[
-  au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=200, on_visual = false}
+  au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
 ]]
 
 --
