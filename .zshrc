@@ -373,6 +373,13 @@ zi0c id-as'nvim' \
   atload'export EDITOR="nvim"'
 zinit light neovim/neovim
 
+zi0c id-as'efm' \
+  from'gh-r' \
+  as'command' \
+  bpick'*linux_amd64*' \
+  mv"*/efm-langserver -> ${ZPFX}/bin/efm-langserver"
+zinit light mattn/efm-langserver
+
 # zi0c id-as'difftastic' \
 #   cargo'!difftastic'
 # zinit light wilfred/difftastic
