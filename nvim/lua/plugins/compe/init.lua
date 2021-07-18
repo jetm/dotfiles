@@ -25,7 +25,6 @@ function compe:init()
         source = {
             tabnine = false,
             nvim_lsp = true,
-            zsh = true,
             path = true,
             nvim_lua = false,
             snippets_nvim = false,

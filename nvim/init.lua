@@ -217,6 +217,21 @@ vimp.nnoremap("g#", "g#<cmd>lua require('hlslens').start()<CR>")
 vimp.nnoremap('<leader>f', ':Format<CR>')
 
 --
+-- Snippets
+--
+local function prequire(...)
+    local status, lib = pcall(require, ...)
+    if (status) then return lib end
+    return nil
+end
+
+require("luasnip/loaders/from_vscode").lazy_load({
+    "~/.local/share/nvim/site/pack/packer/start/friendly-snippets"
+})
+
+local luasnip = prequire("luasnip")
+
+--
 -- completion
 --
 vim.o.completeopt = "menuone,noinsert,noselect"
@@ -245,6 +260,7 @@ _G.tab_complete = function()
         return vim.fn["compe#complete"]()
     end
 end
+
 _G.s_tab_complete = function()
     if vim.fn.pumvisible() == 1 then
         return t "<C-p>"
@@ -266,13 +282,21 @@ function _G.completions()
 end
 
 --
+-- LSP
+--
+vimp.nnoremap('<leader>gt', ':LspTroubleToggle<CR>')
+
+--
 -- completions mappings
 --
 vim.api.nvim_set_keymap("i", "<Tab>", [[v:lua.tab_complete()]], {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", [[v:lua.tab_complete()]], {expr = true})
-vim.api.nvim_set_keymap("i", "<S-Tab>", [[v:lua.s_tab_complete()]], {noremap = true, expr = true})
-vim.api.nvim_set_keymap("s", "<S-Tab>", [[v:lua.s_tab_complete()]], {noremap = true, expr = true})
+vim.api.nvim_set_keymap("i", "<S-Tab>", [[v:lua.s_tab_complete()]],
+                        {noremap = true, expr = true})
+vim.api.nvim_set_keymap("s", "<S-Tab>", [[v:lua.s_tab_complete()]],
+                        {noremap = true, expr = true})
 vim.api.nvim_set_keymap("i", "<CR>", [[v:lua.completions()]], {expr = true})
+
 --
 -- Specific Language settings
 --
