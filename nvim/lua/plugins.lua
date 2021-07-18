@@ -30,10 +30,25 @@ require('packer').startup(function(use)
     use {'svermeulen/vimpeccable'}
 
     -- Apply fast colors
-    use {'norcalli/nvim-colorizer.lua'}
+    use {
+        'norcalli/nvim-colorizer.lua',
+        config = function()
+            -- Attaches to every FileType mode
+            require("colorizer").setup({'*'}, {
+                RGB = true, -- #RGB hex codes
+                RRGGBB = true, -- #RRGGBB hex codes
+                RRGGBBAA = true, -- #RRGGBBAA hex codes
+                rgb_fn = true, -- CSS rgb() and rgba() functions
+                hsl_fn = true, -- CSS hsl() and hsla() functions
+                css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+                css_fn = true -- Enable all CSS *functions*: rgb_fn, hsl_fn
+            })
+
+        end
+    }
 
     -- Neovim tabline plugin
-    use {'romgrk/barbar.nvim'}
+    use { 'romgrk/barbar.nvim' }
 
     -- Icons collections
     use 'kyazdani42/nvim-web-devicons'
@@ -41,14 +56,41 @@ require('packer').startup(function(use)
     use {'yamatsum/nvim-nonicons'}
 
     -- We recommend updating the parsers on update
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+        config = function()
+
+            require("nvim-treesitter.configs").setup({
+                ensure_installed = {
+                    "bash", "c", "comment", "cpp", "dockerfile", "go", "json",
+                    "jsonc", "lua", "python", "regex", "yaml"
+                },
+                -- Disabling highlight. Still has problems with shell and other languages
+                -- highlight = {enable = false, use_languagetree = true},
+                -- indent = {enable = true},
+                rainbow = {
+                    enable = true,
+                    -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
+                    extended_mode = true
+                }
+            })
+        end
+    }
     use {'nvim-treesitter/nvim-treesitter-textobjects'}
     use {"romgrk/nvim-treesitter-context"}
 
+    -- navigation
+    -- fuzzy finder
     -- Replace fzf
-    use {'nvim-lua/popup.nvim'}
-    use {'nvim-lua/plenary.nvim'}
-    use {'nvim-telescope/telescope.nvim'}
+    use {"nvim-lua/popup.nvim"}
+    use {"nvim-lua/plenary.nvim"}
+    use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
+    use {
+        "nvim-telescope/telescope.nvim",
+        config = function() require("plugins.telescope") end
+    }
+
     -- use {'camspiers/snap'}
 
     -- spaceline is slower
@@ -57,7 +99,10 @@ require('packer').startup(function(use)
     use {'hoob3rt/lualine.nvim'}
 
     -- Smooth scroll
-    use {'karb94/neoscroll.nvim'}
+    use {
+        'karb94/neoscroll.nvim',
+        config = function() require('neoscroll').setup() end
+    }
 
     -- Indent guides on blank lines for Neovim
     use {'lukas-reineke/indent-blankline.nvim'}
@@ -124,7 +169,11 @@ require('packer').startup(function(use)
     use {'rhysd/conflict-marker.vim'}
 
     -- Git features and provider for feline
-    use {"lewis6991/gitsigns.nvim"}
+    -- like gitgutter shows hunks etc on sign column
+    use {
+        "lewis6991/gitsigns.nvim",
+        config = function() require("plugins.gitsigns") end
+    }
 
     --
     -- Text manipulation
@@ -133,7 +182,10 @@ require('packer').startup(function(use)
     use {'terryma/vim-expand-region'}
 
     -- Vim plugin, insert or delete brackets, parens, quotes in pair
-    use {"windwp/nvim-autopairs"}
+    use {
+        "windwp/nvim-autopairs",
+        config = function() require("nvim-autopairs").setup {} end
+    }
 
     -- Quoting/parenthesizing made simple
     use {'machakann/vim-sandwich'}
@@ -157,10 +209,7 @@ require('packer').startup(function(use)
     -- window for showing LSP detected issues in code
     use {
         "folke/lsp-trouble.nvim",
-        config = function() require("plugins.trouble") end,
-        cmd = {"LspTrouble"},
-        event = "BufRead",
-        requires = "kyazdani42/nvim-web-devicons"
+        config = function() require("trouble").setup {} end
     }
     -- lsp status
     use {
@@ -169,43 +218,30 @@ require('packer').startup(function(use)
     }
 
     -- fancy popups lsp
-    use {"glepnir/lspsaga.nvim", config = require("plugins.lspsaga")}
+    use {
+        "glepnir/lspsaga.nvim",
+        config = function() require("plugins.lspsaga") end
+    }
 
     -- lsp extensions stuff
     use {
         "onsails/lspkind-nvim",
-        config = require("lspkind").init({File = " "})
+        config = function() require("lspkind").init({File = " "}) end
     }
 
     -- default configs for lsp and setup lsp
     use {
         "neovim/nvim-lspconfig",
-        config = require("plugins.lspconfig").init,
-        requires = {
-            "nvim-lua/lsp-status.nvim",
-            after = {"neovim/nvim-lspconfig"}
-        }
+        config = function() require("plugins.lspconfig").init() end
     }
 
     -- completion engine
     use {
         "hrsh7th/nvim-compe",
-        event = "InsertEnter",
-        config = require("plugins.compe").init
+        config = function() require("plugins.compe").init() end
     }
 
-    use {
-        "tzachar/compe-tabnine",
-        after = "nvim-compe",
-        run = "./install.sh",
-        requires = "hrsh7th/nvim-compe"
-    }
-
-    use {
-        "tamago324/compe-zsh",
-        after = "nvim-compe",
-        requires = "hrsh7th/nvim-compe"
-    }
+    use {"tzachar/compe-tabnine", run = "./install.sh"}
 
     -- Quickstart configurations for the Nvim LSP client
     -- use {'kabouzeid/nvim-lspinstall'}
@@ -219,6 +255,7 @@ require('packer').startup(function(use)
     --
     -- lua nvim setup
     use {"folke/lua-dev.nvim"}
+
     use {'sheerun/vim-polyglot'}
 
     -- Wisely add if/fi, for/end in several languages
@@ -234,16 +271,17 @@ require('packer').startup(function(use)
     --
     -- Snippets
     --
-    use {
-        "L3MON4D3/LuaSnip",
-        config = function() require("plugins.compe.luasnip") end
-    }
+    use {"L3MON4D3/LuaSnip"}
+
+    use {"rafamadriz/friendly-snippets"}
 
     --
     -- File modifications
     --
     -- An alternative sudo.vim
-    use {'lambdalisue/suda.vim'}
+    use {
+        'lambdalisue/suda.vim'
+    }
 
     -- New files created with a shebang line are automatically made executable
     use {'tpope/vim-eunuch'}
@@ -252,77 +290,36 @@ require('packer').startup(function(use)
     use {"kyazdani42/nvim-tree.lua"}
 
     -- A neovim lua plugin to help easily manage multiple terminal windows
-    use {'akinsho/nvim-toggleterm.lua'}
+    use {
+        'akinsho/nvim-toggleterm.lua',
+        config = function()
+            require("toggleterm").setup {
+                open_mapping = [[<F11>]],
+                shade_terminals = false,
+                hide_numbers = true
+            }
+        end
+    }
 end)
 
---
--- Icons
---
-local icons = require("nvim-nonicons")
+-- peekup
+g.peekup_open = '"'
+require('nvim-peekup.config').on_keystroke["paste_reg"] = "\""
+require('nvim-peekup.config').on_keystroke["delay"] = ''
 
---
--- nvim-treesitter
---
-require("nvim-treesitter.configs").setup({
-    ensure_installed = {
-        "bash", "c", "comment", "cpp", "dockerfile", "go", "json", "jsonc",
-        "lua", "python", "regex", "yaml"
-    },
-    -- Disabling highlight. Still has problems with shell and other languages
-    -- highlight = {enable = false, use_languagetree = true},
-    -- indent = {enable = true},
-    rainbow = {
-        enable = true,
-        extended_mode = true -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-    }
-})
-
---
--- telescope
---
-local actions = require("telescope.actions")
-require("telescope").setup({
-    defaults = {
-        mappings = {i = {["<esc>"] = actions.close}},
-        prompt_prefix = "🔍 ",
-        selection_caret = " ",
-        entry_prefix = " ",
-        previewer = false,
-        set_env = {['COLORTERM'] = 'truecolor'} -- default = nil,
-    },
-    pickers = {find_files = {previewer = false}}
-})
-
---
--- autopairs
---
-require("nvim-autopairs").setup()
-
---
--- colorizer
---
--- Attaches to every FileType mode
-require("colorizer").setup({'*'}, {
-    RGB = true, -- #RGB hex codes
-    RRGGBB = true, -- #RRGGBB hex codes
-    RRGGBBAA = true, -- #RRGGBBAA hex codes
-    rgb_fn = true, -- CSS rgb() and rgba() functions
-    hsl_fn = true, -- CSS hsl() and hsla() functions
-    css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-    css_fn = true -- Enable all CSS *functions*: rgb_fn, hsl_fn
-})
-
---
 -- barbar
---
 g.bufferline = {icons = 'both'}
+
+-- suda
+g.suda_smart_edit = 1
 
 --
 -- nvim-tree
 --
-
 -- 0 by default, will not resize the tree when opening a file
 g.nvim_tree_width_allow_resize = 1
+
+local icons = require("nvim-nonicons")
 
 g.nvim_tree_icons = {
     default = icons.get("file"),
@@ -360,16 +357,6 @@ g.nvim_tree_follow = 1
 
 -- closes the tree when it's the last window
 g.nvim_tree_auto_close = true
-
---
--- Neoscroll
---
-require('neoscroll').setup()
-
---
--- git
---
-require('gitsigns').setup()
 
 --
 -- lualine
@@ -469,15 +456,6 @@ require'lualine'.setup {
 }
 
 --
--- toggleterm
---
-require("toggleterm").setup {
-    open_mapping = [[<F11>]],
-    shade_terminals = false,
-    hide_numbers = true
-}
-
---
 -- formatter
 --
 local function prettier()
@@ -507,13 +485,6 @@ require"formatter".setup({
         lua = {luaformat}
     }
 })
-
---
--- nvim-peekup
---
-g.peekup_open = '"'
-require('nvim-peekup.config').on_keystroke["paste_reg"] = "\""
-require('nvim-peekup.config').on_keystroke["delay"] = ''
 
 --
 -- Comments
@@ -560,11 +531,6 @@ g.indent_blankline_context_patterns = {
     'class', 'function', 'method', 'while', 'closure', 'for'
 }
 g.indent_blankline_viewport_buffer = 50
-
---
--- Smartedit
---
-g.suda_smart_edit = 1
 
 --
 -- snap
