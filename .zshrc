@@ -380,6 +380,22 @@ zi0c id-as'efm' \
   mv"*/efm-langserver -> ${ZPFX}/bin/efm-langserver"
 zinit light mattn/efm-langserver
 
+zi0c id-as'ninja' \
+  from'gh-r' \
+  as'command' \
+  bpick'*linux*' \
+  pick'ninja'
+zinit light ninja-build/ninja
+
+zi0c id-as'lua-language-server' \
+  as'program' \
+  nocompile \
+  atclone"git submodule update --init --recursive; \
+          ninja -C 3rd/luamake -f compile/ninja/linux.ninja; \
+          ./3rd/luamake/luamake rebuild;" \
+  atpull'%atclone'
+zinit light sumneko/lua-language-server
+
 # zi0c id-as'difftastic' \
 #   cargo'!difftastic'
 # zinit light wilfred/difftastic

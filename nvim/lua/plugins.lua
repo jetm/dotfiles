@@ -150,32 +150,75 @@ require('packer').startup(function(use)
     -- use 'AndrewRadev/splitjoin.vim'
 
     --
-    -- Completion
+    -- Completion/LSP
     --
-    -- Neovim completion. It has more features compared to completion.nvim
-    use {'hrsh7th/nvim-compe'}
+    use {"ray-x/lsp_signature.nvim"}
 
-    -- tabnine using nvim-compe
-    use {'tzachar/compe-tabnine', run = './install.sh'}
+    -- window for showing LSP detected issues in code
+    use {
+        "folke/lsp-trouble.nvim",
+        config = function() require("plugins.trouble") end,
+        cmd = {"LspTrouble"},
+        event = "BufRead",
+        requires = "kyazdani42/nvim-web-devicons"
+    }
+    -- lsp status
+    use {
+        "nvim-lua/lsp-status.nvim",
+        config = function() require("plugins.lspStatus") end
+    }
 
-    --
-    --
-    -- Linter/LSP
-    --
+    -- fancy popups lsp
+    use {"glepnir/lspsaga.nvim", config = require("plugins.lspsaga")}
+
+    -- lsp extensions stuff
+    use {
+        "onsails/lspkind-nvim",
+        config = require("lspkind").init({File = " "})
+    }
+
+    -- default configs for lsp and setup lsp
+    use {
+        "neovim/nvim-lspconfig",
+        config = require("plugins.lspconfig").init,
+        requires = {
+            "nvim-lua/lsp-status.nvim",
+            after = {"neovim/nvim-lspconfig"}
+        }
+    }
+
+    -- completion engine
+    use {
+        "hrsh7th/nvim-compe",
+        event = "InsertEnter",
+        config = require("plugins.compe").init
+    }
+
+    use {
+        "tzachar/compe-tabnine",
+        after = "nvim-compe",
+        run = "./install.sh",
+        requires = "hrsh7th/nvim-compe"
+    }
+
+    use {
+        "tamago324/compe-zsh",
+        after = "nvim-compe",
+        requires = "hrsh7th/nvim-compe"
+    }
+
     -- Quickstart configurations for the Nvim LSP client
-    use {'neovim/nvim-lspconfig'}
-    use {'kabouzeid/nvim-lspinstall'}
+    -- use {'kabouzeid/nvim-lspinstall'}
 
     -- Replacing ale, as it's big for just removing whitespaces and do formatting
     use {'ntpeters/vim-better-whitespace'}
     use {'mhartington/formatter.nvim'}
 
-    -- Linter to replace ale
-    use {'mfussenegger/nvim-lint'}
-
     --
     -- Languages support
     --
+    -- lua nvim setup
+    use {"folke/lua-dev.nvim"}
     use {'sheerun/vim-polyglot'}
 
     -- Wisely add if/fi, for/end in several languages
@@ -191,9 +234,10 @@ require('packer').startup(function(use)
     --
     -- Snippets
     --
-    use {'rafamadriz/friendly-snippets'}
-    use {"hrsh7th/vim-vsnip"}
-    use {"hrsh7th/vim-vsnip-integ"}
+    use {
+        "L3MON4D3/LuaSnip",
+        config = function() require("plugins.compe.luasnip") end
+    }
 
     --
     -- File modifications
@@ -215,106 +259,6 @@ end)
 -- Icons
 --
 local icons = require("nvim-nonicons")
-
---
--- LSP
---
-require('lsp-settings')
-
---
--- nvim-compe
---
-o.completeopt = "menuone,noinsert,noselect"
-
-require("compe").setup({
-    enabled = true,
-    -- auto open popup
-    autocomplete = true,
-    debug = false,
-    -- min chars to trigger completion on
-    min_length = 1,
-    preselect = "enable",
-    throttle_time = 80,
-    source_timeout = 200,
-    incomplete_delay = 400,
-    max_abbr_width = 100,
-    max_kind_width = 100,
-    max_menu_width = 100,
-    documentation = true,
-
-    tabnine = {
-        max_line = 1000,
-        max_num_results = 6,
-        sort = false,
-        priority = 1,
-        show_prediction_strength = false
-    },
-
-    source = {
-        path = true,
-        buffer = {kind = "﬘", true},
-        nvim_lsp = true,
-        nvim_lua = true,
-        ultisnips = {kind = "﬌", true},
-        vsnip = {kind = "﬌", true},
-        spell = false,
-        tags = true
-    }
-})
-
-local t = function(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local check_back_space = function()
-    local col = fn.col(".") - 1
-    if col == 0 or fn.getline("."):sub(col, col):match("%s") then
-        return true
-    else
-        return false
-    end
-end
-
--- tab completion
-
-_G.tab_complete = function()
-    if fn.pumvisible() == 1 then
-        return t "<C-n>"
-    elseif check_back_space() then
-        return t "<Tab>"
-    else
-        return fn["compe#complete"]()
-    end
-end
-_G.s_tab_complete = function()
-    if fn.pumvisible() == 1 then
-        return t "<C-p>"
-    elseif fn.call("vsnip#jumpable", {-1}) == 1 then
-        return t "<Plug>(vsnip-jump-prev)"
-    else
-        return t "<S-Tab>"
-    end
-end
-
---
--- completions mappings
---
-api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-
-function _G.completions()
-    local npairs = require("nvim-autopairs")
-    if fn.pumvisible() == 1 then
-        if fn.complete_info()["selected"] ~= -1 then
-            return fn["compe#confirm"]("<CR>")
-        end
-    end
-    return npairs.check_break_line_char()
-end
-
-api.nvim_set_keymap("i", "<CR>", "v:lua.completions()", {expr = true})
 
 --
 -- nvim-treesitter
@@ -354,28 +298,6 @@ require("telescope").setup({
 --
 require("nvim-autopairs").setup()
 
-local remap = vim.api.nvim_set_keymap
-local npairs = require('nvim-autopairs')
-
--- skip it, if you use another global object
-_G.MUtils = {}
-
-g.completion_confirm_key = ""
-MUtils.completion_confirm = function()
-    if fn.pumvisible() ~= 0 then
-        if fn.complete_info()["selected"] ~= -1 then
-            return fn["compe#confirm"](npairs.esc("<cr>"))
-        else
-            return npairs.esc("<cr>")
-        end
-    else
-        return npairs.autopairs_cr()
-    end
-end
-
-remap('i', '<CR>', 'v:lua.MUtils.completion_confirm()',
-      {expr = true, noremap = true})
-
 --
 -- colorizer
 --
@@ -394,20 +316,6 @@ require("colorizer").setup({'*'}, {
 -- barbar
 --
 g.bufferline = {icons = 'both'}
-
---
--- nvim-lspinstall
---
-
-function _G.lsp_reinstall_all()
-    local lspinstall = require "lspinstall"
-    for _, server in ipairs(lspinstall.installed_servers()) do
-        lspinstall.install_server(server)
-    end
-end
-
--- Add LspReinstallAll command
-cmd [[command! -nargs=0 LspReinstallAll call v:lua.lsp_reinstall_all()]]
 
 --
 -- nvim-tree
@@ -582,17 +490,11 @@ local function prettier()
     }
 end
 
-local function shfmt() return {exe = "shfmt", args = {"-"}, stdin = true} end
+local function shfmt()
+    return {exe = "shfmt", args = {'-sr', '-i 4', '-ci', '-s'}, stdin = true}
+end
 
 local function luaformat() return {exe = 'lua-format', stdin = true} end
-
--- Format on Save
-api.nvim_exec([[
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePost * silent! FormatWrite
-augroup END
-]], true)
 
 require"formatter".setup({
     logging = false,
@@ -605,11 +507,6 @@ require"formatter".setup({
         lua = {luaformat}
     }
 })
-
---
--- hop
---
--- require'hop'.setup({term_seq_bias = 0.5})
 
 --
 -- nvim-peekup
