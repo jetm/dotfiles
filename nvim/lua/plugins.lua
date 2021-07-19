@@ -1,24 +1,3 @@
-local vim = vim
-local api = vim.api
-local cmd = vim.cmd -- to execute Vim commands e.g. cmd('pwd')
-local fn = vim.fn -- to call Vim functions e.g. fn.bufnr()
-local g = vim.g -- a table to access global variables
-local o = vim.o -- to set options
-
---
--- Colors
---
--- Putting here before onedar plugin is downloaded. I should be using setup and
--- config, but it seems packer has issues
-if fn.exists('+termguicolors') == 1 then
-    cmd [[
-        let &t_8f = "\\<Esc>[38;2;%lu;%lu;%lum"
-        let &t_8b = "\\<Esc>[48;2;%lu;%lu;%lum"
-    ]]
-    o.termguicolors = true
-end
-cmd [[colorscheme onedark]]
-
 require('packer').startup(function(use)
     -- Packer can manage itself
     use {'wbthomason/packer.nvim'}
@@ -48,7 +27,10 @@ require('packer').startup(function(use)
     }
 
     -- Neovim tabline plugin
-    use { 'romgrk/barbar.nvim' }
+    use {
+        'romgrk/barbar.nvim',
+        config = function() require('plugins.barbar') end
+    }
 
     -- Icons collections
     use 'kyazdani42/nvim-web-devicons'
@@ -80,7 +62,9 @@ require('packer').startup(function(use)
     use {'nvim-treesitter/nvim-treesitter-textobjects'}
     use {"romgrk/nvim-treesitter-context"}
 
-    -- navigation
+    --
+    -- Navigation
+    --
     -- fuzzy finder
     -- Replace fzf
     use {"nvim-lua/popup.nvim"}
@@ -91,12 +75,19 @@ require('packer').startup(function(use)
         config = function() require("plugins.telescope") end
     }
 
-    -- use {'camspiers/snap'}
+    use {'kevinhwang91/nvim-bqf'}
+
+    -- use {'camspiers/snap',
+    -- config = function() require('plugins.snap')
+    -- end}
 
     -- spaceline is slower
     -- Galaxyline lacks of nice configurations, like feline has
     -- lualine has better structure and theme, it's more like spaceline
-    use {'hoob3rt/lualine.nvim'}
+    use {
+        'hoob3rt/lualine.nvim',
+        config = function() require('plugins.lualine') end
+    }
 
     -- Smooth scroll
     use {
@@ -105,7 +96,10 @@ require('packer').startup(function(use)
     }
 
     -- Indent guides on blank lines for Neovim
-    use {'lukas-reineke/indent-blankline.nvim'}
+    use {
+        'lukas-reineke/indent-blankline.nvim',
+        config = function() require('plugins.indent-blankline') end
+    }
 
     -- Rainbow Parentheses Improved, shorter code, no level limit, smooth and fast,
     -- powerful configuration
@@ -148,7 +142,10 @@ require('packer').startup(function(use)
     -- Copy/Paste
     --
     -- Dynamically show content of vim registers
-    use {'gennaro-tedesco/nvim-peekup'}
+    use {
+        'gennaro-tedesco/nvim-peekup',
+        config = function() require('plugins.peekup') end
+    }
 
     -- Handles bracketed-paste-mode in vim (aka. automatic `:set paste`)
     use {'ConradIrwin/vim-bracketed-paste'}
@@ -184,7 +181,7 @@ require('packer').startup(function(use)
     -- Vim plugin, insert or delete brackets, parens, quotes in pair
     use {
         "windwp/nvim-autopairs",
-        config = function() require("nvim-autopairs").setup {} end
+        config = function() require('plugins.autopairs') end
     }
 
     -- Quoting/parenthesizing made simple
@@ -194,7 +191,10 @@ require('packer').startup(function(use)
     use {'tpope/vim-repeat'}
 
     -- Vim plugin for intensely nerdy commenting powers
-    use {'preservim/nerdcommenter'}
+    use {
+        'preservim/nerdcommenter',
+        config = function() require('plugins.nerd-commenter') end
+    }
 
     -- Switch between single-line and multiline forms of code
     -- gS to split a one-liner into multiple lines
@@ -211,6 +211,7 @@ require('packer').startup(function(use)
         "folke/lsp-trouble.nvim",
         config = function() require("trouble").setup {} end
     }
+
     -- lsp status
     use {
         "nvim-lua/lsp-status.nvim",
@@ -247,8 +248,14 @@ require('packer').startup(function(use)
     -- use {'kabouzeid/nvim-lspinstall'}
 
     -- Replacing ale, as it's big for just removing whitespaces and do formatting
-    use {'ntpeters/vim-better-whitespace'}
-    use {'mhartington/formatter.nvim'}
+    use {
+        'ntpeters/vim-better-whitespace',
+        config = function() require('plugins.vim-better-whitespace') end
+    }
+    use {
+        'mhartington/formatter.nvim',
+        config = function() require('plugins.formatter') end
+    }
 
     --
     -- Languages support
@@ -280,14 +287,19 @@ require('packer').startup(function(use)
     --
     -- An alternative sudo.vim
     use {
-        'lambdalisue/suda.vim'
+        'lambdalisue/suda.vim',
+
+        config = function() require('plugins.suda') end
     }
 
     -- New files created with a shebang line are automatically made executable
     use {'tpope/vim-eunuch'}
 
     -- File manager
-    use {"kyazdani42/nvim-tree.lua"}
+    use {
+        "kyazdani42/nvim-tree.lua",
+        config = function() require('plugins.nvim-tree') end
+    }
 
     -- A neovim lua plugin to help easily manage multiple terminal windows
     use {
@@ -300,312 +312,10 @@ require('packer').startup(function(use)
             }
         end
     }
+
+    use {
+        "folke/todo-comments.nvim",
+        requires = "nvim-lua/plenary.nvim",
+        config = function() require('plugins.todo-comments') end
+    }
 end)
-
--- peekup
-g.peekup_open = '"'
-require('nvim-peekup.config').on_keystroke["paste_reg"] = "\""
-require('nvim-peekup.config').on_keystroke["delay"] = ''
-
--- barbar
-g.bufferline = {icons = 'both'}
-
--- suda
-g.suda_smart_edit = 1
-
---
--- nvim-tree
---
--- 0 by default, will not resize the tree when opening a file
-g.nvim_tree_width_allow_resize = 1
-
-local icons = require("nvim-nonicons")
-
-g.nvim_tree_icons = {
-    default = icons.get("file"),
-    symlink = icons.get("file-symlink"),
-    git = {
-        unstaged = "✗",
-        staged = "✓",
-        unmerged = "",
-        renamed = "➜",
-        untracked = "★",
-        deleted = "",
-        ignored = "◌"
-    },
-    folder = {
-        arrow_open = "",
-        arrow_closed = "",
-        default = icons.get("file-directory"),
-        open = icons.get("file-directory"),
-        empty = icons.get("file-directory-outline"),
-        empty_open = icons.get("file-directory-outline"),
-        symlink = icons.get("file-submodule"),
-        symlink_open = icons.get("file-submodule")
-    }
-}
-
--- compact folders that only contain a single folder into one node in the file
--- tree
-g.nvim_tree_group_empty = 1
-
--- shows indent markers when folders are open
-g.nvim_tree_indent_markers = 1
-
--- allows the cursor to be updated when entering a buffer
-g.nvim_tree_follow = 1
-
--- closes the tree when it's the last window
-g.nvim_tree_auto_close = true
-
---
--- lualine
---
-local function lsp_servers_status()
-    local clients = vim.lsp.buf_get_clients(0)
-    if vim.tbl_isempty(clients) then return "" end
-
-    local client_names = {}
-    for _, client in pairs(clients) do
-        table.insert(client_names, client.name)
-    end
-
-    return icons.get("zap") .. " " .. table.concat(client_names, "|")
-end
-
-local function lsp_messages()
-    local msgs = {}
-
-    for _, msg in ipairs(vim.lsp.util.get_progress_messages()) do
-        local content
-        if msg.progress then
-            content = msg.title
-            if msg.message then
-                content = content .. " " .. msg.message
-            end
-            if msg.percentage then
-                content = content .. " (" .. msg.percentage .. "%%)"
-            end
-        elseif msg.status then
-            content = msg.content
-            if msg.uri then
-                local filename = vim.uri_to_fname(msg.uri)
-                filename = fn.fnamemodify(filename, ":~:.")
-                local space = math.min(60, math.floor(0.6 * fn.winwidth(0)))
-                if #filename > space then
-                    filename = fn.pathshorten(filename)
-                end
-
-                content = "(" .. filename .. ") " .. content
-            end
-        else
-            content = msg.content
-        end
-
-        table.insert(msgs, "[" .. msg.name .. "] " .. content)
-    end
-
-    return table.concat(msgs, " | ")
-end
-
-local custom_onedark = require 'lualine.themes.onedark'
--- Change the background of lualine_c section for normal mode
-custom_onedark.normal.b.bg = '#282c34' -- rgb colors are supported
-custom_onedark.normal.c.bg = '#282c34' -- rgb colors are supported
-
-require'lualine'.setup {
-    options = {
-        theme = custom_onedark,
-        component_separators = {'', ''},
-        section_separators = {'', ''}
-    },
-    sections = {
-        lualine_a = {'mode'},
-        lualine_b = {{"branch", icon = ""}, {'filename', path = 1}},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {
-            {
-                lsp_messages, {
-                    "diagnostics",
-                    symbols = {
-                        error = icons.get("x-circle") .. " ",
-                        warn = icons.get("alert") .. " ",
-                        info = icons.get("info") .. " "
-                    },
-                    sources = {"nvim_lsp"}
-                }
-            }, {lsp_servers_status}, {
-                'encoding',
-                condition = function()
-                    -- when filencoding="" lualine would otherwise report utf-8 anyways
-                    return vim.bo.fileencoding and #vim.bo.fileencoding > 0 and
-                               vim.bo.fileencoding ~= 'utf-8'
-                end
-            }, {
-                'fileformat',
-                condition = function()
-                    return vim.bo.fileformat ~= 'unix'
-                end,
-                icons_enabled = false
-            }, {'filetype', icons_enabled = true}, {'progress'}
-        },
-        lualine_z = {{'location'}}
-    },
-    extensions = {"nvim-tree"}
-}
-
---
--- formatter
---
-local function prettier()
-    return {
-        exe = 'prettier',
-        args = {
-            '--stdin-filepath', vim.api.nvim_buf_get_name(0), '--single-quote'
-        },
-        stdin = true
-    }
-end
-
-local function shfmt()
-    return {exe = "shfmt", args = {'-sr', '-i 4', '-ci', '-s'}, stdin = true}
-end
-
-local function luaformat() return {exe = 'lua-format', stdin = true} end
-
-require"formatter".setup({
-    logging = false,
-    filetype = {
-        markdown = {prettier},
-        json = {prettier},
-        yaml = {prettier},
-        sh = {shfmt},
-        bash = {shfmt},
-        lua = {luaformat}
-    }
-})
-
---
--- Comments
---
--- Add spaces after comment delimiters
-g.NERDSpaceDelims = 1
-
-g.NERDCreateDefaultMappings = 0
-
--- Use compact syntax for prettified multi-line comments
-g.NERDCompactSexyComs = 1
-
--- Align line-wise comment delimiters flush left instead of following code
--- indentation
-g.NERDDefaultAlign = 'left'
-
--- Enable trimming of trailing whitespace when uncommenting
-g.NERDTrimTrailingWhitespace = 1
-
--- Allow commenting and inverting empty lines (useful when commenting a region)
-g.NERDCommentEmptyLines = 1
-
--- Enable NERDCommenterToggle to check all selected lines is commented or not
-g.NERDToggleCheckAllLines = 1
-
---
--- vim-better-whitespace
---
-g.better_whitespace_ctermcolor = ""
-g.better_whitespace_guicolor = ""
-g.better_whitespace_enabled = 0
-g.strip_only_modified_lines = 1
-g.strip_whitespace_confirm = 0
-g.strip_whitespace_on_save = 1
-
---
--- indent-blankline
---
-g.indent_blankline_char = '│'
-g.indent_blankline_use_treesitter = true
-g.indent_blankline_show_current_context = true
-g.indent_blankline_filetype_exclude = {'help', 'make'}
-g.indent_blankline_context_patterns = {
-    'class', 'function', 'method', 'while', 'closure', 'for'
-}
-g.indent_blankline_viewport_buffer = 50
-
---
--- snap
---
--- local snap = require("snap")
---
--- local git_file = snap.get"producer.git.file".args {
---     "--cached", "--others", "--exclude-standard"
--- }
---
--- local smart_file =
---     snap.get "consumer.try"(git_file, snap.get "producer.fd.file")
---
--- -- Defaults
--- local function create(config)
---     return snap.create(config, {
---         reverse = true,
---         mappings = {
---             ["next-page"] = {"<C-f>", "<PageDown>"},
---             ["prev-page"] = {"<C-b>", "<PageUp>"}
---         }
---     })
--- end
-
--- Files
--- snap.register.map("n", "<Space><Space>", create(function()
---     return {
---         producer = snap.get "consumer.fzf"(smart_file),
---         select = snap.get"select.file".select,
---         multiselect = snap.get"select.file".multiselect
---     }
--- end))
-
--- Grep
--- snap.register.map("n", "<Space>g", create(function()
---     return {
---         producer = snap.get "consumer.limit"(10000,
---                                              snap.get "producer.ripgrep.vimgrep"),
---         select = snap.get"select.vimgrep".select,
---         multiselect = snap.get"select.vimgrep".multiselect,
---         views = {snap.get "preview.vimgrep"}
---     }
--- end))
-
--- Old files
--- snap.register.map("n", "<Space>of", create(function()
---     return {
---         producer = snap.get "consumer.fzf"(snap.get "producer.vim.oldfile"),
---         select = snap.get"select.file".select,
---         multiselect = snap.get"select.file".multiselect,
---         views = {snap.get "preview.file"}
---     }
--- end))
-
--- Grep with post-filtering
--- Have missing files issues
--- snap.register.map("n", "<Space>g", create(function()
---     return {
---         producer = snap.get "consumer.limit"(10000,
---                                              snap.get "producer.ripgrep.vimgrep"),
---         steps = {
---             {consumer = snap.get "consumer.fzf", config = {prompt = "FZF>"}}
---         },
---         select = snap.get"select.file".select,
---         multiselect = snap.get"select.file".multiselect,
---         views = {snap.get "preview.file"}
---     }
--- end))
-
--- Vim help
--- snap.register.map("n", "<Space>h", create(function ()
---   return {
---     prompt = "Help>",
---     producer = snap.get"consumer.fzf"(snap.get"producer.vim.help"),
---     select = snap.get"select.help".select,
---     views = {snap.get"preview.help"},
---   }
--- end))
