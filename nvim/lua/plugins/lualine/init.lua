@@ -1,3 +1,5 @@
+local vim = vim
+local fn = vim.fn
 local icons = require("nvim-nonicons")
 
 local function lsp_servers_status()
@@ -47,14 +49,9 @@ local function lsp_messages()
     return table.concat(msgs, " | ")
 end
 
-local custom_onedark = require 'lualine.themes.onedark'
--- Change the background of lualine_c section for normal mode
-custom_onedark.normal.b.bg = '#282c34' -- rgb colors are supported
-custom_onedark.normal.c.bg = '#282c34' -- rgb colors are supported
-
 require'lualine'.setup {
     options = {
-        theme = custom_onedark,
+        theme = 'onedark',
         component_separators = {'', ''},
         section_separators = {'', ''}
     },

@@ -77,8 +77,8 @@ vimp.nnoremap('<leader>8', ':BufferGoto8<CR>')
 vimp.nnoremap('<leader>9', ':BufferGoto9<CR>')
 
 -- barbar buffer close still has some issues. Try later
-vimp.nnoremap('<leader>q', ':BufferClose<CR>')
--- nnoremap <silent> <leader>q :Bwipeout<CR>
+vimp.nnoremap('<leader>x', ':BufferClose<CR>')
+-- nnoremap <silent> <leader>x :Bwipeout<CR>
 
 --
 -- NvimTree
@@ -115,8 +115,8 @@ vimp.nnoremap("g#", "g#<cmd>lua require('hlslens').start()<CR>")
 vimp.nnoremap('<leader><leader>', ':Format<CR>')
 
 -- quickfix
--- vimp.nnoremap("<Leader>qc", ":cclose<CR>")
--- vimp.nnoremap("<Leader>qo", ":copen<CR>")
+vimp.nnoremap("<Leader>qc", ":cclose<CR>")
+vimp.nnoremap("<Leader>qo", ":copen<CR>")
 -- vimp.nnoremap("<Leader>qn", ":cnext<CR>")
 -- vimp.nnoremap("<Leader>qp", ":cprev<CR>")
 -- vimp.nnoremap("<Leader>qa", ":cc<CR>")

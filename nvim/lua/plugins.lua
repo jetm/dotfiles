@@ -2,8 +2,15 @@ require('packer').startup(function(use)
     -- Packer can manage itself
     use {'wbthomason/packer.nvim'}
 
-    use {'ii14/onedark.nvim'}
+    -- Vim version
     -- use 'joshdick/onedark.vim'
+    -- Coping joshdick
+    -- use {'ii14/onedark.nvim'}
+    -- More complete
+    use {
+        'navarasu/onedark.nvim',
+        config = function() require('onedark').setup() end
+    }
 
     -- Neovim plugin that allows you to easily write your .vimrc in lua or any lua based language
     use {'svermeulen/vimpeccable'}
@@ -22,7 +29,6 @@ require('packer').startup(function(use)
                 css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
                 css_fn = true -- Enable all CSS *functions*: rgb_fn, hsl_fn
             })
-
         end
     }
 
@@ -33,7 +39,7 @@ require('packer').startup(function(use)
     }
 
     -- Icons collections
-    use 'kyazdani42/nvim-web-devicons'
+    use {'kyazdani42/nvim-web-devicons'}
     -- Icon set using nonicons for neovim plugins and settings
     use {'yamatsum/nvim-nonicons'}
 
@@ -44,13 +50,14 @@ require('packer').startup(function(use)
         config = function()
 
             require("nvim-treesitter.configs").setup({
-                ensure_installed = {
-                    "bash", "c", "comment", "cpp", "dockerfile", "go", "json",
-                    "jsonc", "lua", "python", "regex", "yaml"
+                ensure_installed = "maintained",
+                highlight = {
+                    enable = true,
+                    use_languagetree = true
+                    -- disable = {"sh", "bash"}
                 },
-                -- Disabling highlight. Still has problems with shell and other languages
-                -- highlight = {enable = false, use_languagetree = true},
-                -- indent = {enable = true},
+                -- Still an experimental
+                indent = {enable = false},
                 rainbow = {
                     enable = true,
                     -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
@@ -313,9 +320,22 @@ require('packer').startup(function(use)
         end
     }
 
+    -- todo searcher
     use {
         "folke/todo-comments.nvim",
         requires = "nvim-lua/plenary.nvim",
         config = function() require('plugins.todo-comments') end
+    }
+
+    -- Create key bindings that stick. Displays a popup with possible
+    -- keybindings of the command you started typing
+    use {
+        "folke/which-key.nvim",
+        config = function()
+            require("which-key").setup {
+                -- your configuration comes here
+                -- or leave it empty to use the default settings
+            }
+        end
     }
 end)
