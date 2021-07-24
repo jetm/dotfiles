@@ -75,7 +75,13 @@ zinit light MichaelAquilina/zsh-you-should-use
 zi0a id-as'history-search-multi-word'
 zinit light zdharma/history-search-multi-word
 
-zi0a id-as'zsh-autocomplete'
+zi0a id-as'zsh-autocomplete' \
+  atinit"zstyle ':autocomplete:*' min-delay 0.4; \
+    zstyle ':autocomplete:*' min-input 2; \
+    zstyle ':autocomplete:*' fzf-completion yes; \
+    zstyle ':autocomplete:*' recent-dirs no; \
+    zle -A {.,}history-incremental-search-forward; \
+    zle -A {.,}history-incremental-search-backward"
 zinit light marlonrichert/zsh-autocomplete
 
 # Zinit pack is outdated and key-bindings doesn't work. Configuration is in
