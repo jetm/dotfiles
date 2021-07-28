@@ -210,4 +210,3 @@ vim.api.nvim_set_keymap("i", "<CR>", [[v:lua.completions()]], {expr = true})
 -- LSP
 --
 vimp.nnoremap('<leader>gt', ':LspTroubleToggle<CR>')
-

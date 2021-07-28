@@ -1,7 +1,7 @@
 #
 # Global Key Bindings
 #
-# Use cat > /dev/null to know the keybinding
+# Use cat -v > /dev/null to know the keybinding
 #
 
 # Ctrl+right => forward word
@@ -11,13 +11,7 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
 # Call fuck command-line
-bindkey '^[[1;5A' fuck-command-line
-
-# zsh-history-substring-search
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
-bindkey $key[Up] history-substring-search-up
-bindkey $key[down] history-substring-search-down
+# bindkey '^[[1;5A' fuck-command-line
 
 # Use Ctrl-Z to switch back to Vim
 fancy-ctrl-z () {

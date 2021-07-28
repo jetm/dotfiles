@@ -20,43 +20,26 @@ autoload -Uz _zinit
 
 ### End of Zinit's installer chunk
 
+#
+# Powerlevel10k
+#
+# Must be run just before zinit
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh
+zinit ice id-as'p10k' \
+  silent \
+  depth=1 \
+  reset-prompt \
+  nocd \
+  atload"!source ${HOME}/.p10k.zsh"
+zinit light romkatv/powerlevel10k
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+# typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+
 z_ice() { zinit ice lucid silent "$@" }
 zi0a() { z_ice wait'0' "$@" }
 zi0b() { z_ice wait'!0' "$@" }
 zi0c() { z_ice wait'!1' "$@" }
 zi0d() { z_ice wait'!2' "$@" }
-
-#
-# prezto plugins
-#
-# Required here before prezto are loaded
-load_PZT_mod() { z_ice; zinit snippet PZT::modules/$1 }
-
-zstyle ':prezto:*:*' case-sensitive 'yes'
-zstyle ':prezto:*:*' color 'yes'
-zstyle ':prezto:module:editor' key-bindings 'vi'
-zstyle ':prezto:module:editor' dot-expansion 'yes'
-zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa_home' 'swbuildn'
-load_PZT_mod helper/init.zsh
-load_PZT_mod environment
-load_PZT_mod editor
-load_PZT_mod ssh
-load_PZT_mod history
-load_PZT_mod completion
-
-#
-# Powerlevel10k
-#
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-zinit ice lucid nocd id-as'p10k' \
-  depth=1 \
-  atload"!source ${HOME}/.p10k.zsh"
-zinit light romkatv/powerlevel10k
-
-zinit ice depth=1 id-as'zsh-vi-mode' \
-  atload"ZVM_VI_SURROUND_BINDKEY=s-prefix; ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT"
-zinit light jeffreytse/zsh-vi-mode
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
@@ -66,23 +49,76 @@ zinit id-as'z-a-readurl' light-mode for zinit-zsh/z-a-readurl
 zinit id-as'z-a-gen-mod-node' light-mode for zinit-zsh/z-a-bin-gem-node
 zinit id-as'z-a-as-monitor' light-mode for zinit-zsh/z-a-as-monitor
 
-zi0a id-as'zsh-thefuck'
-zinit light laggardkernel/zsh-thefuck
+#
+# prezto plugins
+#
+# Required here before prezto is loaded
+load_PZT_mod() { z_ice; zinit snippet PZT::modules/$1 }
 
-zi0a id-as'zsh-you-should-use'
-zinit light MichaelAquilina/zsh-you-should-use
+zstyle ':prezto:*:*' case-sensitive 'yes'
+zstyle ':prezto:*:*' color 'yes'
+zstyle ':prezto:module:editor' key-bindings 'vi'
+zstyle ':prezto:module:editor' dot-expansion 'yes'
+zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa_home' 'swbuildn'
+zstyle ':prezto:module:prompt' theme 'off'
+load_PZT_mod helper/init.zsh
+load_PZT_mod environment
+load_PZT_mod editor
+load_PZT_mod ssh
+load_PZT_mod history
 
-zi0a id-as'history-search-multi-word'
+
+#
+# completion
+#
+zi0b id-as'zsh-autosuggestions' \
+  atload'!_zsh_autosuggest_start'
+zinit light zsh-users/zsh-autosuggestions
+
+zi0a id-as'zsh-completions' \
+  atload"zicompinit; zicdreplay"\
+  blockf
+zinit light zsh-users/zsh-completions
+
+zi0a id-as'zsh-abbrev-alias' \
+  atload"source ${HOME}/.zsh/zsh-abbr-alias.conf"
+zinit light momo-lab/zsh-abbrev-alias
+
+zi0b id-as'history-search-multi-word'
 zinit light zdharma/history-search-multi-word
 
-zi0a id-as'zsh-autocomplete' \
-  atinit"zstyle ':autocomplete:*' min-delay 0.4; \
-    zstyle ':autocomplete:*' min-input 2; \
-    zstyle ':autocomplete:*' fzf-completion yes; \
-    zstyle ':autocomplete:*' recent-dirs no; \
-    zle -A {.,}history-incremental-search-forward; \
-    zle -A {.,}history-incremental-search-backward"
-zinit light marlonrichert/zsh-autocomplete
+# use `cat -v` to define the map
+zi0b id-as'zsh-history-substring-search' \
+  atload"bindkey '^[[A' history-substring-search-up; \
+         bindkey '^[[B' history-substring-search-down"
+zinit light zsh-users/zsh-history-substring-search
+
+zi0b id-as'zsh-autopair'
+zinit light hlissner/zsh-autopair
+
+zi0c id-as'fpp' \
+  from"gh" \
+  as"program" \
+  nocompile \
+  atinit"sed -i 's/python3/python3.7/g' fpp" \
+  pick"fpp"
+zinit light facebook/pathpicker
+
+zi0c id-as'navi' \
+  from'gh-r' \
+  as'program' \
+  nocompile \
+  pick'navi' \
+  atload'eval "$(navi widget zsh)";'
+zinit light denisidoro/navi
+
+#
+# Navigation
+#
+zinit ice depth=1 id-as'zsh-vi-mode' \
+  atload"ZVM_VI_SURROUND_BINDKEY=s-prefix; \
+         ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT"
+zinit light jeffreytse/zsh-vi-mode
 
 # Zinit pack is outdated and key-bindings doesn't work. Configuration is in
 # key-bindings.zsh file
@@ -90,6 +126,7 @@ zi0c id-as'fzf' \
   from"gh-r" \
   as"program" \
   has"fd" \
+  nocompile \
   bpick"*linux_amd64*"
 zinit light junegunn/fzf
 
@@ -99,64 +136,66 @@ zinit snippet 'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zs
 # zi0b id-as'fzf-tab'
 # zinit light Aloxaf/fzf-tab
 
-zi0b id-as'zsh-autosuggestions'
-zinit light zsh-users/zsh-autosuggestions
+zi0c id-as'zoxide' \
+  from"gh-r" \
+  as"command" \
+  mv"zoxide* -> zoxide" \
+  nocompile \
+  bpick"*x86_64-unknown-linux*" \
+  pick"zoxide/zoxide" \
+  atload"source <(zoxide init zsh)"
+zinit light ajeetdsouza/zoxide
 
-zi0b id-as'zsh-history-substring-search'
-zinit light zsh-users/zsh-history-substring-search
+# Too slow. Seems has conflict with other plugins
+# It brings back live history, even when it's disabled
+# zi0a id-as'zsh-autocomplete' \
+#   atinit"zstyle ':autocomplete:*' min-delay 0.4; \
+#     zstyle ':autocomplete:*' min-input 2; \
+#     zstyle ':autocomplete:*' fzf-completion yes; \
+#     zstyle ':autocomplete:*' recent-dirs no"
+# zinit light marlonrichert/zsh-autocomplete
 
-zi0b id-as'zsh-abbrev-alias' \
-  atload"source ${HOME}/.zsh/zsh-abbr-alias.conf"
-zinit light momo-lab/zsh-abbrev-alias
+# Disable live history. Better using history-search-multi-word and fzf
+# zle -A {.,}history-incremental-search-forward
+# zle -A {.,}history-incremental-search-backward
 
-zi0b id-as'zsh-autopair'
-zinit light hlissner/zsh-autopair
+# Forgot to use it
+# zi0a id-as'zsh-thefuck'
+# zinit light laggardkernel/zsh-thefuck
 
-zi0c id-as'fast-syntax-highlighting'
+# Forgot to use it
+# zi0a id-as'zsh-you-should-use'
+# zinit light MichaelAquilina/zsh-you-should-use
+
+#
+# CLI Highlight & Colors
+#
+zi0c id-as'fast-syntax-highlighting' \
+  atinit'ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay'
 zinit light zdharma/fast-syntax-highlighting
 
 zi0c id-as'zsh-ls-color'
 zinit light xPMo/zsh-ls-colors
 
-zi0c id-as'git-reauthor' \
-  as'command' \
-  pick'bin/git-reauthor'
-zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-reauthor
-
-zi0c id-as'git-squash' \
-  as'command' \
-  pick'bin/git-squash'
-zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-squash
-
-zi0c id-as'git-undo' \
-  as'command' \
-  pick'bin/git-undo'
-zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-undo
-
-zi0c id-as'git-reset-file' \
-  as'command' \
-  pick'bin/git-reset-file'
-zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-reset-file
-
+#
+# Diff
+#
 zi0c id-as'delta' \
   from'gh-r' \
   as'command' \
+  nocompile \
   bpick"$PICK" \
   pick'delta/delta' \
   mv'delta* -> delta'
 zinit light dandavison/delta
 
-zi0c id-as'shellcheck' \
-  from'gh-r' \
-  as'program' \
-  bpick'*linux.x86_64*' \
-  mv'shellcheck-*/shellcheck -> shellcheck' \
-  sbin'shellcheck'
-zinit light koalaman/shellcheck
-
+#
+# Cheatsheet
+#
 zi0c id-as'tldr' \
   from'gh-r' \
   as'program' \
+  nocompile \
   bpick'*linux-x86_64-musl*' \
   mv'tldr-* -> tldr' \
   sbin'tldr*'
@@ -171,6 +210,7 @@ zinit snippet https://github.com/dbrgn/tealdeer/blob/master/zsh_tealdeer
 zi0c id-as'cht.sh' \
   as'command' \
   has'rlwrap' \
+  nocompile \
   pick'cht.sh' \
   atload'export CHTSH="$XDG_CONFIG_HOME"'
 zinit snippet https://cht.sh/:cht.sh
@@ -189,37 +229,57 @@ zinit id-as'hacker-laws-cli' \
   pick'hacker-laws-cli' \
   for @umutphp/hacker-laws-cli
 
-zi0c id-as'forgit' \
-  atinit'export FORGIT_NO_ALIASES=1'
-zinit light wfxr/forgit
+#
+# Shell scripting
+#
+zi0c id-as'shellharden' \
+  from'gh-r' \
+  as'program' \
+  nocompile \
+  bpick'*x86_64-linux-gnu*' \
+  mv'shellharden-* -> shellharden' \
+  sbin'shellharden*'
+zinit light anordal/shellharden
 
-zi0c id-as'git-interactive-rebase-tool' \
-  ver'2.1.0' \
+zi0c id-as'shellcheck' \
+  from'gh-r' \
+  as'program' \
+  nocompile \
+  bpick'*linux.x86_64*' \
+  mv'shellcheck-*/shellcheck -> shellcheck' \
+  sbin'shellcheck'
+zinit light koalaman/shellcheck
+
+zi0c id-as'shfmt' \
+  from'gh-r' \
+  as'program' \
+  mv'shfmt* -> shfmt'
+zinit light mvdan/sh
+
+#
+# File utilities
+#
+zi0c id-as'dust' \
+  from'gh-r' \
+  as'program' \
+  nocompile \
+  bpick'*linux*gnu*' \
+  pick'dust*/dust' \
+  mv'dust* -> dust'
+zinit light bootandy/dust
+
+zi0c id-as'fd' \
+  from'gh-r' \
   as'command' \
-  rustup cargo'!git-interactive-rebase-tool' \
-  pick'bin/interactive-rebase-tool'
-zinit light MitMaro/git-interactive-rebase-tool
+  nocompile \
+  pick'fd/fd' \
+  mv'fd* -> fd'
+zinit light sharkdp/fd
 
-zi0c id-as'zoxide' \
+zi0a id-as"exa" \
   from"gh-r" \
-  as"command" \
-  mv"zoxide* -> zoxide" \
-  bpick"*x86_64-unknown-linux*" \
-  pick"zoxide/zoxide" \
-  atload"source <(zoxide init zsh)"
-zinit light ajeetdsouza/zoxide
-
-zi0c id-as'fpp' \
-  from"gh" \
   as"program" \
   nocompile \
-  atinit"sed -i 's/python3/python3.7/g' fpp" \
-  pick"fpp"
-zinit light facebook/pathpicker
-
-zi0c id-as"exa" \
-  from"gh-r" \
-  as"program" \
   pick'bin/exa' \
   mv"completions/_exa -> _exa"
 zinit light ogham/exa
@@ -231,9 +291,28 @@ zi0c id-as'sd' \
   sbin'sd*'
 zinit light chmln/sd
 
+zi0c id-as'bat' \
+  from'gh-r' \
+  as'command' \
+  nocompile \
+  pick'bat/bat' \
+  mv'bat* -> bat'
+zinit light sharkdp/bat
+
+zi0c id-as'duf' \
+  from'gh-r' \
+  nocompile \
+  bpick'*linux_x86_64.tar.gz' \
+  as'command'
+zinit light muesli/duf
+
+#
+# jq parsing
+#
 zi0c id-as'jq' \
   from'gh-r'  \
   as'program'  \
+  nocompile \
   bpick'*linux64' \
   mv'jq-* -> jq'
 zinit load stedolan/jq
@@ -244,31 +323,67 @@ zi0c id-as'fx' \
   mv'fx* -> fx'
 zinit light antonmedv/fx
 
-zi0c id-as'hss' \
-  from'gh-r' \
-  as'program' \
-  mv'hss-Linux-x86_64 -> hss'
-zinit light six-ddc/hss
-
-zi0c id-as'bat' \
-  from'gh-r' \
-  as'command' \
-  pick'bat/bat' \
-  mv'bat* -> bat'
-zinit light sharkdp/bat
-
-zi0c id-as'duf' \
-  from'gh-r' \
-  bpick'*linux_x86_64.tar.gz' \
-  as'command'
-zinit light muesli/duf
-
+#
+# Monitoring
+#
 zi0c id-as'htop' \
   as"program" \
   atclone"./autogen.sh && ./configure && make && \\
     ln -sf ${HOME}/.zinit/plugins/hishamhm---htop/htop.1.in ${HOME}/.zinit/man/man1" \
-  atpull"%atclone" pick"htop"
+  atpull"%atclone" \
+  pick"htop"
 zinit light hishamhm/htop
+
+#
+# Grepping
+#
+zi0c id-as'ripgrep' \
+  from'gh-r' \
+  as'program' \
+  nocompile \
+  atclone"mv rg/doc/rg.1 $ZPFX/man/man1" \
+  mv'ripgrep* -> rg' \
+  pick'rg/rg'
+zinit light BurntSushi/ripgrep
+
+zi0c id-as'ugrep' \
+  as'program' \
+  atclone"./build.sh --prefix=$ZPFX" \
+  atpull'%atclone' \
+  make'install'
+zinit light Genivia/ugrep
+
+#
+# Editor
+#
+
+# Release 0.5.0
+zi0c id-as'nvim' \
+  ver'v0.5.0' \
+  as'program' \
+  make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
+  atload'export EDITOR="nvim"'
+zinit light neovim/neovim
+
+zi0c id-as'glow' \
+  from'gh-r' \
+  as'program' \
+  nocompile \
+  bpick'*linux_x86_64.tar.gz' \
+  pick'glow'
+zinit light charmbracelet/glow
+
+#
+# File managers
+#
+zi0c id-as'ranger' \
+  from'gh' \
+  as'program' \
+  depth'1' \
+  nocompile \
+  pick'ranger.py' \
+  atload'alias ranger=ranger.py'
+zinit light ranger/ranger
 
 zi0c id-as'nnn' \
   from'github' \
@@ -281,28 +396,84 @@ zinit light jarun/nnn
 zi0c id-as'broot' \
   from'gh-r' \
   as'program' \
+  nocompile \
   pick'build/x86_64-unknown-linux-musl/broot' \
   ver'latest'
 zinit light Canop/broot
 
-zi0c id-as'navi' \
+#
+# Build tools
+#
+zi0c id-as'ninja' \
   from'gh-r' \
-  as'program' \
-  pick'navi' \
-  atload'eval "$(navi widget zsh)";'
-zinit light denisidoro/navi
+  as'command' \
+  nocompile \
+  bpick'*linux*' \
+  pick'ninja'
+zinit light ninja-build/ninja
 
-zi0c id-as'glow' \
+#
+# Language servers
+#
+zi0c id-as'efm' \
   from'gh-r' \
+  as'command' \
+  nocompile \
+  bpick'*linux_amd64*' \
+  mv"*/efm-langserver -> ${ZPFX}/bin/efm-langserver"
+zinit light mattn/efm-langserver
+
+zi0c id-as'lua-language-server' \
   as'program' \
-  bpick'*linux_x86_64.tar.gz' \
-  pick'glow'
-zinit light charmbracelet/glow
+  atclone"git submodule update --init --recursive; \
+          ninja -C 3rd/luamake -f compile/ninja/linux.ninja; \
+          ./3rd/luamake/luamake rebuild;" \
+  atpull'%atclone'
+zinit light sumneko/lua-language-server
+
+#
+# Git utilities
+#
+zi0c id-as'forgit' \
+  atinit'export FORGIT_NO_ALIASES=1'
+zinit light wfxr/forgit
+
+zi0c id-as'git-reauthor' \
+  as'command' \
+  nocompile \
+  pick'bin/git-reauthor'
+zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-reauthor
+
+zi0c id-as'git-squash' \
+  as'command' \
+  nocompile \
+  pick'bin/git-squash'
+zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-squash
+
+zi0c id-as'git-undo' \
+  as'command' \
+  nocompile \
+  pick'bin/git-undo'
+zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-undo
+
+zi0c id-as'git-reset-file' \
+  as'command' \
+  nocompile \
+  pick'bin/git-reset-file'
+zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-reset-file
+
+zi0c id-as'git-interactive-rebase-tool' \
+  ver'2.1.0' \
+  as'command' \
+  rustup cargo'!git-interactive-rebase-tool' \
+  pick'bin/interactive-rebase-tool'
+zinit light MitMaro/git-interactive-rebase-tool
 
 zi0c id-as'git-lfs' \
   from'gh-r' \
   as'program' \
   has'git' \
+  nocompile \
   bpick'*linux-amd64*' \
   atclone"PREFIX=$ZPFX ./install.sh; \
     rm -f ./install.sh ./*.md; \
@@ -310,59 +481,9 @@ zi0c id-as'git-lfs' \
     rm -rf ./man"
 zinit light git-lfs/git-lfs
 
-zi0c id-as'shellharden' \
-  from'gh-r' \
-  as'program' \
-  bpick'*x86_64-linux-gnu*' \
-  mv'shellharden-* -> shellharden' \
-  sbin'shellharden*'
-zinit light anordal/shellharden
-
-zi0c id-as'dust' \
-  from'gh-r' \
-  as'program' \
-  bpick'*linux*gnu*' \
-  pick'dust*/dust' \
-  mv'dust* -> dust'
-zinit light bootandy/dust
-
-zi0c id-as'shfmt' \
-  from'gh-r' \
-  as'program' \
-  mv'shfmt* -> shfmt'
-zinit light mvdan/sh
-
-zi0c id-as'ranger' \
-  from'gh' \
-  as'program' \
-  depth'1' \
-  pick'ranger.py' \
-  atload'alias ranger=ranger.py'
-zinit light ranger/ranger
-
-zi0c id-as'fd' \
-  from'gh-r' \
-  as'command' \
-  pick'fd/fd' \
-  mv'fd* -> fd'
-zinit light sharkdp/fd
-
-zi0c id-as'ripgrep' \
-  from'gh-r' \
-  as'program' \
-  mv'ripgrep* -> rg' \
-  atclone"mv rg/doc/rg.1 $ZPFX/man/man1" \
-  pick'rg/rg'
-zinit light BurntSushi/ripgrep
-
-zi0c id-as'ugrep' \
-  as'program' \
-  nocompile \
-  atclone"./build.sh --prefix=$ZPFX" \
-  atpull'%atclone' \
-  make'install'
-zinit light Genivia/ugrep
-
+#
+# Parallel processing
+#
 zinit id-as'parallel' \
   as'program' \
   nocompile \
@@ -371,36 +492,12 @@ zinit id-as'parallel' \
   make'install' \
   for https://ftp.gnu.org/gnu/parallel/parallel-latest.tar.bz2
 
-# Release 0.5.0
-zi0c id-as'nvim' \
-  ver'v0.5.0' \
-  as'program' \
-  make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
-  atload'export EDITOR="nvim"'
-zinit light neovim/neovim
-
-zi0c id-as'efm' \
+# interactive parallel ssh client
+zi0c id-as'hss' \
   from'gh-r' \
-  as'command' \
-  bpick'*linux_amd64*' \
-  mv"*/efm-langserver -> ${ZPFX}/bin/efm-langserver"
-zinit light mattn/efm-langserver
-
-zi0c id-as'ninja' \
-  from'gh-r' \
-  as'command' \
-  bpick'*linux*' \
-  pick'ninja'
-zinit light ninja-build/ninja
-
-zi0c id-as'lua-language-server' \
   as'program' \
-  nocompile \
-  atclone"git submodule update --init --recursive; \
-          ninja -C 3rd/luamake -f compile/ninja/linux.ninja; \
-          ./3rd/luamake/luamake rebuild;" \
-  atpull'%atclone'
-zinit light sumneko/lua-language-server
+  mv'hss-Linux-x86_64 -> hss'
+zinit light six-ddc/hss
 
 # zi0c id-as'difftastic' \
 #   cargo'!difftastic'
