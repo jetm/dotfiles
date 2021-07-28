@@ -328,11 +328,11 @@ zinit light antonmedv/fx
 #
 zi0c id-as'htop' \
   as"program" \
-  atclone"./autogen.sh && ./configure && make && \\
-    ln -sf ${HOME}/.zinit/plugins/hishamhm---htop/htop.1.in ${HOME}/.zinit/man/man1" \
+  ver'3.0.5' \
+  atclone"./autogen.sh && ./configure --enable-delayacct && make htop" \
   atpull"%atclone" \
   pick"htop"
-zinit light hishamhm/htop
+zinit light htop-dev/htop
 
 #
 # Grepping
