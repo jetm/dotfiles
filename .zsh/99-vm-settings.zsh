@@ -22,10 +22,4 @@ if [[ $(lsb_release -i) = *Ubuntu* ]]; then
   # unalias bb
 fi
 
-# lazy loading
-rbenv() {
-  eval "$(command rbenv init - zsh)"
-  rbenv "$@"
-}
-
 # vim:set ts=2 sw=2 et:

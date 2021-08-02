@@ -14,74 +14,106 @@ if [[ ! -f ${HOME}/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
-source "${HOME}/.zinit/bin/zinit.zsh"
+turbo_source() {
+  file="$1"
+  if [[ -e "$file" ]] && [[ ! -e "$file.zwc" ]] \
+     || [[ "$file" -nt "$file.zwc" ]]; then
+    zcompile "$file"
+  fi
+  source "$file"
+}
+
+turbo_source "${HOME}/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of Zinit's installer chunk
 
+#
+# Powerlevel10k
+#
+# Must be run just after zinit
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh
+zinit ice id-as'p10k' \
+  silent \
+  depth=1
+zinit light romkatv/powerlevel10k
+
 z_ice() { zinit ice lucid silent "$@" }
 zi0a() { z_ice wait'0' "$@" }
-zi0b() { z_ice wait'!0' "$@" }
-zi0c() { z_ice wait'!1' "$@" }
-zi0d() { z_ice wait'!2' "$@" }
+zi0b() { z_ice wait'1' "$@" }
+zi0c() { z_ice wait'2' "$@" }
+
+#
+# prezto plugins
+#
+# zinit internal load prezto module is too slow
+z_ice id-as'prezto' \
+  depth=1 \
+  cloneonly \
+  atpull"%atclone" \
+  nocompile \
+  nocd
+zinit light sorin-ionescu/prezto
+
+load_prezto_mod() { turbo_source "$ZINIT[PLUGINS_DIR]/prezto/modules/$1/init.zsh"; }
+
+# Required here before prezto is loaded
+zstyle ':prezto:*:*' case-sensitive 'yes'
+zstyle ':prezto:*:*' color 'yes'
+zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa_home' 'swbuildn'
+load_prezto_mod helper
+load_prezto_mod environment
+load_prezto_mod ssh
+load_prezto_mod history
+load_prezto_mod utility
+# requires utility
+load_prezto_mod completion
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit id-as'z-a-rust' light-mode for zinit-zsh/z-a-rust
 zinit id-as'z-a-readurl' light-mode for zinit-zsh/z-a-readurl
-# zinit id-as'z-a-path-dl' light-mode for zinit-zsh/z-a-patch-dl
+zinit id-as'z-a-path-dl' light-mode for zinit-zsh/z-a-patch-dl
 # zinit id-as'z-a-gen-mod-node' light-mode for zinit-zsh/z-a-bin-gem-node
 # zinit id-as'z-a-as-monitor' light-mode for zinit-zsh/z-a-as-monitor
 
 #
-# prezto plugins
-#
-load_PZT_mod() { zinit snippet PZT::modules/$1; }
-
-# Required here before prezto is loaded
-zstyle ':prezto:*:*' case-sensitive 'yes'
-zstyle ':prezto:*:*' color 'yes'
-zstyle ':prezto:module:editor' key-bindings 'vi'
-zstyle ':prezto:module:editor' dot-expansion 'yes'
-zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa_home' 'swbuildn'
-zstyle ':prezto:module:prompt' theme 'off'
-load_PZT_mod helper/init.zsh
-load_PZT_mod environment
-load_PZT_mod editor
-load_PZT_mod ssh
-load_PZT_mod history
-load_PZT_mod utility
-load_PZT_mod completion
-
-#
 # completion
 #
-zi0b id-as'zsh-autosuggestions' \
-  atload'!_zsh_autosuggest_start'
+zi0a id-as'zsh-autosuggestions'
 zinit light zsh-users/zsh-autosuggestions
 
+# Extra completion no required
 # zi0a id-as'zsh-completions' \
 #   atload"zicompinit; zicdreplay"\
 #   blockf
 # zinit light zsh-users/zsh-completions
 
-zi0a id-as'zsh-abbrev-alias' \
-  compile"${HOME}/.zsh/zsh-abbr-alias.conf" \
-  atload"source ${HOME}/.zsh/zsh-abbr-alias.conf"
-zinit light momo-lab/zsh-abbrev-alias
+# zsh-expand is quicker than zsh-abbrev-alias
+zi0a id-as'zsh-expand'
+zinit light MenkeTechnologies/zsh-expand
 
-zi0b id-as'history-search-multi-word'
-zinit light zdharma/history-search-multi-word
+# zi0a id-as'zsh-abbrev-alias'
+# zinit light momo-lab/zsh-abbrev-alias
+
+# Replace by fzf. Conflict with Ctrl-R
+# zi0b id-as'history-search-multi-word'
+# zinit light zdharma/history-search-multi-word
 
 # use `cat -v` to define the map
-zi0b id-as'zsh-history-substring-search' \
+zi0a id-as'zsh-history-substring-search' \
   atload"bindkey '^[[A' history-substring-search-up; \
          bindkey '^[[B' history-substring-search-down"
 zinit light zsh-users/zsh-history-substring-search
 
-zi0b id-as'zsh-autopair'
+# Quicker doing manual initialization
+zi0b id-as'zsh-autopair' \
+  atinit'AUTOPAIR_INHIBIT_INIT=1;'
 zinit light hlissner/zsh-autopair
+turbo_source "$ZINIT[PLUGINS_DIR]/zsh-autopair/autopair.zsh"
+autopair-init
 
+# replaced by tmux-fingers
 # zi0c id-as'fpp' \
 #   from"gh" \
 #   as"program" \
@@ -101,23 +133,20 @@ zinit light hlissner/zsh-autopair
 #
 # Navigation
 #
-zi0a id-as'zsh-vi-mode' \
+z_ice id-as'zsh-vi-mode' \
   depth=1
 zinit light jeffreytse/zsh-vi-mode
 ZVM_VI_SURROUND_BINDKEY=s-prefix
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 
-# Zinit pack is outdated and key-bindings doesn't work. Configuration is in
-# key-bindings.zsh file
 zi0c id-as'fzf' \
   from"gh-r" \
   as"command" \
   has"fd" \
+  dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh' \
+  src'key-bindings.zsh' \
   bpick"*linux_amd64*"
 zinit light junegunn/fzf
-
-zi0c id-as'fzf-key-bindings'
-zinit snippet 'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
 
 # zi0b id-as'fzf-tab'
 # zinit light Aloxaf/fzf-tab
@@ -128,7 +157,7 @@ zi0c id-as'zoxide' \
   mv"zoxide* -> zoxide" \
   bpick"*x86_64-unknown-linux*" \
   pick"zoxide/zoxide" \
-  atload"source <(zoxide init zsh)"
+  atload'eval "$(zoxide init zsh)";'
 zinit light ajeetdsouza/zoxide
 
 # Help to remember alias
@@ -144,7 +173,7 @@ zinit light ajeetdsouza/zoxide
 #     zstyle ':autocomplete:*' recent-dirs no"
 # zinit light marlonrichert/zsh-autocomplete
 
-# Disable live history. Better using history-search-multi-word and fzf
+# Disable live history. Better using fzf
 # zle -A {.,}history-incremental-search-forward
 # zle -A {.,}history-incremental-search-backward
 
@@ -155,8 +184,18 @@ zinit light ajeetdsouza/zoxide
 #
 # CLI Highlight & Colors
 #
-zi0c id-as'zsh-syntax-highlighting'
+# zsh-syntax-highlighting is quicker than fast-syntax-highlighting
+# atinit'ZSH_HIGHLIGHT_HIGHLIGHTERS=();'
+zi0c id-as'zsh-syntax-highlighting' \
+  depth=1 \
+  cloneonly \
+  atpull"%atclone" \
+  nocompile \
+  nocd
 zinit light zsh-users/zsh-syntax-highlighting
+
+# zi0a id-as'fast-syntax-highlighting'
+# zinit light zdharma/fast-syntax-highlighting
 
 #
 # Diff
@@ -180,32 +219,12 @@ zi0c id-as'tldr' \
   sbin'tldr*'
 zinit light dbrgn/tealdeer
 
-# zi0b id-as'tldr-completion' \
-#   has'tldr' \
-#   mv'tldr* -> _tldr' \
-#   as'completion'
-# zinit snippet https://github.com/dbrgn/tealdeer/blob/master/zsh_tealdeer
-
 zi0c id-as'cht.sh' \
   as'command' \
   has'rlwrap' \
   pick'cht.sh' \
   atload'export CHTSH="$XDG_CONFIG_HOME"'
 zinit snippet https://cht.sh/:cht.sh
-
-# zi0b id-as'cht-completion' \
-#   as'completion' \
-#   has'rlwrap' \
-#   mv'cht* -> _cht' \
-# zinit snippet https://cheat.sh/:zsh
-
-# zinit id-as'hacker-laws-cli' \
-#   as'program' \
-#   nocompile \
-#   atclone'go build' \
-#   atpull'%atclone' \
-#   pick'hacker-laws-cli' \
-#   for @umutphp/hacker-laws-cli
 
 #
 # Shell scripting
@@ -286,7 +305,7 @@ zinit light muesli/duf
 #   nocompile \
 #   bpick'*linux64' \
 #   mv'jq-* -> jq'
-# zinit load stedolan/jq
+# zinit light stedolan/jq
 #
 # zi0c id-as'fx' \
 #   from'gh-r' \
@@ -402,8 +421,11 @@ zinit light sumneko/lua-language-server
 # Git utilities
 #
 zi0c id-as'forgit' \
-  as"program" \
-  atinit'export FORGIT_NO_ALIASES=1'
+  depth=1 \
+  cloneonly \
+  atpull"%atclone" \
+  nocompile \
+  nocd
 zinit light wfxr/forgit
 
 zi0c id-as'git-fuzzy' \
@@ -471,15 +493,6 @@ zinit light six-ddc/hss
 #   cargo'!difftastic'
 # zinit light wilfred/difftastic
 
-# no good integration with zsh-autocomplete
-# zi0c id-as'mcfly' \
-#   from"gh-r" \
-#   as"command" \
-#   bpick"*x86_64-unknown-linux*" \
-#   pick"mcfly" \
-#   atload"export MCFLY_KEY_SCHEME=vim MCFLY_FUZZY=true; source <(mcfly init zsh)"
-# zinit light cantino/mcfly
-
 if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zinit pack for zsh
 
@@ -492,45 +505,12 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     dlink"/git/git/archive/refs/tags/v%VERSION%.zip" \
     for https://github.com/git/git/releases/
 
-  install_asdf_plugins() {
-    # # https://github.com/asdf-vm/asdf-nodejs
-    # nodejs \
-    # issues with nodejs binaries are not found
-    # export ASDF_NPM_DEFAULT_PACKAGES_FILE="$ASDF_DATA_DIR/npm-packages"; \
-    # export NODEJS_CONFIGURE_OPTIONS="prefix=/users/tiamarin/.asdf/npm-packages ";' \
-    local plugins_list_to_install=( \
-      # https://github.com/asdf-vm/asdf-ruby.git
-      ruby \
-      # https://github.com/code-lever/asdf-rust
-      rust \
-      # https://github.com/kennyp/asdf-golang
-      golang \
-      # https://github.com/Stratus3D/asdf-lua.git
-      lua
-    )
-    local installed_plugins=$(asdf plugin list)
-    for plugin in $plugins_list_to_install; do
-      if [[ "$installed_plugins" != *"$plugin"* ]]; then
-        command asdf plugin add $plugin
-        print -P "%F{blue}Added plugin for %K{white} $plugin %k and now installing the latest version...%f"
-        if [[ "$plugin" == "nodejs" ]]; then
-          bash -c "$ASDF_DATA_DIR/plugins/nodejs/bin/import-release-team-keyring"
-        fi
-        command asdf install $plugin latest
-        command asdf global $plugin latest
-        command asdf reshim $plugin
-        print -P "%F{green}Finished installing the lastest version with asdf %K{white} $plugin %k%f."
-      fi
-    done
-  }
-
-  zi0c id-as"asdf" \
+  # look for 70-asdf.zsh configuration file
+  zi0a id-as"asdf" \
     atinit'export ASDF_DATA_DIR="$HOME/.asdf"; \
-      export ASDF_CONFIG_FILE="$ASDF_DATA_DIR/.asdfrc";' \
-    compile"asdf.sh" \
-    src"asdf.sh" \
-    atload'install_asdf_plugins; unfunction install_asdf_plugins'
+      export ASDF_CONFIG_FILE="$ASDF_DATA_DIR/.asdfrc";'
   zinit light asdf-vm/asdf
+  turbo_source "$ZINIT[PLUGINS_DIR]/asdf/asdf.sh"
 
   # zinit id-as"cargo-completion" \
   #   has'cargo' \
@@ -549,14 +529,6 @@ fi
 #   depth"1" \
 #   blockf
 # zinit light yuki-yano/zeno.zsh
-
-# Replaced by exa
-# zinit id-as'lsd' \
-#   from'gh-r' \
-#   as'program' \
-#   mv'lsd* -> lsd' \
-#   pick'lsd/lsd' \
-#   for @Peltoche/lsd
 
 # zi0c id-as'grex' \
 #   from'gh-r' \
@@ -585,34 +557,29 @@ fi
 #   has'zui'
 # zinit light zinit-zsh/zinit-console
 
-compile_and_source() {
-  file="$1"
-  if [[ -e "$file" ]] && [[ ! -e "$file.zwc" ]] \
-     || [[ "$file" -nt "$file.zwc" ]]; then
-    zcompile "$file"
-  fi
-  source "$file"
-}
-
+#
+# Put most source here to improve zsh load speed
+#
 # extensions dotfiles
 for file in ${HOME}/.zsh/*.zsh; do
-  compile_and_source "${file}"
+  turbo_source "${file}"
 done
 unset file
 
-#
-# Powerlevel10k
-#
-# Must be run just before zinit
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh
-zinit ice id-as'p10k' \
-  silent \
-  depth=1 \
-  nocd \
-  compile"${HOME}/.p10k.zsh" \
-  atload"source ${HOME}/.p10k.zsh"
-zinit light romkatv/powerlevel10k
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-# typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+# Soure here because doing source inside of zinit is slow
+turbo_source ${HOME}/.p10k.zsh
+
+export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+turbo_source "$ZINIT[PLUGINS_DIR]/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+export FORGIT_NO_ALIASES=1
+turbo_source "$ZINIT[PLUGINS_DIR]/forgit/forgit.plugin.sh"
+
+unset turbo_source
+unset load_prezto_mod
+unset z_ice
+unset zi0a
+unset zi0b
+unset zi0c
 
 # vim:set ts=2 sw=2 et:

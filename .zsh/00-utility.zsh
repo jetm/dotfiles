@@ -61,22 +61,6 @@ aurgen() {
   fi
 }
 
-# `quote` - pick a random quote from http://www.quotationspage.com/
-# https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/rand-quote/rand-quote.plugin.zsh
-quote() {
-  emulate -L zsh
-  # make the GET request and extract the output
-  request=$(curl -s --connect-timeout 2 "http://www.quotationspage.com/random.php" \
-    | iconv -c -f ISO-8859-1 -t UTF-8 \
-    | grep -m 1 "dt ")
-  sentence=$(echo "$request" | sed -e 's/<\/dt>.*//g' -e 's/.*html//g' -e 's/^[^a-zA-Z]*//' -e 's/<\/a..*$//g')
-  author=$(echo "$request" | sed -e 's/.*\/quotes\///g' -e 's/<.*//g' -e 's/.*">//g')
-  # if request sucessfull, print it
-  if [[ -n "$author" && -n "$sentence" ]]; then
-    print "${sentence}\n\n-- [${author}]"
-  fi
-}
-
 # Colorize the `man` pages
 # https://www.howtogeek.com/683134/how-to-display-man-pages-in-color-on-linux/
 function man() {
@@ -112,21 +96,6 @@ where() {
   else
     print -P '%F{red}The command "$1" does not exist!%f'
   fi
-}
-
-# `palette` - print palette and color codes (for percentage expansion)
-palette() {
-  local colors
-  if [[ $1 == "background" || $1 == "bg" ]]; then
-    for n in {000..255}; do
-      colors+=("%K{$n}   %k%F{$n}$n%f")
-    done
-  else
-    for n in {000..255}; do
-      colors+=("%F{$n}$n%f")
-    done
-  fi
-  print -Pc $colors
 }
 
 # `where_zsh` - find the mentioned word ($1) anywhere in Zsh configuration

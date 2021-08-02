@@ -23,9 +23,6 @@ setopt NO_NOMATCH
 # Now we can pipe to multiple outputs!
 setopt MULTIOS
 
-# Make Vi mode transitions faster (KEYTIMEOUT is in hundredths of a second)
-export KEYTIMEOUT=1
-
 #
 # Less
 #
@@ -40,5 +37,3 @@ export LESS='-F -g -i -M -R -S -w -X -z-4'
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
-
-export EDITOR=nvim
