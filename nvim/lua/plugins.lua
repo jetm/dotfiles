@@ -40,6 +40,7 @@ require('packer').startup(function(use)
 
     -- Icons collections
     use {'kyazdani42/nvim-web-devicons'}
+
     -- Icon set using nonicons for neovim plugins and settings
     use {'yamatsum/nvim-nonicons'}
 
@@ -66,7 +67,7 @@ require('packer').startup(function(use)
             })
         end
     }
-    use {'nvim-treesitter/nvim-treesitter-textobjects'}
+
     use {"romgrk/nvim-treesitter-context"}
 
     --

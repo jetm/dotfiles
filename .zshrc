@@ -89,12 +89,15 @@ zinit light zsh-users/zsh-autosuggestions
 #   blockf
 # zinit light zsh-users/zsh-completions
 
-# zsh-expand is quicker than zsh-abbrev-alias
-zi0a id-as'zsh-expand'
-zinit light MenkeTechnologies/zsh-expand
+zi0a id-as'zsh-abbrev-alias' \
+  src"${HOME}/.zsh/zsh-aliases"
+zinit light momo-lab/zsh-abbrev-alias
 
-# zi0a id-as'zsh-abbrev-alias'
-# zinit light momo-lab/zsh-abbrev-alias
+# zsh-expand is quicker than zsh-abbrev-alias, but it has issues expanding 2nd
+# command position
+#
+# zi0a id-as'zsh-expand'
+# zinit light MenkeTechnologies/zsh-expand
 
 # Replace by fzf. Conflict with Ctrl-R
 # zi0b id-as'history-search-multi-word'
