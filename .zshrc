@@ -463,6 +463,13 @@ zi0c id-as'git-interactive-rebase-tool' \
   pick'bin/interactive-rebase-tool'
 zinit light MitMaro/git-interactive-rebase-tool
 
+zi0c id-as'git-update' \
+  as'program' \
+  atclone"go get; go build -o $ZPFX/bin/git-update" \
+  atpull'%atclone' \
+  pick"$ZPFX/bin/git-update"
+zinit light nikitavoloboev/gitupdate
+
 # zi0c id-as'git-lfs' \
 #   from'gh-r' \
 #   as'program' \
