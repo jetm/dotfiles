@@ -145,7 +145,6 @@ ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 zi0c id-as'fzf' \
   from"gh-r" \
   as"command" \
-  has"fd" \
   dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh' \
   src'key-bindings.zsh' \
   bpick"*linux_amd64*"
@@ -473,7 +472,6 @@ zinit light nikitavoloboev/gitupdate
 # zi0c id-as'git-lfs' \
 #   from'gh-r' \
 #   as'program' \
-#   has'git' \
 #   nocompile \
 #   bpick'*linux-amd64*' \
 #   atclone"PREFIX=$ZPFX ./install.sh; \
@@ -523,7 +521,6 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   turbo_source "$ZINIT[PLUGINS_DIR]/asdf/asdf.sh"
 
   # zinit id-as"cargo-completion" \
-  #   has'cargo' \
   #   mv"cargo* -> _cargo" \
   #   as"completion" \
   #   for https://github.com/rust-lang/cargo/blob/master/src/etc/_cargo
@@ -563,8 +560,7 @@ fi
 # zi0b id-as'zui'
 # zinit light zdharma/zui
 
-# zi0c id-as'zinit-console' \
-#   has'zui'
+# zi0c id-as'zinit-console'
 # zinit light zinit-zsh/zinit-console
 
 #
