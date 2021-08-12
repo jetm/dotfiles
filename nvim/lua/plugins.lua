@@ -85,9 +85,7 @@ require('packer').startup(function(use)
 
     use {
         "Yggdroot/LeaderF",
-        run = function()
-            vim.cmd([[LeaderfInstallCExtension]])
-        end,
+        run = function() vim.cmd([[LeaderfInstallCExtension]]) end,
         config = function() require('plugins.leaderf') end
     }
 
@@ -100,9 +98,7 @@ require('packer').startup(function(use)
     -- Smooth scroll
     use {
         'karb94/neoscroll.nvim',
-        config = function() require('neoscroll').setup(
-                { mappings = {}}
-            ) end
+        config = function() require('neoscroll').setup({mappings = {}}) end
     }
 
     -- Indent guides on blank lines for Neovim
@@ -190,6 +186,7 @@ require('packer').startup(function(use)
     -- like gitgutter shows hunks etc on sign column
     use {
         "lewis6991/gitsigns.nvim",
+        requires = {'nvim-lua/plenary.nvim'},
         config = function() require("plugins.gitsigns") end
     }
 

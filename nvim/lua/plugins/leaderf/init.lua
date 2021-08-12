@@ -10,5 +10,6 @@ vim.g.Lf_PreviewInPopup = 1
 -- vim.g.Lf_PreviewResult = { Rg = 1 }
 vim.g.Lf_WindowPosition = 'popup'
 
-vimp.nnoremap('<C-F>', ':<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>')
+vimp.nnoremap('<C-F>',
+              ':<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>')
 vimp.nnoremap('go', ':<C-U>Leaderf! rg --recall<CR>')
