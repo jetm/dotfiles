@@ -83,24 +83,26 @@ require('packer').startup(function(use)
         config = function() require("plugins.telescope") end
     }
 
+    use {
+        "Yggdroot/LeaderF",
+        run = function()
+            vim.cmd([[LeaderfInstallCExtension]])
+        end,
+        config = function() require('plugins.leaderf') end
+    }
+
     use {'kevinhwang91/nvim-bqf'}
 
     -- use {'camspiers/snap',
     -- config = function() require('plugins.snap')
     -- end}
 
-    -- spaceline is slower
-    -- Galaxyline lacks of nice configurations, like feline has
-    -- lualine has better structure and theme, it's more like spaceline
-    use {
-        'hoob3rt/lualine.nvim',
-        config = function() require('plugins.lualine') end
-    }
-
     -- Smooth scroll
     use {
         'karb94/neoscroll.nvim',
-        config = function() require('neoscroll').setup() end
+        config = function() require('neoscroll').setup(
+                { mappings = {}}
+            ) end
     }
 
     -- Indent guides on blank lines for Neovim
@@ -109,9 +111,20 @@ require('packer').startup(function(use)
         config = function() require('plugins.indent-blankline') end
     }
 
+    --
+    -- UI
+    --
     -- Rainbow Parentheses Improved, shorter code, no level limit, smooth and fast,
     -- powerful configuration
     use {'p00f/nvim-ts-rainbow'}
+
+    -- spaceline is slower
+    -- Galaxyline lacks of nice configurations, like feline has
+    -- lualine has better structure and theme, it's more like spaceline
+    use {
+        'hoob3rt/lualine.nvim',
+        config = function() require('plugins.lualine') end
+    }
 
     --
     -- Motions
