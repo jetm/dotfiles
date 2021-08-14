@@ -253,6 +253,14 @@ zi0c id-as'shfmt' \
 zinit light mvdan/sh
 
 #
+# JS Node modules
+#
+zi0c id-as'node-modules' \
+  node'bash-language-server' \
+  sbin'node_modules/.bin/bash-language-server'
+zinit light zdharma/null
+
+#
 # File utilities
 #
 zi0c id-as'dust' \
@@ -484,9 +492,10 @@ zinit light nikitavoloboev/gitupdate
 #
 zinit id-as'parallel' \
   as'readurl|command' \
-  atclone"ziextract --auto --move && ./configure --disable-documentation --prefix=$ZPFX" \
+  atclone"ziextract --auto --move && ./configure --disable-documentation" \
   atpull'%atclone' \
-  make"DESTDIR=$ZPFX install" \
+  make'' \
+  sbin'src/parallel' \
   dlink"parallel-latest.tar.bz2" \
   for https://ftp.gnu.org/gnu/parallel/
 
@@ -505,7 +514,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zinit pack for zsh
 
   zi0a id-as'git' \
-    as'readurlcommand' \
+    as'readurl|command' \
     mv"%ID% -> git.zip" \
     atclone'ziextract --move git.zip' \
     atpull'%atclone' \
