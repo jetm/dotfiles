@@ -190,11 +190,20 @@ require('packer').startup(function(use)
         config = function() require("plugins.gitsigns") end
     }
 
+    -- magit for neovim
     use {
         'TimUntersberger/neogit',
-        requires = 'nvim-lua/plenary.nvim',
+        requires = {'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim'},
         config = function() require("plugins.neogit") end
     }
+
+    -- single tabpage interface for easily cycling through diffs for all
+    -- modified files for any git rev
+    use {
+        'sindrets/diffview.nvim',
+        config = function() require("plugins.diffview") end
+    }
+
     --
     -- Text manipulation
     --
