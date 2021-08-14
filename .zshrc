@@ -74,8 +74,7 @@ load_prezto_mod completion
 zinit id-as'z-a-rust' light-mode for zinit-zsh/z-a-rust
 zinit id-as'z-a-readurl' light-mode for zinit-zsh/z-a-readurl
 zinit id-as'z-a-path-dl' light-mode for zinit-zsh/z-a-patch-dl
-zinit id-as'z-a-as-monitor' light-mode for zinit-zsh/z-a-as-monitor
-# zinit id-as'z-a-gen-mod-node' light-mode for zinit-zsh/z-a-bin-gem-node
+zinit id-as'z-a-gen-mod-node' light-mode for zinit-zsh/z-a-bin-gem-node
 
 #
 # completion
