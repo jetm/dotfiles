@@ -190,6 +190,11 @@ require('packer').startup(function(use)
         config = function() require("plugins.gitsigns") end
     }
 
+    use {
+        'TimUntersberger/neogit',
+        requires = 'nvim-lua/plenary.nvim',
+        config = function() require("plugins.neogit") end
+    }
     --
     -- Text manipulation
     --
