@@ -74,8 +74,8 @@ load_prezto_mod completion
 zinit id-as'z-a-rust' light-mode for zinit-zsh/z-a-rust
 zinit id-as'z-a-readurl' light-mode for zinit-zsh/z-a-readurl
 zinit id-as'z-a-path-dl' light-mode for zinit-zsh/z-a-patch-dl
+zinit id-as'z-a-as-monitor' light-mode for zinit-zsh/z-a-as-monitor
 # zinit id-as'z-a-gen-mod-node' light-mode for zinit-zsh/z-a-bin-gem-node
-# zinit id-as'z-a-as-monitor' light-mode for zinit-zsh/z-a-as-monitor
 
 #
 # completion
@@ -484,11 +484,12 @@ zinit light nikitavoloboev/gitupdate
 # Parallel processing
 #
 zinit id-as'parallel' \
-  as'program' \
+  as'readurl|command' \
   atclone"ziextract --auto --move && ./configure --disable-documentation --prefix=$ZPFX" \
   atpull'%atclone' \
-  make'install' \
-  for https://ftp.gnu.org/gnu/parallel/parallel-latest.tar.bz2
+  make"DESTDIR=$ZPFX install" \
+  dlink"parallel-latest.tar.bz2" \
+  for https://ftp.gnu.org/gnu/parallel/
 
 # interactive parallel ssh client
 zi0c id-as'hss' \
@@ -505,7 +506,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zinit pack for zsh
 
   zi0a id-as'git' \
-    as'readurl|command' \
+    as'readurlcommand' \
     mv"%ID% -> git.zip" \
     atclone'ziextract --move git.zip' \
     atpull'%atclone' \
