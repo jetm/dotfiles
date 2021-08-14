@@ -121,7 +121,7 @@ abbrev-alias gfi='git fixup-prev-ci'
 abbrev-alias gcl='git clone'
 abbrev-alias gfe='git fetch'
 abbrev-alias gls='git ls-files'
-abbrev-alias gpu='git pull'
+abbrev-alias gP='git pull'
 abbrev-alias gt='git status'
 
 # git fuzzy
