@@ -163,14 +163,14 @@ zinit light jeffreytse/zsh-vi-mode
 ZVM_VI_SURROUND_BINDKEY=s-prefix
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 
-# shim fails for fzf
 zi0b id-as'fzf' \
   from"gh-r" \
   as"program" \
   bpick"*linux_amd64*" \
   dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh' \
   compile'key-bindings.zsh' \
-  src'key-bindings.zsh'
+  src'key-bindings.zsh' \
+  pick'fzf'
 zinit light junegunn/fzf
 
 # zi0b id-as'fzf-tab'
@@ -180,8 +180,8 @@ zi0c id-as'zoxide' \
   from"gh-r" \
   as"program" \
   bpick"*x86_64-unknown-linux*" \
-  mv"zoxide* -> zoxide" \
-  pick"zoxide/zoxide" \
+  mv"zoxide*/zoxide -> zoxide" \
+  pick"zoxide" \
   atload'eval "$(zoxide init zsh)";'
 zinit light ajeetdsouza/zoxide
 
@@ -229,8 +229,8 @@ zi0c id-as'delta' \
   from'gh-r' \
   as'program' \
   bpick"$PICK" \
-  pick'delta/delta' \
-  mv'delta* -> delta'
+  mv'delta*/delta -> delta' \
+  pick'delta'
 zinit light dandavison/delta
 
 #
@@ -240,7 +240,8 @@ zi0c id-as'tldr' \
   from'gh-r' \
   as'program' \
   bpick'*linux-x86_64-musl*' \
-  mv'tldr-* -> tldr'
+  mv'tldr-* -> tldr' \
+  pick'tldr'
 zinit light dbrgn/tealdeer
 
 zi0c id-as'cht.sh' \
@@ -257,14 +258,16 @@ zi0c id-as'shellharden' \
   from'gh-r' \
   as'program' \
   bpick'*x86_64-linux-gnu*' \
-  mv'shellharden-* -> shellharden'
+  mv'shellharden* -> shellharden' \
+  pick'shellharden'
 zinit light anordal/shellharden
 
 zi0c id-as'shellcheck' \
   from'gh-r' \
   as'program' \
   bpick'*linux.x86_64*' \
-  mv'shellcheck-*/shellcheck -> shellcheck'
+  mv'shellcheck*/shellcheck -> shellcheck' \
+  pick'shellcheck'
 zinit light koalaman/shellcheck
 
 zi0c id-as'shfmt' \
@@ -288,36 +291,38 @@ zi0c id-as'dust' \
   from'gh-r' \
   as'program' \
   bpick'*linux*gnu*' \
-  pick'dust*/dust' \
-  mv'dust* -> dust'
+  mv'dust*/dust -> dust' \
+  pick'dust'
 zinit light bootandy/dust
 
 # shim fails for fzf
 zi0b id-as'fd' \
   from'gh-r' \
   as'program' \
-  mv'fd* -> fd'
+  mv'fd*/fd -> fd' \
+  pick'fd'
 zinit light sharkdp/fd
 
 zi0a id-as"exa" \
   from"gh-r" \
   as"program" \
-  pick'bin/exa' \
-  mv"completions/_exa -> _exa"
+  mv'bin/exa -> exa' \
+  pick'exa'
 zinit light ogham/exa
 
 # shim fails for sd
 zi0c id-as'sd' \
   from'gh-r' \
   as'program' \
-  mv'sd-* -> sd'
+  mv'sd-* -> sd' \
+  pick'sd'
 zinit light chmln/sd
 
 zi0c id-as'bat' \
   from'gh-r' \
   as'program' \
-  pick'bat/bat' \
-  mv'bat* -> bat'
+  mv'bat*/bat -> bat' \
+  pick'bat'
 zinit light sharkdp/bat
 
 zi0c id-as'duf' \
@@ -349,9 +354,10 @@ zinit light muesli/duf
 zi0c id-as'htop' \
   as"program" \
   ver'3.0.5' \
-  atclone"./autogen.sh && ./configure --enable-delayacct && make htop" \
+  atclone"./autogen.sh && ./configure --enable-delayacct" \
   atpull"%atclone" \
-  pick"htop"
+  make'htop' \
+  pick'htop'
 zinit light htop-dev/htop
 
 #
@@ -360,8 +366,8 @@ zinit light htop-dev/htop
 zi0c id-as'ripgrep' \
   from'gh-r' \
   as'program' \
-  atclone"mv rg/doc/rg.1 $ZPFX/man/man1" \
-  mv'ripgrep* -> rg'
+  mv'ripgrep*/rg -> rg' \
+  pick'rg'
 zinit light BurntSushi/ripgrep
 
 # zi0c id-as'ugrep' \
@@ -412,7 +418,6 @@ zinit light neovim/neovim
 zi0c id-as'nnn' \
   from'github' \
   as'program'  \
-  sbin'nnn' \
   make='O_NERD=1 O_PCRE=1' \
   compile'misc/quitcd/quitcd.bash_zsh' \
   src'misc/quitcd/quitcd.bash_zsh'
@@ -423,7 +428,7 @@ zinit light jarun/nnn
 #
 zi0c id-as'ninja' \
   from'gh-r' \
-  as'command' \
+  as'program' \
   bpick'*linux*' \
   pick'ninja'
 zinit light ninja-build/ninja
@@ -435,7 +440,8 @@ zi0c id-as'efm' \
   from'gh-r' \
   as'command' \
   bpick'*linux_amd64*' \
-  mv"*/efm-langserver -> efm-langserver"
+  mv"*/efm-langserver -> efm-langserver" \
+  pick"efm-langserver"
 zinit light mattn/efm-langserver
 
 zi0c id-as'lua-language-server' \
@@ -458,35 +464,41 @@ zi0c id-as'forgit' \
 zinit light wfxr/forgit
 
 zi0c id-as'git-fuzzy' \
-  as"command" \
-  pick"bin/git-fuzzy"
+  as"program" \
+  mv"bin/git-fuzzy -> git-fuzzy" \
+  pick"git-fuzzy"
 zinit light bigH/git-fuzzy
 
 zi0c id-as'git-reauthor' \
-  as'command' \
-  pick'bin/git-reauthor'
+  as'program' \
+  mv'bin/git-reauthor -> git-reauthor' \
+  pick'git-reauthor'
 zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-reauthor
 
 zi0c id-as'git-squash' \
-  as'command' \
-  pick'bin/git-squash'
+  as'program' \
+  mv'bin/git-squash -> git-squash' \
+  pick'git-squash'
 zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-squash
 
 zi0c id-as'git-undo' \
-  as'command' \
-  pick'bin/git-undo'
+  as'program' \
+  mv'bin/git-undo -> git-undo' \
+  pick'git-undo'
 zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-undo
 
 zi0c id-as'git-reset-file' \
-  as'command' \
-  pick'bin/git-reset-file'
+  as'program' \
+  mv'bin/git-reset-file -> git-reset-file' \
+  pick'git-reset-file'
 zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-reset-file
 
 zi0c id-as'git-interactive-rebase-tool' \
   ver'2.1.0' \
-  as'command' \
+  as'program' \
   rustup cargo'!git-interactive-rebase-tool' \
-  pick'bin/interactive-rebase-tool'
+  mv'bin/interactive-rebase-tool -> interactive-rebase-tool' \
+  pick'interactive-rebase-tool'
 zinit light MitMaro/git-interactive-rebase-tool
 
 zi0c id-as'git-update' \
@@ -522,7 +534,7 @@ zinit id-as'parallel' \
 # interactive parallel ssh client
 zi0c id-as'hss' \
   from'gh-r' \
-  as'command' \
+  as'program' \
   mv'hss-Linux-x86_64 -> hss'
 zinit light six-ddc/hss
 
