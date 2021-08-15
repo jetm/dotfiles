@@ -86,7 +86,8 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     as'readurl|command' \
     atclone'ziextract --move --auto' \
     atpull'%atclone' \
-    make"USE_LIBPCRE2=1 -j$[$(nproc) + 1] prefix=$ZPFX install install-doc" \
+    make"USE_LIBPCRE2=1 -j$[$(nproc) + 1] prefix=$ZPFX all doc install-doc" \
+    pick'git' \
     for https://github.com/git/git/releases/
 
   # look for 70-asdf.zsh configuration file
@@ -400,13 +401,13 @@ zinit light neovim/neovim
 #
 # File managers
 #
-# zi0c id-as'ranger' \
-#   from'gh' \
-#   as'program' \
-#   depth'1' \
-#   pick'ranger.py' \
-#   atload'alias ranger=ranger.py'
-# zinit light ranger/ranger
+zi0c id-as'nnn' \
+  from'gh-r' \
+  as'program'  \
+  bpick'nnn-static*x86_64*' \
+  mv'nnn-static -> nnn' \
+  pick'nnn'
+zinit light jarun/nnn
 
 # zi0c id-as'broot' \
 #   from'gh-r' \
@@ -415,13 +416,13 @@ zinit light neovim/neovim
 #   ver'latest'
 # zinit light Canop/broot
 
-zi0c id-as'nnn' \
-  from'github' \
-  as'program'  \
-  make='O_NERD=1 O_PCRE=1' \
-  compile'misc/quitcd/quitcd.bash_zsh' \
-  src'misc/quitcd/quitcd.bash_zsh'
-zinit light jarun/nnn
+# zi0c id-as'ranger' \
+#   from'gh' \
+#   as'program' \
+#   depth'1' \
+#   pick'ranger.py' \
+#   atload'alias ranger=ranger.py'
+# zinit light ranger/ranger
 
 #
 # Build tools
@@ -438,7 +439,7 @@ zinit light ninja-build/ninja
 #
 zi0c id-as'efm' \
   from'gh-r' \
-  as'command' \
+  as'program' \
   bpick'*linux_amd64*' \
   mv"*/efm-langserver -> efm-langserver" \
   pick"efm-langserver"
@@ -469,17 +470,20 @@ zi0c id-as'git-fuzzy' \
   pick"git-fuzzy"
 zinit light bigH/git-fuzzy
 
-zi0c id-as'git-reauthor' \
-  as'program' \
-  mv'bin/git-reauthor -> git-reauthor' \
-  pick'git-reauthor'
-zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-reauthor
+# Put here all rust installations
+# looks the mv ice doesn't work with rustup cargo
+zi0c id-as'git-interactive-rebase-tool' \
+  rustup cargo'git-interactive-rebase-tool' \
+  as'command' \
+  pick'bin/interactive-rebase-tool'
+zinit light zdharma/null
 
-zi0c id-as'git-squash' \
+zi0c id-as'git-update' \
   as'program' \
-  mv'bin/git-squash -> git-squash' \
-  pick'git-squash'
-zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-squash
+  atclone'go get && go build && mv -v gitupdate git-update' \
+  atpull'%atclone' \
+  pick'git-update'
+zinit light nikitavoloboev/gitupdate
 
 zi0c id-as'git-undo' \
   as'program' \
@@ -487,26 +491,23 @@ zi0c id-as'git-undo' \
   pick'git-undo'
 zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-undo
 
-zi0c id-as'git-reset-file' \
-  as'program' \
-  mv'bin/git-reset-file -> git-reset-file' \
-  pick'git-reset-file'
-zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-reset-file
+# zi0c id-as'git-reauthor' \
+#   as'program' \
+#   mv'bin/git-reauthor -> git-reauthor' \
+#   pick'git-reauthor'
+# zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-reauthor
 
-zi0c id-as'git-interactive-rebase-tool' \
-  ver'2.1.0' \
-  as'program' \
-  rustup cargo'!git-interactive-rebase-tool' \
-  mv'bin/interactive-rebase-tool -> interactive-rebase-tool' \
-  pick'interactive-rebase-tool'
-zinit light MitMaro/git-interactive-rebase-tool
+# zi0c id-as'git-squash' \
+#   as'program' \
+#   mv'bin/git-squash -> git-squash' \
+#   pick'git-squash'
+# zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-squash
 
-zi0c id-as'git-update' \
-  as'program' \
-  atclone'go get && go build' \
-  atpull'%atclone' \
-  sbin'gitupdate -> git-update'
-zinit light nikitavoloboev/gitupdate
+# zi0c id-as'git-reset-file' \
+#   as'program' \
+#   mv'bin/git-reset-file -> git-reset-file' \
+#   pick'git-reset-file'
+# zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-reset-file
 
 # zi0c id-as'git-lfs' \
 #   from'gh-r' \
@@ -524,10 +525,11 @@ zinit light nikitavoloboev/gitupdate
 #
 zinit id-as'parallel' \
   as'readurl|command' \
+  nocompile \
   atclone"ziextract --auto --move && ./configure --disable-documentation" \
   atpull'%atclone' \
   make'' \
-  sbin'src/parallel' \
+  pick'src/parallel' \
   dlink"parallel-latest.tar.bz2" \
   for https://ftp.gnu.org/gnu/parallel/
 
