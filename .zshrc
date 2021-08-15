@@ -75,6 +75,27 @@ zinit id-as'z-a-rust' light-mode for zinit-zsh/z-a-rust
 zinit id-as'z-a-readurl' light-mode for zinit-zsh/z-a-readurl
 zinit id-as'z-a-path-dl' light-mode for zinit-zsh/z-a-patch-dl
 zinit id-as'z-a-gen-mod-node' light-mode for zinit-zsh/z-a-bin-gem-node
+zinit id-as'zsh-defer' light-mode for romkatv/zsh-defer
+
+
+if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
+  zinit pack for zsh
+
+  zinit id-as'git' \
+    dlink"/git/git/archive/refs/tags/v%VERSION%.zip" \
+    as'readurl|command' \
+    atclone'ziextract --move --auto' \
+    atpull'%atclone' \
+    make"USE_LIBPCRE2=1 -j$[$(nproc) + 1] prefix=$ZPFX install install-doc" \
+    for https://github.com/git/git/releases/
+
+  # look for 70-asdf.zsh configuration file
+  zi0a id-as"asdf" \
+    atinit'export ASDF_DATA_DIR="$HOME/.asdf"; \
+      export ASDF_CONFIG_FILE="$ASDF_DATA_DIR/.asdfrc";'
+  zinit light asdf-vm/asdf
+  turbo_source "$ZINIT[PLUGINS_DIR]/asdf/asdf.sh"
+fi
 
 #
 # completion
@@ -89,6 +110,7 @@ zinit light zsh-users/zsh-autosuggestions
 # zinit light zsh-users/zsh-completions
 
 zi0a id-as'zsh-abbrev-alias' \
+  compile"${HOME}/.zsh/zsh-aliases" \
   src"${HOME}/.zsh/zsh-aliases"
 zinit light momo-lab/zsh-abbrev-alias
 
@@ -141,12 +163,14 @@ zinit light jeffreytse/zsh-vi-mode
 ZVM_VI_SURROUND_BINDKEY=s-prefix
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 
-zi0c id-as'fzf' \
+# shim fails for fzf
+zi0b id-as'fzf' \
   from"gh-r" \
-  as"command" \
+  as"program" \
+  bpick"*linux_amd64*" \
   dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh' \
-  src'key-bindings.zsh' \
-  bpick"*linux_amd64*"
+  compile'key-bindings.zsh' \
+  src'key-bindings.zsh'
 zinit light junegunn/fzf
 
 # zi0b id-as'fzf-tab'
@@ -154,9 +178,9 @@ zinit light junegunn/fzf
 
 zi0c id-as'zoxide' \
   from"gh-r" \
-  as"command" \
-  mv"zoxide* -> zoxide" \
+  as"program" \
   bpick"*x86_64-unknown-linux*" \
+  mv"zoxide* -> zoxide" \
   pick"zoxide/zoxide" \
   atload'eval "$(zoxide init zsh)";'
 zinit light ajeetdsouza/zoxide
@@ -203,7 +227,7 @@ zinit light zsh-users/zsh-syntax-highlighting
 #
 zi0c id-as'delta' \
   from'gh-r' \
-  as'command' \
+  as'program' \
   bpick"$PICK" \
   pick'delta/delta' \
   mv'delta* -> delta'
@@ -214,10 +238,9 @@ zinit light dandavison/delta
 #
 zi0c id-as'tldr' \
   from'gh-r' \
-  as'command' \
+  as'program' \
   bpick'*linux-x86_64-musl*' \
-  mv'tldr-* -> tldr' \
-  sbin'tldr*'
+  mv'tldr-* -> tldr'
 zinit light dbrgn/tealdeer
 
 zi0c id-as'cht.sh' \
@@ -232,18 +255,16 @@ zinit snippet https://cht.sh/:cht.sh
 #
 zi0c id-as'shellharden' \
   from'gh-r' \
-  as'command' \
+  as'program' \
   bpick'*x86_64-linux-gnu*' \
-  mv'shellharden-* -> shellharden' \
-  sbin'shellharden*'
+  mv'shellharden-* -> shellharden'
 zinit light anordal/shellharden
 
 zi0c id-as'shellcheck' \
   from'gh-r' \
-  as'command' \
+  as'program' \
   bpick'*linux.x86_64*' \
-  mv'shellcheck-*/shellcheck -> shellcheck' \
-  sbin'shellcheck'
+  mv'shellcheck-*/shellcheck -> shellcheck'
 zinit light koalaman/shellcheck
 
 zi0c id-as'shfmt' \
@@ -265,16 +286,16 @@ zinit light zdharma/null
 #
 zi0c id-as'dust' \
   from'gh-r' \
-  as'command' \
+  as'program' \
   bpick'*linux*gnu*' \
   pick'dust*/dust' \
   mv'dust* -> dust'
 zinit light bootandy/dust
 
-zi0c id-as'fd' \
+# shim fails for fzf
+zi0b id-as'fd' \
   from'gh-r' \
-  as'command' \
-  pick'fd/fd' \
+  as'program' \
   mv'fd* -> fd'
 zinit light sharkdp/fd
 
@@ -285,23 +306,23 @@ zi0a id-as"exa" \
   mv"completions/_exa -> _exa"
 zinit light ogham/exa
 
+# shim fails for sd
 zi0c id-as'sd' \
   from'gh-r' \
-  as'command' \
-  mv'sd-* -> sd' \
-  sbin'sd*'
+  as'program' \
+  mv'sd-* -> sd'
 zinit light chmln/sd
 
 zi0c id-as'bat' \
   from'gh-r' \
-  as'command' \
+  as'program' \
   pick'bat/bat' \
   mv'bat* -> bat'
 zinit light sharkdp/bat
 
 zi0c id-as'duf' \
   from'gh-r' \
-  as'command' \
+  as'program' \
   bpick'*linux_x86_64.tar.gz'
 zinit light muesli/duf
 
@@ -340,8 +361,7 @@ zi0c id-as'ripgrep' \
   from'gh-r' \
   as'program' \
   atclone"mv rg/doc/rg.1 $ZPFX/man/man1" \
-  mv'ripgrep* -> rg' \
-  pick'rg/rg'
+  mv'ripgrep* -> rg'
 zinit light BurntSushi/ripgrep
 
 # zi0c id-as'ugrep' \
@@ -415,7 +435,7 @@ zi0c id-as'efm' \
   from'gh-r' \
   as'command' \
   bpick'*linux_amd64*' \
-  mv"*/efm-langserver -> ${ZPFX}/bin/efm-langserver"
+  mv"*/efm-langserver -> efm-langserver"
 zinit light mattn/efm-langserver
 
 zi0c id-as'lua-language-server' \
@@ -471,9 +491,9 @@ zinit light MitMaro/git-interactive-rebase-tool
 
 zi0c id-as'git-update' \
   as'program' \
-  atclone"go get; go build -o $ZPFX/bin/git-update" \
+  atclone'go get && go build' \
   atpull'%atclone' \
-  pick"$ZPFX/bin/git-update"
+  sbin'gitupdate -> git-update'
 zinit light nikitavoloboev/gitupdate
 
 # zi0c id-as'git-lfs' \
@@ -509,37 +529,6 @@ zinit light six-ddc/hss
 # zi0c id-as'difftastic' \
 #   cargo'!difftastic'
 # zinit light wilfred/difftastic
-
-if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
-  zinit pack for zsh
-
-  zi0a id-as'git' \
-    as'readurl|command' \
-    mv"%ID% -> git.zip" \
-    atclone'ziextract --move git.zip' \
-    atpull'%atclone' \
-    make"USE_LIBPCRE2=1 -j$[$(nproc) + 1] prefix=$ZPFX install install-doc" \
-    dlink"/git/git/archive/refs/tags/v%VERSION%.zip" \
-    for https://github.com/git/git/releases/
-
-  # look for 70-asdf.zsh configuration file
-  zi0a id-as"asdf" \
-    atinit'export ASDF_DATA_DIR="$HOME/.asdf"; \
-      export ASDF_CONFIG_FILE="$ASDF_DATA_DIR/.asdfrc";'
-  zinit light asdf-vm/asdf
-  turbo_source "$ZINIT[PLUGINS_DIR]/asdf/asdf.sh"
-
-  # zinit id-as"cargo-completion" \
-  #   mv"cargo* -> _cargo" \
-  #   as"completion" \
-  #   for https://github.com/rust-lang/cargo/blob/master/src/etc/_cargo
-
-  # zi0c id-as'deno' \
-  #   as"program" \
-  #   atclone"curl -fsSL https://deno.land/x/install/install.sh | DENO_INSTALL=$ZPFX sh" \
-  #   atpull"%atclone"
-  # zinit light denoland/deno_install
-fi
 
 # zi0c id-as'zeno' \
 #   depth"1" \
