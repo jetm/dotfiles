@@ -77,7 +77,6 @@ zinit id-as'z-a-path-dl' light-mode for zinit-zsh/z-a-patch-dl
 zinit id-as'z-a-gen-mod-node' light-mode for zinit-zsh/z-a-bin-gem-node
 zinit id-as'zsh-defer' light-mode for romkatv/zsh-defer
 
-
 if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zinit pack for zsh
 
@@ -96,6 +95,13 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
       export ASDF_CONFIG_FILE="$ASDF_DATA_DIR/.asdfrc";'
   zinit light asdf-vm/asdf
   turbo_source "$ZINIT[PLUGINS_DIR]/asdf/asdf.sh"
+
+  zi0c id-as'topgrade' \
+    from'gh-r' \
+    as'program' \
+    bpick'*x86_64-unknown-linux-gnu*' \
+    pick'topgrade'
+  zinit light r-darwish/topgrade
 fi
 
 #
@@ -111,7 +117,6 @@ zinit light zsh-users/zsh-autosuggestions
 # zinit light zsh-users/zsh-completions
 
 zi0a id-as'zsh-abbrev-alias' \
-  compile"${HOME}/.zsh/zsh-aliases" \
   src"${HOME}/.zsh/zsh-aliases"
 zinit light momo-lab/zsh-abbrev-alias
 
@@ -169,7 +174,6 @@ zi0b id-as'fzf' \
   as"program" \
   bpick"*linux_amd64*" \
   dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh' \
-  compile'key-bindings.zsh' \
   src'key-bindings.zsh' \
   pick'fzf'
 zinit light junegunn/fzf
