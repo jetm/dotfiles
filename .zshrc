@@ -82,11 +82,14 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
 
   zinit id-as'git' \
     dlink"/git/git/archive/refs/tags/v%VERSION%.zip" \
-    as'readurl|command' \
-    atclone'ziextract --move --auto' \
+    as'readurl|null' \
+    atclone"ziextract --move --auto; \
+      make prefix=$ZPFX USE_LIBPCRE2=1 INSTALL_SYMLINKS=1 \
+      -j$[$(nproc) + 1] all doc install install-doc &&
+      rm -vf $ZPFX/bin/git-shell;
+      rm -vf $ZPFX/bin/git-cvsserver;
+      rm -vf $ZPFX/bin/gitk;" \
     atpull'%atclone' \
-    make"USE_LIBPCRE2=1 -j$[$(nproc) + 1] prefix=$ZPFX all doc install-doc" \
-    pick'git' \
     for https://github.com/git/git/releases/
 
   # look for 70-asdf.zsh configuration file
@@ -335,6 +338,13 @@ zi0c id-as'duf' \
   as'program' \
   bpick'*linux_x86_64.tar.gz'
 zinit light muesli/duf
+
+zi0c id-as'moar' \
+  as'program' \
+  atclone'go get && go build' \
+  atpull'%atclone' \
+  pick'moar'
+zinit light walles/moar
 
 #
 # jq parsing
