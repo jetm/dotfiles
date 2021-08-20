@@ -1,3 +1,5 @@
+local vim = vim
+
 vim.g.better_whitespace_ctermcolor = ""
 vim.g.better_whitespace_guicolor = ""
 vim.g.better_whitespace_enabled = 0

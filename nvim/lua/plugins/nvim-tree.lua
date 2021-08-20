@@ -1,6 +1,5 @@
---
--- nvim-tree
---
+local vim = vim
+
 -- 0 by default, will not resize the tree when opening a file
 vim.g.nvim_tree_width_allow_resize = 1
 
