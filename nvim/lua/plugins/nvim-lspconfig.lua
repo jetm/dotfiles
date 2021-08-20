@@ -65,7 +65,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
 function LSP:init()
     local servers = {"lua", "docker", "yaml", "bash", "efm", "c"}
     for _, server in ipairs(servers) do
-        local settings = {lsp_config = "plugins.lspconfig." .. server}
+        local settings = {lsp_config = "plugins.nvim-lspconfig." .. server}
         require(settings.lsp_config)
     end
 end

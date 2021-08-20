@@ -480,8 +480,7 @@ zinit light wfxr/forgit
 
 zi0c id-as'git-fuzzy' \
   as"program" \
-  mv"bin/git-fuzzy -> git-fuzzy" \
-  pick"git-fuzzy"
+  pick"bin/git-fuzzy"
 zinit light bigH/git-fuzzy
 
 # Put here all rust installations

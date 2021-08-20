@@ -1,5 +1,5 @@
 local lspconfig = require("lspconfig")
-local lsp = require("plugins.lspconfig")
+local lsp = require("plugins.nvim-lspconfig")
 
 lspconfig.clangd.setup {
     on_attach = function(client, bufnr)

@@ -1,16 +1,19 @@
-require('coq')()
+-- local lsp = require("lspconfig")
+-- local coq = require("coq")
+-- local servers = {"bash", "lua"}
+-- for _, server in ipairs(servers) do
+--     lsp[server].setup(coq.lsp_ensure_capabilities())
+-- end
 
 local vim = vim
 
 vim.g.coq_settings = {
     auto_start = true,
-    ['clients.tmux.enabled'] = false,
     ['clients.tabnine.enabled'] = true,
-    ['clients.tags.enabled'] = false,
-    ["display.preview.positions"] = {east = 1, south = 2, west = 3, north = 4}
+    ['clients.tabnine.enabled'] = true,
+    ['clients.tmux.enabled'] = false,
+    ['clients.tags.enabled'] = false
 }
-
-vim.cmd [[COQnow -s]]
 
 -- vim.g.coq_settings = {
 --     ['clients.tree_sitter.enabled'] = false,

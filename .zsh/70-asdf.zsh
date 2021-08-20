@@ -5,14 +5,16 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   # export ASDF_NPM_DEFAULT_PACKAGES_FILE="$ASDF_DATA_DIR/npm-packages"; \
   # export NODEJS_CONFIGURE_OPTIONS="prefix=/users/tiamarin/.asdf/npm-packages ";' \
   local plugins_list_to_install=(
-  # https://github.com/asdf-vm/asdf-ruby.git
+  # https://github.com/asdf-vm/asdf-ruby
   ruby
   # https://github.com/code-lever/asdf-rust
   rust
   # https://github.com/kennyp/asdf-golang
   golang
-  # https://github.com/Stratus3D/asdf-lua.git
+  # https://github.com/Stratus3D/asdf-lua
   lua
+  # https://github.com/danhper/asdf-python
+  python
   )
 
   local installed_plugins=$(asdf plugin list)

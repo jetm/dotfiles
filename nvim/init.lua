@@ -1,7 +1,15 @@
+--
+-- VM settings
+--
+local vim = vim
+
+vim.g.python3_host_prog = os.getenv("HOME") ..
+                              "/.asdf/installs/python/3.9.6/bin/python3.9"
+
 -- For debugging purpose
 function _G.dump(...)
-  local objects = vim.tbl_map(vim.inspect, { ... })
-  print(unpack(objects))
+    local objects = vim.tbl_map(vim.inspect, {...})
+    print(unpack(objects))
 end
 
 -- Disable some unused built-in Neovim plugins
@@ -23,12 +31,10 @@ require('mappings')
 require('colors-ui')
 
 vim.notify = function(msg, log_level, _)
-  if msg:match("exit code") then
-    return
-  end
-  if log_level == vim.log.levels.ERROR then
-    vim.api.nvim_err_writeln(msg)
-  else
-    vim.api.nvim_echo({ { msg } }, true, {})
-  end
+    if msg:match("exit code") then return end
+    if log_level == vim.log.levels.ERROR then
+        vim.api.nvim_err_writeln(msg)
+    else
+        vim.api.nvim_echo({{msg}}, true, {})
+    end
 end

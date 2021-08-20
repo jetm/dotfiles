@@ -296,7 +296,6 @@ packer.startup({
         --
         use {
             'ms-jpq/coq_nvim',
-            before = 'nvim-lspconfig',
             branch = 'coq',
             run = ':COQdeps',
             config = function() require("plugins.coq") end
@@ -310,10 +309,9 @@ packer.startup({
         --
         -- LSP
         --
-        -- default configs for lsp and setup lsp
         use {
             "neovim/nvim-lspconfig",
-            config = function() require("plugins.nvim-lspconfig") end
+            config = function() require("plugins.nvim-lspconfig").init() end
         }
 
         use {"ray-x/lsp_signature.nvim"}

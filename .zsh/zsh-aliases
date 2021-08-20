@@ -13,7 +13,6 @@ alias mv='mv -i'
 alias cp='cp -i'
 alias ln='ln -i'
 alias mkdir='mkdir -p'
-alias less='roar'
 
 # Reload the Zsh configurations
 alias reload="exec $SHELL -i -l"
