@@ -6,3 +6,5 @@ vim.g.coq_settings = {
     ['clients.tmux.enabled'] = false,
     ['clients.tags.enabled'] = false
 }
+
+vim.cmd [[autocmd VimEnter * COQnow -s]]
