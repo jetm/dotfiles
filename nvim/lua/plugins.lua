@@ -29,8 +29,7 @@ vim.api.nvim_exec([[
 ]], false)
 
 local inspected_buffers = {}
--- this function is called b4 a buffer is opened, so we need to manually open
--- the file and count the lines
+-- this function is called b4 a buffer is opened, so we need to manually open the file and count the lines.
 function limit_by_line_count(max_lines)
     local fname = vim.fn.expand("%:p")
     local cache = inspected_buffers[fname]
@@ -74,18 +73,7 @@ packer.startup({
         -- Apply fast colors
         use {
             'norcalli/nvim-colorizer.lua',
-            config = function()
-                -- Attaches to every FileType mode
-                require("colorizer").setup({'*'}, {
-                    RGB = true, -- #RGB hex codes
-                    RRGGBB = true, -- #RRGGBB hex codes
-                    RRGGBBAA = true, -- #RRGGBBAA hex codes
-                    rgb_fn = true, -- CSS rgb() and rgba() functions
-                    hsl_fn = true, -- CSS hsl() and hsla() functions
-                    css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-                    css_fn = true -- Enable all CSS *functions*: rgb_fn, hsl_fn
-                })
-            end
+            config = function() require('plugins.nvim-colorizer') end
         }
 
         -- Neovim tabline plugin
@@ -104,24 +92,7 @@ packer.startup({
         use {
             'nvim-treesitter/nvim-treesitter',
             run = ':TSUpdate',
-            config = function()
-
-                require("nvim-treesitter.configs").setup({
-                    ensure_installed = "maintained",
-                    highlight = {
-                        enable = true,
-                        use_languagetree = true
-                        -- disable = {"sh", "bash"}
-                    },
-                    -- Still an experimental
-                    indent = {enable = false},
-                    rainbow = {
-                        enable = true,
-                        -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-                        extended_mode = true
-                    }
-                })
-            end
+            config = function() require("plugins.nvim-treesitter") end
         }
 
         use {"romgrk/nvim-treesitter-context"}
@@ -193,22 +164,13 @@ packer.startup({
         -- Go to the last edited place
         use {
             'ethanholz/nvim-lastplace',
-            config = function()
-                require'nvim-lastplace'.setup {
-                    lastplace_ignore_buftype = {"quickfix", "nofile", "help"},
-                    lastplace_ignore_filetype = {
-                        "gitcommit", "gitrebase", "svn", "hgcommit"
-                    },
-                    lastplace_open_folds = true
-                }
-            end
+            config = function() require("plugins.nvim-lastplace") end
         }
 
         --
         -- Search/Replace
         --
-        -- Hlsearch Lens for Neovim. Replace incsearch.vim
-        use {'kevinhwang91/nvim-hlslens'}
+        use {"mg979/vim-visual-multi"}
 
         -- Substitute preview
         use {'osyo-manga/vim-over'}
@@ -311,7 +273,9 @@ packer.startup({
         --
         use {
             "neovim/nvim-lspconfig",
-            config = function() require("plugins.nvim-lspconfig").init() end
+            config = function()
+                require("plugins.nvim-lspconfig").init()
+            end
         }
 
         use {"ray-x/lsp_signature.nvim"}
@@ -397,13 +361,7 @@ packer.startup({
         -- A neovim lua plugin to help easily manage multiple terminal windows
         use {
             'akinsho/nvim-toggleterm.lua',
-            config = function()
-                require("toggleterm").setup {
-                    open_mapping = [[<F11>]],
-                    shade_terminals = false,
-                    hide_numbers = true
-                }
-            end
+            config = function() require('plugins.nvim-toggleterm') end
         }
 
         -- todo searcher
@@ -425,7 +383,6 @@ packer.startup({
             end
         }
 
-        use("famiu/nvim-reload")
     end,
     config = {display = {open_fn = require("packer.util").float}}
 })

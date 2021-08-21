@@ -1,5 +1,4 @@
 local vim = vim
-local fn = vim.fn
 
 vim.g.mapleader = ' '
 
@@ -10,7 +9,6 @@ vimp.nmap('<C-s>', ':update<CR>')
 vimp.vmap('<C-s>', '<C-c>:update<CR>')
 vimp.imap('<C-s>', '<C-o>:update<CR>')
 
---
 -- moving up and down work as you would expect
 vimp.nnoremap('j', 'gj')
 vimp.nnoremap('k', 'gk')
@@ -46,6 +44,24 @@ vimp.nnoremap('<C-J>', '<C-W>j')
 vimp.nnoremap('<C-K>', '<C-W>k')
 vimp.nnoremap('<C-L>', '<C-W>l')
 vimp.nnoremap('<C-H>', '<C-W>h')
+
+-- Use virtual replace mode all the time
+vimp.nnoremap('r', 'gr')
+vimp.nnoremap('R', 'gT')
+
+vimp.nnoremap('<kPlus>', '<C-a>')
+vimp.nnoremap('<kMinus>', '<C-x>')
+vimp.nnoremap('+', '<C-a>')
+vimp.nnoremap('-', '<C-x>')
+vimp.vnoremap('+', 'g<C-a>gv')
+vimp.vnoremap('-', 'g<C-x>gv')
+
+-- Opens line below or above the current line
+vimp.inoremap('<S-CR>', '<C-O>o')
+vimp.inoremap('<C-CR>', '<C-O>O')
+
+-- Clears hlsearch after doing a search, otherwise just does normal <CR> stuff
+vimp.nnoremap({'expr', 'silent'}, '<CR>', [[{-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()]])
 
 -- CtrlP compatibility
 -- fzf.vim is quicker than fzf.preview
@@ -84,7 +100,7 @@ vimp.nnoremap('<leader>x', ':BufferClose<CR>')
 -- NvimTree
 --
 vimp.nnoremap('<leader>n', ':NvimTreeFindFile<CR>')
-vimp.nnoremap('<C-n>', ':NvimTreeToggle<CR>')
+vimp.nnoremap('<A-n>', ':NvimTreeToggle<CR>')
 
 --
 -- shellharden
@@ -98,16 +114,8 @@ vimp.xmap("v", "<Plug>(expand_region_expand)")
 vimp.xmap("V", "<Plug>(expand_region_shrink)")
 
 --
--- hlslens
 --
-vimp.nnoremap("n",
-              "<cmd>execute('normal! ' . v:count1 . 'n')<CR><cmd>lua require('hlslens').start()<CR>")
-vimp.nnoremap("N",
-              "<cmd>execute('normal! ' . v:count1 . 'N')<CR><cmd>lua require('hlslens').start()<CR>")
-vimp.nnoremap("*", "*<cmd>lua require('hlslens').start()<CR>")
-vimp.nnoremap("#", "#<cmd>lua require('hlslens').start()<CR>")
-vimp.nnoremap("g*", "g*<cmd>lua require('hlslens').start()<CR>")
-vimp.nnoremap("g#", "g#<cmd>lua require('hlslens').start()<CR>")
+--
 
 --
 -- formatter
@@ -132,3 +140,7 @@ vimp.nnoremap("<Leader>qo", ":copen<CR>")
 -- LSP
 --
 vimp.nnoremap('<leader>gt', ':LspTroubleToggle<CR>')
+
+vimp.nnoremap('<C-F>',
+              ':<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>')
+vimp.nnoremap('go', ':<C-U>Leaderf! rg --recall<CR>')

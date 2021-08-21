@@ -1,8 +1,5 @@
 local vim = vim
 
--- 0 by default, will not resize the tree when opening a file
-vim.g.nvim_tree_width_allow_resize = 1
-
 local icons = require("nvim-nonicons")
 
 vim.g.nvim_tree_icons = {
@@ -28,6 +25,9 @@ vim.g.nvim_tree_icons = {
         symlink_open = icons.get("file-submodule")
     }
 }
+
+-- 0 by default, will not resize the tree when opening a file
+vim.g.nvim_tree_width_allow_resize = 1
 
 -- compact folders that only contain a single folder into one node in the file
 -- tree

@@ -7,7 +7,7 @@ saga.init_lsp_saga {
         sign_priority = 20,
         virtual_text = false
     },
-    error_sign = "", -- 
+    error_sign = "",
     warn_sign = "",
     hint_sign = "",
     infor_sign = ""
