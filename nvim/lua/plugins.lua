@@ -22,28 +22,11 @@ end
 
 -- Need to replace this once lua api has vim modes
 vim.api.nvim_exec([[
-  augroup Packer
+  augroup PackerReload
     autocmd!
     autocmd BufWritePost plugins.lua lua require'plugins'.reload_config()
   augroup end
 ]], false)
-
-local inspected_buffers = {}
--- this function is called b4 a buffer is opened, so we need to manually open the file and count the lines.
-function limit_by_line_count(max_lines)
-    local fname = vim.fn.expand("%:p")
-    local cache = inspected_buffers[fname]
-    if cache ~= nil then return cache end
-
-    max_lines = max_lines or 1000
-    local lines = 0
-    for _ in io.lines(fname) do
-        lines = lines + 1
-        if lines > max_lines then break end
-    end
-    inspected_buffers[fname] = (lines <= max_lines)
-    return inspected_buffers[fname]
-end
 
 local packer = require("packer")
 local use = packer.use
@@ -248,10 +231,24 @@ packer.startup({
             config = function() require('plugins.nerd-commenter') end
         }
 
-        -- Switch between single-line and multiline forms of code
-        -- gS to split a one-liner into multiple lines
-        -- gJ (with the cursor on the first line of a block) to join a block into a single-line statement
-        -- use 'AndrewRadev/splitjoin.vim'
+        -- enhanced increment/decrement plugin for Neovim
+        use {'monaqa/dial.nvim'}
+
+        -- Nvim-plugin for doing the opposite of join-line (J) of arguments
+        -- example: use ,j
+        use {
+            'AckslD/nvim-revJ.lua',
+            requires = {'kana/vim-textobj-user', 'sgur/vim-textobj-parameter'},
+            config = function()
+                require("revj").setup({
+                    keymaps = {
+                        operator = "<Leader>J", -- for operator (+motion)
+                        line = "<Leader>j", -- for formatting current line
+                        visual = "<Leader>j" -- for formatting visual selection
+                    }
+                })
+            end
+        }
 
         --
         -- Completion
@@ -386,18 +383,5 @@ packer.startup({
     end,
     config = {display = {open_fn = require("packer.util").float}}
 })
-
-vim.cmd([[
-function! g:Scriptnames_capture() abort
-  try
-    redir => out
-    exe 'silent! scriptnames'
-  finally
-    redir END
-  endtry
-  call writefile(split(out, "\n", 1), glob('scriptnames.log'), 'b')
-  return out
-endfunction
-]])
 
 return M

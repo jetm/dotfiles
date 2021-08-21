@@ -24,7 +24,7 @@ cmd([[
   augroup END
 
   " resize panes when host window is resized
-  augroup GoFiles
+  augroup WindowAutoRisize
   autocmd VimResized * wincmd =
   augroup END
 ]])
