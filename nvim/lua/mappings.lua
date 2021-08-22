@@ -19,7 +19,6 @@ vimp.nnoremap({'silent'}, '<M-k>', ':move -2<CR>')
 
 vimp.nnoremap({'silent'}, 'Q', ':q<CR>')
 
--- Stop being so lazy - remove arrow key config
 vimp.nmap({'silent'}, '<UP>', '<Nop>')
 vimp.nmap({'silent'}, '<Down>', '<Nop>')
 vimp.nmap({'silent'}, '<Left>', '<Nop>')
@@ -39,7 +38,7 @@ vimp.nnoremap({'silent'}, '<C-.>', '<C-W>>')
 vimp.nnoremap({'silent'}, 'Y', 'y$')
 
 -- Keep the cursor in place while joining lines
--- vimp.nnoremap({'silent'}, 'J', 'mzJ`z')
+vimp.nnoremap({'silent'}, 'J', 'mzJ`z')
 
 -- Visual shifting (does not exit Visual mode)
 vimp.vmap({'silent'}, '<', '<gv')
@@ -51,22 +50,14 @@ vimp.nnoremap({'silent'}, '<C-K>', '<C-W>k')
 vimp.nnoremap({'silent'}, '<C-L>', '<C-W>l')
 vimp.nnoremap({'silent'}, '<C-H>', '<C-W>h')
 
--- Use virtual replace mode all the time
-vimp.nnoremap({'silent'}, 'r', 'gr')
-vimp.nnoremap({'silent'}, 'R', 'gT')
-
 vimp.nmap({'silent'}, '+', '<Plug>(dial-increment)')
 vimp.nmap({'silent'}, '-', '<Plug>(dial-decrement)')
 vimp.vmap({'silent'}, '+', '<Plug>(dial-increment)')
-vimp.vmap({'silent'}, '-', '<Plug>(dial-decrement)')
+vimp.vmap({'silent'}, '-', '<plug>(dial-decrement)')
 
 -- Opens line below or above the current line
 vimp.inoremap({'silent'}, '<S-CR>', '<C-O>o')
 vimp.inoremap({'silent'}, '<C-CR>', '<C-O>O')
-
--- Clears hlsearch after doing a search, otherwise just does normal <CR> stuff
-vimp.nnoremap({'expr', 'silent'}, '<CR>',
-              [[{-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()]])
 
 -- CtrlP compatibility
 -- fzf.vim is quicker than fzf.preview
@@ -117,10 +108,6 @@ vimp.nnoremap({'silent'}, '<A-n>', ':NvimTreeToggle<CR>')
 --
 vimp.xmap({'silent'}, "v", "<Plug>(expand_region_expand)")
 vimp.xmap({'silent'}, "V", "<Plug>(expand_region_shrink)")
-
---
---
---
 
 --
 -- formatter

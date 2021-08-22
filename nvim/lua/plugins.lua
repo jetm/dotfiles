@@ -211,7 +211,14 @@ packer.startup({
         -- Text manipulation
         --
         -- Expand selection
-        use {'terryma/vim-expand-region'}
+        use {
+            'terryma/vim-expand-region',
+            requires = {
+                {'kana/vim-textobj-user'}, {'kana/vim-textobj-line'},
+                {'machakann/vim-textobj-functioncall'},
+                {'sgur/vim-textobj-parameter'}
+            }
+        }
 
         -- Vim plugin, insert or delete brackets, parens, quotes in pair
         use {
@@ -235,20 +242,21 @@ packer.startup({
         use {'monaqa/dial.nvim'}
 
         -- Nvim-plugin for doing the opposite of join-line (J) of arguments
-        -- example: use ,j
-        use {
-            'AckslD/nvim-revJ.lua',
-            requires = {'kana/vim-textobj-user', 'sgur/vim-textobj-parameter'},
-            config = function()
-                require("revj").setup({
-                    keymaps = {
-                        operator = "<Leader>J", -- for operator (+motion)
-                        line = "<Leader>j", -- for formatting current line
-                        visual = "<Leader>j" -- for formatting visual selection
-                    }
-                })
-            end
-        }
+        -- example: use ,<leader>j
+        -- Not working, produces many errors
+        -- use {
+        --     'AckslD/nvim-revJ.lua',
+        --     requires = {'kana/vim-textobj-user', 'sgur/vim-textobj-parameter'},
+        --     config = function()
+        --         require("revj").setup({
+        --             keymaps = {
+        --                 operator = "<Leader>J", -- for operator (+motion)
+        --                 line = "<Leader>j", -- for formatting current line
+        --                 visual = "<Leader>j" -- for formatting visual selection
+        --             }
+        --         })
+        --     end
+        -- }
 
         --
         -- Completion
@@ -270,6 +278,7 @@ packer.startup({
         --
         use {
             "neovim/nvim-lspconfig",
+            requires = {'folke/lua-dev.nvim'},
             config = function()
                 require("plugins.nvim-lspconfig").init()
             end
@@ -321,9 +330,6 @@ packer.startup({
         --
         -- Languages support
         --
-        -- lua nvim setup
-        use {"folke/lua-dev.nvim"}
-
         use {'sheerun/vim-polyglot'}
 
         -- Wisely add if/fi, for/end in several languages
@@ -342,7 +348,6 @@ packer.startup({
         -- An alternative sudo.vim
         use {
             'lambdalisue/suda.vim',
-
             config = function() require('plugins.suda') end
         }
 
