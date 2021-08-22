@@ -22,16 +22,50 @@ setopt NO_NOMATCH
 setopt MULTIOS
 
 #
+# less pager
+#
+unset LESS
+
+# -F quit if one screen
+LESS="--quit-if-one-screen"
+
+# -g highlight only last match for searches
+LESS="${LESS} --hilite-search"
+
+# -i ignore case
+LESS="${LESS} --ignore-case"
+
+# -M
+LESS="${LESS} --long-prompt"
+
+# -R raw
+LESS="${LESS} --raw-control-chars"
+
+# # -S
+# LESS="${LESS} --chop-long-lines"
+
+# -w
+LESS="${LESS} --hilite-unread"
+
+# -X
+LESS="${LESS} --no-init"
+
+LESS="${LESS} -z-4"
+
+# --incsearch incremental search
+LESS="${LESS} --incsearch"
+
+# --no-histdups remove duplicates from command history
+LESS="${LESS} --no-histdups"
+
+export LESS="${LESS}"
+
+#
 # PAGER
 #
-# export PAGER="${HOME}/.zinit/plugins/moar/moar -wrap -no-linenumbers"
-#
-# Set the default Less options
-# Mouse-wheel scrolling has been disabled by -X (disable screen clearing)
-# Remove -X and -F (exit if the content fits on one screen) to enable it
-export LESS='-F -g -i -M -R -S -w -X -z-4'
+export PAGER=less
 
 #
 # Man Pages
 #
-export MANPATH="$ZPFX/share/man${MANPATH:+$MANPATH}"
+export MANPATH="$ZPFX/share/man:/usr/share/man"

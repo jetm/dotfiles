@@ -105,6 +105,16 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     bpick'*x86_64-unknown-linux-gnu*' \
     pick'topgrade'
   zinit light r-darwish/topgrade
+
+  zi0c id-as'less' \
+    ver'v591' \
+    as"program" \
+    atclone'make -f Makefile.aut && autoreconf --install &&
+      ./configure --with-regex=gnu --with-editor=nvim' \
+    atpull"%atclone" \
+    make"-j$[$(nproc) + 1]" \
+    pick'less'
+  zinit light gwsw/less
 fi
 
 #
@@ -339,12 +349,12 @@ zi0c id-as'duf' \
   bpick'*linux_x86_64.tar.gz'
 zinit light muesli/duf
 
-zi0c id-as'moar' \
-  as'program' \
-  atclone'go get && go build' \
-  atpull'%atclone' \
-  pick'moar'
-zinit light walles/moar
+# zi0c id-as'moar' \
+#   as'program' \
+#   atclone'go get && go build' \
+#   atpull'%atclone' \
+#   pick'moar'
+# zinit light walles/moar
 
 #
 # jq parsing
