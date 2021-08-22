@@ -32,11 +32,10 @@ local packer = require("packer")
 local use = packer.use
 
 packer.reset()
-packer.init({max_jobs = 8})
+packer.init({max_jobs = 16})
 
 packer.startup({
     function()
-
         -- Packer can manage itself
         use {'wbthomason/packer.nvim'}
 
@@ -124,7 +123,10 @@ packer.startup({
         --
         -- Rainbow Parentheses Improved, shorter code, no level limit, smooth and fast,
         -- powerful configuration
-        use {'p00f/nvim-ts-rainbow'}
+        use {
+            'p00f/nvim-ts-rainbow',
+            requires = {'nvim-treesitter/nvim-treesitter'}
+        }
 
         -- spaceline is slower
         -- Galaxyline lacks of nice configurations, like feline has
@@ -170,13 +172,14 @@ packer.startup({
         -- Handles bracketed-paste-mode in vim (aka. automatic `:set paste`)
         use {'ConradIrwin/vim-bracketed-paste'}
 
-        -- Pasting in Vim with indentation adjusted to destination context
-        use {'sickill/vim-pasta'}
-
         -- seamless integration for vim and tmux's clipboard
         -- Allows to copy between multiple neovim instances
         -- tmux.nvim needs a lot configuration
         use {'roxma/vim-tmux-clipboard'}
+
+        -- Pasting in Vim with indentation adjusted to destination context
+        -- It breaks vim-repeat
+        -- use {'sickill/vim-pasta'}
 
         --
         -- Diff/Git
@@ -313,7 +316,7 @@ packer.startup({
         }
 
         -- Quickstart configurations for the Nvim LSP client
-        -- use {'kabouzeid/nvim-lspinstall'}
+        use {'kabouzeid/nvim-lspinstall'}
 
         -- Replacing ale, as it's big for just removing whitespaces and do formatting
         use {
@@ -322,6 +325,7 @@ packer.startup({
                 require('plugins.vim-better-whitespace')
             end
         }
+
         use {
             'mhartington/formatter.nvim',
             config = function() require('plugins.formatter') end
