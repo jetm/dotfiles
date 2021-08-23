@@ -1,8 +1,7 @@
 local vim = vim
+local vimp = require('vimp')
 
 vim.g.mapleader = ' '
-
-local vimp = require('vimp')
 
 --  Helper for saving file
 vimp.nmap({'silent'}, '<C-s>', ':update<CR>')
@@ -17,8 +16,6 @@ vimp.nnoremap({'silent'}, 'k', 'gk')
 vimp.nnoremap({'silent'}, '<M-j>', ':move +1<CR>')
 vimp.nnoremap({'silent'}, '<M-k>', ':move -2<CR>')
 
-vimp.nnoremap({'silent'}, 'Q', ':q<CR>')
-
 vimp.nmap({'silent'}, '<UP>', '<Nop>')
 vimp.nmap({'silent'}, '<Down>', '<Nop>')
 vimp.nmap({'silent'}, '<Left>', '<Nop>')
@@ -28,6 +25,8 @@ vimp.imap({'silent'}, '<Down>', '<Nop>')
 vimp.imap({'silent'}, '<Left>', '<Nop>')
 vimp.imap({'silent'}, '<Right>', '<Nop>')
 
+-- macros mapping
+vimp.noremap({'silent'}, 'Q', '@q')
 vimp.nnoremap({'silent'}, 'q', '<Nop>')
 
 -- Sizing window horizontally
@@ -41,14 +40,20 @@ vimp.nnoremap({'silent'}, 'Y', 'y$')
 vimp.nnoremap({'silent'}, 'J', 'mzJ`z')
 
 -- Visual shifting (does not exit Visual mode)
-vimp.vmap({'silent'}, '<', '<gv')
-vimp.vmap({'silent'}, '>', '>gv')
+vimp.vnoremap({'silent'}, '<', '<gv')
+vimp.vnoremap({'silent'}, '>', '>gv')
+vimp.nnoremap({'silent'}, '<', '>>_')
+vimp.nnoremap({'silent'}, '>', '>>_')
 
 -- Move between vim panes with Ctrl-J
 vimp.nnoremap({'silent'}, '<C-J>', '<C-W>j')
 vimp.nnoremap({'silent'}, '<C-K>', '<C-W>k')
 vimp.nnoremap({'silent'}, '<C-L>', '<C-W>l')
 vimp.nnoremap({'silent'}, '<C-H>', '<C-W>h')
+
+-- Search selected text (consistent with `*` behaviour)
+vimp.nnoremap({'silent'}, '*', [[*N]])
+vimp.vnoremap({'silent'}, '*', [[y/\V<c-r>=escape(@",'/\')<cr><cr>N]])
 
 vimp.nmap({'silent'}, '+', '<Plug>(dial-increment)')
 vimp.nmap({'silent'}, '-', '<Plug>(dial-decrement)')
@@ -92,6 +97,12 @@ vimp.nnoremap({'silent'}, '<leader>9', ':BufferGoto9<CR>')
 vimp.nnoremap({'silent'}, '<leader>x', ':BufferClose<CR>')
 -- nnoremap <silent> <leader>x :Bwipeout<CR>
 
+vimp.nnoremap({'silent'}, '<F4>', ':q<CR>')
+
+vimp.nnoremap({'silent'}, '<F3>',
+              ':<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>')
+vimp.nnoremap({'silent'}, '<C-F>', ':<C-U>Leaderf! rg --recall<CR>')
+
 --
 -- NvimTree
 --
@@ -132,7 +143,3 @@ vimp.nnoremap({'silent'}, "<Leader>qo", ":copen<CR>")
 -- LSP
 --
 vimp.nnoremap({'silent'}, '<leader>gt', ':LspTroubleToggle<CR>')
-
-vimp.nnoremap({'silent'}, '<C-F>',
-              ':<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>')
-vimp.nnoremap({'silent'}, 'go', ':<C-U>Leaderf! rg --recall<CR>')

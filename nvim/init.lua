@@ -7,13 +7,14 @@ vim.g.python3_host_prog = os.getenv("HOME") ..
                               "/.asdf/installs/python/3.9.6/bin/python3.9"
 
 -- Disable some unused built-in Neovim plugins
-vim.g.loaded_man = false
-vim.g.loaded_gzip = false
-vim.g.loaded_netrwPlugin = false
-vim.g.loaded_tarPlugin = false
-vim.g.loaded_zipPlugin = false
-vim.g.loaded_2html_plugin = false
-vim.g.loaded_remote_plugins = false
+local disabled_built_ins = {
+    '2html_plugin', 'getscript', 'getscriptPlugin', 'gzip', 'logipat', 'man',
+    'matchit', 'netrw', 'netrwFileHandlers', 'netrwPlugin', 'netrwSettings',
+    'remotes_plugins', 'rrhelper', 'spellfile_plugin', 'tar', 'tarPlugin',
+    'vimball', 'vimballPlugin', 'zip', 'zipPlugin'
+}
+
+for _, plugin in pairs(disabled_built_ins) do vim.g['loaded_' .. plugin] = false end
 
 require('plugins')
 require('global')
