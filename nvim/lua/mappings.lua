@@ -95,8 +95,8 @@ vimp.nnoremap({'silent'}, '<leader>x', ':BufferClose<CR>')
 --
 -- NvimTree
 --
-vimp.nnoremap({'silent'}, '<leader>n', ':NvimTreeFindFile<CR>')
-vimp.nnoremap({'silent'}, '<A-n>', ':NvimTreeToggle<CR>')
+vimp.nnoremap({'silent'}, '<F14>', ':NvimTreeFindFile<CR>')
+vimp.nnoremap({'silent'}, '<F2>', ':NvimTreeToggle<CR>')
 
 --
 -- shellharden
