@@ -32,22 +32,17 @@ local packer = require("packer")
 local use = packer.use
 
 packer.reset()
-packer.init({max_jobs = 16})
+packer.init({
+    max_jobs = 16,
+    luarocks = {
+        python_cmd = 'python3' -- Set the python command to use for running hererocks
+    }
+})
 
 packer.startup({
     function()
         -- Packer can manage itself
         use {'wbthomason/packer.nvim'}
-
-        -- Vim version
-        -- use 'joshdick/onedark.vim'
-        -- Coping joshdick
-        -- use {'ii14/onedark.nvim'}
-        -- More complete
-        use {
-            'navarasu/onedark.nvim',
-            config = function() require('onedark').setup() end
-        }
 
         -- Neovim plugin that allows you to easily write your .vimrc in lua or any lua based language
         use {'svermeulen/vimpeccable'}
@@ -74,10 +69,17 @@ packer.startup({
         use {
             'nvim-treesitter/nvim-treesitter',
             run = ':TSUpdate',
+            requires = {
+                {"nvim-treesitter/nvim-treesitter-refactor"},
+                {"nvim-treesitter/nvim-treesitter-textobjects"},
+                {"romgrk/nvim-treesitter-context"}, {"p00f/nvim-ts-rainbow"}
+            },
             config = function() require("plugins.nvim-treesitter") end
         }
 
-        use {"romgrk/nvim-treesitter-context"}
+        use {'andymass/vim-matchup',
+            config = function() require("plugins.vim-matchup") end
+        }
 
         --
         -- Navigation
@@ -121,11 +123,14 @@ packer.startup({
         --
         -- UI
         --
-        -- Rainbow Parentheses Improved, shorter code, no level limit, smooth and fast,
-        -- powerful configuration
+        -- Vim version
+        -- use 'joshdick/onedark.vim'
+        -- Coping joshdick
+        -- use {'ii14/onedark.nvim'}
+        -- More complete
         use {
-            'p00f/nvim-ts-rainbow',
-            requires = {'nvim-treesitter/nvim-treesitter'}
+            'navarasu/onedark.nvim',
+            config = function() require('onedark').setup() end
         }
 
         -- spaceline is slower
@@ -281,13 +286,29 @@ packer.startup({
         --
         use {
             "neovim/nvim-lspconfig",
-            requires = {'folke/lua-dev.nvim'},
+            requires = {
+                'folke/lua-dev.nvim', {
+                    -- Lightweight UI provider for LSP
+                    "glepnir/lspsaga.nvim"
+                }, {
+                    -- Signature hint when typing
+                    "ray-x/lsp_signature.nvim"
+                }, {
+                    -- Generate statusline components from the built-in LSP client
+                    "nvim-lua/lsp-status.nvim"
+                }, {
+                    -- Pictograms for LSP completion system
+                    "onsails/lspkind-nvim"
+                }, {
+                    -- Better diagnostic list
+                    "folke/lsp-trouble.nvim"
+                }
+
+            },
             config = function()
                 require("plugins.nvim-lspconfig").init()
             end
         }
-
-        use {"ray-x/lsp_signature.nvim"}
 
         -- window for showing LSP detected issues in code
         use {
@@ -316,7 +337,7 @@ packer.startup({
         }
 
         -- Quickstart configurations for the Nvim LSP client
-        use {'kabouzeid/nvim-lspinstall'}
+        -- use {'kabouzeid/nvim-lspinstall'}
 
         -- Replacing ale, as it's big for just removing whitespaces and do formatting
         use {
