@@ -35,7 +35,8 @@ packer.reset()
 packer.init({
     max_jobs = 16,
     luarocks = {
-        python_cmd = 'python3' -- Set the python command to use for running hererocks
+        -- Set the python command to use for running hererocks
+        python_cmd = 'python3'
     }
 })
 
@@ -45,7 +46,7 @@ packer.startup({
         use {'wbthomason/packer.nvim'}
 
         -- Neovim plugin that allows you to easily write your .vimrc in lua or any lua based language
-        use {'svermeulen/vimpeccable'}
+        use {'svermeulen/vimpeccable', requires = {'tpope/vim-repeat'}}
 
         -- Apply fast colors
         use {
@@ -59,26 +60,30 @@ packer.startup({
             config = function() require('plugins.barbar') end
         }
 
-        -- Icons collections
-        use {'kyazdani42/nvim-web-devicons'}
-
-        -- Icon set using nonicons for neovim plugins and settings
-        use {'yamatsum/nvim-nonicons'}
-
         -- We recommend updating the parsers on update
         use {
             'nvim-treesitter/nvim-treesitter',
             run = ':TSUpdate',
             requires = {
-                {"nvim-treesitter/nvim-treesitter-refactor"},
-                {"nvim-treesitter/nvim-treesitter-textobjects"},
-                {"romgrk/nvim-treesitter-context"}, {"p00f/nvim-ts-rainbow"}
+                {'kyazdani42/nvim-web-devicons'},
+                {'nvim-treesitter/nvim-treesitter-refactor'},
+                {'nvim-treesitter/nvim-treesitter-textobjects'},
+                {'romgrk/nvim-treesitter-context'}, {'p00f/nvim-ts-rainbow'}
             },
-            config = function() require("plugins.nvim-treesitter") end
+            config = function() require('plugins.nvim-treesitter') end
         }
 
-        use {'andymass/vim-matchup',
-            config = function() require("plugins.vim-matchup") end
+        use {
+            'andymass/vim-matchup',
+            config = function() require('plugins.vim-matchup') end
+        }
+
+        -- Icons collections
+
+        -- Icon set using nonicons for neovim plugins and settings
+        use {
+            'yamatsum/nvim-nonicons',
+            requires = {'kyazdani42/nvim-web-devicons'}
         }
 
         --
@@ -86,16 +91,19 @@ packer.startup({
         --
         -- fuzzy finder
         -- Replace fzf
-        use {"nvim-lua/popup.nvim"}
-        use {"nvim-lua/plenary.nvim"}
-        use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
+        use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
         use {
-            "nvim-telescope/telescope.nvim",
-            config = function() require("plugins.telescope") end
+            'nvim-telescope/telescope.nvim',
+            requires = {
+                'nvim-telescope/telescope-fzf-native.nvim',
+                'yamatsum/nvim-nonicons', 'nvim-lua/popup.nvim',
+                'nvim-lua/plenary.nvim'
+            },
+            config = function() require('plugins.telescope') end
         }
 
         use {
-            "Yggdroot/LeaderF",
+            'Yggdroot/LeaderF',
             run = function() vim.cmd([[LeaderfInstallCExtension]]) end,
             config = function() require('plugins.leaderf') end
         }
@@ -154,13 +162,13 @@ packer.startup({
         -- Go to the last edited place
         use {
             'ethanholz/nvim-lastplace',
-            config = function() require("plugins.nvim-lastplace") end
+            config = function() require('plugins.nvim-lastplace') end
         }
 
         --
         -- Search/Replace
         --
-        use {"mg979/vim-visual-multi"}
+        use {'mg979/vim-visual-multi'}
 
         -- Substitute preview
         use {'osyo-manga/vim-over'}
@@ -196,23 +204,23 @@ packer.startup({
         -- Git features and provider for feline
         -- like gitgutter shows hunks etc on sign column
         use {
-            "lewis6991/gitsigns.nvim",
+            'lewis6991/gitsigns.nvim',
             requires = {'nvim-lua/plenary.nvim'},
-            config = function() require("plugins.gitsigns") end
+            config = function() require('plugins.gitsigns') end
         }
 
         -- magit for neovim
         use {
             'TimUntersberger/neogit',
             requires = {'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim'},
-            config = function() require("plugins.neogit") end
+            config = function() require('plugins.neogit') end
         }
 
         -- single tabpage interface for easily cycling through diffs for all
         -- modified files for any git rev
         use {
             'sindrets/diffview.nvim',
-            config = function() require("plugins.diffview") end
+            config = function() require('plugins.diffview') end
         }
 
         --
@@ -273,66 +281,66 @@ packer.startup({
             'ms-jpq/coq_nvim',
             branch = 'coq',
             run = ':COQdeps',
-            config = function() require("plugins.coq") end
+            config = function() require('plugins.coq') end
         }
 
         -- coq_nvim snippets
         use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
 
-        use {"tzachar/compe-tabnine", run = "./install.sh"}
+        use {'tzachar/compe-tabnine', run = './install.sh'}
 
         --
         -- LSP
         --
         use {
-            "neovim/nvim-lspconfig",
+            'neovim/nvim-lspconfig',
             requires = {
                 'folke/lua-dev.nvim', {
                     -- Lightweight UI provider for LSP
-                    "glepnir/lspsaga.nvim"
+                    'glepnir/lspsaga.nvim'
                 }, {
                     -- Signature hint when typing
-                    "ray-x/lsp_signature.nvim"
+                    'ray-x/lsp_signature.nvim'
                 }, {
                     -- Generate statusline components from the built-in LSP client
-                    "nvim-lua/lsp-status.nvim"
+                    'nvim-lua/lsp-status.nvim'
                 }, {
                     -- Pictograms for LSP completion system
-                    "onsails/lspkind-nvim"
+                    'onsails/lspkind-nvim'
                 }, {
                     -- Better diagnostic list
-                    "folke/lsp-trouble.nvim"
+                    'folke/lsp-trouble.nvim'
                 }
 
             },
             config = function()
-                require("plugins.nvim-lspconfig").init()
+                require('plugins.nvim-lspconfig').init()
             end
         }
 
         -- window for showing LSP detected issues in code
         use {
-            "folke/lsp-trouble.nvim",
-            config = function() require("plugins.lsp-trouble") end
+            'folke/lsp-trouble.nvim',
+            config = function() require('plugins.lsp-trouble') end
         }
 
         -- lsp status
         use {
             "nvim-lua/lsp-status.nvim",
-            config = function() require("plugins.lsp-status") end
+            config = function() require('plugins.lsp-status') end
         }
 
         -- fancy popups lsp
         use {
-            "glepnir/lspsaga.nvim",
-            config = function() require("plugins.lspsaga") end
+            'glepnir/lspsaga.nvim',
+            config = function() require('plugins.lspsaga') end
         }
 
         -- lsp extensions stuff
         use {
-            "onsails/lspkind-nvim",
+            'onsails/lspkind-nvim',
             config = function()
-                require("lspkind").init({File = " "})
+                require('lspkind').init({File = ' '})
             end
         }
 
@@ -381,7 +389,8 @@ packer.startup({
 
         -- File manager
         use {
-            "kyazdani42/nvim-tree.lua",
+            'kyazdani42/nvim-tree.lua',
+            requires = 'kyazdani42/nvim-web-devicons',
             config = function() require('plugins.nvim-tree') end
         }
 
@@ -393,17 +402,17 @@ packer.startup({
 
         -- todo searcher
         use {
-            "folke/todo-comments.nvim",
-            requires = "nvim-lua/plenary.nvim",
+            'folke/todo-comments.nvim',
+            requires = 'nvim-lua/plenary.nvim',
             config = function() require('plugins.todo-comments') end
         }
 
         -- Create key bindings that stick. Displays a popup with possible
         -- keybindings of the command you started typing
         use {
-            "folke/which-key.nvim",
+            'folke/which-key.nvim',
             config = function()
-                require("which-key").setup {
+                require('which-key').setup {
                     -- your configuration comes here
                     -- or leave it empty to use the default settings
                 }
@@ -411,7 +420,7 @@ packer.startup({
         }
 
     end,
-    config = {display = {open_fn = require("packer.util").float}}
+    config = {display = {open_fn = require('packer.util').float}}
 })
 
 return M

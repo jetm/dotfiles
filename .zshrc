@@ -93,7 +93,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     for https://github.com/git/git/releases/
 
   # look for 70-asdf.zsh configuration file
-  zi0a id-as"asdf" \
+  zi0a id-as'asdf' \
     atinit'export ASDF_DATA_DIR="$HOME/.asdf"; \
       export ASDF_CONFIG_FILE="$ASDF_DATA_DIR/.asdfrc";'
   zinit light asdf-vm/asdf
@@ -108,13 +108,20 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
 
   zi0c id-as'less' \
     ver'v591' \
-    as"program" \
+    as'program' \
     atclone'make -f Makefile.aut && autoreconf --install &&
       ./configure --with-regex=gnu --with-editor=nvim' \
     atpull"%atclone" \
     make"-j$[$(nproc) + 1]" \
     pick'less'
   zinit light gwsw/less
+
+  zi0c id-as'clangd' \
+    from'gh-r' \
+    as'program'  \
+    bpick'clangd-linux*' \
+    mv'clangd*/bin/clangd -> clangd'
+	zinit light clangd/clangd
 fi
 
 #
@@ -183,9 +190,9 @@ ZVM_VI_SURROUND_BINDKEY=s-prefix
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 
 zi0b id-as'fzf' \
-  from"gh-r" \
-  as"program" \
-  bpick"*linux_amd64*" \
+  from'gh-r' \
+  as'program' \
+  bpick'*linux_amd64*' \
   dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh' \
   src'key-bindings.zsh' \
   pick'fzf'
@@ -195,11 +202,11 @@ zinit light junegunn/fzf
 # zinit light Aloxaf/fzf-tab
 
 zi0c id-as'zoxide' \
-  from"gh-r" \
-  as"program" \
-  bpick"*x86_64-unknown-linux*" \
-  mv"zoxide*/zoxide -> zoxide" \
-  pick"zoxide" \
+  from'gh-r' \
+  as'program' \
+  bpick'*x86_64-unknown-linux*' \
+  mv'zoxide*/zoxide -> zoxide' \
+  pick'zoxide' \
   atload'eval "$(zoxide init zsh)";'
 zinit light ajeetdsouza/zoxide
 
@@ -232,7 +239,7 @@ zinit light ajeetdsouza/zoxide
 zi0c id-as'zsh-syntax-highlighting' \
   depth=1 \
   cloneonly \
-  atpull"%atclone" \
+  atpull'%atclone' \
   nocompile \
   nocd
 zinit light zsh-users/zsh-syntax-highlighting
@@ -266,7 +273,7 @@ zi0c id-as'cht.sh' \
   as'command' \
   has'rlwrap' \
   pick'cht.sh' \
-  atload'export CHTSH="$XDG_CONFIG_HOME"'
+  atload"export CHTSH="$XDG_CONFIG_HOME""
 zinit snippet https://cht.sh/:cht.sh
 
 #
@@ -321,9 +328,9 @@ zi0b id-as'fd' \
   pick'fd'
 zinit light sharkdp/fd
 
-zi0a id-as"exa" \
-  from"gh-r" \
-  as"program" \
+zi0a id-as'exa' \
+  from'gh-r' \
+  as'program' \
   mv'bin/exa -> exa' \
   pick'exa'
 zinit light ogham/exa
@@ -377,7 +384,7 @@ zinit light muesli/duf
 # Monitoring
 #
 zi0c id-as'htop' \
-  as"program" \
+  as'program' \
   ver'3.0.5' \
   atclone"./autogen.sh && ./configure --enable-delayacct" \
   atpull"%atclone" \
@@ -465,7 +472,7 @@ zi0c id-as'efm' \
   from'gh-r' \
   as'program' \
   bpick'*linux_amd64*' \
-  mv"*/efm-langserver -> efm-langserver" \
+  mv'*/efm-langserver -> efm-langserver' \
   pick"efm-langserver"
 zinit light mattn/efm-langserver
 
@@ -483,14 +490,14 @@ zinit light sumneko/lua-language-server
 zi0c id-as'forgit' \
   depth=1 \
   cloneonly \
-  atpull"%atclone" \
+  atpull'%atclone' \
   nocompile \
   nocd
 zinit light wfxr/forgit
 
 zi0c id-as'git-fuzzy' \
-  as"program" \
-  pick"bin/git-fuzzy"
+  as'program' \
+  pick'bin/git-fuzzy'
 zinit light bigH/git-fuzzy
 
 # Put here all rust installations
@@ -549,11 +556,11 @@ zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-undo
 zinit id-as'parallel' \
   as'readurl|command' \
   nocompile \
-  atclone"ziextract --auto --move && ./configure --disable-documentation" \
+  atclone'ziextract --auto --move && ./configure --disable-documentation' \
   atpull'%atclone' \
   make'' \
   pick'src/parallel' \
-  dlink"parallel-latest.tar.bz2" \
+  dlink'parallel-latest.tar.bz2' \
   for https://ftp.gnu.org/gnu/parallel/
 
 # interactive parallel ssh client

@@ -1,6 +1,23 @@
 local vim = vim
-
 local icons = require("nvim-nonicons")
+local M = {}
+
+function M.resize()
+    local w = require'nvim-tree.view'.View.width
+    if original_width == nil then original_width = w end
+    if w ~= original_width then
+        w = original_width
+    else
+        w = w + 10
+    end
+    require'nvim-tree.view'.View.width = w
+    vim.cmd('NvimTreeClose')
+    vim.cmd('NvimTreeToggle')
+end
+
+vim.g.nvim_tree_bindings = {
+    {key = "z", cb = [[:lua require('plugins.nvim-tree').resize()<CR>]]}
+}
 
 vim.g.nvim_tree_icons = {
     default = icons.get("file"),
@@ -41,3 +58,5 @@ vim.g.nvim_tree_follow = 1
 
 -- closes the tree when it's the last window
 vim.g.nvim_tree_auto_close = true
+
+return M

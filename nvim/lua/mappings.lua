@@ -13,8 +13,8 @@ vimp.nnoremap({'silent'}, 'j', 'gj')
 vimp.nnoremap({'silent'}, 'k', 'gk')
 
 -- move one line up and one line down
-vimp.nnoremap({'silent'}, '<M-j>', ':move +1<CR>')
-vimp.nnoremap({'silent'}, '<M-k>', ':move -2<CR>')
+vimp.bind({'repeatable'}, '<M-k>', ':move -2<CR>')
+vimp.bind({'repeatable'}, '<M-j>', ':move +1<CR>')
 
 vimp.nmap({'silent'}, '<UP>', '<Nop>')
 vimp.nmap({'silent'}, '<Down>', '<Nop>')
@@ -59,10 +59,6 @@ vimp.nmap({'silent'}, '+', '<Plug>(dial-increment)')
 vimp.nmap({'silent'}, '-', '<Plug>(dial-decrement)')
 vimp.vmap({'silent'}, '+', '<Plug>(dial-increment)')
 vimp.vmap({'silent'}, '-', '<plug>(dial-decrement)')
-
--- Opens line below or above the current line
-vimp.inoremap({'silent'}, '<S-CR>', '<C-O>o')
-vimp.inoremap({'silent'}, '<C-CR>', '<C-O>O')
 
 -- CtrlP compatibility
 -- fzf.vim is quicker than fzf.preview
@@ -143,3 +139,7 @@ vimp.nnoremap({'silent'}, "<Leader>qo", ":copen<CR>")
 -- LSP
 --
 vimp.nnoremap({'silent'}, '<leader>gt', ':LspTroubleToggle<CR>')
+
+-- Cancel a leader operation without sometimes causing unintended side effects
+-- https://github.com/svermeulen/vimpeccable#chord-cancellation-maps
+vimp.add_chord_cancellations('n', '<leader>')
