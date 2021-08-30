@@ -48,7 +48,7 @@ function LSP:on_attach(client, bufnr)
         hint_enable = true, -- virtual hint enable
         hint_prefix = "", -- Panda for parameter
         hint_scheme = "String",
-        use_lspsaga = false, -- set to true if you want to use lspsaga popup
+        use_lspsaga = true, -- set to true if you want to use lspsaga popup
         hi_parameter = "FloatBorder", -- how your parameter will be highlight
         handler_opts = {
             border = "single" -- double, single, shadow, none

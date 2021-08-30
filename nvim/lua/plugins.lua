@@ -102,9 +102,10 @@ packer.startup({
             config = function() require('plugins.telescope') end
         }
 
+        -- fast grep using ripgrep. It allows to change grepping directory
         use {
             'Yggdroot/LeaderF',
-            run = function() vim.cmd([[LeaderfInstallCExtension]]) end,
+            run = ':LeaderfInstallCExtension',
             config = function() require('plugins.leaderf') end
         }
 
@@ -288,6 +289,25 @@ packer.startup({
         use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
 
         use {'tzachar/compe-tabnine', run = './install.sh'}
+
+        -- nvim-cmp is slow. Test more later
+        -- use {
+        --     'hrsh7th/nvim-cmp',
+        --     requires = 'onsails/lspkind-nvim',
+        --     config = function() require('plugins.nvim-cmp') end
+        -- }
+        -- -- sources
+        -- use {
+        --     'tzachar/cmp-tabnine',
+        --     requires = 'tzachar/nvim-cmp',
+        --     run = './install.sh'
+        -- }
+        -- use {'hrsh7th/cmp-buffer', requires = 'tzachar/nvim-cmp'}
+        -- use {'hrsh7th/cmp-nvim-lsp', requires = 'tzachar/nvim-cmp'}
+        -- use {'hrsh7th/cmp-path', requires = 'tzachar/nvim-cmp'}
+        -- use {'hrsh7th/cmp-vsnip', requires = 'tzachar/nvim-cmp'}
+        -- use {'hrsh7th/vim-vsnip', requires = 'hrsh7th/vim-vsnip-integ'}
+
 
         --
         -- LSP
