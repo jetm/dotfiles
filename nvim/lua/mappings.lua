@@ -45,11 +45,11 @@ vimp.vnoremap({'silent'}, '>', '>gv')
 vimp.nnoremap({'silent'}, '<', '>>_')
 vimp.nnoremap({'silent'}, '>', '>>_')
 
--- Move between vim panes with Ctrl-J
-vimp.nnoremap({'silent'}, '<C-J>', '<C-W>j')
-vimp.nnoremap({'silent'}, '<C-K>', '<C-W>k')
-vimp.nnoremap({'silent'}, '<C-L>', '<C-W>l')
-vimp.nnoremap({'silent'}, '<C-H>', '<C-W>h')
+-- Move between vim panes
+vimp.nnoremap({'silent'}, '<C-j>', '<C-W>j')
+vimp.nnoremap({'silent'}, '<C-k>', '<C-W>k')
+vimp.nnoremap({'silent'}, '<C-l>', '<C-W>l')
+vimp.nnoremap({'silent'}, '<C-h>', '<C-W>h')
 
 -- Search selected text (consistent with `*` behaviour)
 vimp.nnoremap({'silent'}, '*', [[*N]])
@@ -70,7 +70,7 @@ vimp.nnoremap({'silent'}, '<C-p>',
 
 -- Use <Alt-l> to clear the highlighting of :set hlsearch
 vimp.nnoremap({'silent'}, '<M-l>',
-              ':nohlsearch<CR>:diffupdate<CR>:syntax sync fromstart<CR><C-l>')
+              '<Cmd>nohlsearch<Bar>diffupdate<Bar>syntax sync fromstart<CR><M-l>')
 
 -- Comments
 vimp.nmap({'silent'}, '<leader>c', '<Plug>NERDCommenterToggle')
