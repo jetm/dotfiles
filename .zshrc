@@ -107,7 +107,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zinit light r-darwish/topgrade
 
   zi0c id-as'less' \
-    ver'v591' \
+    ver'v593' \
     as'program' \
     atclone'make -f Makefile.aut && autoreconf --install &&
       ./configure --with-regex=gnu --with-editor=nvim' \

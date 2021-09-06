@@ -42,6 +42,13 @@ packer.init({
 
 packer.startup({
     function()
+        -- Need to be at the beginning
+        use {
+            "lewis6991/impatient.nvim",
+            rocks = "mpack",
+            config = 'pcall(require, "impatient")'
+        }
+
         -- Packer can manage itself
         use {'wbthomason/packer.nvim'}
 
@@ -210,19 +217,20 @@ packer.startup({
             config = function() require('plugins.gitsigns') end
         }
 
-        -- magit for neovim
-        use {
-            'TimUntersberger/neogit',
-            requires = {'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim'},
-            config = function() require('plugins.neogit') end
-        }
-
-        -- single tabpage interface for easily cycling through diffs for all
-        -- modified files for any git rev
-        use {
-            'sindrets/diffview.nvim',
-            config = function() require('plugins.diffview') end
-        }
+        -- Disable because crashes nvim
+        -- -- magit for neovim
+        -- use {
+        --     'TimUntersberger/neogit',
+        --     requires = {'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim'},
+        --     config = function() require('plugins.neogit') end
+        -- }
+        --
+        -- -- single tabpage interface for easily cycling through diffs for all
+        -- -- modified files for any git rev
+        -- use {
+        --     'sindrets/diffview.nvim',
+        --     config = function() require('plugins.diffview') end
+        -- }
 
         --
         -- Text manipulation
@@ -240,6 +248,7 @@ packer.startup({
         -- Vim plugin, insert or delete brackets, parens, quotes in pair
         use {
             "windwp/nvim-autopairs",
+            requires = {'nvim-treesitter/nvim-treesitter'},
             config = function() require('plugins.nvim-autopairs') end
         }
 
@@ -290,7 +299,7 @@ packer.startup({
 
         use {'tzachar/compe-tabnine', run = './install.sh'}
 
-        -- nvim-cmp is slow. Test more later
+        -- nvim-cmp is slow. Test it more later
         -- use {
         --     'hrsh7th/nvim-cmp',
         --     requires = 'onsails/lspkind-nvim',
@@ -307,7 +316,6 @@ packer.startup({
         -- use {'hrsh7th/cmp-path', requires = 'tzachar/nvim-cmp'}
         -- use {'hrsh7th/cmp-vsnip', requires = 'tzachar/nvim-cmp'}
         -- use {'hrsh7th/vim-vsnip', requires = 'hrsh7th/vim-vsnip-integ'}
-
 
         --
         -- LSP
@@ -355,17 +363,6 @@ packer.startup({
             'glepnir/lspsaga.nvim',
             config = function() require('plugins.lspsaga') end
         }
-
-        -- lsp extensions stuff
-        use {
-            'onsails/lspkind-nvim',
-            config = function()
-                require('lspkind').init({File = ' '})
-            end
-        }
-
-        -- Quickstart configurations for the Nvim LSP client
-        -- use {'kabouzeid/nvim-lspinstall'}
 
         -- Replacing ale, as it's big for just removing whitespaces and do formatting
         use {

@@ -3,8 +3,7 @@
 --
 local vim = vim
 
-vim.g.python3_host_prog = os.getenv("HOME") ..
-                              "/.asdf/installs/python/3.9.6/bin/python3.9"
+vim.g.python3_host_prog = '/usr/bin/python3.9'
 
 -- Disable some unused built-in Neovim plugins
 local disabled_built_ins = {
