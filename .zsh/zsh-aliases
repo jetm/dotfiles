@@ -145,17 +145,17 @@ if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
   # dependencies
   abbrev-alias -c parem='sudo pacman -Rns'
 
-  if (command -v yay > /dev/null 2>&1); then
+  if (command -v paru > /dev/null 2>&1); then
     # Upgrade all packages
-    abbrev-alias -c paud='yay -Syu --devel'
+    abbrev-alias -c paud='paru -Syu --devel'
 
     # Install specific package(s) from local and AUR
-    abbrev-alias -c pain='yay -S'
+    abbrev-alias -c pain='paru -S'
 
     # Install specific package from source package
-    abbrev-alias -c pains='yay -U'
+    abbrev-alias -c pains='paru -U'
 
     # Search for package(s) for local and AUR
-    abbrev-alias -c pasp='yay'
+    abbrev-alias -c pasp='paru'
   fi
 fi
