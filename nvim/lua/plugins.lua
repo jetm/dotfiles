@@ -169,7 +169,8 @@ packer.startup({
         -- Replace hop.nvim and quick-scope
         use {
             'ggandor/lightspeed.nvim',
-            config = function() require('plugins.lightspeed') end
+            config = function() require('plugins.lightspeed') end,
+            after = 'coq_nvim'
         }
 
         -- usein for vim to enabling opening a file in a given line
