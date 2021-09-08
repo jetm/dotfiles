@@ -80,13 +80,17 @@ packer.startup({
             config = function() require('plugins.nvim-treesitter') end
         }
 
+        -- even better % navigate and highlight matchin words
         use {
             'andymass/vim-matchup',
-            config = function() require('plugins.vim-matchup') end
+            config = function() require('plugins.vim-matchup') end,
+            event = 'CursorMoved',
+            opt = true
         }
 
+        --
         -- Icons collections
-
+        --
         -- Icon set using nonicons for neovim plugins and settings
         use {
             'yamatsum/nvim-nonicons',
@@ -116,6 +120,7 @@ packer.startup({
             config = function() require('plugins.leaderf') end
         }
 
+        -- Better quickfix window in Neovim, polish old quickfix window
         use {'kevinhwang91/nvim-bqf'}
 
         -- use {'camspiers/snap',
@@ -162,7 +167,10 @@ packer.startup({
         --
         -- Next-generation motion plugin for incredibly fast on-screen navigation.
         -- Replace hop.nvim and quick-scope
-        use {'ggandor/lightspeed.nvim'}
+        use {
+            'ggandor/lightspeed.nvim',
+            config = function() require('plugins.lightspeed') end
+        }
 
         -- usein for vim to enabling opening a file in a given line
         use {'wsdjeg/vim-fetch'}

@@ -88,10 +88,7 @@ vimp.nnoremap({'silent'}, '<leader>6', ':BufferGoto6<CR>')
 vimp.nnoremap({'silent'}, '<leader>7', ':BufferGoto7<CR>')
 vimp.nnoremap({'silent'}, '<leader>8', ':BufferGoto8<CR>')
 vimp.nnoremap({'silent'}, '<leader>9', ':BufferGoto9<CR>')
-
--- barbar buffer close still has some issues. Try later
 vimp.nnoremap({'silent'}, '<leader>x', ':BufferClose<CR>')
--- nnoremap <silent> <leader>x :Bwipeout<CR>
 
 vimp.nnoremap({'silent'}, '<F4>', ':q<CR>')
 
