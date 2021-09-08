@@ -59,6 +59,7 @@ vimp.add_chord_cancellations('n', '<leader>')
 vimp.nnoremap({'silent'}, '<leader>f', ':Format<CR>')
 
 vimp.nnoremap({'silent'}, '<leader>q', ':q<CR>')
+vimp.nnoremap({'silent'}, '<leader>Q', ':qa<CR>')
 
 -- Comments
 vimp.nmap({'silent'}, '<leader>c', '<Plug>NERDCommenterToggle')
