@@ -55,18 +55,6 @@ packer.startup({
         -- Neovim plugin that allows you to easily write your .vimrc in lua or any lua based language
         use {'svermeulen/vimpeccable', requires = {'tpope/vim-repeat'}}
 
-        -- Apply fast colors
-        use {
-            'norcalli/nvim-colorizer.lua',
-            config = function() require('plugins.nvim-colorizer') end
-        }
-
-        -- Neovim tabline plugin
-        use {
-            'romgrk/barbar.nvim',
-            config = function() require('plugins.barbar') end
-        }
-
         -- We recommend updating the parsers on update
         use {
             'nvim-treesitter/nvim-treesitter',
@@ -80,29 +68,13 @@ packer.startup({
             config = function() require('plugins.nvim-treesitter') end
         }
 
-        -- even better % navigate and highlight matchin words
-        use {
-            'andymass/vim-matchup',
-            config = function() require('plugins.vim-matchup') end,
-            event = 'CursorMoved',
-            opt = true
-        }
-
         --
-        -- Icons collections
-        --
-        -- Icon set using nonicons for neovim plugins and settings
-        use {
-            'yamatsum/nvim-nonicons',
-            requires = {'kyazdani42/nvim-web-devicons'}
-        }
-
-        --
-        -- Navigation
+        -- Navigation/Movement
         --
         -- fuzzy finder
         -- Replace fzf
         use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
+
         use {
             'nvim-telescope/telescope.nvim',
             requires = {
@@ -135,12 +107,18 @@ packer.startup({
             end
         }
 
-        -- Indent guides on blank lines for Neovim
+        -- even better % navigate and highlight matchin words
         use {
-            'lukas-reineke/indent-blankline.nvim',
-            config = function() require('plugins.indent-blankline') end
+            'andymass/vim-matchup',
+            config = function() require('plugins.vim-matchup') end,
+            event = 'CursorMoved',
+            opt = true
         }
 
+        use {
+            'Jorengarenar/vim-MvVis',
+            config = function() require('plugins.vim-MvVis') end,
+        }
         --
         -- UI
         --
@@ -152,6 +130,30 @@ packer.startup({
         use {
             'navarasu/onedark.nvim',
             config = function() require('onedark').setup() end
+        }
+
+        -- Icon set using nonicons for neovim plugins and settings
+        use {
+            'yamatsum/nvim-nonicons',
+            requires = {'kyazdani42/nvim-web-devicons'}
+        }
+
+        -- Apply fast colors
+        use {
+            'norcalli/nvim-colorizer.lua',
+            config = function() require('plugins.nvim-colorizer') end
+        }
+
+        -- Neovim tabline plugin
+        use {
+            'romgrk/barbar.nvim',
+            config = function() require('plugins.barbar') end
+        }
+
+        -- Indent guides on blank lines for Neovim
+        use {
+            'lukas-reineke/indent-blankline.nvim',
+            config = function() require('plugins.indent-blankline') end
         }
 
         -- spaceline is slower
