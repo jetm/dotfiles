@@ -45,8 +45,9 @@ packer.startup({
         -- Need to be at the beginning
         use {
             "lewis6991/impatient.nvim",
-            rocks = "mpack",
-            config = 'pcall(require, "impatient")'
+            config = function()
+                require('impatient')
+            end
         }
 
         -- Packer can manage itself
