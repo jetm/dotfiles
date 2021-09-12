@@ -204,7 +204,7 @@ zinit light junegunn/fzf
 zi0c id-as'zoxide' \
   from'gh-r' \
   as'program' \
-  bpick'*x86_64-unknown-linux*' \
+  bpick'*x86_64*linux*' \
   mv'zoxide*/zoxide -> zoxide' \
   pick'zoxide' \
   atload'eval "$(zoxide init zsh)";'
