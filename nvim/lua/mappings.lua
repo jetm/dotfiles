@@ -1,16 +1,15 @@
-local vim = vim
-local vimp = require('vimp')
-
 --
 -- Misc mappings
 --
+local vimp = require('vimp')
+
 -- moving up and down work as you would expect
 vimp.nnoremap({'silent'}, 'j', 'gj')
 vimp.nnoremap({'silent'}, 'k', 'gk')
 
--- macros mapping
-vimp.noremap({'silent'}, 'Q', '@q')
-vimp.nnoremap({'silent'}, 'q', '<Nop>')
+-- quitting mapping
+vimp.nnoremap({'silent'}, 'q', ':q<CR>')
+vimp.nnoremap({'silent'}, 'Q', ':qa<CR>')
 
 -- copy until the end
 vimp.nnoremap({'silent'}, 'Y', 'y$')
@@ -54,6 +53,8 @@ vimp.vmap({'silent'}, '-', '<plug>(dial-decrement)')
 --
 -- <leader> mappings
 --
+local vim = vim
+
 vim.g.mapleader = ' '
 
 -- Cancel a leader operation without sometimes causing unintended side effects
@@ -62,9 +63,6 @@ vimp.add_chord_cancellations('n', '<leader>')
 
 -- formatter
 vimp.nnoremap({'silent'}, '<leader>f', ':Format<CR>')
-
-vimp.nnoremap({'silent'}, '<leader>q', ':q<CR>')
-vimp.nnoremap({'silent'}, '<leader>Q', ':qa<CR>')
 
 -- Comments
 vimp.nmap({'silent'}, '<leader>c', '<Plug>NERDCommenterToggle')
@@ -125,10 +123,6 @@ vimp.nnoremap({'silent'}, '<leader>gt', ':LspTroubleToggle<CR>')
 vimp.nmap({'silent'}, '<C-s>', ':update<CR>')
 vimp.vmap({'silent'}, '<C-s>', '<C-c>:update<CR>')
 vimp.imap({'silent'}, '<C-s>', '<C-o>:update<CR>')
-
--- move one line up and one line down
-vimp.bind({'repeatable'}, '<C-k>', ':move -2<CR>')
-vimp.bind({'repeatable'}, '<C-j>', ':move +1<CR>')
 
 -- CtrlP compatibility
 -- fzf.vim is quicker than fzf.preview
