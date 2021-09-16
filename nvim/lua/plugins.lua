@@ -45,9 +45,7 @@ packer.startup({
         -- Need to be at the beginning
         use {
             "lewis6991/impatient.nvim",
-            config = function()
-                require('impatient')
-            end
+            config = function() require('impatient') end
         }
 
         -- Packer can manage itself
@@ -118,7 +116,7 @@ packer.startup({
 
         use {
             'Jorengarenar/vim-MvVis',
-            config = function() require('plugins.vim-MvVis') end,
+            config = function() require('plugins.vim-MvVis') end
         }
         --
         -- UI
@@ -309,7 +307,12 @@ packer.startup({
         -- coq_nvim snippets
         use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
 
-        use {'tzachar/compe-tabnine', run = './install.sh'}
+        use {
+            'tzachar/cmp-tabnine',
+            run = './install.sh',
+            requires = 'hrsh7th/nvim-cmp',
+            config = function() require('plugins.cmp-tabnine') end
+        }
 
         -- nvim-cmp is slow. Test it more later
         -- use {
