@@ -141,11 +141,11 @@ if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
   # Remove ALL packages from cache
   abbrev-alias -c paremALL='sudo pacman -Scc'
 
-  # Remove the specified package(s), its configuration(s) and unneeded
-  # dependencies
-  abbrev-alias -c parem='sudo pacman -Rns'
-
   if (command -v paru > /dev/null 2>&1); then
+    # Remove the specified package(s), its configuration(s) and unneeded
+    # dependencies
+    abbrev-alias -c parem='paru -Rns'
+
     # Upgrade all packages
     abbrev-alias -c paud='paru -Syu --devel'
 
