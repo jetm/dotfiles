@@ -8,7 +8,7 @@ vimp.nnoremap({'silent'}, 'j', 'gj')
 vimp.nnoremap({'silent'}, 'k', 'gk')
 
 -- quitting mapping
-vimp.nnoremap({'silent'}, 'q', ':q<CR>')
+vimp.nnoremap({'silent'}, 'q', ':BufferClose<CR>')
 vimp.nnoremap({'silent'}, 'Q', ':qa<CR>')
 
 -- copy until the end
@@ -97,7 +97,6 @@ vimp.nnoremap({'silent'}, '<leader>6', ':BufferGoto6<CR>')
 vimp.nnoremap({'silent'}, '<leader>7', ':BufferGoto7<CR>')
 vimp.nnoremap({'silent'}, '<leader>8', ':BufferGoto8<CR>')
 vimp.nnoremap({'silent'}, '<leader>9', ':BufferGoto9<CR>')
-vimp.nnoremap({'silent'}, '<leader>x', ':BufferClose<CR>')
 
 -- quickfix
 -- vimp.nnoremap({'silent'}, "<Leader>qc", ":cclose<CR>")
