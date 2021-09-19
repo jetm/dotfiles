@@ -60,10 +60,8 @@ load_prezto_mod() { turbo_source "$ZINIT[PLUGINS_DIR]/prezto/modules/$1/init.zsh
 # Required here before prezto is loaded
 zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
-zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa_home' 'swbuildn'
 load_prezto_mod helper
 load_prezto_mod environment
-load_prezto_mod ssh
 load_prezto_mod history
 load_prezto_mod utility
 # requires utility
@@ -622,6 +620,8 @@ turbo_source "$ZINIT[PLUGINS_DIR]/zsh-syntax-highlighting/zsh-syntax-highlightin
 
 export FORGIT_NO_ALIASES=1
 turbo_source "$ZINIT[PLUGINS_DIR]/forgit/forgit.plugin.sh"
+
+zsh-defer eval $(keychain --eval --quiet --agents ssh id_rsa id_rsa_home)
 
 unset turbo_source
 unset load_prezto_mod
