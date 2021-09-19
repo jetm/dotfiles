@@ -2,9 +2,20 @@
 local cmp = require('cmp')
 local lspkind = require('lspkind')
 
-local check_back_space = function()
-    local col = vim.fn.col('.') - 1
-    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
+local has_words_before = function()
+    if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+        return false
+    end
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and
+               vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col,
+                                                                          col)
+                   :match("%s") == nil
+end
+
+local feedkey = function(key, mode)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true),
+                          mode, true)
 end
 
 cmp.setup {
@@ -21,22 +32,26 @@ cmp.setup {
             behavior = cmp.ConfirmBehavior.Insert,
             select = true
         }),
-        ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'}),
-        ['<Tab>'] = function(fallback)
+        ["<Tab>"] = cmp.mapping(function(fallback)
             if vim.fn.pumvisible() == 1 then
-                vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true,
-                                                               true, true), 'n')
-            elseif check_back_space() then
-                vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Tab>', true,
-                                                               true, true), 'n')
-            elseif vim.fn['vsnip#available']() == 1 then
-                vim.fn.feedkeys(vim.api.nvim_replace_termcodes(
-                                    '<Plug>(vsnip-expand-or-jump)', true, true,
-                                    true), '')
+                feedkey("<C-n>", "n")
+            elseif vim.fn["vsnip#available"]() == 1 then
+                feedkey("<Plug>(vsnip-expand-or-jump)", "")
+            elseif has_words_before() then
+                cmp.complete()
             else
-                fallback()
+                fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
             end
-        end
+        end, {"i", "s"}),
+
+        ["<S-Tab>"] = cmp.mapping(function()
+            if vim.fn.pumvisible() == 1 then
+                feedkey("<C-p>", "n")
+            elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+                feedkey("<Plug>(vsnip-jump-prev)", "")
+            end
+        end, {"i", "s"})
+
     },
 
     formatting = {
@@ -45,9 +60,24 @@ cmp.setup {
             return vim_item
         end
     },
+    --    source = {
+    --   tags = false,
+    --   buffer = {kind = "   (Buffer)"},
+    --   nvim_lsp = {kind = "   (LSP)"},
+    --   nvim_lua = {kind = "  "},
+    --   path = {kind = "   (Path)"},
+    --   treesitter = {kind = "  "},
+    --   vsnip = {kind = "   (Snippet)"},
+    -- },
     -- You should specify your *installed* sources.
     sources = {
-        {name = 'nvim_lsp'}, {name = 'buffer'}, {name = 'path'},
-        {name = 'cmp-tabnine'}, {name = 'nvim_lua'}, {name = 'vsnip'}
+        {name = 'buffer'}, {name = 'nvim_lsp'}, {name = 'nvim_lua'},
+        {name = 'path'}, {name = 'cmp-tabnine'}, {name = 'vsnip'},
+        {name = 'treesitter'}
     }
 }
+
+require("cmp_nvim_lsp").setup()
+for index, value in ipairs(vim.lsp.protocol.CompletionItemKind) do
+    cmp.lsp.CompletionItemKind[index] = value
+end
