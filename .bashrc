@@ -125,28 +125,9 @@ alias e=vim
 export EDITOR='vim'
 alias ..='cd ..'
 
-# for t in $(cat /tmp/LEVEL2_8400); do TS_SOCKET=/ws/tiamarin/logs/ridley/l2/ridley.l2.socket TMPDIR=/ws/tiamarin/logs/ridley/l2 TS_SAVELIST=/ws/tiamarin/logs/ridley/l2/ridley.l2.ts-savelist ts -L 'LEVEL2_8400' ht -t $t -h 8400ANY -e jetm@hpe.com -y -waitForResults -i /aruba/pub/ridley-tiamarin-linux-yocto-4-4-93.swi; done
-alias ts-ridley-l1='TS_SOCKET=/ws/tiamarin/logs/ridley/l1/ridley.l1.socket TMPDIR=/ws/tiamarin/logs/ridley/l1 ts'
-alias ts-ridley-l2='TS_SOCKET=/ws/tiamarin/logs/ridley/l2/ridley.l2.socket TMPDIR=/ws/tiamarin/logs/ridley/l2 ts'
-alias ts-topflite-l1='TS_SOCKET=/ws/tiamarin/logs/topflite/l1/topflite.l1.socket TMPDIR=/ws/tiamarin/logs/topflite/l1 TS_SAVELIST=/ws/tiamarin/logs/topflite/l1/topflite.l1.ts-savelist ts'
-alias ts-topflite-l2='TS_SOCKET=/ws/tiamarin/logs/topflite/l2/topflite.l2.socket TMPDIR=/ws/tiamarin/logs/topflite/l2 TS_SAVELIST=/ws/tiamarin/logs/topflite/l2/topflite.l2.ts-savelist ts'
-alias ts-until-brake='TS_SOCKET=/ws/tiamarin/logs/until-brake/until-brake.socket TMPDIR=/ws/tiamarin/logs/until-brake TS_SAVELIST=/ws/tiamarin/logs/until-brake.ts-savelist TS_MAILTO=jetm@hpe.com ts'
-
-alias gerrit-code-nos="ssh -p 29418 javier.tia@code-nos.rose.rdlabs.hpecorp.net"
-
 if (command -v keychain >/dev/null 2>&1); then
-    # --clear option make sure an intruder cannot use your existing SSH-Agents keys
-    [ -x /usr/bin/ruby ] && keychain --clear $HOME/.ssh/id_rsa
-
-    [ -f $HOME/.keychain/$HOSTNAME-sh ] && source $HOME/.keychain/$HOSTNAME-sh
+  eval "$(keychain --eval --quiet --agents ssh id_rsa id_rsa_home)"
 fi
-
-# if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
-# GIT_PROMPT_ONLY_IN_REPO=1
-# source $HOME/.bash-git-prompt/gitprompt.sh
-# GIT_PROMPT_END_USER=" \n${BoldBlue}${ResetColor}$ "
-# GIT_PROMPT_END_ROOT=" \n${BoldBlue}${ResetColor}# "
-# fi
 
 #
 # History Stuff
@@ -176,11 +157,6 @@ alias g='git'
 alias gnp='git --no-pager'
 complete -o default -o nospace -F _git g
 alias giA='git add --patch'
-
-if [ -f "$HOME"/.git-completion.bash ]; then
-    source "/users/tiamarin/.git-completion.bash"
-    complete -o default -o nospace -F _git g
-fi
 
 alias fix-code-format='git --no-pager diff --name-only HEAD~ HEAD | grep "\.[ch]$" | xargs clang-format -i -style=file'
 

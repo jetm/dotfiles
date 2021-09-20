@@ -78,7 +78,7 @@ zinit id-as'zsh-defer' light-mode for romkatv/zsh-defer
 if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zinit pack for zsh
 
-  zi0a id-as'git' \
+  zinit id-as'git' \
     dlink"/git/git/archive/refs/tags/v%VERSION%.zip" \
     as'readurl|null' \
     atclone"ziextract --move --auto; \
@@ -121,7 +121,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     mv'clangd*/bin/clangd -> clangd'
 	zinit light clangd/clangd
 
-  zi0c id-as'keychain' \
+  zinit id-as'keychain' \
     nocompile \
     dlink"/funtoo/keychain/archive/refs/tags/%VERSION%.zip" \
     as'readurl|null' \
@@ -130,6 +130,12 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     atpull'%atclone' \
     for https://github.com/funtoo/keychain/releases
 fi
+
+ZVM_VI_SURROUND_BINDKEY=s-prefix
+ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+zi0a id-as'zsh-vi-mode' \
+  depth=1
+zinit light jeffreytse/zsh-vi-mode
 
 #
 # completion
@@ -149,8 +155,10 @@ zinit light momo-lab/zsh-abbrev-alias
 
 # zsh-expand is quicker than zsh-abbrev-alias, but it has issues expanding 2nd
 # command position
-#
-# zi0a id-as'zsh-expand'
+
+# export ZPWR_EXPAND_TO_HISTORY=true
+# zi0a id-as'zsh-expand' \
+#   src"${HOME}/.zsh/zsh-aliases"
 # zinit light MenkeTechnologies/zsh-expand
 
 # Replace by fzf. Conflict with Ctrl-R
@@ -190,12 +198,6 @@ autopair-init
 #
 # Navigation
 #
-z_ice id-as'zsh-vi-mode' \
-  depth=1
-zinit light jeffreytse/zsh-vi-mode
-ZVM_VI_SURROUND_BINDKEY=s-prefix
-ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-
 zi0b id-as'fzf' \
   from'gh-r' \
   as'program' \
@@ -630,7 +632,9 @@ turbo_source "$ZINIT[PLUGINS_DIR]/zsh-syntax-highlighting/zsh-syntax-highlightin
 export FORGIT_NO_ALIASES=1
 turbo_source "$ZINIT[PLUGINS_DIR]/forgit/forgit.plugin.sh"
 
-zsh-defer eval $(keychain --eval --quiet --agents ssh id_rsa id_rsa_home)
+if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
+  zsh-defer eval $(keychain --eval --quiet --agents ssh id_rsa id_rsa_home)
+fi
 
 unset turbo_source
 unset load_prezto_mod
