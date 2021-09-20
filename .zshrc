@@ -121,14 +121,14 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     mv'clangd*/bin/clangd -> clangd'
 	zinit light clangd/clangd
 
-  zinit id-as'keychain' \
-    nocompile \
-    dlink"/funtoo/keychain/archive/refs/tags/%VERSION%.zip" \
-    as'readurl|null' \
-    atclone"ziextract --move --auto; \
-      install -m755 keychain $ZPFX/bin/" \
-    atpull'%atclone' \
-    for https://github.com/funtoo/keychain/releases
+  # zinit id-as'keychain' \
+  #   nocompile \
+  #   dlink"/funtoo/keychain/archive/refs/tags/%VERSION%.zip" \
+  #   as'readurl|null' \
+  #   atclone"ziextract --move --auto; \
+  #     install -m755 keychain $ZPFX/bin/" \
+  #   atpull'%atclone' \
+  #   for https://github.com/funtoo/keychain/releases
 fi
 
 ZVM_VI_SURROUND_BINDKEY=s-prefix
@@ -632,7 +632,7 @@ turbo_source "$ZINIT[PLUGINS_DIR]/zsh-syntax-highlighting/zsh-syntax-highlightin
 export FORGIT_NO_ALIASES=1
 turbo_source "$ZINIT[PLUGINS_DIR]/forgit/forgit.plugin.sh"
 
-if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
+if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
   zsh-defer eval $(keychain --eval --quiet --agents ssh id_rsa id_rsa_home)
 fi
 
