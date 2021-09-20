@@ -78,7 +78,7 @@ zinit id-as'zsh-defer' light-mode for romkatv/zsh-defer
 if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zinit pack for zsh
 
-  zinit id-as'git' \
+  zi0a id-as'git' \
     dlink"/git/git/archive/refs/tags/v%VERSION%.zip" \
     as'readurl|null' \
     atclone"ziextract --move --auto; \
@@ -120,6 +120,15 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     bpick'clangd-linux*' \
     mv'clangd*/bin/clangd -> clangd'
 	zinit light clangd/clangd
+
+  zi0c id-as'keychain' \
+    nocompile \
+    dlink"/funtoo/keychain/archive/refs/tags/%VERSION%.zip" \
+    as'readurl|null' \
+    atclone"ziextract --move --auto; \
+      install -m755 keychain $ZPFX/bin/" \
+    atpull'%atclone' \
+    for https://github.com/funtoo/keychain/releases
 fi
 
 #
