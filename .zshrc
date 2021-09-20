@@ -632,9 +632,7 @@ turbo_source "$ZINIT[PLUGINS_DIR]/zsh-syntax-highlighting/zsh-syntax-highlightin
 export FORGIT_NO_ALIASES=1
 turbo_source "$ZINIT[PLUGINS_DIR]/forgit/forgit.plugin.sh"
 
-if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
-  zsh-defer eval $(keychain --eval --quiet --agents ssh id_rsa id_rsa_home)
-fi
+zsh-defer eval $(keychain --eval --quiet --agents ssh id_rsa id_rsa_home)
 
 unset turbo_source
 unset load_prezto_mod
