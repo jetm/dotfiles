@@ -235,12 +235,12 @@ packer.startup({
         --     config = function() require('plugins.neogit') end
         -- }
         --
-        -- -- single tabpage interface for easily cycling through diffs for all
-        -- -- modified files for any git rev
-        -- use {
-        --     'sindrets/diffview.nvim',
-        --     config = function() require('plugins.diffview') end
-        -- }
+        -- single tabpage interface for easily cycling through diffs for all
+        -- modified files for any git rev
+        use {
+            'sindrets/diffview.nvim',
+            config = function() require('plugins.diffview') end
+        }
 
         --
         -- Text manipulation

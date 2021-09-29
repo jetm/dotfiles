@@ -401,6 +401,14 @@ zi0c id-as'htop' \
   pick'htop'
 zinit light htop-dev/htop
 
+# required gcc 10
+#  ver'v1.0.10' \
+# zi0c id-as'btop' \
+#   as'program' \
+#   atclone"make" \
+#   make"PREFIX=$ZPFX install"
+# zinit light aristocratos/btop
+
 #
 # Grepping
 #
@@ -424,7 +432,7 @@ zinit light BurntSushi/ripgrep
 
 # Release 0.5.0
 zi0c id-as'nvim' \
-  ver'v0.5.0' \
+  ver'v0.5.1' \
   as'program' \
   make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
   atload'export EDITOR="nvim"'

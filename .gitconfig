@@ -54,6 +54,12 @@
     # its date
     fixup-prev-ci = !git commit --all --amend --reuse-message=HEAD --date=\"$(date)\"
 
+    # list files which have changed
+    files = !git diff --name-only
+
+    # diff stat instead of just names
+    stat = !git diff --stat
+
 [i18n]
     # Character encoding the commit messages are converted to when running git
     # log and friends

@@ -36,7 +36,7 @@ require("gitsigns").setup {
     signs = signs,
     numhl = true,
     linehl = false,
-    watch_index = {interval = 100},
+    watch_gitdir = {interval = 100},
     sign_priority = 5,
     status_formatter = nil, -- Use default
     diff_opts = {internal = true} -- If luajit is present
