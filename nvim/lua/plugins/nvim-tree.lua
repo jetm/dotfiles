@@ -1,5 +1,6 @@
 local vim = vim
 local icons = require("nvim-nonicons")
+
 local M = {}
 
 function M.resize()
@@ -14,10 +15,6 @@ function M.resize()
     vim.cmd('NvimTreeClose')
     vim.cmd('NvimTreeToggle')
 end
-
-vim.g.nvim_tree_bindings = {
-    {key = "z", cb = [[:lua require('plugins.nvim-tree').resize()<CR>]]}
-}
 
 vim.g.nvim_tree_icons = {
     default = icons.get("file"),
@@ -43,20 +40,17 @@ vim.g.nvim_tree_icons = {
     }
 }
 
--- 0 by default, will not resize the tree when opening a file
-vim.g.nvim_tree_width_allow_resize = 1
-
--- compact folders that only contain a single folder into one node in the file
--- tree
-vim.g.nvim_tree_group_empty = 1
-
--- shows indent markers when folders are open
-vim.g.nvim_tree_indent_markers = 1
-
--- allows the cursor to be updated when entering a buffer
-vim.g.nvim_tree_follow = 1
-
--- closes the tree when it's the last window
-vim.g.nvim_tree_auto_close = true
+require'nvim-tree'.setup {
+    -- closes neovim automatically when the tree is the last **WINDOW** in the view
+    auto_close = true,
+    -- if true the tree will resize itself after opening a file
+    auto_resize = true,
+    mappings = {
+        -- list of mappings to set on the tree manually
+        list = {
+            {key = "z", cb = [[:lua require('plugins.nvim-tree').resize()<CR>]]}
+        }
+    }
+}
 
 return M

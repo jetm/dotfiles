@@ -153,12 +153,6 @@
     prompt = false
 [difftool "nvimdiff"]
     cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
-[merge]
-    tool = nvimdiff
-[mergetool]
-    prompt = true
-[mergetool "nvimdiff"]
-    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'"
 
 #
 # VM settings
@@ -166,10 +160,6 @@
 [user]
     name = Javier Tiá
     email = javier.tia@hpe.com
-
-[core]
-    # gitproxy is a script to allow clone git:// repositories
-    gitproxy = gitproxy
 
 [gitreview]
     # Gerrit username
@@ -183,15 +173,15 @@
 [sequence]
     editor = interactive-rebase-tool
 
-; [http]
-;     proxy = http://web-proxy.rose.hpecorp.net:8080
-;     sslverify = false
+[halon "gitdl"]
+    remote = gitv2cache
 
-; [feature]
-    ; experimental = true
-    ; manyFiles = true
-;
-; [protocol]
-    ; version = 2
+[http]
+    proxy = http://web-proxy.houston.hpecorp.net:8080
+
+[core]
+    gitProxy = none for hpe.com
+    gitProxy = none for hpecorp.net
+    gitProxy = gitproxy-socat
 
 # vim:set ts=4 sw=4 et:
