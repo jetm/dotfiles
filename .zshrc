@@ -69,7 +69,6 @@ load_prezto_mod completion
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
-zinit id-as'z-a-rust' light-mode for zinit-zsh/z-a-rust
 zinit id-as'z-a-readurl' light-mode for zinit-zsh/z-a-readurl
 zinit id-as'z-a-path-dl' light-mode for zinit-zsh/z-a-patch-dl
 zinit id-as'z-a-gen-mod-node' light-mode for zinit-zsh/z-a-bin-gem-node
@@ -120,6 +119,17 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     bpick'clangd-linux*' \
     mv'clangd*/bin/clangd -> clangd'
 	zinit light clangd/clangd
+
+  # Put here all rust installations
+  # looks the mv ice doesn't work with rustup cargo
+  zinit id-as'git-interactive-rebase-tool' \
+    dlink"/MitMaro/git-interactive-rebase-tool/releases/download/%VERSION%/git-interactive-rebase-tool-%VERSION%-ubuntu-16.04_amd64.deb" \
+    as'readurl|null' \
+    atclone"ziextract --move --auto; \
+      dpkg -x git-interactive-rebase-tool .; \
+      mv -vf usr/bin/interactive-rebase-tool $ZPFX/bin;" \
+    atpull'%atclone' \
+    for https://github.com/MitMaro/git-interactive-rebase-tool/releases
 
   # zinit id-as'keychain' \
   #   nocompile \
@@ -517,14 +527,6 @@ zi0c id-as'git-fuzzy' \
   pick'bin/git-fuzzy'
 zinit light bigH/git-fuzzy
 
-# Put here all rust installations
-# looks the mv ice doesn't work with rustup cargo
-zi0c id-as'git-interactive-rebase-tool' \
-  rustup cargo'git-interactive-rebase-tool' \
-  as'command' \
-  pick'bin/interactive-rebase-tool'
-zinit light zdharma/null
-
 zi0c id-as'git-update' \
   as'program' \
   atclone'go get && go build && mv -v gitupdate git-update' \
@@ -534,9 +536,8 @@ zinit light nikitavoloboev/gitupdate
 
 zi0c id-as'git-undo' \
   as'program' \
-  mv'bin/git-undo -> git-undo' \
   pick'git-undo'
-zinit snippet https://github.com/tj/git-extras/blob/master/bin/git-undo
+zinit snippet https://raw.githubusercontent.com/tj/git-extras/master/bin/git-undo
 
 # zi0c id-as'git-reauthor' \
 #   as'program' \
