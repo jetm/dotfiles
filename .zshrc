@@ -104,7 +104,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zinit light r-darwish/topgrade
 
   zi0c id-as'less' \
-    ver'v593' \
+    ver'v595' \
     as'program' \
     atclone'make -f Makefile.aut && autoreconf --install &&
       ./configure --with-regex=gnu --with-editor=nvim' \
@@ -120,16 +120,18 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     mv'clangd*/bin/clangd -> clangd'
 	zinit light clangd/clangd
 
-  # Put here all rust installations
-  # looks the mv ice doesn't work with rustup cargo
   zinit id-as'git-interactive-rebase-tool' \
-    dlink"/MitMaro/git-interactive-rebase-tool/releases/download/%VERSION%/git-interactive-rebase-tool-%VERSION%-ubuntu-16.04_amd64.deb" \
     as'readurl|null' \
+    nocompile \
+    dlink"/MitMaro/git-interactive-rebase-tool/releases/download/%VERSION%/git-interactive-rebase-tool-%VERSION%-ubuntu-16.04_amd64.deb" \
     atclone"ziextract --move --auto; \
       dpkg -x git-interactive-rebase-tool .; \
       mv -vf usr/bin/interactive-rebase-tool $ZPFX/bin;" \
     atpull'%atclone' \
     for https://github.com/MitMaro/git-interactive-rebase-tool/releases
+
+  # Put here all rust installations
+  # looks the mv ice doesn't work with rustup cargo
 
   # zinit id-as'keychain' \
   #   nocompile \
@@ -538,6 +540,26 @@ zi0c id-as'git-undo' \
   as'program' \
   pick'git-undo'
 zinit snippet https://raw.githubusercontent.com/tj/git-extras/master/bin/git-undo
+
+# Use backspace \ before $ for SHELL variable
+# zi0c id-as'tabnine' \
+#   nocompile \
+#   atclone"local VER
+#     local START_URL
+#     local END_URL
+#     VER=\$(curl -sS https://update.tabnine.com/bundles/version); \
+#     START_URL=https://update.tabnine.com/bundles/; \
+#     END_URL=/x86_64-unknown-linux-musl/TabNine.zip; \
+#     wget \$START_URL\$VER\$END_URL; \
+#     unzip -o TabNine.zip; \
+#     rm -vf TabNine.zip
+#     chmod -v +x *Tab*; \
+#     mv -vf *Tab* /ws/tiamarin/home-cache/local/share/nvim/site/pack/packer/start/coq_nvim/.vars/clients/t9/; \
+#     unset VER; \
+#     unset START_URL; \
+#     unset END_URL" \
+#   atpull'%atclone'
+# zinit light zdharma/null
 
 # zi0c id-as'git-reauthor' \
 #   as'program' \

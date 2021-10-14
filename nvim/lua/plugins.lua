@@ -118,6 +118,7 @@ packer.startup({
             'Jorengarenar/vim-MvVis',
             config = function() require('plugins.vim-MvVis') end
         }
+
         --
         -- UI
         --
@@ -307,22 +308,28 @@ packer.startup({
         -- coq_nvim snippets
         use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
 
-        use {
-            'tzachar/cmp-tabnine',
-            run = './install.sh',
-            requires = 'hrsh7th/nvim-cmp',
-            config = function() require('plugins.cmp-tabnine') end
-        }
-
         -- nvim-cmp is slower than coq_nvim. Test it more later
         -- use {
         --     'hrsh7th/nvim-cmp',
         --     requires = {
-        --         'onsails/lspkind-nvim', 'nvim-treesitter/nvim-treesitter',
-        --         'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer',
-        --         'hrsh7th/cmp-nvim-lua', 'hrsh7th/cmp-path', 'hrsh7th/cmp-vsnip'
+        --         { "hrsh7th/cmp-nvim-lsp" },
+        --         { "onsails/lspkind-nvim" },
+        --         { "rafamadriz/friendly-snippets" },
+        --         { "nvim-treesitter/nvim-treesitter" },
+        --         { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+        --         { "hrsh7th/cmp-path", after = "nvim-cmp" },
+        --         { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
+        --         { "hrsh7th/cmp-vsnip", after = "nvim-cmp" },
+        --         { "hrsh7th/vim-vsnip", after = "nvim-cmp" },
         --     },
         --     config = function() require('plugins.nvim-cmp') end
+        -- }
+        --
+        -- use {
+        --     'tzachar/cmp-tabnine',
+        --     run = './install.sh',
+        --     requires = 'hrsh7th/nvim-cmp',
+        --     config = function() require('plugins.cmp-tabnine') end
         -- }
 
         --
@@ -426,23 +433,25 @@ packer.startup({
         }
 
         -- todo searcher
-        use {
-            'folke/todo-comments.nvim',
-            requires = 'nvim-lua/plenary.nvim',
-            config = function() require('plugins.todo-comments') end
-        }
+        -- No longer needed
+        -- use {
+        --     'folke/todo-comments.nvim',
+        --     requires = 'nvim-lua/plenary.nvim',
+        --     config = function() require('plugins.todo-comments') end
+        -- }
 
+        -- Have not found an use
         -- Create key bindings that stick. Displays a popup with possible
         -- keybindings of the command you started typing
-        use {
-            'folke/which-key.nvim',
-            config = function()
-                require('which-key').setup {
-                    -- your configuration comes here
-                    -- or leave it empty to use the default settings
-                }
-            end
-        }
+        -- use {
+        --     'folke/which-key.nvim',
+        --     config = function()
+        --         require('which-key').setup {
+        --             -- your configuration comes here
+        --             -- or leave it empty to use the default settings
+        --         }
+        --     end
+        -- }
 
     end,
     config = {display = {open_fn = require('packer.util').float}}

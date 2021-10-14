@@ -5,7 +5,8 @@ vim.g.coq_settings = {
     clients = {
         lsp = {short_name = "LSP"},
         snippets = {enabled = true},
-        tabnine = {enabled = true},
+        -- too slow in big repo. coq uses a slow version
+        tabnine = {enabled = false},
         paths = {preview_lines = 6},
         tree_sitter = {enabled = true},
         buffers = {
