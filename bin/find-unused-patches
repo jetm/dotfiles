@@ -1,0 +1,12 @@
+#!/bin/bash
+
+  # grep -IhFriof /tmp/patch-files yocto/ |
+git ls-files 'yocto/**/*.patch' |
+  awk -F/ '{print $NF}' |
+  sort -u > /tmp/patch-files &&
+  rg -g '*.{inc,bb,bbappend,bbclass,scc}' --color never -iFINo -f /tmp/patch-files yocto/ |
+  sort -u |
+  comm -23 /tmp/patch-files - |
+  xargs -n1 -I{} git ls-files "yocto/**/{}" |
+  xargs git rm
+

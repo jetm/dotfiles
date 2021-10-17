@@ -82,7 +82,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     as'readurl|null' \
     atclone"ziextract --move --auto; \
       make prefix=$ZPFX USE_LIBPCRE2=1 INSTALL_SYMLINKS=1 \
-      -j$[$(nproc) + 1] all doc install install-doc &&
+      -j$(nproc) all doc install install-doc &&
       rm -vf $ZPFX/bin/git-shell;
       rm -vf $ZPFX/bin/git-cvsserver;
       rm -vf $ZPFX/bin/gitk;" \
@@ -109,7 +109,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     atclone'make -f Makefile.aut && autoreconf --install &&
       ./configure --with-regex=gnu --with-editor=nvim' \
     atpull"%atclone" \
-    make"-j$[$(nproc) + 1]" \
+    make"-j$(nproc)" \
     pick'less'
   zinit light gwsw/less
 
@@ -609,6 +609,13 @@ zi0c id-as'hss' \
   as'program' \
   mv'hss-Linux-x86_64 -> hss'
 zinit light six-ddc/hss
+
+zi0c id-as'task-spooler' \
+  as'program' \
+  atclone"git checkout cpu-only" \
+  atpull"%atclone" \
+  make"PREFIX=$ZPFX -j$(nproc) install"
+zinit light justanhduc/task-spooler
 
 # zi0c id-as'difftastic' \
 #   cargo'!difftastic'

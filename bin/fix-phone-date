@@ -1,7 +1,0 @@
-#!/bin/bash
-
-adb devices
-
-UT=$(date -u '+%Y.%m.%d-%H:%M:%S')
-
-adb shell date -us "${UT}"

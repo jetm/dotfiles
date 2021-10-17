@@ -1,0 +1,16 @@
+#!/bin/bash
+
+function create-branch() {
+    local branch_name
+    export JIRA_API_TOKEN=XOgyHN6yperLV1D97KLidVYyY0L4SxCl6pE
+    branch_name=$(jira mine-sprint |
+        fzf |
+        cut -d: -f1 |
+        tr '[:upper:]' '[:lower:]')
+
+    if [ -n "$branch_name" ]; then
+        git checkout -b "$branch_name" "$1"
+    fi
+}
+
+create-branch "$@"

@@ -1,0 +1,6 @@
+#!/bin/sh
+set -x
+test -z "$1" && exit 1
+mkdir -p $1
+bitbake -s > $1/recipes
+for c in show-layers show-overlayed show-recipes show-appends show-cross-depends ; do bitbake-layers $c > $1/$c ; done
