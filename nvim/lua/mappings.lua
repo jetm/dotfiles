@@ -38,7 +38,7 @@ vimp.vmap({'silent'}, 'H', '<Plug>(MvVisLeft)')
 -- Visual shifting (does not exit Visual mode)
 vimp.vnoremap({'silent'}, '<', '<gv')
 vimp.vnoremap({'silent'}, '>', '>gv')
-vimp.nnoremap({'silent'}, '<', '>>_')
+vimp.nnoremap({'silent'}, '<', '<<_')
 vimp.nnoremap({'silent'}, '>', '>>_')
 
 -- Search selected text (consistent with `*` behaviour)
