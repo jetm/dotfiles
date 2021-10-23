@@ -1,3 +1,4 @@
+local vim = vim
 local o = vim.o -- to set options
 o.autowrite = true -- Automatically write a file when leaving a modified buffer
 o.cursorline = true -- Highlight current line
@@ -24,7 +25,7 @@ o.tabstop = o.softtabstop -- Tab width
 
 -- Display whitespace characters
 o.list = true
-vim.opt.listchars = {tab = '→ ', trail = '·', nbsp = '␣'}
+vim.opt.listchars = {tab = '→ ', trail = '·'}
 
 -- I like to include the end newline
 -- cmd 'set clipboard+=unnamedplus' -- Copy paste between vim and everything else

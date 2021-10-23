@@ -31,3 +31,5 @@ path=( ${path[@]:#*slickedit*} )
 path=( ${path[@]:#*ntl_tools*} )
 path=( ${path[@]:#/tools} )
 path=( ${path[@]:#/tools/halon} )
+
+# vim:set ts=2 sw=2 et:

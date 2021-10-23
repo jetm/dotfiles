@@ -45,7 +45,7 @@ zsh-defer abbrev-alias -c cd-="cd -"
 zsh-defer abbrev-alias -c fdi="fd -t f -o $USER -l -d 1 . /aruba/pub"
 zsh-defer abbrev-alias -c ls="exa"
 zsh-defer abbrev-alias -c df="duf"
-zsh-defer abbrev-alias -c bb="bitbake"
+zsh-defer abbrev-alias -c bbk="bitbake"
 
 #
 # Git
@@ -126,6 +126,9 @@ zsh-defer abbrev-alias -c gt='git status'
 # git fuzzy
 zsh-defer abbrev-alias -c gzt='git fuzzy status'
 zsh-defer abbrev-alias -c gzb='git fuzzy branch'
+
+# git dl
+zsh-defer abbrev-alias -c gdl="git dl -x"
 
 #
 # Arch Linux Stuff

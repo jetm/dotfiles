@@ -69,3 +69,5 @@ export PAGER=less
 # Man Pages
 #
 export MANPATH="$ZPFX/share/man:/usr/share/man"
+
+# vim:set ts=2 sw=2 et:

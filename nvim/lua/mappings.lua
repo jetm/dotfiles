@@ -35,12 +35,6 @@ vimp.vmap({'silent'}, 'K', '<Plug>(MvVisUp)')
 vimp.vmap({'silent'}, 'L', '<Plug>(MvVisRight)')
 vimp.vmap({'silent'}, 'H', '<Plug>(MvVisLeft)')
 
--- Visual shifting (does not exit Visual mode)
-vimp.vnoremap({'silent'}, '<', '<gv')
-vimp.vnoremap({'silent'}, '>', '>gv')
-vimp.nnoremap({'silent'}, '<', '<<_')
-vimp.nnoremap({'silent'}, '>', '>>_')
-
 -- Search selected text (consistent with `*` behaviour)
 vimp.nnoremap({'silent'}, '*', [[*N]])
 vimp.vnoremap({'silent'}, '*', [[y/\V<c-r>=escape(@",'/\')<cr><cr>N]])
@@ -74,6 +68,7 @@ local function refresh_buffer()
         nohlsearch
         diffupdate
         syntax sync fromstart
+        IndentBlanklineRefresh!
         normal! zzze<CR>
     ]], false)
 
@@ -83,7 +78,7 @@ local function refresh_buffer()
     vim.g.Lf_PopupWidth = get_opt('columns') * 0.8
 end
 
-vimp.nnoremap({'silent'}, '<leader><leader>', refresh_buffer)
+vimp.nnoremap({'silent'}, '<C-l>', refresh_buffer)
 
 --
 -- barbar

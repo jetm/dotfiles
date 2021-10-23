@@ -160,7 +160,7 @@ packer.startup({
         -- Galaxyline lacks of nice configurations, like feline has
         -- lualine has better structure and theme, it's more like spaceline
         use {
-            'hoob3rt/lualine.nvim',
+            'nvim-lualine/lualine.nvim',
             config = function() require('plugins.lualine') end
         }
 

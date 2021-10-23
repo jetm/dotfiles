@@ -1,10 +1,10 @@
-local vim = vim
-
-vim.g.indent_blankline_char = '│'
-vim.g.indent_blankline_use_treesitter = true
-vim.g.indent_blankline_show_current_context = true
-vim.g.indent_blankline_filetype_exclude = {'help', 'make'}
-vim.g.indent_blankline_context_patterns = {
-    'class', 'function', 'method', 'while', 'closure', 'for'
+require("indent_blankline").setup {
+    char = "|",
+    show_current_context = true,
+    use_treesitter = true,
+    filetype_exclude = {'help', 'make', 'terminal'},
+    context_patterns = {
+        'class', 'function', 'method', 'while', 'closure', 'for'
+    },
+    viewport_buffer = 50
 }
-vim.g.indent_blankline_viewport_buffer = 50

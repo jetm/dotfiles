@@ -25,4 +25,6 @@ if [[ $(lsb_release -i) = *Ubuntu* ]]; then
   # unalias bb
 fi
 
+eval "$(/ws/$USER/shell-goodies/bb/bin/bb init -)"
+
 # vim:set ts=2 sw=2 et:
