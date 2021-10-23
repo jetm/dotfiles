@@ -20,3 +20,5 @@ vim.g.NERDCommentEmptyLines = 1
 
 -- Enable NERDCommenterToggle to check all selected lines is commented or not
 vim.g.NERDToggleCheckAllLines = 1
+
+vim.g.NERDCustomDelimiters = { dosini = { left= '#' } }
