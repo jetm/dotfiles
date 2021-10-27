@@ -332,6 +332,13 @@ packer.startup({
         --     config = function() require('plugins.cmp-tabnine') end
         -- }
 
+        -- It's not ready yet
+        -- use({
+        --     'jameshiew/nvim-magic',
+        --     config = function() require('nvim-magic').setup() end,
+        --     requires = {'nvim-lua/plenary.nvim', 'MunifTanjim/nui.nvim'}
+        -- })
+
         --
         -- LSP
         --
@@ -360,6 +367,8 @@ packer.startup({
                 require('plugins.nvim-lspconfig').init()
             end
         }
+
+        use {'github/copilot.vim' }
 
         -- window for showing LSP detected issues in code
         use {

@@ -1,16 +1,27 @@
 #!/bin/bash
 
-function create-branch() {
-    local branch_name
-    export JIRA_API_TOKEN=XOgyHN6yperLV1D97KLidVYyY0L4SxCl6pE
-    branch_name=$(jira mine-sprint |
-        fzf |
-        cut -d: -f1 |
-        tr '[:upper:]' '[:lower:]')
+create-branch() {
+  export JIRA_API_TOKEN=XOgyHN6yperLV1D97KLidVYyY0L4SxCl6pE
 
-    if [ -n "$branch_name" ]; then
-        git checkout -b "$branch_name" "$1"
-    fi
+  local jiraus
+  jiraus=$(jira mine-sprint | fzf)
+  jiraus=$(echo "${jiraus}" | sd ': ' ':')
+
+  local jiraus_id
+  jiraus_id=$(echo "${jiraus}" |
+    cut -d: -f1 |
+    tr '[:upper:]' '[:lower:]'
+  )
+
+  local jiraus_summary
+  jiraus_summary=$(echo "${jiraus}" | cut -d: -f2)
+
+  if [[ -n "${jiraus_id}" ]]; then
+    git checkout -b "${jiraus_id}" "$1"
+    git commit --allow-empty -m "${jiraus_summary}"
+  fi
 }
 
 create-branch "$@"
+
+# vim:set ts=2 sw=2 et:
