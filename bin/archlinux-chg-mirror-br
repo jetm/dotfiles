@@ -4,6 +4,6 @@ sudo -E pacman-mirrors \
   --api \
   --geoip \
   --timeout 2 \
-  --set-branch $1 \
+  --set-branch "$1" \
   --proto http https \
   --method rank

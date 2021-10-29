@@ -368,7 +368,7 @@ packer.startup({
             end
         }
 
-        use {'github/copilot.vim' }
+        -- use {'github/copilot.vim' }
 
         -- window for showing LSP detected issues in code
         use {
