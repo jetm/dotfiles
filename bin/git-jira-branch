@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -Ee
+
 create-branch() {
   export JIRA_API_TOKEN=XOgyHN6yperLV1D97KLidVYyY0L4SxCl6pE
 
@@ -14,7 +16,7 @@ create-branch() {
   )
 
   local jiraus_summary
-  jiraus_summary=$(echo "${jiraus}" | cut -d: -f2)
+  jiraus_summary=$(echo "${jiraus}" | cut -d: -f2-)
 
   if [[ -n "${jiraus_id}" ]]; then
     git checkout -b "${jiraus_id}" "$1"

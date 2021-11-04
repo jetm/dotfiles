@@ -9,7 +9,7 @@ fi
 if [[ ! -f ${HOME}/.zinit/bin/zinit.zsh ]]; then
   print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
   command mkdir -p "${HOME}/.zinit" && command chmod g-rwX "${HOME}/.zinit"
-  command git clone https://github.com/zdharma/zinit "${HOME}/.zinit/bin" && \
+  command git clone https://github.com/zdharma-continuum/zinit "${HOME}/.zinit/bin" && \
     print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
     print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
@@ -175,7 +175,7 @@ zinit light momo-lab/zsh-abbrev-alias
 
 # Replace by fzf. Conflict with Ctrl-R
 # zi0b id-as'history-search-multi-word'
-# zinit light zdharma/history-search-multi-word
+# zinit light zdharma-continuum/history-search-multi-word
 
 # use `cat -v` to define the map
 zi0a id-as'zsh-history-substring-search' \
@@ -266,7 +266,7 @@ zi0c id-as'zsh-syntax-highlighting' \
 zinit light zsh-users/zsh-syntax-highlighting
 
 # zi0a id-as'fast-syntax-highlighting'
-# zinit light zdharma/fast-syntax-highlighting
+# zinit light zdharma-continuum/fast-syntax-highlighting
 
 #
 # Diff
@@ -328,7 +328,7 @@ zinit light mvdan/sh
 zi0c id-as'node-modules' \
   node'bash-language-server' \
   sbin'node_modules/.bin/bash-language-server'
-zinit light zdharma/null
+zinit light zdharma-continuum/null
 
 #
 # File utilities
@@ -443,25 +443,26 @@ zinit light BurntSushi/ripgrep
 #
 
 # Release 0.5.1
-zi0c id-as'nvim' \
-  ver'v0.5.1' \
-  as'program' \
-  make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
-  atload'export EDITOR="nvim"'
-zinit light neovim/neovim
+# zi0c id-as'nvim' \
+#   ver'v0.5.1' \
+#   as'program' \
+#   make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
+#   atload'export EDITOR="nvim"'
+# zinit light neovim/neovim
 
 #
 # neovim-nightlies
 #
-# zi0c id-as'nvim' \
-#   nocompile \
-#   atclone"wget https://github.com/github/copilot.vim/releases/download/neovim-nightlies/nvim-linux64.zip; \
-#     unzip -o nvim-linux64.zip; \
-#     fd nvim -x rm -vrf {} \; $ZPFX; \
-#     tar xvf nvim-linux64.tar.gz --strip-components=1 -C $ZPFX; \
-#     rm -f nvim-linux64.zip"
-#   atpull'%atclone'
-# zinit light zdharma/null
+zi0c id-as'nvim' \
+  nocompile \
+  atclone"wget https://github.com/github/copilot.vim/releases/download/neovim-nightlies/nvim-linux64.zip; \
+    unzip -o nvim-linux64.zip; \
+    fd nvim -x rm -vrf {} \; $ZPFX; \
+    tar xvf nvim-linux64.tar.gz --strip-components=1 -C $ZPFX; \
+    rm -f nvim-linux64.zip" \
+  atpull'%atclone' \
+  atload'export EDITOR="nvim"'
+zinit light zdharma-continuum/null
 
 # zi0c id-as'glow' \
 #   from'gh-r' \
@@ -510,21 +511,21 @@ zinit light ninja-build/ninja
 #
 # Language servers
 #
-zi0c id-as'efm' \
-  from'gh-r' \
-  as'program' \
-  bpick'*linux_amd64*' \
-  mv'*/efm-langserver -> efm-langserver' \
-  pick"efm-langserver"
-zinit light mattn/efm-langserver
+# zi0c id-as'efm' \
+#   from'gh-r' \
+#   as'program' \
+#   bpick'*linux_amd64*' \
+#   mv'*/efm-langserver -> efm-langserver' \
+#   pick"efm-langserver"
+# zinit light mattn/efm-langserver
 
-zi0c id-as'lua-language-server' \
-  as'program' \
-  atclone"git submodule update --init --recursive; \
-          ninja -C 3rd/luamake -f compile/ninja/linux.ninja; \
-          ./3rd/luamake/luamake rebuild;" \
-  atpull'%atclone'
-zinit light sumneko/lua-language-server
+# zi0c id-as'lua-language-server' \
+#   as'program' \
+#   atclone"git submodule update --init --recursive; \
+#           ninja -C 3rd/luamake -f compile/ninja/linux.ninja; \
+#           ./3rd/luamake/luamake rebuild;" \
+#   atpull'%atclone'
+# zinit light sumneko/lua-language-server
 
 #
 # Git utilities
@@ -554,6 +555,14 @@ zi0c id-as'git-undo' \
   pick'git-undo'
 zinit snippet https://raw.githubusercontent.com/tj/git-extras/master/bin/git-undo
 
+# It needs higher Ubuntu v16.04
+# zi0c id-as'askgit' \
+#   from'gh-r' \
+#   as'program' \
+#   bpick'*linux-amd64*' \
+#   pick'askgit'
+# zinit light askgitdev/askgit
+
 # Use backspace \ before $ for SHELL variable
 #   nocompile \
 # zi0c id-as'tabnine' \
@@ -572,7 +581,7 @@ zinit snippet https://raw.githubusercontent.com/tj/git-extras/master/bin/git-und
 #     unset START_URL; \
 #     unset END_URL" \
 #   atpull'%atclone'
-# zinit light zdharma/null
+# zinit light zdharma-continuum/null
 
 # zi0c id-as'git-reauthor' \
 #   as'program' \
@@ -660,7 +669,7 @@ zinit light justanhduc/task-spooler
 # zinit light jesseduffield/lazydocker
 
 # zi0b id-as'zui'
-# zinit light zdharma/zui
+# zinit light zdharma-continuum/zui
 
 # zi0c id-as'zinit-console'
 # zinit light zinit-zsh/zinit-console

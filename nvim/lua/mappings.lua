@@ -11,9 +11,6 @@ vimp.nnoremap({'silent'}, 'k', 'gk')
 vimp.nnoremap({'silent'}, 'q', ':BufferClose<CR>')
 vimp.nnoremap({'silent'}, 'Q', ':qa<CR>')
 
--- copy until the end
-vimp.nnoremap({'silent'}, 'Y', 'y$')
-
 -- Keep the cursor in place while joining lines
 vimp.nnoremap({'silent'}, 'J', 'mzJ`z')
 
@@ -85,7 +82,7 @@ local function refresh_buffer()
     vim.g.Lf_PopupWidth = get_opt('columns') * 0.8
 end
 
-vimp.nnoremap({'silent'}, '<C-l>', refresh_buffer)
+-- vimp.nnoremap({'silent'}, '<C-l>', refresh_buffer)
 
 --
 -- barbar

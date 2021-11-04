@@ -41,12 +41,12 @@ local s_tab_complete = function(fallback)
 end
 
 cmp.setup {
-    -- completion = { completeopt = "menu,menuone,noselect" },
+    completion = { completeopt = "menu,menuone,noselect" },
     -- You must set mapping if you want
     mapping = {
         ['<CR>'] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Insert,
-            select = false
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true
         }),
         ["<Tab>"] = cmp.mapping(tab_complete, {"i", "s"}),
         ["<C-j>"] = cmp.mapping(tab_complete, {"i", "s"}),
@@ -67,10 +67,12 @@ cmp.setup {
     sources = {
         {name = 'buffer', max_item_count = 5, priority = 1},
         {name = 'treesitter', max_item_count = 5, priority = 2},
+        -- unable to select new element
+        -- {name = 'rg', opts = { additional_arguments = "--ignore-file halon-src --ignore-file halon-test --ignore-file tools" }, max_item_count = 10, priority = 3},
         -- too slow in big repo
         -- {name = 'cmp_tabnine', max_item_count = 5, priority = 3},
         {name = 'path', max_item_count = 10, priority = 4},
-        {name = 'nvim_lsp', max_item_count = 10, priority = 5},
+        {name = 'nvim_lsp', max_item_count = 5, priority = 5},
         {name = 'nvim_lua', max_item_count = 3, priority = 6},
         {name = 'vsnip', max_item_count = 2, priority = 7}
     }

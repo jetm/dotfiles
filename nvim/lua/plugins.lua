@@ -48,6 +48,10 @@ packer.startup({
             config = function() require('impatient') end
         }
 
+        -- A faster version of filetype.vim
+        -- Still missing colors in some files
+        -- use {"nathom/filetype.nvim"}
+
         -- Packer can manage itself
         use {'wbthomason/packer.nvim'}
 
@@ -167,7 +171,7 @@ packer.startup({
         --
         -- Motions
         --
-        -- Next-generation motion plugin for incredibly fast on-screen navigation.
+        -- Next-generation motion plugin for incredibly fast on-screen navigation
         -- Replace hop.nvim and quick-scope
         use {
             'ggandor/lightspeed.nvim',
@@ -175,7 +179,7 @@ packer.startup({
             after = 'coq_nvim'
         }
 
-        -- usein for vim to enabling opening a file in a given line
+        -- Enable opening a file in a given line
         use {'wsdjeg/vim-fetch'}
 
         -- Go to the last edited place
@@ -321,10 +325,11 @@ packer.startup({
         --         { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
         --         { "hrsh7th/cmp-vsnip", after = "nvim-cmp" },
         --         { "hrsh7th/vim-vsnip", after = "nvim-cmp" },
+        --         { "lukas-reineke/cmp-rg", after = "nvim-cmp" },
         --     },
         --     config = function() require('plugins.nvim-cmp') end
         -- }
-        --
+
         -- use {
         --     'tzachar/cmp-tabnine',
         --     run = './install.sh',
@@ -345,10 +350,7 @@ packer.startup({
         use {
             'neovim/nvim-lspconfig',
             requires = {
-                'folke/lua-dev.nvim', {
-                    -- Lightweight UI provider for LSP
-                    'glepnir/lspsaga.nvim'
-                }, {
+                {
                     -- Signature hint when typing
                     'ray-x/lsp_signature.nvim'
                 }, {
@@ -363,9 +365,15 @@ packer.startup({
                 }
 
             },
-            config = function()
-                require('plugins.nvim-lspconfig').init()
-            end
+            config = function() require('plugins.nvim-lspconfig') end
+        }
+
+        -- replace lsp-saga
+        -- Use Neovim as a language server to inject LSP diagnostics, code
+        -- actions, and more via Lua
+        use {
+            "jose-elias-alvarez/null-ls.nvim",
+            requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"}
         }
 
         -- use {'github/copilot.vim' }
@@ -380,12 +388,6 @@ packer.startup({
         use {
             "nvim-lua/lsp-status.nvim",
             config = function() require('plugins.lsp-status') end
-        }
-
-        -- fancy popups lsp
-        use {
-            'glepnir/lspsaga.nvim',
-            config = function() require('plugins.lspsaga') end
         }
 
         -- Replacing ale, as it's big for just removing whitespaces and do formatting
