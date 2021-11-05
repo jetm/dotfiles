@@ -175,8 +175,9 @@ packer.startup({
         -- Replace hop.nvim and quick-scope
         use {
             'ggandor/lightspeed.nvim',
-            config = function() require('plugins.lightspeed') end,
-            after = 'coq_nvim'
+            config = function() require('plugins.lightspeed') end
+            -- after = 'coq_nvim',
+            -- after = 'nvim-cmp'
         }
 
         -- Enable opening a file in a given line
@@ -313,22 +314,23 @@ packer.startup({
         use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
 
         -- nvim-cmp is slower than coq_nvim. Test it more later
-        -- use {
-        --     'hrsh7th/nvim-cmp',
-        --     requires = {
-        --         { "hrsh7th/cmp-nvim-lsp" },
-        --         { "onsails/lspkind-nvim" },
-        --         { "rafamadriz/friendly-snippets" },
-        --         { "nvim-treesitter/nvim-treesitter" },
-        --         { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-        --         { "hrsh7th/cmp-path", after = "nvim-cmp" },
-        --         { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
+        -- {"rafamadriz/friendly-snippets"},
         --         { "hrsh7th/cmp-vsnip", after = "nvim-cmp" },
         --         { "hrsh7th/vim-vsnip", after = "nvim-cmp" },
         --         { "lukas-reineke/cmp-rg", after = "nvim-cmp" },
+        -- use {
+        --     'hrsh7th/nvim-cmp',
+        --     requires = {
+        --         {"hrsh7th/cmp-nvim-lsp"}, {"onsails/lspkind-nvim"},
+        --         {"nvim-treesitter/nvim-treesitter"},
+        --         {"hrsh7th/cmp-nvim-lua", after = "nvim-cmp"},
+        --         {"hrsh7th/cmp-buffer", after = "nvim-cmp"},
+        --         {"hrsh7th/cmp-path", after = "nvim-cmp"},
+        --         {'quangnguyen30192/cmp-nvim-ultisnips', after = "nvim-cmp"}
         --     },
         --     config = function() require('plugins.nvim-cmp') end
         -- }
+
 
         -- use {
         --     'tzachar/cmp-tabnine',
@@ -365,7 +367,7 @@ packer.startup({
                 }
 
             },
-            config = function() require('plugins.nvim-lspconfig') end
+            config = function() require('plugins.lsp') end
         }
 
         -- replace lsp-saga

@@ -1,6 +1,6 @@
 -- Setup global configuration. More on configuration below.
-local lspkind = require('lspkind')
 local cmp = require('cmp')
+local lspkind = require('lspkind')
 
 local has_words_before = function()
     if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
@@ -42,7 +42,6 @@ end
 
 cmp.setup {
     completion = { completeopt = "menu,menuone,noselect" },
-    -- You must set mapping if you want
     mapping = {
         ['<CR>'] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,

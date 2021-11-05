@@ -455,7 +455,7 @@ zinit light BurntSushi/ripgrep
 #
 zi0c id-as'nvim' \
   nocompile \
-  atclone"wget https://github.com/github/copilot.vim/releases/download/neovim-nightlies/nvim-linux64.zip; \
+  atclone"wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz; \
     unzip -o nvim-linux64.zip; \
     fd nvim -x rm -vrf {} \; $ZPFX; \
     tar xvf nvim-linux64.tar.gz --strip-components=1 -C $ZPFX; \
@@ -511,6 +511,14 @@ zinit light ninja-build/ninja
 #
 # Language servers
 #
+zi0c id-as'lua-language-server' \
+  as'program' \
+  atclone"git submodule update --init --recursive; \
+          ninja -C 3rd/luamake -f compile/ninja/linux.ninja; \
+          ./3rd/luamake/luamake rebuild;" \
+  atpull'%atclone'
+zinit light sumneko/lua-language-server
+
 # zi0c id-as'efm' \
 #   from'gh-r' \
 #   as'program' \
@@ -518,14 +526,6 @@ zinit light ninja-build/ninja
 #   mv'*/efm-langserver -> efm-langserver' \
 #   pick"efm-langserver"
 # zinit light mattn/efm-langserver
-
-# zi0c id-as'lua-language-server' \
-#   as'program' \
-#   atclone"git submodule update --init --recursive; \
-#           ninja -C 3rd/luamake -f compile/ninja/linux.ninja; \
-#           ./3rd/luamake/luamake rebuild;" \
-#   atpull'%atclone'
-# zinit light sumneko/lua-language-server
 
 #
 # Git utilities
