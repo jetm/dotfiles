@@ -113,6 +113,13 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     pick'less'
   zinit light gwsw/less
 
+  zi0c id-as'ov' \
+    from'gh-r' \
+    as'program' \
+    bpick'*linux_amd64*' \
+    pick'ov'
+  zinit light noborus/ov
+
   zi0c id-as'clangd' \
     from'gh-r' \
     as'program'  \

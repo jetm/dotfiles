@@ -63,7 +63,7 @@ export LESS="${LESS}"
 #
 # PAGER
 #
-export PAGER=less
+export PAGER="ov --quit-if-one-screen"
 
 #
 # Man Pages

@@ -392,12 +392,10 @@ packer.startup({
             config = function() require('plugins.lsp-status') end
         }
 
-        -- Replacing ale, as it's big for just removing whitespaces and do formatting
+        -- Removes trailing whitespace from *modified* lines on save
+        -- Replace ntpeters/vim-better-whitespace
         use {
-            'ntpeters/vim-better-whitespace',
-            config = function()
-                require('plugins.vim-better-whitespace')
-            end
+            'axelf4/vim-strip-trailing-whitespace'
         }
 
         use {
