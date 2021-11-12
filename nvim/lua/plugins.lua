@@ -303,34 +303,31 @@ packer.startup({
         --
         -- Completion
         --
-        use {
-            'ms-jpq/coq_nvim',
-            branch = 'coq',
-            run = ':COQdeps',
-            config = function() require('plugins.coq') end
-        }
-
-        -- coq_nvim snippets
-        use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
-
-        -- nvim-cmp is slower than coq_nvim. Test it more later
-        -- {"rafamadriz/friendly-snippets"},
-        --         { "hrsh7th/cmp-vsnip", after = "nvim-cmp" },
-        --         { "hrsh7th/vim-vsnip", after = "nvim-cmp" },
-        --         { "lukas-reineke/cmp-rg", after = "nvim-cmp" },
         -- use {
-        --     'hrsh7th/nvim-cmp',
-        --     requires = {
-        --         {"hrsh7th/cmp-nvim-lsp"}, {"onsails/lspkind-nvim"},
-        --         {"nvim-treesitter/nvim-treesitter"},
-        --         {"hrsh7th/cmp-nvim-lua", after = "nvim-cmp"},
-        --         {"hrsh7th/cmp-buffer", after = "nvim-cmp"},
-        --         {"hrsh7th/cmp-path", after = "nvim-cmp"},
-        --         {'quangnguyen30192/cmp-nvim-ultisnips', after = "nvim-cmp"}
-        --     },
-        --     config = function() require('plugins.nvim-cmp') end
+        --     'ms-jpq/coq_nvim',
+        --     branch = 'coq',
+        --     run = ':COQdeps',
+        --     config = function() require('plugins.coq') end
         -- }
 
+        -- coq_nvim snippets
+        -- use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
+
+        use {
+            'hrsh7th/nvim-cmp',
+            requires = {
+                {"onsails/lspkind-nvim"},
+                {"dcampos/nvim-snippy"},
+                {"honza/vim-snippets"},
+                {"hrsh7th/cmp-nvim-lsp"},
+                {"hrsh7th/cmp-nvim-lua", after = "nvim-cmp"},
+                {"hrsh7th/cmp-buffer", after = "nvim-cmp"},
+                {"hrsh7th/cmp-path", after = "nvim-cmp"},
+                {"lukas-reineke/cmp-rg", after = "nvim-cmp" },
+                {"dcampos/cmp-snippy", after = "nvim-cmp"}
+            },
+            config = function() require('plugins.nvim-cmp') end
+        }
 
         -- use {
         --     'tzachar/cmp-tabnine',

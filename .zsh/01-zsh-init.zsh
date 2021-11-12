@@ -58,12 +58,15 @@ LESS="${LESS} --incsearch"
 # --no-histdups remove duplicates from command history
 LESS="${LESS} --no-histdups"
 
+# -~ --tilde Don't display tildes after end of file
+LESS="${LESS} --tilde"
+
 export LESS="${LESS}"
 
 #
 # PAGER
 #
-export PAGER="ov --quit-if-one-screen"
+export PAGER=less
 
 #
 # Man Pages

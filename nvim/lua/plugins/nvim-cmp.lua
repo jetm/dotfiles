@@ -1,6 +1,6 @@
 -- Setup global configuration. More on configuration below.
 local cmp = require('cmp')
-local lspkind = require('lspkind')
+local snippy = require("snippy")
 
 local has_words_before = function()
     if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
@@ -13,16 +13,11 @@ local has_words_before = function()
                    :match("%s") == nil
 end
 
-local feedkey = function(key, mode)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true),
-                          mode, true)
-end
-
 local tab_complete = function(fallback)
-    if vim.fn["vsnip#available"]() == 1 then
-        feedkey("<Plug>(vsnip-expand-or-jump)", "")
-    elseif cmp.visible() then
+    if cmp.visible() then
         cmp.select_next_item()
+    elseif snippy.can_expand_or_advance() then
+        snippy.expand_or_advance()
     elseif has_words_before() then
         cmp.complete()
     else
@@ -31,32 +26,31 @@ local tab_complete = function(fallback)
 end
 
 local s_tab_complete = function(fallback)
-    if vim.fn["vsnip#jumpable"](-1) == 1 then
-        feedkey("<Plug>(vsnip-jump-prev)", "")
-    elseif cmp.visible() then
+    if cmp.visible() then
         cmp.select_prev_item()
+    elseif snippy.can_jump(-1) then
+        snippy.previous()
     else
         fallback()
     end
 end
 
+local lspkind = require('lspkind')
+
 cmp.setup {
-    completion = { completeopt = "menu,menuone,noselect" },
+    completion = {completeopt = "menu,menuone,noselect"},
+
+    snippet = {
+        expand = function(args) require'snippy'.expand_snippet(args.body) end
+    },
+
     mapping = {
         ['<CR>'] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,
             select = true
         }),
         ["<Tab>"] = cmp.mapping(tab_complete, {"i", "s"}),
-        ["<C-j>"] = cmp.mapping(tab_complete, {"i", "s"}),
         ["<S-Tab>"] = cmp.mapping(s_tab_complete, {"i", "s"})
-    },
-
-    snippet = {
-        expand = function(args)
-            -- You must install `vim-vsnip` if you use the following as-is.
-            vim.fn['vsnip#anonymous'](args.body)
-        end
     },
 
     formatting = {
@@ -65,15 +59,16 @@ cmp.setup {
 
     sources = {
         {name = 'buffer', max_item_count = 5, priority = 1},
-        {name = 'treesitter', max_item_count = 5, priority = 2},
-        -- unable to select new element
-        -- {name = 'rg', opts = { additional_arguments = "--ignore-file halon-src --ignore-file halon-test --ignore-file tools" }, max_item_count = 10, priority = 3},
-        -- too slow in big repo
-        -- {name = 'cmp_tabnine', max_item_count = 5, priority = 3},
-        {name = 'path', max_item_count = 10, priority = 4},
+        {name = 'snippy', priority = 2}, {
+            name = 'rg',
+            max_item_count = 10,
+            priority = 3,
+            opts = {
+                additional_arguments = "--ignore-file halon-src --ignore-file halon-test --ignore-file tools"
+            }
+        }, {name = 'path', max_item_count = 10, priority = 4},
         {name = 'nvim_lsp', max_item_count = 5, priority = 5},
-        {name = 'nvim_lua', max_item_count = 3, priority = 6},
-        {name = 'vsnip', max_item_count = 2, priority = 7}
+        {name = 'nvim_lua', max_item_count = 3, priority = 6}
     }
 }
 
