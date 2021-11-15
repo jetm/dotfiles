@@ -69,9 +69,9 @@ load_prezto_mod completion
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
-zinit id-as'z-a-readurl' light-mode for zinit-zsh/z-a-readurl
-zinit id-as'z-a-path-dl' light-mode for zinit-zsh/z-a-patch-dl
-zinit id-as'z-a-gen-mod-node' light-mode for zinit-zsh/z-a-bin-gem-node
+zinit id-as'z-a-readurl' light-mode for z-shell/z-a-readurl
+zinit id-as'z-a-path-dl' light-mode for z-shell/z-a-patch-dl
+zinit id-as'z-a-bin-mod-node' light-mode for z-shell/z-a-bin-gem-node
 zinit id-as'zsh-defer' light-mode for romkatv/zsh-defer
 
 if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
@@ -99,7 +99,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zi0c id-as'topgrade' \
     from'gh-r' \
     as'program' \
-    bpick'*x86_64-unknown-linux-gnu*' \
+    bpick'*x86_64-unknown-linux-musl*' \
     pick'topgrade'
   zinit light r-darwish/topgrade
 
@@ -641,8 +641,7 @@ zinit light six-ddc/hss
 
 zi0c id-as'task-spooler' \
   as'program' \
-  atclone"git checkout cpu-only" \
-  atpull"%atclone" \
+  ver'cpu-only' \
   make"PREFIX=$ZPFX -j$(nproc) install"
 zinit light justanhduc/task-spooler
 
