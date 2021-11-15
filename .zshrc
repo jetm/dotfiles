@@ -87,7 +87,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
       rm -vf $ZPFX/bin/git-cvsserver;
       rm -vf $ZPFX/bin/gitk;" \
     atpull'%atclone' \
-    for https://github.com/git/git/releases/
+    for https://github.com/git/git/tags/
 
   # look for 70-asdf.zsh configuration file
   zi0a id-as'asdf' \
@@ -644,6 +644,13 @@ zi0c id-as'task-spooler' \
   ver'cpu-only' \
   make"PREFIX=$ZPFX -j$(nproc) install"
 zinit light justanhduc/task-spooler
+
+zi0c id-as'stylua' \
+  from'gh-r' \
+  as'program' \
+  bpick'*stylua*linux*' \
+  pick'stylua'
+zinit light JohnnyMorganz/StyLua
 
 # zi0c id-as'difftastic' \
 #   cargo'!difftastic'
