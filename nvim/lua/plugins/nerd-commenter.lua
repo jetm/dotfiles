@@ -10,7 +10,7 @@ vim.g.NERDCompactSexyComs = 1
 
 -- Align line-wise comment delimiters flush left instead of following code
 -- indentation
-vim.g.NERDDefaultAlign = 'left'
+vim.g.NERDDefaultAlign = "left"
 
 -- Enable trimming of trailing whitespace when uncommenting
 vim.g.NERDTrimTrailingWhitespace = 1
@@ -21,4 +21,4 @@ vim.g.NERDCommentEmptyLines = 1
 -- Enable NERDCommenterToggle to check all selected lines is commented or not
 vim.g.NERDToggleCheckAllLines = 1
 
-vim.g.NERDCustomDelimiters = { dosini = { left= '#' } }
+vim.g.NERDCustomDelimiters = { dosini = { left = "#" } }

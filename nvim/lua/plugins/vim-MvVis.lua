@@ -1,3 +1,3 @@
 local vim = vim
 
-vim.g.MvVis_mappings=0
+vim.g.MvVis_mappings = 0

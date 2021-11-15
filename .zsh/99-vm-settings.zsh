@@ -27,4 +27,9 @@ fi
 
 eval "$(/ws/$USER/shell-goodies/bb/bin/bb init -)"
 
+# rust
+if [ -d "${HOME}/.zinit/polaris" ]; then
+  export CARGO_INSTALL_ROOT="${HOME}/.zinit/polaris"
+fi
+
 # vim:set ts=2 sw=2 et:

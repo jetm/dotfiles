@@ -1,6 +1,6 @@
 local cmd = vim.cmd
 
-cmd [[
+cmd([[
   set backup
   set undofile
   set undodir=$HOME/.vim_data/undofile
@@ -31,4 +31,4 @@ cmd [[
   unlet g:swap_dir
   unlet g:undo_dir
   unlet g:conf_dir
-]]
+]])
