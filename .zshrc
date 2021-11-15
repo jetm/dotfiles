@@ -14,6 +14,11 @@ if [[ ! -f ${HOME}/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
+source "${HOME}/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+### End of Zinit's installer chunk
+
 turbo_source() {
   file="$1"
   if [[ -e "$file" ]] && [[ ! -e "$file.zwc" ]] \
@@ -22,11 +27,6 @@ turbo_source() {
   fi
   source "$file"
 }
-
-turbo_source "${HOME}/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-### End of Zinit's installer chunk
 
 #
 # Powerlevel10k
