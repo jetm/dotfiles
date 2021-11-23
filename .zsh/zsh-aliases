@@ -46,6 +46,7 @@ zsh-defer abbrev-alias -c fdi="fd -t f -o $USER -l -d 1 . /aruba/pub"
 zsh-defer abbrev-alias -c ls="exa"
 zsh-defer abbrev-alias -c df="duf"
 zsh-defer abbrev-alias -c bbk="bitbake"
+zsh-defer abbrev-alias -c rmb="for d in build*; do ts rm -rf $d; done"
 
 #
 # Git

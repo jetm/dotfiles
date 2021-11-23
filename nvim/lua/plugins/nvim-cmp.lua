@@ -63,17 +63,17 @@ cmp.setup({
 	sources = {
 		{ name = "buffer", max_item_count = 5, priority = 1 },
 		{ name = "snippy", priority = 2 },
+		{ name = "path", max_item_count = 5, priority = 3 },
+		{ name = "nvim_lsp", max_item_count = 5, priority = 4 },
+		{ name = "nvim_lua", max_item_count = 5, priority = 5 },
 		{
 			name = "rg",
-			max_item_count = 10,
-			priority = 3,
+			max_item_count = 5,
+			priority = 10,
 			opts = {
-				additional_arguments = "--ignore-file halon-src --ignore-file halon-test --ignore-file tools",
+				additional_arguments = "--ignore-file halon-src --ignore-file halon-test --ignore-file tools --glob '!*.patch'",
 			},
 		},
-		{ name = "path", max_item_count = 10, priority = 4 },
-		{ name = "nvim_lsp", max_item_count = 5, priority = 5 },
-		{ name = "nvim_lua", max_item_count = 3, priority = 6 },
 	},
 })
 

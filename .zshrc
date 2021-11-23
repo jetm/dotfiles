@@ -104,7 +104,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zinit light r-darwish/topgrade
 
   zi0c id-as'less' \
-    ver'v595' \
+    ver'v597' \
     as'program' \
     atclone'make -f Makefile.aut && autoreconf --install &&
       ./configure --with-regex=gnu --with-editor=nvim' \
@@ -136,6 +136,13 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
       mv -vf usr/bin/interactive-rebase-tool $ZPFX/bin;" \
     atpull'%atclone' \
     for https://github.com/MitMaro/git-interactive-rebase-tool/releases
+
+  zi0c id-as'tmux' \
+    as"program" \
+    ver"3.2a" \
+    atclone"./autogen.sh && ./configure && make -j$(nproc)" \
+    mv"tmux -> /ws/${USER}/shell-goodies/repos/dotfiles/bin/tmux"
+  zinit light tmux/tmux
 
   # Put here all rust installations
   # looks the mv ice doesn't work with rustup cargo
