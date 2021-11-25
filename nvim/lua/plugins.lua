@@ -57,8 +57,13 @@ packer.startup({
 
 		-- A faster version of filetype.vim
 		-- Still missing colors in some files
-		-- use {"nathom/filetype.nvim"}
-
+		use({
+			"nathom/filetype.nvim",
+			config = function()
+				require("plugins.filetype")
+			end,
+		})
+		--
 		-- Packer can manage itself
 		use({ "wbthomason/packer.nvim" })
 

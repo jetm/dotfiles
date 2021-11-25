@@ -6,7 +6,7 @@ local vim = vim
 vim.g.python3_host_prog = "/usr/bin/python3.9"
 
 -- Do not source the default filetype.vim
--- vim.g.did_load_filetypes = 1
+vim.g.did_load_filetypes = 1
 
 -- Disable some unused built-in Neovim plugins
 local disabled_built_ins = {

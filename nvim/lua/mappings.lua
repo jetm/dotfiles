@@ -108,10 +108,11 @@ vimp.imap({ "silent" }, "<C-s>", "<C-o>:update<CR>")
 -- Telescope is async
 -- Testing snap
 -- Select files, symlinks, hidden files, and exclude Git directory
+-- ":Telescope find_files find_command=git,ls-files<CR>"
 vimp.nnoremap(
 	{ "silent" },
 	"<C-p>",
-	":Telescope find_files find_command=fd,-t,f,-t,l,--hidden,--exclude,.git<CR>"
+    ":Telescope find_files find_command=fd,-t,f,-t,l,--hidden,--exclude,.git<CR>"
 )
 
 --
@@ -133,7 +134,7 @@ vimp.nnoremap({ "silent" }, "<M-.>", "<C-W>>")
 -- NvimTree
 vimp.nnoremap({ "silent" }, "<F2>", ":NvimTreeToggle<CR>")
 -- Shift + <F2>
-vimp.nnoremap({ "silent" }, "<F14>", ":NvimTreeFindFile<CR>")
+vimp.nnoremap({ "silent" }, "<S-F2>", ":NvimTreeFindFile<CR>")
 
 vimp.nnoremap(
 	{ "silent" },
