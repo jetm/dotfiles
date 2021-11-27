@@ -112,7 +112,7 @@ vimp.imap({ "silent" }, "<C-s>", "<C-o>:update<CR>")
 vimp.nnoremap(
 	{ "silent" },
 	"<C-p>",
-    ":Telescope find_files find_command=fd,-t,f,-t,l,--hidden,--exclude,.git<CR>"
+    ":Telescope find_files find_command=fd,-t,f,-t,l,--hidden,--exclude,.git,--color,never<CR>"
 )
 
 --

@@ -22,3 +22,5 @@ vim.g.NERDCommentEmptyLines = 1
 vim.g.NERDToggleCheckAllLines = 1
 
 vim.g.NERDCustomDelimiters = { dosini = { left = "#" } }
+
+vim.g.NERDCustomDelimiters = { c = { left = "//" } }
