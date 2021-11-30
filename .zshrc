@@ -456,27 +456,29 @@ zinit light BurntSushi/ripgrep
 # Editor
 #
 
-# Release 0.5.1
-# zi0c id-as'nvim' \
-#   ver'v0.5.1' \
-#   as'program' \
-#   make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
-#   atload'export EDITOR="nvim"'
-# zinit light neovim/neovim
+#
+# neovim stable releases
+#
+zi0c id-as'nvim' \
+  ver'v0.6.0' \
+  as'program' \
+  make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
+  atload'export EDITOR="nvim"'
+zinit light neovim/neovim
 
 #
 # neovim-nightlies
 #
-zi0c id-as'nvim' \
-  nocompile \
-  atclone"wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz; \
-    unzip -o nvim-linux64.zip; \
-    fd nvim -x rm -vrf {} \; $ZPFX; \
-    tar xvf nvim-linux64.tar.gz --strip-components=1 -C $ZPFX; \
-    rm -f nvim-linux64.zip" \
-  atpull'%atclone' \
-  atload'export EDITOR="nvim"'
-zinit light zdharma-continuum/null
+# zi0c id-as'nvim' \
+#   nocompile \
+#   atclone"wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz; \
+#     unzip -o nvim-linux64.zip; \
+#     fd nvim -x rm -vrf {} \; $ZPFX; \
+#     tar xvf nvim-linux64.tar.gz --strip-components=1 -C $ZPFX; \
+#     rm -f nvim-linux64.zip" \
+#   atpull'%atclone' \
+#   atload'export EDITOR="nvim"'
+# zinit light zdharma-continuum/null
 
 # zi0c id-as'glow' \
 #   from'gh-r' \
