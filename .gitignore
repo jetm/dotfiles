@@ -3,3 +3,4 @@ nvim/plugin/packer_compiled.lua
 *.zwc
 bin/tmux
 bin/unifdef
+bin/makePipRecipes.py

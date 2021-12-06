@@ -5,6 +5,7 @@ require('filetype').setup({
             -- Set the filetype of *.pn files to potion
             bb = 'bitbake',
             bbclass = 'bitbake',
+            inc = 'bitbake',
             bbappend = 'bitbake'
         },
         literal = {
