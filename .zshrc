@@ -71,7 +71,8 @@ load_prezto_mod completion
 # (this is currently required for annexes)
 zinit id-as'z-a-readurl' light-mode for z-shell/z-a-readurl
 zinit id-as'z-a-path-dl' light-mode for z-shell/z-a-patch-dl
-zinit id-as'z-a-bin-mod-node' light-mode for z-shell/z-a-bin-gem-node
+zinit id-as'z-a-bin-mod-node' light-mode for zdharma-continuum/zinit-annex-bin-gem-node
+
 zinit id-as'zsh-defer' light-mode for romkatv/zsh-defer
 
 if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
@@ -104,7 +105,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zinit light r-darwish/topgrade
 
   zi0c id-as'less' \
-    ver'v597' \
+    ver'v598' \
     as'program' \
     atclone'make -f Makefile.aut && autoreconf --install &&
       ./configure --with-regex=gnu --with-editor=nvim' \

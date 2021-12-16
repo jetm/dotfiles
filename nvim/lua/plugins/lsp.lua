@@ -1,4 +1,3 @@
-local null_ls = require("null-ls")
 local lsp = require("lspconfig")
 local lsp_status = require("lsp-status")
 lsp_status.register_progress()
@@ -17,17 +16,11 @@ local on_attach = function(client, bufnr)
 	lsp_status.on_attach(client, bufnr)
 end
 
-local b = null_ls.builtins
-null_ls.config({
+local null_ls = require("null-ls")
+null_ls.setup({
 	sources = {
-		-- b.code_actions.gitsigns,
-		b.diagnostics.shellcheck,
+		null_ls.builtins.diagnostics.shellcheck,
 	},
-})
-
-lsp["null-ls"].setup({
-	on_attach = on_attach,
-	capabilities = lsp_status.capabilities,
 })
 
 -- diagnostics

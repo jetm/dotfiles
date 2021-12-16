@@ -66,14 +66,14 @@ cmp.setup({
 		{ name = "path", max_item_count = 5, priority = 3 },
 		{ name = "nvim_lsp", max_item_count = 5, priority = 4 },
 		{ name = "nvim_lua", max_item_count = 5, priority = 5 },
-		{
-			name = "rg",
-			max_item_count = 5,
-			priority = 10,
-			option = {
-				additional_arguments = "--ignore-file halon-src --ignore-file halon-test --ignore-file tools --glob '!*.patch'",
-			},
-		},
+		-- {
+		--     name = "rg",
+		--     max_item_count = 5,
+		--     priority = 10,
+		--     option = {
+		--         additional_arguments = "--ignore-file halon-src --ignore-file halon-test --ignore-file tools --glob '!*.patch'",
+		--     },
+		-- },
 	},
 })
 

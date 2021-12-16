@@ -427,7 +427,7 @@ packer.startup({
 		-- actions, and more via Lua
 		use({
 			"jose-elias-alvarez/null-ls.nvim",
-			requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+			requires = { "nvim-lua/plenary.nvim"},
 		})
 
 		-- use {'github/copilot.vim' }
