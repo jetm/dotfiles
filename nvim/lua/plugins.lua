@@ -140,12 +140,13 @@ packer.startup({
 			opt = true,
 		})
 
-		use({
-			"Jorengarenar/vim-MvVis",
-			config = function()
-				require("plugins.vim-MvVis")
-			end,
-		})
+		-- Forgetting to use it
+		-- use({
+		--     "Jorengarenar/vim-MvVis",
+		--     config = function()
+		--         require("plugins.vim-MvVis")
+		--     end,
+		-- })
 
 		--
 		-- UI

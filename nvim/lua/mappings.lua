@@ -27,11 +27,6 @@ vimp.imap({ "silent" }, "<Down>", "<Nop>")
 vimp.imap({ "silent" }, "<Left>", "<Nop>")
 vimp.imap({ "silent" }, "<Right>", "<Nop>")
 
-vimp.vmap({ "silent" }, "J", "<Plug>(MvVisDown)")
-vimp.vmap({ "silent" }, "K", "<Plug>(MvVisUp)")
-vimp.vmap({ "silent" }, "L", "<Plug>(MvVisRight)")
-vimp.vmap({ "silent" }, "H", "<Plug>(MvVisLeft)")
-
 -- Visual shifting (does not exit Visual mode)
 vimp.vnoremap({ "silent" }, "<", "<gv")
 vimp.vnoremap({ "silent" }, ">", ">gv")
