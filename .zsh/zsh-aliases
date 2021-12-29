@@ -8,11 +8,11 @@ unalias -m '*'
 # Disable correction
 alias type='type -a'
 
-alias rm='rm -i'
-alias mv='mv -i'
-alias cp='cp -i'
-alias ln='ln -i'
-alias mkdir='mkdir -p'
+alias -c rm='rm -i'
+alias -c mv='mv -i'
+alias -c cp='cp -i'
+alias -c ln='ln -i'
+alias -c mkdir='mkdir -p'
 
 # Reload the Zsh configurations
 alias reload="exec $SHELL -i -l"
@@ -37,129 +37,129 @@ alias lt='exa --tree'
 # )
 
 # General
-zsh-defer abbrev-alias -c e="nvim"
-zsh-defer abbrev-alias -c vim="nvim"
-zsh-defer abbrev-alias -c vimdiff="nvim -d"
-zsh-defer abbrev-alias -c up="cd ../"
-zsh-defer abbrev-alias -c cd-="cd -"
-zsh-defer abbrev-alias -c fdi="fd -t f -o $USER -l -d 1 . /aruba/pub"
-zsh-defer abbrev-alias -c ls="exa"
-zsh-defer abbrev-alias -c df="duf"
-zsh-defer abbrev-alias -c bbk="bitbake"
-zsh-defer abbrev-alias -c rmb="for d in build*; do ts rm -rf \$d; done"
+alias e="nvim"
+alias vim="nvim"
+alias vimdiff="nvim -d"
+alias up="cd ../"
+alias cd-="cd -"
+alias fdi="fd -t f -o $USER -l -d 1 . /aruba/pub"
+alias ls="exa"
+alias df="duf"
+alias bbk="bitbake"
+alias rmb="for d in build*; do ts rm -rf \$d; done"
 
 #
 # Git
 #
-zsh-defer abbrev-alias -c g="git"
+alias g="git"
 
 # Branch (b)
-zsh-defer abbrev-alias -c gb='git branch'
-zsh-defer abbrev-alias -c gbd='git branch -D'
-zsh-defer abbrev-alias -c gbv='git branch -vv'
-zsh-defer abbrev-alias -c gbm='git branch -M'
+alias gb='git branch'
+alias gbd='git branch -D'
+alias gbv='git branch -vv'
+alias gbm='git branch -M'
 
 # Commit (c)
-zsh-defer abbrev-alias -c gc='git commit'
-zsh-defer abbrev-alias -c gca='git commit --all'
-zsh-defer abbrev-alias -c gcf='git commit --amend'
-zsh-defer abbrev-alias -c gch='git cherry-pick -x'
-zsh-defer abbrev-alias -c gcs='git show'
+alias gc='git commit'
+alias gca='git commit --all'
+alias gcf='git commit --amend'
+alias gch='git cherry-pick -x'
+alias gcs='git show'
 
 # Checkout (c)
-zsh-defer abbrev-alias -c gco='git checkout'
-zsh-defer abbrev-alias -c gfcf='forgit::checkout::file'
-zsh-defer abbrev-alias -c gcp='git checkout --patch'
-zsh-defer abbrev-alias -c gcb='git checkout -b'
-zsh-defer abbrev-alias -c gc-='git checkout -'
-zsh-defer abbrev-alias -c gre='git restore'
-zsh-defer abbrev-alias -c grs='git restore --staged'
+alias gco='git checkout'
+alias gfcf='forgit::checkout::file'
+alias gcp='git checkout --patch'
+alias gcb='git checkout -b'
+alias gc-='git checkout -'
+alias gre='git restore'
+alias grs='git restore --staged'
 
 # Restore (r)
-zsh-defer abbrev-alias -c grf='git reset-file'
-zsh-defer abbrev-alias -c grh='forgit::reset::head'
+alias grf='git reset-file'
+alias grh='forgit::reset::head'
 
 # Grep (g)
-zsh-defer abbrev-alias -c gg='git grep'
+alias gg='git grep'
 
 # Index (a)
-zsh-defer abbrev-alias -c ga='forgit::add'
-zsh-defer abbrev-alias -c gap='git add --patch'
+alias ga='forgit::add'
+alias gap='git add --patch'
 
 # Diff (d)
-zsh-defer abbrev-alias -c gd='forgit::diff'
-zsh-defer abbrev-alias -c gdc='forgit::diff --cached'
+alias gd='forgit::diff'
+alias gdc='forgit::diff --cached'
 
 # Log (l)
-zsh-defer abbrev-alias -c gl='git lg'
-zsh-defer abbrev-alias -c gla='git last'
-zsh-defer abbrev-alias -c gll='git lol'
+alias gl='git lg'
+alias gla='git last'
+alias gll='git lol'
 
 # Push (p)
-zsh-defer abbrev-alias -c gp='git push'
-zsh-defer abbrev-alias -c gpp='git push --force-with-lease'
-zsh-defer abbrev-alias -c gpr='git publish -t'
+alias gp='git push'
+alias gpp='git push --force-with-lease'
+alias gpr='git publish -t'
 
 # Rebase (r)
-zsh-defer abbrev-alias -c gr='git rebase'
-zsh-defer abbrev-alias -c gra='git rebase --abort'
-zsh-defer abbrev-alias -c grc='git rebase --continue'
-zsh-defer abbrev-alias -c gri='git rebase --interactive'
+alias gr='git rebase'
+alias gra='git rebase --abort'
+alias grc='git rebase --continue'
+alias gri='git rebase --interactive'
 
 # Stash (s)
-zsh-defer abbrev-alias -c gs='git stash'
-zsh-defer abbrev-alias -c gsd='git stash drop'
-zsh-defer abbrev-alias -c gsp='git stash pop'
-zsh-defer abbrev-alias -c gss='git stash show'
+alias gs='git stash'
+alias gsd='git stash drop'
+alias gsp='git stash pop'
+alias gss='git stash show'
 
 # Undo (u)
-zsh-defer abbrev-alias -c gu='git undo'
-zsh-defer abbrev-alias -c guh='git undo -h'
+alias gu='git undo'
+alias guh='git undo -h'
 
 # rest
-zsh-defer abbrev-alias -c gfi='git fixup-prev-ci'
-zsh-defer abbrev-alias -c gcl='git clone'
-zsh-defer abbrev-alias -c gfe='git fetch'
-zsh-defer abbrev-alias -c gls='git ls-files'
-zsh-defer abbrev-alias -c gP='git pull'
-zsh-defer abbrev-alias -c gt='git status'
+alias gfi='git fixup-prev-ci'
+alias gcl='git clone'
+alias gfe='git fetch'
+alias gls='git ls-files'
+alias gP='git pull'
+alias gt='git status'
 
 # git fuzzy
-zsh-defer abbrev-alias -c gzt='git fuzzy status'
-zsh-defer abbrev-alias -c gzb='git fuzzy branch'
+alias gzt='git fuzzy status'
+alias gzb='git fuzzy branch'
 
 # git dl
-zsh-defer abbrev-alias -c gdl="git dl -x"
+alias gdl="git dl -x"
 
 #
 # Arch Linux Stuff
 #
 if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
   #
-  # Pacman abbrev-alias -c --globales
+  # Pacman abbrev-alias --globales
   #
 
   # Recursively removing orphans (be careful)
-  abbrev-alias -c paorph='sudo pacman -Rs $(pacman -Qtdq)'
+  alias paorph='sudo pacman -Rs $(pacman -Qtdq)'
 
   # Remove ALL packages from cache
-  abbrev-alias -c paremALL='sudo pacman -Scc'
+  alias paremALL='sudo pacman -Scc'
 
   if (command -v paru > /dev/null 2>&1); then
     # Remove the specified package(s), its configuration(s) and unneeded
     # dependencies
-    abbrev-alias -c parem='paru -Rns'
+    alias parem='paru -Rns'
 
     # Upgrade all packages
-    abbrev-alias -c paud='paru -Syu --devel'
+    alias paud='paru -Syu --devel'
 
     # Install specific package(s) from local and AUR
-    abbrev-alias -c pain='paru -S'
+    alias pain='paru -S'
 
     # Install specific package from source package
-    abbrev-alias -c pains='paru -U'
+    alias pains='paru -U'
 
     # Search for package(s) for local and AUR
-    abbrev-alias -c pasp='paru'
+    alias pasp='paru'
   fi
 fi
