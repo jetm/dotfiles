@@ -39,7 +39,7 @@ cmd("sign define LspDiagnosticsSignHint text=")
 
 -- show line diagnostic
 vim.api.nvim_command(
-	"autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics({ focusable = false })"
+	"autocmd CursorHold * lua vim.diagnostic.open_float({ focusable = false })"
 )
 
 lsp.bashls.setup({

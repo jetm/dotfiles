@@ -43,4 +43,7 @@ zvm_after_lazy_keybindings() {
   zvm_bindkey vicmd '^E' my_custom_widget
 }
 
+bindkey -M viins '^[[A' history-substring-search-up
+bindkey -M viins '^[[B' history-substring-search-down
+
 # vim:set ts=2 sw=2 et:

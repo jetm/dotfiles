@@ -162,8 +162,18 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   #   for https://github.com/funtoo/keychain/releases
 fi
 
+#
+# vi-mode
+#
 ZVM_VI_SURROUND_BINDKEY=s-prefix
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+
+# The plugin will auto execute this zvm_after_init function
+zvm_after_init() {
+  # required to read fzf key-bindings, otherwise they will be overwritten by zsh-vi-mode
+  turbo_source "$ZI[PLUGINS_DIR]/fzf/key-bindings.zsh"
+}
+
 zi0a id-as'zsh-vi-mode' \
   depth=1
 zi light jeffreytse/zsh-vi-mode
@@ -174,67 +184,18 @@ zi light jeffreytse/zsh-vi-mode
 zi0a id-as'zsh-autosuggestions'
 zi light zsh-users/zsh-autosuggestions
 
-# Extra completion no required
-# zi0a id-as'zsh-completions' \
-#   atload"zicompinit; zicdreplay"\
-#   blockf
-# zi light zsh-users/zsh-completions
-
-# zi0a id-as'zsh-abbrev-alias' \
-#   src"${HOME}/.zsh/zsh-aliases"
-# zi light momo-lab/zsh-abbrev-alias
-
-# zsh-expand is quicker than zsh-abbrev-alias, but it has issues expanding 2nd
-# command position
-
-# export ZPWR_EXPAND_TO_HISTORY=true
-zi0b id-as'zsh-expand' \
-  src"${HOME}/.zsh/zsh-aliases"
-zi light MenkeTechnologies/zsh-expand
-
-# Replace by fzf. Conflict with Ctrl-R
-# zi0b id-as'history-search-multi-word'
-# zi light zdharma-continuum/history-search-multi-word
-
-# use `cat -v` to define the map
-zi0b id-as'zsh-history-substring-search' \
-  atload"bindkey '^[[A' history-substring-search-up; \
-         bindkey '^[[B' history-substring-search-down"
-zi light zsh-users/zsh-history-substring-search
-
-# Quicker doing manual initialization
-zi0b id-as'zsh-autopair' \
-  atinit'AUTOPAIR_INHIBIT_INIT=1;'
-zi light hlissner/zsh-autopair
-turbo_source "$ZI[PLUGINS_DIR]/zsh-autopair/autopair.zsh"
-autopair-init
-
-# replaced by tmux-fingers
-# zi0c id-as'fpp' \
-#   from"gh" \
-#   as"program" \
-#   nocompile \
-#   atinit"sed -i 's/python3/python3.7/g' fpp" \
-#   pick"fpp"
-# zi light facebook/pathpicker
-
-# zi0c id-as'navi' \
-#   from'gh-r' \
-#   as'program' \
-#   nocompile \
-#   pick'navi' \
-#   atload'eval "$(navi widget zsh)";'
-# zi light denisidoro/navi
-
 #
 # Navigation
 #
+# use `cat -v` to define the map
+zi0a id-as'zsh-history-substring-search'
+zi light zsh-users/zsh-history-substring-search
+
 zi0b id-as'fzf' \
   from'gh-r' \
   as'program' \
   bpick'*linux_amd64*' \
   dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh' \
-  src'key-bindings.zsh' \
   pick'fzf'
 zi light junegunn/fzf
 
@@ -263,13 +224,55 @@ zi light ajeetdsouza/zoxide
 #     zstyle ':autocomplete:*' recent-dirs no"
 # zi light marlonrichert/zsh-autocomplete
 
-# Disable live history. Better using fzf
-# zle -A {.,}history-incremental-search-forward
-# zle -A {.,}history-incremental-search-backward
-
 # Forgot to use it
 # zi0a id-as'zsh-thefuck'
 # zi light laggardkernel/zsh-thefuck
+
+# Extra completion no required
+# zi0a id-as'zsh-completions' \
+#   atload"zicompinit; zicdreplay"\
+#   blockf
+# zi light zsh-users/zsh-completions
+
+# zi0a id-as'zsh-abbrev-alias' \
+#   src"${HOME}/.zsh/zsh-aliases"
+# zi light momo-lab/zsh-abbrev-alias
+
+# zsh-expand is quicker than zsh-abbrev-alias, but it has issues expanding 2nd
+# command position
+
+# export ZPWR_EXPAND_TO_HISTORY=true
+zi0b id-as'zsh-expand' \
+  src"${HOME}/.zsh/zsh-aliases"
+zi light MenkeTechnologies/zsh-expand
+
+# Replace by fzf. Conflict with Ctrl-R
+# zi0b id-as'history-search-multi-word'
+# zi light zdharma-continuum/history-search-multi-word
+
+# Quicker doing manual initialization
+zi0b id-as'zsh-autopair' \
+  atinit'AUTOPAIR_INHIBIT_INIT=1;'
+zi light hlissner/zsh-autopair
+turbo_source "$ZI[PLUGINS_DIR]/zsh-autopair/autopair.zsh"
+autopair-init
+
+# replaced by tmux-fingers
+# zi0c id-as'fpp' \
+#   from"gh" \
+#   as"program" \
+#   nocompile \
+#   atinit"sed -i 's/python3/python3.7/g' fpp" \
+#   pick"fpp"
+# zi light facebook/pathpicker
+
+# zi0c id-as'navi' \
+#   from'gh-r' \
+#   as'program' \
+#   nocompile \
+#   pick'navi' \
+#   atload'eval "$(navi widget zsh)";'
+# zi light denisidoro/navi
 
 #
 # CLI Highlight & Colors
@@ -465,7 +468,7 @@ zi light BurntSushi/ripgrep
 # neovim stable releases
 #
 zi0c id-as'nvim' \
-  ver'v0.6.0' \
+  ver'v0.6.1' \
   as'program' \
   make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
   atload'export EDITOR="nvim"'
@@ -695,21 +698,6 @@ zi light JohnnyMorganz/StyLua
 #   pick'lazydocker'
 # zi light jesseduffield/lazydocker
 
-# zi0b id-as'zui'
-# zi light zdharma-continuum/zui
-
-# zi0c id-as'zi-console'
-# zi light zinit-zsh/zinit-console
-
-#
-# Put most source here to improve zsh load speed
-#
-# extensions dotfiles
-for file in ${HOME}/.zsh/*.zsh; do
-  turbo_source "${file}"
-done
-unset file
-
 # Soure here because doing source inside of zi is slow
 turbo_source ${HOME}/.p10k.zsh
 
@@ -727,5 +715,14 @@ unset z_ice
 unset zi0a
 unset zi0b
 unset zi0c
+
+#
+# Put most source here to improve zsh load speed
+#
+# extensions dotfiles
+for file in ${HOME}/.zsh/*.zsh; do
+  turbo_source "${file}"
+done
+unset file
 
 # vim:set ts=2 sw=2 et:
