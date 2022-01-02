@@ -76,8 +76,3 @@ cmp.setup({
 		-- },
 	},
 })
-
-require("cmp_nvim_lsp").setup()
-for index, value in ipairs(vim.lsp.protocol.CompletionItemKind) do
-	cmp.lsp.CompletionItemKind[index] = value
-end

@@ -1,20 +1,77 @@
 local lsp = require("lspconfig")
 local lsp_status = require("lsp-status")
 lsp_status.register_progress()
+local vim = vim
 
 -- custom attach config for most LSP configs
 local on_attach = function(client, bufnr)
-	require("lsp_signature").on_attach({
-		bind = true, -- This is mandatory, otherwise border config won't get registered.
-		floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
-		hint_enable = true, -- virtual hint enable
-		handler_opts = {
-			border = "shadow", -- double, single, shadow, none
-		},
-	})
+	-- enable signature help when possible
+	if client.resolved_capabilities.signature_help then
+		require("lsp_signature").on_attach({
+			bind = true, -- This is mandatory, otherwise border config won't get registered.
+			floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
+			hint_enable = false, -- virtual hint false
+			handler_opts = {
+				border = "shadow", -- double, single, shadow, none
+			},
+		})
+	end
 
 	lsp_status.on_attach(client, bufnr)
 end
+
+--
+-- Signs settings
+--
+local signs = {
+	{ name = "DiagnosticSignError", text = "" },
+	{ name = "DiagnosticSignWarn", text = "" },
+	{ name = "DiagnosticSignHint", text = "" },
+	{ name = "DiagnosticSignInfo", text = "" },
+}
+
+for _, sign in ipairs(signs) do
+	vim.fn.sign_define(
+		sign.name,
+		{ texthl = sign.name, text = sign.text, numhl = "" }
+	)
+end
+
+--
+-- diagnostic configuration
+--
+local config = {
+	virtual_text = false, -- annoying
+	signs = signs,
+	underline = true,
+	update_in_insert = true,
+	severity_sort = true,
+	float = {
+		focusable = false,
+		style = "minimal",
+		border = "rounded",
+		source = "always",
+		header = "",
+		prefix = "",
+		format = function(d)
+			local t = vim.deepcopy(d)
+			if d.code then
+				t.message = string.format("%s [%s]", t.message, t.code):gsub(
+					"1. ",
+					""
+				)
+			end
+			return t.message
+		end,
+	},
+}
+
+vim.diagnostic.config(config)
+
+-- automatically show diagnostic. Consider using a keymap
+vim.api.nvim_command(
+	"autocmd CursorHold * lua vim.diagnostic.open_float({0, {scope='line'}})"
+)
 
 local null_ls = require("null-ls")
 null_ls.setup({
@@ -23,34 +80,23 @@ null_ls.setup({
 	},
 })
 
--- diagnostics
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-	vim.lsp.diagnostic.on_publish_diagnostics,
-	{ virtual_text = false, signs = true }
-)
+--
+-- LSP servers configuration
+--
 
--- Design
-local vim = vim
-local cmd = vim.cmd
-cmd("sign define LspDiagnosticsSignError text=")
-cmd("sign define LspDiagnosticsSignWarning text=ﰣ")
-cmd("sign define LspDiagnosticsSignInformation text=")
-cmd("sign define LspDiagnosticsSignHint text=")
-
--- show line diagnostic
-vim.api.nvim_command(
-	"autocmd CursorHold * lua vim.diagnostic.open_float({ focusable = false })"
-)
+-- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 lsp.bashls.setup({
 	filetypes = { "sh", "zsh", "bash" },
 	on_attach = on_attach,
-	capabilities = lsp_status.capabilities,
+	capabilities = capabilities,
 })
 
 lsp.clangd.setup({
 	on_attach = on_attach,
-	capabilities = lsp_status.capabilities,
+	capabilities = capabilities,
 })
 
 local sumneko_root_path = os.getenv("HOME")
@@ -60,7 +106,7 @@ local sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
 lsp.sumneko_lua.setup({
 	cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
 	on_attach = on_attach,
-	capabilities = lsp_status.capabilities,
+	capabilities = capabilities,
 	settings = {
 		Lua = {
 			runtime = {

@@ -168,12 +168,6 @@ fi
 ZVM_VI_SURROUND_BINDKEY=s-prefix
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 
-# The plugin will auto execute this zvm_after_init function
-zvm_after_init() {
-  # required to read fzf key-bindings, otherwise they will be overwritten by zsh-vi-mode
-  turbo_source "$ZI[PLUGINS_DIR]/fzf/key-bindings.zsh"
-}
-
 zi0a id-as'zsh-vi-mode' \
   depth=1
 zi light jeffreytse/zsh-vi-mode
@@ -709,13 +703,6 @@ turbo_source "$ZI[PLUGINS_DIR]/forgit/forgit.plugin.sh"
 
 zsh-defer eval $(keychain --eval --quiet --agents ssh id_rsa id_rsa_home)
 
-unset turbo_source
-unset load_prezto_mod
-unset z_ice
-unset zi0a
-unset zi0b
-unset zi0c
-
 #
 # Put most source here to improve zsh load speed
 #
@@ -724,5 +711,18 @@ for file in ${HOME}/.zsh/*.zsh; do
   turbo_source "${file}"
 done
 unset file
+
+# The plugin will auto execute this zvm_after_init function
+zvm_after_init() {
+  # required to read fzf key-bindings, otherwise they will be overwritten by zsh-vi-mode
+  turbo_source "$ZI[PLUGINS_DIR]/fzf/key-bindings.zsh"
+}
+
+unset turbo_source
+unset load_prezto_mod
+unset z_ice
+unset zi0a
+unset zi0b
+unset zi0c
 
 # vim:set ts=2 sw=2 et:
