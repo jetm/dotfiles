@@ -38,10 +38,11 @@ end
 
 require("plugins")
 require("global")
-require("autocmds")
+require("autocmds").setup()
 require("backup")
 require("mappings")
 require("colors-ui")
+require('packer_compiled')
 
 -- For debugging purpose
 -- :lua put(...)

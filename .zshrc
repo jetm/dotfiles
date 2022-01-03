@@ -32,26 +32,28 @@ turbo_source() {
   source "$file"
 }
 
+zi_ice() { zi ice lucid silent "$@" }
+zi0a() { zi_ice wait'0' "$@" }
+zi0b() { zi_ice wait'1' "$@" }
+zi0c() { zi_ice wait'2' "$@" }
+
 #
 # Powerlevel10k
 #
 # Must be run just after zi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh
-zi ice id-as'p10k' \
-  silent \
+zi_ice id-as'p10k' \
   depth=1
 zi light romkatv/powerlevel10k
 
-z_ice() { zi ice lucid silent "$@" }
-zi0a() { z_ice wait'0' "$@" }
-zi0b() { z_ice wait'1' "$@" }
-zi0c() { z_ice wait'2' "$@" }
+zi_ice id-as'zsh-autosuggestions'
+zi light zsh-users/zsh-autosuggestions
 
 #
 # prezto plugins
 #
 # zi internal load prezto module is too slow
-z_ice id-as'prezto' \
+zi_ice id-as'prezto' \
   depth=1 \
   cloneonly \
   atpull"%atclone" \
@@ -167,22 +169,15 @@ fi
 #
 ZVM_VI_SURROUND_BINDKEY=s-prefix
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-
-zi0a id-as'zsh-vi-mode' \
+zi0c id-as'zsh-vi-mode' \
   depth=1
 zi light jeffreytse/zsh-vi-mode
 
 #
-# completion
-#
-zi0a id-as'zsh-autosuggestions'
-zi light zsh-users/zsh-autosuggestions
-
-#
-# Navigation
+# Navigation/completion
 #
 # use `cat -v` to define the map
-zi0a id-as'zsh-history-substring-search'
+zi0b id-as'zsh-history-substring-search'
 zi light zsh-users/zsh-history-substring-search
 
 zi0b id-as'fzf' \

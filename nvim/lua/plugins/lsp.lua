@@ -77,6 +77,7 @@ local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
 		null_ls.builtins.diagnostics.shellcheck,
+		null_ls.builtins.code_actions.shellcheck,
 	},
 })
 
@@ -94,7 +95,19 @@ lsp.bashls.setup({
 	capabilities = capabilities,
 })
 
+local clangd_flags = {
+	"--all-scopes-completion",
+	"--background-index",
+	"--pch-storage=memory",
+	"--log=info",
+	"--enable-config",
+	"--clang-tidy",
+	"--completion-style=detailed",
+	"--offset-encoding=utf-16", --temporary fix for null-ls
+}
+
 lsp.clangd.setup({
+	cmd = { "clangd", unpack(clangd_flags) },
 	on_attach = on_attach,
 	capabilities = capabilities,
 })
@@ -109,16 +122,8 @@ lsp.sumneko_lua.setup({
 	capabilities = capabilities,
 	settings = {
 		Lua = {
-			runtime = {
-				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-				version = "LuaJIT",
-				-- Setup your lua path
-				path = vim.split(package.path, ";"),
-			},
-			diagnostics = {
-				-- Get the language server to recognize the `vim` global
-				globals = { "vim" },
-			},
+			telemetry = { enable = false },
+			diagnostics = { enable = false },
 			workspace = {
 				-- Make the server aware of Neovim runtime files
 				library = {

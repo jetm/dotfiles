@@ -18,13 +18,6 @@ require("nvim-treesitter.configs").setup({
 	highlight = { enable = true },
 	-- https://github.com/nvim-treesitter/nvim-treesitter#indentation
 	indent = { enable = true },
-	-- https://github.com/nvim-treesitter/nvim-treesitter-refactor
-	-- refactor = {
-	--     smart_rename = {enable = true, keymaps = {smart_rename = "grr"}},
-	--     highlight_definitions = {enable = true},
-	--     highlight_current_scope = {enable = true},
-	--     navigation = {enable = true, test = {}}
-	-- },
 	-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 	textobjects = {
 		-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-select

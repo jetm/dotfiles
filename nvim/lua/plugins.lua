@@ -1,4 +1,4 @@
-M = {}
+local vim = vim
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
@@ -14,30 +14,18 @@ if fn.empty(fn.glob(install_path)) > 0 then
 	execute("packadd packer.nvim")
 end
 
-function M.reload_config()
-	vim.cmd("source ~/.config/nvim/init.lua")
-	vim.cmd("source ~/.config/nvim/lua/plugins.lua")
-	vim.cmd(":PackerCompile")
-	vim.cmd(":PackerClean")
-	vim.cmd(":PackerInstall")
-end
-
--- Need to replace this once lua api has vim modes
-vim.api.nvim_exec(
-	[[
-  augroup PackerReload
-    autocmd!
-    autocmd BufWritePost plugins.lua lua require'plugins'.reload_config()
-  augroup end
-]],
-	false
-)
-
 local packer = require("packer")
 local use = packer.use
 
 packer.reset()
 packer.init({
+	display = {
+		open_fn = function()
+			return require("packer.util").float({ border = "single" })
+		end,
+	},
+	-- Move to lua dir so impatient.nvim can cache it
+	compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
 	max_jobs = 16,
 	luarocks = {
 		-- Set the python command to use for running hererocks
@@ -63,7 +51,7 @@ packer.startup({
 				require("plugins.filetype")
 			end,
 		})
-		--
+
 		-- Packer can manage itself
 		use({ "wbthomason/packer.nvim" })
 
@@ -428,7 +416,7 @@ packer.startup({
 		-- actions, and more via Lua
 		use({
 			"jose-elias-alvarez/null-ls.nvim",
-			requires = { "nvim-lua/plenary.nvim"},
+			requires = { "nvim-lua/plenary.nvim" },
 		})
 
 		-- use {'github/copilot.vim' }
@@ -528,8 +516,7 @@ packer.startup({
 		--         }
 		--     end
 		-- }
-	end,
-	config = { display = { open_fn = require("packer.util").float } },
+	end
 })
 
 return M
