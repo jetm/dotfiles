@@ -1,3 +1,8 @@
+local status_ok, formatter = pcall(require, "formatter")
+if not status_ok then
+	return
+end
+
 local function prettier()
 	return {
 		exe = "prettier",
@@ -29,7 +34,7 @@ local function luaformat()
 	}
 end
 
-require("formatter").setup({
+formatter.setup({
 	logging = false,
 	filetype = {
 		markdown = { prettier },

@@ -1,3 +1,8 @@
+local status_ok, lualine = pcall(require, "lualine")
+if not status_ok then
+	return
+end
+
 local vim = vim
 local fn = vim.fn
 local icons = require("nvim-nonicons")
@@ -51,7 +56,7 @@ local function lsp_messages()
 	return table.concat(msgs, " | ")
 end
 
-require("lualine").setup({
+lualine.setup({
 	options = {
 		theme = "onedark",
 		component_separators = { "", "" },

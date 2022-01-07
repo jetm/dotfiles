@@ -1,7 +1,10 @@
 --
 -- Misc mappings
 --
-local vimp = require("vimp")
+local status_ok, vimp = pcall(require, "vimp")
+if not status_ok then
+	return
+end
 
 -- moving up and down work as you would expect
 vimp.nnoremap({ "silent" }, "j", "gj")

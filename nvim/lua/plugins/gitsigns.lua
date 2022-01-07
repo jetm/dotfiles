@@ -1,3 +1,8 @@
+local status_ok, gitsigns = pcall(require, "gitsigns")
+if not status_ok then
+	return
+end
+
 local signs = {
 	add = {
 		hl = "GitSignsAdd",
@@ -32,7 +37,7 @@ local signs = {
 }
 
 -- https://github.com/lewis6991/gitsigns.nvim#usage
-require("gitsigns").setup({
+gitsigns.setup({
 	signs = signs,
 	numhl = true,
 	linehl = false,

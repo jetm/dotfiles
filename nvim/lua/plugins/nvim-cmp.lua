@@ -1,5 +1,8 @@
--- Setup global configuration. More on configuration below.
-local cmp = require("cmp")
+local status_ok, cmp = pcall(require, "cmp")
+if not status_ok then
+	return
+end
+
 local snippy = require("snippy")
 
 local has_words_before = function()

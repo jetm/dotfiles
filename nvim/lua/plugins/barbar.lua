@@ -1,3 +1,8 @@
+local status_ok, _ = pcall(require, "barbar")
+if not status_ok then
+	return
+end
+
 local vim = vim
 
 -- Set barbar's options

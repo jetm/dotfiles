@@ -1,6 +1,11 @@
-local lsp = require("lspconfig")
+local status_ok, lsp = pcall(require, "lspconfig")
+if not status_ok then
+	return
+end
+
 local lsp_status = require("lsp-status")
 lsp_status.register_progress()
+
 local vim = vim
 
 -- custom attach config for most LSP configs

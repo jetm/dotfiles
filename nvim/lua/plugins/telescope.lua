@@ -1,4 +1,9 @@
-require("telescope").setup({
+local status_ok, telescope = pcall(require, "telescope")
+if not status_ok then
+	return
+end
+
+telescope.setup({
 	defaults = {
 		mappings = { i = { ["<esc>"] = require("telescope.actions").close } },
 		vimgrep_arguments = {

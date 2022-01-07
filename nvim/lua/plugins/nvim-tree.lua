@@ -1,3 +1,8 @@
+local status_ok, nvim_tree = pcall(require, "nvim-tree")
+if not status_ok then
+	return
+end
+
 local vim = vim
 local icons = require("nvim-nonicons")
 
@@ -42,7 +47,7 @@ vim.g.nvim_tree_icons = {
 	},
 }
 
-require("nvim-tree").setup({
+nvim_tree.setup({
 	-- closes neovim automatically when the tree is the last **WINDOW** in the view
 	auto_close = true,
 	-- if true the tree will resize itself after opening a file

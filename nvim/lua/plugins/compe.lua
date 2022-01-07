@@ -1,7 +1,11 @@
-local compe = {}
+local status_ok, compe = pcall(require, "compe")
+if not status_ok then
+	return
+end
 
-function compe:init()
-	require("compe").setup({
+local M = {}
+function M:init()
+	compe.setup({
 		enabled = true,
 		autocomplete = true,
 		debug = false,
@@ -36,4 +40,4 @@ function compe:init()
 	})
 end
 
-return compe
+return M

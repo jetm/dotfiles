@@ -1,10 +1,6 @@
-local remap = vim.api.nvim_set_keymap
+local status_ok, trouble = pcall(require, "trouble")
+if not status_ok then
+	return
+end
 
-require("trouble").setup({})
-
-remap(
-	"n",
-	"<Leader>gt",
-	":LspTroubleToggle<CR>",
-	{ silent = true, noremap = true }
-)
+trouble.setup()
