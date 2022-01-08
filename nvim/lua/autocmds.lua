@@ -1,13 +1,16 @@
 local M = {}
+
 local vim = vim
-local packer = require("packer")
---local nvim = require('nvim')
+
+local status_ok, packer = pcall(require, "packer")
+if not status_ok then
+	return
+end
 
 function M.reload_config()
     vim.cmd("luafile ~/.config/nvim/init.lua")
     vim.cmd("luafile ~/.config/nvim/lua/plugins.lua")
-    --nvim.ex.source("~/.config/nvim/init.lua")
-    --nvim.ex.source("~/.config/nvim/lua/plugins.lua")
+
     packer.compile()
     packer.clean()
 	packer.install()
@@ -49,6 +52,9 @@ M.augroups = {
 			"lspinfo,lsp-installer,null-ls-info",
 			"nnoremap <silent> <buffer> <esc> :close<CR>",
 		},
+	    { "CursorHold", "*", [[lua vim.diagnostic.open_float(nil, {scope = 'line'})]] },
+	    { "CursorHoldI", "*", [[lua vim.diagnostic.open_float(nil, {scope = 'line'})]] }
+
 	},
 	_cmp = {
 		{
@@ -59,7 +65,7 @@ M.augroups = {
 	},
 }
 
-function M.define_augroups(definitions) -- {{{1
+function M.define_augroups(definitions)
 	-- Create autocommand groups based on the passed definitions
 	--
 	-- The key will be the name of the group, and each definition

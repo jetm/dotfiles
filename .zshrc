@@ -460,6 +460,7 @@ zi0c id-as'nvim' \
   ver'v0.6.1' \
   as'program' \
   make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
+  bin"$ZPFX/bin/nvim" \
   atload'export EDITOR="nvim"'
 zi light neovim/neovim
 

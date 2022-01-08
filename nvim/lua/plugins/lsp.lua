@@ -1,45 +1,13 @@
-local status_ok, lsp = pcall(require, "lspconfig")
-if not status_ok then
-	return
-end
-
-local lsp_status = require("lsp-status")
-lsp_status.register_progress()
-
 local vim = vim
-
--- custom attach config for most LSP configs
-local on_attach = function(client, bufnr)
-	-- enable signature help when possible
-	if client.resolved_capabilities.signature_help then
-		require("lsp_signature").on_attach({
-			bind = true, -- This is mandatory, otherwise border config won't get registered.
-			floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
-			hint_enable = false, -- virtual hint false
-			handler_opts = {
-				border = "shadow", -- double, single, shadow, none
-			},
-		})
-	end
-
-	lsp_status.on_attach(client, bufnr)
-end
 
 --
 -- Signs settings
 --
-local signs = {
-	{ name = "DiagnosticSignError", text = "" },
-	{ name = "DiagnosticSignWarn", text = "" },
-	{ name = "DiagnosticSignHint", text = "" },
-	{ name = "DiagnosticSignInfo", text = "" },
-}
+local signs = { Error = " ", Warn = " ", Hint = "", Info = "" }
 
-for _, sign in ipairs(signs) do
-	vim.fn.sign_define(
-		sign.name,
-		{ texthl = sign.name, text = sign.text, numhl = "" }
-	)
+for type, icon in pairs(signs) do
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
 --
@@ -73,12 +41,11 @@ local config = {
 
 vim.diagnostic.config(config)
 
--- automatically show diagnostic. Consider using a keymap
-vim.api.nvim_command(
-	"autocmd CursorHold * lua vim.diagnostic.open_float({0, {scope='line'}})"
-)
+local ok, null_ls = pcall(require, "null-ls")
+if not ok then
+	return
+end
 
-local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
 		null_ls.builtins.diagnostics.shellcheck,
@@ -90,9 +57,45 @@ null_ls.setup({
 -- LSP servers configuration
 --
 
--- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
+-- The nvim-cmp almost supports LSP's capabilities so You should advertise it
+-- to LSP servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+
+ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not ok then
+	return
+end
+
+capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+
+ok, lsp_status = pcall(require, "lsp-status")
+if not ok then
+	return
+end
+
+lsp_status.register_progress()
+
+-- custom attach config for most LSP configs
+local on_attach = function(client, bufnr)
+	-- enable signature help when possible
+	if client.resolved_capabilities.signature_help then
+		require("lsp_signature").on_attach({
+			bind = true, -- This is mandatory, otherwise border config won't get registered.
+			floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
+			hint_enable = false, -- virtual hint false
+			handler_opts = {
+				border = "shadow", -- double, single, shadow, none
+			},
+		})
+	end
+
+	lsp_status.on_attach(client, bufnr)
+end
+
+ok, lsp = pcall(require, "lspconfig")
+if not ok then
+	return
+end
 
 lsp.bashls.setup({
 	filetypes = { "sh", "zsh", "bash" },
