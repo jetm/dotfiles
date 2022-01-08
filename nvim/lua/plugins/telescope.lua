@@ -1,11 +1,30 @@
-local status_ok, telescope = pcall(require, "telescope")
-if not status_ok then
+local ok, telescope = pcall(require, "telescope")
+if not ok then
+	error("Loading telescope")
+	return
+end
+
+local ok2, telescope_actions = pcall(require, "telescope.actions")
+if not ok2 then
+	error("Loading telescope.actions")
+	return
+end
+
+local ok3, telescope_sorters = pcall(require, "telescope.sorters")
+if not ok3 then
+	error("Loading telescope.sorters")
+	return
+end
+
+local ok4, telescope_previewers = pcall(require, "telescope.previewers")
+if not ok4 then
+	error("Loading telescope.previewers")
 	return
 end
 
 telescope.setup({
 	defaults = {
-		mappings = { i = { ["<esc>"] = require("telescope.actions").close } },
+		mappings = { i = { ["<esc>"] = telescope_actions.close } },
 		vimgrep_arguments = {
 			"rg",
 			"--color=never",
@@ -23,9 +42,9 @@ telescope.setup({
 		selection_strategy = "reset",
 		sorting_strategy = "descending",
 		layout_strategy = "horizontal",
-		file_sorter = require("telescope.sorters").get_generic_sorter,
+		file_sorter = telescope_sorters.get_generic_sorter,
 		file_ignore_patterns = {},
-		generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+		generic_sorter = telescope_sorters.get_generic_fuzzy_sorter,
 		winblend = 0,
 		border = {},
 		borderchars = {
@@ -41,11 +60,11 @@ telescope.setup({
 		color_devicons = true,
 		use_less = true,
 		set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
-		file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-		grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-		qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+		file_previewer = telescope_previewers.vim_buffer_cat.new,
+		grep_previewer = telescope_previewers.vim_buffer_vimgrep.new,
+		qflist_previewer = telescope_previewers.vim_buffer_qflist.new,
 		-- Developer configurations: Not meant for general override
-		buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
+		buffer_previewer_maker = telescope_previewers.buffer_previewer_maker,
 	},
 	extensions = {
 		fzf = {
@@ -56,4 +75,4 @@ telescope.setup({
 	},
 })
 
-require("telescope").load_extension("fzf")
+telescope.load_extension("fzf")

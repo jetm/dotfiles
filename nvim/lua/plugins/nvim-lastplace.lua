@@ -1,5 +1,6 @@
-local status_ok, nvim_lastplace = pcall(require, "nvim-lastplace")
-if not status_ok then
+local ok, nvim_lastplace = pcall(require, "nvim-lastplace")
+if not ok then
+	error("Loading nvim-lastplace")
 	return
 end
 

@@ -1,9 +1,14 @@
-local status_ok, cmp = pcall(require, "cmp")
-if not status_ok then
+local ok, cmp = pcall(require, "cmp")
+if not ok then
+	error("Loading cmp")
 	return
 end
 
-local snippy = require("snippy")
+local ok2, snippy = pcall(require, "snippy")
+if not ok2 then
+	error("Loading snippy")
+	return
+end
 
 local has_words_before = function()
 	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
@@ -39,14 +44,18 @@ local s_tab_complete = function(fallback)
 	end
 end
 
-local lspkind = require("lspkind")
+local ok3, lspkind = pcall(require, "lspkind")
+if not ok3 then
+	error("Loading lspkind")
+	return
+end
 
 cmp.setup({
 	completion = { completeopt = "menu,menuone,noselect" },
 
 	snippet = {
 		expand = function(args)
-			require("snippy").expand_snippet(args.body)
+			snippy.expand_snippet(args.body)
 		end,
 	},
 

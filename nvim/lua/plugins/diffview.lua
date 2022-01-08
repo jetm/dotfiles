@@ -1,9 +1,16 @@
-local status_ok, diffview = pcall(require, "diffview")
-if not status_ok then
+local ok, diffview = pcall(require, "diffview")
+if not ok then
+	error("Loading diffview")
 	return
 end
 
-local cb = require("diffview.config").diffview_callback
+local ok2, diffview_config = pcall(require, "diffview.config")
+if not ok2 then
+	error("Loading diffview.config")
+	return
+end
+
+local cb = diffview_config.diffview_callback
 
 -- https://github.com/sindrets/diffview.nvim#configuration
 diffview.setup({

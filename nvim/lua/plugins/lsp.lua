@@ -1,5 +1,3 @@
-local vim = vim
-
 --
 -- Signs settings
 --
@@ -43,13 +41,15 @@ vim.diagnostic.config(config)
 
 local ok, null_ls = pcall(require, "null-ls")
 if not ok then
+	error("Loading null-ls")
 	return
 end
 
 null_ls.setup({
 	sources = {
-		null_ls.builtins.diagnostics.shellcheck,
-		null_ls.builtins.code_actions.shellcheck,
+		null_ls.builtins.diagnostics.shellcheck.with({ filetypes = { 'sh', 'zsh', 'bash' } }),
+		null_ls.builtins.code_actions.shellcheck.with({ filetypes = { 'sh', 'zsh', 'bash' } }),
+		null_ls.builtins.diagnostics.luacheck
 	},
 })
 
@@ -61,25 +61,33 @@ null_ls.setup({
 -- to LSP servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not ok then
+local ok1, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not ok1 then
+	error("Loading cmp_nvim_lsp")
 	return
 end
 
 capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
-ok, lsp_status = pcall(require, "lsp-status")
-if not ok then
+local ok2, lsp_status = pcall(require, "lsp-status")
+if not ok2 then
+	error("Loading lsp-status")
 	return
 end
 
 lsp_status.register_progress()
 
+local ok3, lsp_signature = pcall(require, "lsp_signature")
+if not ok3 then
+	error("Loading lsp_signature")
+	return
+end
+
 -- custom attach config for most LSP configs
 local on_attach = function(client, bufnr)
 	-- enable signature help when possible
 	if client.resolved_capabilities.signature_help then
-		require("lsp_signature").on_attach({
+		lsp_signature.on_attach({
 			bind = true, -- This is mandatory, otherwise border config won't get registered.
 			floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
 			hint_enable = false, -- virtual hint false
@@ -92,8 +100,8 @@ local on_attach = function(client, bufnr)
 	lsp_status.on_attach(client, bufnr)
 end
 
-ok, lsp = pcall(require, "lspconfig")
-if not ok then
+local ok4, lsp = pcall(require, "lspconfig")
+if not ok4 then
 	return
 end
 

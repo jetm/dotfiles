@@ -1,8 +1,9 @@
 --
 -- Misc mappings
 --
-local status_ok, vimp = pcall(require, "vimp")
-if not status_ok then
+local ok, vimp = pcall(require, "vimp")
+if not ok then
+	error("Loading packer")
 	return
 end
 
@@ -48,8 +49,6 @@ vimp.vmap({ "silent" }, "-", "<plug>(dial-decrement)")
 --
 -- <leader> mappings
 --
-local vim = vim
-
 vim.g.mapleader = " "
 
 -- Cancel a leader operation without sometimes causing unintended side effects

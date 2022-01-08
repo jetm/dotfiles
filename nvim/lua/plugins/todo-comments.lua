@@ -1,5 +1,6 @@
-local status_ok, todo_comments = pcall(require, "todo-comments")
-if not status_ok then
+local ok, todo_comments = pcall(require, "todo-comments")
+if not ok then
+	error('Loading todo-comments')
 	return
 end
 

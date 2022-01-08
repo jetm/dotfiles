@@ -1,10 +1,13 @@
-local vim = vim
-local fn = vim.fn
-
+--
 -- Automatically install packer
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-	PACKER_BOOTSTRAP = fn.system({
+--
+local install_path = vim.fn.stdpath("data")
+	.. "/site/pack/packer/start/packer.nvim"
+
+local PACKER_BOOTSTRAP
+
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+	PACKER_BOOTSTRAP = vim.fn.system({
 		"git",
 		"clone",
 		"--depth",
@@ -17,8 +20,9 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
+local ok, packer = pcall(require, "packer")
+if not ok then
+	error("Loading packer")
 	return
 end
 
@@ -36,8 +40,6 @@ packer.init({
 		python_cmd = "python3",
 	},
 })
-
-local use = packer.use
 
 packer.startup(function(use)
 	-- Need to be at the beginning
@@ -119,7 +121,7 @@ packer.startup(function(use)
 	use({
 		"karb94/neoscroll.nvim",
 		config = function()
-			require("neoscroll").setup({ mappings = {} })
+			require("plugins.neoscroll")
 		end,
 	})
 
@@ -152,7 +154,7 @@ packer.startup(function(use)
 	use({
 		"navarasu/onedark.nvim",
 		config = function()
-			require("onedark").setup()
+			require("plugins.onedark")
 		end,
 	})
 
@@ -496,7 +498,7 @@ packer.startup(function(use)
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then
-		require("packer").sync()
+		packer.sync()
 	end
 
 	-- todo searcher
@@ -520,5 +522,3 @@ packer.startup(function(use)
 	--     end
 	-- }
 end)
-
-return M

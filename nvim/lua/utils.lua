@@ -1,5 +1,7 @@
 -- For debugging purpose
 -- :lua put(...)
+local vim = vim
+
 function _G.put(...)
 	local objects = {}
 	for i = 1, select("#", ...) do

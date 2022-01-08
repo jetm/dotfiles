@@ -1,9 +1,8 @@
 local M = {}
 
-local vim = vim
-
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
+local ok, packer = pcall(require, "packer")
+if not ok then
+	error('Loading packer')
 	return
 end
 

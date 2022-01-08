@@ -1,5 +1,5 @@
-local vim = vim
 local o = vim.o -- to set options
+
 o.autowrite = true -- Automatically write a file when leaving a modified buffer
 o.cursorline = true -- Highlight current line
 o.hidden = true -- Allow buffer switching without saving
@@ -26,6 +26,15 @@ o.tabstop = o.softtabstop -- Tab width
 -- Display whitespace characters
 o.list = true
 vim.opt.listchars = { tab = "→ ", trail = "·" }
+
+-- config, but it seems packer has issues
+if vim.fn.exists("+termguicolors") == 1 then
+	vim.cmd([[
+        let &t_8f = "\\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\\<Esc>[48;2;%lu;%lu;%lum"
+    ]])
+	o.termguicolors = true
+end
 
 -- I like to include the end newline
 -- cmd 'set clipboard+=unnamedplus' -- Copy paste between vim and everything else

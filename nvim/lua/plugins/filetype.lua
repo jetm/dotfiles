@@ -1,5 +1,6 @@
-local status_ok, filetype = pcall(require, "filetype")
-if not status_ok then
+local ok, filetype = pcall(require, "filetype")
+if not ok then
+	error("Loading filetype")
 	return
 end
 

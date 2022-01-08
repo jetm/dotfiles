@@ -1,5 +1,6 @@
-local status_ok, nvim_treesitter = pcall(require, "nvim-treesitter.configs")
-if not status_ok then
+local ok, nvim_treesitter = pcall(require, "nvim-treesitter.configs")
+if not ok then
+	error("Loading nvim-treesitter.configs")
 	return
 end
 

@@ -1,15 +1,25 @@
-local status_ok, nvim_tree = pcall(require, "nvim-tree")
-if not status_ok then
+local ok, nvim_tree = pcall(require, "nvim-tree")
+if not ok then
+	error("Loading nvim-tree")
 	return
 end
 
-local vim = vim
-local icons = require("nvim-nonicons")
+local ok2, icons = pcall(require, "nvim-nonicons")
+if not ok2 then
+	error("Loading nvim-nonicons")
+	return
+end
+
+local ok3, nvim_tree_view = pcall(require, "nvim-tree.view")
+if not ok3 then
+	error("Loading nvim-tree.view")
+	return
+end
 
 local M = {}
 
 function M.resize()
-	local w = require("nvim-tree.view").View.width
+	local w = nvim_tree_view.View.width
 	if original_width == nil then
 		original_width = w
 	end
@@ -18,7 +28,7 @@ function M.resize()
 	else
 		w = w + 10
 	end
-	require("nvim-tree.view").View.width = w
+	nvim_tree_view.View.width = w
 	vim.cmd("NvimTreeClose")
 	vim.cmd("NvimTreeToggle")
 end

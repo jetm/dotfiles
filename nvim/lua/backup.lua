@@ -1,6 +1,4 @@
-local cmd = vim.cmd
-
-cmd([[
+vim.cmd([[
   set backup
   set undofile
   set undodir=$HOME/.vim_data/undofile

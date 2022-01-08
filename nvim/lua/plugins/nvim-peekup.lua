@@ -1,11 +1,16 @@
-local status_ok, _ = pcall(require, "nvim-peekup")
-if not status_ok then
+local ok, _ = pcall(require, "nvim-peekup")
+if not ok then
+	error("Loading nvim-peekup")
 	return
 end
 
-local vim = vim
-
 vim.g.peekup_open = '"'
 
-require("nvim-peekup.config").on_keystroke["paste_reg"] = '"'
-require("nvim-peekup.config").on_keystroke["delay"] = ""
+local ok2, nvim_peekup_config = pcall(require, "nvim-peekup.config")
+if not ok2 then
+	error("Loading nvim-peekup.config")
+	return
+end
+
+nvim_peekup_config.on_keystroke["paste_reg"] = '"'
+nvim_peekup_config.on_keystroke["delay"] = ""

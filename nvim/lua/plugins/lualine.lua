@@ -1,11 +1,16 @@
-local status_ok, lualine = pcall(require, "lualine")
-if not status_ok then
+local ok, lualine = pcall(require, "lualine")
+if not ok then
+	error("Loading lualine")
 	return
 end
 
-local vim = vim
+local ok2, icons = pcall(require, "nvim-nonicons")
+if not ok2 then
+	error("Loading nvim-nonicons")
+	return
+end
+
 local fn = vim.fn
-local icons = require("nvim-nonicons")
 
 local function lsp_servers_status()
 	local clients = vim.lsp.buf_get_clients(0)
