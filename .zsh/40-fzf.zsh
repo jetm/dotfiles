@@ -20,7 +20,7 @@ FZF_DEFAULT_OPTS+=' --bind "ctrl-o:execute-multi(nvim -p {} > /dev/tty)"'
 export FZF_DEFAULT_OPTS
 export FZF_COMPLETION_TRIGGER="@@"
 
-export FZF_DEFAULT_COMMAND='fd --hidden --exclude .git --color never'
+export FZF_DEFAULT_COMMAND='fd --hidden --exclude .git --color never --strip-cwd-prefix'
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND} --type f"
 export FZF_ALT_C_COMMAND="${FZF_DEFAULT_COMMAND} --type d"
 

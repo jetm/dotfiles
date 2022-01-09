@@ -32,10 +32,10 @@ turbo_source() {
   source "$file"
 }
 
-zi_ice() { zi ice lucid silent "$@" }
-zi0a() { zi_ice wait'0' "$@" }
-zi0b() { zi_ice wait'1' "$@" }
-zi0c() { zi_ice wait'2' "$@" }
+zi_ice() { zi ice lucid silent "$@"; }
+zi0a() { zi_ice wait'0' "$@"; }
+zi0b() { zi_ice wait'1' "$@"; }
+zi0c() { zi_ice wait'2' "$@"; }
 
 #
 # Powerlevel10k
@@ -61,7 +61,7 @@ zi_ice id-as'prezto' \
   nocd
 zi light sorin-ionescu/prezto
 
-load_prezto_mod() { turbo_source "$ZI[PLUGINS_DIR]/prezto/modules/$1/init.zsh"; }
+load_prezto_mod() { turbo_source "${ZI[PLUGINS_DIR]}/prezto/modules/$1/init.zsh"; }
 
 # Required here before prezto is loaded
 zstyle ':prezto:*:*' case-sensitive 'yes'
@@ -101,7 +101,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     atinit'export ASDF_DATA_DIR="$HOME/.asdf"; \
       export ASDF_CONFIG_FILE="$ASDF_DATA_DIR/.asdfrc";'
   zi light asdf-vm/asdf
-  turbo_source "$ZI[PLUGINS_DIR]/asdf/asdf.sh"
+  turbo_source "${ZI[PLUGINS_DIR]}/asdf/asdf.sh"
 
   zi0c id-as'topgrade' \
     from'gh-r' \
@@ -111,7 +111,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zi light r-darwish/topgrade
 
   zi0c id-as'less' \
-    ver'v598' \
+    ver'v600' \
     as'program' \
     atclone'make -f Makefile.aut && autoreconf --install &&
       ./configure --with-regex=gnu --with-editor=nvim' \
@@ -243,7 +243,7 @@ zi light MenkeTechnologies/zsh-expand
 zi0b id-as'zsh-autopair' \
   atinit'AUTOPAIR_INHIBIT_INIT=1;'
 zi light hlissner/zsh-autopair
-turbo_source "$ZI[PLUGINS_DIR]/zsh-autopair/autopair.zsh"
+turbo_source "${ZI[PLUGINS_DIR]}/zsh-autopair/autopair.zsh"
 autopair-init
 
 # replaced by tmux-fingers
@@ -305,7 +305,7 @@ zi0c id-as'cht.sh' \
   as'command' \
   has'rlwrap' \
   pick'cht.sh' \
-  atload"export CHTSH="$XDG_CONFIG_HOME""
+  atload'export CHTSH="$XDG_CONFIG_HOME"'
 zi snippet https://cht.sh/:cht.sh
 
 #
@@ -689,13 +689,13 @@ zi light JohnnyMorganz/StyLua
 # zi light jesseduffield/lazydocker
 
 # Soure here because doing source inside of zi is slow
-turbo_source ${HOME}/.p10k.zsh
+turbo_source "${HOME}"/.p10k.zsh
 
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-turbo_source "$ZI[PLUGINS_DIR]/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+turbo_source "${ZI[PLUGINS_DIR]}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 export FORGIT_NO_ALIASES=1
-turbo_source "$ZI[PLUGINS_DIR]/forgit/forgit.plugin.sh"
+turbo_source "${ZI[PLUGINS_DIR]}/forgit/forgit.plugin.sh"
 
 zsh-defer eval $(keychain --eval --quiet --agents ssh id_rsa id_rsa_home)
 
@@ -703,7 +703,7 @@ zsh-defer eval $(keychain --eval --quiet --agents ssh id_rsa id_rsa_home)
 # Put most source here to improve zsh load speed
 #
 # extensions dotfiles
-for file in ${HOME}/.zsh/*.zsh; do
+for file in "${HOME}"/.zsh/*.zsh; do
   turbo_source "${file}"
 done
 unset file
@@ -711,7 +711,7 @@ unset file
 # The plugin will auto execute this zvm_after_init function
 zvm_after_init() {
   # required to read fzf key-bindings, otherwise they will be overwritten by zsh-vi-mode
-  turbo_source "$ZI[PLUGINS_DIR]/fzf/key-bindings.zsh"
+  turbo_source "${ZI[PLUGINS_DIR]}/fzf/key-bindings.zsh"
 }
 
 unset turbo_source
