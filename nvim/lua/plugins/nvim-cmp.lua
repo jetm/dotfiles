@@ -1,11 +1,11 @@
-local ok, cmp = pcall(require, "cmp")
-if not ok then
+local ok_cmp, cmp = pcall(require, "cmp")
+if not ok_cmp then
 	error("Loading cmp")
 	return
 end
 
-local ok2, snippy = pcall(require, "snippy")
-if not ok2 then
+local ok_snippy, snippy = pcall(require, "snippy")
+if not ok_snippy then
 	error("Loading snippy")
 	return
 end
@@ -44,14 +44,17 @@ local s_tab_complete = function(fallback)
 	end
 end
 
-local ok3, lspkind = pcall(require, "lspkind")
-if not ok3 then
+local ok_lspkind, lspkind = pcall(require, "lspkind")
+if not ok_lspkind then
 	error("Loading lspkind")
 	return
 end
 
 cmp.setup({
-	completion = { completeopt = "menu,menuone,noselect" },
+	completion = {
+		keyword_length = 2,
+		completeopt = "menu,menuone,preview,noinsert",
+	},
 
 	snippet = {
 		expand = function(args)
@@ -74,17 +77,55 @@ cmp.setup({
 
 	sources = {
 		{ name = "buffer", max_item_count = 5, priority = 1 },
-		{ name = "snippy", priority = 2 },
-		{ name = "path", max_item_count = 5, priority = 3 },
-		{ name = "nvim_lsp", max_item_count = 5, priority = 4 },
-		{ name = "nvim_lua", max_item_count = 5, priority = 5 },
+		{ name = "nvim_lsp", max_item_count = 5, priority = 2 },
+		{ name = "nvim_lua", max_item_count = 5, priority = 3 },
+		{ name = "snippy", priority = 4 },
+		{ name = "path", max_item_count = 5, priority = 5 },
 		-- {
 		--     name = "rg",
 		--     max_item_count = 5,
 		--     priority = 10,
 		--     option = {
-		--         additional_arguments = "--ignore-file halon-src --ignore-file halon-test --ignore-file tools --glob '!*.patch'",
+		--         additional_arguments = "--ignore-file halon-src --ignore-file halon-test --ignore-file tools --glob '!*.patch'"
 		--     },
 		-- },
 	},
 })
+
+-- Use buffer source for `/`
+-- if you enabled `native_menu`, this won't work anymore
+cmp.setup.cmdline("/", {
+	completion = {
+		keyword_length = 1,
+	},
+	sources = {
+		{ name = "buffer" },
+	},
+})
+
+-- Use cmdline & path source for ':'
+-- if you enabled `native_menu`, this won't work anymore
+cmp.setup.cmdline(":", {
+	completion = {
+		keyword_length = 1,
+	},
+	sources = cmp.config.sources({
+		{ name = "path" },
+	}, {
+		{ name = "cmdline" },
+	}),
+})
+
+-- If you want insert `(` after select function or method item
+local ok_cmp_autopairs, cmp_autopairs = pcall(
+	require,
+	"nvim-autopairs.completion.cmp"
+)
+if not ok_cmp_autopairs then
+	error("Loading nvim-autopairs.completion.cmp")
+	return
+end
+cmp.event:on(
+	"confirm_done",
+	cmp_autopairs.on_confirm_done({ map_char = { tex = "" } })
+)

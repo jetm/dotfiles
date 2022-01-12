@@ -361,15 +361,15 @@ packer.startup(function(use)
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
-			{ "onsails/lspkind-nvim" },
 			{ "dcampos/nvim-snippy" },
 			{ "honza/vim-snippets" },
-			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "onsails/lspkind-nvim" }, -- no after
+			{ "hrsh7th/cmp-nvim-lsp" }, -- no after
 			{ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-path", after = "nvim-cmp" },
-			{ "lukas-reineke/cmp-rg", after = "nvim-cmp" },
-			{ "dcampos/cmp-snippy", after = "nvim-cmp" },
+			{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
+			-- { "lukas-reineke/cmp-rg", after = "nvim-cmp" },
 		},
 		config = function()
 			require("plugins.nvim-cmp")

@@ -71,7 +71,7 @@
 
     # delta will display diffs between the ancestral commit and each of the two
     # merge parents
-    conflictstyle = diff3
+    ; conflictstyle = diff3
 
 [help]
     # Automatically correct and execute mistyped commands

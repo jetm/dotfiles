@@ -460,8 +460,7 @@ zi0c id-as'nvim' \
   ver'v0.6.1' \
   as'program' \
   make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
-  bin"$ZPFX/bin/nvim" \
-  atload'export EDITOR="nvim"'
+  bin"$ZPFX/bin/nvim"
 zi light neovim/neovim
 
 #
@@ -474,8 +473,7 @@ zi light neovim/neovim
 #     fd nvim -x rm -vrf {} \; $ZPFX; \
 #     tar xvf nvim-linux64.tar.gz --strip-components=1 -C $ZPFX; \
 #     rm -f nvim-linux64.zip" \
-#   atpull'%atclone' \
-#   atload'export EDITOR="nvim"'
+#   atpull'%atclone'
 # zi light zdharma-continuum/null
 
 # zi0c id-as'glow' \
