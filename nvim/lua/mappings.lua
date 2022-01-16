@@ -11,12 +11,16 @@ end
 vimp.nnoremap({ "silent" }, "j", "gj")
 vimp.nnoremap({ "silent" }, "k", "gk")
 
+-- Keep the cursor in place while joining lines
+vimp.nnoremap({ "silent" }, "J", "mzJ`z")
+
+-- Move selected line / block of text in visual mode
+vimp.vnoremap({ "silent" }, "K", ":move '<-2<CR>gv-gv")
+vimp.vnoremap({ "silent" }, "J", ":move '>+1<CR>gv-gv")
+
 -- quitting mapping
 vimp.nnoremap({ "silent" }, "q", ":BufferClose<CR>")
 vimp.nnoremap({ "silent" }, "Q", ":qa<CR>")
-
--- Keep the cursor in place while joining lines
-vimp.nnoremap({ "silent" }, "J", "mzJ`z")
 
 -- expand_region
 vimp.xmap({ "silent" }, "v", "<Plug>(expand_region_expand)")
@@ -75,23 +79,6 @@ vimp.nnoremap({ "silent" }, "<leader>7", ":BufferGoto7<CR>")
 vimp.nnoremap({ "silent" }, "<leader>8", ":BufferGoto8<CR>")
 vimp.nnoremap({ "silent" }, "<leader>9", ":BufferGoto9<CR>")
 
--- quickfix
--- vimp.nnoremap({'silent'}, "<Leader>qc", ":cclose<CR>")
--- vimp.nnoremap({'silent'}, "<Leader>qo", ":copen<CR>")
--- vimp.nnoremap("<Leader>qn", ":cnext<CR>")
--- vimp.nnoremap("<Leader>qp", ":cprev<CR>")
--- vimp.nnoremap("<Leader>qa", ":cc<CR>")
-
--- locationlist
--- vimp.nnoremap("<Leader>lc", ":lclose<CR>")
--- vimp.nnoremap("<Leader>lo", ":lopen<CR>")
--- vimp.nnoremap("<Leader>ln", ":lnext<CR>")
--- vimp.nnoremap("<Leader>lp", ":lprev<CR>")
--- vimp.nnoremap("<Leader>la", ":ll<CR>")
-
--- LSP
-vimp.nnoremap({ "silent" }, "<leader>gt", ":LspTroubleToggle<CR>")
-
 --
 -- Ctrl <C-> Mappings
 --
@@ -109,21 +96,39 @@ vimp.imap({ "silent" }, "<C-s>", "<C-o>:update<CR>")
 vimp.nnoremap(
 	{ "silent" },
 	"<C-p>",
-    ":Telescope find_files find_command=fd,-t,f,-t,l,--hidden,--exclude,.git,--color,never<CR>"
+	":Telescope find_files find_command=fd,-t,f,-t,l,--hidden,--exclude,.git,--color,never<CR>"
+)
+
+vimp.nnoremap(
+	{ "silent" },
+	"<F5>",
+	":lua vim.lsp.diagnostic.show_line_diagnostics()<CR>"
 )
 
 --
 -- Alt <M-> Mappings
 --
--- Move between vim panes
-vimp.nnoremap({ "silent" }, "<M-j>", "<C-W>j")
-vimp.nnoremap({ "silent" }, "<M-k>", "<C-W>k")
-vimp.nnoremap({ "silent" }, "<M-l>", "<C-W>l")
-vimp.nnoremap({ "silent" }, "<M-h>", "<C-W>h")
+-- navigation
+vimp.inoremap({ "silent" }, "<A-Up>", "<C-\\><C-N><C-w>k")
+vimp.inoremap({ "silent" }, "<A-Down>", "<C-\\><C-N><C-w>j")
+vimp.inoremap({ "silent" }, "<A-Left>", "<C-\\><C-N><C-w>h")
+vimp.inoremap({ "silent" }, "<A-Right>", "<C-\\><C-N><C-w>l")
+
+-- Move current line / block with Alt-j/k ala vscode
+vimp.inoremap({ "silent" }, "<A-j>", "<Esc>:m .+1<CR>==gi")
+vimp.inoremap({ "silent" }, "<A-k>", "<Esc>:m .-2<CR>==gi")
+
+-- Move current line / block with Alt-j/k a la vscode
+vimp.nnoremap({ "silent" }, "<A-j>", ":m .+1<CR>==")
+vimp.nnoremap({ "silent" }, "<A-k>", ":m .-2<CR>==")
 
 -- Sizing window horizontally
 vimp.nnoremap({ "silent" }, "<M-,>", "<C-W><")
 vimp.nnoremap({ "silent" }, "<M-.>", "<C-W>>")
+
+-- Move current line / block with Alt-j/k ala vscode)
+vimp.vnoremap({ "silent" }, "<A-j>", ":m '>+1<CR>gv-gv")
+vimp.vnoremap({ "silent" }, "<A-k>", ":m '<-2<CR>gv-gv")
 
 --
 -- <F1>..<F12> Mappings

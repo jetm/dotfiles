@@ -408,10 +408,10 @@ packer.startup(function(use)
 				-- Pictograms for LSP completion system
 				"onsails/lspkind-nvim",
 			},
-			{
-				-- Better diagnostic list
-				"folke/lsp-trouble.nvim",
-			},
+			-- {
+			--     -- Better diagnostic list
+			--     "folke/lsp-trouble.nvim",
+			-- },
 		},
 		config = function()
 			require("plugins.lsp")
@@ -426,15 +426,26 @@ packer.startup(function(use)
 		requires = { "nvim-lua/plenary.nvim" },
 	})
 
+	-- Show nvim diagnostics using virtual lines
+	-- Missing toggle option
+	-- use({
+	--     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+	--     config = function()
+	--         require("plugins.lsp_lines")
+	--     end,
+	-- })
+
 	-- use {'github/copilot.vim' }
 
 	-- window for showing LSP detected issues in code
-	use({
-		"folke/lsp-trouble.nvim",
-		config = function()
-			require("plugins.lsp-trouble")
-		end,
-	})
+	-- No use yet
+	-- use({
+	--     "folke/trouble.nvim",
+	--     requires = "kyazdani42/nvim-web-devicons",
+	--     config = function()
+	--         require("plugins.trouble")
+	--     end,
+	-- })
 
 	-- Removes trailing whitespace from *modified* lines on save
 	-- Replace ntpeters/vim-better-whitespace

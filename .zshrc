@@ -1,9 +1,9 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 ### Added by zi's installer
 zi_home="${HOME}/.zi"
@@ -45,6 +45,13 @@ zi0c() { zi_ice wait'2' "$@"; }
 zi_ice id-as'p10k' \
   depth=1
 zi light romkatv/powerlevel10k
+
+# Git status is still slower than p10k gitstatusd
+# zi_ice id-as'starship' \
+#   from"gh-r" \
+#   as"program" \
+#   atload'!eval $(starship init zsh)'
+# zi light starship/starship
 
 zi_ice id-as'zsh-autosuggestions'
 zi light zsh-users/zsh-autosuggestions

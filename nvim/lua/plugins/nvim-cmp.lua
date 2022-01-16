@@ -53,7 +53,7 @@ end
 cmp.setup({
 	completion = {
 		keyword_length = 2,
-		completeopt = "menu,menuone,preview,noinsert",
+		completeopt = "menu,menuone,preview,noselect", -- want to select the first
 	},
 
 	snippet = {

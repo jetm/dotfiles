@@ -50,10 +50,7 @@ M.augroups = {
 			"FileType",
 			"lspinfo,lsp-installer,null-ls-info",
 			"nnoremap <silent> <buffer> <esc> :close<CR>",
-		},
-	    { "CursorHold", "*", [[lua vim.diagnostic.open_float(nil, {scope = 'line'})]] },
-	    { "CursorHoldI", "*", [[lua vim.diagnostic.open_float(nil, {scope = 'line'})]] }
-
+		}
 	},
 	_cmp = {
 		{

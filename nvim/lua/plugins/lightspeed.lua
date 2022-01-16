@@ -7,6 +7,8 @@ end
 lightspeed.setup({
 	limit_ft_matches = 1,
 	-- Keys to jump group
-	cycle_group_fwd_key = "<tab>",
-	cycle_group_bwd_key = "<s-tab>",
+	special_keys = {
+		next_match_group = "<tab>",
+		prev_match_group = "<s-tab>",
+	},
 })
