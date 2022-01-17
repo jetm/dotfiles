@@ -1,3 +1,0 @@
-#!/bin/sh
-
-/usr/local/sbin/keyfuzz -s -d "$1" < /usr/local/etc/keyfuzz/apple_keyboard.keyfuzz

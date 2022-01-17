@@ -1,3 +1,0 @@
-# Disable searching hidden files and directories
-# no-hidden
-exclude-dir=build*
