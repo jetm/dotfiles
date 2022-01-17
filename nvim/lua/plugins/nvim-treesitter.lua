@@ -5,7 +5,7 @@ if not ok then
 end
 
 nvim_treesitter.setup({
-	ensure_installed = "all",
+	ensure_installed = "maintained",
 	autotag = { enable = false },
 	highlight = {
 		enable = true,
