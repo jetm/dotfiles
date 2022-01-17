@@ -1,0 +1,7 @@
+#!/bin/bash
+
+awk '(NR==FNR){a[$0]=1;next}
+     (FNR==1){ for(i in a) if(a[i]) {a[i]=0} else {delete a[i]} }
+     ($0 in a) { a[$0]=1 }
+     END{for (i in a) if (a[i]) print i}' \
+    "$@"

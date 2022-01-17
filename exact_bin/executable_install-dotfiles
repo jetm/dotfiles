@@ -1,0 +1,24 @@
+#!/bin/bash
+
+err()
+{
+    echo "Error: $1"
+    exit 1;
+}
+
+DOTFILES="${HOME}/dotfiles"
+
+if command -v stow 2&> /dev/null; then
+    err "stow is not installed"
+elif [[ ! -d ${HOME}/.zprezto || ! -d ${HOME}/.SpaceVim ]]; then
+    err "zprezto or SpaceVim are not installed"
+elif [ ! -d "${DOTFILES}" ]; then
+    err "No found ${DOTFILES} dir"
+fi
+
+if [ "$1" = "-u" ]
+then
+    stow -D . -t ~ "${DOTFILES}"
+else
+    stow -d . --ignore="(junk|no-stow|README)" -t ~ "${DOTFILES}"
+fi

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# clean all dirs and files have not accessed for more than 30 days
+find /tmp -atime +30 -exec rm -rfv {} +
