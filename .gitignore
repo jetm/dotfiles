@@ -1,6 +1,5 @@
-nvim/plugin/packer_compiled.vim
-nvim/lua/packer_compiled.lua
-*.zwc
+.config/nvim/lua/packer_compiled.lua
+**/*.zwc
 bin/tmux
 bin/unifdef
 bin/makePipRecipes.py
