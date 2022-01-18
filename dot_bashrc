@@ -165,3 +165,6 @@ if [[ $(lsb_release -i) = *Ubuntu* ]]; then
     remove_PATH_duplicates
     unalias bb
 fi
+
+# vim:ft=bash
+# vim:set ts=4 sw=4
