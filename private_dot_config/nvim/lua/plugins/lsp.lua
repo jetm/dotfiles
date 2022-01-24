@@ -129,7 +129,7 @@ lsp.clangd.setup({
 })
 
 local sumneko_root_path = os.getenv("HOME")
-	.. "/.zinit/plugins/lua-language-server"
+	.. "/.zi/plugins/lua-language-server"
 local sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
 
 lsp.sumneko_lua.setup({
