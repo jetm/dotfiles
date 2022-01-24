@@ -6,6 +6,7 @@ end
 
 nvim_treesitter.setup({
 	ensure_installed = "maintained",
+	ignore_install = { "php", "norg", "tlaplus"},
 	autotag = { enable = false },
 	highlight = {
 		enable = true,
