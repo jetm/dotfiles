@@ -42,9 +42,9 @@ zi0c() { zi_ice wait'2' "$@"; }
 #
 # Must be run just after zi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh
-# zi_ice id-as'p10k' \
-#   depth=1
-# zi light romkatv/powerlevel10k
+zi_ice id-as'p10k' \
+  depth=1
+zi light romkatv/powerlevel10k
 
 # Git status is still slower than p10k gitstatusd
 # zi_ice id-as'starship' \
@@ -694,8 +694,8 @@ zi light JohnnyMorganz/StyLua
 # zi light jesseduffield/lazydocker
 
 # Soure here because doing source inside of zi is slow
-# turbo_source "${HOME}"/.p10k.zsh
-#
+turbo_source "${HOME}"/.p10k.zsh
+
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 turbo_source "${ZI[PLUGINS_DIR]}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
