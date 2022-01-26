@@ -20,5 +20,5 @@ for d in "$DIR_TEMP"/build*; do
 done
 
 if [[ -d "$DIR_TEMP" ]]; then
-    rmdir "$DIR_TEMP"
+    ts -d rmdir "$DIR_TEMP"
 fi
