@@ -44,6 +44,11 @@ telescope.setup({
 		selection_strategy = "reset",
 		sorting_strategy = "descending",
 		layout_strategy = "horizontal",
+		layout_config = {
+			height = 0.95,
+			width = 0.95,
+			preview_width = 0.4,
+		},
 		file_sorter = telescope_sorters.get_generic_sorter,
 		file_ignore_patterns = {},
 		path_display = { shorten = 5 },

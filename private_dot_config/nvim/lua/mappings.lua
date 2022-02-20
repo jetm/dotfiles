@@ -91,12 +91,10 @@ vimp.imap({ "silent" }, "<C-s>", "<C-o>:update<CR>")
 -- fzf.vim is quicker than fzf.preview
 -- Telescope is async
 -- Testing snap
--- Select files, symlinks, hidden files, and exclude Git directory
--- ":Telescope find_files find_command=git,ls-files<CR>"
 vimp.nnoremap(
 	{ "silent" },
 	"<C-p>",
-	":Telescope find_files find_command=fd,-t,f,-t,l,--hidden,--exclude,.git,--color,never<CR>"
+	":lua require('plugins.telescope-mapping').find_files()<CR>"
 )
 
 vimp.nnoremap(

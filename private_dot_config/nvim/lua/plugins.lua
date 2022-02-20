@@ -506,6 +506,11 @@ packer.startup(function(use)
 		end,
 	})
 
+	-- A neovim lua plugin to help easily manage multiple terminal windows
+	use({
+		"antoinemadec/FixCursorHold.nvim"
+	})
+
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then
