@@ -118,7 +118,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zi light r-darwish/topgrade
 
   zi0c id-as'less' \
-    ver'v600' \
+    ver'v602' \
     as'program' \
     atclone'make -f Makefile.aut && autoreconf --install &&
       ./configure --with-regex=gnu --with-editor=nvim' \
