@@ -292,7 +292,7 @@ zi light zsh-users/zsh-syntax-highlighting
 zi0c id-as'delta' \
   from'gh-r' \
   as'program' \
-  bpick"$PICK" \
+  bpick'*x86_64-unknown-linux-musl*' \
   mv'delta*/delta -> delta' \
   pick'delta'
 zi light dandavison/delta
