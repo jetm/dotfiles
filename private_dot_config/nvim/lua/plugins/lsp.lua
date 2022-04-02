@@ -111,22 +111,22 @@ lsp.bashls.setup({
 	capabilities = capabilities,
 })
 
-local clangd_flags = {
-	"--all-scopes-completion",
-	"--background-index",
-	"--pch-storage=memory",
-	"--log=info",
-	"--enable-config",
-	"--clang-tidy",
-	"--completion-style=detailed",
-	"--offset-encoding=utf-16", --temporary fix for null-ls
-}
-
-lsp.clangd.setup({
-	cmd = { "clangd", unpack(clangd_flags) },
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
+-- local clangd_flags = {
+--     "--all-scopes-completion",
+--     "--background-index",
+--     "--pch-storage=memory",
+--     "--log=info",
+--     "--enable-config",
+--     "--clang-tidy",
+--     "--completion-style=detailed",
+--     "--offset-encoding=utf-16", --temporary fix for null-ls
+-- }
+--
+-- lsp.clangd.setup({
+--     cmd = { "clangd", unpack(clangd_flags) },
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+-- })
 
 local sumneko_root_path = os.getenv("HOME")
 	.. "/.zi/plugins/lua-language-server"

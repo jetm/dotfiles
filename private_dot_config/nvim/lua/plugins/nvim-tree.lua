@@ -58,8 +58,6 @@ vim.g.nvim_tree_icons = {
 }
 
 nvim_tree.setup({
-	-- closes neovim automatically when the tree is the last **WINDOW** in the view
-	auto_close = true,
 	-- if true the tree will resize itself after opening a file
 	auto_resize = true,
 	mappings = {

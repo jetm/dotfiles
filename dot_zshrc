@@ -385,6 +385,7 @@ zi light chmln/sd
 zi0c id-as'bat' \
   from'gh-r' \
   as'program' \
+  bpick'*x86_64-unknown-linux-musl*' \
   mv'bat*/bat -> bat' \
   pick'bat'
 zi light sharkdp/bat
@@ -448,6 +449,14 @@ zi0c id-as'ripgrep' \
   mv'ripgrep*/rg -> rg' \
   pick'rg'
 zi light BurntSushi/ripgrep
+
+zi0c id-as'igrep' \
+  from'gh-r' \
+  as'program' \
+  bpick'*x86_64-unknown-linux-gnu*' \
+  mv'igrep/ig -> ig' \
+  pick'ig'
+zi light konradsz/igrep
 
 # zi0c id-as'ugrep' \
 #   as'program' \

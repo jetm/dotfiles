@@ -50,6 +50,9 @@ packer.startup(function(use)
 		end,
 	})
 
+	-- Packer can manage itself
+	use({ "wbthomason/packer.nvim" })
+
 	-- A faster version of filetype.vim
 	-- Still missing colors in some files
 	use({
@@ -59,9 +62,63 @@ packer.startup(function(use)
 		end,
 	})
 
-	-- Packer can manage itself
-	use({ "wbthomason/packer.nvim" })
+	--
+	-- UI
+	--
+	-- Vim version
+	-- use 'joshdick/onedark.vim'
+	-- Coping joshdick
+	-- use {'ii14/onedark.nvim'}
+	-- More complete
+	use({
+		"navarasu/onedark.nvim",
+		config = function()
+			require("plugins.onedark")
+		end,
+	})
 
+	-- Icon set using nonicons for neovim plugins and settings
+	use({
+		"yamatsum/nvim-nonicons",
+		requires = { "kyazdani42/nvim-web-devicons" },
+	})
+
+	-- Apply fast colors
+	use({
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("plugins.nvim-colorizer")
+		end,
+	})
+
+	-- Neovim tabline plugin
+	use({
+		"romgrk/barbar.nvim",
+		config = function()
+			require("plugins.barbar")
+		end,
+	})
+
+	-- Indent guides on blank lines for Neovim
+	use({
+		"lukas-reineke/indent-blankline.nvim",
+		config = function()
+			require("plugins.indent-blankline")
+		end,
+	})
+
+	-- spaceline is slower
+	-- Galaxyline lacks of nice configurations, like feline has
+	-- lualine has better structure and theme, it's more like spaceline
+	use({
+		"nvim-lualine/lualine.nvim",
+		requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+		config = function()
+			require("plugins.lualine")
+		end,
+		after = 'onedark.nvim'
+	})
+	--
 	-- Neovim plugin that allows you to easily write your .vimrc in lua or any lua based language
 	use({ "svermeulen/vimpeccable", requires = { "tpope/vim-repeat" } })
 
@@ -142,61 +199,6 @@ packer.startup(function(use)
 	--         require("plugins.vim-MvVis")
 	--     end,
 	-- })
-
-	--
-	-- UI
-	--
-	-- Vim version
-	-- use 'joshdick/onedark.vim'
-	-- Coping joshdick
-	-- use {'ii14/onedark.nvim'}
-	-- More complete
-	use({
-		"navarasu/onedark.nvim",
-		config = function()
-			require("plugins.onedark")
-		end,
-	})
-
-	-- Icon set using nonicons for neovim plugins and settings
-	use({
-		"yamatsum/nvim-nonicons",
-		requires = { "kyazdani42/nvim-web-devicons" },
-	})
-
-	-- Apply fast colors
-	use({
-		"norcalli/nvim-colorizer.lua",
-		config = function()
-			require("plugins.nvim-colorizer")
-		end,
-	})
-
-	-- Neovim tabline plugin
-	use({
-		"romgrk/barbar.nvim",
-		config = function()
-			require("plugins.barbar")
-		end,
-	})
-
-	-- Indent guides on blank lines for Neovim
-	use({
-		"lukas-reineke/indent-blankline.nvim",
-		config = function()
-			require("plugins.indent-blankline")
-		end,
-	})
-
-	-- spaceline is slower
-	-- Galaxyline lacks of nice configurations, like feline has
-	-- lualine has better structure and theme, it's more like spaceline
-	use({
-		"nvim-lualine/lualine.nvim",
-		config = function()
-			require("plugins.lualine")
-		end,
-	})
 
 	--
 	-- Motions
