@@ -5,8 +5,7 @@ if not ok then
 end
 
 nvim_treesitter.setup({
-	ensure_installed = "maintained",
-	ignore_install = { "php", "norg", "tlaplus"},
+	ensure_installed = { "bash", "c", "cmake", "comment", "dockerfile", "dot", "go", "json", "lua", "make", "ninja", "python", "regex", "rust", "toml", "vim", "yaml"},
 	autotag = { enable = false },
 	highlight = {
 		enable = true,

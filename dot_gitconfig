@@ -106,9 +106,8 @@
     submoduleSummary = true
 
 [rerere]
-    # Activate recording of resolved conflicts, so that identical conflict
-    # hunks can be resolved automatically
-    enabled = true
+    # Disable recording of resolved conflicts
+    enabled = false
 
 [rebase]
     # Enable --autosquash option by default
@@ -187,6 +186,14 @@
     gitProxy = none for hpe.com
     gitProxy = none for hpecorp.net
     gitProxy = gitproxy-socat
+
+[safe]
+    directory = /disk/data/opengrok/src/HALON_master
+    directory = /disk/data/opengrok/src/HALON_release_10.06
+    directory = /disk/data/opengrok/src/HALON_release_10.08
+    directory = /disk/data/opengrok/src/HALON_release_10.09
+    directory = /disk/data/opengrok/src/HALON_release_10.10
+    directory = /disk/data/opengrok/src/NetEdit_master
 
 # vim:ft=gitconfig
 # vim:set ts=4 sw=4
