@@ -8,8 +8,10 @@ if not ok then
 end
 
 -- moving up and down work as you would expect
-vimp.nnoremap({ "silent" }, "j", "gj")
-vimp.nnoremap({ "silent" }, "k", "gk")
+-- Remap for dealing with word wrap
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
 
 -- Keep the cursor in place while joining lines
 vimp.nnoremap({ "silent" }, "J", "mzJ`z")
@@ -53,7 +55,10 @@ vimp.vmap({ "silent" }, "-", "<plug>(dial-decrement)")
 --
 -- <leader> mappings
 --
-vim.g.mapleader = " "
+--Remap space as leader key
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- Cancel a leader operation without sometimes causing unintended side effects
 -- https://github.com/svermeulen/vimpeccable#chord-cancellation-maps

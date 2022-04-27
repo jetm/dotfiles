@@ -62,14 +62,14 @@ cmp.setup({
 		end,
 	},
 
-	mapping = {
+	mapping = cmp.mapping.preset.insert({
 		["<CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = true,
 		}),
 		["<Tab>"] = cmp.mapping(tab_complete, { "i", "s" }),
 		["<S-Tab>"] = cmp.mapping(s_tab_complete, { "i", "s" }),
-	},
+	}),
 
 	formatting = {
 		format = lspkind.cmp_format({ with_text = false, maxwidth = 50 }),
@@ -95,8 +95,9 @@ cmp.setup({
 -- Use buffer source for `/`
 -- if you enabled `native_menu`, this won't work anymore
 cmp.setup.cmdline("/", {
+	mapping = cmp.mapping.preset.cmdline(),
 	completion = {
-		keyword_length = 1,
+		keyword_length = 2,
 	},
 	sources = {
 		{ name = "buffer" },
@@ -106,8 +107,9 @@ cmp.setup.cmdline("/", {
 -- Use cmdline & path source for ':'
 -- if you enabled `native_menu`, this won't work anymore
 cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
 	completion = {
-		keyword_length = 1,
+		keyword_length = 2,
 	},
 	sources = cmp.config.sources({
 		{ name = "path" },

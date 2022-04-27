@@ -66,6 +66,9 @@ lualine.setup({
 		theme = "onedark",
 		component_separators = { "", "" },
 		section_separators = { "", "" },
+		-- enable global statusline (have a single statusline at bottom of
+		-- neovim instead of one for  every window)
+		globalstatus = true,
 	},
 	sections = {
 		lualine_a = { "mode" },

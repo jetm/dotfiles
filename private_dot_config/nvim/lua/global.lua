@@ -18,6 +18,7 @@ o.showmode = true -- Show current mode in command-line
 o.showtabline = 2 -- Always show tabline
 o.smartcase = true -- Case insensitive search, but case sensitive when uc present
 o.smartindent = true
+o.statusline = 3 -- Have a single statusline at bottom of neovim instead of one for every window
 o.expandtab = true
 o.softtabstop = 4
 o.shiftwidth = o.softtabstop
