@@ -57,18 +57,4 @@ vim.g.nvim_tree_icons = {
 	},
 }
 
-nvim_tree.setup({
-	-- if true the tree will resize itself after opening a file
-	auto_resize = true,
-	mappings = {
-		-- list of mappings to set on the tree manually
-		list = {
-			{
-				key = "z",
-				cb = [[:lua require('plugins.nvim-tree').resize()<CR>]],
-			},
-		},
-	},
-})
-
 return M
