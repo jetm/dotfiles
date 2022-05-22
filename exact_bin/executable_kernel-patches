@@ -1,0 +1,49 @@
+#!/bin/bash
+
+LINUX_FILES=(
+drivers/net/bonding/bond_netlink.c
+drivers/net/ipvlan/
+drivers/net/macvlan.c
+drivers/net/vrf.c
+drivers/net/vxlan.c
+include/linux/netdevice.h
+include/net/arp.h
+include/net/busy_poll.h
+include/net/neighbour.h
+include/net/netlink.h
+include/net/sock.h
+mm/page_alloc.c
+mm/slab_common.c
+mm/slub.c
+mm/vmalloc.c
+net/8021q/
+net/bridge/br_netlink.c
+net/bridge/br_arp_nd_proxy.c
+net/bridge/br_vlan.c
+net/bridge/br_if.c
+net/core/neighbour.c
+net/core/rtnetlink.c
+net/core/sock.c
+net/netlink/
+net/packet/af_packet.c
+net/sched/
+net/socket.c
+net/ipv4/raw.c
+net/ipv4/arp.c
+net/ipv4/netlink.c
+)
+
+linux_patches=()
+for f in "${LINUX_FILES[@]}"; do
+  rev_list="$(git rev-list --no-merges v5.4.47..linux-5.4.y -- "${f}")"
+  for r in ${rev_list}; do
+    tmp="$(rg \
+      --files-with-matches \
+      --no-ignore \
+      "$r" \
+      patches-linux-5.4.y/ || echo "$r is not found")"
+    linux_patches+=("$tmp")
+  done
+done
+
+echo "${linux_patches[@]}" | tr ' ' '\n' | sort -u | cut -d'/' -f2 | sort -k1 -t'-' -n

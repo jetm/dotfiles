@@ -162,3 +162,10 @@ if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
     alias pasp='paru'
   fi
 fi
+
+if ! (( $+commands[chezmoi] )); then
+  print "zsh chezmoi plugin: chezmoi not found..." >&2
+else
+  alias cm="chezmoi"
+  alias cma="chezmoi apply"
+fi

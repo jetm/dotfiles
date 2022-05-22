@@ -491,13 +491,16 @@ packer.startup(function(use)
 	-- New files created with a shebang line are automatically made executable
 	use({ "tpope/vim-eunuch" })
 
+	--
 	-- File manager
+	--
 	use({
 		"kyazdani42/nvim-tree.lua",
 		requires = "kyazdani42/nvim-web-devicons",
 		config = function()
 			require("plugins.nvim-tree")
 		end,
+		tag = 'nightly'
 	})
 
 	-- A neovim lua plugin to help easily manage multiple terminal windows

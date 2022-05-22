@@ -10,28 +10,7 @@ if not ok2 then
 	return
 end
 
-local ok3, nvim_tree_view = pcall(require, "nvim-tree.view")
-if not ok3 then
-	error("Loading nvim-tree.view")
-	return
-end
-
-local M = {}
-
-function M.resize()
-	local w = nvim_tree_view.View.width
-	if original_width == nil then
-		original_width = w
-	end
-	if w ~= original_width then
-		w = original_width
-	else
-		w = w + 10
-	end
-	nvim_tree_view.View.width = w
-	vim.cmd("NvimTreeClose")
-	vim.cmd("NvimTreeToggle")
-end
+local vim = vim
 
 vim.g.nvim_tree_icons = {
 	default = icons.get("file"),
@@ -57,4 +36,4 @@ vim.g.nvim_tree_icons = {
 	},
 }
 
-return M
+nvim_tree.setup({})

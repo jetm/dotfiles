@@ -136,13 +136,12 @@
     diffFilter = delta --color-only
 
 [delta]
+    navigate = true # use n and N to move between diff sections
     line-numbers = false
-    ; syntax-theme = Nord
 
 [pager]
     diff = delta --dark
     log = delta --dark
-    reflog = delta --dark
     show = delta --dark
 
 #
