@@ -193,6 +193,7 @@
     directory = /disk/data/opengrok/src/HALON_release_10.09
     directory = /disk/data/opengrok/src/HALON_release_10.10
     directory = /disk/data/opengrok/src/NetEdit_master
+    directory = /pnb/software/attools/tw-halon
 
 # vim:ft=gitconfig
 # vim:set ts=4 sw=4

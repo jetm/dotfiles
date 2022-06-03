@@ -151,9 +151,9 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
 
   zi0c id-as'tmux' \
     as"program" \
-    ver"3.2a" \
+    ver"3.3" \
     atclone"./autogen.sh && ./configure && make -j$(nproc)" \
-    mv"tmux -> /ws/${USER}/shell-goodies/repos/dotfiles/bin/tmux"
+    mv"tmux -> /ws/${USER}/shell-goodies/repos/dotfiles/exact_bin/tmux"
   zinit light tmux/tmux
 
   # Put here all rust installations
@@ -204,6 +204,11 @@ zi0c id-as'zoxide' \
   pick'zoxide' \
   atload'eval "$(zoxide init zsh --cmd j)";'
 zinit light ajeetdsouza/zoxide
+
+zi0c id-as'zsh-bd' \
+  depth=1
+zinit light tarrasch/zsh-bd
+turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-bd/bd.zsh"
 
 # Help to remember alias
 # zi0a id-as'zsh-you-should-use'
@@ -298,13 +303,13 @@ zinit light dandavison/delta
 #
 # Cheatsheet
 #
-zi0c id-as'tldr' \
-  from'gh-r' \
-  as'program' \
-  bpick'*linux-x86_64-musl*' \
-  mv'tldr-* -> tldr' \
-  pick'tldr'
-zinit light dbrgn/tealdeer
+# zi0c id-as'tldr' \
+#   from'gh-r' \
+#   as'program' \
+#   bpick'*linux-x86_64-musl*' \
+#   mv'tldr-* -> tldr' \
+#   pick'tldr'
+# zinit light dbrgn/tealdeer
 
 zi0c id-as'cht.sh' \
   as'command' \
@@ -670,6 +675,20 @@ zi0c id-as'stylua' \
   bpick'*stylua*linux*' \
   pick'stylua'
 zinit light JohnnyMorganz/StyLua
+
+zi0c id-as'stylua' \
+  from'gh-r' \
+  as'program' \
+  bpick'*stylua*linux*' \
+  pick'stylua'
+zinit light JohnnyMorganz/StyLua
+
+zi0c id-as'gitui' \
+  from'gh-r' \
+  as'program' \
+  bpick'*linux-musl*' \
+  pick'gitui'
+zinit light extrawurst/gitui
 
 # zi0c id-as'difftastic' \
 #   cargo'!difftastic'
