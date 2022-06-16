@@ -1,49 +1,53 @@
 #!/bin/bash
 
+# PCI subsystem
 LINUX_FILES=(
-drivers/net/bonding/bond_netlink.c
-drivers/net/ipvlan/
-drivers/net/macvlan.c
-drivers/net/vrf.c
-drivers/net/vxlan.c
-include/linux/netdevice.h
-include/net/arp.h
-include/net/busy_poll.h
-include/net/neighbour.h
-include/net/netlink.h
-include/net/sock.h
-mm/page_alloc.c
-mm/slab_common.c
-mm/slub.c
-mm/vmalloc.c
-net/8021q/
-net/bridge/br_netlink.c
-net/bridge/br_arp_nd_proxy.c
-net/bridge/br_vlan.c
-net/bridge/br_if.c
-net/core/neighbour.c
-net/core/rtnetlink.c
-net/core/sock.c
-net/netlink/
-net/packet/af_packet.c
-net/sched/
-net/socket.c
-net/ipv4/raw.c
-net/ipv4/arp.c
-net/ipv4/netlink.c
+include/asm-generic/pci_iomap.h
+include/asm-generic/pci.h
+include/uapi/linux/pcitest.h
+include/uapi/linux/pci.h
+include/uapi/linux/pci_regs.h
+arch/arm64/kernel/pci.c
+arch/arm64/include/asm/pci.h
+drivers/acpi/pci_irq.c
+drivers/acpi/pci_link.c
+drivers/acpi/pci_mcfg.c
+drivers/acpi/pci_root.c
+drivers/acpi/pci_slot.c
+drivers/pci/
+include/linux/pci_hotplug.h
+include/linux/pci-acpi.h
+include/linux/pci-ecam.h
+include/linux/pci-epf.h
+include/linux/pci_hotplug.h
+include/linux/pci-ats.h
+include/linux/pci-ep-cfs.h
+include/linux/pci-p2pdma.h
+include/linux/pci_ids.h
+include/linux/pci-dma-compat.h
+include/linux/pci-epc.h
+include/linux/pci.h
 )
+
+# 5.10 LTS and NXP
+LV=v5.10.35
+LB=linux-5.10.y
+
+# 5.10 LTS and NXP
+LV=v5.10.35
+LB=linux-rolling-lts
 
 linux_patches=()
 for f in "${LINUX_FILES[@]}"; do
-  rev_list="$(git rev-list --no-merges v5.4.47..linux-5.4.y -- "${f}")"
+  rev_list="$(git rev-list --no-merges ${LV}..${LB} -- "${f}")"
   for r in ${rev_list}; do
     tmp="$(rg \
       --files-with-matches \
       --no-ignore \
       "$r" \
-      patches-linux-5.4.y/ || echo "$r is not found")"
+      patches-${LB}/ || echo "$r is not found")"
     linux_patches+=("$tmp")
   done
 done
 
-echo "${linux_patches[@]}" | tr ' ' '\n' | sort -u | cut -d'/' -f2 | sort -k1 -t'-' -n
+echo "${linux_patches[@]}" | tr ' ' '\n' | sort -u | sort -k3 -t'-' -n
