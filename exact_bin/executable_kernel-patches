@@ -29,6 +29,12 @@ include/linux/pci-epc.h
 include/linux/pci.h
 )
 
+# 82 subsystem
+LINUX_FILES=(
+drivers/tty/serial/
+drivers/usb/serial/
+)
+
 # 5.10 LTS and NXP
 LV=v5.10.35
 LB=linux-5.10.y
@@ -50,4 +56,8 @@ for f in "${LINUX_FILES[@]}"; do
   done
 done
 
-echo "${linux_patches[@]}" | tr ' ' '\n' | sort -u | sort -k3 -t'-' -n
+echo "${linux_patches[@]}" \
+  | tr ' ' '\n' \
+  | sort -u \
+  | sort -k3 -t'-' -n \
+  | awk '!visited[$0]++'

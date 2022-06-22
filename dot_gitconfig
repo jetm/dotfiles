@@ -156,6 +156,9 @@
 [difftool "nvimdiff"]
     cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 
+[feature]
+    manyFiles = true
+
 #
 # VM settings
 #

@@ -51,7 +51,7 @@ telescope.setup({
 		},
 		file_sorter = telescope_sorters.get_generic_sorter,
 		file_ignore_patterns = {},
-		path_display = { shorten = 5 },
+		path_display = { },
 		generic_sorter = telescope_sorters.get_generic_fuzzy_sorter,
 		winblend = 0,
 		border = {},
