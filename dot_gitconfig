@@ -159,6 +159,9 @@
 [feature]
     manyFiles = true
 
+[core]
+    fsmonitor = true
+
 #
 # VM settings
 #

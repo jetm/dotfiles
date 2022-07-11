@@ -58,6 +58,11 @@ zinit light romkatv/powerlevel10k
 #   atload'!eval $(starship init zsh)'
 # zinit light starship/starship
 
+zi_ice id-as'zsh-completions' \
+  atload"zicompinit; zicdreplay" \
+  blockf
+zinit light zsh-users/zsh-completions
+
 zi_ice id-as'zsh-autosuggestions'
 zinit light zsh-users/zsh-autosuggestions
 
@@ -477,7 +482,7 @@ zinit light konradsz/igrep
 # neovim stable releases
 #
 zi0c id-as'nvim' \
-  ver'v0.7.0' \
+  ver'v0.7.2' \
   as'program' \
   make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
   bin"$ZPFX/bin/nvim"
