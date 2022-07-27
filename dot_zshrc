@@ -330,13 +330,10 @@ zinit snippet https://cht.sh/:cht.sh
 #
 # Shell scripting
 #
-zi0c id-as'shellharden' \
-  from'gh-r' \
+zinit ice rustup id-as'shellharden' \
   as'program' \
-  bpick'*x86_64-linux-gnu*' \
-  mv'shellharden* -> shellharden' \
-  pick'shellharden'
-zinit light anordal/shellharden
+  cargo'!shellharden'
+zinit light zdharma-continuum/null
 
 zi0c id-as'shellcheck' \
   from'gh-r' \
