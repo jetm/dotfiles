@@ -258,12 +258,12 @@ packer.startup(function(use)
 	-- ct - choose theirs
 	-- cb - choose both
 	-- c0 - choose none
-	-- use({ "rhysd/conflict-marker.vim" })
-	use({'akinsho/git-conflict.nvim',
-		config = function()
-			require('git-conflict').setup()
-		end
-	})
+	use({ "rhysd/conflict-marker.vim" })
+	-- use({'akinsho/git-conflict.nvim',
+	--     config = function()
+	--         require('git-conflict').setup()
+	--     end
+	-- })
 
 	-- Git features and provider for feline
 	-- like gitgutter shows hunks etc on sign column

@@ -51,6 +51,9 @@ zi_ice id-as'p10k' \
   depth=1
 zinit light romkatv/powerlevel10k
 
+zi_ice id-as'fzf-tab'
+zinit light Aloxaf/fzf-tab
+
 # Git status is still slower than p10k gitstatusd
 # zi_ice id-as'starship' \
 #   from"gh-r" \
@@ -701,6 +704,14 @@ zi0c id-as'gitui' \
   bpick'*linux-musl*' \
   pick'gitui'
 zinit light extrawurst/gitui
+
+zi0c id-as'direnv' \
+  from'gh-r' \
+  as'program' \
+  pick'direnv' \
+  mv'direnv*->direnv' \
+  atload'eval "$(direnv hook zsh)"'
+zinit light direnv/direnv
 
 # zi0c id-as'difftastic' \
 #   cargo'!difftastic'

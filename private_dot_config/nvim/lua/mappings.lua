@@ -12,14 +12,6 @@ end
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
-
--- Keep the cursor in place while joining lines
-vimp.nnoremap({ "silent" }, "J", "mzJ`z")
-
--- Move selected line / block of text in visual mode
-vimp.vnoremap({ "silent" }, "K", ":move '<-2<CR>gv-gv")
-vimp.vnoremap({ "silent" }, "J", ":move '>+1<CR>gv-gv")
-
 -- quitting mapping
 vimp.nnoremap({ "silent" }, "q", ":BufferClose<CR>")
 vimp.nnoremap({ "silent" }, "Q", ":qa<CR>")

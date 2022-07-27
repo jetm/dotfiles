@@ -161,7 +161,7 @@
 
 [core]
     fsmonitor = true
-
+    excludesfile = ~/.gitignore
 #
 # VM settings
 #

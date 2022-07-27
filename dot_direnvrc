@@ -1,0 +1,31 @@
+export_function() {
+  local name=$1
+  shift
+  local alias_dir=${PWD}/.direnv/aliases
+  mkdir -p "${alias_dir}"
+  if ! [[ ":${PATH}:" == *":${alias_dir}:"* ]]; then
+    export PATH=${alias_dir}:${PATH}
+  fi
+  local target="${alias_dir}/${name}"
+  if declare -f "${name}" >/dev/null; then
+    echo "#!/usr/bin/bash" > "${target}"
+    declare -f "${name}" >> "${target}" 2>/dev/null
+    # Notice that we add shell variables to the function trigger.
+    echo "$name \$*" >> "${target}"
+    chmod +x "${target}"
+  fi
+}
+
+export_alias() {
+  local name=$1
+  shift
+  local alias_dir=${PWD}/.direnv/aliases
+  mkdir -p "${alias_dir}"
+  if ! [[ ":${PATH}:" == *":${alias_dir}:"* ]]; then
+    export PATH=${alias_dir}:${PATH}
+  fi
+  local target="${alias_dir}/${name}"
+  echo "#!/usr/bin/bash" > "${target}"
+  echo "$@" >> "$target"
+  chmod +x "$target"
+}

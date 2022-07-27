@@ -37,20 +37,21 @@ alias lt='exa --tree'
 # )
 
 # General
-alias e="nvim"
-alias vim="nvim"
-alias vimdiff="nvim -d"
-alias up="bd 1"
-alias cd-="cd -"
+alias e='nvim'
+alias vim='nvim'
+alias vimdiff='nvim -d'
+alias up='bd 1'
+alias cd-='cd -'
 alias fdi='fd -t f -o "$USER" -l -d 1 . /aruba/pub'
-alias ls="exa"
-alias df="duf"
-alias bbk="bitbake"
+alias ls='exa'
+alias df='duf'
+alias bbk='bitbake'
+alias ato='atool -x -E'
 
 #
 # Git
 #
-alias g="git"
+alias g='git'
 
 # Branch (b)
 alias gb='git branch'
@@ -128,7 +129,7 @@ alias gzt='git fuzzy status'
 alias gzb='git fuzzy branch'
 
 # git dl
-alias gdl="git dl -x"
+alias gdl='git dl -x'
 
 #
 # Arch Linux Stuff
@@ -164,8 +165,8 @@ if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
 fi
 
 if ! (( $+commands[chezmoi] )); then
-  print "zsh chezmoi plugin: chezmoi not found..." >&2
+  print 'zsh chezmoi plugin: chezmoi not found...' >&2
 else
-  alias cm="chezmoi"
-  alias cma="chezmoi apply"
+  alias cm='chezmoi'
+  alias cma='chezmoi apply'
 fi
