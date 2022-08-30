@@ -216,6 +216,14 @@ packer.startup(function(use)
 		end,
 	})
 
+	-- move and duplicate blocks and lines, with complete fold handling,
+	-- reindent, and undone in one go
+	use({ "booperlv/nvim-gomove",
+		config = function()
+			require("plugins.nvim-gomove")
+		end,
+	})
+
 	--
 	-- Search/Replace
 	--
@@ -477,7 +485,7 @@ packer.startup(function(use)
 
 	-- Markdown support
 	-- Generate table of contents for Markdown files
-	use({ "mzlogin/vim-markdown-toc", opt = true })
+	use({ "mzlogin/vim-markdown-toc" })
 
 	--
 	-- File modifications

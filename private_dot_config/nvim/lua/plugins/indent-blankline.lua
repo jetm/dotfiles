@@ -5,7 +5,6 @@ if not ok then
 end
 
 indent_blankline.setup({
-	char = "|",
 	show_current_context = true,
 	use_treesitter = true,
 	filetype_exclude = { "help", "make", "terminal" },
