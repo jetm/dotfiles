@@ -48,10 +48,12 @@ zi0c() { zi_ice wait'2' "$@"; }
 # Must be run just after zinit
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh
 zi_ice id-as'p10k' \
+  nocompile \
   depth=1
 zinit light romkatv/powerlevel10k
 
-zi_ice id-as'fzf-tab'
+zi_ice id-as'fzf-tab' \
+  nocompile
 zinit light Aloxaf/fzf-tab
 
 # Git status is still slower than p10k gitstatusd
@@ -120,6 +122,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zi0c id-as'topgrade' \
     from'gh-r' \
     as'program' \
+    nocompile \
     bpick'*x86_64-unknown-linux-musl*' \
     pick'topgrade'
   zinit light r-darwish/topgrade
@@ -137,6 +140,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zi0c id-as'ov' \
     from'gh-r' \
     as'program' \
+    nocompile \
     bpick'*linux_amd64*' \
     pick'ov'
   zinit light noborus/ov
@@ -144,6 +148,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
   zi0c id-as'clangd' \
     from'gh-r' \
     as'program'  \
+    nocompile \
     bpick'clangd-linux*' \
     mv'clangd*/bin/clangd -> clangd'
 	zinit light clangd/clangd
@@ -184,6 +189,7 @@ fi
 ZVM_VI_SURROUND_BINDKEY=s-prefix
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 zi0c id-as'zsh-vi-mode' \
+  nocompile \
   depth=1
 zinit light jeffreytse/zsh-vi-mode
 
@@ -197,6 +203,7 @@ zinit light zsh-users/zsh-history-substring-search
 zi0b id-as'fzf' \
   from'gh-r' \
   as'program' \
+  nocompile \
   bpick'*linux_amd64*' \
   dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh' \
   pick'fzf'
@@ -208,6 +215,7 @@ zinit light junegunn/fzf
 zi0c id-as'zoxide' \
   from'gh-r' \
   as'program' \
+  nocompile \
   bpick'*x86_64*linux*' \
   mv'zoxide*/zoxide -> zoxide' \
   pick'zoxide' \
@@ -215,6 +223,7 @@ zi0c id-as'zoxide' \
 zinit light ajeetdsouza/zoxide
 
 zi0c id-as'zsh-bd' \
+  nocompile \
   depth=1
 zinit light tarrasch/zsh-bd
 turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-bd/bd.zsh"
@@ -290,8 +299,8 @@ autopair-init
 zi0c id-as'zsh-syntax-highlighting' \
   depth=1 \
   cloneonly \
-  atpull'%atclone' \
   nocompile \
+  atpull'%atclone' \
   nocd
 zinit light zsh-users/zsh-syntax-highlighting
 
@@ -304,6 +313,7 @@ zinit light zsh-users/zsh-syntax-highlighting
 zi0c id-as'delta' \
   from'gh-r' \
   as'program' \
+  nocompile \
   bpick'*x86_64-unknown-linux-musl*' \
   mv'delta*/delta -> delta' \
   pick'delta'
@@ -322,6 +332,7 @@ zinit light dandavison/delta
 
 zi0c id-as'cht.sh' \
   as'command' \
+  nocompile \
   has'rlwrap' \
   pick'cht.sh' \
   atload'export CHTSH="$XDG_CONFIG_HOME"'
@@ -338,6 +349,7 @@ zinit light zdharma-continuum/null
 zi0c id-as'shellcheck' \
   from'gh-r' \
   as'program' \
+  nocompile \
   bpick'*linux.x86_64*' \
   mv'shellcheck*/shellcheck -> shellcheck' \
   pick'shellcheck'
@@ -345,6 +357,7 @@ zinit light koalaman/shellcheck
 
 zi0c id-as'shfmt' \
   from'gh-r' \
+  nocompile \
   as'program' \
   mv'shfmt* -> shfmt'
 zinit light mvdan/sh
@@ -363,6 +376,7 @@ zinit light zdharma-continuum/null
 zi0c id-as'dust' \
   from'gh-r' \
   as'program' \
+  nocompile \
   bpick'*linux*gnu*' \
   mv'dust*/dust -> dust' \
   pick'dust'
@@ -372,6 +386,7 @@ zinit light bootandy/dust
 zi0b id-as'fd' \
   from'gh-r' \
   as'program' \
+  nocompile \
   mv'fd*/fd -> fd' \
   pick'fd'
 zinit light sharkdp/fd
@@ -379,6 +394,7 @@ zinit light sharkdp/fd
 zi0a id-as'exa' \
   from'gh-r' \
   as'program' \
+  nocompile \
   mv'bin/exa -> exa' \
   pick'exa'
 zinit light ogham/exa
@@ -387,6 +403,7 @@ zinit light ogham/exa
 zi0c id-as'sd' \
   from'gh-r' \
   as'program' \
+  nocompile \
   mv'sd-* -> sd' \
   pick'sd'
 zinit light chmln/sd
@@ -394,6 +411,7 @@ zinit light chmln/sd
 zi0c id-as'bat' \
   from'gh-r' \
   as'program' \
+  nocompile \
   bpick'*x86_64-unknown-linux-musl*' \
   mv'bat*/bat -> bat' \
   pick'bat'
@@ -401,6 +419,7 @@ zinit light sharkdp/bat
 
 zi0c id-as'duf' \
   from'gh-r' \
+  nocompile \
   as'program' \
   bpick'*linux_x86_64.tar.gz'
 zinit light muesli/duf
@@ -455,6 +474,7 @@ zinit light htop-dev/htop
 zi0c id-as'ripgrep' \
   from'gh-r' \
   as'program' \
+  nocompile \
   mv'ripgrep*/rg -> rg' \
   pick'rg'
 zinit light BurntSushi/ripgrep
@@ -462,6 +482,7 @@ zinit light BurntSushi/ripgrep
 zi0c id-as'igrep' \
   from'gh-r' \
   as'program' \
+  nocompile \
   bpick'*x86_64-unknown-linux-gnu*' \
   mv'igrep/ig -> ig' \
   pick'ig'
@@ -515,6 +536,7 @@ zinit light neovim/neovim
 zi0c id-as'nnn' \
   from'gh-r' \
   as'program'  \
+  nocompile \
   bpick'nnn-static*x86_64*' \
   mv'nnn-static -> nnn' \
   pick'nnn'
@@ -541,6 +563,7 @@ zinit light jarun/nnn
 zi0c id-as'ninja' \
   from'gh-r' \
   as'program' \
+  nocompile \
   bpick'*linux*' \
   pick'ninja'
 zinit light ninja-build/ninja
@@ -570,13 +593,14 @@ zinit light sumneko/lua-language-server
 zi0c id-as'forgit' \
   depth=1 \
   cloneonly \
-  atpull'%atclone' \
   nocompile \
+  atpull'%atclone' \
   nocd
 zinit light wfxr/forgit
 
 zi0c id-as'git-fuzzy' \
   as'program' \
+  nocompile \
   pick'bin/git-fuzzy'
 zinit light bigH/git-fuzzy
 
@@ -589,6 +613,7 @@ zinit light nikitavoloboev/gitupdate
 
 zi0c id-as'git-undo' \
   as'program' \
+  nocompile \
   pick'git-undo'
 zinit snippet https://raw.githubusercontent.com/tj/git-extras/master/bin/git-undo
 
@@ -665,6 +690,7 @@ zinit id-as'parallel' \
 # interactive parallel ssh client
 zi0c id-as'hss' \
   from'gh-r' \
+  nocompile \
   as'program' \
   mv'hss-Linux-x86_64 -> hss'
 zinit light six-ddc/hss
@@ -691,6 +717,7 @@ zinit light zdharma-continuum/null
 zi0c id-as'stylua' \
   from'gh-r' \
   as'program' \
+  nocompile \
   bpick'*stylua*linux*' \
   pick'stylua'
 zinit light JohnnyMorganz/StyLua
@@ -698,6 +725,7 @@ zinit light JohnnyMorganz/StyLua
 zi0c id-as'gitui' \
   from'gh-r' \
   as'program' \
+  nocompile \
   bpick'*linux-musl*' \
   pick'gitui'
 zinit light extrawurst/gitui
@@ -705,6 +733,7 @@ zinit light extrawurst/gitui
 zi0c id-as'direnv' \
   from'gh-r' \
   as'program' \
+  nocompile \
   pick'direnv' \
   mv'direnv*->direnv' \
   atload'eval "$(direnv hook zsh)"'
