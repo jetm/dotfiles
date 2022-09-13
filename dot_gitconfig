@@ -178,34 +178,5 @@
     # Gerrit username
     username = javier.tia
 
-#
-# VM settings
-#
-[sendemail]
-    smtpServerPort = 25
-    ; smtpserver = G9W8453.americas.hpqcorp.net
-    smtpserver = smtp3.hpe.com
-
-[halon "gitdl"]
-    remote = gitv2cache
-
-[http]
-    proxy = http://web-proxy.houston.hpecorp.net:8080
-
-[core]
-    gitProxy = none for hpe.com
-    gitProxy = none for hpecorp.net
-    gitProxy = gitproxy-socat
-
-[safe]
-    directory = /disk/data/opengrok/src/HALON_master
-    directory = /disk/data/opengrok/src/HALON_release_10.06
-    directory = /disk/data/opengrok/src/HALON_release_10.08
-    directory = /disk/data/opengrok/src/HALON_release_10.09
-    directory = /disk/data/opengrok/src/HALON_release_10.10
-    directory = /disk/data/opengrok/src/HALON_release_10.11
-    directory = /disk/data/opengrok/src/NetEdit_master
-    directory = /pnb/software/attools/tw-halon
-
 # vim:ft=gitconfig
 # vim:set ts=4 sw=4

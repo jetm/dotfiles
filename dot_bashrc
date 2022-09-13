@@ -150,23 +150,5 @@ export HISTSIZE=${HISTFILESIZE} # increase history size (default is 500)
 # ensure synchronization between Bash memory and history file
 export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
 
-#
-# VM settings
-#
-
-# aliases for git
-alias g='git'
-alias gnp='git --no-pager'
-complete -o default -o nospace -F _git g
-alias giA='git add --patch'
-
-alias fix-code-format='git --no-pager diff --name-only HEAD~ HEAD | grep "\.[ch]$" | xargs clang-format -i -style=file'
-
-if [[ $(lsb_release -i) = *Ubuntu* ]]; then
-    source /aruba/halon/infra/halon.profile
-    remove_PATH_duplicates
-    unalias bb
-fi
-
 # vim:ft=bash
 # vim:set ts=4 sw=4

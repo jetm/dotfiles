@@ -1,4 +1,3 @@
-require("vm-settings")
 require("no-vim-plugins")
 require("global")
 require("plugins")
