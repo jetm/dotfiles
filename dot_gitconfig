@@ -1,9 +1,10 @@
-# include for all repositories inside of ~/work
-[includeIf "gitdir:~/work"]
-    path = .gitconfig-work
+# Git config for all repositories inside of work/
+[includeIf "gitdir:~/repos/work/**"]
+    path = ~/.gitconfig-work
 
-[includeIf "gitdir:~/personal"]
-    path = .gitconfig-personal
+# Git config for all repositories inside of personal/
+[includeIf "gitdir:~/repos/personal/**"]
+    path = ~/.gitconfig-personal
 
 [alias]
     # Print the name of the current branch
