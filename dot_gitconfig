@@ -162,6 +162,11 @@
 [core]
     fsmonitor = true
     excludesfile = ~/.gitignore
+
+; include for all repositories inside of ~/work
+[includeIf "gitdir:~/work"]
+    path = .gitconfig-work
+
 #
 # VM settings
 #
