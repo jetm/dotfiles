@@ -2,3 +2,5 @@
 .envrc
 install_chezmoi.sh
 srtadrm
+.idea
+.editorconfig
