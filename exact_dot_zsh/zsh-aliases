@@ -128,8 +128,8 @@ alias gt='git status'
 alias gzt='git fuzzy status'
 alias gzb='git fuzzy branch'
 
-# git dl
-alias gdl='git dl -x'
+# glab
+alias gL='glab'
 
 #
 # Arch Linux Stuff
