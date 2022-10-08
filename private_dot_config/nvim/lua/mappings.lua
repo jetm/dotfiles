@@ -35,10 +35,6 @@ vimp.vnoremap({ "silent" }, ">", ">gv")
 vimp.nnoremap({ "silent" }, "<", "<<_")
 vimp.nnoremap({ "silent" }, ">", ">>_")
 
--- Search selected text (consistent with `*` behaviour)
-vimp.nnoremap({ "silent" }, "*", [[*N]])
-vimp.vnoremap({ "silent" }, "*", [[y/\V<c-r>=escape(@",'/\')<cr><cr>N]])
-
 vimp.nmap({ "silent" }, "+", "<Plug>(dial-increment)")
 vimp.nmap({ "silent" }, "-", "<Plug>(dial-decrement)")
 vimp.vmap({ "silent" }, "+", "<Plug>(dial-increment)")
