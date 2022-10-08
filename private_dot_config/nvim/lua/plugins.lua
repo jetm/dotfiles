@@ -527,6 +527,16 @@ packer.startup(function(use)
 		"antoinemadec/FixCursorHold.nvim",
 	})
 
+	use({
+		"cuducos/yaml.nvim",
+		-- ft = { "yaml", "jinja", "jinja2" },
+		requires = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+	})
+
+	use({ "glench/vim-jinja2-syntax" })
+
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then
