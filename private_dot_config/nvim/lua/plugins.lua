@@ -103,11 +103,11 @@ packer.startup(function(use)
 	-- lualine has better structure and theme, it's more like spaceline
 	use({
 		"nvim-lualine/lualine.nvim",
-		requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 		config = function()
 			require("plugins.lualine")
 		end,
-		after = 'onedark.nvim'
+		after = "onedark.nvim",
 	})
 	--
 	-- Neovim plugin that allows you to easily write your .vimrc in lua or any lua based language
@@ -218,7 +218,8 @@ packer.startup(function(use)
 
 	-- move and duplicate blocks and lines, with complete fold handling,
 	-- reindent, and undone in one go
-	use({ "booperlv/nvim-gomove",
+	use({
+		"booperlv/nvim-gomove",
 		config = function()
 			require("plugins.nvim-gomove")
 		end,
@@ -510,7 +511,7 @@ packer.startup(function(use)
 		config = function()
 			require("plugins.nvim-tree")
 		end,
-		tag = 'nightly'
+		tag = "nightly",
 	})
 
 	-- A neovim lua plugin to help easily manage multiple terminal windows
@@ -523,7 +524,7 @@ packer.startup(function(use)
 
 	-- A neovim lua plugin to help easily manage multiple terminal windows
 	use({
-		"antoinemadec/FixCursorHold.nvim"
+		"antoinemadec/FixCursorHold.nvim",
 	})
 
 	-- Automatically set up your configuration after cloning packer.nvim
