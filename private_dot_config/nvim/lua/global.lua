@@ -37,5 +37,5 @@ if vim.fn.exists("+termguicolors") == 1 then
 	o.termguicolors = true
 end
 
--- I like to include the end newline
--- cmd 'set clipboard+=unnamedplus' -- Copy paste between vim and everything else
+-- sync yanked text with the system clipboard
+vim.opt.clipboard:append { 'unnamedplus' }
