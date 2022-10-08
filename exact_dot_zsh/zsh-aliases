@@ -167,6 +167,6 @@ fi
 if ! (( $+commands[chezmoi] )); then
   print 'zsh chezmoi plugin: chezmoi not found...' >&2
 else
-  alias cm='chezmoi'
-  alias cma='chezmoi apply'
+  alias ch='chezmoi'
+  alias cha='chezmoi apply -v'
 fi
