@@ -1,9 +1,15 @@
 # Git config for all repositories inside of work/
-[includeIf "gitdir:~/repos/work/**"]
+[includeIf "gitdir:**/repos/work/**"]
     path = ~/.gitconfig-work
 
 # Git config for all repositories inside of personal/
 [includeIf "gitdir:~/repos/personal/**"]
+    path = ~/.gitconfig-personal
+
+[includeIf "gitdir:~/Dropbox/**"]
+    path = ~/.gitconfig-personal
+
+[includeIf "gitdir:~/.local/share/chezmoi/**"]
     path = ~/.gitconfig-personal
 
 [alias]
@@ -103,10 +109,6 @@
     # does
     submodule = log
     colorMoved = default
-
-[credential]
-    # Set the cache to timeout after 8 hour (setting is in seconds)
-    helper = cache --timeout=28800
 
 [status]
     # submodule summary will be enabled and a summary of commits for modified
