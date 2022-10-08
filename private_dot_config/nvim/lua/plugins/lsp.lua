@@ -86,7 +86,7 @@ end
 -- custom attach config for most LSP configs
 local on_attach = function(client, bufnr)
 	-- enable signature help when possible
-	if client.resolved_capabilities.signature_help then
+	if client.server_capabilities.signature_help then
 		lsp_signature.on_attach({
 			bind = true, -- This is mandatory, otherwise border config won't get registered.
 			floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
