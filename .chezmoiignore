@@ -4,3 +4,4 @@ scripts
 install_chezmoi.sh
 srtadrm
 **/*.zwc
+KDE_JETM_Shortcuts.kksrc
