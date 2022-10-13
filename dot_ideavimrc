@@ -43,7 +43,7 @@ set highlightedyank
 " https://youtrack.jetbrains.com/issue/VIM-959
 "set ideamarks
 
-"set ideajoin
+set ideajoin
 
 " die dae cie cae
 "set textobj-entire
@@ -115,14 +115,18 @@ vnoremap p :action EditorPaste<CR>
 vnoremap P :action EditorPaste<CR>
 
 " Move text up and down
-nnoremap J :action MoveLineDown<CR>
-nnoremap K :action MoveLineUp<CR>
-vnoremap J :action MoveLineDown<CR>
-vnoremap K :action MoveLineUp<CR>
+inoremap <A-j> :action MoveLineDown<CR>
+inoremap <A-k> :action MoveLineUp<CR>
+nnoremap <A-j> :action MoveLineDown<CR>
+nnoremap <A-k> :action MoveLineUp<CR>
+vnoremap <A-j> :action MoveLineDown<CR>
+vnoremap <A-k> :action MoveLineUp<CR>
 
 " Smart select/unselect
-nmap v <Action>(EditorSelectWord)
-vmap v <Action>(EditorSelectWord)
+nmap <C-[> <Action>(EditorSelectWord)
+vmap <C-[> <Action>(EditorSelectWord)
+nmap <C-]> <Action>(EditorUnSelectWord)
+vmap <C-]> <Action>(EditorUnSelectWord)
 
 nnoremap <c-s> :write<CR>
 nnoremap s :action KJumpAction<CR>
@@ -163,17 +167,14 @@ nnoremap gi :action GotoImplementation<CR>
 
 nnoremap <Leader>c :action CommentByLineComment<CR>
 
-"nnoremap <s-TAB> :action PreviousTab<CR>
-"nnoremap <TAB> :action NextTab<CR>
+nnoremap H :action PreviousTab<CR>
+nnoremap L :action NextTab<CR>
+
+nnoremap <Leader>q :action CloseContent<CR>
 
 "nnoremap <Leader>n :action NextWindow<CR>
-"nnoremap <Leader>q :action CloseContent<CR>
-"nnoremap <Leader>qa :action CloseAllEditors<CR>
-"nnoremap <Leader>en :action EditSourceInNewWindow<CR>
 "nnoremap <leader>zc :action CollapseAllRegions<CR>
 "nnoremap <leader>zo :action ExpandAllRegions<CR>
 "nnoremap <leader>r :action Refactorings.QuickListPopupAction<CR>
 "nnoremap <Leader>=  :action ReformatCode<CR>
-"nnoremap <leader>o :action OptimizeImports<CR>
 "nnoremap <leader>l :action RecentLocations<CR>
-"nnoremap <leader>h  :action LocalHistory.ShowHistory<CR>
