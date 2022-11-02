@@ -42,6 +42,8 @@ zi0a() { zi_ice wait'0' "$@"; }
 zi0b() { zi_ice wait'1' "$@"; }
 zi0c() { zi_ice wait'2' "$@"; }
 
+zinit pack="default" for zsh
+
 #
 # Powerlevel10k
 #
@@ -98,7 +100,6 @@ load_prezto_mod completion
 zinit id-as'zsh-defer' light-mode for romkatv/zsh-defer
 
 if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
-  zinit pack for zsh
 
   zinit id-as'git' \
     dlink"/git/git/archive/refs/tags/v%VERSION%.zip" \
