@@ -67,7 +67,7 @@ if not ok1 then
 	return
 end
 
-capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
 local ok2, lsp_status = pcall(require, "lsp-status")
 if not ok2 then
