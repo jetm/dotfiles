@@ -103,12 +103,8 @@ where() {
 #  available searching tool
 where_zsh() {
   local searcher_cmd
-  if (( $+commands[ag] )); then
-    searcher_cmd='ag'
-  elif (( $+commands[rg] )); then
+  if (( $+commands[rg] )); then
       searcher_cmd="rg"
-  elif (( $+commands[ack] )); then
-    searcher_cmd="ack"
   else
     searcher_cmd="grep"
   fi
