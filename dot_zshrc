@@ -382,7 +382,7 @@ zi0c id-as'dust' \
   pick'dust'
 zinit light bootandy/dust
 
-# shim fails for fzf
+# shim fails for fd
 zi0b id-as'fd' \
   from'gh-r' \
   as'program' \
