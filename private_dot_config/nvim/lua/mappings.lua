@@ -56,8 +56,9 @@ vimp.add_chord_cancellations("n", "<leader>")
 vimp.nnoremap({ "silent" }, "<leader>f", ":Format<CR>")
 
 -- Comments
-vimp.nmap({ "silent" }, "<leader>c", "<Plug>NERDCommenterToggle")
-vimp.vmap({ "silent" }, "<leader>c", "<Plug>NERDCommenterToggle")
+-- Ctrl-/ as VSCode and Jetbrain
+vimp.nmap({ "silent" }, "<c-_>", "<Plug>NERDCommenterToggle")
+vimp.vmap({ "silent" }, "<c-_>", "<Plug>NERDCommenterToggle")
 
 --
 -- barbar
