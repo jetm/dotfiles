@@ -42,6 +42,9 @@ packer.init({
 })
 
 packer.startup(function(use)
+	-- Packer can manage itself
+	use({ "wbthomason/packer.nvim" })
+
 	-- Need to be at the beginning
 	use({
 		"lewis6991/impatient.nvim",
@@ -50,17 +53,28 @@ packer.startup(function(use)
 		end,
 	})
 
-	-- Packer can manage itself
-	use({ "wbthomason/packer.nvim" })
-
 	--
 	-- UI
 	--
-	-- Vim version
-	-- use 'joshdick/onedark.vim'
-	-- Coping joshdick
-	-- use {'ii14/onedark.nvim'}
-	-- More complete
+	-- Notification Enhancer
+	use({
+		"rcarriga/nvim-notify",
+		config = function()
+			require("plugins.nvim-notify")
+		end,
+	})
+
+	-- Neovim UI Enhancer
+	use({
+		"stevearc/dressing.nvim",
+		config = function()
+			require("plugins.dressing")
+		end,
+	})
+
+	-- Onedark Color Scheme
+	-- Vim version, use 'joshdick/onedark.vim'
+	-- Alterntive use 'olimorris/onedarkpro.nvim'
 	use({
 		"navarasu/onedark.nvim",
 		config = function()
@@ -98,9 +112,19 @@ packer.startup(function(use)
 		end,
 	})
 
+	-- Indent detection
+	use({
+		"Darazaki/indent-o-matic",
+		config = function()
+			require("plugins.indent-o-matic")
+		end,
+	})
+
+	-- Status line
 	-- spaceline is slower
 	-- Galaxyline lacks of nice configurations, like feline has
 	-- lualine has better structure and theme, it's more like spaceline
+	-- heirline lacks of OneDark Color scheme
 	use({
 		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
