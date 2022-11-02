@@ -3,7 +3,7 @@
     path = ~/.gitconfig-work
 
 # Git config for all repositories inside of personal/
-[includeIf "gitdir:~/repos/personal/**"]
+[includeIf "gitdir:**/repos/personal/**"]
     path = ~/.gitconfig-personal
 
 [includeIf "gitdir:~/Dropbox/**"]
@@ -179,6 +179,10 @@
 [gitreview]
     # Gerrit username
     username = javier.tia
+
+[credential "https://gitlab.com"]
+   helper =
+   helper = !/usr/bin/glab auth git-credential
 
 # vim:ft=gitconfig
 # vim:set ts=4 sw=4
