@@ -167,7 +167,7 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
 
   zi0c id-as'tmux' \
     as"program" \
-    ver"3.3" \
+    ver"3.3a" \
     atclone"./autogen.sh && ./configure && make -j$(nproc)" \
     mv"tmux -> /ws/${USER}/shell-goodies/repos/dotfiles/exact_bin/tmux"
   zinit light tmux/tmux
