@@ -688,12 +688,12 @@ zinit id-as'parallel' \
   for https://ftp.gnu.org/gnu/parallel/
 
 # interactive parallel ssh client
-zi0c id-as'hss' \
-  from'gh-r' \
-  nocompile \
-  as'program' \
-  mv'hss-Linux-x86_64 -> hss'
-zinit light six-ddc/hss
+# zi0c id-as'hss' \
+#   from'gh-r' \
+#   nocompile \
+#   as'program' \
+#   mv'hss-Linux-x86_64 -> hss'
+# zinit light six-ddc/hss
 
 zi0c id-as'task-spooler' \
   as'program' \
