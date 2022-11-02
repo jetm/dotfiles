@@ -782,7 +782,11 @@ turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-syntax-highlighting/zsh-syntax-highlight
 export FORGIT_NO_ALIASES=1
 turbo_source "${ZINIT[PLUGINS_DIR]}/forgit/forgit.plugin.sh"
 
-zsh-defer eval $(keychain --eval --quiet --agents ssh id_rsa)
+if (command -v keychain >/dev/null 2>&1); then
+  if [[ -f "$HOME/.ssh/id_rsa" ]]; then
+    zsh-defer eval "$(keychain --eval --quiet --agents ssh id_rsa)"
+  fi
+fi
 
 #
 # Put most source here to improve zsh load speed
