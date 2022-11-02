@@ -170,6 +170,11 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     mv"tmux -> /ws/${USER}/shell-goodies/repos/dotfiles/exact_bin/tmux"
   zinit light tmux/tmux
 
+  zi0c id-as'chezmoi' \
+    as'program' \
+    from'gh-r' \
+    cp'completions/chezmoi.zsh -> _chezmoi'
+  zinit light twpayne/chezmoi
   # Put here all rust installations
   # looks the mv ice doesn't work with rustup cargo
 
