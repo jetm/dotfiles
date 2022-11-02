@@ -125,10 +125,12 @@ alias e=vim
 export EDITOR='vim'
 alias ..='cd ..'
 
-export PATH=/users/tiamarin/.local/share/zinit/plugins/tmux/:$PATH
+export PATH=$HOME/.local/share/zinit/plugins/tmux/:$PATH
 
 if (command -v keychain >/dev/null 2>&1); then
-  eval "$(keychain --eval --quiet --agents ssh id_rsa id_rsa_home)"
+    if [[ -f "$HOME/.ssh/id_rsa" ]]; then
+        eval "$(keychain --eval --quiet --agents ssh id_rsa)"
+    fi
 fi
 
 #
