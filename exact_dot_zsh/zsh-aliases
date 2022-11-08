@@ -60,9 +60,9 @@ alias gbv='git branch -vv'
 alias gbm='git branch -M'
 
 # Commit (c)
-alias gc='git commit'
+alias gc='git commit -s'
 alias gca='git commit --all'
-alias gcf='git commit --amend'
+alias gcf='git commit --amend -s'
 alias gch='git cherry-pick -x'
 alias gcs='git show'
 

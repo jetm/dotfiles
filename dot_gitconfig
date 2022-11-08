@@ -135,6 +135,13 @@
     # A boolean or int to specify the level of verbose with git commit
     verbose = true
 
+    # All commits should be GPG signed
+	gpgsign = true
+
+[format]
+    # Enable the -s/--signoff option by default in the patches
+    signOff = true
+
 [interactive]
     # Enable single key presses in Interactive Mode
     singlekey = true
