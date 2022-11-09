@@ -136,7 +136,7 @@
     verbose = true
 
     # All commits should be GPG signed
-	gpgsign = true
+    gpgsign = true
 
 [format]
     # Enable the -s/--signoff option by default in the patches
