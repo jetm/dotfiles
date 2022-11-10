@@ -173,11 +173,7 @@
 [difftool "nvimdiff"]
     cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 
-[feature]
-    manyFiles = true
-
 [core]
-    fsmonitor = true
     excludesfile = ~/.gitignore
 
 [sequence]
