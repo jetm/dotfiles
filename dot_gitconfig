@@ -12,6 +12,9 @@
 [includeIf "gitdir:~/.local/share/chezmoi/**"]
     path = ~/.gitconfig-personal
 
+[safe]
+    directory = *
+
 [alias]
     # Print the name of the current branch
     current = symbolic-ref --short HEAD
