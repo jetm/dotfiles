@@ -94,29 +94,29 @@ cmp.setup({
 
 -- Use buffer source for `/`
 -- if you enabled `native_menu`, this won't work anymore
-cmp.setup.cmdline("/", {
-	mapping = cmp.mapping.preset.cmdline(),
-	completion = {
-		keyword_length = 2,
-	},
-	sources = {
-		{ name = "buffer" },
-	},
-})
+-- cmp.setup.cmdline("/", {
+--     mapping = cmp.mapping.preset.cmdline(),
+--     completion = {
+--         keyword_length = 2,
+--     },
+--     sources = {
+--         { name = "buffer" },
+--     },
+-- })
 
 -- Use cmdline & path source for ':'
 -- if you enabled `native_menu`, this won't work anymore
-cmp.setup.cmdline(":", {
-	mapping = cmp.mapping.preset.cmdline(),
-	completion = {
-		keyword_length = 2,
-	},
-	sources = cmp.config.sources({
-		{ name = "path" },
-	}, {
-		{ name = "cmdline" },
-	}),
-})
+-- cmp.setup.cmdline(":", {
+--     mapping = cmp.mapping.preset.cmdline(),
+--     completion = {
+--         keyword_length = 2,
+--     },
+--     sources = cmp.config.sources({
+--         { name = "path" },
+--     }, {
+--         { name = "cmdline" },
+--     }),
+-- })
 
 -- If you want insert `(` after select function or method item
 local ok_cmp_autopairs, cmp_autopairs = pcall(
