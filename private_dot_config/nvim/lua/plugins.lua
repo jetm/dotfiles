@@ -154,7 +154,7 @@ packer.startup(function(use)
 	})
 
 	--
-	-- Navigation/Movement
+	-- Navigation/Movement/Motions
 	--
 	-- fuzzy finder
 	-- Replace fzf
@@ -207,17 +207,6 @@ packer.startup(function(use)
 		opt = true,
 	})
 
-	-- Forgetting to use it
-	-- use({
-	--     "Jorengarenar/vim-MvVis",
-	--     config = function()
-	--         require("plugins.vim-MvVis")
-	--     end,
-	-- })
-
-	--
-	-- Motions
-	--
 	-- Next-generation motion plugin for incredibly fast on-screen navigation
 	-- Replace hop.nvim and quick-scope
 	use({
@@ -248,6 +237,29 @@ packer.startup(function(use)
 			require("plugins.nvim-gomove")
 		end,
 	})
+
+	use({
+		"cbochs/portal.nvim",
+		config = function()
+			require("portal").setup({
+				-- Your configuration goes here
+				-- Leave empty to use the default configuration
+				-- Please see the Configuration section below for more information
+			})
+		end,
+		requires = {
+			"cbochs/grapple.nvim", -- Optional: provides the "grapple" query item
+			"ThePrimeagen/harpoon", -- Optional: provides the "harpoon" query item
+		},
+	})
+
+	-- Forgetting to use it
+	-- use({
+	--     "Jorengarenar/vim-MvVis",
+	--     config = function()
+	--         require("plugins.vim-MvVis")
+	--     end,
+	-- })
 
 	--
 	-- Search/Replace

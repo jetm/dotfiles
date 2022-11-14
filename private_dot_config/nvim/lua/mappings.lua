@@ -9,8 +9,18 @@ end
 
 -- moving up and down work as you would expect
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set(
+	"n",
+	"k",
+	"v:count == 0 ? 'gk' : 'k'",
+	{ expr = true, silent = true }
+)
+vim.keymap.set(
+	"n",
+	"j",
+	"v:count == 0 ? 'gj' : 'j'",
+	{ expr = true, silent = true }
+)
 
 -- quitting mapping
 vimp.nnoremap({ "silent" }, "q", ":BufferClose<CR>")
@@ -44,10 +54,11 @@ vimp.vmap({ "silent" }, "-", "<plug>(dial-decrement)")
 -- <leader> mappings
 --
 --Remap space as leader key
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
+--
 -- Cancel a leader operation without sometimes causing unintended side effects
 -- https://github.com/svermeulen/vimpeccable#chord-cancellation-maps
 vimp.add_chord_cancellations("n", "<leader>")
@@ -72,6 +83,9 @@ vimp.nnoremap({ "silent" }, "<leader>6", ":BufferGoto6<CR>")
 vimp.nnoremap({ "silent" }, "<leader>7", ":BufferGoto7<CR>")
 vimp.nnoremap({ "silent" }, "<leader>8", ":BufferGoto8<CR>")
 vimp.nnoremap({ "silent" }, "<leader>9", ":BufferGoto9<CR>")
+
+vimp.nnoremap({ "silent" }, "<leader>o", require("portal").jump_backward)
+vimp.nnoremap({ "silent" }, "<leader>i", require("portal").jump_forward)
 
 --
 -- Ctrl <C-> Mappings
