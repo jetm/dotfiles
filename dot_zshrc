@@ -510,7 +510,7 @@ zinit light konradsz/igrep
 # neovim stable releases
 #
 zi0c id-as'nvim' \
-  ver'v0.8.0' \
+  ver'v0.8.1' \
   as'program' \
   make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
   bin"$ZPFX/bin/nvim"
