@@ -133,7 +133,7 @@ packer.startup(function(use)
 		end,
 		after = "onedark.nvim",
 	})
-	--
+
 	-- Neovim plugin that allows you to easily write your .vimrc in lua or any lua based language
 	use({ "svermeulen/vimpeccable", requires = { "tpope/vim-repeat" } })
 
@@ -174,13 +174,13 @@ packer.startup(function(use)
 	})
 
 	-- fast grep using ripgrep. It allows to change grepping directory
-	use({
-		"Yggdroot/LeaderF",
-		run = ":LeaderfInstallCExtension",
-		config = function()
-			require("plugins.leaderf")
-		end,
-	})
+	-- use({
+	--     "Yggdroot/LeaderF",
+	--     run = ":LeaderfInstallCExtension",
+	--     config = function()
+	--         require("plugins.leaderf")
+	--     end,
+	-- })
 
 	-- Better quickfix window in Neovim, polish old quickfix window
 	use({ "kevinhwang91/nvim-bqf" })
@@ -209,15 +209,18 @@ packer.startup(function(use)
 
 	-- Next-generation motion plugin for incredibly fast on-screen navigation
 	-- Replace hop.nvim and quick-scope
-	use({
-		"ggandor/lightspeed.nvim",
-		config = function()
-			require("plugins.lightspeed")
-		end,
-		-- after = 'coq_nvim',
-		-- after = 'nvim-cmp'
-	})
+	-- use({
+	--     "ggandor/lightspeed.nvim",
+	--     config = function()
+	--         require("plugins.lightspeed")
+	--     end,
+	--     -- after = 'coq_nvim',
+	--     -- after = 'nvim-cmp'
+	-- })
 
+	-- Neovim plugin to jump to any location with few keystrokes
+	use({ "https://gitlab.com/madyanov/svart.nvim", as = "svart.nvim" })
+	--
 	-- Enable opening a file in a given line
 	use({ "wsdjeg/vim-fetch" })
 

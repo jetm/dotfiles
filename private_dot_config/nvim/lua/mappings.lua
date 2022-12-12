@@ -127,6 +127,10 @@ vimp.nnoremap(
 -- Shift + <F3>
 vimp.nnoremap({ "silent" }, "<F15>", ":<C-U>Leaderf! rg --recall<CR>")
 
+vimp.nnoremap({ "silent" }, "s", "<Cmd>Svart<CR>")
+vimp.xnoremap({ "silent" }, "s", "<Cmd>Svart<CR>")
+vimp.onoremap({ "silent" }, "s", "<Cmd>Svart<CR>")
+
 --
 -- shellharden
 --
