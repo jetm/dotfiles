@@ -2,6 +2,9 @@
 [includeIf "gitdir:**/repos/work/**"]
     path = ~/.gitconfig-work
 
+[includeIf "gitdir:**/repos/work/**"]
+    path = ~/.git-send-email-work.conf
+
 # Git config for all repositories inside of personal/
 [includeIf "gitdir:**/repos/personal/**"]
     path = ~/.gitconfig-personal
@@ -189,6 +192,9 @@
 [credential "https://gitlab.com"]
    helper =
    helper = !/usr/bin/glab auth git-credential
+
+[color]
+    ui = auto
 
 # vim:ft=gitconfig
 # vim:set ts=4 sw=4
