@@ -30,3 +30,7 @@ export FORGIT_FZF_DEFAULT_OPTS
 
 FORGIT_DIFF_FZF_OPTS+=' --bind="ctrl-e:execute(nvim {-1} > /dev/tty)"'
 export FORGIT_DIFF_FZF_OPTS
+
+# Show proper colors and not %F{yellow}
+zstyle -d ':completion:*' format
+zstyle ':completion:*:descriptions' format '[%d]'

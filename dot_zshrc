@@ -67,6 +67,7 @@ zinit light Aloxaf/fzf-tab
 
 zi_ice id-as'zsh-completions' \
   atload"zicompinit; zicdreplay" \
+  wait \
   blockf
 zinit light zsh-users/zsh-completions
 
