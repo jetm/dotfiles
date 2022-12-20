@@ -178,6 +178,15 @@ if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
     from'gh-r' \
     cp'completions/chezmoi.zsh -> _chezmoi'
   zinit light twpayne/chezmoi
+
+  #
+  # JS Node modules
+  #
+  zi0c id-as'node-modules' \
+    node'bash-language-server' \
+    sbin'node_modules/.bin/bash-language-server'
+  zinit light zdharma-continuum/null
+
   # Put here all rust installations
   # looks the mv ice doesn't work with rustup cargo
 
@@ -369,14 +378,6 @@ zi0c id-as'shfmt' \
   as'program' \
   mv'shfmt* -> shfmt'
 zinit light mvdan/sh
-
-#
-# JS Node modules
-#
-zi0c id-as'node-modules' \
-  node'bash-language-server' \
-  sbin'node_modules/.bin/bash-language-server'
-zinit light zdharma-continuum/null
 
 #
 # File utilities
