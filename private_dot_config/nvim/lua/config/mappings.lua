@@ -45,19 +45,11 @@ vimp.vnoremap({ "silent" }, ">", ">gv")
 vimp.nnoremap({ "silent" }, "<", "<<_")
 vimp.nnoremap({ "silent" }, ">", ">>_")
 
-vimp.nmap({ "silent" }, "+", "<Plug>(dial-increment)")
-vimp.nmap({ "silent" }, "-", "<Plug>(dial-decrement)")
-vimp.vmap({ "silent" }, "+", "<Plug>(dial-increment)")
-vimp.vmap({ "silent" }, "-", "<plug>(dial-decrement)")
-
+-- vimp.nmap({ "silent" }, "+", "<Plug>(dial-increment)")
+-- vimp.nmap({ "silent" }, "-", "<Plug>(dial-decrement)")
+-- vimp.vmap({ "silent" }, "+", "<Plug>(dial-increment)")
+-- vimp.vmap({ "silent" }, "-", "<plug>(dial-decrement)")
 --
--- <leader> mappings
---
---Remap space as leader key
-vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 --
 -- Cancel a leader operation without sometimes causing unintended side effects
 -- https://github.com/svermeulen/vimpeccable#chord-cancellation-maps
@@ -84,8 +76,8 @@ vimp.nnoremap({ "silent" }, "<leader>7", ":BufferGoto7<CR>")
 vimp.nnoremap({ "silent" }, "<leader>8", ":BufferGoto8<CR>")
 vimp.nnoremap({ "silent" }, "<leader>9", ":BufferGoto9<CR>")
 
-vimp.nnoremap({ "silent" }, "<leader>o", require("portal").jump_backward)
-vimp.nnoremap({ "silent" }, "<leader>i", require("portal").jump_forward)
+-- vimp.nnoremap({ "silent" }, "<leader>o", require("portal").jump_backward)
+-- vimp.nnoremap({ "silent" }, "<leader>i", require("portal").jump_forward)
 
 --
 -- Ctrl <C-> Mappings
@@ -95,14 +87,27 @@ vimp.nmap({ "silent" }, "<C-s>", ":update<CR>")
 vimp.vmap({ "silent" }, "<C-s>", "<C-c>:update<CR>")
 vimp.imap({ "silent" }, "<C-s>", "<C-o>:update<CR>")
 
+-- local opts = {
+--     prompt_title = "~ files ~",
+--     find_command = {
+--         "fd",
+--         "--hidden",
+--         "--type=file",
+--         "--type=symlink",
+--         "--exclude=.git",
+--         "--ignore-case",
+--         "--color=never",
+--     },
+-- }
+--require("telescope.builtin").find_files(opts)
+
 -- CtrlP compatibility
 -- fzf.vim is quicker than fzf.preview
 -- Telescope is async
--- Testing snap
 vimp.nnoremap(
 	{ "silent" },
 	"<C-p>",
-	":lua require('plugins.telescope-mapping').find_files()<CR>"
+	"<cmd> Telescope find_files<CR>"
 )
 
 vimp.nnoremap(

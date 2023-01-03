@@ -1,20 +1,5 @@
 local M = {}
 
-local ok, packer = pcall(require, "packer")
-if not ok then
-	error('Loading packer')
-	return
-end
-
-function M.reload_config()
-    vim.cmd("luafile ~/.config/nvim/init.lua")
-    vim.cmd("luafile ~/.config/nvim/lua/plugins.lua")
-
-    packer.compile()
-    packer.clean()
-	packer.install()
-end
-
 M.augroups = {
 	_general_settings = {
 		{
@@ -24,7 +9,6 @@ M.augroups = {
 		}
 	},
 	_filetypechanges = {
-		{ "BufWritePost", "plugins.lua", [[lua require('autocmds').reload_config()]] },
 		{ "BufWinEnter", "*.zsh", "setlocal filetype=sh" },
 		{ "BufRead", "*.zsh", "setlocal filetype=sh" },
 		{ "BufNewFile", "*.zsh", "setlocal filetype=sh" },
