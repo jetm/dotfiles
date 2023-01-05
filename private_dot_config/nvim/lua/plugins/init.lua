@@ -81,4 +81,9 @@ return {
 	},
 
 	{ "glench/vim-jinja2-syntax" },
+
+    { "folke/trouble.nvim",
+		dependencies = "kyazdani42/nvim-web-devicons",
+		config = true,
+	},
 }

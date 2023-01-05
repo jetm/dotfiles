@@ -108,17 +108,12 @@ vimp.nnoremap(
 	"<cmd> Telescope find_files<CR>"
 )
 
-vimp.nnoremap(
-	{ "silent" },
-	"<F5>",
-	":lua vim.lsp.diagnostic.show_line_diagnostics()<CR>"
-)
-
 --
 -- <F1>..<F12> Mappings
 --
 -- NvimTree
 vimp.nnoremap({ "silent" }, "<F2>", ":NvimTreeToggle<CR>")
+
 -- Shift + <F2>
 vimp.nnoremap({ "silent" }, "<S-F2>", ":NvimTreeFindFile<CR>")
 
@@ -130,6 +125,10 @@ vimp.nnoremap(
 -- Shift + <F3>
 vimp.nnoremap({ "silent" }, "<F15>", ":<C-U>Leaderf! rg --recall<CR>")
 
+-- F5 shows a diagnostics
+vimp.nnoremap({ "silent" }, "<F5>", ":TroubleToggle<CR>")
+
+-- Search for words
 vimp.nnoremap({ "silent" }, "s", "<Cmd>Svart<CR>")
 vimp.xnoremap({ "silent" }, "s", "<Cmd>Svart<CR>")
 vimp.onoremap({ "silent" }, "s", "<Cmd>Svart<CR>")
