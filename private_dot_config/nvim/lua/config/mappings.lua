@@ -45,12 +45,10 @@ vimp.vnoremap({ "silent" }, ">", ">gv")
 vimp.nnoremap({ "silent" }, "<", "<<_")
 vimp.nnoremap({ "silent" }, ">", ">>_")
 
--- vimp.nmap({ "silent" }, "+", "<Plug>(dial-increment)")
--- vimp.nmap({ "silent" }, "-", "<Plug>(dial-decrement)")
--- vimp.vmap({ "silent" }, "+", "<Plug>(dial-increment)")
--- vimp.vmap({ "silent" }, "-", "<plug>(dial-decrement)")
---
---
+-- vimp lacks of unmap() feature
+vim.keymap.set({"n", "v"}, "+", "<Plug>(dial-increment)")
+vim.keymap.set({"n", "v"}, "-", "<Plug>(dial-increment)")
+
 -- Cancel a leader operation without sometimes causing unintended side effects
 -- https://github.com/svermeulen/vimpeccable#chord-cancellation-maps
 vimp.add_chord_cancellations("n", "<leader>")
