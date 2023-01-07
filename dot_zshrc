@@ -29,12 +29,10 @@ zinit id-as'z-a-rust' light-mode for zdharma-continuum/zinit-annex-rust
 ### End of Zinit's installer chunk
 
 turbo_source() {
-  file="$1"
-  if [[ -e "$file" ]] && [[ ! -e "$file.zwc" ]] \
-     || [[ "$file" -nt "$file.zwc" ]]; then
-    zcompile "$file"
+  if [[ -s "$1" && ( ! -s "$1.zwc" || "$1" -nt "$1.zwc" ) ]]; then
+    zcompile "$1"
   fi
-  source "$file"
+  source "$1"
 }
 
 zi_ice() { zinit ice lucid silent "$@"; }
