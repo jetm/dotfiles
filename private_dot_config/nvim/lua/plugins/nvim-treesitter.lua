@@ -5,7 +5,7 @@ local M = {
 		"nvim-treesitter/nvim-treesitter-refactor",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"romgrk/nvim-treesitter-context",
-		"p00f/nvim-ts-rainbow",
+		"mrjones2014/nvim-ts-rainbow",
 	},
 	build = ":TSUpdate",
 }
