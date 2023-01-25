@@ -21,7 +21,8 @@ export FZF_DEFAULT_OPTS
 export FZF_COMPLETION_TRIGGER="@@"
 
 export FZF_DEFAULT_COMMAND='fd --hidden --color never --strip-cwd-prefix'
-export FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND} --exclude .git --exclude build/"
+export FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND} --exclude .git --exclude .repo/"
+export FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND} --exclude build/"
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND} --type f"
 export FZF_ALT_C_COMMAND="${FZF_DEFAULT_COMMAND} --type d"
 
