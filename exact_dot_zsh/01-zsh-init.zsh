@@ -1,7 +1,8 @@
+# shellcheck disable=SC2148
+
 #
 # Executes commands at the start of an interactive session
 #
-
 if [ -z "$PS1" ] ; then
   # If not running interactively, don't do anything
   return
