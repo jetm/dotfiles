@@ -1,15 +1,16 @@
 return {
-    -- Icon set using nonicons for neovim plugins and settings
-    { "yamatsum/nvim-nonicons",
-      dependencies = { "kyazdani42/nvim-web-devicons" },
-    },
+	-- Icon set using nonicons for neovim plugins and settings
+	{
+		"yamatsum/nvim-nonicons",
+		dependencies = { "kyazdani42/nvim-web-devicons" },
+	},
 
-    -- Neovim plugin that allows you to easily write your .vimrc in lua or any
-    -- lua based language
-    {"svermeulen/vimpeccable", dependencies = { "tpope/vim-repeat" } },
+	-- Neovim plugin that allows you to easily write your .vimrc in lua or any
+	-- lua based language
+	{ "svermeulen/vimpeccable", dependencies = { "tpope/vim-repeat" } },
 
-    -- Replace fzf
-    {"nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+	-- Replace fzf
+	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 
 	-- Neovim plugin to jump to any location with few keystrokes
 	{ url = "https://gitlab.com/madyanov/svart.nvim", name = "svart.nvim" },
@@ -74,7 +75,8 @@ return {
 	-- A neovim lua plugin to help easily manage multiple terminal windows
 	{ "antoinemadec/FixCursorHold.nvim" },
 
-	{ "cuducos/yaml.nvim",
+	{
+		"cuducos/yaml.nvim",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 		},
@@ -82,7 +84,8 @@ return {
 
 	{ "glench/vim-jinja2-syntax" },
 
-    { "folke/trouble.nvim",
+	{
+		"folke/trouble.nvim",
 		dependencies = "kyazdani42/nvim-web-devicons",
 		config = true,
 	},
