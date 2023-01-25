@@ -79,4 +79,9 @@ if command -v nvim &> /dev/null; then
   export VISUAL="nvim"
 fi
 
+NPROC=$(nproc)
+export SSTATE_DIR=~/repos/work/cache/sstate \
+  DL_DIR=~/repos/work/cache/downloads \
+  NPROC
+
 # vim:set ts=2 sw=2 et:
