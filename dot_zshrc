@@ -775,9 +775,6 @@ zinit light direnv/direnv
 #   pick'lazydocker'
 # zinit light jesseduffield/lazydocker
 
-# Soure here because doing source inside of zi is slow
-source "${HOME}"/.p10k.zsh
-
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
@@ -798,6 +795,9 @@ for file in "${HOME}"/.zsh/*.zsh; do
   turbo_source "${file}"
 done
 unset file
+
+# Soure here because doing source inside of zinit is slow
+source "${HOME}"/.p10k.zsh
 
 # The plugin will auto execute this zvm_after_init function
 zvm_after_init() {
