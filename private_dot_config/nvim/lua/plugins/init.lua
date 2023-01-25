@@ -89,4 +89,6 @@ return {
 		dependencies = "kyazdani42/nvim-web-devicons",
 		config = true,
 	},
+
+	{ "asiryk/auto-hlsearch.nvim", config = true },
 }
