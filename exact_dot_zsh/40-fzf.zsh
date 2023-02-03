@@ -1,7 +1,9 @@
+# shellcheck disable=SC2148
 FZF_DEFAULT_OPTS+=' --layout=reverse'
 FZF_DEFAULT_OPTS+=' --info=inline'
 FZF_DEFAULT_OPTS+=' --height=50%'
 FZF_DEFAULT_OPTS+=' --multi'
+FZF_DEFAULT_OPTS+=' --extended'
 FZF_DEFAULT_OPTS+=' --preview-window=:down:80%:hidden'
 FZF_DEFAULT_OPTS+=' --preview="[ -f {} ] && bat --style=grid,snip {} || [[ -d {}  ]] && tree -C {} | less"'
 FZF_DEFAULT_OPTS+=' --prompt="∼ "'
