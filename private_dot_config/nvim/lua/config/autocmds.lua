@@ -13,6 +13,9 @@ M.augroups = {
 		{ "BufRead", "*.zsh", "setlocal filetype=sh" },
 		{ "BufNewFile", "*.zsh", "setlocal filetype=sh" },
 	},
+	_bitbake = {
+		{ "FileType", "inc", "setlocal filetype=bitbake" },
+	},
 	_git = {
 		{ "FileType", "gitcommit", "setlocal wrap" },
 	},
