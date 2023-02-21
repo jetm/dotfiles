@@ -11,11 +11,11 @@ local M = {
 
 		-- Pictograms for LSP completion system
 		"onsails/lspkind-nvim",
-		
+
 		-- Use Neovim as a language server to inject LSP diagnostics, code
 		-- actions, and more via Lua
 		"jose-elias-alvarez/null-ls.nvim",
-	}
+	},
 }
 
 function M.config()
@@ -48,10 +48,9 @@ function M.config()
 			format = function(d)
 				local t = vim.deepcopy(d)
 				if d.code then
-					t.message = string.format("%s [%s]", t.message, t.code):gsub(
-						"1. ",
-						""
-					)
+					t.message = string
+						.format("%s [%s]", t.message, t.code)
+						:gsub("1. ", "")
 				end
 				return t.message
 			end,
@@ -68,9 +67,13 @@ function M.config()
 
 	null_ls.setup({
 		sources = {
-			null_ls.builtins.diagnostics.shellcheck.with({ filetypes = { 'sh', 'zsh', 'bash' } }),
-			null_ls.builtins.code_actions.shellcheck.with({ filetypes = { 'sh', 'zsh', 'bash' } }),
-			null_ls.builtins.diagnostics.luacheck
+			null_ls.builtins.diagnostics.shellcheck.with({
+				filetypes = { "sh", "zsh", "bash" },
+			}),
+			null_ls.builtins.code_actions.shellcheck.with({
+				filetypes = { "sh", "zsh", "bash" },
+			}),
+			null_ls.builtins.diagnostics.luacheck,
 		},
 	})
 
@@ -105,7 +108,7 @@ function M.config()
 	end
 
 	-- custom attach config for most LSP configs
-	local on_attach = function(client, bufnr)
+	local on_attach = function(client)
 		-- enable signature help when possible
 		if client.server_capabilities.signature_help then
 			lsp_signature.on_attach({
@@ -118,15 +121,15 @@ function M.config()
 			})
 		end
 
-		lsp_status.on_attach(client, bufnr)
+		lsp_status.on_attach(client)
 	end
 
-	local ok4, lsp = pcall(require, "lspconfig")
+	local ok4, lspconfig = pcall(require, "lspconfig")
 	if not ok4 then
 		return
 	end
 
-	lsp.bashls.setup({
+	lspconfig.bashls.setup({
 		filetypes = { "sh", "zsh", "bash" },
 		on_attach = on_attach,
 		capabilities = capabilities,
@@ -149,27 +152,31 @@ function M.config()
 	--     capabilities = capabilities,
 	-- })
 
-	local sumneko_root_path = "/usr/lib/lua-language-server/bin/main.lua"
-
-	lsp.sumneko_lua.setup({
-		cmd = { 'lua-language-server', "-E", sumneko_root_path },
+	lspconfig.lua_ls.setup({
 		on_attach = on_attach,
 		capabilities = capabilities,
 		settings = {
 			Lua = {
-				telemetry = { enable = false },
-				diagnostics = { enable = false },
+				runtime = {
+					-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+					version = "LuaJIT",
+				},
+				diagnostics = {
+					-- Get the language server to recognize the `vim` global
+					globals = { "vim" },
+				},
 				workspace = {
 					-- Make the server aware of Neovim runtime files
-					library = {
-						[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-						[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-					},
+					library = vim.api.nvim_get_runtime_file("", true),
+					checkThirdParty = false,
+				},
+				-- Do not send telemetry data containing a randomized but unique identifier
+				telemetry = {
+					enable = false,
 				},
 			},
 		},
 	})
-
 end
 
 return M
