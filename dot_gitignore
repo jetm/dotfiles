@@ -1,6 +1,10 @@
+**/*.luarc.json
+**/*.zwc
 .direnv
-.envrc
-install_chezmoi.sh
-srtadrm
-.idea
 .editorconfig
+.envrc
+.idea
+bin/makePipRecipes.py
+bin/tmux
+bin/unifdef
+install_chezmoi.sh
