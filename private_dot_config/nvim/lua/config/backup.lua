@@ -1,3 +1,5 @@
+local vim = vim
+
 vim.cmd([[
   set backup
   set undofile

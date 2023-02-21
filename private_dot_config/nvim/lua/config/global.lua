@@ -1,3 +1,4 @@
+local vim = vim
 local o = vim.o -- to set options
 
 o.autowrite = true -- Automatically write a file when leaving a modified buffer

@@ -1,3 +1,5 @@
+local vim = vim
+
 local M = {
 	"neovim/nvim-lspconfig",
 	dependencies = {

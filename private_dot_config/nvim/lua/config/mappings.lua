@@ -7,6 +7,8 @@ if not ok then
 	return
 end
 
+local vim = vim
+
 -- moving up and down work as you would expect
 -- Remap for dealing with word wrap
 vim.keymap.set(
