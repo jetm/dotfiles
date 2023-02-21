@@ -158,14 +158,14 @@
 [interactive]
     diffFilter = delta --color-only
 
+[core]
+    pager = delta
+
 [delta]
     navigate = true # use n and N to move between diff sections
     line-numbers = false
-
-[pager]
-    diff = delta --dark
-    log = delta --dark
-    show = delta --dark
+    light = false
+    side-by-side = true
 
 #
 # nvim
