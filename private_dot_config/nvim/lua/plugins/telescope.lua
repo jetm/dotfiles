@@ -16,20 +16,20 @@ function M.config()
 		return
 	end
 
-	ok, telescope_actions = pcall(require, "telescope.actions")
-	if not ok then
+	local ok2, telescope_actions = pcall(require, "telescope.actions")
+	if not ok2 then
 		error("Loading telescope.actions")
 		return
 	end
 
-	ok, telescope_sorters = pcall(require, "telescope.sorters")
-	if not ok then
+	local ok3, telescope_sorters = pcall(require, "telescope.sorters")
+	if not ok3 then
 		error("Loading telescope.sorters")
 		return
 	end
 
-	ok, telescope_previewers = pcall(require, "telescope.previewers")
-	if not ok then
+	local ok4, telescope_previewers = pcall(require, "telescope.previewers")
+	if not ok4 then
 		error("Loading telescope.previewers")
 		return
 	end

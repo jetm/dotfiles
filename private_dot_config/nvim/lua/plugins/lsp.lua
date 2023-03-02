@@ -4,7 +4,9 @@ local M = {
 		{ "neovim/nvim-lspconfig" },
 		{ "williamboman/mason.nvim" },
 		{ "williamboman/mason-lspconfig.nvim" },
+		{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 
+		-- completation
 		{ "hrsh7th/nvim-cmp" },
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "hrsh7th/cmp-buffer" },
@@ -23,14 +25,14 @@ local M = {
 }
 
 function M.config()
-	local ok_lsp, lsp = pcall(require, "lsp-zero")
-	if not ok_lsp then
+	local ok, lsp = pcall(require, "lsp-zero")
+	if not ok then
 		error("Loading lsp-zero")
 		return
 	end
 
-	local ok_lspkind, lspkind = pcall(require, "lspkind")
-	if not ok_lspkind then
+	local ok2, lspkind = pcall(require, "lspkind")
+	if not ok2 then
 		error("Loading lspkind")
 		return
 	end
@@ -52,12 +54,29 @@ function M.config()
 		},
 	})
 
-	lsp.ensure_installed({
-		"bashls",
-		"dockerls",
-		"lua_ls",
-		"vimls",
-		"yamlls",
+	local ok3, mason_installer = pcall(require, "mason-tool-installer")
+	if not ok3 then
+		error("Loading mason-tool-installer")
+		return
+	end
+
+	mason_installer.setup({
+		-- a list of all tools you want to ensure are installed upon
+		-- start; they should be the names Mason uses for each tool
+		ensure_installed = {
+			'bash-language-server',
+			'dockerfile-language-server',
+			'flake8',
+			'marksman',
+			'shellcheck',
+			'shellharden',
+			'shfmt',
+			'stylua',
+			'vim-language-server',
+            'lua-language-server',
+			'yaml-language-server',
+		},
+		auto_update = true,
 	})
 
 	-- lua_ls Fix Undefined global 'vim'
@@ -72,8 +91,8 @@ function M.config()
 
 	vim.opt.signcolumn = "yes"
 
-	local ok, null_ls = pcall(require, "null-ls")
-	if not ok then
+	local ok4, null_ls = pcall(require, "null-ls")
+	if not ok4 then
 		error("Loading null-ls")
 		return
 	end
