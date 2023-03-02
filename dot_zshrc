@@ -357,26 +357,29 @@ zinit snippet https://cht.sh/:cht.sh
 #
 # Shell scripting
 #
-zinit ice rustup id-as'shellharden' \
-  as'program' \
-  cargo'!shellharden'
-zinit light zdharma-continuum/null
-
-zi0c id-as'shellcheck' \
-  from'gh-r' \
-  as'program' \
-  nocompile \
-  bpick'*linux.x86_64*' \
-  mv'shellcheck*/shellcheck -> shellcheck' \
-  pick'shellcheck'
-zinit light koalaman/shellcheck
-
-zi0c id-as'shfmt' \
-  from'gh-r' \
-  nocompile \
-  as'program' \
-  mv'shfmt* -> shfmt'
-zinit light mvdan/sh
+# Installed by Neovim
+# zinit ice rustup id-as'shellharden' \
+#   as'program' \
+#   cargo'!shellharden'
+# zinit light zdharma-continuum/null
+#
+# Installed by Neovim
+# zi0c id-as'shellcheck' \
+#   from'gh-r' \
+#   as'program' \
+#   nocompile \
+#   bpick'*linux.x86_64*' \
+#   mv'shellcheck*/shellcheck -> shellcheck' \
+#   pick'shellcheck'
+# zinit light koalaman/shellcheck
+#
+# Installed by Neovim
+# zi0c id-as'shfmt' \
+#   from'gh-r' \
+#   nocompile \
+#   as'program' \
+#   mv'shfmt* -> shfmt'
+# zinit light mvdan/sh
 
 #
 # File utilities
@@ -579,6 +582,7 @@ zinit light ninja-build/ninja
 #
 # Language servers
 #
+# Installed by Neovim
 # zi0c id-as'lua-language-server' \
 #   as'program' \
 #   atclone"git submodule update --init --recursive; \
@@ -587,6 +591,7 @@ zinit light ninja-build/ninja
 #   atpull'%atclone'
 # zinit light sumneko/lua-language-server
 
+# Installed by Neovim
 # zi0c id-as'efm' \
 #   from'gh-r' \
 #   as'program' \
@@ -710,11 +715,13 @@ zi0c id-as'task-spooler' \
 zinit light justanhduc/task-spooler
 
 # Use cargo
-zinit ice rustup id-as'stylua' \
-  as'program' \
-  cargo'!stylua'
-zinit light zdharma-continuum/null
+# Installed by Mason Neovim plugin
+# zinit ice rustup id-as'stylua' \
+#   as'program' \
+#   cargo'!stylua'
+# zinit light zdharma-continuum/null
 
+# Installed by Neovim
 # zi0c id-as'stylua' \
 #   from'gh-r' \
 #   as'program' \
@@ -722,13 +729,14 @@ zinit light zdharma-continuum/null
 #   pick'stylua'
 # zinit light JohnnyMorganz/StyLua
 
-zi0c id-as'stylua' \
-  from'gh-r' \
-  as'program' \
-  nocompile \
-  bpick'*stylua*linux*' \
-  pick'stylua'
-zinit light JohnnyMorganz/StyLua
+# Installed by Neovim
+# zi0c id-as'stylua' \
+#   from'gh-r' \
+#   as'program' \
+#   nocompile \
+#   bpick'*stylua*linux*' \
+#   pick'stylua'
+# zinit light JohnnyMorganz/StyLua
 
 zi0c id-as'gitui' \
   from'gh-r' \
