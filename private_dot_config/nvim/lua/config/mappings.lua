@@ -62,7 +62,7 @@ vim.keymap.set({"n", "v"}, "-", "<Plug>(dial-increment)")
 vimp.add_chord_cancellations("n", "<leader>")
 
 -- formatter
-vimp.nnoremap({ "silent" }, "<leader>f", ":Format<CR>")
+vimp.nnoremap({ "silent" }, "<leader>f", "<cmd>lua vim.lsp.buf.format()<CR>")
 
 -- Comments
 -- Ctrl-/ as VSCode and Jetbrain
