@@ -79,6 +79,9 @@ function M.config()
 	end
 
 	null_ls.setup({
+		on_attach = function(client, bufnr)
+          vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
+        end,
 		sources = {
 			null_ls.builtins.diagnostics.shellcheck.with({
 				filetypes = { "sh", "zsh", "bash" },
