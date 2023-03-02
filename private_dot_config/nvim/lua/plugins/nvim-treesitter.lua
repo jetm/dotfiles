@@ -17,6 +17,7 @@ if not ok then
 end
 
 function M.config()
+	require("nvim-treesitter.install").prefer_git = true
 	nvim_treesitter.setup({
 		version = false,
 		ensure_installed = {
