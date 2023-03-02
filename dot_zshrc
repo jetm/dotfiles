@@ -40,7 +40,8 @@ zi0a() { zi_ice wait'0' "$@"; }
 zi0b() { zi_ice wait'1' "$@"; }
 zi0c() { zi_ice wait'2' "$@"; }
 
-zinit pack="default" for zsh
+# Use default installed in the Linux distribution. This version has bugs
+# zinit pack="default" for zsh
 
 #
 # Powerlevel10k
