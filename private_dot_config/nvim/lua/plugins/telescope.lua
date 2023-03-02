@@ -5,6 +5,7 @@ local M = {
 		"yamatsum/nvim-nonicons",
 		"nvim-lua/popup.nvim",
 		"nvim-lua/plenary.nvim",
+		"molecule-man/telescope-menufacture",
 	},
 }
 
@@ -15,27 +16,29 @@ function M.config()
 		return
 	end
 
-	local ok2, telescope_actions = pcall(require, "telescope.actions")
-	if not ok2 then
+	ok, telescope_actions = pcall(require, "telescope.actions")
+	if not ok then
 		error("Loading telescope.actions")
 		return
 	end
 
-	local ok3, telescope_sorters = pcall(require, "telescope.sorters")
-	if not ok3 then
+	ok, telescope_sorters = pcall(require, "telescope.sorters")
+	if not ok then
 		error("Loading telescope.sorters")
 		return
 	end
 
-	local ok4, telescope_previewers = pcall(require, "telescope.previewers")
-	if not ok4 then
+	ok, telescope_previewers = pcall(require, "telescope.previewers")
+	if not ok then
 		error("Loading telescope.previewers")
 		return
 	end
 
 	telescope.setup({
 		defaults = {
-			mappings = { i = { ["<esc>"] = telescope_actions.close } },
+			mappings = {
+				i = { ["<esc>"] = telescope_actions.close, },
+			},
 			vimgrep_arguments = {
 				"rg",
 				"--color=never",
@@ -62,7 +65,7 @@ function M.config()
 			},
 			file_sorter = telescope_sorters.get_generic_sorter,
 			file_ignore_patterns = {},
-			path_display = { },
+			path_display = {},
 			generic_sorter = telescope_sorters.get_generic_fuzzy_sorter,
 			winblend = 0,
 			border = {},
@@ -91,10 +94,17 @@ function M.config()
 				override_file_sorter = true, -- override the file sorter
 				case_mode = "smart_case", -- or "ignore_case" or "respect_case"
 			},
+			menufacture = {
+				mappings = {
+					main_menu = { [{ 'i', 'n' }] = '<C-^>' },
+				},
+			},
 		},
 	})
 
-	telescope.load_extension("fzf")
+	telescope.load_extension('menufacture')
+	telescope.load_extension('fzf')
+
 end
 
 return M

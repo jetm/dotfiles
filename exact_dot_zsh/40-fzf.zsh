@@ -28,13 +28,16 @@ export FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND} --exclude build/"
 export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND} --type f"
 export FZF_ALT_C_COMMAND="${FZF_DEFAULT_COMMAND} --type d"
 
+# Show proper colors and not %F{yellow}
+zstyle -d ':completion:*' format
+zstyle ':completion:*:descriptions' format '[%d]'
+
+#
+# forgit
+#
 FORGIT_FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS}"
 FORGIT_FZF_DEFAULT_OPTS+=' --preview-window=:down:80%:nohidden'
 export FORGIT_FZF_DEFAULT_OPTS
 
 # FORGIT_DIFF_FZF_OPTS+=' --bind="ctrl-e:become(nvim {-1} > /dev/tty)"'
 # export FORGIT_DIFF_FZF_OPTS
-
-# Show proper colors and not %F{yellow}
-zstyle -d ':completion:*' format
-zstyle ':completion:*:descriptions' format '[%d]'

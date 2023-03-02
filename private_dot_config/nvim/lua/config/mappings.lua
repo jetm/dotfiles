@@ -7,6 +7,12 @@ if not ok then
 	return
 end
 
+local ok, telescope = pcall(require, "telescope")
+if not ok then
+	error("Loading telescope")
+	return
+end
+
 local vim = vim
 
 -- moving up and down work as you would expect
@@ -87,27 +93,24 @@ vimp.nmap({ "silent" }, "<C-s>", ":update<CR>")
 vimp.vmap({ "silent" }, "<C-s>", "<C-c>:update<CR>")
 vimp.imap({ "silent" }, "<C-s>", "<C-o>:update<CR>")
 
--- local opts = {
---     prompt_title = "~ files ~",
---     find_command = {
---         "fd",
---         "--hidden",
---         "--type=file",
---         "--type=symlink",
---         "--exclude=.git",
---         "--ignore-case",
---         "--color=never",
---     },
--- }
---require("telescope.builtin").find_files(opts)
-
 -- CtrlP compatibility
 -- fzf.vim is quicker than fzf.preview
 -- Telescope is async
 vimp.nnoremap(
 	{ "silent" },
 	"<C-p>",
-	"<cmd> Telescope find_files<CR>"
+	-- "<cmd> Telescope find_files<CR>"
+	telescope.extensions.menufacture.find_files
+)
+vimp.nnoremap(
+	{ "silent" },
+	"<leader>lg",
+	telescope.extensions.menufacture.live_grep
+)
+vimp.nnoremap(
+	{ "silent" },
+	"<leader>g",
+	telescope.extensions.menufacture.grep_string
 )
 
 --
