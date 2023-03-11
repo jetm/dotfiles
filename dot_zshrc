@@ -411,13 +411,21 @@ zi0a id-as'exa' \
 zinit light ogham/exa
 
 # shim fails for sd
-zi0c id-as'sd' \
+# zi0c id-as'sd' \
+#   from'gh-r' \
+#   as'program' \
+#   nocompile \
+#   mv'sd-* -> sd' \
+#   pick'sd'
+# zinit light chmln/sd
+
+zi0c id-as'sad' \
   from'gh-r' \
   as'program' \
   nocompile \
-  mv'sd-* -> sd' \
-  pick'sd'
-zinit light chmln/sd
+  bpick'*x86_64-unknown-linux-gnu*' \
+  pick'sad'
+zinit light ms-jpq/sad
 
 zi0c id-as'bat' \
   from'gh-r' \
@@ -434,6 +442,23 @@ zi0c id-as'duf' \
   as'program' \
   bpick'*linux_x86_64.tar.gz'
 zinit light muesli/duf
+
+zi0c id-as'ouch' \
+  from'gh-r' \
+  as'program' \
+  nocompile \
+  bpick'*x86_64-unknown-linux-gnu*' \
+  mv'ouch*/ouch -> ouch' \
+  pick'ouch'
+zinit light ouch-org/ouch
+
+zi0c id-as'erdtree' \
+  from'gh-r' \
+  as'program' \
+  nocompile \
+  bpick'*x86_64-unknown-linux-gnu*' \
+  pick'erdtree'
+zinit light solidiquis/erdtree
 
 # zi0c id-as'moar' \
 #   as'program' \

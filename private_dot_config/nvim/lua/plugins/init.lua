@@ -7,10 +7,10 @@ return {
 
 	-- Neovim plugin that allows you to easily write your .vimrc in lua or any
 	-- lua based language
-	{ "svermeulen/vimpeccable", dependencies = { "tpope/vim-repeat" } },
+	{ "svermeulen/vimpeccable" },
 
 	-- Replace fzf
-	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+	{ "nvim-telescope/telescope-fzf-native.nvim",     build = "make" },
 
 	-- Neovim plugin to jump to any location with few keystrokes
 	{ url = "https://gitlab.com/madyanov/svart.nvim", name = "svart.nvim" },
@@ -91,4 +91,11 @@ return {
 	},
 
 	{ "asiryk/auto-hlsearch.nvim", config = true },
+
+	{ 'echasnovski/mini.nvim',     version = false },
+	{
+		'echasnovski/mini.bracketed',
+		version = false,
+		config = function() require('mini.bracketed').setup() end
+	},
 }

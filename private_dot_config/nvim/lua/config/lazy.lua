@@ -13,44 +13,50 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins",
-  {
-    -- defaults = { lazy = true },
-    -- checker = { enabled = true },
-    diff = {
-      cmd = "terminal_git",
-    },
-    concurrency = 8,
-    performance = {
-      rtp = {
-        disabled_plugins = {
-          "2html_plugin",
-          "getscript",
-          "getscriptPlugin",
-          "gzip",
-          "logipat",
-          "man",
-          "matchit",
-          "matchparen",
-          "netrw",
-          "netrwFileHandlers",
-          "netrwPlugin",
-          "netrwSettings",
-          "nvim-treesitter-textobjects",
-          "remotes_plugins",
-          "rrhelper",
-          "spellfile_plugin",
-          "tar",
-          "tarPlugin",
-          "tohtml",
-          "tutor",
-          "vimball",
-          "vimballPlugin",
-          "zip",
-          "zipPlugin",
-        },
+require("lazy").setup({
+  spec = {
+    -- add LazyVim and import its plugins
+    -- { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    -- import any extras modules here
+    -- { import = "lazyvim.plugins.extras.lang.typescript" },
+    -- { import = "lazyvim.plugins.extras.lang.json" },
+    -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
+    -- import/override with your plugins
+    { import = "plugins" },
+  },
+  diff = {
+    cmd = "terminal_git",
+  },
+  concurrency = 8,
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "2html_plugin",
+        "getscript",
+        "getscriptPlugin",
+        "gzip",
+        "logipat",
+        "man",
+        "matchit",
+        "matchparen",
+        "netrw",
+        "netrwFileHandlers",
+        "netrwPlugin",
+        "netrwSettings",
+        "nvim-treesitter-textobjects",
+        "remotes_plugins",
+        "rrhelper",
+        "spellfile_plugin",
+        "tar",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "vimball",
+        "vimballPlugin",
+        "zip",
+        "zipPlugin",
       },
     },
-    -- debug = true,
-  }
-)
+  },
+  -- debug = true,
+})

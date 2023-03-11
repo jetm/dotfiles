@@ -1,5 +1,7 @@
-local M =
-	{ "navarasu/onedark.nvim" }
+local M = {
+    "navarasu/onedark.nvim",
+    priority = 1000,
+}
 
 function M.config()
     local ok, onedark = pcall(require, "onedark")

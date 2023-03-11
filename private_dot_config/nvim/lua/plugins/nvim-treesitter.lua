@@ -5,7 +5,7 @@ local M = {
 		"nvim-treesitter/nvim-treesitter-refactor",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"romgrk/nvim-treesitter-context",
-		"mrjones2014/nvim-ts-rainbow",
+		"HiPhish/nvim-ts-rainbow2",
 	},
 	build = ":TSUpdate",
 }
@@ -46,11 +46,14 @@ function M.config()
 		},
 		-- https://github.com/nvim-treesitter/nvim-treesitter#indentation
 		indent = { enable = true, disable = { "gitcommit", "python" } },
-		-- https://github.com/p00f/nvim-ts-rainbow
 		rainbow = {
 			enable = true,
 			extended_mode = true, -- Highlight also non-parentheses delimiters
 			max_file_lines = 1000,
+			-- Which query to use for finding delimiters
+			query = 'rainbow-parens',
+			-- Highlight the entire buffer all at once
+			strategy = require 'ts-rainbow.strategy.global',
 		},
 		context_commentstring = { enable = true, enable_autocmd = false },
 	})

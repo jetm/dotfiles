@@ -73,7 +73,7 @@ function M.config()
 			'shfmt',
 			'stylua',
 			'vim-language-server',
-            'lua-language-server',
+			'lua-language-server',
 			'yaml-language-server',
 		},
 		auto_update = true,
