@@ -104,7 +104,6 @@ function M.config()
 
 	telescope.load_extension('menufacture')
 	telescope.load_extension('fzf')
-
 end
 
 return M

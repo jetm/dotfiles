@@ -1,5 +1,7 @@
 local M = {
     "navarasu/onedark.nvim",
+     -- make sure we load this during startup if it is your main colorscheme
+    lazy = false,
     priority = 1000,
 }
 

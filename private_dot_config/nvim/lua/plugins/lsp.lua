@@ -7,13 +7,17 @@ local M = {
 		{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 
 		-- completation
-		{ "hrsh7th/nvim-cmp" },
+		{ "hrsh7th/nvim-cmp", event = 'InsertEnter', },
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "hrsh7th/cmp-buffer" },
 		{ "hrsh7th/cmp-path" },
 		{ "saadparwaiz1/cmp_luasnip" },
 		{ "hrsh7th/cmp-nvim-lua" },
 		{ "onsails/lspkind.nvim" },
+		{
+        'f3fora/cmp-spell',
+        ft = { 'gitcommit', 'markdown' },
+      },
 
 		-- snippets
 		{ "L3MON4D3/LuaSnip" },
@@ -122,7 +126,7 @@ function M.config()
 				extra_filetypes = { "zsh" },
 			}),
 			null_ls.builtins.formatting.stylua.with({
-				extra_args = { "--column-width 80" },
+				extra_args = { "--column-width", "80", "--indent-width", "2" },
 			}),
 		},
 	})

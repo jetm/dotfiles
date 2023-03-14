@@ -1,7 +1,8 @@
 local M = {
 	"nvim-treesitter/nvim-treesitter",
+	event = 'VeryLazy',
 	dependencies = {
-		"kyazdani42/nvim-web-devicons",
+		"nvim-tree/nvim-web-devicons",
 		"nvim-treesitter/nvim-treesitter-refactor",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"romgrk/nvim-treesitter-context",
@@ -53,7 +54,7 @@ function M.config()
 			-- Which query to use for finding delimiters
 			query = 'rainbow-parens',
 			-- Highlight the entire buffer all at once
-			strategy = require 'ts-rainbow.strategy.global',
+			strategy = { require('ts-rainbow.strategy.global') },
 		},
 		context_commentstring = { enable = true, enable_autocmd = false },
 	})

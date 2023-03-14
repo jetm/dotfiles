@@ -27,7 +27,13 @@ require("lazy").setup({
   diff = {
     cmd = "terminal_git",
   },
-  concurrency = 8,
+  checker = {
+    enabled = true,
+    concurrency = 8,
+    notify = false,
+    frequency = 3600, -- check for updates every hour
+  },
+  change_detection = { notify = false },
   performance = {
     rtp = {
       disabled_plugins = {

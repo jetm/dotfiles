@@ -11,7 +11,7 @@ local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 autocmd('TextYankPost', {
 	group = augroup("YankHighlight"),
 	callback = function()
-		vim.highlight.on_yank({ higroup = 'IncSearch', timeout = '1000' })
+		vim.highlight.on_yank({ higroup = 'IncSearch', timeout = '500' })
 	end
 })
 
@@ -50,7 +50,7 @@ autocmd("FileType", {
 -- Set indentation to 2 spaces
 autocmd('Filetype', {
 	group = augroup('setIndent'),
-	pattern = { 'yaml' },
+	pattern = { 'yaml', 'lua' },
 	command = 'setlocal shiftwidth=2 tabstop=2 sts=2 expandtab'
 })
 
@@ -66,26 +66,6 @@ autocmd('Filetype', {
 	group = augroup('wrap'),
 	pattern = { 'markdown', 'gitcommit' },
 	command = 'setlocal wrap'
-})
-
--- Enable sh on zsh files
-autocmd('Filetype', {
-	group = augroup('zsh'),
-	pattern = { 'zsh' },
-	command = 'setlocal filetype=sh'
-})
-
-autocmd({ "BufNewFile", "BufRead" }, {
-	group = augroup('bats'),
-	pattern = { 'bats' },
-	command = 'setlocal filetype=bash'
-})
-
--- Enable bitbake
-autocmd('Filetype', {
-	group = augroup('bitbake'),
-	pattern = { 'inc', 'bb', 'bbappend' },
-	command = 'setlocal filetype=bitbake'
 })
 
 -- Terminal settings:

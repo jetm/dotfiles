@@ -2,12 +2,8 @@ return {
 	-- Icon set using nonicons for neovim plugins and settings
 	{
 		"yamatsum/nvim-nonicons",
-		dependencies = { "kyazdani42/nvim-web-devicons" },
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
-
-	-- Neovim plugin that allows you to easily write your .vimrc in lua or any
-	-- lua based language
-	{ "svermeulen/vimpeccable" },
 
 	-- Replace fzf
 	{ "nvim-telescope/telescope-fzf-native.nvim",     build = "make" },
@@ -87,7 +83,7 @@ return {
 
 	{
 		"folke/trouble.nvim",
-		dependencies = "kyazdani42/nvim-web-devicons",
+		dependencies = "nvim-tree/nvim-web-devicons",
 		config = true,
 	},
 

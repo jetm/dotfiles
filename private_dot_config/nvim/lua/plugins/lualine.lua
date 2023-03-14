@@ -5,7 +5,7 @@
 -- heirline lacks of OneDark Color scheme
 local M = {
 	"nvim-lualine/lualine.nvim",
-    dependencies = { "kyazdani42/nvim-web-devicons", "navarasu/onedark.nvim" },
+    dependencies = { "nvim-tree/nvim-web-devicons", "navarasu/onedark.nvim" },
 }
 
 function M.config()
