@@ -1,15 +1,16 @@
-if not vim.filetype then return end
+if not vim.filetype then
+  return
+end
 
 vim.filetype.add({
   extension = {
-    lock = 'yaml',
+    lock = "yaml",
   },
-  filename = {
-  },
+  filename = {},
   pattern = {
-    ['.*%.bb%..*'] = 'bitbake',
-    ['.*%.inc'] = 'bitbake',
-    ['.*%.bats'] = 'bash',
-    ['.*%.zsh'] = 'sh',
+    [".*%.bb%..*"] = "bitbake",
+    [".*%.inc"] = "bitbake",
+    [".*%.bats"] = "bash",
+    [".*%.zsh"] = "sh",
   },
 })

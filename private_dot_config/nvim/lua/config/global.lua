@@ -31,15 +31,15 @@ vim.opt.listchars = { tab = "→ ", trail = "·" }
 
 --- config, but it seems packer has issues
 if vim.fn.exists("+termguicolors") == 1 then
-    vim.cmd([[
+  vim.cmd([[
         let &t_8f = "\\<Esc>[38;2;%lu;%lu;%lum"
         let &t_8b = "\\<Esc>[48;2;%lu;%lu;%lum"
     ]])
-    o.termguicolors = true
+  o.termguicolors = true
 end
 
 -- sync yanked text with the system clipboard
-vim.opt.clipboard:append { 'unnamedplus' }
+vim.opt.clipboard:append({ "unnamedplus" })
 
 --
 -- <leader> mappings

@@ -3,29 +3,29 @@
 --
 
 local function map(mode, lhs, rhs, opts)
-	local keys = require("lazy.core.handler").handlers.keys
-	---@cast keys LazyKeysHandler
-	-- do not create the keymap if a lazy keys handler exists
-	if not keys.active[keys.parse({ lhs, mode = mode }).id] then
-		opts = opts or {}
-		opts.silent = opts.silent ~= false
-		vim.keymap.set(mode, lhs, rhs, opts)
-	end
+  local keys = require("lazy.core.handler").handlers.keys
+  ---@cast keys LazyKeysHandler
+  -- do not create the keymap if a lazy keys handler exists
+  if not keys.active[keys.parse({ lhs, mode = mode }).id] then
+    opts = opts or {}
+    opts.silent = opts.silent ~= false
+    vim.keymap.set(mode, lhs, rhs, opts)
+  end
 end
 
 -- moving up and down work as you would expect
 -- Remap for dealing with word wrap
 map(
-	{ "n", "x" },
-	"j",
-	[[v:count == 0 ? 'gj' : 'j']],
-	{ expr = true, silent = true }
+  { "n", "x" },
+  "j",
+  [[v:count == 0 ? 'gj' : 'j']],
+  { expr = true, silent = true }
 )
 map(
-	{ "n", "x" },
-	"k",
-	[[v:count == 0 ? 'gk' : 'k']],
-	{ expr = true, silent = true }
+  { "n", "x" },
+  "k",
+  [[v:count == 0 ? 'gk' : 'k']],
+  { expr = true, silent = true }
 )
 
 -- quitting mapping
@@ -53,10 +53,10 @@ map({ "n", "v" }, "-", "<Plug>(dial-increment)")
 
 -- formatter
 map(
-	{ "n" },
-	"<leader>f",
-	"<cmd>lua vim.lsp.buf.format()<CR>",
-	{ silent = true }
+  { "n" },
+  "<leader>f",
+  "<cmd>lua vim.lsp.buf.format()<CR>",
+  { silent = true }
 )
 
 -- Comments
@@ -89,31 +89,31 @@ map({ "i" }, "<C-s>", "<C-o>:update<CR>", { silent = true })
 -- Telescope is async
 local ok, telescope = pcall(require, "telescope")
 if not ok then
-	error("Loading telescope")
-	return
+  error("Loading telescope")
+  return
 end
 
 map(
-	{ "n" },
-	"<C-p>",
-	telescope.extensions.menufacture.find_files,
-	{ silent = true }
+  { "n" },
+  "<C-p>",
+  telescope.extensions.menufacture.find_files,
+  { silent = true }
 )
 
 map(
-	{ "n" },
-	"<leader>g",
-	telescope.extensions.menufacture.add_menu_with_default_mapping(
-		require("telescope.builtin").grep_string,
-		vim.tbl_extend("force", telescope.extensions.menufacture.grep_string_menu, {
-			["change cwd to parent"] = function(opts, callback)
-				local cwd = opts.cwd and vim.fn.expand(opts.cwd) or vim.loop.cwd()
-				opts.cwd = vim.fn.fnamemodify(cwd, ":p:h:h")
-				callback(opts)
-			end,
-		})
-	),
-	{ silent = true }
+  { "n" },
+  "<leader>g",
+  telescope.extensions.menufacture.add_menu_with_default_mapping(
+    require("telescope.builtin").grep_string,
+    vim.tbl_extend("force", telescope.extensions.menufacture.grep_string_menu, {
+      ["change cwd to parent"] = function(opts, callback)
+        local cwd = opts.cwd and vim.fn.expand(opts.cwd) or vim.loop.cwd()
+        opts.cwd = vim.fn.fnamemodify(cwd, ":p:h:h")
+        callback(opts)
+      end,
+    })
+  ),
+  { silent = true }
 )
 
 -- map( { "n" }, "<leader>lg",
@@ -131,10 +131,10 @@ map({ "n" }, "<F2>", ":NvimTreeToggle<CR>", { silent = true })
 map({ "n" }, "<S-F2>", ":NvimTreeFindFile<CR>", { silent = true })
 
 map(
-	{ "n" },
-	"<F3>",
-	':<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>',
-	{ silent = true }
+  { "n" },
+  "<F3>",
+  ':<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>',
+  { silent = true }
 )
 -- Shift + <F3>
 map({ "n" }, "<F15>", ":<C-U>Leaderf! rg --recall<CR>", { silent = true })
