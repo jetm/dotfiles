@@ -1,6 +1,6 @@
 require("config.global")
 require("config.lazy")
-require("config.autocmds").setup()
+require("config.autocmds")
 require("config.backup")
 require("config.mappings")
 require("config.utils")

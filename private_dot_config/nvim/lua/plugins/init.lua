@@ -57,7 +57,8 @@ return {
 	-- Replace ntpeters/vim-better-whitespace
 	{ "axelf4/vim-strip-trailing-whitespace" },
 
-	{ "sheerun/vim-polyglot" },
+	-- Disabled. Overwritten autocmds. Need more work
+	-- { "sheerun/vim-polyglot" },
 
 	-- Wisely add if/fi, for/end in several languages
 	{ "tpope/vim-endwise" },

@@ -1,82 +1,113 @@
-local vim = vim
+local function augroup(name)
+	return vim.api.nvim_create_augroup("jetm_" .. name, { clear = true })
+end
 
-local M = {}
+local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 
-M.augroups = {
-	_general_settings = {
-		{
-			"TextYankPost",
-			"*",
-			"lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 200})",
-		}
-	},
-	_filetypechanges = {
-		{ "BufWinEnter", "*.zsh", "setlocal filetype=sh" },
-		{ "BufRead", "*.zsh", "setlocal filetype=sh" },
-		{ "BufNewFile", "*.zsh", "setlocal filetype=sh" },
-	},
-	_bitbake = {
-		{ "FileType", "inc", "setlocal filetype=bitbake" },
-	},
-	_git = {
-		{ "FileType", "gitcommit", "setlocal wrap" },
-	},
-	_markdown = {
-		{ "FileType", "markdown", "setlocal wrap" },
-	},
-	_yaml = {
-		{ "FileType", "yaml", "setlocal ts=2 sts=2 sw=2 expandtab" },
-	},
-	-- Show by default 4 spaces for a tab
-	_golang = {
-		{ "FileType", "*.go", "setlocal noexpandtab tabstop=4 shiftwidth=4" },
-	},
-	_buffer_bindings = {
-		{ "FileType", "floaterm", "nnoremap <silent> <buffer> q :q<CR>" },
-	},
-	_general_lsp = {
-		{
-			"FileType",
-			"lspinfo,lsp-installer,null-ls-info",
-			"nnoremap <silent> <buffer> <esc> :close<CR>",
-		}
-	},
-	_cmp = {
-		{
-			"FileType",
-			"TelescopePrompt",
-			[[lua require('cmp').setup.buffer { enabled = false }]],
-		},
-	},
-}
+-- General settings:
+--------------------
 
-function M.define_augroups(definitions)
-	-- Create autocommand groups based on the passed definitions
-	--
-	-- The key will be the name of the group, and each definition
-	-- within the group should have:
-	--    1. Trigger
-	--    2. Pattern
-	--    3. Text
-	-- just like how they would normally be defined from Vim itself
-	for group_name, definition in pairs(definitions) do
-		vim.cmd("augroup " .. group_name)
-		vim.cmd("autocmd!")
-
-		for _, def in pairs(definition) do
-			local command = table.concat(
-				vim.tbl_flatten({ "autocmd", def }),
-				" "
-			)
-			vim.cmd(command)
-		end
-
-		vim.cmd("augroup END")
+-- Highlight on yank
+autocmd('TextYankPost', {
+	group = augroup("YankHighlight"),
+	callback = function()
+		vim.highlight.on_yank({ higroup = 'IncSearch', timeout = '1000' })
 	end
-end
+})
 
-function M.setup()
-	M.define_augroups(M.augroups)
-end
+-- Don't auto commenting new lines
+autocmd('BufEnter', {
+	pattern = '',
+	command = 'set fo-=c fo-=r fo-=o'
+})
 
-return M
+-- close some filetypes with <q>
+autocmd("FileType", {
+	group = augroup("close_with_q"),
+	pattern = {
+		"PlenaryTestPopup",
+		"help",
+		"lspinfo",
+		"man",
+		"notify",
+		"qf",
+		"query", -- :InspectTree
+		"spectre_panel",
+		"startuptime",
+		"tsplayground",
+		"floaterm",
+	},
+	callback = function(event)
+		vim.bo[event.buf].buflisted = false
+		vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = event.buf, silent = true })
+	end,
+})
+
+--
+-- Settings for filetypes:
+--
+
+-- Set indentation to 2 spaces
+autocmd('Filetype', {
+	group = augroup('setIndent'),
+	pattern = { 'yaml' },
+	command = 'setlocal shiftwidth=2 tabstop=2 sts=2 expandtab'
+})
+
+-- Show by default 4 spaces for a tab
+autocmd('Filetype', {
+	group = augroup('setIndent'),
+	pattern = { 'go' },
+	command = 'setlocal shiftwidth=4 tabstop=4 sts=4 noexpandtab'
+})
+
+-- Enable wrap
+autocmd('Filetype', {
+	group = augroup('wrap'),
+	pattern = { 'markdown', 'gitcommit' },
+	command = 'setlocal wrap'
+})
+
+-- Enable sh on zsh files
+autocmd('Filetype', {
+	group = augroup('zsh'),
+	pattern = { 'zsh' },
+	command = 'setlocal filetype=sh'
+})
+
+autocmd({ "BufNewFile", "BufRead" }, {
+	group = augroup('bats'),
+	pattern = { 'bats' },
+	command = 'setlocal filetype=bash'
+})
+
+-- Enable bitbake
+autocmd('Filetype', {
+	group = augroup('bitbake'),
+	pattern = { 'inc', 'bb', 'bbappend' },
+	command = 'setlocal filetype=bitbake'
+})
+
+-- Terminal settings:
+---------------------
+
+-- Open a Terminal on the right tab
+autocmd('CmdlineEnter', {
+	command = 'command! Term :botright vsplit term://$SHELL'
+})
+
+-- Enter insert mode when switching to terminal
+autocmd('TermOpen', {
+	command = 'setlocal listchars= nonumber norelativenumber nocursorline',
+})
+
+autocmd('TermOpen', {
+	pattern = '',
+	command = 'startinsert'
+})
+
+-- Close terminal buffer on process exit
+autocmd('BufLeave', {
+	pattern = 'term://*',
+	command = 'stopinsert'
+})
