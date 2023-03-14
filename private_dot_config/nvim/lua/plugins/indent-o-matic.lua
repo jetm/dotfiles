@@ -1,5 +1,6 @@
 local M = {
   "Darazaki/indent-o-matic",
+  event = { "BufReadPre", "BufNewFile" },
 }
 
 function M.config()

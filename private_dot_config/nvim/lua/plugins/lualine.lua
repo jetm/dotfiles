@@ -5,6 +5,7 @@
 -- heirline lacks of OneDark Color scheme
 local M = {
   "nvim-lualine/lualine.nvim",
+  event = "VeryLazy",
   dependencies = { "nvim-tree/nvim-web-devicons", "navarasu/onedark.nvim" },
 }
 
@@ -74,7 +75,7 @@ function M.config()
 
   lualine.setup({
     options = {
-      theme = "onedark",
+      theme = "auto",
       component_separators = { "", "" },
       section_separators = { "", "" },
       -- enable global statusline (have a single statusline at bottom of

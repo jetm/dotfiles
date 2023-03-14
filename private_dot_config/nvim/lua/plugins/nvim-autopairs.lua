@@ -1,6 +1,7 @@
 -- Vim plugin, insert or delete brackets, parens, quotes in pair
 local M = {
   "windwp/nvim-autopairs",
+  event = "VeryLazy",
   dependencies = { "nvim-treesitter/nvim-treesitter" },
 }
 

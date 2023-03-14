@@ -1,6 +1,7 @@
 -- Neovim UI Enhancer
 local M = {
   "stevearc/dressing.nvim",
+  lazy = true,
 }
 
 function M.config()

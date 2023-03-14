@@ -1,5 +1,6 @@
 local M = {
   "VonHeikemen/lsp-zero.nvim",
+  event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     { "neovim/nvim-lspconfig" },
     { "williamboman/mason.nvim" },
@@ -20,7 +21,7 @@ local M = {
     },
 
     -- snippets
-    { "L3MON4D3/LuaSnip" },
+    { "L3MON4D3/LuaSnip", event = "VeryLazy" },
     { "rafamadriz/friendly-snippets" },
 
     -- null-ls

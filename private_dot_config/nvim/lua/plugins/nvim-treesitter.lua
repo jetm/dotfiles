@@ -1,6 +1,7 @@
 local M = {
   "nvim-treesitter/nvim-treesitter",
-  event = "VeryLazy",
+  version = false,
+  event = { "BufReadPost", "BufNewFile" },
   dependencies = {
     "nvim-tree/nvim-web-devicons",
     "nvim-treesitter/nvim-treesitter-refactor",

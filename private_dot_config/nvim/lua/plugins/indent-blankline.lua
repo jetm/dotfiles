@@ -1,6 +1,7 @@
 -- Indent guides on blank lines for Neovim
 local M = {
   "lukas-reineke/indent-blankline.nvim",
+  event = { "BufReadPost", "BufNewFile" },
   dependencies = { "nvim-treesitter/nvim-treesitter" },
 }
 
