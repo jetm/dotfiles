@@ -28,7 +28,11 @@ return {
   -- ct - choose theirs
   -- cb - choose both
   -- c0 - choose none
-  { "akinsho/git-conflict.nvim", lazy = true, config = true },
+  {
+    "akinsho/git-conflict.nvim",
+    lazy = true,
+    config = true,
+  },
 
   -- Expand selection
   {
@@ -42,8 +46,12 @@ return {
     },
   },
 
-  -- Quoting/parenthesizing made simple
-  { "machakann/vim-sandwich", lazy = true },
+  -- Add/change/delete surrounding delimiter pairs with ease
+  {
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    config = true,
+  },
 
   -- Enable repeating supported plugin maps with '.'
   { "tpope/vim-repeat", lazy = true },
