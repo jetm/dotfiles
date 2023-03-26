@@ -37,7 +37,6 @@ return {
   -- Expand selection
   {
     "terryma/vim-expand-region",
-    lazy = true,
     dependencies = {
       "kana/vim-textobj-user",
       "kana/vim-textobj-line",
@@ -67,7 +66,7 @@ return {
   -- { "sheerun/vim-polyglot" },
 
   -- Wisely add if/fi, for/end in several languages
-  { "tpope/vim-endwise", lazy = true },
+  { "tpope/vim-endwise" },
 
   -- bitbake support
   { "kergoth/vim-bitbake", lazy = true },
@@ -77,7 +76,7 @@ return {
   -- { "mzlogin/vim-markdown-toc" },
 
   -- New files created with a shebang line are automatically made executable
-  { "tpope/vim-eunuch", lazy = true },
+  { "tpope/vim-eunuch" },
 
   -- A neovim lua plugin to help easily manage multiple terminal windows
   -- { "antoinemadec/FixCursorHold.nvim" },
