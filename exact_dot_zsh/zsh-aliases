@@ -166,6 +166,5 @@ fi
 if ! (( $+commands[chezmoi] )); then
   print 'zsh chezmoi plugin: chezmoi not found...' >&2
 else
-  alias ch='chezmoi'
-  alias cha='chezmoi apply -v'
+  alias che="chezmoi edit --apply ~/\$(chezmoi managed --exclude dirs | fzf)"
 fi

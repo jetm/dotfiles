@@ -15,6 +15,7 @@ local M = {
     { "saadparwaiz1/cmp_luasnip" },
     { "hrsh7th/cmp-nvim-lua" },
     { "onsails/lspkind.nvim" },
+    { "ray-x/cmp-treesitter" },
     {
       "f3fora/cmp-spell",
       ft = { "gitcommit", "markdown" },
@@ -49,7 +50,8 @@ function M.config()
   lsp.setup_nvim_cmp({
     mapping = lsp.defaults.cmp_mappings,
     sources = {
-      { name = "path" },
+      { name = "path", keyword_length = 3, max_item_count = 3 },
+      { name = "treesitter", keyword_length = 1, max_item_count = 5 },
       { name = "nvim_lsp", keyword_length = 1, max_item_count = 5 },
       { name = "buffer", keyword_length = 3, max_item_count = 5 },
       { name = "luasnip", keyword_length = 2 },
