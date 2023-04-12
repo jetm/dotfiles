@@ -116,15 +116,26 @@ function M.config()
         filetypes = { "sh", "zsh", "bash" },
       }),
       null_ls.builtins.diagnostics.zsh,
+      -- null_ls.builtins.diagnostics.checkmake,
       null_ls.builtins.formatting.shfmt.with({
         extra_args = function(params)
-          return {
-            "-i",
-            vim.api.nvim_buf_get_option(params.bufnr, "shiftwidth"),
+          local extra_args = {
             "-sr",
             "-ci",
             "-s",
           }
+
+          if params.options and not params.options.insertSpaces then
+            -- Default indent with Tabs
+            table.insert(extra_args, "--indent")
+            table.insert(extra_args, 0)
+          else
+            -- Indent with Spaces
+            table.insert(extra_args, "--indent")
+            table.insert(extra_args, params.options.tabSize)
+          end
+
+          return extra_args
         end,
         extra_filetypes = { "zsh" },
       }),

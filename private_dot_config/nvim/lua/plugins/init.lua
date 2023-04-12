@@ -45,6 +45,10 @@ return {
     },
   },
 
+  -- Use the w, e, b motions like a spider. Move by subwords and skip
+  -- insignificant punctuation
+  -- { "chrisgrieser/nvim-spider", lazy = true },
+
   -- Add/change/delete surrounding delimiter pairs with ease
   {
     "kylechui/nvim-surround",
@@ -111,4 +115,7 @@ return {
       require("mini.bracketed").setup()
     end,
   },
+
+  -- Automatic indentation style detection for Neovim
+  { "nmac427/guess-indent.nvim", config = true },
 }

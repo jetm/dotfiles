@@ -144,3 +144,33 @@ map({ "n" }, "<F5>", ":TroubleToggle<CR>", { silent = true })
 
 -- Search for words
 map({ "n", "x", "o" }, "s", "<Cmd>Svart<CR>", { silent = true })
+
+-- Use the w, e, b motions like a spider. Move by subwords and skip insignificant punctuation
+--
+-- map(
+--   { "n", "o", "x" },
+--   "w",
+--   "<cmd>lua require('spider').motion('w')<CR>",
+--   { desc = "Spider-w" }
+-- )
+
+-- map(
+--   { "n", "o", "x" },
+--   "e",
+--   "<cmd>lua require('spider').motion('e')<CR>",
+--   { desc = "Spider-w" }
+-- )
+--
+-- map(
+--   { "n", "o", "x" },
+--   "b",
+--   "<cmd>lua require('spider').motion('b')<CR>",
+--   { desc = "Spider-w" }
+-- )
+--
+-- map(
+--   { "n", "o", "x" },
+--   "ge",
+--   "<cmd>lua require('spider').motion('ge')<CR>",
+--   { desc = "Spider-w" }
+-- )

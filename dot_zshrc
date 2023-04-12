@@ -780,6 +780,14 @@ zi0c id-as'direnv' \
   atload'eval "$(direnv hook zsh)"'
 zinit light direnv/direnv
 
+zi0c id-as'checkmake' \
+  from'gh-r' \
+  as'program' \
+  nocompile \
+  bpick'*linux.amd64*' \
+  mv'checkmake*->checkmake'
+zinit light mrtazz/checkmake
+
 # zi0c id-as'difftastic' \
 #   cargo'!difftastic'
 # zinit light wilfred/difftastic
