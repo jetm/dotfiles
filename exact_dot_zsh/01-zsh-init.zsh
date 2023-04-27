@@ -84,4 +84,11 @@ export SSTATE_DIR=~/repos/work/cache/sstate \
   DL_DIR=~/repos/work/cache/downloads \
   NPROC
 
+git_extras=/usr/share/doc/git-extras/git-extras-completion.zsh
+
+if [ -f "${git_extras}" ]; then
+  # shellcheck disable=SC1090
+  source "${git_extras}"
+fi
+
 # vim:set ts=2 sw=2 et:
