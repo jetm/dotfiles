@@ -73,6 +73,7 @@ zinit light zsh-users/zsh-completions
 zi_ice id-as'zsh-autosuggestions'
 zinit light zsh-users/zsh-autosuggestions
 
+# TODO: disable Ctrl-R and rest of features to integrate it with fzf
 # zi_ice id-as'zsh-autocomplete'
 # zinit light marlonrichert/zsh-autocomplete
 
