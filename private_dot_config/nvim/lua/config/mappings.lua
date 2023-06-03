@@ -145,6 +145,13 @@ map({ "n" }, "<F5>", ":TroubleToggle<CR>", { silent = true })
 -- Search for words
 map({ "n", "x", "o" }, "s", "<Cmd>Svart<CR>", { silent = true })
 
+map(
+  { "n" },
+  "-",
+  require("oil").open,
+  { silent = true, desc = "Open parent directory" }
+)
+
 -- Use the w, e, b motions like a spider. Move by subwords and skip insignificant punctuation
 --
 -- map(
