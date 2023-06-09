@@ -3,11 +3,27 @@ local M = {
   cmd = "Telescope",
   version = false,
   dependencies = {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    "yamatsum/nvim-nonicons",
-    "nvim-lua/popup.nvim",
-    "nvim-lua/plenary.nvim",
-    "molecule-man/telescope-menufacture",
+    {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      enabled = vim.fn.executable("make") == 1,
+      build = "make",
+    },
+    { "yamatsum/nvim-nonicons" },
+    { "nvim-lua/popup.nvim" },
+    { "nvim-lua/plenary.nvim" },
+    { "brookhong/telescope-pathogen.nvim" },
+  },
+  config = function()
+    require("telescope").load_extension("pathogen")
+    vim.keymap.set(
+      "v",
+      "<space>g",
+      require("telescope").extensions["pathogen"].live_grep
+    )
+  end,
+  keys = {
+    { "<space>g", ":Telescope pathogen live_grep<CR>", silent = true },
+    { "<C-p>", ":Telescope pathogen find_files<CR>", silent = true },
   },
 }
 
@@ -24,87 +40,27 @@ function M.config()
     return
   end
 
-  local ok3, telescope_sorters = pcall(require, "telescope.sorters")
-  if not ok3 then
-    error("Loading telescope.sorters")
-    return
-  end
-
-  local ok4, telescope_previewers = pcall(require, "telescope.previewers")
-  if not ok4 then
-    error("Loading telescope.previewers")
-    return
-  end
-
   telescope.setup({
     defaults = {
       mappings = {
-        i = { ["<esc>"] = telescope_actions.close },
+        n = { q = telescope_actions.close },
       },
-      vimgrep_arguments = {
-        "rg",
-        "--color=never",
-        "--no-heading",
-        "--with-filename",
-        "--line-number",
-        "--column",
-        "--smart-case",
-        "--hidden",
-        "--glob=!.git/",
-      },
-      hidden = true,
       prompt_prefix = "🔍 ",
-      selection_caret = " ",
-      entry_prefix = " ",
+      selection_caret = "  ",
       initial_mode = "insert",
-      selection_strategy = "reset",
-      sorting_strategy = "descending",
-      layout_strategy = "horizontal",
+      path_display = { },
       layout_config = {
+        horizontal = { preview_width = 0.55 },
+        vertical = { mirror = false },
         height = 0.95,
         width = 0.95,
-        preview_width = 0.4,
-      },
-      file_sorter = telescope_sorters.get_generic_sorter,
-      file_ignore_patterns = {},
-      path_display = {},
-      generic_sorter = telescope_sorters.get_generic_fuzzy_sorter,
-      winblend = 0,
-      border = {},
-      borderchars = {
-        "─",
-        "│",
-        "─",
-        "│",
-        "╭",
-        "╮",
-        "╯",
-        "╰",
       },
       color_devicons = true,
       use_less = true,
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
-      file_previewer = telescope_previewers.vim_buffer_cat.new,
-      grep_previewer = telescope_previewers.vim_buffer_vimgrep.new,
-      qflist_previewer = telescope_previewers.vim_buffer_qflist.new,
-      -- Developer configurations: Not meant for general override
-      buffer_previewer_maker = telescope_previewers.buffer_previewer_maker,
-    },
-    extensions = {
-      fzf = {
-        override_generic_sorter = true, -- override the generic sorter
-        override_file_sorter = true, -- override the file sorter
-        case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-      },
-      menufacture = {
-        mappings = {
-          main_menu = { [{ "i", "n" }] = "<C-^>" },
-        },
-      },
     },
   })
 
-  telescope.load_extension("menufacture")
   telescope.load_extension("fzf")
 end
 
