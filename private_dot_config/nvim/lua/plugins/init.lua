@@ -108,20 +108,22 @@ return {
   { "asiryk/auto-hlsearch.nvim", config = true },
 
   { "echasnovski/mini.nvim", version = false },
+
   {
     "echasnovski/mini.bracketed",
     version = false,
-    config = function()
-      require("mini.bracketed").setup()
-    end,
+    config = true,
   },
 
   -- Automatic indentation style detection for Neovim
   { "nmac427/guess-indent.nvim", config = true },
 
-  {
-    "stevearc/oil.nvim",
-    config = true,
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
+  -- Disable oil as it has a conflict with pathogen
+  --
+  -- File explorer
+  -- {
+  --   "stevearc/oil.nvim",
+  --   config = true,
+  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  -- },
 }
