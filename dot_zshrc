@@ -464,6 +464,14 @@ zi0c id-as'erdtree' \
   pick'erdtree'
 zinit light solidiquis/erdtree
 
+zi0c id-as'codespelunker' \
+  from'gh-r' \
+  as'program' \
+  nocompile \
+  bpick'*Linux_x86_64*' \
+  pick'cs'
+zinit light boyter/cs
+
 # zi0c id-as'moar' \
 #   as'program' \
 #   atclone'go get && go build' \
