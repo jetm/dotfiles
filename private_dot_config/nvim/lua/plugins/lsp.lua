@@ -110,10 +110,10 @@ function M.config()
     end,
     sources = {
       null_ls.builtins.diagnostics.shellcheck.with({
-        filetypes = { "sh", "zsh", "bash" },
+        filetypes = { "sh", "zsh", "bash", "bats" },
       }),
       null_ls.builtins.code_actions.shellcheck.with({
-        filetypes = { "sh", "zsh", "bash" },
+        filetypes = { "sh", "zsh", "bash", "bats" },
       }),
       null_ls.builtins.diagnostics.zsh,
       -- null_ls.builtins.diagnostics.checkmake,
@@ -137,7 +137,7 @@ function M.config()
 
           return extra_args
         end,
-        extra_filetypes = { "zsh" },
+        extra_filetypes = { "zsh", "bats" },
       }),
       null_ls.builtins.formatting.stylua.with({
         extra_args = {
