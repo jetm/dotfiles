@@ -84,37 +84,22 @@ map({ "n" }, "<C-s>", ":update<CR>", { silent = true })
 map({ "v" }, "<C-s>", "<C-c>:update<CR>", { silent = true })
 map({ "i" }, "<C-s>", "<C-o>:update<CR>", { silent = true })
 
+-- Search for words
+map({ "n", "x", "o" }, "s", "<Cmd>Svart<CR>", { silent = true })
+
+map("n", "-", require("oil").open, { desc = "Open parent directory" })
+
 --
 -- <F1>..<F12> Mappings
 --
 -- NvimTree
-map({ "n" }, "<F2>", ":NvimTreeToggle<CR>", { silent = true })
+-- map({ "n" }, "<F2>", ":NvimTreeToggle<CR>", { silent = true })
 
 -- Shift + <F2>
-map({ "n" }, "<S-F2>", ":NvimTreeFindFile<CR>", { silent = true })
-
-map(
-  { "n" },
-  "<F3>",
-  ':<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>',
-  { silent = true }
-)
--- Shift + <F3>
-map({ "n" }, "<F15>", ":<C-U>Leaderf! rg --recall<CR>", { silent = true })
+-- map({ "n" }, "<S-F2>", ":NvimTreeFindFile<CR>", { silent = true })
 
 -- F5 shows a diagnostics
 map({ "n" }, "<F5>", ":TroubleToggle<CR>", { silent = true })
-
--- Search for words
-map({ "n", "x", "o" }, "s", "<Cmd>Svart<CR>", { silent = true })
-
--- Disable oil as it has a conflict with pathogen
--- map(
---   { "n" },
---   "-",
---   require("oil").open,
---   { silent = true, desc = "Open parent directory" }
--- )
 
 -- Use the w, e, b motions like a spider. Move by subwords and skip insignificant punctuation
 --

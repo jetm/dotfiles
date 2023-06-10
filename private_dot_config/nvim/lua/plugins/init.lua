@@ -118,12 +118,4 @@ return {
   -- Automatic indentation style detection for Neovim
   { "nmac427/guess-indent.nvim", config = true },
 
-  -- Disable oil as it has a conflict with pathogen
-  --
-  -- File explorer
-  -- {
-  --   "stevearc/oil.nvim",
-  --   config = true,
-  --   dependencies = { "nvim-tree/nvim-web-devicons" },
-  -- },
 }
