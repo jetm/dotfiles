@@ -14,6 +14,7 @@ return {
 
   -- Enable opening a file in a given line
   { "wsdjeg/vim-fetch" },
+  -- { "lewis6991/fileline.nvim" },
 
   -- Substitute preview
   { "osyo-manga/vim-over", lazy = true },
