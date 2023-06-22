@@ -10,16 +10,16 @@ FZF_DEFAULT_OPTS+=' --prompt="∼ "'
 FZF_DEFAULT_OPTS+=' --pointer="▶"'
 FZF_DEFAULT_OPTS+=' --marker="✓"'
 FZF_DEFAULT_OPTS+=' --bind "?:toggle-preview"'
-# FZF_DEFAULT_OPTS+=' --bind "ctrl-a:select-all"'
-# FZF_DEFAULT_OPTS+=' --bind "ctrl-d:deselect-all"'
-# FZF_DEFAULT_OPTS+=' --bind "ctrl-t:toggle-all"'
-# FZF_DEFAULT_OPTS+=' --bind "ctrl-r:reload(eval $FZF_DEFAULT_COMMAND)"'
-# FZF_DEFAULT_OPTS+=' --bind "ctrl-y:execute-silent(echo {+} | xargs -n1 tmux set-buffer)"'
-# FZF_DEFAULT_OPTS+=' --bind "ctrl-e:become(nvim {} > /dev/tty)+abort"'
-# FZF_DEFAULT_OPTS+=' --bind "ctrl-j:preview-page-down"'
-# FZF_DEFAULT_OPTS+=' --bind "ctrl-k:preview-page-up"'
-# FZF_DEFAULT_OPTS+=' --bind "ctrl-o:execute-multi(nvim -p {} > /dev/tty)"'
+FZF_DEFAULT_OPTS+=' --bind "ctrl-a:select-all"'
+FZF_DEFAULT_OPTS+=' --bind "ctrl-d:deselect-all"'
+FZF_DEFAULT_OPTS+=' --bind "ctrl-t:toggle-all"'
+FZF_DEFAULT_OPTS+=' --bind "ctrl-e:become(nvim {} > /dev/tty)+abort"'
+# shellcheck disable=SC2089
+FZF_DEFAULT_OPTS+=' --bind "ctrl-o:execute-multi(nvim -p {} > /dev/tty)"'
+
+# shellcheck disable=SC2090
 export FZF_DEFAULT_OPTS
+
 export FZF_COMPLETION_TRIGGER="@@"
 
 export FZF_DEFAULT_COMMAND='fd --hidden --color never --strip-cwd-prefix'
