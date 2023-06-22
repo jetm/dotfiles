@@ -119,4 +119,31 @@ return {
   -- Automatic indentation style detection for Neovim
   { "nmac427/guess-indent.nvim", config = true },
 
+  {
+    "glacambre/firenvim",
+
+    -- Lazy load firenvim
+    -- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
+    cond = not not vim.g.started_by_firenvim,
+    build = function()
+      require("lazy").load({ plugins = "firenvim", wait = true })
+      vim.fn["firenvim#install"](0)
+    end,
+    config = function ()
+      vim.g.firenvim_config = {
+        globalSettigs = {
+          alt = "all",
+        },
+        localSettings = {
+          [".*"] = {
+            cmdline = "neovim",
+            content = "text",
+            priority = 0,
+            selector = "div",
+            takeover = "never",
+          },
+        },
+      }
+    end
+  },
 }
