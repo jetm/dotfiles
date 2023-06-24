@@ -31,8 +31,13 @@ return {
   -- c0 - choose none
   {
     "akinsho/git-conflict.nvim",
-    lazy = true,
-    config = true,
+    lazy = false,
+    config = function()
+      require("git-conflict").setup({
+        default_mappings = true,
+        disable_diagnostics = true,
+      })
+    end,
   },
 
   -- Expand selection
@@ -129,7 +134,7 @@ return {
       require("lazy").load({ plugins = "firenvim", wait = true })
       vim.fn["firenvim#install"](0)
     end,
-    config = function ()
+    config = function()
       vim.g.firenvim_config = {
         globalSettigs = {
           alt = "all",
@@ -144,6 +149,6 @@ return {
           },
         },
       }
-    end
+    end,
   },
 }
