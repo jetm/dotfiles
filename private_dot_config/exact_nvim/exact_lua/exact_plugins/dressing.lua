@@ -10,16 +10,7 @@ function M.config()
     return
   end
 
-  dressing.setup({
-    input = {
-      default_prompt = "➤ ",
-      win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" },
-    },
-    select = {
-      backend = { "telescope", "builtin" },
-      win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" },
-    },
-  })
+  dressing.setup({})
 end
 
 return M
