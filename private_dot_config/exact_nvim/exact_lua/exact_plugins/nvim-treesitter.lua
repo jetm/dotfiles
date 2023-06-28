@@ -4,9 +4,7 @@ local M = {
   event = { "BufReadPost", "BufNewFile" },
   dependencies = {
     "nvim-tree/nvim-web-devicons",
-    "nvim-treesitter/nvim-treesitter-refactor",
     "nvim-treesitter/nvim-treesitter-textobjects",
-    "romgrk/nvim-treesitter-context",
     "HiPhish/nvim-ts-rainbow2",
   },
   build = ":TSUpdate",
@@ -20,6 +18,8 @@ end
 
 function M.config()
   require("nvim-treesitter.install").prefer_git = true
+  require("nvim-treesitter.install").compilers = { "gcc" }
+
   nvim_treesitter.setup({
     version = false,
     ensure_installed = {
@@ -28,7 +28,6 @@ function M.config()
       "cmake",
       "comment",
       "dockerfile",
-      "dot",
       "go",
       "json",
       "lua",
@@ -44,9 +43,8 @@ function M.config()
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = true,
-      disable = { "gitcommit" },
+      disable = function(_, bufnr) return vim.api.nvim_buf_line_count(bufnr) > 10000 end,
     },
-    -- https://github.com/nvim-treesitter/nvim-treesitter#indentation
     indent = { enable = true, disable = { "gitcommit", "python" } },
     rainbow = {
       enable = true,
