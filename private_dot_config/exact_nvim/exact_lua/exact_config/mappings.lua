@@ -13,20 +13,6 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
--- moving up and down work as you would expect
--- Remap for dealing with word wrap
-map(
-  { "n", "x" },
-  "j",
-  [[v:count == 0 ? 'gj' : 'j']],
-  { expr = true, silent = true }
-)
-map(
-  { "n", "x" },
-  "k",
-  [[v:count == 0 ? 'gk' : 'k']],
-  { expr = true, silent = true }
-)
 
 -- quitting mapping
 map({ "n", "x" }, "q", ":BufDel<CR>", { silent = true })
@@ -35,11 +21,6 @@ map({ "n", "x" }, "Q", ":qa<CR>", { silent = true })
 -- expand_region
 map({ "x" }, "v", "<Plug>(expand_region_expand)", { silent = true })
 map({ "x" }, "V", "<Plug>(expand_region_shrink)", { silent = true })
-
-map({ "n", "i" }, "<UP>", "<Nop>", { silent = true })
-map({ "n", "i" }, "<Down>", "<Nop>", { silent = true })
-map({ "n", "i" }, "<Left>", "<Nop>", { silent = true })
-map({ "n", "i" }, "<Right>", "<Nop>", { silent = true })
 
 -- Visual shifting (does not exit Visual mode)
 map({ "v" }, "<", "<gv", { silent = true })
@@ -87,7 +68,7 @@ map({ "i" }, "<C-s>", "<C-o>:update<CR>", { silent = true })
 -- Search for words
 map({ "n", "x", "o" }, "s", "<Cmd>Svart<CR>", { silent = true })
 
-map("n", "-", require("oil").open, { desc = "Open parent directory" })
+map("n", "_", require("oil").open, { desc = "Open parent directory" })
 
 --
 -- <F1>..<F12> Mappings

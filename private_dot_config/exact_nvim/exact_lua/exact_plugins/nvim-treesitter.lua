@@ -18,7 +18,7 @@ end
 
 function M.config()
   require("nvim-treesitter.install").prefer_git = true
-  require("nvim-treesitter.install").compilers = { "gcc" }
+  -- require("nvim-treesitter.install").compilers = { "gcc" }
 
   nvim_treesitter.setup({
     version = false,
