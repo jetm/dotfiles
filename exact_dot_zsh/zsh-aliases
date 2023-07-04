@@ -14,9 +14,6 @@ alias -c cp='cp -i'
 alias -c ln='ln -i'
 alias -c mkdir='mkdir -p'
 
-# Reload the Zsh configurations
-alias reload='exec "$SHELL" -i -l'
-
 # exa
 alias l='exa -l'
 alias la='exa -a'
@@ -68,16 +65,11 @@ alias gcs='git show'
 
 # Checkout (c)
 alias gco='git checkout'
-alias gfcf='forgit::checkout::file'
 alias gcp='git checkout --patch'
 alias gcb='git checkout -b'
 alias gc-='git checkout -'
 alias gre='git restore'
 alias grs='git restore --staged'
-
-# Restore (r)
-alias grf='git reset-file'
-alias grh='forgit::reset::head'
 
 # Grep (g)
 alias gg='git grep'
@@ -97,7 +89,6 @@ alias gll='git lol'
 
 # Push (p)
 alias gp='git push'
-alias gpp='git push --force-with-lease'
 alias gpr='git publish -t'
 
 # Rebase (r)
@@ -123,13 +114,6 @@ alias gfe='git fetch'
 alias gls='git ls-files'
 alias gP='git pull'
 alias gt='git status'
-
-# git fuzzy
-alias gzt='git fuzzy status'
-alias gzb='git fuzzy branch'
-
-# glab
-alias gL='glab'
 
 #
 # Arch Linux Stuff
