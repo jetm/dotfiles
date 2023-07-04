@@ -800,6 +800,13 @@ zi0c id-as'checkmake' \
   mv'checkmake*->checkmake'
 zinit light mrtazz/checkmake
 
+zi_ice id-as'atuin' \
+  from'gh-r' \
+  as'program' \
+  nocompile \
+  sbin"**/atuin"
+zinit light ellie/atuin
+
 # zi0c id-as'difftastic' \
 #   cargo'!difftastic'
 # zinit light wilfred/difftastic
@@ -841,6 +848,15 @@ if (command -v keychain >/dev/null 2>&1); then
   fi
 fi
 
+# The plugin will auto execute this zvm_after_init function
+zvm_after_init() {
+  # required to read fzf key-bindings, otherwise they will be overwritten by zsh-vi-mode
+  turbo_source "${ZINIT[PLUGINS_DIR]}/fzf/key-bindings.zsh"
+
+  export ATUIN_NOBIND="true"
+  eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
+}
+
 #
 # Put most source here to improve zsh load speed
 #
@@ -853,12 +869,6 @@ unset file
 # Soure here because doing source inside of zinit is slow
 source "${HOME}"/.p10k.zsh
 
-# The plugin will auto execute this zvm_after_init function
-zvm_after_init() {
-  # required to read fzf key-bindings, otherwise they will be overwritten by zsh-vi-mode
-  turbo_source "${ZINIT[PLUGINS_DIR]}/fzf/key-bindings.zsh"
-}
-
 unset turbo_source
 unset load_prezto_mod
 unset z_ice
@@ -866,5 +876,4 @@ unset zi0a
 unset zi0b
 unset zi0c
 
-# vim:ft=zsh
-# vim:set ts=2 sw=2 et:
+# vim:ft=zsh ts=2 sw=2 et:
