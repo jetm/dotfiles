@@ -861,16 +861,16 @@ zvm_after_init() {
 
   export ATUIN_NOBIND="true"
   eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
-}
 
-#
-# Put most source here to improve zsh load speed
-#
-# extensions dotfiles
-for file in "${HOME}"/.zsh/*.zsh; do
-  turbo_source "${file}"
-done
-unset file
+  #
+  # Put most source here to improve zsh load speed
+  #
+  # extensions dotfiles
+  for file in "${HOME}"/.zsh/*.zsh; do
+    turbo_source "${file}"
+  done
+  unset file
+}
 
 # Soure here because doing source inside of zinit is slow
 source "${HOME}"/.p10k.zsh
