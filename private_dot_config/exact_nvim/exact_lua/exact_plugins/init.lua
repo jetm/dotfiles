@@ -28,21 +28,6 @@ return {
     end,
   },
 
-  -- Expand selection
-  {
-    "terryma/vim-expand-region",
-    dependencies = {
-      "kana/vim-textobj-user",
-      "kana/vim-textobj-line",
-      "machakann/vim-textobj-functioncall",
-      "sgur/vim-textobj-parameter",
-    },
-  },
-
-  -- Use the w, e, b motions like a spider. Move by subwords and skip
-  -- insignificant punctuation
-  -- { "chrisgrieser/nvim-spider", lazy = true },
-
   -- Add/change/delete surrounding delimiter pairs with ease
   {
     "kylechui/nvim-surround",
