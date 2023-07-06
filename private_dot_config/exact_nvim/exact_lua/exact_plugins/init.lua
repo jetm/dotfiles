@@ -60,9 +60,7 @@ return {
   -- New files created with a shebang line are automatically made executable
   { "tpope/vim-eunuch" },
 
-  -- A neovim lua plugin to help easily manage multiple terminal windows
-  -- { "antoinemadec/FixCursorHold.nvim" },
-
+  -- YAML syntax support
   {
     "cuducos/yaml.nvim",
     event = { "BufReadPre", "BufNewFile" },
@@ -71,16 +69,20 @@ return {
     },
   },
 
+  -- Jinja2 syntax support
   {
     "glench/vim-jinja2-syntax",
     event = { "BufReadPre", "BufNewFile" },
   },
 
+  -- A pretty diagnostics, references, telescope results, quickfix and location
+  -- list to help you solve all the trouble your code is causing.
   {
     "folke/trouble.nvim",
     cmd = { "TroubleToggle", "Trouble" },
     dependencies = "nvim-tree/nvim-web-devicons",
     config = true,
+    lazy = true,
   },
 
   { "asiryk/auto-hlsearch.nvim", config = true },
