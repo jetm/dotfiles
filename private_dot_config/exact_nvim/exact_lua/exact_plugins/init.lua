@@ -85,15 +85,8 @@ return {
     lazy = true,
   },
 
-  { "asiryk/auto-hlsearch.nvim", config = true },
-
-  { "echasnovski/mini.nvim", version = false },
-
-  {
-    "echasnovski/mini.bracketed",
-    version = false,
-    config = true,
-  },
+  -- Automatically manage hlsearch setting
+  { "asiryk/auto-hlsearch.nvim", config = true, lazy = true },
 
   -- Automatic indentation style detection for Neovim
   { "nmac427/guess-indent.nvim", config = true },
