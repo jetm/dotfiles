@@ -10,12 +10,6 @@ return {
   { "wsdjeg/vim-fetch" },
   -- { "lewis6991/fileline.nvim" },
 
-  -- Substitute preview
-  { "osyo-manga/vim-over", lazy = true },
-
-  -- Handles bracketed-paste-mode in vim (aka. automatic `:set paste`)
-  { "ConradIrwin/vim-bracketed-paste", lazy = true },
-
   -- Visualise and resolve merge conflicts in neovim
   -- ]x - move to previous conflict
   -- [x - move to next conflict
