@@ -122,4 +122,21 @@ where_zsh() {
   fi
 }
 
+help() { "$@" --help 2>&1 | bat --plain --language=help }
+path() { echo ${PATH//:/\\n} }
+silent() { "$@" > /dev/null 2>&1; }
+unique() { awk '!seen[$0]++' "$1"; }
+wtfis() { curl -s "cheat.sh/${@:-cheat}" | sed -e 's/cheat/wtfis/g' | bat --plain -l=md || less -R } > /dev/tty
+
+move() {
+  local ext=${2:-.bak}
+  if [ -d "$1" ]; then
+    echo "Error: $1 is a directory"
+  else
+    backup_file=${1}.${ext}
+    mv "$1" "$backup_file"
+  fi
+}
+
 # vim:set ts=2 sw=2 et:
+
