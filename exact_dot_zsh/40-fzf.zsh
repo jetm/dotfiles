@@ -114,44 +114,45 @@ FORGIT_FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS}"
 FORGIT_FZF_DEFAULT_OPTS+=' --preview-window=:down:80%:nohidden'
 export FORGIT_FZF_DEFAULT_OPTS
 
-# FORGIT_DIFF_FZF_OPTS+=' --bind="ctrl-e:become(nvim {-1} > /dev/tty)"'
-# export FORGIT_DIFF_FZF_OPTS
-
-bindkey '^ ' autosuggest-accept
-_zsh_autosuggest_strategy_atuin_top() {
-  suggestion=$(atuin search --cmd-only --limit 1 --search-mode prefix $1)
-}
-ZSH_AUTOSUGGEST_STRATEGY=atuin_top
-
-atuin-setup() {
-  fzf-atuin-history-widget() {
-    local selected num
-    setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
-    # shellcheck disable=SC2296
-    selected=( $(atuin history list --cmd-only | tac | awk '{ cmd=$0; sub(/^[ \t]*[0-9]+\**[ \t]+/, "", cmd); if (!seen[cmd]++) print $0 }' |  FZF_DEFAULT_OPTS="--ansi --height ${FZF_TMUX_HEIGHT:-40%} ${FZF_DEFAULT_OPTS-} --scheme=history --bind=ctrl-r:toggle-sort,ctrl-z:ignore ${FZF_CTRL_R_OPTS-} --query=${(qqq)LBUFFER} +m" fzf) )
-    local ret=$?
-    if [ -n "$selected" ]; then
-      # shellcheck disable=SC1087
-      cmd=$selected[1,-1]
-      if [ -n "$cmd" ]; then
-        zle vi-fetch-history -n $cmd
-      fi
-    fi
-    zle -U "$cmd"
-    zle kill-buffer
-    zle reset-prompt
-    return $ret
-  }
-
-  if ! command -v atuin > /dev/null; then
-    zle      -N     fzf-history-widget
-    bindkey '^R'    fzf-history-widget
-  else
-    zle      -N     fzf-atuin-history-widget
-    bindkey '^R'    fzf-atuin-history-widget
-  fi
-}
-
-atuin-setup
+#
+# BUGS: no all history is shown
+# atuin is good to sync history between devices
+#
+# bindkey '^ ' autosuggest-accept
+# _zsh_autosuggest_strategy_atuin_top() {
+#   suggestion=$(atuin search --cmd-only --limit 1 --search-mode prefix $1)
+# }
+# ZSH_AUTOSUGGEST_STRATEGY=atuin_top
+#
+# atuin-setup() {
+#   fzf-atuin-history-widget() {
+#     local selected num
+#     setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
+#     # shellcheck disable=SC2296
+#     selected=( $(atuin history list --cmd-only | tac | awk '{ cmd=$0; sub(/^[ \t]*[0-9]+\**[ \t]+/, "", cmd); if (!seen[cmd]++) print $0 }' |  FZF_DEFAULT_OPTS="--ansi --height ${FZF_TMUX_HEIGHT:-40%} ${FZF_DEFAULT_OPTS-} --scheme=history --bind=ctrl-r:toggle-sort,ctrl-z:ignore ${FZF_CTRL_R_OPTS-} --query=${(qqq)LBUFFER} +m" fzf) )
+#     local ret=$?
+#     if [ -n "$selected" ]; then
+#       # shellcheck disable=SC1087
+#       cmd=$selected[1,-1]
+#       if [ -n "$cmd" ]; then
+#         zle vi-fetch-history -n $cmd
+#       fi
+#     fi
+#     zle -U "$cmd"
+#     zle kill-buffer
+#     zle reset-prompt
+#     return $ret
+#   }
+#
+#   if ! command -v atuin > /dev/null; then
+#     zle      -N     fzf-history-widget
+#     bindkey '^R'    fzf-history-widget
+#   else
+#     zle      -N     fzf-atuin-history-widget
+#     bindkey '^R'    fzf-atuin-history-widget
+#   fi
+# }
+#
+# atuin-setup
 
 # vim:ft=zsh ts=2 sw=2 et:
