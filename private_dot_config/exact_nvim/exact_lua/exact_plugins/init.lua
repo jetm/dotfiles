@@ -91,6 +91,7 @@ return {
   -- Automatic indentation style detection for Neovim
   { "nmac427/guess-indent.nvim", config = true },
 
+  -- add neovim in browser
   {
     "glacambre/firenvim",
 
@@ -117,5 +118,11 @@ return {
         },
       }
     end,
+  },
+
+  -- Peek lines just when you intend
+  {
+    "nacro90/numb.nvim",
+    config = true,
   },
 }
