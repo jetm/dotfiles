@@ -6,12 +6,6 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
   },
 
-  -- Replace fzf
-  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-
-  -- Neovim plugin to jump to any location with few keystrokes
-  { url = "https://gitlab.com/madyanov/svart.nvim", name = "svart.nvim" },
-
   -- Enable opening a file in a given line
   { "wsdjeg/vim-fetch" },
   -- { "lewis6991/fileline.nvim" },
