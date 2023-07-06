@@ -42,8 +42,7 @@ return {
   { "monaqa/dial.nvim", lazy = true },
 
   -- Removes trailing whitespace from *modified* lines on save
-  -- Replace ntpeters/vim-better-whitespace
-  { "axelf4/vim-strip-trailing-whitespace" },
+  { "cappyzawa/trim.nvim", lazy = true, config = true },
 
   -- Disabled. Overwritten autocmds. Need more work
   -- { "sheerun/vim-polyglot" },
