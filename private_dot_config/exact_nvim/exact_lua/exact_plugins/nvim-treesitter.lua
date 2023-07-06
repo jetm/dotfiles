@@ -3,9 +3,25 @@ local M = {
   version = false,
   event = { "BufReadPost", "BufNewFile" },
   dependencies = {
-    "nvim-tree/nvim-web-devicons",
     "nvim-treesitter/nvim-treesitter-textobjects",
-    "HiPhish/nvim-ts-rainbow2",
+    {
+      "nvim-treesitter/nvim-treesitter-context",
+      config = true,
+    },
+    {
+      "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+      init = function()
+        local rainbow_delimiters = require("rainbow-delimiters")
+
+        vim.g.rainbow_delimiters = {
+          strategy = { [""] = rainbow_delimiters.strategy["global"] },
+          query = {
+            [""] = "rainbow-delimiters",
+            lua = "rainbow-blocks",
+          },
+        }
+      end,
+    },
   },
   build = ":TSUpdate",
 }
@@ -43,19 +59,13 @@ function M.config()
     highlight = {
       enable = true,
       additional_vim_regex_highlighting = true,
-      disable = function(_, bufnr) return vim.api.nvim_buf_line_count(bufnr) > 10000 end,
+      disable = function(_, bufnr)
+        return vim.api.nvim_buf_line_count(bufnr) > 10000
+      end,
     },
     indent = { enable = true, disable = { "gitcommit", "python" } },
-    rainbow = {
-      enable = true,
-      extended_mode = true, -- Highlight also non-parentheses delimiters
-      max_file_lines = 1000,
-      -- Which query to use for finding delimiters
-      query = "rainbow-parens",
-      -- Highlight the entire buffer all at once
-      strategy = { require("ts-rainbow.strategy.global") },
-    },
     context_commentstring = { enable = true, enable_autocmd = false },
+    -- incremental_selection = { enable = true, },
   })
 end
 
