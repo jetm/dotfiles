@@ -73,6 +73,12 @@ autocmd("Filetype", {
   command = "setlocal wrap",
 })
 
+-- Apply changes in chezmoi managed files
+autocmd("BufWritePost", {
+  pattern = os.getenv 'HOME' .. '/.local/share/chezmoi/*',
+  command = "silent !chezmoi apply --source-path %",
+})
+
 -- Terminal settings:
 ---------------------
 
