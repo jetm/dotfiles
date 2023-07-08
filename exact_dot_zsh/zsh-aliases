@@ -162,8 +162,14 @@ if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
   fi
 fi
 
-if ! (( $+commands[chezmoi] )); then
-  print 'zsh chezmoi plugin: chezmoi not found...' >&2
-else
-  alias che="chezmoi edit --apply ~/\$(chezmoi managed --exclude dirs | fzf)"
-fi
+function che() {
+  if (command -v chezmoi > /dev/null 2>&1); then
+    chezmoi managed -x dirs |
+      sed -ne 's/.*/\/home\/'"$USER"'\/&/p' |
+      fzf --multi --ansi --height=90% --info=inline --no-separator --layout=reverse |
+      tr '\n' '\0' |
+      xargs -0 nvim
+  else
+    print 'zsh chezmoi plugin: chezmoi not found...' >&2
+  fi
+}
