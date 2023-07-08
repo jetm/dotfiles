@@ -586,14 +586,14 @@ zinit light neovim/neovim
 #
 # File managers
 #
-zi0c id-as'nnn' \
-  from'gh-r' \
-  as'program'  \
-  nocompile \
-  bpick'nnn-static*x86_64*' \
-  mv'nnn-static -> nnn' \
-  pick'nnn'
-zinit light jarun/nnn
+# zi0c id-as'nnn' \
+#   from'gh-r' \
+#   as'program'  \
+#   nocompile \
+#   bpick'nnn-static*x86_64*' \
+#   mv'nnn-static -> nnn' \
+#   pick'nnn'
+# zinit light jarun/nnn
 
 # zi0c id-as'broot' \
 #   from'gh-r' \
