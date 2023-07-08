@@ -16,113 +16,66 @@ function M.config()
     return
   end
 
-  local ok2, icons = pcall(require, "nvim-nonicons")
-  if not ok2 then
-    error("Loading nvim-nonicons")
-    return
+  local hide_in_width = function()
+    return vim.fn.winwidth(0) > 80
   end
 
-  local fn = vim.fn
+  local diagnostics = {
+    "diagnostics",
+    sources = { "nvim_diagnostic" },
+    sections = { "error", "warn" },
+    symbols = { error = " ", warn = " " },
+    colored = false,
+    always_visible = true,
+  }
 
-  local function lsp_servers_status()
-    local clients = vim.lsp.buf_get_clients(0)
-    if vim.tbl_isempty(clients) then
-      return ""
-    end
+  local diff = {
+    "diff",
+    colored = false,
+    symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
+    cond = hide_in_width,
+  }
 
-    local client_names = {}
-    for _, client in pairs(clients) do
-      table.insert(client_names, client.name)
-    end
+  local filetype = {
+    "filetype",
+  }
 
-    return icons.get("zap") .. " " .. table.concat(client_names, "|")
-  end
+  local location = {
+    "location",
+    padding = 0,
+  }
 
-  local function lsp_messages()
-    local msgs = {}
-
-    for _, msg in ipairs(vim.lsp.util.get_progress_messages()) do
-      local content
-      if msg.progress then
-        content = msg.title
-        if msg.message then
-          content = content .. " " .. msg.message
-        end
-        if msg.percentage then
-          content = content .. " (" .. msg.percentage .. "%%)"
-        end
-      elseif msg.status then
-        content = msg.content
-        if msg.uri then
-          local filename = vim.uri_to_fname(msg.uri)
-          filename = fn.fnamemodify(filename, ":~:.")
-          local space = math.min(60, math.floor(0.6 * fn.winwidth(0)))
-          if #filename > space then
-            filename = fn.pathshorten(filename)
-          end
-
-          content = "(" .. filename .. ") " .. content
-        end
-      else
-        content = msg.content
-      end
-
-      table.insert(msgs, "[" .. msg.name .. "] " .. content)
-    end
-
-    return table.concat(msgs, " | ")
+  local spaces = function()
+    return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
   end
 
   lualine.setup({
     options = {
-      theme = "auto",
-      component_separators = { "", "" },
-      section_separators = { "", "" },
+      icons_enabled = true,
+      theme = "onedark",
+      component_separators = { left = "", right = "" },
+      section_separators = { left = "", right = "" },
       -- enable global statusline (have a single statusline at bottom of
       -- neovim instead of one for  every window)
       globalstatus = true,
+      always_divide_middle = true,
     },
     sections = {
       lualine_a = { "mode" },
-      lualine_b = { { "branch", icon = "" }, { "filename", path = 1 } },
-      lualine_c = {},
-      lualine_x = {},
-      lualine_y = {
-        {
-          lsp_messages,
-          {
-            "diagnostics",
-            symbols = {
-              error = icons.get("x-circle") .. " ",
-              warn = icons.get("alert") .. " ",
-              info = icons.get("info") .. " ",
-            },
-            sources = { "nvim_lsp" },
-          },
-        },
-        { lsp_servers_status },
-        {
-          "encoding",
-          condition = function()
-            -- when filencoding="" lualine would otherwise report utf-8 anyways
-            return vim.bo.fileencoding
-              and #vim.bo.fileencoding > 0
-              and vim.bo.fileencoding ~= "utf-8"
-          end,
-        },
-        {
-          "fileformat",
-          condition = function()
-            return vim.bo.fileformat ~= "unix"
-          end,
-          icons_enabled = false,
-        },
-        { "filetype", icons_enabled = true },
-        { "progress" },
-      },
-      lualine_z = { { "location" } },
+      lualine_b = { { "branch", icon = "" } },
+      lualine_c = { diagnostics },
+      lualine_x = { diff, spaces, "encoding", filetype, "fileformat" },
+      lualine_y = { location },
+      lualine_z = { "progress" },
     },
-    extensions = { "nvim-tree" },
+    inactive_sections = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = { "filename" },
+      lualine_x = { "location" },
+      lualine_y = {},
+      lualine_z = {},
+    },
   })
 end
 
