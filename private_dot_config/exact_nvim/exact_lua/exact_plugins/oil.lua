@@ -1,6 +1,8 @@
 local M = {
   -- File explorer
   "stevearc/oil.nvim",
+  cmd = "Oil",
+  event = "BufEnter",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     require("oil").setup({
