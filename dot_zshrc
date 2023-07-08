@@ -653,11 +653,11 @@ zi0c id-as'forgit' \
   nocd
 zinit light wfxr/forgit
 
-zi0c id-as'git-fuzzy' \
-  as'program' \
-  nocompile \
-  pick'bin/git-fuzzy'
-zinit light bigH/git-fuzzy
+# zi0c id-as'git-fuzzy' \
+#   as'program' \
+#   nocompile \
+#   pick'bin/git-fuzzy'
+# zinit light bigH/git-fuzzy
 
 zi0c id-as'git-update' \
   as'program' \
