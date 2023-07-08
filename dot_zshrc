@@ -756,11 +756,11 @@ zinit snippet https://raw.githubusercontent.com/tj/git-extras/master/bin/git-und
 #   mv'hss-Linux-x86_64 -> hss'
 # zinit light six-ddc/hss
 
-zi0c id-as'task-spooler' \
-  as'program' \
-  ver'cpu-only' \
-  make"PREFIX=$ZPFX -j$(nproc) install"
-zinit light justanhduc/task-spooler
+# zi0c id-as'task-spooler' \
+#   as'program' \
+#   ver'cpu-only' \
+#   make"PREFIX=$ZPFX -j$(nproc) install"
+# zinit light justanhduc/task-spooler
 
 # Use cargo
 # Installed by Mason Neovim plugin
