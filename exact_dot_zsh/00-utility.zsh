@@ -97,5 +97,32 @@ move() {
   fi
 }
 
-# vim:set ts=2 sw=2 et:
+# save-dotfiles - apply and commit dotfiles
+#   usage: save-dotfiles "MESSAGE"
+save-dotfiles() {
+  local commit_message="${1:?"a commit message must be specified"}"
+  echo "\n\n"
+  echo $0 "local diff:"
+  GIT_PAGER="cat" LESS="$LESS -FRXK" chezmoi --no-pager diff || echo "no diff"
 
+  echo "\n\n"
+  echo $0 "remote diff:"
+  GIT_PAGER="cat" LESS="$LESS -FRXK" chezmoi --no-pager git --no-pager diff || echo "no diff"
+  echo "\n\n"
+
+  # http://zsh.sourceforge.net/Doc/Release/Shell-Builtin-Commands.html#index-read
+  if read -q "choice?continue? (Y/y): "; then
+    echo
+    echo $0 "updating dotfiles..."
+    chezmoi git add .
+    chezmoi git -- commit -m "${commit_message}"
+    chezmoi git -- push origin main
+    chezmoi apply
+    reload-zsh
+  else
+    echo
+    echo "'$choice' not 'Y' or 'y'. Skipping..."
+  fi
+}
+
+# vim:set ft=sh ts=2 sw=2 et:
