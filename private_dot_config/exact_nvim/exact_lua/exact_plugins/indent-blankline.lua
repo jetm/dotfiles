@@ -2,7 +2,6 @@
 local M = {
   "lukas-reineke/indent-blankline.nvim",
   event = { "BufReadPost", "BufNewFile" },
-  dependencies = { "nvim-treesitter/nvim-treesitter" },
 }
 
 function M.config()
@@ -14,17 +13,7 @@ function M.config()
 
   indent_blankline.setup({
     show_current_context = true,
-    use_treesitter = true,
-    filetype_exclude = { "help", "make", "terminal" },
-    context_patterns = {
-      "class",
-      "function",
-      "method",
-      "while",
-      "closure",
-      "for",
-    },
-    viewport_buffer = 50,
+    show_current_context_start = true,
   })
 end
 
