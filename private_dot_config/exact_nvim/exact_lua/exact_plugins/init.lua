@@ -39,7 +39,7 @@ return {
   { "tpope/vim-repeat", lazy = true },
 
   -- enhanced increment/decrement plugin for Neovim
-  { "monaqa/dial.nvim", lazy = true },
+  -- { "monaqa/dial.nvim", lazy = true },
 
   -- Removes trailing whitespace from *modified* lines on save
   { "cappyzawa/trim.nvim", event = "BufWritePre", config = true },

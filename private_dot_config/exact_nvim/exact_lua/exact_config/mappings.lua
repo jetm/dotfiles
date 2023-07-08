@@ -12,8 +12,8 @@ yet.map({ "n" }, "<", "<<_", { silent = true })
 yet.map({ "n" }, ">", ">>_", { silent = true })
 
 -- increment/decrement anything
-yet.map({ "n", "v" }, "+", "<Plug>(dial-increment)")
-yet.map({ "n", "v" }, "-", "<Plug>(dial-increment)")
+-- yet.map({ "n", "v" }, "+", "<Plug>(dial-increment)")
+-- yet.map({ "n", "v" }, "-", "<Plug>(dial-increment)")
 
 -- formatter
 yet.map(
