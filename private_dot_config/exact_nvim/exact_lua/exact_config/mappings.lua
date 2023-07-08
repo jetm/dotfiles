@@ -25,7 +25,13 @@ yet.map(
 
 -- Comments
 -- Ctrl-/ as VSCode and Jetbrain
-yet.map({ "n", "v" }, "<c-_>", "<Plug>NERDCommenterToggle", { silent = true })
+yet.map({ "n" }, "<c-_>", function()
+  return vim.v.count == 0 and "<Plug>(comment_toggle_linewise_current)"
+    or "<Plug>(comment_toggle_linewise_count)"
+end, { expr = true })
+
+-- Toggle in VISUAL mode
+yet.map("x", "<c-_>", "<Plug>(comment_toggle_linewise_visual)")
 
 --
 -- bufferline
