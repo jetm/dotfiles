@@ -44,12 +44,6 @@ return {
   -- Removes trailing whitespace from *modified* lines on save
   { "cappyzawa/trim.nvim", event = "BufWritePre", config = true },
 
-  -- Disabled. Overwritten autocmds. Need more work
-  -- { "sheerun/vim-polyglot" },
-
-  -- Wisely add if/fi, for/end in several languages
-  { "tpope/vim-endwise" },
-
   -- bitbake support
   { "kergoth/vim-bitbake", lazy = true },
 
