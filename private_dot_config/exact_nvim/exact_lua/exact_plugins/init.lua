@@ -125,4 +125,12 @@ return {
     "nacro90/numb.nvim",
     config = true,
   },
+
+  -- Search and Replace
+  {
+    "Usuim/searchbox.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    },
+  },
 }
