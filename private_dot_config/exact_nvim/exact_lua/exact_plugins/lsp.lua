@@ -1,28 +1,30 @@
 local M = {
   "VonHeikemen/lsp-zero.nvim",
+  branch = "v2.x",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     { "neovim/nvim-lspconfig" },
     { "williamboman/mason.nvim" },
     { "williamboman/mason-lspconfig.nvim" },
-    { "WhoIsSethDaniel/mason-tool-installer.nvim" },
+    {
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      auto_update = true,
+      debounce_hours = 5,
+    },
 
     -- completation
-    { "hrsh7th/nvim-cmp", event = "InsertEnter" },
-    { "hrsh7th/cmp-nvim-lsp" },
+    { "hrsh7th/nvim-cmp" },
     { "hrsh7th/cmp-buffer" },
     { "hrsh7th/cmp-path" },
-    { "saadparwaiz1/cmp_luasnip" },
-    { "hrsh7th/cmp-nvim-lua" },
+    { "hrsh7th/cmp-nvim-lsp" },
     { "onsails/lspkind.nvim" },
-    { "ray-x/cmp-treesitter" },
     {
       "f3fora/cmp-spell",
       ft = { "gitcommit", "markdown" },
     },
 
     -- snippets
-    { "L3MON4D3/LuaSnip", event = "VeryLazy" },
+    { "L3MON4D3/LuaSnip" },
     { "rafamadriz/friendly-snippets" },
 
     -- null-ls
@@ -31,40 +33,33 @@ local M = {
 }
 
 function M.config()
-  local ok, lsp = pcall(require, "lsp-zero")
-  if not ok then
-    error("Loading lsp-zero")
-    return
-  end
+  require("mason").setup()
+  require("mason-lspconfig").setup()
 
-  local ok2, lspkind = pcall(require, "lspkind")
-  if not ok2 then
-    error("Loading lspkind")
-    return
-  end
+  local lspconfig = require("lspconfig")
+  local lsp_defaults = lspconfig.util.default_config
 
-  lsp.preset("recommended")
+  lsp_defaults.capabilities = vim.tbl_deep_extend(
+    "force",
+    lsp_defaults.capabilities,
+    require("cmp_nvim_lsp").default_capabilities()
+  )
 
-  lsp.set_preferences({})
-
-  lsp.setup_nvim_cmp({
-    mapping = lsp.defaults.cmp_mappings,
-    sources = {
-      { name = "path", keyword_length = 3, max_item_count = 3 },
-      { name = "treesitter", keyword_length = 1, max_item_count = 5 },
-      { name = "nvim_lsp", keyword_length = 1, max_item_count = 5 },
-      { name = "buffer", keyword_length = 3, max_item_count = 5 },
-      { name = "luasnip", keyword_length = 2 },
-    },
-    formatting = {
-      format = lspkind.cmp_format({ with_text = false }),
-    },
-  })
+  lspconfig.lua_ls.setup({})
 
   local ok3, mason_installer = pcall(require, "mason-tool-installer")
   if not ok3 then
     error("Loading mason-tool-installer")
     return
+  end
+
+  local function check_back_space()
+    local col = vim.fn.col(".") - 1
+    if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
+      return true
+    else
+      return false
+    end
   end
 
   mason_installer.setup({
@@ -86,17 +81,77 @@ function M.config()
     auto_update = true,
   })
 
-  -- lua_ls Fix Undefined global 'vim'
-  lsp.configure(
-    "lua_ls",
-    { settings = { Lua = { diagnostics = { globals = { "vim" } } } } }
-  )
+  local lsp = require("lsp-zero").preset({})
+
+  lsp.on_attach(function(client, bufnr)
+    lsp.default_keymaps({ buffer = bufnr })
+  end)
 
   -- Configure lua language server for neovim
-  lsp.nvim_workspace()
+  -- For now, not required
+  -- lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
+
+  -- Configure lua language server for neovim
   lsp.setup()
 
-  vim.opt.signcolumn = "yes"
+  -- Must setup `cmp` after lsp-zero
+  local cmp = require("cmp")
+
+  local ok2, lspkind = pcall(require, "lspkind")
+  if not ok2 then
+    error("Loading lspkind")
+    return
+  end
+
+  require("luasnip.loaders.from_vscode").lazy_load()
+
+  local luasnip = require("luasnip")
+
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        luasnip.lsp_expand(args.body)
+      end,
+    },
+    window = {
+      documentation = cmp.config.window.bordered(),
+    },
+    mapping = {
+      -- `Enter` key to confirm completion
+      ["<CR>"] = cmp.mapping.confirm({ select = false }),
+
+      -- Ctrl+Space to trigger completion menu
+      ["<C-Space>"] = cmp.mapping.complete(),
+      ["<Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.confirm({ select = true })
+        elseif luasnip.jumpable(1) then
+          luasnip.jump(1)
+        elseif check_back_space() then
+          fallback()
+        else
+          cmp.complete()
+        end
+      end, { "i", "s" }),
+    },
+    sources = {
+      { name = "path" },
+      { name = "nvim_lsp", keyword_length = 1 },
+      { name = "buffer", keyword_length = 3 },
+    },
+    formatting = {
+      format = lspkind.cmp_format({ with_text = false }),
+    },
+  })
+
+  vim.diagnostic.config({
+    virtual_text = false,
+    severity_sort = true,
+    float = {
+      border = "rounded",
+      source = "always",
+    },
+  })
 
   local ok4, null_ls = pcall(require, "null-ls")
   if not ok4 then
@@ -105,9 +160,6 @@ function M.config()
   end
 
   null_ls.setup({
-    on_attach = function(client, bufnr)
-      vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
-    end,
     sources = {
       null_ls.builtins.diagnostics.shellcheck.with({
         filetypes = { "sh", "zsh", "bash", "bats" },
