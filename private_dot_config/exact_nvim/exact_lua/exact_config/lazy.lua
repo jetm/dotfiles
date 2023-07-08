@@ -1,31 +1,41 @@
-local vim = vim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
+local luv = vim.uv or vim.loop -- TODO: REMOVE WHEN DROPPING SUPPORT FOR Neovim v0.9
+if not luv.fs_stat(lazypath) then
+  local output = vim.fn.system({
     "git",
     "clone",
     "--filter=blob:none",
+    "--branch=stable",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
     lazypath,
   })
+  if vim.api.nvim_get_vvar("shell_error") ~= 0 then
+    vim.api.nvim_err_writeln(
+      "Error cloning lazy.nvim repository...\n\n" .. output
+    )
+  end
+  local oldcmdheight = vim.opt.cmdheight:get()
+  vim.opt.cmdheight = 1
+  vim.notify("Please wait while plugins are installed...")
+  vim.api.nvim_create_autocmd("User", {
+    desc = "Load Mason and Treesitter after Lazy installs plugins",
+    once = true,
+    pattern = "LazyInstall",
+    callback = function()
+      vim.cmd.bw()
+      vim.opt.cmdheight = oldcmdheight
+      vim.tbl_map(function(module)
+        pcall(require, module)
+      end, { "nvim-treesitter", "mason" })
+      vim.notify("Mason is installing packages if configured, check status with `:Mason`")
+    end,
+  })
 end
-
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = {
-    -- add LazyVim and import its plugins
-    -- { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    -- import any extras modules here
-    -- { import = "lazyvim.plugins.extras.lang.typescript" },
-    -- { import = "lazyvim.plugins.extras.lang.json" },
-    -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
-    -- import/override with your plugins
     { import = "plugins" },
-  },
-  diff = {
-    cmd = "terminal_git",
   },
   checker = {
     enabled = true,
@@ -33,36 +43,15 @@ require("lazy").setup({
     notify = false,
     frequency = 3600, -- check for updates every hour
   },
-  change_detection = { notify = false },
   performance = {
     rtp = {
       disabled_plugins = {
-        "2html_plugin",
-        "getscript",
-        "getscriptPlugin",
-        "gzip",
-        "logipat",
-        "man",
-        "matchit",
-        "matchparen",
-        "netrw",
-        "netrwFileHandlers",
-        "netrwPlugin",
-        "netrwSettings",
-        "nvim-treesitter-textobjects",
-        "remotes_plugins",
-        "rrhelper",
-        "spellfile_plugin",
-        "tar",
-        "tarPlugin",
         "tohtml",
-        "tutor",
-        "vimball",
-        "vimballPlugin",
-        "zip",
+        "gzip",
         "zipPlugin",
+        "netrwPlugin",
+        "tarPlugin",
       },
     },
   },
-  -- debug = true,
 })
