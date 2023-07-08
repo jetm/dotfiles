@@ -738,15 +738,15 @@ zinit snippet https://raw.githubusercontent.com/tj/git-extras/master/bin/git-und
 #
 # Parallel processing
 #
-zinit id-as'parallel' \
-  as'readurl|command' \
-  nocompile \
-  atclone'ziextract --auto --move && ./configure --disable-documentation' \
-  atpull'%atclone' \
-  make'' \
-  pick'src/parallel' \
-  dlink'parallel-latest.tar.bz2' \
-  for https://ftp.gnu.org/gnu/parallel/
+# zinit id-as'parallel' \
+#   as'readurl|command' \
+#   nocompile \
+#   atclone'ziextract --auto --move && ./configure --disable-documentation' \
+#   atpull'%atclone' \
+#   make'' \
+#   pick'src/parallel' \
+#   dlink'parallel-latest.tar.bz2' \
+#   for https://ftp.gnu.org/gnu/parallel/
 
 # interactive parallel ssh client
 # zi0c id-as'hss' \
