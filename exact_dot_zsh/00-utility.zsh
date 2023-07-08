@@ -122,11 +122,8 @@ where_zsh() {
   fi
 }
 
-help() { "$@" --help 2>&1 | bat --plain --language=help }
 path() { echo ${PATH//:/\\n} }
 silent() { "$@" > /dev/null 2>&1; }
-unique() { awk '!seen[$0]++' "$1"; }
-wtfis() { curl -s "cheat.sh/${@:-cheat}" | sed -e 's/cheat/wtfis/g' | bat --plain -l=md || less -R } > /dev/tty
 
 move() {
   local ext=${2:-.bak}
