@@ -504,14 +504,14 @@ zinit light boyter/cs
 #
 # Monitoring
 #
-zi0c id-as'htop' \
-  as'program' \
-  ver'3.2.0' \
-  atclone"./autogen.sh && ./configure --enable-delayacct" \
-  atpull"%atclone" \
-  make'htop' \
-  pick'htop'
-zinit light htop-dev/htop
+# zi0c id-as'htop' \
+#   as'program' \
+#   ver'3.2.0' \
+#   atclone"./autogen.sh && ./configure --enable-delayacct" \
+#   atpull"%atclone" \
+#   make'htop' \
+#   pick'htop'
+# zinit light htop-dev/htop
 
 # required gcc 10
 #  ver'v1.0.10' \
