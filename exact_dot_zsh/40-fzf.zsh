@@ -155,4 +155,4 @@ export FORGIT_FZF_DEFAULT_OPTS
 #
 # atuin-setup
 
-# vim:ft=zsh ts=2 sw=2 et:
+# vim:ft=sh ts=2 sw=2 et:
