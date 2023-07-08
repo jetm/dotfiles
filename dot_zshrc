@@ -794,14 +794,14 @@ zi0c id-as'gitui' \
   pick'gitui'
 zinit light extrawurst/gitui
 
-zi0c id-as'direnv' \
-  from'gh-r' \
-  as'program' \
-  nocompile \
-  pick'direnv' \
-  mv'direnv*->direnv' \
-  atload'eval "$(direnv hook zsh)"'
-zinit light direnv/direnv
+# zi0c id-as'direnv' \
+#   from'gh-r' \
+#   as'program' \
+#   nocompile \
+#   pick'direnv' \
+#   mv'direnv*->direnv' \
+#   atload'eval "$(direnv hook zsh)"'
+# zinit light direnv/direnv
 
 zi0c id-as'checkmake' \
   from'gh-r' \
