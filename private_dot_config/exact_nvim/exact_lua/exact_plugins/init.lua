@@ -126,5 +126,12 @@ return {
     dependencies = {
       "MunifTanjim/nui.nvim",
     },
+    lazy = true,
+  },
+
+  -- alternative to matchparen neovim plugin
+  {
+    "monkoose/matchparen.nvim",
+    config = true,
   },
 }
