@@ -84,46 +84,7 @@ function man() {
   command man "$@"
 }
 
-# `where $1` - ($1 - name of the command) show the location of the executable
-# file and completion if this command have them
-where() {
-  if (( $+commands[$1] )); then
-    print -P "%F{blue}Executable file location:%f $(which $1)"
-    if [[ $_comps[$1] ]]; then
-      print -P "%F{magenta}Completion file location:%f $(echo $^fpath/$_comps[$1](N))"
-    else
-      print -P '%F{yellow}This command has no completions installed.%f'
-    fi
-  else
-    print -P '%F{red}The command "$1" does not exist!%f'
-  fi
-}
-
-# `where_zsh` - find the mentioned word ($1) anywhere in Zsh configuration
-#  It can be alias, command, commented word or anything. It will use best
-#  available searching tool
-where_zsh() {
-  local searcher_cmd
-  if (( $+commands[rg] )); then
-      searcher_cmd="rg"
-  else
-    searcher_cmd="grep"
-  fi
-  local results
-  # Explanation of flags:
-  # `-i` - force shell to be interactive
-  # `-c` - take the first argument as a command to execute
-  # `-x` - equivalent to `--xtrace`
-  results="$(zsh -ixc : 2>&1 | $searcher_cmd $1)"
-  if [ $results ]; then
-    print -P "%F{green}Found in:%f"
-    print -l $results | nl
-  else
-    print -P "%F{red}It wasn't defined or mentioned anywhere in Zsh configurations.%f"
-  fi
-}
-
-path() { echo ${PATH//:/\\n} }
+path() { echo "${PATH//:/\\n}"; }
 silent() { "$@" > /dev/null 2>&1; }
 
 move() {
