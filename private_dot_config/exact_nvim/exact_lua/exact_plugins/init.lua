@@ -42,7 +42,7 @@ return {
   { "monaqa/dial.nvim", lazy = true },
 
   -- Removes trailing whitespace from *modified* lines on save
-  { "cappyzawa/trim.nvim", lazy = true, config = true },
+  { "cappyzawa/trim.nvim", event = "BufWritePre", config = true },
 
   -- Disabled. Overwritten autocmds. Need more work
   -- { "sheerun/vim-polyglot" },
