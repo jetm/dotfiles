@@ -1,7 +1,10 @@
+# shellcheck disable=SC2148
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
+# shellcheck disable=SC2296
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  # shellcheck disable=SC2296
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
@@ -73,7 +76,8 @@ zinit light zsh-users/zsh-completions
 zi_ice id-as'zsh-autosuggestions'
 zinit light zsh-users/zsh-autosuggestions
 
-# TODO: disable Ctrl-R and rest of features to integrate it with fzf
+# TODO: problem with zsh-autosuggestions
+# zstyle ':autocomplete:key-bindings' enabled no
 # zi_ice id-as'zsh-autocomplete'
 # zinit light marlonrichert/zsh-autocomplete
 

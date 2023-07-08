@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148
 # debug bash script
 debug() {
   local script="$1"; shift
