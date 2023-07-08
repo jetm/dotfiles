@@ -532,14 +532,14 @@ zi0c id-as'ripgrep' \
   pick'rg'
 zinit light BurntSushi/ripgrep
 
-zi0c id-as'igrep' \
-  from'gh-r' \
-  as'program' \
-  nocompile \
-  bpick'*x86_64-unknown-linux-gnu*' \
-  mv'igrep/ig -> ig' \
-  pick'ig'
-zinit light konradsz/igrep
+# zi0c id-as'igrep' \
+#   from'gh-r' \
+#   as'program' \
+#   nocompile \
+#   bpick'*x86_64-unknown-linux-gnu*' \
+#   mv'igrep/ig -> ig' \
+#   pick'ig'
+# zinit light konradsz/igrep
 
 # zi0c id-as'ugrep' \
 #   as'program' \
