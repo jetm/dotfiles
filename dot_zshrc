@@ -613,13 +613,13 @@ zinit light neovim/neovim
 #
 # Build tools
 #
-zi0c id-as'ninja' \
-  from'gh-r' \
-  as'program' \
-  nocompile \
-  bpick'*linux*' \
-  pick'ninja'
-zinit light ninja-build/ninja
+# zi0c id-as'ninja' \
+#   from'gh-r' \
+#   as'program' \
+#   nocompile \
+#   bpick'*linux*' \
+#   pick'ninja'
+# zinit light ninja-build/ninja
 
 #
 # Language servers
