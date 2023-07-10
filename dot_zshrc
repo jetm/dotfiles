@@ -448,14 +448,14 @@ zinit snippet https://cht.sh/:cht.sh
 #   bpick'*linux_x86_64.tar.gz'
 # zinit light muesli/duf
 
-zi0c id-as'ouch' \
-  from'gh-r' \
-  as'program' \
-  nocompile \
-  bpick'*x86_64-unknown-linux-gnu*' \
-  mv'ouch*/ouch -> ouch' \
-  pick'ouch'
-zinit light ouch-org/ouch
+# zi0c id-as'ouch' \
+#   from'gh-r' \
+#   as'program' \
+#   nocompile \
+#   bpick'*x86_64-unknown-linux-gnu*' \
+#   mv'ouch*/ouch -> ouch' \
+#   pick'ouch'
+# zinit light ouch-org/ouch
 
 zi0c id-as'erdtree' \
   from'gh-r' \
