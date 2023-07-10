@@ -51,6 +51,8 @@ require("lazy").setup({
         "zipPlugin",
         "netrwPlugin",
         "tarPlugin",
+        "tutor",
+        "matchparen",
       },
     },
   },

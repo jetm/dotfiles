@@ -84,6 +84,11 @@ return {
 
   -- Automatic indentation style detection for Neovim
   { "nmac427/guess-indent.nvim", config = true },
+  -- {
+  --   "Darazaki/indent-o-matic",
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   config = true,
+  -- },
 
   -- add neovim in browser
   {
@@ -143,13 +148,139 @@ return {
     cmd = { "SudaRead", "SudaWrite" },
   },
 
-  { "petertriho/nvim-scrollbar" },
+  -- { "petertriho/nvim-scrollbar" },
 
   {
     "rcarriga/nvim-notify",
     opts = {
       stages = "static",
       timeout = 2000,
+    },
+  },
+
+  -- File explorer
+  {
+    "stevearc/oil.nvim",
+    cmd = "Oil",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`
+      -- Conflict with pathogen
+      default_file_explorer = false,
+      columns = {
+        "icon",
+        "permissions",
+        "size",
+        "mtime",
+      },
+    },
+  },
+
+  -- Neovim UI Enhancer
+  {
+    "stevearc/dressing.nvim",
+    lazy = true,
+    opts = {
+      input = {
+        default_prompt = "➤ ",
+        win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" },
+      },
+      select = {
+        backend = { "telescope", "builtin" },
+        builtin = {
+          win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" },
+        },
+      },
+    },
+  },
+
+  {
+    "olimorris/onedarkpro.nvim",
+    lazy = false,
+    -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000,
+    opts = {
+      caching = true,
+    },
+    config = function()
+      vim.cmd.colorscheme("onedark")
+    end,
+  },
+
+  {
+    "ojroques/nvim-bufdel",
+    opts = {
+      -- or 'cycle, 'alternate'
+      next = "tabs",
+      -- quit Neovim when last buffer is closed
+      quit = true,
+    },
+  },
+
+  -- move and duplicate blocks and lines, with complete fold handling,
+  -- reindent, and undone in one go
+  {
+    "booperlv/nvim-gomove",
+    opts = {
+      -- whether or not to map default key bindings, (true/false)
+      map_defaults = true,
+      -- whether or not to reindent lines moved vertically (true/false)
+      reindent = true,
+      -- whether or not to undojoin same direction moves (true/false)
+      undojoin = true,
+      -- whether to not to move past end column when moving blocks horizontally, (true/false)
+      move_past_end_col = false,
+    },
+  },
+
+  {
+    "NvChad/nvim-colorizer.lua",
+    lazy = true,
+    opts = { "*" },
+  },
+
+  -- Go to the last edited place
+  {
+    "ethanholz/nvim-lastplace",
+    opts = {
+      lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
+      lastplace_ignore_filetype = {
+        "gitcommit",
+        "gitrebase",
+        "svn",
+        "hgcommit",
+      },
+      lastplace_open_folds = true,
+    },
+  },
+
+  {
+    "akinsho/bufferline.nvim",
+    event = "VeryLazy",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      options = {
+        tab_size = 20,
+        diagnostics = false,
+        color_icons = true,
+        show_buffer_icons = true,
+        show_buffer_close_icons = true,
+        show_close_icon = true,
+        show_tab_indicators = true,
+        separator_style = "thin",
+        enforce_regular_tabs = false,
+        always_show_bufferline = true,
+      },
+    },
+  },
+
+  -- Indent guides on blank lines for Neovim
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      show_current_context = true,
+      show_current_context_start = true,
     },
   },
 }
