@@ -520,13 +520,13 @@ zinit snippet https://cht.sh/:cht.sh
 #
 # Grepping
 #
-zi0c id-as'ripgrep' \
-  from'gh-r' \
-  as'program' \
-  nocompile \
-  mv'ripgrep*/rg -> rg' \
-  pick'rg'
-zinit light BurntSushi/ripgrep
+# zi0c id-as'ripgrep' \
+#   from'gh-r' \
+#   as'program' \
+#   nocompile \
+#   mv'ripgrep*/rg -> rg' \
+#   pick'rg'
+# zinit light BurntSushi/ripgrep
 
 # zi0c id-as'igrep' \
 #   from'gh-r' \
