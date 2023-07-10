@@ -354,7 +354,6 @@ zinit light zsh-users/zsh-syntax-highlighting
 
 zi0c id-as'cht.sh' \
   as'command' \
-  nocompile \
   has'rlwrap' \
   pick'cht.sh' \
   atload'export CHTSH="$XDG_CONFIG_HOME"'
