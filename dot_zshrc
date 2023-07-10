@@ -644,7 +644,6 @@ zinit light neovim/neovim
 zi0c id-as'forgit' \
   depth=1 \
   cloneonly \
-  nocompile \
   atpull'%atclone' \
   nocd
 zinit light wfxr/forgit
