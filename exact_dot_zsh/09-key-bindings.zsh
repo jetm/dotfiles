@@ -19,6 +19,16 @@ bindkey -M vicmd ' ' edit-command-line
 bindkey -M viins '^[[A' history-substring-search-up
 bindkey -M viins '^[[B' history-substring-search-down
 
+paste-from-clipboard() {
+  local clipboard
+  # clipboard=$(xsel -o -b)
+  clipboard=$(cb paste 2> /dev/null | cat -)
+  BUFFER="$LBUFFER$clipboard$RBUFFER"
+  CURSOR="$(($CURSOR + ${#clipboard}))"
+}
+zle -N paste-from-clipboard
+bindkey '^V'      paste-from-clipboard # Ctrl + V
+
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
     BUFFER="fg"
