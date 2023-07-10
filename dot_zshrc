@@ -780,13 +780,13 @@ zinit snippet https://raw.githubusercontent.com/tj/git-extras/master/bin/git-und
 #   pick'stylua'
 # zinit light JohnnyMorganz/StyLua
 
-zi0c id-as'gitui' \
-  from'gh-r' \
-  as'program' \
-  nocompile \
-  bpick'*linux-musl*' \
-  pick'gitui'
-zinit light extrawurst/gitui
+# zi0c id-as'gitui' \
+#   from'gh-r' \
+#   as'program' \
+#   nocompile \
+#   bpick'*linux-musl*' \
+#   pick'gitui'
+# zinit light extrawurst/gitui
 
 # zi0c id-as'direnv' \
 #   from'gh-r' \
