@@ -26,13 +26,13 @@ local M = {
   build = ":TSUpdate",
 }
 
-local ok, nvim_treesitter = pcall(require, "nvim-treesitter.configs")
-if not ok then
-  error("Loading nvim-treesitter.configs")
-  return
-end
-
 function M.config()
+  local ok, nvim_treesitter = pcall(require, "nvim-treesitter.configs")
+  if not ok then
+    error("Loading nvim-treesitter.configs")
+    return
+  end
+
   require("nvim-treesitter.install").prefer_git = true
   -- require("nvim-treesitter.install").compilers = { "gcc" }
 
@@ -65,7 +65,11 @@ function M.config()
     },
     indent = { enable = true, disable = { "gitcommit", "python" } },
     context_commentstring = { enable = true, enable_autocmd = false },
-    -- incremental_selection = { enable = true, },
+    incremental_selection = { enable = true },
+    matchup = {
+      enable = true,
+      enable_quotes = true,
+    },
   })
 end
 
