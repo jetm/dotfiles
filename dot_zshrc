@@ -332,14 +332,14 @@ zinit light zsh-users/zsh-syntax-highlighting
 #
 # Diff
 #
-zi0c id-as'delta' \
-  from'gh-r' \
-  as'program' \
-  nocompile \
-  bpick'*x86_64-unknown-linux-musl*' \
-  mv'delta*/delta -> delta' \
-  pick'delta'
-zinit light dandavison/delta
+# zi0c id-as'delta' \
+#   from'gh-r' \
+#   as'program' \
+#   nocompile \
+#   bpick'*x86_64-unknown-linux-musl*' \
+#   mv'delta*/delta -> delta' \
+#   pick'delta'
+# zinit light dandavison/delta
 
 #
 # Cheatsheet
