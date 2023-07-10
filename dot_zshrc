@@ -52,7 +52,6 @@ zi0c() { zi_ice wait'2' "$@"; }
 # Must be run just after zinit
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh
 zi_ice id-as'p10k' \
-  nocompile \
   depth=1
 zinit light romkatv/powerlevel10k
 
