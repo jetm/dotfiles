@@ -242,15 +242,15 @@ zi0b id-as'fzf' \
   pick'fzf'
 zinit light junegunn/fzf
 
-zi0c id-as'zoxide' \
-  from'gh-r' \
-  as'program' \
-  nocompile \
-  bpick'*x86_64*linux*' \
-  mv'zoxide*/zoxide -> zoxide' \
-  pick'zoxide' \
-  atload'eval "$(zoxide init zsh --cmd j)";'
-zinit light ajeetdsouza/zoxide
+# zi0c id-as'zoxide' \
+#   from'gh-r' \
+#   as'program' \
+#   nocompile \
+#   bpick'*x86_64*linux*' \
+#   mv'zoxide*/zoxide -> zoxide' \
+#   pick'zoxide' \
+#   atload'eval "$(zoxide init zsh --cmd j)";'
+# zinit light ajeetdsouza/zoxide
 
 zi0c id-as'zsh-bd' \
   nocompile \
