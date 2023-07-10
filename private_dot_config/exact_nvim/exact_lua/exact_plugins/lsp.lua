@@ -23,9 +23,16 @@ local M = {
       ft = { "gitcommit", "markdown" },
     },
 
-    -- snippets
-    { "L3MON4D3/LuaSnip" },
-    { "rafamadriz/friendly-snippets" },
+    --  Vim Snippets engine  [snippet engine] + [snippet templates]
+    {
+      "L3MON4D3/LuaSnip",
+      dependencies = {
+        "rafamadriz/friendly-snippets",
+      },
+      config = function(_, _)
+        require("luasnip.loaders.from_vscode").lazy_load()
+      end,
+    },
 
     -- null-ls
     "jose-elias-alvarez/null-ls.nvim",
@@ -103,8 +110,6 @@ function M.config()
     return
   end
 
-  require("luasnip.loaders.from_vscode").lazy_load()
-
   local luasnip = require("luasnip")
 
   cmp.setup({
@@ -120,24 +125,39 @@ function M.config()
       -- `Enter` key to confirm completion
       ["<CR>"] = cmp.mapping.confirm({ select = false }),
 
-      -- Ctrl+Space to trigger completion menu
-      ["<C-Space>"] = cmp.mapping.complete(),
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
-          cmp.confirm({ select = true })
-        elseif luasnip.jumpable(1) then
-          luasnip.jump(1)
+          cmp.select_next_item()
+        elseif luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
         elseif check_back_space() then
           fallback()
         else
           cmp.complete()
         end
       end, { "i", "s" }),
+
+      ["<S-Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        else
+          fallback()
+        end
+      end, { "i", "s" }),
     },
-    sources = {
-      { name = "path" },
-      { name = "nvim_lsp", keyword_length = 1 },
-      { name = "buffer", keyword_length = 3 },
+    sources = cmp.config.sources({
+      { name = "nvim_lsp", priority = 1000 },
+      { name = "luasnip", priority = 750 },
+      { name = "buffer", priority = 500 },
+      { name = "path", priority = 250 },
+    }),
+    duplicates = {
+      nvim_lsp = 1,
+      luasnip = 1,
+      buffer = 1,
+      path = 1,
     },
     formatting = {
       format = lspkind.cmp_format({ with_text = false }),
