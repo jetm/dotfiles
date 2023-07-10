@@ -156,6 +156,9 @@ return {
       stages = "static",
       timeout = 2000,
     },
+    config = function ()
+      vim.notify = require("notify")
+    end
   },
 
   -- File explorer
