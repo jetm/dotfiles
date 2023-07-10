@@ -441,12 +441,12 @@ zinit snippet https://cht.sh/:cht.sh
 #   pick'bat'
 # zinit light sharkdp/bat
 
-zi0c id-as'duf' \
-  from'gh-r' \
-  nocompile \
-  as'program' \
-  bpick'*linux_x86_64.tar.gz'
-zinit light muesli/duf
+# zi0c id-as'duf' \
+#   from'gh-r' \
+#   nocompile \
+#   as'program' \
+#   bpick'*linux_x86_64.tar.gz'
+# zinit light muesli/duf
 
 zi0c id-as'ouch' \
   from'gh-r' \
