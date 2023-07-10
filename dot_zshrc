@@ -389,14 +389,14 @@ zinit snippet https://cht.sh/:cht.sh
 #
 # File utilities
 #
-zi0c id-as'dust' \
-  from'gh-r' \
-  as'program' \
-  nocompile \
-  bpick'*linux*gnu*' \
-  mv'dust*/dust -> dust' \
-  pick'dust'
-zinit light bootandy/dust
+# zi0c id-as'dust' \
+#   from'gh-r' \
+#   as'program' \
+#   nocompile \
+#   bpick'*linux*gnu*' \
+#   mv'dust*/dust -> dust' \
+#   pick'dust'
+# zinit light bootandy/dust
 
 # shim fails for fd
 zi0b id-as'fd' \
