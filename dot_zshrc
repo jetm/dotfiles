@@ -663,7 +663,6 @@ zinit light nikitavoloboev/gitupdate
 
 zi0c id-as'git-undo' \
   as'program' \
-  nocompile \
   pick'git-undo'
 zinit snippet https://raw.githubusercontent.com/tj/git-extras/master/bin/git-undo
 
