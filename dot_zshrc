@@ -322,7 +322,6 @@ autopair-init
 zi0c id-as'zsh-syntax-highlighting' \
   depth=1 \
   cloneonly \
-  nocompile \
   atpull'%atclone' \
   nocd
 zinit light zsh-users/zsh-syntax-highlighting
