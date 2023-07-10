@@ -134,4 +134,22 @@ return {
     "monkoose/matchparen.nvim",
     config = true,
   },
+
+  -- An alternative to sudo.vim
+  {
+    -- Suda
+    "lambdalisue/suda.vim",
+    config = vim.api.nvim_set_var("suda_smart_edit", 1),
+    cmd = { "SudaRead", "SudaWrite" },
+  },
+
+  { "petertriho/nvim-scrollbar" },
+
+  {
+    "rcarriga/nvim-notify",
+    opts = {
+      stages = "static",
+      timeout = 2000,
+    },
+  },
 }

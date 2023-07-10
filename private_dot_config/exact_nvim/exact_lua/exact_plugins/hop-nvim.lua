@@ -1,6 +1,7 @@
 local M = {
   "phaazon/hop.nvim",
   branch = "v2",
+  cmd = { "HopChar2" },
   lazy = false,
 }
 
@@ -38,6 +39,7 @@ function M.config()
   yet.map({ "n", "x", "o" }, "s", "<Cmd>HopChar2<CR>", { silent = true })
 
   hop.setup({})
+
   if vim.api.nvim_echo == noop then
     vim.api.nvim_echo = echo
   end
