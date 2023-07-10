@@ -92,7 +92,6 @@ zi_ice id-as'prezto' \
   depth=1 \
   cloneonly \
   atpull"%atclone" \
-  nocompile \
   nocd
 zinit light sorin-ionescu/prezto
 
