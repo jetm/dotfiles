@@ -424,13 +424,13 @@ zinit snippet https://cht.sh/:cht.sh
 #   pick'sd'
 # zinit light chmln/sd
 
-zi0c id-as'sad' \
-  from'gh-r' \
-  as'program' \
-  nocompile \
-  bpick'*x86_64-unknown-linux-gnu*' \
-  pick'sad'
-zinit light ms-jpq/sad
+# zi0c id-as'sad' \
+#   from'gh-r' \
+#   as'program' \
+#   nocompile \
+#   bpick'*x86_64-unknown-linux-gnu*' \
+#   pick'sad'
+# zinit light ms-jpq/sad
 
 zi0c id-as'bat' \
   from'gh-r' \
