@@ -21,7 +21,6 @@ bindkey -M viins '^[[B' history-substring-search-down
 
 paste-from-clipboard() {
   local clipboard
-  # clipboard=$(xsel -o -b)
   clipboard=$(cb paste 2> /dev/null | cat -)
   BUFFER="$LBUFFER$clipboard$RBUFFER"
   CURSOR="$(($CURSOR + ${#clipboard}))"
