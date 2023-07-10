@@ -805,12 +805,12 @@ zi0c id-as'checkmake' \
   mv'checkmake*->checkmake'
 zinit light mrtazz/checkmake
 
-zi_ice id-as'atuin' \
-  from'gh-r' \
-  as'program' \
-  nocompile \
-  sbin"**/atuin"
-zinit light ellie/atuin
+# zi_ice id-as'atuin' \
+#   from'gh-r' \
+#   as'program' \
+#   nocompile \
+#   sbin"**/atuin"
+# zinit light ellie/atuin
 
 # zi0c id-as'difftastic' \
 #   cargo'!difftastic'
