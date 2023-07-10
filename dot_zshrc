@@ -215,9 +215,16 @@ fi
 ZVM_VI_SURROUND_BINDKEY=s-prefix
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 zi0c id-as'zsh-vi-mode' \
-  nocompile \
   depth=1
 zinit light jeffreytse/zsh-vi-mode
+
+#
+# system clipboard
+#
+# ZSH_SYSTEM_CLIPBOARD_METHOD=tmux
+# zi_ice id-as'zsh-system-clipboard' \
+#   depth=1
+# zinit light kutsan/zsh-system-clipboard
 
 #
 # Navigation/completion
