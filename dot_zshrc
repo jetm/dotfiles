@@ -399,13 +399,13 @@ zinit snippet https://cht.sh/:cht.sh
 # zinit light bootandy/dust
 
 # shim fails for fd
-zi0b id-as'fd' \
-  from'gh-r' \
-  as'program' \
-  nocompile \
-  mv'fd*/fd -> fd' \
-  pick'fd'
-zinit light sharkdp/fd
+# zi0b id-as'fd' \
+#   from'gh-r' \
+#   as'program' \
+#   nocompile \
+#   mv'fd*/fd -> fd' \
+#   pick'fd'
+# zinit light sharkdp/fd
 
 zi0a id-as'exa' \
   from'gh-r' \
