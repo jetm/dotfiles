@@ -432,14 +432,14 @@ zinit snippet https://cht.sh/:cht.sh
 #   pick'sad'
 # zinit light ms-jpq/sad
 
-zi0c id-as'bat' \
-  from'gh-r' \
-  as'program' \
-  nocompile \
-  bpick'*x86_64-unknown-linux-musl*' \
-  mv'bat*/bat -> bat' \
-  pick'bat'
-zinit light sharkdp/bat
+# zi0c id-as'bat' \
+#   from'gh-r' \
+#   as'program' \
+#   nocompile \
+#   bpick'*x86_64-unknown-linux-musl*' \
+#   mv'bat*/bat -> bat' \
+#   pick'bat'
+# zinit light sharkdp/bat
 
 zi0c id-as'duf' \
   from'gh-r' \
