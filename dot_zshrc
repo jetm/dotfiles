@@ -457,13 +457,13 @@ zinit snippet https://cht.sh/:cht.sh
 #   pick'ouch'
 # zinit light ouch-org/ouch
 
-zi0c id-as'erdtree' \
-  from'gh-r' \
-  as'program' \
-  nocompile \
-  bpick'*x86_64-unknown-linux-gnu*' \
-  pick'erdtree'
-zinit light solidiquis/erdtree
+# zi0c id-as'erdtree' \
+#   from'gh-r' \
+#   as'program' \
+#   nocompile \
+#   bpick'*x86_64-unknown-linux-gnu*' \
+#   pick'erdtree'
+# zinit light solidiquis/erdtree
 
 zi0c id-as'codespelunker' \
   from'gh-r' \
