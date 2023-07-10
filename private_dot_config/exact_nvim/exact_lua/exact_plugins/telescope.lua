@@ -12,15 +12,8 @@ local M = {
     { "nvim-lua/popup.nvim" },
     { "nvim-lua/plenary.nvim" },
     { "brookhong/telescope-pathogen.nvim" },
+    { "rcarriga/nvim-notify" },
   },
-  config = function()
-    require("telescope").load_extension("pathogen")
-    vim.keymap.set(
-      "v",
-      "<space>g",
-      require("telescope").extensions["pathogen"].live_grep
-    )
-  end,
   keys = {
     { "<space>g", ":Telescope pathogen live_grep<CR>", silent = true },
     { "<C-p>", ":Telescope pathogen find_files<CR>", silent = true },
@@ -48,7 +41,7 @@ function M.config()
       prompt_prefix = "🔍 ",
       selection_caret = "  ",
       initial_mode = "insert",
-      path_display = { },
+      path_display = {},
       layout_config = {
         horizontal = { preview_width = 0.55 },
         vertical = { mirror = false },
@@ -61,7 +54,15 @@ function M.config()
     },
   })
 
+  telescope.load_extension("pathogen")
+  vim.keymap.set(
+    "v",
+    "<space>g",
+    require("telescope").extensions["pathogen"].live_grep
+  )
+
   telescope.load_extension("fzf")
+  telescope.load_extension("notify")
 end
 
 return M
