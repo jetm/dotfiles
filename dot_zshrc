@@ -47,6 +47,15 @@ zi0c() { zi_ice wait'2' "$@"; }
 # zinit pack="default" for zsh
 
 #
+# vi-mode
+#
+ZVM_VI_SURROUND_BINDKEY=s-prefix
+ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+zi_ice id-as'zsh-vi-mode' \
+  depth=1
+zinit light jeffreytse/zsh-vi-mode
+
+#
 # Powerlevel10k
 #
 # Must be run just after zinit
@@ -58,31 +67,8 @@ zinit light romkatv/powerlevel10k
 zi_ice id-as'fzf-tab'
 zinit light Aloxaf/fzf-tab
 
-# Alternative to fzf-tab, but less friendly
-# zi_ice id-as'fzf-tab-completion' \
-#   pick'zsh/fzf-zsh-completion.sh'
-# zinit light "lincheney/fzf-tab-completion"
-
-# Git status is still slower than p10k gitstatusd
-# zi_ice id-as'starship' \
-#   from"gh-r" \
-#   as"program" \
-#   atload'!eval $(starship init zsh)'
-# zinit light starship/starship
-
-# zi_ice id-as'zsh-completions' \
-#   atload"zicompinit; zicdreplay" \
-#   wait \
-#   blockf
-# zinit light zsh-users/zsh-completions
-
 zi_ice id-as'zsh-autosuggestions'
 zinit light zsh-users/zsh-autosuggestions
-
-# TODO: problem with zsh-autosuggestions
-# zstyle ':autocomplete:key-bindings' enabled no
-# zi_ice id-as'zsh-autocomplete'
-# zinit light marlonrichert/zsh-autocomplete
 
 #
 # prezto plugins
@@ -95,136 +81,7 @@ zi_ice id-as'prezto' \
   nocd
 zinit light sorin-ionescu/prezto
 
-load_prezto_mod() { turbo_source "${ZINIT[PLUGINS_DIR]}/prezto/modules/$1/init.zsh"; }
-
-# Required here before prezto is loaded
-zstyle ':prezto:*:*' case-sensitive 'yes'
-zstyle ':prezto:*:*' color 'yes'
-load_prezto_mod helper
-load_prezto_mod environment
-load_prezto_mod history
-load_prezto_mod utility
-# requires utility
-load_prezto_mod completion
-
 zinit id-as'zsh-defer' light-mode for romkatv/zsh-defer
-
-if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
-
-  # There is a bug on zinit
-  # zinit id-as'git' \
-  #   dlink"/git/git/archive/refs/tags/v%VERSION%.zip" \
-  #   as'readurl|null' \
-  #   atclone"ziextract --move --auto; \
-  #     make prefix=$ZPFX USE_LIBPCRE2=1 INSTALL_SYMLINKS=1 \
-  #     -j$(nproc) all man install install-man &&
-  #     rm -vf $ZPFX/bin/git-shell;
-  #     rm -vf $ZPFX/bin/git-cvsserver;
-  #     rm -vf $ZPFX/bin/gitk;" \
-  #   atpull'%atclone' \
-  #   for https://github.com/git/git/tags/
-
-  # look for 70-asdf.zsh configuration file
-  zi0a id-as'asdf' \
-    atinit'export ASDF_DATA_DIR="$HOME/.asdf"; \
-      export ASDF_CONFIG_FILE="$ASDF_DATA_DIR/.asdfrc";'
-  zinit light asdf-vm/asdf
-  turbo_source "${ZINIT[PLUGINS_DIR]}/asdf/asdf.sh"
-
-  zi0c id-as'topgrade' \
-    from'gh-r' \
-    as'program' \
-    nocompile \
-    bpick'*x86_64-unknown-linux-musl*' \
-    pick'topgrade'
-  zinit light r-darwish/topgrade
-
-  zi0c id-as'less' \
-    ver'v602' \
-    as'program' \
-    atclone'make -f Makefile.aut && autoreconf --install &&
-      ./configure --with-regex=gnu --with-editor=nvim' \
-    atpull"%atclone" \
-    make"-j$(nproc)" \
-    pick'less'
-  zinit light gwsw/less
-
-  zi0c id-as'ov' \
-    from'gh-r' \
-    as'program' \
-    nocompile \
-    bpick'*linux_amd64*' \
-    pick'ov'
-  zinit light noborus/ov
-
-  zi0c id-as'clangd' \
-    from'gh-r' \
-    as'program'  \
-    nocompile \
-    bpick'clangd-linux*' \
-    mv'clangd*/bin/clangd -> clangd'
-	zinit light clangd/clangd
-
-  zinit id-as'git-interactive-rebase-tool' \
-    as'readurl|null' \
-    nocompile \
-    dlink"/MitMaro/git-interactive-rebase-tool/releases/download/%VERSION%/git-interactive-rebase-tool-%VERSION%-ubuntu-16.04_amd64.deb" \
-    atclone"ziextract --move --auto; \
-      dpkg -x git-interactive-rebase-tool .; \
-      mv -vf usr/bin/interactive-rebase-tool $ZPFX/bin;" \
-    atpull'%atclone' \
-    for https://github.com/MitMaro/git-interactive-rebase-tool/releases
-
-  zi0c id-as'tmux' \
-    as"program" \
-    ver"3.3a" \
-    atclone"./autogen.sh && ./configure && make -j$(nproc)" \
-    mv"tmux -> /ws/${USER}/shell-goodies/repos/dotfiles/exact_bin/tmux"
-  zinit light tmux/tmux
-
-  zi0c id-as'chezmoi' \
-    as'program' \
-    from'gh-r' \
-    cp'completions/chezmoi.zsh -> _chezmoi'
-  zinit light twpayne/chezmoi
-
-  #
-  # JS Node modules
-  #
-  zi0c id-as'node-modules' \
-    node'bash-language-server' \
-    sbin'node_modules/.bin/bash-language-server'
-  zinit light zdharma-continuum/null
-
-  # Put here all rust installations
-  # looks the mv ice doesn't work with rustup cargo
-
-  # zinit id-as'keychain' \
-  #   nocompile \
-  #   dlink"/funtoo/keychain/archive/refs/tags/%VERSION%.zip" \
-  #   as'readurl|null' \
-  #   atclone"ziextract --move --auto; \
-  #     install -m755 keychain $ZPFX/bin/" \
-  #   atpull'%atclone' \
-  #   for https://github.com/funtoo/keychain/releases
-fi
-
-#
-# vi-mode
-#
-ZVM_VI_SURROUND_BINDKEY=s-prefix
-ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-zi0c id-as'zsh-vi-mode' \
-  depth=1
-zinit light jeffreytse/zsh-vi-mode
-
-#
-# system clipboard
-#
-# ZSH_SYSTEM_CLIPBOARD_METHOD=tmux
-# zi_ice id-as'zsh-system-clipboard' \
-#   depth=1
-# zinit light kutsan/zsh-system-clipboard
 
 #
 # Navigation/completion
@@ -242,6 +99,136 @@ zi0b id-as'fzf' \
   pick'fzf'
 zinit light junegunn/fzf
 
+zi0c id-as'zsh-bd' \
+  depth=1
+zinit light tarrasch/zsh-bd
+
+# export ZPWR_EXPAND_TO_HISTORY=true
+zi0b id-as'zsh-expand' \
+  src"${HOME}/.zsh/zsh-aliases"
+zinit light MenkeTechnologies/zsh-expand
+
+# Quicker doing manual initialization
+zi0b id-as'zsh-autopair' \
+  atinit'AUTOPAIR_INHIBIT_INIT=1;'
+zinit light hlissner/zsh-autopair
+
+# zsh-syntax-highlighting is quicker than fast-syntax-highlighting
+zi0c id-as'zsh-syntax-highlighting' \
+  depth=1 \
+  cloneonly \
+  atpull'%atclone' \
+  nocd
+zinit light zsh-users/zsh-syntax-highlighting
+
+zi0c id-as'cht.sh' \
+  as'command' \
+  has'rlwrap' \
+  pick'cht.sh' \
+  atload'export CHTSH="$XDG_CONFIG_HOME"'
+zinit snippet https://cht.sh/:cht.sh
+
+#
+# neovim stable releases
+#
+zi0c id-as'nvim' \
+  ver'v0.9.1' \
+  as'program' \
+  make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
+  bin"$ZPFX/bin/nvim"
+zinit light neovim/neovim
+
+zi0c id-as'forgit' \
+  depth=1 \
+  cloneonly \
+  atpull'%atclone' \
+  nocd
+zinit light wfxr/forgit
+
+zi0c id-as'git-update' \
+  as'program' \
+  atclone'go get && go build && mv -v gitupdate git-update' \
+  atpull'%atclone' \
+  pick'git-update'
+zinit light nikitavoloboev/gitupdate
+
+zi0c id-as'git-undo' \
+  as'program' \
+  pick'git-undo'
+zinit snippet https://raw.githubusercontent.com/tj/git-extras/master/bin/git-undo
+
+zi0c id-as'checkmake' \
+  from'gh-r' \
+  as'program' \
+  nocompile \
+  bpick'*linux.amd64*' \
+  mv'checkmake*->checkmake'
+zinit light mrtazz/checkmake
+
+# zsh-vi-mode will auto execute this zvm_after_init function
+zvm_after_init() {
+  load_prezto_mod() { turbo_source "${ZINIT[PLUGINS_DIR]}/prezto/modules/$1/init.zsh"; }
+
+  # Required here before prezto is loaded
+  zstyle ':prezto:*:*' case-sensitive 'yes'
+  zstyle ':prezto:*:*' color 'yes'
+  load_prezto_mod helper
+  load_prezto_mod environment
+  load_prezto_mod history
+  load_prezto_mod utility
+  # requires utility
+  load_prezto_mod completion
+
+  turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-bd/bd.zsh"
+
+  turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-autopair/autopair.zsh"
+  autopair-init
+
+  export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+  turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+  export FORGIT_NO_ALIASES=1
+  turbo_source "${ZINIT[PLUGINS_DIR]}/forgit/forgit.plugin.sh"
+
+  if (command -v keychain >/dev/null 2>&1); then
+    if [[ -f "$HOME/.ssh/id_rsa" ]]; then
+      defer eval "$(keychain --eval --quiet --agents ssh id_rsa)"
+    fi
+  fi
+
+  # required to read fzf key-bindings, otherwise they will be overwritten by zsh-vi-mode
+  turbo_source "${ZINIT[PLUGINS_DIR]}/fzf/key-bindings.zsh"
+
+  if (command -v atuin >/dev/null 2>&1); then
+    export ATUIN_NOBIND="true"
+    eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
+  fi
+
+  #
+  # Put most source here to improve zsh load speed
+  #
+  # extensions dotfiles
+  for file in "${HOME}"/.zsh/*.zsh; do
+    turbo_source "${file}"
+  done
+  unset file
+}
+
+# Soure here because doing source inside of zinit is slow
+source "${HOME}"/.p10k.zsh
+
+unset turbo_source
+unset load_prezto_mod
+unset z_ice
+unset zi0a
+unset zi0b
+unset zi0c
+
+# Alternative to fzf-tab, but less friendly
+# zi_ice id-as'fzf-tab-completion' \
+#   pick'zsh/fzf-zsh-completion.sh'
+# zinit light "lincheney/fzf-tab-completion"
+
 # zi0c id-as'zoxide' \
 #   from'gh-r' \
 #   as'program' \
@@ -252,10 +239,131 @@ zinit light junegunn/fzf
 #   atload'eval "$(zoxide init zsh --cmd j)";'
 # zinit light ajeetdsouza/zoxide
 
-zi0c id-as'zsh-bd' \
-  depth=1
-zinit light tarrasch/zsh-bd
-turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-bd/bd.zsh"
+# Git status is still slower than p10k gitstatusd
+# zi_ice id-as'starship' \
+#   from"gh-r" \
+#   as"program" \
+#   atload'!eval $(starship init zsh)'
+# zinit light starship/starship
+
+# zi_ice id-as'zsh-completions' \
+#   atload"zicompinit; zicdreplay" \
+#   wait \
+#   blockf
+# zinit light zsh-users/zsh-completions
+
+# TODO: problem with zsh-autosuggestions
+# zstyle ':autocomplete:key-bindings' enabled no
+# zi_ice id-as'zsh-autocomplete'
+# zinit light marlonrichert/zsh-autocomplete
+
+# if [ ! -f /etc/arch-release ] || [ ! -f /etc/manjaro-release ]; then
+
+  # There is a bug on zinit
+  # zinit id-as'git' \
+  #   dlink"/git/git/archive/refs/tags/v%VERSION%.zip" \
+  #   as'readurl|null' \
+  #   atclone"ziextract --move --auto; \
+  #     make prefix=$ZPFX USE_LIBPCRE2=1 INSTALL_SYMLINKS=1 \
+  #     -j$(nproc) all man install install-man &&
+  #     rm -vf $ZPFX/bin/git-shell;
+  #     rm -vf $ZPFX/bin/git-cvsserver;
+  #     rm -vf $ZPFX/bin/gitk;" \
+  #   atpull'%atclone' \
+  #   for https://github.com/git/git/tags/
+
+  # look for 70-asdf.zsh configuration file
+ #  zi0a id-as'asdf' \
+ #    atinit'export ASDF_DATA_DIR="$HOME/.asdf"; \
+ #      export ASDF_CONFIG_FILE="$ASDF_DATA_DIR/.asdfrc";'
+ #  zinit light asdf-vm/asdf
+ #  turbo_source "${ZINIT[PLUGINS_DIR]}/asdf/asdf.sh"
+	#
+ #  zi0c id-as'topgrade' \
+ #    from'gh-r' \
+ #    as'program' \
+ #    nocompile \
+ #    bpick'*x86_64-unknown-linux-musl*' \
+ #    pick'topgrade'
+ #  zinit light r-darwish/topgrade
+	#
+ #  zi0c id-as'less' \
+ #    ver'v602' \
+ #    as'program' \
+ #    atclone'make -f Makefile.aut && autoreconf --install &&
+ #      ./configure --with-regex=gnu --with-editor=nvim' \
+ #    atpull"%atclone" \
+ #    make"-j$(nproc)" \
+ #    pick'less'
+ #  zinit light gwsw/less
+	#
+ #  zi0c id-as'ov' \
+ #    from'gh-r' \
+ #    as'program' \
+ #    nocompile \
+ #    bpick'*linux_amd64*' \
+ #    pick'ov'
+ #  zinit light noborus/ov
+	#
+ #  zi0c id-as'clangd' \
+ #    from'gh-r' \
+ #    as'program'  \
+ #    nocompile \
+ #    bpick'clangd-linux*' \
+ #    mv'clangd*/bin/clangd -> clangd'
+	# zinit light clangd/clangd
+	#
+ #  zinit id-as'git-interactive-rebase-tool' \
+ #    as'readurl|null' \
+ #    nocompile \
+ #    dlink"/MitMaro/git-interactive-rebase-tool/releases/download/%VERSION%/git-interactive-rebase-tool-%VERSION%-ubuntu-16.04_amd64.deb" \
+ #    atclone"ziextract --move --auto; \
+ #      dpkg -x git-interactive-rebase-tool .; \
+ #      mv -vf usr/bin/interactive-rebase-tool $ZPFX/bin;" \
+ #    atpull'%atclone' \
+ #    for https://github.com/MitMaro/git-interactive-rebase-tool/releases
+	#
+ #  zi0c id-as'tmux' \
+ #    as"program" \
+ #    ver"3.3a" \
+ #    atclone"./autogen.sh && ./configure && make -j$(nproc)" \
+ #    mv"tmux -> /ws/${USER}/shell-goodies/repos/dotfiles/exact_bin/tmux"
+ #  zinit light tmux/tmux
+	#
+ #  zi0c id-as'chezmoi' \
+ #    as'program' \
+ #    from'gh-r' \
+ #    cp'completions/chezmoi.zsh -> _chezmoi'
+ #  zinit light twpayne/chezmoi
+
+  #
+  # JS Node modules
+  #
+  # zi0c id-as'node-modules' \
+  #   node'bash-language-server' \
+  #   sbin'node_modules/.bin/bash-language-server'
+  # zinit light zdharma-continuum/null
+
+  # Put here all rust installations
+  # looks the mv ice doesn't work with rustup cargo
+
+  # zinit id-as'keychain' \
+  #   nocompile \
+  #   dlink"/funtoo/keychain/archive/refs/tags/%VERSION%.zip" \
+  #   as'readurl|null' \
+  #   atclone"ziextract --move --auto; \
+  #     install -m755 keychain $ZPFX/bin/" \
+  #   atpull'%atclone' \
+  #   for https://github.com/funtoo/keychain/releases
+# fi
+
+#
+# system clipboard
+#
+# ZSH_SYSTEM_CLIPBOARD_METHOD=tmux
+# zi_ice id-as'zsh-system-clipboard' \
+#   depth=1
+# zinit light kutsan/zsh-system-clipboard
 
 # Help to remember alias
 # zi0a id-as'zsh-you-should-use'
@@ -281,21 +389,9 @@ turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-bd/bd.zsh"
 # zsh-expand is quicker than zsh-abbrev-alias, but it has issues expanding 2nd
 # command position
 
-# export ZPWR_EXPAND_TO_HISTORY=true
-zi0b id-as'zsh-expand' \
-  src"${HOME}/.zsh/zsh-aliases"
-zinit light MenkeTechnologies/zsh-expand
-
 # Replace by fzf. Conflict with Ctrl-R
 # zi0b id-as'history-search-multi-word'
 # zinit light zdharma-continuum/history-search-multi-word
-
-# Quicker doing manual initialization
-zi0b id-as'zsh-autopair' \
-  atinit'AUTOPAIR_INHIBIT_INIT=1;'
-zinit light hlissner/zsh-autopair
-turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-autopair/autopair.zsh"
-autopair-init
 
 # replaced by tmux-fingers
 # zi0c id-as'fpp' \
@@ -317,15 +413,6 @@ autopair-init
 #
 # CLI Highlight & Colors
 #
-# zsh-syntax-highlighting is quicker than fast-syntax-highlighting
-# atinit'ZSH_HIGHLIGHT_HIGHLIGHTERS=();'
-zi0c id-as'zsh-syntax-highlighting' \
-  depth=1 \
-  cloneonly \
-  atpull'%atclone' \
-  nocd
-zinit light zsh-users/zsh-syntax-highlighting
-
 # zi0a id-as'fast-syntax-highlighting'
 # zinit light zdharma-continuum/fast-syntax-highlighting
 
@@ -351,13 +438,6 @@ zinit light zsh-users/zsh-syntax-highlighting
 #   mv'tldr-* -> tldr' \
 #   pick'tldr'
 # zinit light dbrgn/tealdeer
-
-zi0c id-as'cht.sh' \
-  as'command' \
-  has'rlwrap' \
-  pick'cht.sh' \
-  atload'export CHTSH="$XDG_CONFIG_HOME"'
-zinit snippet https://cht.sh/:cht.sh
 
 #
 # Shell scripting
@@ -549,16 +629,6 @@ zinit snippet https://cht.sh/:cht.sh
 #
 
 #
-# neovim stable releases
-#
-zi0c id-as'nvim' \
-  ver'v0.9.1' \
-  as'program' \
-  make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
-  bin"$ZPFX/bin/nvim"
-zinit light neovim/neovim
-
-#
 # neovim-nightlies
 #
 # zi0c id-as'nvim' \
@@ -641,30 +711,11 @@ zinit light neovim/neovim
 #
 # Git utilities
 #
-zi0c id-as'forgit' \
-  depth=1 \
-  cloneonly \
-  atpull'%atclone' \
-  nocd
-zinit light wfxr/forgit
-
 # zi0c id-as'git-fuzzy' \
 #   as'program' \
 #   nocompile \
 #   pick'bin/git-fuzzy'
 # zinit light bigH/git-fuzzy
-
-zi0c id-as'git-update' \
-  as'program' \
-  atclone'go get && go build && mv -v gitupdate git-update' \
-  atpull'%atclone' \
-  pick'git-update'
-zinit light nikitavoloboev/gitupdate
-
-zi0c id-as'git-undo' \
-  as'program' \
-  pick'git-undo'
-zinit snippet https://raw.githubusercontent.com/tj/git-extras/master/bin/git-undo
 
 # zi0c id-as'bugs' \
 #   as'program' \
@@ -797,14 +848,6 @@ zinit snippet https://raw.githubusercontent.com/tj/git-extras/master/bin/git-und
 #   atload'eval "$(direnv hook zsh)"'
 # zinit light direnv/direnv
 
-zi0c id-as'checkmake' \
-  from'gh-r' \
-  as'program' \
-  nocompile \
-  bpick'*linux.amd64*' \
-  mv'checkmake*->checkmake'
-zinit light mrtazz/checkmake
-
 # zi_ice id-as'atuin' \
 #   from'gh-r' \
 #   as'program' \
@@ -840,45 +883,5 @@ zinit light mrtazz/checkmake
 #   as'program' \
 #   pick'lazydocker'
 # zinit light jesseduffield/lazydocker
-
-export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
-export FORGIT_NO_ALIASES=1
-turbo_source "${ZINIT[PLUGINS_DIR]}/forgit/forgit.plugin.sh"
-
-if (command -v keychain >/dev/null 2>&1); then
-  if [[ -f "$HOME/.ssh/id_rsa" ]]; then
-    zsh-defer eval "$(keychain --eval --quiet --agents ssh id_rsa)"
-  fi
-fi
-
-# The plugin will auto execute this zvm_after_init function
-zvm_after_init() {
-  # required to read fzf key-bindings, otherwise they will be overwritten by zsh-vi-mode
-  turbo_source "${ZINIT[PLUGINS_DIR]}/fzf/key-bindings.zsh"
-
-  export ATUIN_NOBIND="true"
-  eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
-
-  #
-  # Put most source here to improve zsh load speed
-  #
-  # extensions dotfiles
-  for file in "${HOME}"/.zsh/*.zsh; do
-    turbo_source "${file}"
-  done
-  unset file
-}
-
-# Soure here because doing source inside of zinit is slow
-source "${HOME}"/.p10k.zsh
-
-unset turbo_source
-unset load_prezto_mod
-unset z_ice
-unset zi0a
-unset zi0b
-unset zi0c
 
 # vim:ft=zsh ts=2 sw=2 et:
