@@ -70,11 +70,11 @@ zinit light Aloxaf/fzf-tab
 #   atload'!eval $(starship init zsh)'
 # zinit light starship/starship
 
-zi_ice id-as'zsh-completions' \
-  atload"zicompinit; zicdreplay" \
-  wait \
-  blockf
-zinit light zsh-users/zsh-completions
+# zi_ice id-as'zsh-completions' \
+#   atload"zicompinit; zicdreplay" \
+#   wait \
+#   blockf
+# zinit light zsh-users/zsh-completions
 
 zi_ice id-as'zsh-autosuggestions'
 zinit light zsh-users/zsh-autosuggestions
