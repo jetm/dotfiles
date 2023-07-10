@@ -253,7 +253,6 @@ zinit light junegunn/fzf
 # zinit light ajeetdsouza/zoxide
 
 zi0c id-as'zsh-bd' \
-  nocompile \
   depth=1
 zinit light tarrasch/zsh-bd
 turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-bd/bd.zsh"
@@ -274,12 +273,6 @@ turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-bd/bd.zsh"
 # Forgot to use it
 # zi0a id-as'zsh-thefuck'
 # zinit light laggardkernel/zsh-thefuck
-
-# Extra completion no required
-# zi0a id-as'zsh-completions' \
-#   atload"zicompinit; zicdreplay"\
-#   blockf
-# zinit light zsh-users/zsh-completions
 
 # zi0a id-as'zsh-abbrev-alias' \
 #   src"${HOME}/.zsh/zsh-aliases"
