@@ -177,40 +177,48 @@ zvm_after_init() {
   turbo_source "${HOME}/.zsh/key-bindings"
 }
 
-  turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-bd/bd.zsh"
+load_prezto_mod() { turbo_source "${ZINIT[PLUGINS_DIR]}/prezto/modules/$1/init.zsh"; }
 
-  turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-autopair/autopair.zsh"
-  autopair-init
+# Required here before prezto is loaded
+zstyle ':prezto:*:*' case-sensitive 'yes'
+zstyle ':prezto:*:*' color 'yes'
+load_prezto_mod helper
+load_prezto_mod environment
+load_prezto_mod history
+load_prezto_mod utility
+# requires utility
+load_prezto_mod completion
 
-  export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-  turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-bd/bd.zsh"
 
-  export FORGIT_NO_ALIASES=1
-  turbo_source "${ZINIT[PLUGINS_DIR]}/forgit/forgit.plugin.sh"
+turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-autopair/autopair.zsh"
+autopair-init
 
-  if (command -v keychain >/dev/null 2>&1); then
-    if [[ -f "$HOME/.ssh/id_rsa" ]]; then
-      defer eval "$(keychain --eval --quiet --agents ssh id_rsa)"
-    fi
+export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+export FORGIT_NO_ALIASES=1
+turbo_source "${ZINIT[PLUGINS_DIR]}/forgit/forgit.plugin.sh"
+
+if (command -v keychain >/dev/null 2>&1); then
+  if [[ -f "$HOME/.ssh/id_rsa" ]]; then
+    zsh-defer eval "$(keychain --eval --quiet --agents ssh id_rsa)"
   fi
+fi
 
-  # required to read fzf key-bindings, otherwise they will be overwritten by zsh-vi-mode
-  turbo_source "${ZINIT[PLUGINS_DIR]}/fzf/key-bindings.zsh"
+if (command -v atuin >/dev/null 2>&1); then
+  export ATUIN_NOBIND="true"
+  zsh-defer eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
+fi
 
-  if (command -v atuin >/dev/null 2>&1); then
-    export ATUIN_NOBIND="true"
-    eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
-  fi
-
-  #
-  # Put most source here to improve zsh load speed
-  #
-  # extensions dotfiles
-  for file in "${HOME}"/.zsh/*.zsh; do
-    turbo_source "${file}"
-  done
-  unset file
-}
+#
+# Put most source here to improve zsh load speed
+#
+# extensions dotfiles
+for file in "${HOME}"/.zsh/*.zsh; do
+  turbo_source "${file}"
+done
+unset file
 
 # Soure here because doing source inside of zinit is slow
 source "${HOME}"/.p10k.zsh
@@ -387,6 +395,10 @@ unset zi0c
 # zsh-expand is quicker than zsh-abbrev-alias, but it has issues expanding 2nd
 # command position
 
+#
+# Navigation/completion
+#
+# use `cat -v` to define the map
 # Replace by fzf. Conflict with Ctrl-R
 # zi0b id-as'history-search-multi-word'
 # zinit light zdharma-continuum/history-search-multi-word
