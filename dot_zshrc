@@ -168,7 +168,9 @@ zinit light mrtazz/checkmake
 
 # zsh-vi-mode will auto execute this zvm_after_init function
 zvm_after_init() {
-  load_prezto_mod() { turbo_source "${ZINIT[PLUGINS_DIR]}/prezto/modules/$1/init.zsh"; }
+  # required to read fzf key-bindings after zsh-vi-mode, otherwise they will be
+  # overwritten by zsh-vi-mode
+  turbo_source "${ZINIT[PLUGINS_DIR]}/fzf/key-bindings.zsh"
 
   # required to read custom key-bindings, otherwise they will be overwritten by
   # zsh-vi-mode
