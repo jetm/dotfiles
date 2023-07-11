@@ -5,7 +5,24 @@
 # Use cat -v > /dev/null to know the keybinding
 #
 
-# Ctrl+right => forward word
+# <Ctrl+Right>  => Forward word
+# <Ctrl+Left>   => Backward word
+# <Space>       => Open $EDITOR
+# <Ctrl+V>      => Paste from system clipboard
+# <UP>          => History search up for substring
+# <DOWN>        => History search down for substring
+# <Ctrl+Z>      => Run fg
+# <Alt+A>       => Search for alias
+# <Alt+F>       => Search for functions
+# <Ctrl+F>      => Search for files
+# <Ctrl+T>      => Search in history
+# <Alt+S>       => Insert sudo word
+# <Alt+l>       => Run ls
+# <Alt+Shift+S> => Run with sudo word
+# <Ctrl+J>      => Insert $()
+# <Alt+Enter>   => execute the command and don't clear it
+
+# <Ctrl+Right> => Forward word
 bindkey "^[[1;5C" forward-word
 
 # Ctrl+left => backward word
