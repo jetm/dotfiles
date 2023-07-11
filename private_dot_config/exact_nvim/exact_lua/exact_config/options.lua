@@ -12,7 +12,7 @@ if vim.fn.has("nvim-0.9") == 1 then
   o.diffopt:append("linematch:60") -- enable linematch diff algorithm
 end
 
-o.breakindent = true -- Wrap indent to match  line start
+o.breakindent = true -- Wrap indent to match line start
 o.clipboard = "unnamedplus" -- Connection to the system clipboard
 o.completeopt = { "menu", "menuone", "noselect" } -- Options for insert mode completion
 o.copyindent = true -- Copy the previous indentation on autoindenting
@@ -45,7 +45,6 @@ o.undofile = true -- Enable persistent undo
 o.undodir = os.getenv 'HOME' .. "/.vim_data/undofile" -- Where to save undofile
 o.updatetime = 300 -- Length of time to wait before triggering the plugin
 o.virtualedit = "block" -- allow going past end of line in visual block mode
-o.wrap = false -- Disable wrapping of lines longer than the width of window
 o.writebackup = false -- Disable making a backup before overwriting a file
 
 local g = vim.g -- Global set options
