@@ -25,12 +25,14 @@
 # <Ctrl+Right> => Forward word
 bindkey "^[[1;5C" forward-word
 
-# Ctrl+left => backward word
+# <Ctrl+Left> => Backward word
 bindkey "^[[1;5D" backward-word
 
 # same behavior from bash for vi-mode
 autoload edit-command-line
 zle -N edit-command-line
+
+# <Space>
 bindkey -M vicmd ' ' edit-command-line
 
 bindkey -M viins '^[[A' history-substring-search-up
@@ -43,7 +45,9 @@ paste-from-clipboard() {
   CURSOR="$(($CURSOR + ${#clipboard}))"
 }
 zle -N paste-from-clipboard
-bindkey '^V'      paste-from-clipboard # Ctrl + V
+
+# <Ctrl+V>
+bindkey '^V' paste-from-clipboard
 
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
@@ -55,6 +59,8 @@ fancy-ctrl-z () {
   fi
 }
 zle -N fancy-ctrl-z
+
+# <Ctrl+Z>
 bindkey '^Z' fancy-ctrl-z
 
 fzf-aliases-widget() {
@@ -71,9 +77,10 @@ fzf-aliases-widget() {
         --preview-window 'up:4:nohidden:wrap' | cut -d' ' -f 1)"
   zle reset-prompt
 }
+zle -N fzf-aliases-widget
 
-zle -N          fzf-aliases-widget
-bindkey '^[a'   fzf-aliases-widget #<Alt-A>
+# <Alt+A>
+bindkey '^[a' fzf-aliases-widget
 
 fzf-functions-widget() {
   # shellcheck disable=SC2034
@@ -86,9 +93,10 @@ fzf-functions-widget() {
 
   zle reset-prompt
 }
+zle -N fzf-functions-widget
 
-zle -N          fzf-functions-widget
-bindkey '^[f'   fzf-functions-widget #<Alt-F>
+# <Alt+F>
+bindkey '^[f' fzf-functions-widget
 
 _fzf-ripgrep_() {
 	RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
@@ -118,31 +126,34 @@ fzf-ripgrep-widget() {
   _fzf-ripgrep_"$*" < "$TTY"
   zle redisplay
 }
+zle -N fzf-ripgrep-widget
 
-zle -N        fzf-ripgrep-widget
-bindkey '^F'  fzf-ripgrep-widget   #<Ctrl-F>
-
-# pressing CTRL-D will not close zsh
-# if there's a text filled this one fixes it
+# <Ctrl-F>
+bindkey '^F' fzf-ripgrep-widget
 
 exit_zsh() {
   exit
 }
-
 zle -N exit_zsh
+
+# pressing CTRL-D will not close zsh
+# if there's a text filled this one fixes it
 bindkey '^D' exit_zsh
 
 # ls if the buffer is empty if not transform text to lowercase
 function magic-ls () {
-    if [[ -z "$BUFFER" ]]; then
-        BUFFER="ls"
-        zle accept-line
-    else
-        zle down-case-word
-    fi
+  if [[ -z "$BUFFER" ]]; then
+    BUFFER="ls"
+    zle accept-line
+  else
+    zle down-case-word
+  fi
 }
-zle -N magic-ls                                             # Ls if the BUFFER is empty if not transform to lowercase
-bindkey '^[l' magic-ls                                      # Alt-l
+# Ls if the BUFFER is empty if not transform to lowercase
+zle -N magic-ls
+
+# <Alt+L>
+bindkey '^[l' magic-ls
 
 # ls automatically after cd and git status if on a git repo
 function cd () {
@@ -153,37 +164,47 @@ function cd () {
       ls -Fh --color=auto --group-directories-first
     fi
   }
-    builtin cd "$@"
-    if [[ -d .git ]]; then
-      git status; echo ""
-      auto_ls
-    else
-      auto_ls
-    fi
+
+  builtin cd "$@"
+
+  if [[ -d .git ]]; then
+    git status; echo ""
+    auto_ls
+  else
+    auto_ls
+  fi
 }
 
+# Insert sudo at the beggining of the line
 function insert_sudo() {
-    BUFFER="sudo $BUFFER"
-    zle end-of-line;
+  BUFFER="sudo $BUFFER"
+  zle end-of-line;
 }
-zle      -N     insert_sudo                                 # Insert sudo at the beggining of the line
-bindkey '^[s'   insert_sudo                                 # Alt-s
+zle -N insert_sudo
 
+# <Alt+S>
+bindkey '^[s' insert_sudo
+
+# Execute the previous run command with sudo (similar to: insert-sudo + enter)
 function execute_sudo!!() {
   [[ -z $BUFFER ]] &&
     zle .up-history
     zle accept-line
   LBUFFER=" sudo $LBUFFER"
 }
-zle     -N      execute_sudo!!                              # Execute the previous run command with sudo (similar to: insert-sudo + enter)
-bindkey '^[S'   execute_sudo!!                              # Alt-Shift-S
+zle -N execute_sudo!!
 
+# <Alt+Shift+S>
+bindkey '^[S' execute_sudo!!
+
+# Create command substitution `$()`
 function insert_cmd_sub {
-    RBUFFER='$()'"$RBUFFER"
-    ((CURSOR=CURSOR+2))
+  RBUFFER='$()'"$RBUFFER"
+  ((CURSOR=CURSOR+2))
 }
-zle      -N   insert_cmd_sub                                 # Create command substitution `$()`
-bindkey '^J'  insert_cmd_sub                                 # Ctrl-J
+zle -N insert_cmd_sub
+# <Ctrl+J>
+bindkey '^J' insert_cmd_sub
 
 # execute the command and don't clear it
 bindkey '^[^M'              accept-and-hold                 # Alt+Enter
