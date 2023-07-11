@@ -177,6 +177,9 @@ zvm_after_init() {
   turbo_source "${HOME}/.zsh/key-bindings"
 }
 
+#
+# prezto settings
+#
 load_prezto_mod() { turbo_source "${ZINIT[PLUGINS_DIR]}/prezto/modules/$1/init.zsh"; }
 
 # Required here before prezto is loaded
@@ -189,14 +192,18 @@ load_prezto_mod utility
 # requires utility
 load_prezto_mod completion
 
+# zsh-bd
 turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-bd/bd.zsh"
 
+# autopair
 turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-autopair/autopair.zsh"
 autopair-init
 
+# zsh-syntax-highlighting
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
+# forgit
 export FORGIT_NO_ALIASES=1
 turbo_source "${ZINIT[PLUGINS_DIR]}/forgit/forgit.plugin.sh"
 
@@ -206,6 +213,7 @@ if (command -v keychain >/dev/null 2>&1); then
   fi
 fi
 
+# atuin
 if (command -v atuin >/dev/null 2>&1); then
   export ATUIN_NOBIND="true"
   zsh-defer eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
@@ -220,7 +228,7 @@ for file in "${HOME}"/.zsh/*.zsh; do
 done
 unset file
 
-# Soure here because doing source inside of zinit is slow
+# Source here. It's slower inside of zinit
 source "${HOME}"/.p10k.zsh
 
 unset turbo_source
