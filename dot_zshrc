@@ -169,15 +169,10 @@ zinit light mrtazz/checkmake
 zvm_after_init() {
   load_prezto_mod() { turbo_source "${ZINIT[PLUGINS_DIR]}/prezto/modules/$1/init.zsh"; }
 
-  # Required here before prezto is loaded
-  zstyle ':prezto:*:*' case-sensitive 'yes'
-  zstyle ':prezto:*:*' color 'yes'
-  load_prezto_mod helper
-  load_prezto_mod environment
-  load_prezto_mod history
-  load_prezto_mod utility
-  # requires utility
-  load_prezto_mod completion
+  # required to read custom key-bindings, otherwise they will be overwritten by
+  # zsh-vi-mode
+  turbo_source "${HOME}/.zsh/key-bindings"
+}
 
   turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-bd/bd.zsh"
 
