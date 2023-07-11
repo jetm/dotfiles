@@ -156,9 +156,9 @@ return {
       stages = "static",
       timeout = 2000,
     },
-    config = function ()
+    config = function()
       vim.notify = require("notify")
-    end
+    end,
   },
 
   -- File explorer
@@ -285,5 +285,14 @@ return {
       show_current_context = true,
       show_current_context_start = true,
     },
+  },
+
+  -- Align text interactively
+  -- keys: gas and gAs (preview)
+  {
+    "echasnovski/mini.align",
+    version = false,
+    event = "InsertEnter",
+    config = true,
   },
 }
