@@ -106,6 +106,7 @@ zinit light MenkeTechnologies/zsh-expand
 
 # Quicker doing manual initialization
 zi0b id-as'zsh-autopair' \
+  depth=1 \
   atinit'AUTOPAIR_INHIBIT_INIT=1;'
 zinit light hlissner/zsh-autopair
 
