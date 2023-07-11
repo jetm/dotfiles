@@ -207,6 +207,19 @@ zle -N insert_cmd_sub
 bindkey '^J' insert_cmd_sub
 
 # execute the command and don't clear it
-bindkey '^[^M'              accept-and-hold                 # Alt+Enter
+# <Alt+Enter>
+bindkey '^[^M' accept-and-hold
+
+# Delete Git branch
+function forgit_delete_branch() {
+  forgit::branch::delete
+
+  # show prompt
+  zle redisplay
+}
+zle -N forgit_delete_branch
+
+# <Alt+d>
+bindkey '^[d' forgit_delete_branch
 
 # vim:set ft=zsh ts=2 sw=2 et:
