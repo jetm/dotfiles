@@ -85,11 +85,8 @@ zi_ice id-as'zsh-defer' \
   depth=1
 zinit light romkatv/zsh-defer
 
-#
-# Navigation/completion
-#
-# use `cat -v` to define the map
-zi0b id-as'zsh-history-substring-search'
+zi0b id-as'zsh-history-substring-search' \
+  depth=1
 zinit light zsh-users/zsh-history-substring-search
 
 zi0b id-as'fzf' \
