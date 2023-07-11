@@ -81,7 +81,9 @@ zi_ice id-as'prezto' \
   nocd
 zinit light sorin-ionescu/prezto
 
-zinit id-as'zsh-defer' light-mode for romkatv/zsh-defer
+zi_ice id-as'zsh-defer' \
+  depth=1
+zinit light romkatv/zsh-defer
 
 #
 # Navigation/completion
