@@ -20,11 +20,9 @@ alias -c ln='ln -i'
 alias -c mkdir='mkdir -p'
 
 # exa
-
-alias \
-  ls='exa --group-directories-first' \
-  l='ls --all --header --long --icons --git' \
-  l.='ls --list-dirs .* --icons'
+alias -c ls='exa --group-directories-first'
+alias -c l='ls --all --header --long --icons --git'
+alias -c l.='ls --list-dirs .* --icons'
 
 tree() {
   [ "$1" = "-h" ] || [ "$1" = "--help" ] && {
