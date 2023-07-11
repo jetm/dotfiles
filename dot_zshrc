@@ -98,10 +98,6 @@ zi0b id-as'fzf' \
   pick'fzf'
 zinit light junegunn/fzf
 
-zi0c id-as'zsh-bd' \
-  depth=1
-zinit light tarrasch/zsh-bd
-
 # export ZPWR_EXPAND_TO_HISTORY=true
 zi0b id-as'zsh-expand' \
   src"${HOME}/.zsh/zsh-aliases"
@@ -111,6 +107,10 @@ zinit light MenkeTechnologies/zsh-expand
 zi0b id-as'zsh-autopair' \
   atinit'AUTOPAIR_INHIBIT_INIT=1;'
 zinit light hlissner/zsh-autopair
+
+zi0c id-as'zsh-bd' \
+  depth=1
+zinit light tarrasch/zsh-bd
 
 # zsh-syntax-highlighting is quicker than fast-syntax-highlighting
 zi0c id-as'zsh-syntax-highlighting' \
