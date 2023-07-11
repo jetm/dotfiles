@@ -100,6 +100,7 @@ zinit light junegunn/fzf
 
 # export ZPWR_EXPAND_TO_HISTORY=true
 zi0b id-as'zsh-expand' \
+  depth=1 \
   src"${HOME}/.zsh/zsh-aliases"
 zinit light MenkeTechnologies/zsh-expand
 
