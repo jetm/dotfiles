@@ -56,38 +56,23 @@ yet.map({ "i" }, "<C-s>", "<C-o>:update<CR>", { silent = true })
 
 yet.map("n", "_", require("oil").open, { desc = "Open parent directory" })
 
+function ClipboardPaste()
+  vim.cmd("let @@ = system('cb paste')")
+end
+
+-- Clipboard Paste
+yet.map("i", "<C-V>", ":lua ClipboardPaste()<cr>p", { silent = true })
+yet.map("c", "<C-V>", "<C-R>+")
+vim.cmd("exe 'inoremap <script> <C-V>' paste#paste_cmd['i']")
+
+-- Replace
+yet.map("i", "<c-l>", "<ESC>:SearchBoxReplace confirm=native<CR>")
+yet.map("n", "<c-l>", ":SearchBoxReplace confirm=native<CR>")
+yet.map("v", "<c-l>", ":SearchBoxReplace confirm=native<CR>")
+
 --
 -- <F1>..<F12> Mappings
 --
 
 -- F5 shows a diagnostics
 yet.map({ "n" }, "<F5>", ":TroubleToggle<CR>", { silent = true })
-
-function ClipboardYank()
-  vim.cmd('call system("echo\'". @@,"\' | cb copy")')
-end
-
-function ClipboardPaste()
-  vim.cmd("let @@ = system('cb paste')")
-end
-
--- Clipboard Copy
-yet.map("v", "<C-C>", "y:lua ClipboardYank()<cr>gv", { silent = true })
-yet.map("n", "<C-C>", "yy:lua ClipboardYank()<cr>", { silent = true })
-yet.map("i", "<C-C>", "<c-o>yy<c-o>:lua ClipboardYank()<cr>", { silent = true })
-
--- Clipboard Cut
-yet.map("v", "<C-X>", "x:lua ClipboardYank()<cr>", { silent = true })
-yet.map("n", "<C-X>", "dd:lua ClipboardYank()<cr>", { silent = true })
-yet.map("i", "<C-X>", "<c-o>dd<c-o>:lua ClipboardYank()<cr>", { silent = true })
-
--- Clipboard Paste
-yet.map("i", "<C-V>", ":lua ClipboardPaste()<cr>p", { silent = true })
-yet.map("c", "<C-V>", "<C-R>+")
-vim.cmd("exe 'inoremap <script> <C-V>' paste#paste_cmd['i']")
-vim.cmd("exe 'vnoremap <script> <C-V>' paste#paste_cmd['v']")
-
--- Replace
-yet.map("i", "<c-l>", "<ESC>:SearchBoxReplace confirm=native<CR>")
-yet.map("n", "<c-l>", ":SearchBoxReplace confirm=native<CR>")
-yet.map("v", "<c-l>", ":SearchBoxReplace confirm=native<CR>")
