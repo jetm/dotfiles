@@ -101,6 +101,8 @@ zi0b id-as'fzf' \
 zinit light junegunn/fzf
 
 # export ZPWR_EXPAND_TO_HISTORY=true
+# ignore expansion of these regular/global aliases
+export ZPWR_EXPAND_BLACKLIST=(rm mv cp ln mkdir ls l l. type)
 zi0b id-as'zsh-expand' \
   depth=1 \
   src"${HOME}/.zsh/zsh-aliases"
