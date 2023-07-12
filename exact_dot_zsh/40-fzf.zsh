@@ -110,9 +110,16 @@ zstyle ':completion:*:descriptions' format '[%d]'
 #
 # forgit
 #
-FORGIT_FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS}"
-FORGIT_FZF_DEFAULT_OPTS+=' --preview-window=:down:80%:nohidden'
-export FORGIT_FZF_DEFAULT_OPTS
+# Use a limited fzf option or it will mess with tmux-thumbs text selection
+export FORGIT_FZF_DEFAULT_OPTS="
+${FORGIT_FZF_DEFAULT_OPTS}
+${FZF_PREVIEW_OPTS}
+--ansi
+--tabstop=4
+--layout=reverse
+--preview-window 'nohidden,<50(down,75%,border-top)'
+--preview='bat --style=full --color=always {}'
+"
 
 #
 # BUGS: no all history is shown
