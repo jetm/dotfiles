@@ -68,7 +68,8 @@ zi_ice id-as'fzf-tab' \
   depth=1
 zinit light Aloxaf/fzf-tab
 
-zi_ice id-as'zsh-autosuggestions'
+zi_ice id-as'zsh-autosuggestions' \
+  depth=1
 zinit light zsh-users/zsh-autosuggestions
 
 #
