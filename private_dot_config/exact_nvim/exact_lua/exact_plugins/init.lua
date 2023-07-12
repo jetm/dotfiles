@@ -42,7 +42,14 @@ return {
   -- { "monaqa/dial.nvim", lazy = true },
 
   -- Removes trailing whitespace from *modified* lines on save
-  { "cappyzawa/trim.nvim", event = "BufWritePre", config = true },
+  {
+    "cappyzawa/trim.nvim",
+    event = "BufWritePre",
+    config = true,
+    opts = {
+      ft_blocklist = { "gitcommit" },
+    },
+  },
 
   -- bitbake support
   { "kergoth/vim-bitbake", lazy = true },
