@@ -88,7 +88,7 @@ alias gcp='git checkout --patch'
 alias gcb='git checkout -b'
 alias gc-='git checkout -'
 alias gre='forgit::checkout::file'
-alias grs='git restore --staged'
+alias grs='forgit::reset::head'
 
 # Grep (g)
 alias gg='git grep'
