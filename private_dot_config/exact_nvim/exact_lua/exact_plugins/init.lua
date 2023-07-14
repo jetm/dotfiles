@@ -303,4 +303,28 @@ return {
     event = "InsertEnter",
     config = true,
   },
+
+  -- Navigate your code with search labels, enhanced character motions and
+  -- Treesitter integration
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {
+      modes = {
+        char = {
+          jump_labels = true,
+        },
+      },
+    },
+    keys = {
+      {
+        "s",
+        mode = { "n", "o", "x" },
+        function()
+          require("flash").treesitter()
+        end,
+        desc = "Flash Treesitter",
+      },
+    },
+  },
 }
