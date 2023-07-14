@@ -17,10 +17,11 @@
 # <Ctrl+F>      => Search for files
 # <Ctrl+T>      => Search in history
 # <Alt+S>       => Insert sudo word
-# <Alt+l>       => Run ls
 # <Alt+Shift+S> => Run with sudo word
+# <Alt+l>       => Run ls
 # <Ctrl+J>      => Insert $()
 # <Alt+Enter>   => execute the command and don't clear it
+# <Alt+h>       => Insert halp word
 
 # <Ctrl+Right> => Forward word
 bindkey "^[[1;5C" forward-word
@@ -221,5 +222,15 @@ zle -N forgit_delete_branch
 
 # <Alt+d>
 bindkey '^[d' forgit_delete_branch
+
+# Insert sudo at the beggining of the line
+function insert_halp() {
+  BUFFER="halp $BUFFER"
+  zle end-of-line;
+}
+zle -N insert_halp
+
+# <Alt+h>
+bindkey '^[h' insert_halp
 
 # vim:set ft=zsh ts=2 sw=2 et:

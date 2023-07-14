@@ -61,6 +61,7 @@ alias cd-='cd -'
 alias df='duf'
 alias bbk='bitbake'
 alias ato='atool -x -E'
+alias halp='halp --no-version'
 
 #
 # Git
