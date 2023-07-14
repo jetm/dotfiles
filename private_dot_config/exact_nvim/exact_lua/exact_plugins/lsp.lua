@@ -4,7 +4,26 @@ local M = {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     { "neovim/nvim-lspconfig" },
-    { "williamboman/mason.nvim" },
+    {
+      "williamboman/mason.nvim",
+      cmd = {
+        "Mason",
+        "MasonInstall",
+        "MasonUninstall",
+        "MasonUninstallAll",
+        "MasonUpdate", -- AstroNvim extension here as well
+        "MasonUpdateAll", -- AstroNvim specific
+      },
+      opts = {
+        ui = {
+          icons = {
+            package_installed = "✓",
+            package_uninstalled = "✗",
+            package_pending = "⟳",
+          },
+        },
+      },
+    },
     { "williamboman/mason-lspconfig.nvim" },
     {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
