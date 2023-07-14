@@ -85,6 +85,14 @@ return {
     dependencies = "nvim-tree/nvim-web-devicons",
     config = true,
     lazy = true,
+    keys = {
+      {
+        "<F5>",
+        ":TroubleToggle<cr>",
+        mode = { "n" },
+        desc = "Open diagnostics",
+      },
+    },
   },
 
   -- Automatically manage hlsearch setting
@@ -140,9 +148,27 @@ return {
       "MunifTanjim/nui.nvim",
     },
     lazy = true,
+
+    keys = {
+      {
+        "<c-l>",
+        ":SearchBoxReplace confirm=native<CR>",
+        mode = { "n" },
+      },
+      {
+        "<c-l>",
+        "<ESC>:SearchBoxReplace confirm=native<CR>",
+        mode = { "i" },
+      },
+      {
+        "<c-l>",
+        ":SearchBoxReplace confirm=native<CR>",
+        mode = { "v" },
+      },
+    },
   },
 
-  -- alternative to matchparen neovim plugin
+  -- Alternative to matchparen neovim plugin
   {
     "monkoose/matchparen.nvim",
     config = true,
@@ -183,6 +209,16 @@ return {
         "permissions",
         "size",
         "mtime",
+      },
+    },
+    keys = {
+      {
+        "_",
+        function()
+          require("oil").open()
+        end,
+        mode = { "n" },
+        desc = "Open Parent Directory",
       },
     },
   },
@@ -226,6 +262,20 @@ return {
       -- quit Neovim when last buffer is closed
       quit = true,
     },
+    keys = {
+      {
+        "q",
+        ":BufDel<CR>",
+        mode = { "n", "x" },
+        desc = "Quit Tab",
+      },
+      {
+        "Q",
+        ":qa<CR>",
+        mode = { "n", "x" },
+        desc = "Quit All",
+      },
+    },
   },
 
   -- move and duplicate blocks and lines, with complete fold handling,
@@ -265,6 +315,7 @@ return {
     },
   },
 
+  -- A snazzy bufferline for neovim
   {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
@@ -274,15 +325,52 @@ return {
         tab_size = 20,
         diagnostics = false,
         color_icons = true,
-        show_buffer_icons = true,
-        show_buffer_close_icons = true,
-        show_close_icon = true,
+        show_buffer_icons = false,
+        show_buffer_close_icons = false,
+        show_close_icon = false,
         show_tab_indicators = true,
         separator_style = "thin",
         enforce_regular_tabs = false,
-        always_show_bufferline = true,
+        always_show_bufferline = false,
       },
     },
+    keys = {
+      {
+        "<leader>1",
+        ":BufferLineGoToBuffer 1<CR>",
+        mode = { "n" },
+      },
+      {
+        "<leader>2",
+        ":BufferLineGoToBuffer 2<CR>",
+        mode = { "n" },
+      },
+      {
+        "<leader>3",
+        ":BufferLineGoToBuffer 3<CR>",
+        mode = { "n" },
+      },
+      {
+        "<leader>4",
+        ":BufferLineGoToBuffer 4<CR>",
+        mode = { "n" },
+      },
+      {
+        "<leader>5",
+        ":BufferLineGoToBuffer 5<CR>",
+        mode = { "n" },
+      },
+    },
+  },
+
+  -- status line
+  -- lualine has better structure and theme, it's more like spaceline
+  -- heirline lacks of onedark color scheme
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = require("plugins.configs.lualine_conf"),
   },
 
   -- Indent guides on blank lines for Neovim
@@ -302,6 +390,29 @@ return {
     version = false,
     event = "InsertEnter",
     config = true,
+    keys = {
+      -- visual shifting (does not exit visual mode)
+      {
+        "<",
+        "<gv",
+        mode = { "n" },
+      },
+      {
+        "<",
+        "<<_",
+        mode = { "v" },
+      },
+      {
+        ">",
+        ">gv",
+        mode = { "v" },
+      },
+      {
+        ">",
+        ">>_",
+        mode = { "n" },
+      },
+    },
   },
 
   -- Navigate your code with search labels, enhanced character motions and

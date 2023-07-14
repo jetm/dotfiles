@@ -1,21 +1,4 @@
--- Status line
--- spaceline is slower
--- Galaxyline lacks of nice configurations, like feline has
--- lualine has better structure and theme, it's more like spaceline
--- heirline lacks of OneDark Color scheme
-local M = {
-  "nvim-lualine/lualine.nvim",
-  event = "VeryLazy",
-  dependencies = { "nvim-tree/nvim-web-devicons", "navarasu/onedark.nvim" },
-}
-
-function M.config()
-  local ok, lualine = pcall(require, "lualine")
-  if not ok then
-    error("Loading lualine")
-    return
-  end
-
+return function(_, opts)
   local hide_in_width = function()
     return vim.fn.winwidth(0) > 80
   end
@@ -32,7 +15,8 @@ function M.config()
   local diff = {
     "diff",
     colored = false,
-    symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
+   -- changes diff symbols
+    symbols = { added = " ", modified = " ", removed = " " },
     cond = hide_in_width,
   }
 
@@ -49,14 +33,14 @@ function M.config()
     return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
   end
 
-  lualine.setup({
+  require("lualine").setup({
     options = {
       icons_enabled = true,
       theme = "onedark",
       component_separators = { left = "", right = "" },
       section_separators = { left = "", right = "" },
       -- enable global statusline (have a single statusline at bottom of
-      -- neovim instead of one for  every window)
+      -- neovim instead of one for every window)
       globalstatus = true,
       always_divide_middle = true,
     },
@@ -78,5 +62,3 @@ function M.config()
     },
   })
 end
-
-return M
