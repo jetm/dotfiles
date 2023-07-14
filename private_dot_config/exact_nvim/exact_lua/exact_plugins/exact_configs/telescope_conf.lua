@@ -1,26 +1,4 @@
-local M = {
-  "nvim-telescope/telescope.nvim",
-  cmd = "Telescope",
-  version = false,
-  dependencies = {
-    {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      enabled = vim.fn.executable("make") == 1,
-      build = "make",
-    },
-    { "yamatsum/nvim-nonicons" },
-    { "nvim-lua/popup.nvim" },
-    { "nvim-lua/plenary.nvim" },
-    { "brookhong/telescope-pathogen.nvim" },
-    { "rcarriga/nvim-notify" },
-  },
-  keys = {
-    { "<space>g", ":Telescope pathogen live_grep<CR>", silent = true },
-    { "<C-p>", ":Telescope pathogen find_files<CR>", silent = true },
-  },
-}
-
-function M.config()
+return function (_,_)
   local ok, telescope = pcall(require, "telescope")
   if not ok then
     error("Loading telescope")
@@ -55,6 +33,7 @@ function M.config()
   })
 
   telescope.load_extension("pathogen")
+
   vim.keymap.set(
     "v",
     "<space>g",
@@ -62,7 +41,5 @@ function M.config()
   )
 
   telescope.load_extension("fzf")
-  telescope.load_extension("notify")
+  -- telescope.load_extension("notify")
 end
-
-return M

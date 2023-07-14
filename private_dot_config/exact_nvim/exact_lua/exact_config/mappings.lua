@@ -2,6 +2,16 @@
 -- Misc mappings
 --
 
+-- quitting mapping
+yet.map({ "n", "x" }, "q", ":BufDel<CR>", { silent = true })
+yet.map({ "n", "x" }, "Q", ":qa<CR>", { silent = true })
+
+-- Visual shifting (does not exit Visual mode)
+yet.map({ "v" }, "<", "<gv", { silent = true })
+yet.map({ "v" }, ">", ">gv", { silent = true })
+yet.map({ "n" }, "<", "<<_", { silent = true })
+yet.map({ "n" }, ">", ">>_", { silent = true })
+
 -- formatter
 yet.map(
   { "n" },
@@ -9,16 +19,6 @@ yet.map(
   "<cmd>lua vim.lsp.buf.format()<CR>",
   { silent = true }
 )
-
--- Comments
--- Ctrl-/ as VSCode and Jetbrain
-yet.map({ "n" }, "<c-_>", function()
-  return vim.v.count == 0 and "<Plug>(comment_toggle_linewise_current)"
-    or "<Plug>(comment_toggle_linewise_count)"
-end, { expr = true })
-
--- Toggle in VISUAL mode
-yet.map("x", "<c-_>", "<Plug>(comment_toggle_linewise_visual)")
 
 --
 -- Ctrl <C-> Mappings

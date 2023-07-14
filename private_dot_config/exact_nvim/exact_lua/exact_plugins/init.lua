@@ -82,13 +82,14 @@ return {
   {
     "folke/trouble.nvim",
     cmd = { "TroubleToggle", "Trouble" },
+    opts = { use_diagnostic_signs = true },
     dependencies = "nvim-tree/nvim-web-devicons",
     config = true,
     lazy = true,
     keys = {
       {
         "<F5>",
-        ":TroubleToggle<cr>",
+        "<cmd>TroubleToggle document_diagnostics<CR>",
         mode = { "n" },
         desc = "Open diagnostics",
       },
@@ -184,16 +185,16 @@ return {
 
   -- { "petertriho/nvim-scrollbar" },
 
-  {
-    "rcarriga/nvim-notify",
-    opts = {
-      stages = "static",
-      timeout = 2000,
-    },
-    config = function()
-      vim.notify = require("notify")
-    end,
-  },
+  -- {
+  --   "rcarriga/nvim-notify",
+  --   opts = {
+  --     stages = "static",
+  --     timeout = 2000,
+  --   },
+  --   config = function()
+  --     vim.notify = require("notify")
+  --   end,
+  -- },
 
   -- File explorer
   {
@@ -254,26 +255,19 @@ return {
     end,
   },
 
+  -- "ojroques/nvim-bufdel" has some issues with lazy
+  -- Buffer removing (unshow, delete, wipeout), which saves window layout
   {
-    "ojroques/nvim-bufdel",
-    opts = {
-      -- or 'cycle, 'alternate'
-      next = "tabs",
-      -- quit Neovim when last buffer is closed
-      quit = true,
-    },
+    "echasnovski/mini.bufremove",
+    version = false,
+    config = true,
     keys = {
       {
         "q",
-        ":BufDel<CR>",
-        mode = { "n", "x" },
-        desc = "Quit Tab",
-      },
-      {
-        "Q",
-        ":qa<CR>",
-        mode = { "n", "x" },
-        desc = "Quit All",
+        function()
+          require("mini.bufremove").delete(0, false)
+        end,
+        desc = "Delete Buffer",
       },
     },
   },
@@ -338,27 +332,22 @@ return {
       {
         "<leader>1",
         ":BufferLineGoToBuffer 1<CR>",
-        mode = { "n" },
       },
       {
         "<leader>2",
         ":BufferLineGoToBuffer 2<CR>",
-        mode = { "n" },
       },
       {
         "<leader>3",
         ":BufferLineGoToBuffer 3<CR>",
-        mode = { "n" },
       },
       {
         "<leader>4",
         ":BufferLineGoToBuffer 4<CR>",
-        mode = { "n" },
       },
       {
         "<leader>5",
         ":BufferLineGoToBuffer 5<CR>",
-        mode = { "n" },
       },
     },
   },
@@ -390,29 +379,6 @@ return {
     version = false,
     event = "InsertEnter",
     config = true,
-    keys = {
-      -- visual shifting (does not exit visual mode)
-      {
-        "<",
-        "<gv",
-        mode = { "n" },
-      },
-      {
-        "<",
-        "<<_",
-        mode = { "v" },
-      },
-      {
-        ">",
-        ">gv",
-        mode = { "v" },
-      },
-      {
-        ">",
-        ">>_",
-        mode = { "n" },
-      },
-    },
   },
 
   -- Navigate your code with search labels, enhanced character motions and
@@ -430,12 +396,182 @@ return {
     keys = {
       {
         "s",
-        mode = { "n", "o", "x" },
         function()
           require("flash").treesitter()
         end,
+        mode = { "n", "o", "x" },
         desc = "Flash Treesitter",
       },
     },
+  },
+
+  -- Comment lines
+  {
+    "numToStr/Comment.nvim",
+    event = { "BufRead", "BufNewFile" },
+    opts = {
+      mappings = {
+        basic = false,
+        extra = false,
+      },
+    },
+    keys = {
+      {
+        -- Ctrl-/ as VSCode and Jetbrain
+        "<c-_>",
+        function()
+          return vim.v.count == 0 and "<Plug>(comment_toggle_linewise_current)"
+            or "<Plug>(comment_toggle_linewise_count)"
+        end,
+        mode = { "n" },
+        expr = true,
+      },
+      {
+        "<c-_>",
+        "<Plug>(comment_toggle_linewise_visual)",
+        mode = { "x" },
+      },
+    },
+  },
+
+  {
+    "m4xshen/hardtime.nvim",
+    dependencies = "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      disable_mouse = false,
+      restricted_keys = {
+        ["h"] = { "n", "v" },
+        ["j"] = { "n", "v" },
+        ["k"] = { "n", "v" },
+        ["l"] = { "n", "v" },
+        ["gj"] = { "n", "v" },
+        ["gk"] = { "n", "v" },
+        ["<CR>"] = { "n", "v" },
+      },
+    },
+  },
+
+  -- Vim plugin, insert or delete brackets, parens, quotes in pair
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    dependencies = {
+      { "hrsh7th/nvim-cmp" },
+    },
+    config = require("plugins.configs.nvim-autopairs_conf"),
+  },
+
+  {
+    "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
+    version = false,
+    dependencies = {
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        enabled = vim.fn.executable("make") == 1,
+        build = "make",
+      },
+      { "yamatsum/nvim-nonicons" },
+      { "nvim-lua/popup.nvim" },
+      { "nvim-lua/plenary.nvim" },
+      { "brookhong/telescope-pathogen.nvim" },
+      -- { "rcarriga/nvim-notify" },
+    },
+    keys = {
+      { "<space>g", ":Telescope pathogen live_grep<CR>", silent = true },
+      { "<C-p>", ":Telescope pathogen find_files<CR>", silent = true },
+    },
+    config = require("plugins.configs.telescope_conf"),
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter",
+    version = false,
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      {
+        "nvim-treesitter/nvim-treesitter-context",
+        config = true,
+      },
+      {
+        "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
+        init = function()
+          local rainbow_delimiters = require("rainbow-delimiters")
+
+          vim.g.rainbow_delimiters = {
+            strategy = { [""] = rainbow_delimiters.strategy["global"] },
+            query = {
+              [""] = "rainbow-delimiters",
+              lua = "rainbow-blocks",
+            },
+          }
+        end,
+      },
+    },
+    build = ":TSUpdate",
+    config = require("plugins.configs.nvim-treesitter_conf"),
+  },
+
+  {
+    "VonHeikemen/lsp-zero.nvim",
+    branch = "v2.x",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      { "neovim/nvim-lspconfig" },
+      {
+        "williamboman/mason.nvim",
+        cmd = {
+          "Mason",
+          "MasonInstall",
+          "MasonUninstall",
+          "MasonUninstallAll",
+          "MasonUpdate", -- AstroNvim extension here as well
+          "MasonUpdateAll", -- AstroNvim specific
+        },
+        opts = {
+          ui = {
+            icons = {
+              package_installed = "✓",
+              package_uninstalled = "✗",
+              package_pending = "⟳",
+            },
+          },
+        },
+      },
+      { "williamboman/mason-lspconfig.nvim" },
+      {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        auto_update = true,
+        debounce_hours = 5,
+      },
+
+      -- completation
+      { "hrsh7th/nvim-cmp" },
+      { "hrsh7th/cmp-buffer" },
+      { "hrsh7th/cmp-path" },
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "onsails/lspkind.nvim" },
+      {
+        "f3fora/cmp-spell",
+        ft = { "gitcommit", "markdown" },
+      },
+
+      --  Vim Snippets engine  [snippet engine] + [snippet templates]
+      {
+        "L3MON4D3/LuaSnip",
+        dependencies = {
+          "rafamadriz/friendly-snippets",
+        },
+        config = function(_, _)
+          require("luasnip.loaders.from_vscode").lazy_load()
+        end,
+      },
+
+      -- null-ls
+      "jose-elias-alvarez/null-ls.nvim",
+    },
+    config = require("plugins.configs.lsp_conf"),
   },
 }

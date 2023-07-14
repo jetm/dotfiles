@@ -1,32 +1,4 @@
-local M = {
-  "nvim-treesitter/nvim-treesitter",
-  version = false,
-  event = { "BufReadPost", "BufNewFile" },
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    {
-      "nvim-treesitter/nvim-treesitter-context",
-      config = true,
-    },
-    {
-      "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
-      init = function()
-        local rainbow_delimiters = require("rainbow-delimiters")
-
-        vim.g.rainbow_delimiters = {
-          strategy = { [""] = rainbow_delimiters.strategy["global"] },
-          query = {
-            [""] = "rainbow-delimiters",
-            lua = "rainbow-blocks",
-          },
-        }
-      end,
-    },
-  },
-  build = ":TSUpdate",
-}
-
-function M.config()
+return function (_, _)
   local ok, nvim_treesitter = pcall(require, "nvim-treesitter.configs")
   if not ok then
     error("Loading nvim-treesitter.configs")
@@ -72,5 +44,3 @@ function M.config()
     },
   })
 end
-
-return M

@@ -1,23 +1,5 @@
--- Vim plugin, insert or delete brackets, parens, quotes in pair
-local M = {
-  "windwp/nvim-autopairs",
-  event = "InsertEnter",
-  dependencies = {
-    {
-      "hrsh7th/nvim-cmp",
-      event = { "InsertEnter", "CmdlineEnter" },
-    },
-  },
-}
-
-function M.config()
-  local ok, nvim_autopairs = pcall(require, "nvim-autopairs")
-  if not ok then
-    error("Loading nvim-autopairs")
-    return
-  end
-
-  nvim_autopairs.setup({})
+return function (_,_)
+  require("nvim-autopairs").setup({})
 
   -- If you want insert `(` after select function or method item
   local cmp_autopairs = require("nvim-autopairs.completion.cmp")
@@ -62,5 +44,3 @@ function M.config()
 
   cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 end
-
-return M

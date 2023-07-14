@@ -1,64 +1,4 @@
-local M = {
-  "VonHeikemen/lsp-zero.nvim",
-  branch = "v2.x",
-  event = { "BufReadPre", "BufNewFile" },
-  dependencies = {
-    { "neovim/nvim-lspconfig" },
-    {
-      "williamboman/mason.nvim",
-      cmd = {
-        "Mason",
-        "MasonInstall",
-        "MasonUninstall",
-        "MasonUninstallAll",
-        "MasonUpdate", -- AstroNvim extension here as well
-        "MasonUpdateAll", -- AstroNvim specific
-      },
-      opts = {
-        ui = {
-          icons = {
-            package_installed = "✓",
-            package_uninstalled = "✗",
-            package_pending = "⟳",
-          },
-        },
-      },
-    },
-    { "williamboman/mason-lspconfig.nvim" },
-    {
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
-      auto_update = true,
-      debounce_hours = 5,
-    },
-
-    -- completation
-    { "hrsh7th/nvim-cmp" },
-    { "hrsh7th/cmp-buffer" },
-    { "hrsh7th/cmp-path" },
-    { "hrsh7th/cmp-nvim-lsp" },
-    { "onsails/lspkind.nvim" },
-    {
-      "f3fora/cmp-spell",
-      ft = { "gitcommit", "markdown" },
-    },
-
-    --  Vim Snippets engine  [snippet engine] + [snippet templates]
-    {
-      "L3MON4D3/LuaSnip",
-      dependencies = {
-        "rafamadriz/friendly-snippets",
-      },
-      config = function(_, _)
-        require("luasnip.loaders.from_vscode").lazy_load()
-      end,
-    },
-
-    -- null-ls
-    "jose-elias-alvarez/null-ls.nvim",
-  },
-}
-
-function M.config()
+return function (_,_)
   require("mason").setup()
   require("mason-lspconfig").setup()
 
@@ -246,5 +186,3 @@ function M.config()
     },
   })
 end
-
-return M
