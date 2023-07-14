@@ -65,6 +65,7 @@ return {
   {
     "cuducos/yaml.nvim",
     event = { "BufReadPre", "BufNewFile" },
+    ft = { "yaml" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     },
