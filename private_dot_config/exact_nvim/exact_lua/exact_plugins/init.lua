@@ -47,7 +47,7 @@ return {
     event = "BufWritePre",
     config = true,
     opts = {
-      ft_blocklist = { "gitcommit" },
+      ft_blocklist = { "gitsendemail", "gitcommit" },
     },
   },
 
