@@ -94,7 +94,9 @@ function M.config()
     ensure_installed = {
       "bash-language-server",
       "dockerfile-language-server",
-      "flake8",
+      "ruff",
+      "python-lsp-server",
+      "mypy",
       "marksman",
       "shellcheck",
       "shellharden",
@@ -109,7 +111,7 @@ function M.config()
 
   local lsp = require("lsp-zero").preset({})
 
-  lsp.on_attach(function(client, bufnr)
+  lsp.on_attach(function(_, bufnr)
     lsp.default_keymaps({ buffer = bufnr })
   end)
 
