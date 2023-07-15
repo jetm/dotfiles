@@ -3,9 +3,6 @@ if not vim.filetype then
 end
 
 vim.filetype.add({
-  extension = {
-    lock = "yaml",
-  },
   filename = {},
   pattern = {
     [".*%.bb%..*"] = "bitbake",

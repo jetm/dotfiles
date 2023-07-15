@@ -11,7 +11,6 @@ for _, source in ipairs({
   "config.options",
   "config.lazy",
   "config.autocmds",
-  "config.mappings",
 }) do
   local status_ok, fault = pcall(require, source)
   if not status_ok then
