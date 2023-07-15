@@ -1,15 +1,25 @@
-yet.key(
-  "n",
-  "<leader>g",
-  ":Telescope pathogen live_grep<CR>",
-  { silent = true }
-)
+local function map(mode, lhs, rhs, opts)
+  local keys = require("lazy.core.handler").handlers.keys
+  ---@cast keys LazyKeysHandler
+  -- do not create the keymap if a lazy keys handler exists
+  if not keys.active[keys.parse({ lhs, mode = mode }).id] then
+    opts = opts or {}
+    opts.silent = opts.silent ~= false
+    -- only remap keybinds when running in vscode
+    if opts.remap and not vim.g.vscode then
+      opts.remap = nil
+    end
+    vim.keymap.set(mode, lhs, rhs, opts)
+  end
+end
 
-yet.key("n", "<C-p>", ":Telescope pathogen find_files<CR>", { silent = true })
+-- Telescope mapping
+map("n", "<leader>g", ":Telescope pathogen live_grep<CR>", { silent = true })
+map("n", "<C-p>", ":Telescope pathogen find_files<CR>", { silent = true })
 
--- load it here, otherwise it will fail in config
+-- BufferLine mapping
 for i = 1, 5 do
-  yet.key(
+  map(
     "n",
     ("<Leader>%s"):format(i),
     (":BufferLineGoToBuffer %s<CR>"):format(i),
@@ -18,23 +28,19 @@ for i = 1, 5 do
 end
 
 -- Visual shifting (does not exit Visual mode)
-yet.key({ "v" }, "<", "<gv", { silent = true })
-yet.key({ "v" }, ">", ">gv", { silent = true })
-yet.key({ "n" }, "<", "<<_", { silent = true })
-yet.key({ "n" }, ">", ">>_", { silent = true })
+map({ "v" }, "<", "<gv", { silent = true })
+map({ "v" }, ">", ">gv", { silent = true })
+map({ "n" }, "<", "<<_", { silent = true })
+map({ "n" }, ">", ">>_", { silent = true })
 
--- using keys will not work because keys need to be loaded without
--- lazyness
-yet.key({ "n", "x" }, "q", ":BufDel<CR>", { silent = true })
-yet.key({ "n", "x" }, "Q", ":BufDelAll<CR>", { silent = true })
+-- BufDel/Quitting mapping
+map({ "n", "x" }, "q", ":BufDel<CR>", { silent = true })
+map({ "n", "x" }, "Q", ":BufDelAll<CR>", { silent = true })
 
---
--- load rest of keymaps here until find a proper place
---
 --  Helper for saving file
-yet.key({ "n" }, "<C-s>", ":update<CR>", { silent = true })
-yet.key({ "v" }, "<C-s>", "<C-c>:update<CR>", { silent = true })
-yet.key({ "i" }, "<C-s>", "<C-o>:update<CR>", { silent = true })
+map({ "n" }, "<C-s>", ":update<CR>", { silent = true })
+map({ "v" }, "<C-s>", "<C-c>:update<CR>", { silent = true })
+map({ "i" }, "<C-s>", "<C-o>:update<CR>", { silent = true })
 
 -- Clipboard Paste
-yet.key("i", "<C-V>", ":lua ClipboardPaste()<CR>p", { silent = true })
+map("i", "<C-V>", "<C-o>p", { silent = true })

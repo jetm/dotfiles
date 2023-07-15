@@ -410,7 +410,7 @@ return {
         "<c-_>",
         function()
           return vim.v.count == 0 and "<Plug>(comment_toggle_linewise_current)"
-              or "<Plug>(comment_toggle_linewise_count)"
+            or "<Plug>(comment_toggle_linewise_count)"
         end,
         mode = { "n" },
         expr = true,
@@ -474,7 +474,6 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     version = false,
     dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
       {
         "nvim-treesitter/nvim-treesitter-context",
         config = true,
@@ -511,7 +510,7 @@ return {
             },
           },
         },
-        build = ":MasonUpdate" -- :MasonUpdate updates registry contents
+        build = ":MasonUpdate", -- :MasonUpdate updates registry contents
       },
 
       -- Completation engine
