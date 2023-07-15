@@ -1,8 +1,8 @@
 _G.yet = {}
 
 -- For debugging purpose
--- :lua put(...)
-function yet.put(...)
+-- :lua debug(...)
+function yet.debug(...)
   local objects = {}
   for i = 1, select("#", ...) do
     local v = select(i, ...)
@@ -13,7 +13,7 @@ function yet.put(...)
   return ...
 end
 
-function yet.map(mode, lhs, rhs, opts)
+function yet.key(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
   ---@cast keys LazyKeysHandler
   -- do not create the keymap if a lazy keys handler exists
@@ -24,13 +24,6 @@ function yet.map(mode, lhs, rhs, opts)
   end
 end
 
--- vim.notify = function(msg, log_level, _)
---   if msg:match("exit code") then
---     return
---   end
---   if log_level == vim.log.levels.ERROR then
---     vim.api.nvim_err_writeln(msg)
---   else
---     vim.api.nvim_echo({ { msg } }, true, {})
---   end
--- end
+function yet.ClipboardPaste()
+  vim.cmd("let @@ = system('cb paste')")
+end
