@@ -2,6 +2,7 @@ _G.yet = {}
 
 -- For debugging purpose
 -- :lua debug(...)
+---@diagnostic disable-next-line: duplicate-set-field
 function yet.debug(...)
   local objects = {}
   for i = 1, select("#", ...) do
@@ -13,6 +14,7 @@ function yet.debug(...)
   return ...
 end
 
+---@diagnostic disable-next-line: duplicate-set-field
 function yet.key(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
   ---@cast keys LazyKeysHandler
@@ -24,6 +26,7 @@ function yet.key(mode, lhs, rhs, opts)
   end
 end
 
+---@diagnostic disable-next-line: duplicate-set-field
 function yet.ClipboardPaste()
   vim.cmd("let @@ = system('cb paste')")
 end
