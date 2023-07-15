@@ -73,6 +73,16 @@ return {
     },
   },
 
+  -- Neovim setup for init.lua and plugin development with full signature help,
+  -- docs and completion for the nvim lua API
+  -- Enable to get more get help from Lua API
+  -- {
+  --   "folke/neodev.nvim",
+  --   config = true,
+  --   lazy = true,
+  --   ft = "lua",
+  -- },
+
   {
     "HiPhish/rainbow-delimiters.nvim",
     event = { "BufReadPre", "BufNewFile" },
