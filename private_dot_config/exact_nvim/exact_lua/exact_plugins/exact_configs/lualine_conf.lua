@@ -1,8 +1,4 @@
 return function(_, opts)
-  local hide_in_width = function()
-    return vim.fn.winwidth(0) > 80
-  end
-
   local diagnostics = {
     "diagnostics",
     sources = { "nvim_diagnostic" },
@@ -10,18 +6,6 @@ return function(_, opts)
     symbols = { error = " ", warn = " " },
     colored = false,
     always_visible = true,
-  }
-
-  local diff = {
-    "diff",
-    colored = false,
-   -- changes diff symbols
-    symbols = { added = " ", modified = " ", removed = " " },
-    cond = hide_in_width,
-  }
-
-  local filetype = {
-    "filetype",
   }
 
   local location = {
@@ -46,9 +30,10 @@ return function(_, opts)
     },
     sections = {
       lualine_a = { "mode" },
-      lualine_b = { { "branch", icon = "" } },
+      lualine_b = { "diff" },
+      -- lualine_b = { "branch", "diff" },
       lualine_c = { diagnostics },
-      lualine_x = { diff, spaces, "encoding", filetype, "fileformat" },
+      lualine_x = { spaces, "encoding", "filetype", "fileformat" },
       lualine_y = { location },
       lualine_z = { "progress" },
     },
