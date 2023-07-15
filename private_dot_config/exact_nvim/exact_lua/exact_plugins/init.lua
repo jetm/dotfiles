@@ -1,14 +1,101 @@
 return {
-  -- Icon set using nonicons for neovim plugins and settings
+  -- Enable opening a file in a given line
   {
-    "yamatsum/nvim-nonicons",
+    "wsdjeg/vim-fetch",
+    lazy = false,
+  },
+  -- { "lewis6991/fileline.nvim" },
+
+  -- Enable repeating supported plugin maps with '.'
+  {
+    "tpope/vim-repeat",
     lazy = true,
-    dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
   },
 
-  -- Enable opening a file in a given line
-  { "wsdjeg/vim-fetch" },
-  -- { "lewis6991/fileline.nvim" },
+  -- bitbake support
+  {
+    "kergoth/vim-bitbake",
+    ft = "bitbake",
+  },
+
+  -- Markdown support
+  -- Generate table of contents for Markdown files
+  -- { "mzlogin/vim-markdown-toc" },
+
+  -- New files created with a shebang line are automatically made executable
+  {
+    "tpope/vim-eunuch",
+    event = { "BufReadPre", "BufNewFile" },
+  },
+
+  -- Jinja2 syntax support
+  {
+    "glench/vim-jinja2-syntax",
+    event = { "BufReadPre", "BufNewFile" },
+  },
+
+  {
+    "olimorris/onedarkpro.nvim",
+    lazy = false,
+    -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000,
+    opts = {
+      caching = true,
+    },
+    config = function()
+      vim.cmd.colorscheme("onedark")
+    end,
+  },
+
+  -- improve buffer deletion
+  {
+    "ojroques/nvim-bufdel",
+    lazy = false,
+    config = function()
+      -- using keys will not work because keys need to be loaded without
+      -- lazyness
+      yet.key({ "n", "x" }, "q", ":BufDel<CR>", { silent = true })
+      yet.key({ "n", "x" }, "Q", ":BufDelAll<CR>", { silent = true })
+
+      --
+      -- load rest of keymaps here until find a proper place
+      --
+      --  Helper for saving file
+      yet.key({ "n" }, "<C-s>", ":update<CR>", { silent = true })
+      yet.key({ "v" }, "<C-s>", "<C-c>:update<CR>", { silent = true })
+      yet.key({ "i" }, "<C-s>", "<C-o>:update<CR>", { silent = true })
+
+      -- Clipboard Paste
+      yet.key("i", "<C-V>", ":lua ClipboardPaste()<cr>p", { silent = true })
+      yet.key("c", "<C-V>", "<C-R>+")
+      vim.cmd("exe 'inoremap <script> <C-V>' paste#paste_cmd['i']")
+    end,
+    opts = {
+      -- quit Neovim when last buffer is closed
+      quit = true,
+    },
+  },
+
+  -- Go to the last edited place
+  {
+    "ethanholz/nvim-lastplace",
+    lazy = false,
+    opts = {
+      lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
+      lastplace_ignore_filetype = {
+        "gitcommit",
+        "gitrebase",
+        "svn",
+        "hgcommit",
+      },
+      lastplace_open_folds = true,
+    },
+  },
+
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+  },
 
   -- Visualise and resolve merge conflicts in neovim
   -- ]x - move to previous conflict
@@ -19,7 +106,7 @@ return {
   -- c0 - choose none
   {
     "akinsho/git-conflict.nvim",
-    lazy = false,
+    event = "VeryLazy",
     config = function()
       require("git-conflict").setup({
         default_mappings = true,
@@ -28,15 +115,18 @@ return {
     end,
   },
 
+  -- Required by telescope and others
+  {
+    "nvim-tree/nvim-web-devicons",
+    lazy = true,
+  },
+
   -- Add/change/delete surrounding delimiter pairs with ease
   {
     "kylechui/nvim-surround",
     event = { "BufReadPre", "BufNewFile" },
     config = true,
   },
-
-  -- Enable repeating supported plugin maps with '.'
-  { "tpope/vim-repeat", lazy = true },
 
   -- enhanced increment/decrement plugin for Neovim
   -- { "monaqa/dial.nvim", lazy = true },
@@ -51,30 +141,13 @@ return {
     },
   },
 
-  -- bitbake support
-  { "kergoth/vim-bitbake", lazy = true },
-
-  -- Markdown support
-  -- Generate table of contents for Markdown files
-  -- { "mzlogin/vim-markdown-toc" },
-
-  -- New files created with a shebang line are automatically made executable
-  { "tpope/vim-eunuch" },
-
   -- YAML syntax support
   {
     "cuducos/yaml.nvim",
-    event = { "BufReadPre", "BufNewFile" },
     ft = { "yaml" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     },
-  },
-
-  -- Jinja2 syntax support
-  {
-    "glench/vim-jinja2-syntax",
-    event = { "BufReadPre", "BufNewFile" },
   },
 
   -- A pretty diagnostics, references, telescope results, quickfix and location
@@ -85,7 +158,6 @@ return {
     opts = { use_diagnostic_signs = true },
     dependencies = "nvim-tree/nvim-web-devicons",
     config = true,
-    lazy = true,
     keys = {
       {
         "<F5>",
@@ -97,10 +169,18 @@ return {
   },
 
   -- Automatically manage hlsearch setting
-  { "asiryk/auto-hlsearch.nvim", config = true, lazy = true },
+  {
+    "asiryk/auto-hlsearch.nvim",
+    lazy = true,
+    config = true,
+  },
 
   -- Automatic indentation style detection for Neovim
-  { "nmac427/guess-indent.nvim", config = true },
+  {
+    "nmac427/guess-indent.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = true,
+  },
   -- {
   --   "Darazaki/indent-o-matic",
   --   event = { "BufReadPre", "BufNewFile" },
@@ -139,16 +219,17 @@ return {
   -- Peek lines just when you intend
   {
     "nacro90/numb.nvim",
+    event = { "BufRead", "BufNewFile" },
     config = true,
   },
 
   -- Search and Replace
   {
     "Usuim/searchbox.nvim",
+    lazy = true,
     dependencies = {
       "MunifTanjim/nui.nvim",
     },
-    lazy = true,
 
     keys = {
       {
@@ -172,6 +253,7 @@ return {
   -- Alternative to matchparen neovim plugin
   {
     "monkoose/matchparen.nvim",
+    event = { "BufRead", "BufNewFile" },
     config = true,
   },
 
@@ -179,11 +261,9 @@ return {
   {
     -- Suda
     "lambdalisue/suda.vim",
-    config = vim.api.nvim_set_var("suda_smart_edit", 1),
     cmd = { "SudaRead", "SudaWrite" },
+    config = vim.api.nvim_set_var("suda_smart_edit", 1),
   },
-
-  -- { "petertriho/nvim-scrollbar" },
 
   -- {
   --   "rcarriga/nvim-notify",
@@ -242,40 +322,11 @@ return {
     },
   },
 
-  {
-    "olimorris/onedarkpro.nvim",
-    lazy = false,
-    -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000,
-    opts = {
-      caching = true,
-    },
-    config = function()
-      vim.cmd.colorscheme("onedark")
-    end,
-  },
-
-  -- "ojroques/nvim-bufdel" has some issues with lazy
-  -- Buffer removing (unshow, delete, wipeout), which saves window layout
-  {
-    "echasnovski/mini.bufremove",
-    version = false,
-    config = true,
-    keys = {
-      {
-        "q",
-        function()
-          require("mini.bufremove").delete(0, false)
-        end,
-        desc = "Delete Buffer",
-      },
-    },
-  },
-
   -- move and duplicate blocks and lines, with complete fold handling,
   -- reindent, and undone in one go
   {
     "booperlv/nvim-gomove",
+    event = { "BufReadPre", "BufNewFile" },
     opts = {
       -- whether or not to map default key bindings, (true/false)
       map_defaults = true,
@@ -294,60 +345,27 @@ return {
     opts = { "*" },
   },
 
-  -- Go to the last edited place
-  {
-    "ethanholz/nvim-lastplace",
-    opts = {
-      lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
-      lastplace_ignore_filetype = {
-        "gitcommit",
-        "gitrebase",
-        "svn",
-        "hgcommit",
-      },
-      lastplace_open_folds = true,
-    },
-  },
-
   -- A snazzy bufferline for neovim
+  -- bufferline is faster than nvim-cokeline and barbar
   {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    init = function()
+      -- load it here, otherwise it will fail in config
+      for i = 1, 5 do
+        yet.key(
+          "n",
+          ("<Leader>%s"):format(i),
+          (":BufferLineGoToBuffer %s<CR>"):format(i),
+          { silent = true }
+        )
+      end
+    end,
     opts = {
       options = {
-        tab_size = 20,
-        diagnostics = false,
-        color_icons = true,
         show_buffer_icons = false,
         show_buffer_close_icons = false,
-        show_close_icon = false,
-        show_tab_indicators = true,
-        separator_style = "thin",
-        enforce_regular_tabs = false,
         always_show_bufferline = false,
-      },
-    },
-    keys = {
-      {
-        "<leader>1",
-        ":BufferLineGoToBuffer 1<CR>",
-      },
-      {
-        "<leader>2",
-        ":BufferLineGoToBuffer 2<CR>",
-      },
-      {
-        "<leader>3",
-        ":BufferLineGoToBuffer 3<CR>",
-      },
-      {
-        "<leader>4",
-        ":BufferLineGoToBuffer 4<CR>",
-      },
-      {
-        "<leader>5",
-        ":BufferLineGoToBuffer 5<CR>",
       },
     },
   },
@@ -376,8 +394,15 @@ return {
   -- keys: gas and gAs (preview)
   {
     "echasnovski/mini.align",
-    version = false,
     event = "InsertEnter",
+    init = function()
+      -- Visual shifting (does not exit Visual mode)
+      yet.key({ "v" }, "<", "<gv", { silent = true })
+      yet.key({ "v" }, ">", ">gv", { silent = true })
+      yet.key({ "n" }, "<", "<<_", { silent = true })
+      yet.key({ "n" }, ">", ">>_", { silent = true })
+    end,
+    version = false,
     config = true,
   },
 
@@ -385,7 +410,8 @@ return {
   -- Treesitter integration
   {
     "folke/flash.nvim",
-    event = "VeryLazy",
+    lazy = true,
+    -- event = "VeryLazy",
     opts = {
       modes = {
         char = {
@@ -436,8 +462,8 @@ return {
 
   {
     "m4xshen/hardtime.nvim",
-    dependencies = "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
+    dependencies = "neovim/nvim-lspconfig",
     opts = {
       disable_mouse = false,
       restricted_keys = {
@@ -472,14 +498,13 @@ return {
         enabled = vim.fn.executable("make") == 1,
         build = "make",
       },
-      { "yamatsum/nvim-nonicons" },
       { "nvim-lua/popup.nvim" },
       { "nvim-lua/plenary.nvim" },
       { "brookhong/telescope-pathogen.nvim" },
       -- { "rcarriga/nvim-notify" },
     },
     keys = {
-      { "<space>g", ":Telescope pathogen live_grep<CR>", silent = true },
+      { "<leader>g", ":Telescope pathogen live_grep<CR>", silent = true },
       { "<C-p>", ":Telescope pathogen find_files<CR>", silent = true },
     },
     config = require("plugins.configs.telescope_conf"),
@@ -487,27 +512,13 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    version = false,
     event = { "BufReadPost", "BufNewFile" },
+    version = false,
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
       {
         "nvim-treesitter/nvim-treesitter-context",
         config = true,
-      },
-      {
-        "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
-        init = function()
-          local rainbow_delimiters = require("rainbow-delimiters")
-
-          vim.g.rainbow_delimiters = {
-            strategy = { [""] = rainbow_delimiters.strategy["global"] },
-            query = {
-              [""] = "rainbow-delimiters",
-              lua = "rainbow-blocks",
-            },
-          }
-        end,
       },
     },
     build = ":TSUpdate",
@@ -516,8 +527,8 @@ return {
 
   {
     "VonHeikemen/lsp-zero.nvim",
-    branch = "v2.x",
     event = { "BufReadPre", "BufNewFile" },
+    branch = "v2.x",
     dependencies = {
       { "neovim/nvim-lspconfig" },
       {
@@ -571,6 +582,10 @@ return {
 
       -- null-ls
       "jose-elias-alvarez/null-ls.nvim",
+    },
+    keys = {
+      -- formatter
+      { "<leader>f", "<Cmd>lua vim.lsp.buf.format()<CR>", silent = true },
     },
     config = require("plugins.configs.lsp_conf"),
   },
