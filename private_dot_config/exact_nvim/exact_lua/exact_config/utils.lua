@@ -28,5 +28,5 @@ end
 
 ---@diagnostic disable-next-line: duplicate-set-field
 function yet.ClipboardPaste()
-  vim.cmd("let @@ = system('cb paste')")
+  vim.cmd("let @@ = system('xsel -o -b')")
 end
