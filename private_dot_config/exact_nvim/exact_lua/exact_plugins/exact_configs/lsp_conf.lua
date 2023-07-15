@@ -1,6 +1,16 @@
-return function (_,_)
+return function(_, _)
   require("mason").setup()
-  require("mason-lspconfig").setup()
+
+  -- Install LSP servers
+  require("mason-lspconfig").setup({
+    ensure_installed = {
+      "bashls",
+      "dockerls",
+      "ruff_lsp",
+      "lua_ls",
+      "yamlls",
+    },
+  })
 
   local lspconfig = require("lspconfig")
   local lsp_defaults = lspconfig.util.default_config
@@ -11,42 +21,19 @@ return function (_,_)
     require("cmp_nvim_lsp").default_capabilities()
   )
 
-  lspconfig.lua_ls.setup({})
-
-  local ok3, mason_installer = pcall(require, "mason-tool-installer")
-  if not ok3 then
-    error("Loading mason-tool-installer")
-    return
-  end
-
-  local function check_back_space()
-    local col = vim.fn.col(".") - 1
-    if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
-      return true
-    else
-      return false
-    end
-  end
-
-  mason_installer.setup({
-    -- a list of all tools you want to ensure are installed upon
-    -- start; they should be the names Mason uses for each tool
-    ensure_installed = {
-      "bash-language-server",
-      "dockerfile-language-server",
-      "ruff",
-      "python-lsp-server",
-      "mypy",
-      "marksman",
-      "shellcheck",
-      "shellharden",
-      "shfmt",
-      "stylua",
-      "vim-language-server",
-      "lua-language-server",
-      "yaml-language-server",
+  -- Required to fix vim global warning
+  lspconfig.lua_ls.setup({
+    settings = {
+      Lua = {
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = {
+            "vim",
+            "require",
+          },
+        },
+      },
     },
-    auto_update = true,
   })
 
   local lsp = require("lsp-zero").preset({})
@@ -62,16 +49,19 @@ return function (_,_)
   -- Configure lua language server for neovim
   lsp.setup()
 
-  -- Must setup `cmp` after lsp-zero
-  local cmp = require("cmp")
-
-  local ok2, lspkind = pcall(require, "lspkind")
-  if not ok2 then
-    error("Loading lspkind")
-    return
+  local function check_back_space()
+    local col = vim.fn.col(".") - 1
+    if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
+      return true
+    else
+      return false
+    end
   end
 
   local luasnip = require("luasnip")
+
+  -- Must setup `cmp` after lsp-zero
+  local cmp = require("cmp")
 
   cmp.setup({
     snippet = {
@@ -110,9 +100,9 @@ return function (_,_)
     },
     sources = cmp.config.sources({
       { name = "nvim_lsp", priority = 1000 },
-      { name = "luasnip", priority = 750 },
-      { name = "buffer", priority = 500 },
-      { name = "path", priority = 250 },
+      { name = "luasnip",  priority = 750 },
+      { name = "buffer",   priority = 500 },
+      { name = "path",     priority = 250 },
     }),
     duplicates = {
       nvim_lsp = 1,
@@ -121,7 +111,7 @@ return function (_,_)
       path = 1,
     },
     formatting = {
-      format = lspkind.cmp_format({ with_text = false }),
+      format = require("lspkind").cmp_format({ with_text = false }),
     },
   })
 
@@ -134,11 +124,17 @@ return function (_,_)
     },
   })
 
-  local ok4, null_ls = pcall(require, "null-ls")
-  if not ok4 then
-    error("Loading null-ls")
-    return
-  end
+  -- Install linters and formatters
+  require('mason-null-ls').setup({
+    ensure_installed = {
+      "shellcheck",
+      "shellharden",
+      "shfmt",
+      "stylua",
+    }
+  })
+
+  local null_ls = require("null-ls")
 
   null_ls.setup({
     -- required to restore 'gp' operator
