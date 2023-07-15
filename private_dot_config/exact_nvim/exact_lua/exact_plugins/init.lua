@@ -18,10 +18,6 @@ return {
     ft = "bitbake",
   },
 
-  -- Markdown support
-  -- Generate table of contents for Markdown files
-  -- { "mzlogin/vim-markdown-toc" },
-
   -- New files created with a shebang line are automatically made executable
   {
     "tpope/vim-eunuch",
@@ -33,6 +29,19 @@ return {
     "glench/vim-jinja2-syntax",
     event = { "BufReadPre", "BufNewFile" },
   },
+
+  -- measure startuptime
+  {
+    "dstein64/vim-startuptime",
+    cmd = "StartupTime",
+    config = function()
+      vim.g.startuptime_tries = 10
+    end,
+  },
+
+  -- Markdown support
+  -- Generate table of contents for Markdown files
+  -- { "mzlogin/vim-markdown-toc" },
 
   {
     "olimorris/onedarkpro.nvim",
@@ -106,6 +115,7 @@ return {
     end,
   },
 
+  -- Provide Icons
   -- Required by telescope and others
   {
     "nvim-tree/nvim-web-devicons",
@@ -564,4 +574,5 @@ return {
     },
     config = require("plugins.configs.lsp_conf"),
   },
+
 }
