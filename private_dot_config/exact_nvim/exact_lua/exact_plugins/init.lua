@@ -410,7 +410,7 @@ return {
         "<c-_>",
         function()
           return vim.v.count == 0 and "<Plug>(comment_toggle_linewise_current)"
-            or "<Plug>(comment_toggle_linewise_count)"
+              or "<Plug>(comment_toggle_linewise_count)"
         end,
         mode = { "n" },
         expr = true,
@@ -484,12 +484,14 @@ return {
     config = require("plugins.configs.nvim-treesitter_conf"),
   },
 
+  -- LSP setup
   {
     "VonHeikemen/lsp-zero.nvim",
     event = { "BufReadPre", "BufNewFile" },
     branch = "v2.x",
     dependencies = {
       { "neovim/nvim-lspconfig" },
+      { "williamboman/mason-lspconfig.nvim" },
       {
         "williamboman/mason.nvim",
         cmd = {
@@ -497,8 +499,8 @@ return {
           "MasonInstall",
           "MasonUninstall",
           "MasonUninstallAll",
-          "MasonUpdate", -- AstroNvim extension here as well
-          "MasonUpdateAll", -- AstroNvim specific
+          "MasonUpdate",
+          "MasonUpdateAll",
         },
         opts = {
           ui = {
@@ -509,26 +511,22 @@ return {
             },
           },
         },
-      },
-      { "williamboman/mason-lspconfig.nvim" },
-      {
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
-        auto_update = true,
-        debounce_hours = 5,
+        build = ":MasonUpdate" -- :MasonUpdate updates registry contents
       },
 
-      -- completation
+      -- Completation engine
       { "hrsh7th/nvim-cmp" },
+
+      -- Completation sources
       { "hrsh7th/cmp-buffer" },
       { "hrsh7th/cmp-path" },
       { "hrsh7th/cmp-nvim-lsp" },
-      { "onsails/lspkind.nvim" },
       {
         "f3fora/cmp-spell",
         ft = { "gitcommit", "markdown" },
       },
 
-      --  Vim Snippets engine  [snippet engine] + [snippet templates]
+      -- Vim Snippets engine [snippet engine] + [snippet templates]
       {
         "L3MON4D3/LuaSnip",
         dependencies = {
@@ -539,8 +537,17 @@ return {
         end,
       },
 
-      -- null-ls
+      -- linter + formatter
       "jose-elias-alvarez/null-ls.nvim",
+
+      -- brigde between mason and null-ls for linters and formatter
+      {
+        "jay-babu/mason-null-ls.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+      },
+
+      -- UI
+      { "onsails/lspkind.nvim" },
     },
     keys = {
       -- formatter
