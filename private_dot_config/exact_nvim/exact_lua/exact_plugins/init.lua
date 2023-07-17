@@ -262,7 +262,7 @@ return {
   {
     -- Suda
     "lambdalisue/suda.vim",
-    cmd = { "SudaRead", "SudaWrite" },
+    event = 'BufRead',
     config = vim.api.nvim_set_var("suda_smart_edit", 1),
   },
 
