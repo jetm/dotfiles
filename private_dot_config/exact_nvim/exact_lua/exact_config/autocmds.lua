@@ -26,6 +26,7 @@ autocmd("FileType", {
   group = augroup("close_with_q"),
   pattern = {
     "PlenaryTestPopup",
+    "floaterm",
     "help",
     "lspinfo",
     "man",
@@ -35,7 +36,6 @@ autocmd("FileType", {
     "spectre_panel",
     "startuptime",
     "tsplayground",
-    "floaterm",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -75,7 +75,7 @@ autocmd("Filetype", {
 
 -- Apply changes in chezmoi managed files
 autocmd("BufWritePost", {
-  pattern = os.getenv 'HOME' .. '/.local/share/chezmoi/*',
+  pattern = os.getenv("HOME") .. "/.local/share/chezmoi/*",
   command = "silent !chezmoi apply --source-path %",
 })
 
