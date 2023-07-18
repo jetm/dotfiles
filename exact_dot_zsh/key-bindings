@@ -224,13 +224,13 @@ zle -N forgit_delete_branch
 bindkey '^[d' forgit_delete_branch
 
 # Insert sudo at the beggining of the line
-function insert_halp() {
-  BUFFER="halp $BUFFER"
-  zle end-of-line;
-}
-zle -N insert_halp
-
-# <Alt+h>
-bindkey '^[h' insert_halp
+# function insert_halp() {
+#   BUFFER="halp $BUFFER"
+#   zle end-of-line;
+# }
+# zle -N insert_halp
+#
+# # <Alt+h>
+# bindkey '^[h' insert_halp
 
 # vim:set ft=zsh ts=2 sw=2 et:

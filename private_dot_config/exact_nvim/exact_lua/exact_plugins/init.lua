@@ -548,10 +548,14 @@ return {
       -- Vim Snippets engine [snippet engine] + [snippet templates]
       {
         "L3MON4D3/LuaSnip",
+        version = "2.*",
         dependencies = {
           "rafamadriz/friendly-snippets",
         },
-        config = function(_, _)
+        -- opts = {
+        --   loaders_store_source = true,
+        -- },
+        config = function()
           require("luasnip.loaders.from_vscode").lazy_load()
         end,
       },
