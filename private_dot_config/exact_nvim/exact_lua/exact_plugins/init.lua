@@ -402,16 +402,6 @@ return {
         },
       },
     },
-    keys = {
-      {
-        "s",
-        function()
-          require("flash").treesitter()
-        end,
-        mode = { "n", "o", "x" },
-        desc = "Flash Treesitter",
-      },
-    },
   },
 
   -- Comment lines
@@ -530,7 +520,8 @@ return {
             },
           },
         },
-        build = ":MasonUpdate", -- :MasonUpdate updates registry contents
+        -- :MasonUpdate updates registry contents
+        build = ":MasonUpdate",
       },
 
       -- Completation engine
