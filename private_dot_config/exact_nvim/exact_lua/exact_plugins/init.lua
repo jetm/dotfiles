@@ -393,8 +393,7 @@ return {
   -- Treesitter integration
   {
     "folke/flash.nvim",
-    lazy = true,
-    -- event = "VeryLazy",
+    event = "VeryLazy",
     opts = {
       modes = {
         char = {

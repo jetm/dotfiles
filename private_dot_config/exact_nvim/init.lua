@@ -7,11 +7,11 @@ if vim.loader and vim.fn.has("nvim-0.9.1") == 1 then
 end
 
 for _, source in ipairs({
-  "config.utils",
   "config.options",
   "config.lazy",
   "config.autocmds",
   "config.mappings",
+  "config.utils",
 }) do
   local status_ok, fault = pcall(require, source)
   if not status_ok then
