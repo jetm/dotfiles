@@ -19,9 +19,7 @@
 # <Alt+S>       => Insert sudo word
 # <Alt+Shift+S> => Run with sudo word
 # <Alt+l>       => Run ls
-# <Ctrl+J>      => Insert $()
 # <Alt+Enter>   => execute the command and don't clear it
-# <Alt+h>       => Insert halp word
 
 # <Ctrl+Right> => Forward word
 bindkey "^[[1;5C" forward-word
@@ -51,7 +49,7 @@ zle -N paste-from-clipboard
 bindkey '^V' paste-from-clipboard
 
 fancy-ctrl-z () {
-  if [[ $#BUFFER -eq 0 ]]; then
+  if [[ $#BUFFER = 0 ]]; then
     BUFFER="fg"
     zle accept-line -w
   else
@@ -199,13 +197,14 @@ zle -N execute_sudo!!
 bindkey '^[S' execute_sudo!!
 
 # Create command substitution `$()`
-function insert_cmd_sub {
-  RBUFFER='$()'"$RBUFFER"
-  ((CURSOR=CURSOR+2))
-}
-zle -N insert_cmd_sub
-# <Ctrl+J>
-bindkey '^J' insert_cmd_sub
+# function insert_cmd_sub {
+#   RBUFFER='$()'"$RBUFFER"
+#   ((CURSOR=CURSOR+2))
+# }
+# zle -N insert_cmd_sub
+#
+# # <Ctrl+J>
+# bindkey '^J' insert_cmd_sub
 
 # execute the command and don't clear it
 # <Alt+Enter>
