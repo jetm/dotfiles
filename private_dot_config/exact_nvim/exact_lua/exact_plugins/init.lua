@@ -97,24 +97,6 @@ return {
     event = { "BufReadPre", "BufNewFile" },
   },
 
-  -- Visualise and resolve merge conflicts in neovim
-  -- ]x - move to previous conflict
-  -- [x - move to next conflict
-  -- co - choose ours
-  -- ct - choose theirs
-  -- cb - choose both
-  -- c0 - choose none
-  {
-    "akinsho/git-conflict.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("git-conflict").setup({
-        default_mappings = true,
-        disable_diagnostics = true,
-      })
-    end,
-  },
-
   -- Provide Icons
   -- Required by telescope and others
   {
@@ -262,7 +244,7 @@ return {
   {
     -- Suda
     "lambdalisue/suda.vim",
-    event = 'BufRead',
+    event = "BufRead",
     config = vim.api.nvim_set_var("suda_smart_edit", 1),
   },
 
@@ -570,4 +552,29 @@ return {
     config = require("plugins.configs.lsp_conf"),
   },
 
+  -- better diffing
+  -- ]x - move to previous conflict
+  -- [x - move to next conflict
+  -- co - choose ours
+  -- ct - choose theirs
+  -- cb - choose both
+  -- c0 - choose none
+  {
+    "sindrets/diffview.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+    cmd = { "DiffviewOpen", "DiffviewClose" },
+    config = require("plugins.configs.diffview_conf"),
+  },
+
+  -- Visualise and resolve merge conflicts in neovim
+  -- {
+  --   "akinsho/git-conflict.nvim",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("git-conflict").setup({
+  --       default_mappings = true,
+  --       disable_diagnostics = true,
+  --     })
+  --   end,
+  -- },
 }
