@@ -63,6 +63,7 @@ alias bbk='bitbake'
 alias ato='atool -x -E'
 alias halp='halp --no-version'
 alias de=decompress
+alias pacdiff="DIFFPROG='nvim -d' pacdiff -s"
 
 #
 # Git
