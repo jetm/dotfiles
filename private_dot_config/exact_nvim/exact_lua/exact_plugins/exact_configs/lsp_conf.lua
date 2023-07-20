@@ -174,7 +174,6 @@ return function(_, _)
       }),
       null_ls.builtins.formatting.stylua.with({
         extra_args = {
-          "--column-width=80",
           "--indent-width=2",
           "--indent-type=Spaces",
         },
