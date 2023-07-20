@@ -212,6 +212,7 @@ bindkey '^[^M' accept-and-hold
 
 # Delete Git branch
 function forgit_delete_branch() {
+  git-switch-default-branch
   forgit::branch::delete
 
   # show prompt

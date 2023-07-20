@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+# get the default repo branch. Assume origin as remote
+default_branch=$(git symbolic-ref --short refs/remotes/origin/HEAD |
+  sed 's@^origin/@@')
+
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+if [[ ${default_branch} != "${current_branch}" ]]; then
+  git switch "${default_branch}"
+fi
+
+# vim:set ts=2 sw=2
