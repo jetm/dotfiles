@@ -1,5 +1,5 @@
 local function augroup(name)
-  return vim.api.nvim_create_augroup("jetm_" .. name, { clear = true })
+  return vim.api.nvim_create_augroup("yet_" .. name, { clear = true })
 end
 
 local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
@@ -26,6 +26,7 @@ autocmd("FileType", {
   group = augroup("close_with_q"),
   pattern = {
     "PlenaryTestPopup",
+    "nofile",
     "floaterm",
     "help",
     "lspinfo",
