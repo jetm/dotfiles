@@ -208,4 +208,4 @@
 [color]
     ui = auto
 
-# vim:ft=gitconfig set ts=4 sw=4
+# vim:ft=gitconfig ts=4 sw=4
