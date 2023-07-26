@@ -80,6 +80,8 @@
     # diff stat instead of just names
     stat = !git diff --stat
 
+    dt = "! args=$@; shift $#; nvim -c \"DiffviewOpen $args\""
+
 [i18n]
     # Character encoding the commit messages are converted to when running git
     # log and friends
@@ -186,10 +188,10 @@
     editor = nvim
 [diff]
     tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = nvim -c \"DiffviewOpen\"
 [difftool]
     prompt = false
-[difftool "nvimdiff"]
-    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 
 [core]
     excludesfile = ~/.gitignore
