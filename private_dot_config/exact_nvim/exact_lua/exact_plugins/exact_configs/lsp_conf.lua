@@ -6,8 +6,9 @@ return function(_, _)
     ensure_installed = {
       "bashls",
       "dockerls",
-      "ruff_lsp",
+      "jsonls",
       "lua_ls",
+      "ruff_lsp",
       "yamlls",
     },
   })
@@ -29,6 +30,23 @@ return function(_, _)
             "require",
           },
         },
+      },
+    },
+  })
+
+  lspconfig.jsonls.setup({
+    settings = {
+      jsonls = {
+        format = {
+          enable = false,
+        },
+        validate = { enable = true },
+        schemaStore = {
+          -- Must disable built-in schemaStore support to use
+          -- schemas from SchemaStore.nvim plugin
+          enable = false,
+        },
+        schemas = require("schemastore").yaml.schemas(),
       },
     },
   })

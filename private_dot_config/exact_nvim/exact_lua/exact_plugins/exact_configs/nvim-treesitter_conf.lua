@@ -18,6 +18,8 @@ return function (_, _)
       "dockerfile",
       "go",
       "json",
+      "json5",
+      "jsonc",
       "lua",
       "make",
       "ninja",
