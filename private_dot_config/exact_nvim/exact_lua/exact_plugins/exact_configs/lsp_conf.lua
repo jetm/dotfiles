@@ -137,13 +137,14 @@ return function(_, _)
   })
 
   -- Install linters and formatters
-  require('mason-null-ls').setup({
+  require("mason-null-ls").setup({
     ensure_installed = {
       "shellcheck",
       "shellharden",
       "shfmt",
       "stylua",
-    }
+      "yamlfmt",
+    },
   })
 
   local null_ls = require("null-ls")
@@ -190,6 +191,7 @@ return function(_, _)
           "--indent-type=Spaces",
         },
       }),
+      null_ls.builtins.formatting.yamlfmt,
     },
   })
 end
