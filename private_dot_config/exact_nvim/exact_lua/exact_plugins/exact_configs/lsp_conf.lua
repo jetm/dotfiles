@@ -33,6 +33,25 @@ return function(_, _)
     },
   })
 
+  lspconfig.yamlls.setup({
+    settings = {
+      redhat = { telemetry = { enabled = false } },
+      yaml = {
+        keyOrdering = false,
+        format = {
+          enable = false,
+        },
+        validate = { enable = true },
+        schemaStore = {
+          -- Must disable built-in schemaStore support to use
+          -- schemas from SchemaStore.nvim plugin
+          enable = false,
+        },
+        schemas = require("schemastore").yaml.schemas(),
+      },
+    },
+  })
+
   local lsp = require("lsp-zero").preset({})
 
   lsp.on_attach(function(_, bufnr)

@@ -481,7 +481,13 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     branch = "v2.x",
     dependencies = {
-      { "neovim/nvim-lspconfig" },
+      {
+        "neovim/nvim-lspconfig",
+        dependencies = {
+          "b0o/SchemaStore.nvim",
+          version = false,
+        },
+      },
       { "williamboman/mason-lspconfig.nvim" },
       {
         "williamboman/mason.nvim",
