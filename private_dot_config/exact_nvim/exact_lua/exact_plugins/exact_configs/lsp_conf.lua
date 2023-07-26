@@ -15,11 +15,8 @@ return function(_, _)
   local lspconfig = require("lspconfig")
   local lsp_defaults = lspconfig.util.default_config
 
-  lsp_defaults.capabilities = vim.tbl_deep_extend(
-    "force",
-    lsp_defaults.capabilities,
-    require("cmp_nvim_lsp").default_capabilities()
-  )
+  lsp_defaults.capabilities =
+    vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
 
   -- Required to fix vim global warning
   lspconfig.lua_ls.setup({
@@ -41,10 +38,6 @@ return function(_, _)
   lsp.on_attach(function(_, bufnr)
     lsp.default_keymaps({ buffer = bufnr })
   end)
-
-  -- Configure lua language server for neovim
-  -- For now, not required
-  -- lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
   -- Configure lua language server for neovim
   lsp.setup()
@@ -100,9 +93,9 @@ return function(_, _)
     },
     sources = cmp.config.sources({
       { name = "nvim_lsp", priority = 1000 },
-      { name = "luasnip",  priority = 750 },
-      { name = "buffer",   priority = 500 },
-      { name = "path",     priority = 250 },
+      { name = "luasnip", priority = 750 },
+      { name = "buffer", priority = 500 },
+      { name = "path", priority = 250 },
     }),
     duplicates = {
       nvim_lsp = 1,
