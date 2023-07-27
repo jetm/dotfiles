@@ -47,15 +47,6 @@ zi0c() { zi_ice wait'2' "$@"; }
 # zinit pack="default" for zsh
 
 #
-# vi-mode
-#
-ZVM_VI_SURROUND_BINDKEY=s-prefix
-ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-zi_ice id-as'zsh-vi-mode' \
-  depth=1
-zinit light jeffreytse/zsh-vi-mode
-
-#
 # Powerlevel10k
 #
 # Must be run just after zinit
@@ -64,32 +55,68 @@ zi_ice id-as'p10k' \
   depth=1
 zinit light romkatv/powerlevel10k
 
-zi_ice id-as'fzf-tab' \
-  depth=1
-zinit light Aloxaf/fzf-tab
-
-zi_ice id-as'zsh-autosuggestions' \
-  depth=1
-zinit light zsh-users/zsh-autosuggestions
-
-#
-# prezto plugins
-#
-# zinit internal load prezto module is too slow
-zi_ice id-as'prezto' \
-  depth=1 \
-  cloneonly \
-  atpull"%atclone" \
-  nocd
-zinit light sorin-ionescu/prezto
+# Source here. It's slower inside of zinit
+zinit snippet "${HOME}"/.p10k.zsh
 
 zi_ice id-as'zsh-defer' \
   depth=1
 zinit light romkatv/zsh-defer
 
+if command -v keychain >/dev/null 2>&1 && [[ -f "$HOME/.ssh/id_rsa" ]]; then
+  zsh-defer eval "$(keychain --eval --quiet --agents ssh id_rsa)"
+fi
+
+# atuin
+if (command -v atuin >/dev/null 2>&1); then
+  export ATUIN_NOBIND="true"
+  zsh-defer eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
+fi
+
+#
+# vi-mode
+#
+ZVM_VI_SURROUND_BINDKEY=s-prefix
+ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+zi0a id-as'zsh-vi-mode' \
+  depth=1
+zinit light jeffreytse/zsh-vi-mode
+
+# zsh-vi-mode will auto execute this zvm_after_init function
+zvm_after_init() {
+  # required to read fzf key-bindings after zsh-vi-mode, otherwise they will be
+  # overwritten by zsh-vi-mode
+  turbo_source "${ZINIT[PLUGINS_DIR]}/fzf/key-bindings.zsh"
+
+  # required to read custom key-bindings, otherwise they will be overwritten by
+  # zsh-vi-mode
+  turbo_source "${HOME}/.zsh/key-bindings"
+}
+
+zi0a id-as'zsh-completions' \
+  depth=1 \
+  atload"zicompinit; zicdreplay" \
+  blockf
+zinit light zsh-users/zsh-completions
+
+zi0a id-as'zsh-autosuggestions' \
+  depth=1
+zinit light zsh-users/zsh-autosuggestions
+
 zi0b id-as'zsh-history-substring-search' \
   depth=1
 zinit light zsh-users/zsh-history-substring-search
+
+# zsh-syntax-highlighting is quicker than fast-syntax-highlighting
+zi0b id-as'zsh-syntax-highlighting' \
+  depth=1 \
+  cloneonly \
+  atpull'%atclone' \
+  nocd
+zinit light zsh-users/zsh-syntax-highlighting
+
+# zsh-syntax-highlighting
+export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 zi0b id-as'fzf' \
   from'gh-r' \
@@ -99,6 +126,10 @@ zi0b id-as'fzf' \
   dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh' \
   pick'fzf'
 zinit light junegunn/fzf
+
+zi0b id-as'fzf-tab' \
+  depth=1
+zinit light Aloxaf/fzf-tab
 
 # export ZPWR_EXPAND_TO_HISTORY=true
 # ignore expansion of these regular/global aliases
@@ -114,17 +145,16 @@ zi0b id-as'zsh-autopair' \
   atinit'AUTOPAIR_INHIBIT_INIT=1;'
 zinit light hlissner/zsh-autopair
 
+# autopair
+turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-autopair/autopair.zsh"
+autopair-init
+
 zi0c id-as'zsh-bd' \
   depth=1
 zinit light tarrasch/zsh-bd
 
-# zsh-syntax-highlighting is quicker than fast-syntax-highlighting
-zi0c id-as'zsh-syntax-highlighting' \
-  depth=1 \
-  cloneonly \
-  atpull'%atclone' \
-  nocd
-zinit light zsh-users/zsh-syntax-highlighting
+# zsh-bd
+turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-bd/bd.zsh"
 
 zi0c id-as'cht.sh' \
   as'command' \
@@ -137,9 +167,11 @@ zinit snippet https://cht.sh/:cht.sh
 # neovim stable releases
 #
 zi0c id-as'nvim' \
+  depth=1 \
   ver'v0.9.1' \
   as'program' \
   make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
+  blockf \
   bin"$ZPFX/bin/nvim"
 zinit light neovim/neovim
 
@@ -149,6 +181,10 @@ zi0c id-as'forgit' \
   atpull'%atclone' \
   nocd
 zinit light wfxr/forgit
+
+# forgit
+export FORGIT_NO_ALIASES=1
+turbo_source "${ZINIT[PLUGINS_DIR]}/forgit/forgit.plugin.sh"
 
 zi0c id-as'git-update' \
   as'program' \
@@ -170,58 +206,17 @@ zi0c id-as'checkmake' \
   mv'checkmake*->checkmake'
 zinit light mrtazz/checkmake
 
-# zsh-vi-mode will auto execute this zvm_after_init function
-zvm_after_init() {
-  # required to read fzf key-bindings after zsh-vi-mode, otherwise they will be
-  # overwritten by zsh-vi-mode
-  turbo_source "${ZINIT[PLUGINS_DIR]}/fzf/key-bindings.zsh"
-
-  # required to read custom key-bindings, otherwise they will be overwritten by
-  # zsh-vi-mode
-  turbo_source "${HOME}/.zsh/key-bindings"
-}
-
 #
 # prezto settings
 #
-load_prezto_mod() { turbo_source "${ZINIT[PLUGINS_DIR]}/prezto/modules/$1/init.zsh"; }
+zinit snippet PZTM::environment
+zinit snippet PZTM::history
 
 # Required here before prezto is loaded
 zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
-load_prezto_mod helper
-load_prezto_mod environment
-load_prezto_mod history
-load_prezto_mod utility
-# requires utility
-load_prezto_mod completion
 
-# zsh-bd
-turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-bd/bd.zsh"
-
-# autopair
-turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-autopair/autopair.zsh"
-autopair-init
-
-# zsh-syntax-highlighting
-export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
-# forgit
-export FORGIT_NO_ALIASES=1
-turbo_source "${ZINIT[PLUGINS_DIR]}/forgit/forgit.plugin.sh"
-
-if (command -v keychain >/dev/null 2>&1); then
-  if [[ -f "$HOME/.ssh/id_rsa" ]]; then
-    zsh-defer eval "$(keychain --eval --quiet --agents ssh id_rsa)"
-  fi
-fi
-
-# atuin
-if (command -v atuin >/dev/null 2>&1); then
-  export ATUIN_NOBIND="true"
-  zsh-defer eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
-fi
+zinit snippet OMZP::extract
 
 #
 # Put most source here to improve zsh load speed
@@ -232,11 +227,10 @@ for file in "${HOME}"/.zsh/*.zsh; do
 done
 unset file
 
-# Source here. It's slower inside of zinit
-source "${HOME}"/.p10k.zsh
+# clear unused completions
+zinit cdclear -q
 
 unset turbo_source
-unset load_prezto_mod
 unset z_ice
 unset zi0a
 unset zi0b
@@ -263,12 +257,6 @@ unset zi0c
 #   as"program" \
 #   atload'!eval $(starship init zsh)'
 # zinit light starship/starship
-
-# zi_ice id-as'zsh-completions' \
-#   atload"zicompinit; zicdreplay" \
-#   wait \
-#   blockf
-# zinit light zsh-users/zsh-completions
 
 # TODO: problem with zsh-autosuggestions
 # zstyle ':autocomplete:key-bindings' enabled no
