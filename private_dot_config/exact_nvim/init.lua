@@ -6,6 +6,17 @@ if vim.loader and vim.fn.has("nvim-0.9.1") == 1 then
   vim.loader.enable()
 end
 
+-- Manually add new filetypes
+vim.filetype.add({
+  filename = {},
+  pattern = {
+    [".*%.bb%..*"] = "bitbake",
+    [".*%.inc"] = "bitbake",
+    [".*%.bats"] = "bash",
+    [".*%.zsh"] = "sh",
+  },
+})
+
 for _, source in ipairs({
   "config.options",
   "config.lazy",
