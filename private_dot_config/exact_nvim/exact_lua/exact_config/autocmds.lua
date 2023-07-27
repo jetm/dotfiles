@@ -86,6 +86,15 @@ autocmd("Filetype", {
   command = "setlocal wrap",
 })
 
+-- wrap and check for spell in text filetypes
+autocmd("FileType", {
+  group = augroup("spell"),
+  pattern = { "gitcommit", "markdown" },
+  callback = function()
+    vim.opt_local.spell = true
+  end,
+})
+
 -- Apply changes in chezmoi managed files
 autocmd("BufWritePost", {
   pattern = os.getenv("HOME") .. "/.local/share/chezmoi/*",

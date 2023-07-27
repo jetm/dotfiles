@@ -30,6 +30,8 @@ return function(_, _)
             "require",
           },
         },
+        format = { enable = false },
+        telemetry = { enable = false },
       },
     },
   })
@@ -136,12 +138,23 @@ return function(_, _)
       { name = "luasnip", priority = 750 },
       { name = "buffer", priority = 500 },
       { name = "path", priority = 250 },
+      {
+        name = "spell",
+        priority = 100,
+        option = {
+          keep_all_entries = false,
+          enable_in_context = function()
+            return true
+          end,
+        },
+      },
     }),
     duplicates = {
       nvim_lsp = 1,
       luasnip = 1,
       buffer = 1,
       path = 1,
+      spell = 1,
     },
     formatting = {
       format = require("lspkind").cmp_format({ with_text = false }),
@@ -177,9 +190,6 @@ return function(_, _)
     end,
     sources = {
       null_ls.builtins.diagnostics.shellcheck.with({
-        filetypes = { "sh", "zsh", "bash", "bats" },
-      }),
-      null_ls.builtins.code_actions.shellcheck.with({
         filetypes = { "sh", "zsh", "bash", "bats" },
       }),
       null_ls.builtins.diagnostics.zsh,

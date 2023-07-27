@@ -42,11 +42,11 @@ o.tabstop = 4 -- Tab width
 o.softtabstop = 4
 o.termguicolors = true -- Enable 24-bit RGB color in the TUI
 o.undofile = true -- Enable persistent undo
-o.undodir = os.getenv 'HOME' .. "/.vim_data/undofile" -- Where to save undofile
+o.undodir = os.getenv("HOME") .. "/.vim_data/undofile" -- Where to save undofile
 o.updatetime = 300 -- Length of time to wait before triggering the plugin
 o.virtualedit = "block" -- allow going past end of line in visual block mode
 o.writebackup = false -- Disable making a backup before overwriting a file
+o.spelllang = { "en" } -- English dictionary
 
 local g = vim.g -- Global set options
 g.mapleader = " " -- set leader key
-g.maplocalleader = "," -- set default local leader key
