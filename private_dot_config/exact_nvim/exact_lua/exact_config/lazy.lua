@@ -39,18 +39,20 @@ require("lazy").setup({
   },
   checker = {
     enabled = true,
-    concurrency = 8,
+    concurrency = 16,
     notify = false,
-    frequency = 3600, -- check for updates every hour
+    frequency = 3600 * 24 * 2, -- update every two days
   },
   performance = {
     rtp = {
+      -- Internal Plugins at share/nvim/runtime/plugin
       disabled_plugins = {
         "gzip",
+        "man",
         "matchit",
         "matchparen",
         "netrwPlugin",
-        "man",
+        "spellfile",
         "tarPlugin",
         "tohtml",
         "tutor",
