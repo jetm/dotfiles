@@ -21,29 +21,6 @@ autocmd("BufEnter", {
   command = "set fo-=c fo-=r fo-=o",
 })
 
--- Close some filetypes with <q>
-autocmd("FileType", {
-  group = augroup("close_with_q"),
-  pattern = {
-    "PlenaryTestPopup",
-    "nofile",
-    "floaterm",
-    "help",
-    "lspinfo",
-    "man",
-    "notify",
-    "qf",
-    "query", -- :InspectTree
-    "spectre_panel",
-    "startuptime",
-    "tsplayground",
-  },
-  callback = function(event)
-    vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = event.buf, silent = true })
-  end,
-})
-
 -- Go to last location when opening a buffer
 autocmd("BufReadPost", {
   group = augroup("last_loc"),
@@ -59,6 +36,24 @@ autocmd("BufReadPost", {
       pcall(vim.api.nvim_win_set_cursor, 0, mark)
     end
   end,
+})
+
+-- Auto create dir when saving a file, in case some intermediate directory does not exist
+autocmd({ "BufWritePre" }, {
+  group = augroup("auto_create_dir"),
+  callback = function(event)
+    if event.match:match("^%w%w+://") then
+      return
+    end
+    local file = vim.loop.fs_realpath(event.match) or event.match
+    vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+  end,
+})
+
+-- Apply changes in chezmoi managed files
+autocmd("BufWritePost", {
+  pattern = os.getenv("HOME") .. "/.local/share/chezmoi/*",
+  command = "silent !chezmoi apply --source-path %",
 })
 
 --
@@ -95,10 +90,27 @@ autocmd("FileType", {
   end,
 })
 
--- Apply changes in chezmoi managed files
-autocmd("BufWritePost", {
-  pattern = os.getenv("HOME") .. "/.local/share/chezmoi/*",
-  command = "silent !chezmoi apply --source-path %",
+-- Close some filetypes with <q>
+autocmd("FileType", {
+  group = augroup("close_with_q"),
+  pattern = {
+    "PlenaryTestPopup",
+    "nofile",
+    "floaterm",
+    "help",
+    "lspinfo",
+    "man",
+    "notify",
+    "qf",
+    "query", -- :InspectTree
+    "spectre_panel",
+    "startuptime",
+    "tsplayground",
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = event.buf, silent = true })
+  end,
 })
 
 -- Terminal settings:
