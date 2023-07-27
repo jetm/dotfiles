@@ -21,7 +21,7 @@ autocmd("BufEnter", {
   command = "set fo-=c fo-=r fo-=o",
 })
 
--- close some filetypes with <q>
+-- Close some filetypes with <q>
 autocmd("FileType", {
   group = augroup("close_with_q"),
   pattern = {
@@ -40,12 +40,24 @@ autocmd("FileType", {
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set(
-      "n",
-      "q",
-      "<cmd>close<CR>",
-      { buffer = event.buf, silent = true }
-    )
+    vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = event.buf, silent = true })
+  end,
+})
+
+-- Go to last location when opening a buffer
+autocmd("BufReadPost", {
+  group = augroup("last_loc"),
+  callback = function()
+    local exclude = { "gitcommit", "gitrebase" }
+    local buf = vim.api.nvim_get_current_buf()
+    if vim.tbl_contains(exclude, vim.bo[buf].filetype) then
+      return
+    end
+    local mark = vim.api.nvim_buf_get_mark(buf, '"')
+    local lcount = vim.api.nvim_buf_line_count(buf)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
   end,
 })
 

@@ -66,22 +66,6 @@ return {
     },
   },
 
-  -- Go to the last edited place
-  {
-    "ethanholz/nvim-lastplace",
-    lazy = false,
-    opts = {
-      lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
-      lastplace_ignore_filetype = {
-        "gitcommit",
-        "gitrebase",
-        "svn",
-        "hgcommit",
-      },
-      lastplace_open_folds = true,
-    },
-  },
-
   -- Neovim setup for init.lua and plugin development with full signature help,
   -- docs and completion for the nvim lua API
   -- Enable to get more get help from Lua API
