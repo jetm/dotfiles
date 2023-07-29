@@ -210,13 +210,16 @@ zinit light mrtazz/checkmake
 #
 # prezto settings
 #
-zinit snippet PZTM::environment
-zinit snippet PZTM::history
-
 # Required here before prezto is loaded
 zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
+zstyle ':prezto:module:history:alias' skip 'yes'
 
+zi_ice
+zinit snippet PZTM::environment
+zi_ice
+zinit snippet PZTM::history
+zi_ice
 zinit snippet OMZP::extract
 
 #
