@@ -134,14 +134,12 @@ return function(_, _)
       end, { "i", "s" }),
     },
     sources = cmp.config.sources({
-      { name = "nvim_lsp", priority = 1000 },
-      { name = "luasnip", priority = 750 },
+      { name = "nvim_lsp", priority = 1250 },
+      { name = "luasnip", priority = 1000 },
       {
         name = "buffer",
-        priority = 500,
+        priority = 750,
         option = {
-          -- https://github.com/hrsh7th/cmp-buffer#get_bufnrs-type-fun-number=
-          -- https://github.com/hrsh7th/cmp-buffer#performance-on-large-text-files=
           get_bufnrs = function()
             local LIMIT = 1024 * 1024 -- 1 Megabyte max
             local bufs = {}
@@ -159,6 +157,15 @@ return function(_, _)
           end,
         },
       },
+      {
+        name = "rg",
+        priority = 500,
+        keyword_length = 3,
+        max_item_count = 5,
+        option = {
+          additional_arguments = "--smart-case",
+        },
+      },
       { name = "async_path", priority = 250 },
       {
         name = "spell",
@@ -171,13 +178,6 @@ return function(_, _)
         },
       },
     }),
-    duplicates = {
-      nvim_lsp = 1,
-      luasnip = 1,
-      buffer = 1,
-      async_path = 1,
-      spell = 1,
-    },
     formatting = {
       format = require("lspkind").cmp_format({ with_text = false }),
     },
