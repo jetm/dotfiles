@@ -136,8 +136,30 @@ return function(_, _)
     sources = cmp.config.sources({
       { name = "nvim_lsp", priority = 1000 },
       { name = "luasnip", priority = 750 },
-      { name = "buffer", priority = 500 },
-      { name = "path", priority = 250 },
+      {
+        name = "buffer",
+        priority = 500,
+        option = {
+          -- https://github.com/hrsh7th/cmp-buffer#get_bufnrs-type-fun-number=
+          -- https://github.com/hrsh7th/cmp-buffer#performance-on-large-text-files=
+          get_bufnrs = function()
+            local LIMIT = 1024 * 1024 -- 1 Megabyte max
+            local bufs = {}
+
+            for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+              local line_count = vim.api.nvim_buf_line_count(buf)
+              local byte_size = vim.api.nvim_buf_get_offset(buf, line_count)
+
+              if byte_size < LIMIT then
+                bufs[buf] = true
+              end
+            end
+
+            return vim.tbl_keys(bufs)
+          end,
+        },
+      },
+      { name = "async_path", priority = 250 },
       {
         name = "spell",
         priority = 100,
@@ -153,7 +175,7 @@ return function(_, _)
       nvim_lsp = 1,
       luasnip = 1,
       buffer = 1,
-      path = 1,
+      async_path = 1,
       spell = 1,
     },
     formatting = {

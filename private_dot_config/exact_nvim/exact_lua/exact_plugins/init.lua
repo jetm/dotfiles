@@ -501,7 +501,7 @@ return {
 
       -- Completation sources
       { "hrsh7th/cmp-buffer" },
-      { "hrsh7th/cmp-path" },
+      { "FelipeLema/cmp-async-path" },
       { "hrsh7th/cmp-nvim-lsp" },
       {
         "f3fora/cmp-spell",
