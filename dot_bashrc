@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
 if [ -z "$PS1" ]; then
