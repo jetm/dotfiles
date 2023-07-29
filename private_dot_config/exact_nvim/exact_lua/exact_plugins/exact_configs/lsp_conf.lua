@@ -167,6 +167,7 @@ return function(_, _)
         },
       },
       { name = "async_path", priority = 250 },
+      { name = "bitbake_path", priority = 250 },
       {
         name = "spell",
         priority = 100,

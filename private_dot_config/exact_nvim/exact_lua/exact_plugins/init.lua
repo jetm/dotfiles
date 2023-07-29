@@ -500,10 +500,11 @@ return {
       { "hrsh7th/nvim-cmp" },
 
       -- Completation sources
+      { "hrsh7th/cmp-nvim-lsp" },
       { "hrsh7th/cmp-buffer" },
       { "lukas-reineke/cmp-rg"},
       { "FelipeLema/cmp-async-path" },
-      { "hrsh7th/cmp-nvim-lsp" },
+      { "antznin/cmp-bitbake-path" },
       {
         "f3fora/cmp-spell",
         ft = { "gitcommit", "markdown" },
