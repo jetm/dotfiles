@@ -42,9 +42,30 @@ zi_ice() { zinit ice lucid silent "$@"; }
 zi0a() { zi_ice wait'0' "$@"; }
 zi0b() { zi_ice wait'1' "$@"; }
 zi0c() { zi_ice wait'2' "$@"; }
+zi0d() { zi_ice wait'3' "$@"; }
 
 # Use default installed in the Linux distribution. This version has bugs
 # zinit pack="default" for zsh
+
+#
+# vi-mode
+#
+ZVM_VI_SURROUND_BINDKEY=s-prefix
+ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+zi_ice id-as'zsh-vi-mode' \
+  depth=1
+zinit light jeffreytse/zsh-vi-mode
+
+# zsh-vi-mode will auto execute this zvm_after_init function
+zvm_after_init() {
+  # required to read fzf key-bindings after zsh-vi-mode, otherwise they will be
+  # overwritten by zsh-vi-mode
+  turbo_source "${ZINIT[PLUGINS_DIR]}/fzf/key-bindings.zsh"
+
+  # required to read custom key-bindings, otherwise they will be overwritten by
+  # zsh-vi-mode
+  turbo_source "${HOME}"/.zsh/key-bindings
+}
 
 #
 # Powerlevel10k
@@ -71,26 +92,6 @@ if (command -v atuin >/dev/null 2>&1); then
   export ATUIN_NOBIND="true"
   zsh-defer eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
 fi
-
-#
-# vi-mode
-#
-ZVM_VI_SURROUND_BINDKEY=s-prefix
-ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-zi0a id-as'zsh-vi-mode' \
-  depth=1
-zinit light jeffreytse/zsh-vi-mode
-
-# zsh-vi-mode will auto execute this zvm_after_init function
-zvm_after_init() {
-  # required to read fzf key-bindings after zsh-vi-mode, otherwise they will be
-  # overwritten by zsh-vi-mode
-  turbo_source "${ZINIT[PLUGINS_DIR]}/fzf/key-bindings.zsh"
-
-  # required to read custom key-bindings, otherwise they will be overwritten by
-  # zsh-vi-mode
-  turbo_source "${HOME}/.zsh/key-bindings"
-}
 
 zi0a id-as'zsh-completions' \
   depth=1 \
