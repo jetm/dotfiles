@@ -20,6 +20,7 @@
 # <Alt+Shift+S> => Run with sudo word
 # <Alt+l>       => Run ls
 # <Alt+Enter>   => execute the command and don't clear it
+# <Alt+P>       => Call fzf
 
 # <Ctrl+Right> => Forward word
 bindkey "^[[1;5C" forward-word
@@ -220,8 +221,15 @@ function forgit_delete_branch() {
 }
 zle -N forgit_delete_branch
 
-# <Alt+d>
+# <Alt+D>
 bindkey '^[d' forgit_delete_branch
+
+# <Ctrl+P>
+bindkey -r '^P'
+bindkey -r '^T'
+bindkey -M vicmd '^p' fzf-file-widget
+bindkey -M viins '^p' fzf-file-widget
+bindkey '^P' fzf-file-widget
 
 # Insert sudo at the beggining of the line
 # function insert_halp() {
@@ -230,7 +238,7 @@ bindkey '^[d' forgit_delete_branch
 # }
 # zle -N insert_halp
 #
-# # <Alt+h>
+# # <Alt+H>
 # bindkey '^[h' insert_halp
 
 # vim:set ft=zsh ts=2 sw=2 et:
