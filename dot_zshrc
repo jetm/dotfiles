@@ -1,7 +1,5 @@
 # shellcheck disable=SC2148
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
 # shellcheck disable=SC2296
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   # shellcheck disable=SC2296
@@ -73,11 +71,17 @@ zvm_after_init() {
 # Must be run just after zinit
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh
 zi_ice id-as'p10k' \
-  depth=1
+  depth=1 \
+  src"${HOME}/.p10k.zsh"
 zinit light romkatv/powerlevel10k
 
-# Source here. It's slower inside of zinit
-zinit snippet "${HOME}"/.p10k.zsh
+# p10k has a better default configuration
+# Git status is still slower than p10k gitstatusd
+# zi_ice id-as="starship" \
+#   from"gh-r" \
+#   as"program" \
+#   atload'eval "$(starship init zsh)"'
+# zinit load starship/starship
 
 zi_ice id-as'zsh-defer' \
   depth=1
@@ -103,21 +107,37 @@ zi0a id-as'zsh-autosuggestions' \
   depth=1
 zinit light zsh-users/zsh-autosuggestions
 
-zi0b id-as'zsh-history-substring-search' \
+# zsh-syntax-highlighting is quicker than fast-syntax-highlighting
+export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+zi0a id-as'zsh-syntax-highlighting' \
+  depth=1
+zinit light zsh-users/zsh-syntax-highlighting
+
+# Must loaded after zsh-syntax-highlighting
+zi0a id-as'zsh-history-substring-search' \
   depth=1
 zinit light zsh-users/zsh-history-substring-search
 
-# zsh-syntax-highlighting is quicker than fast-syntax-highlighting
-zi0b id-as'zsh-syntax-highlighting' \
+# export ZPWR_EXPAND_TO_HISTORY=true
+# ignore expansion of these regular/global aliases
+export ZPWR_EXPAND_BLACKLIST=(rm mv cp ln mkdir ls l l. type)
+zi0b id-as'zsh-expand' \
   depth=1 \
-  cloneonly \
-  atpull'%atclone' \
-  nocd
-zinit light zsh-users/zsh-syntax-highlighting
+  src"${HOME}/.zsh/zsh-aliases"
+zinit light MenkeTechnologies/zsh-expand
 
-# zsh-syntax-highlighting
-export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# Quicker doing manual initialization
+zi0b id-as'zsh-autopair' \
+  depth=1 \
+  atinit'AUTOPAIR_INHIBIT_INIT=1' \
+  src"${ZINIT[PLUGINS_DIR]}/zsh-autopair/autopair.zsh" \
+  atload'autopair-init'
+zinit light hlissner/zsh-autopair
+
+zi0c id-as'zsh-bd' \
+  depth=1 \
+  src"${ZINIT[PLUGINS_DIR]}/zsh-bd/bd.zsh"
+zinit light tarrasch/zsh-bd
 
 zi0b id-as'fzf' \
   from'gh-r' \
@@ -131,31 +151,6 @@ zinit light junegunn/fzf
 zi0b id-as'fzf-tab' \
   depth=1
 zinit light Aloxaf/fzf-tab
-
-# export ZPWR_EXPAND_TO_HISTORY=true
-# ignore expansion of these regular/global aliases
-export ZPWR_EXPAND_BLACKLIST=(rm mv cp ln mkdir ls l l. type)
-zi0b id-as'zsh-expand' \
-  depth=1 \
-  src"${HOME}/.zsh/zsh-aliases"
-zinit light MenkeTechnologies/zsh-expand
-
-# Quicker doing manual initialization
-zi0b id-as'zsh-autopair' \
-  depth=1 \
-  atinit'AUTOPAIR_INHIBIT_INIT=1;'
-zinit light hlissner/zsh-autopair
-
-# autopair
-turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-autopair/autopair.zsh"
-autopair-init
-
-zi0c id-as'zsh-bd' \
-  depth=1
-zinit light tarrasch/zsh-bd
-
-# zsh-bd
-turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-bd/bd.zsh"
 
 zi0c id-as'cht.sh' \
   as'command' \
@@ -210,7 +205,7 @@ zinit light mrtazz/checkmake
 #
 # prezto settings
 #
-# Required here before prezto is loaded
+# Set before loading prezto
 zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
 zstyle ':prezto:module:history:alias' skip 'yes'
@@ -254,13 +249,6 @@ unset zi0c
 #   pick'zoxide' \
 #   atload'eval "$(zoxide init zsh --cmd j)";'
 # zinit light ajeetdsouza/zoxide
-
-# Git status is still slower than p10k gitstatusd
-# zi_ice id-as'starship' \
-#   from"gh-r" \
-#   as"program" \
-#   atload'!eval $(starship init zsh)'
-# zinit light starship/starship
 
 # TODO: problem with zsh-autosuggestions
 # zstyle ':autocomplete:key-bindings' enabled no
