@@ -17,9 +17,6 @@
 # <Ctrl+F>      => Search for files
 # <Ctrl+T>      => Search in history
 # <Alt+S>       => Insert sudo word
-# <Alt+Shift+S> => Run with sudo word
-# <Alt+l>       => Run ls
-# <Alt+Enter>   => execute the command and don't clear it
 # <Alt+P>       => Call fzf
 
 # <Ctrl+Right> => Forward word
@@ -140,21 +137,6 @@ zle -N exit_zsh
 # if there's a text filled this one fixes it
 bindkey '^D' exit_zsh
 
-# ls if the buffer is empty if not transform text to lowercase
-function magic-ls () {
-  if [[ -z "$BUFFER" ]]; then
-    BUFFER="ls"
-    zle accept-line
-  else
-    zle down-case-word
-  fi
-}
-# Ls if the BUFFER is empty if not transform to lowercase
-zle -N magic-ls
-
-# <Alt+L>
-bindkey '^[l' magic-ls
-
 # ls automatically after cd and git status if on a git repo
 function cd () {
   auto_ls() {
@@ -184,32 +166,8 @@ zle -N insert_sudo
 
 # <Alt+S>
 bindkey '^[s' insert_sudo
-
-# Execute the previous run command with sudo (similar to: insert-sudo + enter)
-function execute_sudo!!() {
-  [[ -z $BUFFER ]] &&
-    zle .up-history
-    zle accept-line
-  LBUFFER=" sudo $LBUFFER"
-}
-zle -N execute_sudo!!
-
-# <Alt+Shift+S>
-bindkey '^[S' execute_sudo!!
-
-# Create command substitution `$()`
-# function insert_cmd_sub {
-#   RBUFFER='$()'"$RBUFFER"
-#   ((CURSOR=CURSOR+2))
-# }
-# zle -N insert_cmd_sub
-#
-# # <Ctrl+J>
-# bindkey '^J' insert_cmd_sub
-
-# execute the command and don't clear it
-# <Alt+Enter>
-bindkey '^[^M' accept-and-hold
+bindkey -M vicmd '^[s' insert_sudo
+bindkey -M viins '^[s' insert_sudo
 
 # Delete Git branch
 function forgit_delete_branch() {
@@ -230,15 +188,5 @@ bindkey -r '^T'
 bindkey -M vicmd '^p' fzf-file-widget
 bindkey -M viins '^p' fzf-file-widget
 bindkey '^P' fzf-file-widget
-
-# Insert sudo at the beggining of the line
-# function insert_halp() {
-#   BUFFER="halp $BUFFER"
-#   zle end-of-line;
-# }
-# zle -N insert_halp
-#
-# # <Alt+H>
-# bindkey '^[h' insert_halp
 
 # vim:set ft=zsh ts=2 sw=2 et:
