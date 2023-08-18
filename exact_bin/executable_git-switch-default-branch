@@ -3,8 +3,7 @@
 set -e
 
 # get the default repo branch. Assume origin as remote
-default_branch=$(git symbolic-ref --short refs/remotes/origin/HEAD |
-  sed 's@^origin/@@')
+default_branch=$(git remote show origin | grep -oP 'HEAD branch: \K.*')
 
 current_branch=$(git rev-parse --abbrev-ref HEAD)
 

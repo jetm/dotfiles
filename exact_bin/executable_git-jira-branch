@@ -3,17 +3,21 @@
 set -Ee
 
 trim() {
-	local var="$*"
-	# remove leading whitespace characters
-	var="${var#"${var%%[![:space:]]*}"}"
-	# remove trailing whitespace characters
-	var="${var%"${var##*[![:space:]]}"}"
-	echo "$var"
+  local var="$*"
+  # remove leading whitespace characters
+  var="${var#"${var%%[![:space:]]*}"}"
+  # remove trailing whitespace characters
+  var="${var%"${var##*[![:space:]]}"}"
+  echo "$var"
 }
 
 create-branch() {
+  local project=${1:-trs}
   local jira
-  jira=$(jira-terminal list -M -p trs \
+  local default_branch
+  default_branch=$(git remote show origin | grep -oP 'HEAD branch: \K.*')
+
+  jira=$(jira-terminal list -M -p "${project}" \
     -S "Open" -S "In Progress" -S "Todo" -S "Review" \
     -d key,summary | fzf)
   local branch
@@ -27,7 +31,7 @@ create-branch() {
   summary=$(trim "${summary}")
 
   if [[ -n ${branch} ]]; then
-    git checkout -b "${branch}" "$1"
+    git checkout -b "${branch}" "${default_branch}"
     git commit --allow-empty -m "${summary}"
   fi
 }
