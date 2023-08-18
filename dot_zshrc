@@ -97,12 +97,6 @@ if (command -v atuin >/dev/null 2>&1); then
   zsh-defer eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
 fi
 
-zi0a id-as'zsh-completions' \
-  depth=1 \
-  atload"zicompinit; zicdreplay" \
-  blockf
-zinit light zsh-users/zsh-completions
-
 zi0a id-as'zsh-autosuggestions' \
   depth=1
 zinit light zsh-users/zsh-autosuggestions
@@ -117,6 +111,12 @@ zinit light zsh-users/zsh-syntax-highlighting
 zi0a id-as'zsh-history-substring-search' \
   depth=1
 zinit light zsh-users/zsh-history-substring-search
+
+zi0b id-as'zsh-completions' \
+  depth=1 \
+  atload"zicompinit; zicdreplay" \
+  blockf
+zinit light zsh-users/zsh-completions
 
 # export ZPWR_EXPAND_TO_HISTORY=true
 # ignore expansion of these regular/global aliases
