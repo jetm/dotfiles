@@ -43,4 +43,4 @@ map({ "v" }, "<C-s>", "<C-c>:update<CR>", { silent = true })
 map({ "i" }, "<C-s>", "<C-o>:update<CR>", { silent = true })
 
 -- Clipboard Paste
-map("i", "<C-V>", "<C-o>p", { silent = true })
+map("i", "<C-V>", "<C-o>P", { silent = true })

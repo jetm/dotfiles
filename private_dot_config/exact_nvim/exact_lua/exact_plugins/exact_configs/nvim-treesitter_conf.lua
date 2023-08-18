@@ -38,7 +38,6 @@ return function (_, _)
       end,
     },
     indent = { enable = true, disable = { "gitcommit", "python" } },
-    context_commentstring = { enable = true, enable_autocmd = false },
     incremental_selection = { enable = true },
     matchup = {
       enable = true,
