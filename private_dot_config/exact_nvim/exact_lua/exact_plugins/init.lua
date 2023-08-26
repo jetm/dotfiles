@@ -361,9 +361,14 @@ return {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = {
+      jump = {
+        -- automatically jump when there is only one match
+        autojump = true,
+      },
       modes = {
         char = {
           jump_labels = true,
+          -- set to `false` to use the current line only
           multi_line = false,
         },
       },
