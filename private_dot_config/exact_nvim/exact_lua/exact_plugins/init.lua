@@ -556,22 +556,22 @@ return {
   -- ct - choose theirs
   -- cb - choose both
   -- c0 - choose none
+  -- Visualise and resolve merge conflicts in neovim
   {
-    "sindrets/diffview.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
-    cmd = { "DiffviewOpen", "DiffviewClose" },
-    config = require("plugins.configs.diffview_conf"),
+    "akinsho/git-conflict.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("git-conflict").setup({
+        default_mappings = true,
+        disable_diagnostics = true,
+      })
+    end,
   },
 
-  -- Visualise and resolve merge conflicts in neovim
   -- {
-  --   "akinsho/git-conflict.nvim",
-  --   event = "VeryLazy",
-  --   config = function()
-  --     require("git-conflict").setup({
-  --       default_mappings = true,
-  --       disable_diagnostics = true,
-  --     })
-  --   end,
+  --   "sindrets/diffview.nvim",
+  --   dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+  --   cmd = { "DiffviewOpen", "DiffviewClose" },
+  --   config = require("plugins.configs.diffview_conf"),
   -- },
 }
