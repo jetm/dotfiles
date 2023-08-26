@@ -424,7 +424,7 @@ return {
     dependencies = {
       { "hrsh7th/nvim-cmp" },
     },
-    config = require("plugins.configs.nvim-autopairs_conf"),
+    config = true,
   },
 
   {
