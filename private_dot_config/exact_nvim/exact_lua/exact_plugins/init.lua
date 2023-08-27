@@ -507,7 +507,7 @@ return {
       -- Completation sources
       { "hrsh7th/cmp-nvim-lsp" },
       { "hrsh7th/cmp-buffer" },
-      { "lukas-reineke/cmp-rg"},
+      { "lukas-reineke/cmp-rg" },
       { "FelipeLema/cmp-async-path" },
       { "antznin/cmp-bitbake-path" },
       {

@@ -1,6 +1,5 @@
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
-  ---@cast keys LazyKeysHandler
   -- do not create the keymap if a lazy keys handler exists
   if not keys.active[keys.parse({ lhs, mode = mode }).id] then
     opts = opts or {}
@@ -18,14 +17,7 @@ map("n", "<leader>g", ":Telescope pathogen live_grep<CR>", { silent = true })
 map("n", "<C-p>", ":Telescope pathogen find_files<CR>", { silent = true })
 
 -- BufferLine mapping
-for i = 1, 5 do
-  map(
-    "n",
-    ("<Leader>%s"):format(i),
-    (":BufferLineGoToBuffer %s<CR>"):format(i),
-    { silent = true }
-  )
-end
+map("n", "<Leader>b", ":BufferLinePick<CR>", { silent = true })
 
 -- Visual shifting (does not exit Visual mode)
 map({ "v" }, "<", "<gv", { silent = true })
