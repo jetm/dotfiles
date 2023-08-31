@@ -17,7 +17,14 @@ map("n", "<leader>g", ":Telescope pathogen live_grep<CR>", { silent = true })
 map("n", "<C-p>", ":Telescope pathogen find_files<CR>", { silent = true })
 
 -- BufferLine mapping
-map("n", "<Leader>b", ":BufferLinePick<CR>", { silent = true })
+for i = 1, 9 do
+  map(
+    "n",
+    ("<Leader>%s"):format(i),
+    (":BufferLineGoToBuffer %s<CR>"):format(i),
+    { silent = true }
+  )
+end
 
 -- Visual shifting (does not exit Visual mode)
 map({ "v" }, "<", "<gv", { silent = true })
