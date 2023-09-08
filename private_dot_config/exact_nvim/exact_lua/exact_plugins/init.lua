@@ -324,7 +324,7 @@ return {
         always_show_bufferline = false,
         -- For 8 -
         numbers = function(opts)
-          return string.format("%s", opts.id)
+          return string.format("%s", opts.ordinal)
         end,
       },
     },
