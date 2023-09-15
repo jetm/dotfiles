@@ -14,6 +14,8 @@ vim.filetype.add({
     [".*%.inc"] = "bitbake",
     [".*%.bats"] = "bash",
     [".*%.zsh"] = "sh",
+    [".*%.rules"] = "udevrules",
+    [".*%.service"] = "systemd",
   },
 })
 
