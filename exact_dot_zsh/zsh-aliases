@@ -19,10 +19,9 @@ alias cp='cp -i'
 alias ln='ln -i'
 alias mkdir='mkdir -p'
 
-# exa
-alias ls='exa --group-directories-first'
-alias l='ls --all --header --long --icons --git'
-alias l.='ls --list-dirs .* --icons'
+# lsd
+alias ls='lsd --group-directories-first'
+alias l='ls --all --long --header --git'
 
 tree() {
   [ "$1" = "-h" ] || [ "$1" = "--help" ] && {
@@ -35,7 +34,7 @@ tree() {
     return 1
   }
 
-  exa --tree "${1:-}" --icons --level="${2:-3}"
+  lsd --tree "${1:-}" --depth "${2:-3}"
 }
 
 # rg -o 'g\w+=' ~/.zsh/zsh-abbr-alias.conf | tr -d '=' | sort | xargs -n1 -I{} echo "'{}'"

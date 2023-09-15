@@ -140,8 +140,8 @@ bindkey '^D' exit_zsh
 # ls automatically after cd and git status if on a git repo
 function cd () {
   auto_ls() {
-    if command -v exa > /dev/null; then
-      exa --all --icons --group-directories-first
+    if command -v lsd > /dev/null; then
+      lsd --all --group-directories-first
     else
       ls -Fh --color=auto --group-directories-first
     fi
