@@ -556,7 +556,7 @@ return {
       },
 
       -- linter + formatter
-      "jose-elias-alvarez/null-ls.nvim",
+      "nvimtools/none-ls.nvim",
 
       -- brigde between mason and null-ls for linters and formatter
       {
