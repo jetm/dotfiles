@@ -41,7 +41,7 @@ o.mouse = "a" -- Enable mouse support
 --
 -- message and info
 --
-o.shortmess:append({ s = true, I = true }) -- disable startup message
+o.shortmess:append({ I = true }) -- disable startup message
 
 --
 -- selecting clipboard
