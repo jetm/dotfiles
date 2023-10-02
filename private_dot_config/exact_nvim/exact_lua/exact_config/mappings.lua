@@ -43,3 +43,6 @@ map({ "i" }, "<C-s>", "<C-o>:update<CR>", { silent = true })
 
 -- Clipboard Paste
 map("i", "<C-V>", "<C-o>P", { silent = true })
+
+-- formatting
+map({ "n" }, "<leader>f", "<Cmd>lua vim.lsp.buf.format()<CR>", { silent = true })

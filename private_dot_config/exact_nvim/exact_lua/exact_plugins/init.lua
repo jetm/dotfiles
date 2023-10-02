@@ -567,10 +567,6 @@ return {
       -- UI
       { "onsails/lspkind.nvim" },
     },
-    keys = {
-      -- formatter
-      { "<leader>f", "<Cmd>lua vim.lsp.buf.format()<CR>", silent = true },
-    },
     config = require("plugins.configs.lsp_conf"),
   },
 
