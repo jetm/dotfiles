@@ -346,6 +346,10 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     main = "ibl",
     opts = {
+      indent = {
+        char = "│",
+        tab_char = "│",
+      },
       exclude = {
         buftypes = {
           "nofile",
