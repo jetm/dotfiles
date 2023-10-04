@@ -486,6 +486,13 @@ return {
     config = require("plugins.configs.nvim-treesitter_conf"),
   },
 
+  -- yaml schema support
+  {
+    "b0o/SchemaStore.nvim",
+    lazy = true,
+    version = false, -- last release is way too old
+  },
+
   -- LSP setup
   {
     "VonHeikemen/lsp-zero.nvim",
@@ -494,10 +501,6 @@ return {
     dependencies = {
       {
         "neovim/nvim-lspconfig",
-        dependencies = {
-          "b0o/SchemaStore.nvim",
-          version = false,
-        },
       },
       { "williamboman/mason-lspconfig.nvim" },
       {
