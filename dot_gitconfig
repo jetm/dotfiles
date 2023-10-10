@@ -82,6 +82,8 @@
 
     dt = "! args=$@; shift $#; nvim -c \"DiffviewOpen $args\""
 
+    rE = "!f() { git restore -S $@ && git restore $@; }; f"
+
 [i18n]
     # Character encoding the commit messages are converted to when running git
     # log and friends
