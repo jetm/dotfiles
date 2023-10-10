@@ -83,11 +83,13 @@ alias gch='git cherry-pick -x'
 alias gcs='git show'
 
 # Checkout (c)
-alias gco='git checkout'
-alias gcp='git checkout --patch'
-alias gcb='git checkout -b'
-alias gc-='git checkout -'
+alias gsb='git switch'
+alias grp='git restore --patch'
+alias gsc='git switch -c'
+alias gs-='git switch -'
+alias gr-='git restore -'
 alias gre='forgit::checkout::file'
+alias grE='git rE'
 alias grs='forgit::reset::head'
 
 # Grep (g)
