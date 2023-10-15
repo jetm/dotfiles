@@ -348,7 +348,7 @@ return {
     opts = {
       indent = {
         char = "│",
-        tab_char = "│",
+        tab_char = "├",
       },
       exclude = {
         buftypes = {
