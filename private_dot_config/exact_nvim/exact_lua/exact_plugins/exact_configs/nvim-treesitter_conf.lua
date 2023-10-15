@@ -1,4 +1,4 @@
-return function (_, _)
+return function(_, _)
   local ok, nvim_treesitter = pcall(require, "nvim-treesitter.configs")
   if not ok then
     error("Loading nvim-treesitter.configs")
@@ -15,19 +15,24 @@ return function (_, _)
       "c",
       "cmake",
       "comment",
+      "diff",
       "dockerfile",
       "go",
       "json",
-      "json5",
       "jsonc",
       "lua",
+      "luadoc",
+      "luap",
       "make",
+      "markdown",
+      "markdown_inline",
       "ninja",
       "python",
       "regex",
       "rust",
       "toml",
       "vim",
+      "vimdoc",
       "yaml",
     },
     highlight = {
@@ -37,11 +42,18 @@ return function (_, _)
         return vim.api.nvim_buf_line_count(bufnr) > 10000
       end,
     },
-    indent = { enable = true, disable = { "gitcommit", "python" } },
-    incremental_selection = { enable = true },
-    matchup = {
+    indent = {
       enable = true,
-      enable_quotes = true,
+      disable = { "gitcommit", "python" },
+    },
+    textobjects = {
+      move = {
+        enable = true,
+        goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer" },
+        goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer" },
+        goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer" },
+        goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer" },
+      },
     },
   })
 end
