@@ -67,8 +67,8 @@ o.fillchars = { eob = " " } -- Disable `~` on nonexistent lines
 o.preserveindent = true -- Preserve indent structure as much as possible
 o.shiftwidth = 4 -- Number of space inserted for indentation
 o.smartindent = true -- Smarter autoindentation
-o.softtabstop = 4
-o.tabstop = 4 -- Tab width
+o.softtabstop = 2
+o.tabstop = 2 -- Tab width
 
 --
 -- multi-byte characters
