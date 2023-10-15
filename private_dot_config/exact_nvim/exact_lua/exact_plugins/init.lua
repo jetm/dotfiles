@@ -584,7 +584,7 @@ return {
   -- Visualise and resolve merge conflicts in neovim
   {
     "akinsho/git-conflict.nvim",
-    event = "VeryLazy",
+    event = "BufReadPre",
     config = function()
       require("git-conflict").setup({
         default_mappings = true,
