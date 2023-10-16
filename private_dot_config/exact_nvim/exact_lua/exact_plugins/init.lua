@@ -227,32 +227,58 @@ return {
   --   end,
   -- },
 
-  -- File explorer
   {
-    "stevearc/oil.nvim",
-    cmd = "Oil",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-      -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`
-      -- Conflict with pathogen
-      default_file_explorer = false,
-      columns = {
-        "icon",
-        "permissions",
-        "size",
-        "mtime",
-      },
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
     },
+    cmd = "Neotree",
     keys = {
       {
-        "_",
+        "<leader>e",
         function()
-          require("oil").open()
+          require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
         end,
-        mode = { "n" },
-        desc = "Open Parent Directory",
+        desc = "Explorer NeoTree (cwd)",
       },
     },
+    deactivate = function()
+      vim.cmd([[Neotree close]])
+    end,
+    init = function()
+      if vim.fn.argc(-1) == 1 then
+        local stat = vim.loop.fs_stat(vim.fn.argv(0))
+        if stat and stat.type == "directory" then
+          require("neo-tree")
+        end
+      end
+    end,
+    opts = {
+      sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+      open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "Outline" },
+      filesystem = {
+        bind_to_cwd = false,
+        follow_current_file = { enabled = true },
+        use_libuv_file_watcher = true,
+      },
+      window = {
+        mappings = {
+          ["<space>"] = "none",
+        },
+      },
+      default_component_configs = {
+        indent = {
+          with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+          expander_collapsed = "",
+          expander_expanded = "",
+          expander_highlight = "NeoTreeExpander",
+        },
+      },
+    },
+    config = true,
   },
 
   -- Neovim UI Enhancer
