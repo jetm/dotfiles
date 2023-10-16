@@ -142,6 +142,17 @@ return {
     config = true,
   },
 
+  -- search/replace in multiple files
+  {
+    "nvim-pack/nvim-spectre",
+    cmd = "Spectre",
+    opts = { open_cmd = "noswapfile vnew" },
+    -- stylua: ignore
+    keys = {
+      { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+    },
+  },
+
   -- Automatic indentation style detection for Neovim
   {
     "nmac427/guess-indent.nvim",
@@ -188,33 +199,6 @@ return {
     "nacro90/numb.nvim",
     event = { "BufRead", "BufNewFile" },
     config = true,
-  },
-
-  -- Search and Replace
-  {
-    "Usuim/searchbox.nvim",
-    lazy = true,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-    },
-
-    keys = {
-      {
-        "<c-l>",
-        ":SearchBoxReplace confirm=native<CR>",
-        mode = { "n" },
-      },
-      {
-        "<c-l>",
-        "<ESC>:SearchBoxReplace confirm=native<CR>",
-        mode = { "i" },
-      },
-      {
-        "<c-l>",
-        ":SearchBoxReplace confirm=native<CR>",
-        mode = { "v" },
-      },
-    },
   },
 
   -- Alternative to matchparen neovim plugin
