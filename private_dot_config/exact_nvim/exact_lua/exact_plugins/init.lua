@@ -544,6 +544,9 @@ return {
         "nvim-treesitter/nvim-treesitter-context",
         config = true,
       },
+      {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+      },
     },
     build = ":TSUpdate",
     config = require("plugins.configs.nvim-treesitter_conf"),
@@ -651,6 +654,13 @@ return {
       })
     end,
   },
+
+  -- {
+  --   "sindrets/diffview.nvim",
+  --   dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+  --   cmd = { "DiffviewOpen", "DiffviewClose" },
+  --   config = require("plugins.configs.diffview_conf"),
+  -- },
 
   -- Smart selection of the closest text object
   {
