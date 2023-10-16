@@ -9,17 +9,22 @@ return function(_, _)
   -- require("nvim-treesitter.install").compilers = { "gcc" }
 
   nvim_treesitter.setup({
-    version = false,
     ensure_installed = {
       "bash",
       "c",
       "cmake",
       "comment",
+      "devicetree",
       "diff",
       "dockerfile",
+      "git_config",
+      "git_rebase",
+      "gitcommit",
+      "gitignore",
       "go",
       "json",
       "jsonc",
+      "kconfig",
       "lua",
       "luadoc",
       "luap",
@@ -30,6 +35,7 @@ return function(_, _)
       "python",
       "regex",
       "rust",
+      "ssh_config",
       "toml",
       "vim",
       "vimdoc",
@@ -44,7 +50,6 @@ return function(_, _)
     },
     indent = {
       enable = true,
-      disable = { "gitcommit", "python" },
     },
     textobjects = {
       move = {
