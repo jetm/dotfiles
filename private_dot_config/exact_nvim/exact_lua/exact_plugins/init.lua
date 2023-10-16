@@ -670,10 +670,11 @@ return {
     config = true,
   },
 
-  -- {
-  --   "sindrets/diffview.nvim",
-  --   dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
-  --   cmd = { "DiffviewOpen", "DiffviewClose" },
-  --   config = require("plugins.configs.diffview_conf"),
-  -- },
+  -- Automatically highlights other instances of the word under your cursor.
+  -- This works with LSP, Treesitter, and regexp matching to find the other
+  -- instances.
+  {
+    "RRethy/vim-illuminate",
+    event = "BufReadPre",
+  },
 }
