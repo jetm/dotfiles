@@ -440,11 +440,22 @@ return {
         autojump = true,
       },
       modes = {
+        search = { enabled = false },
         char = {
           jump_labels = true,
           -- set to `false` to use the current line only
           multi_line = false,
         },
+      },
+    },
+    keys = {
+      {
+        "s",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").jump()
+        end,
+        desc = "Flash",
       },
     },
   },
