@@ -182,6 +182,7 @@
     line-numbers = false
     light = false
     side-by-side = false
+    tabs = 2
 
 #
 # nvim
