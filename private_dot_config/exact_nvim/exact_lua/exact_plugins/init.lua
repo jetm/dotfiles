@@ -544,14 +544,15 @@ return {
   },
 
   {
+    "nvim-treesitter/nvim-treesitter-context",
+    opts = { max_lines = 3 },
+  },
+
+  {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPost", "BufNewFile" },
     version = false,
     dependencies = {
-      {
-        "nvim-treesitter/nvim-treesitter-context",
-        config = true,
-      },
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
       },
