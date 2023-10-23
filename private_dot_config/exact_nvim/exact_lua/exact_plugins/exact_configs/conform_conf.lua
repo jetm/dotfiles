@@ -15,10 +15,7 @@ return function(_, _)
         prepend_args = {
           "--indent-type=Spaces",
           "--quote-style=ForceDouble",
-          "--sort-requires",
-          "--column-width=80",
           "--indent-width=2",
-          "--call-parentheses=Always",
         },
       },
       shfmt = {
