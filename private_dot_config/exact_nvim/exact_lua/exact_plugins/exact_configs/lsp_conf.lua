@@ -1,5 +1,34 @@
 return function(_, _)
-  require("mason").setup()
+  -- Install formatters
+  require("mason").setup({
+    opts = {
+      ensure_installed = {
+        "shellcheck",
+        "luacheck",
+        "shellharden",
+        "shfmt",
+        "stylua",
+        "yamlfmt",
+      },
+    },
+    config = function(_, opts)
+      require("mason").setup(opts)
+      local mr = require("mason-registry")
+      local function ensure_installed()
+        for _, tool in ipairs(opts.ensure_installed) do
+          local p = mr.get_package(tool)
+          if not p:is_installed() then
+            p:install()
+          end
+        end
+      end
+      if mr.refresh then
+        mr.refresh(ensure_installed)
+      else
+        ensure_installed()
+      end
+    end,
+  })
 
   -- Install LSP servers
   require("mason-lspconfig").setup({
@@ -19,11 +48,11 @@ return function(_, _)
   lsp_defaults.capabilities =
     vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-  -- Required to fix vim global warning
   lspconfig.lua_ls.setup({
     settings = {
       Lua = {
         diagnostics = {
+          -- Required to fix vim global warning
           -- Get the language server to recognize the `vim` global
           globals = {
             "vim",
@@ -31,6 +60,12 @@ return function(_, _)
           },
         },
         format = { enable = false },
+        completion = {
+          callSnippet = "Replace",
+        },
+        workspace = {
+          checkThirdParty = false,
+        },
         telemetry = { enable = false },
       },
     },
@@ -39,9 +74,7 @@ return function(_, _)
   lspconfig.jsonls.setup({
     settings = {
       jsonls = {
-        format = {
-          enable = false,
-        },
+        format = { enable = false },
         validate = { enable = true },
         schemaStore = {
           -- Must disable built-in schemaStore support to use
@@ -57,10 +90,8 @@ return function(_, _)
     settings = {
       redhat = { telemetry = { enabled = false } },
       yaml = {
+        format = { enable = false },
         keyOrdering = false,
-        format = {
-          enable = false,
-        },
         completion = true,
         validate = { enable = true },
         schemaStore = {
@@ -111,7 +142,7 @@ return function(_, _)
       -- `Enter` key to confirm completion
       ["<CR>"] = cmp.mapping.confirm({ select = false }),
 
-     -- Accept currently selected item
+      -- Accept currently selected item
       ["<S-CR>"] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
@@ -196,68 +227,4 @@ return function(_, _)
     },
   })
 
-  vim.diagnostic.config({
-    virtual_text = false,
-    severity_sort = true,
-    float = {
-      border = "rounded",
-      source = "always",
-    },
-  })
-
-  -- Install linters and formatters
-  require("mason-null-ls").setup({
-    ensure_installed = {
-      "shellcheck",
-      "shellharden",
-      "shfmt",
-      "stylua",
-      "yamlfmt",
-    },
-  })
-
-  local null_ls = require("null-ls")
-
-  null_ls.setup({
-    -- required to restore 'gp' operator
-    on_attach = function(_, bufnr)
-      vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
-    end,
-    sources = {
-      null_ls.builtins.diagnostics.shellcheck.with({
-        filetypes = { "sh", "zsh", "bash", "bats" },
-      }),
-      null_ls.builtins.diagnostics.zsh,
-      -- null_ls.builtins.diagnostics.checkmake,
-      null_ls.builtins.formatting.shfmt.with({
-        extra_args = function(params)
-          local extra_args = {
-            "-sr",
-            "-ci",
-            "-s",
-          }
-
-          if params.options and not params.options.insertSpaces then
-            -- Default indent with Tabs
-            table.insert(extra_args, "--indent")
-            table.insert(extra_args, 0)
-          else
-            -- Indent with Spaces
-            table.insert(extra_args, "--indent")
-            table.insert(extra_args, params.options.tabSize)
-          end
-
-          return extra_args
-        end,
-        extra_filetypes = { "zsh", "bats" },
-      }),
-      null_ls.builtins.formatting.stylua.with({
-        extra_args = {
-          "--indent-width=2",
-          "--indent-type=Spaces",
-        },
-      }),
-      null_ls.builtins.formatting.yamlfmt,
-    },
-  })
 end

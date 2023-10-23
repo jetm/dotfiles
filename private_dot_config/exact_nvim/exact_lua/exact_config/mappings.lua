@@ -44,5 +44,16 @@ map({ "i" }, "<C-s>", "<C-o>:update<CR>", { silent = true })
 -- Clipboard Paste
 map("i", "<C-V>", "<C-o>P", { silent = true })
 
--- formatting
-map({ "n" }, "<leader>f", "<Cmd>lua vim.lsp.buf.format()<CR>", { silent = true })
+-- Diagnostic
+map({ "n" }, "<leader>l", function()
+  require("lint").try_lint()
+end, { desc = "Lint Current Buffer" })
+
+map("n", "<leader>d", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+
+map(
+  "n",
+  "<leader>D",
+  "<cmd>lua vim.diagnostic.reset()<CR>",
+  { desc = "clear diagnostics" }
+)

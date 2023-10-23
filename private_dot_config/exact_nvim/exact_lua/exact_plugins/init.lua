@@ -240,7 +240,10 @@ return {
       {
         "<leader>e",
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+          require("neo-tree.command").execute({
+            toggle = true,
+            dir = vim.loop.cwd(),
+          })
         end,
         desc = "Explorer NeoTree (cwd)",
       },
@@ -258,7 +261,12 @@ return {
     end,
     opts = {
       sources = { "filesystem", "buffers", "git_status", "document_symbols" },
-      open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "Outline" },
+      open_files_do_not_replace_types = {
+        "terminal",
+        "Trouble",
+        "qf",
+        "Outline",
+      },
       filesystem = {
         bind_to_cwd = false,
         follow_current_file = { enabled = true },
@@ -394,9 +402,9 @@ return {
       -- remove animation. It's distracting
       draw = {
         delay = 0,
-        animation = function ()
+        animation = function()
           return 0
-        end
+        end,
       },
     },
     init = function()
@@ -559,7 +567,68 @@ return {
     version = false, -- last release is way too old
   },
 
+  -- Linter
+  {
+    "mfussenegger/nvim-lint",
+    event = "VeryLazy",
+    config = function()
+      require("lint").linters_by_ft = {
+        sh = { "shellcheck" },
+        zsh = { "shellcheck" },
+        bats = { "shellcheck" },
+        lua = { "luacheck" },
+        yaml = { "yamlfmt" },
+      }
+    end,
+  },
+
+  -- Lightweight yet powerful formatter
+  {
+    "stevearc/conform.nvim",
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    keys = {
+      {
+        "<leader>f",
+        function()
+          require("conform").format({ async = true, lsp_fallback = true })
+        end,
+        mode = { "n", "v" },
+        desc = "Format buffer",
+      },
+    },
+    config = require("plugins.configs.conform_conf"),
+  },
+
+  --
   -- LSP setup
+  --
+  {
+    "williamboman/mason.nvim",
+    cmd = {
+      "Mason",
+      "MasonInstall",
+      "MasonUninstall",
+      "MasonUninstallAll",
+      "MasonUpdate",
+      "MasonUpdateAll",
+    },
+    -- :MasonUpdate updates registry contents
+    build = ":MasonUpdate",
+  },
+
+  -- Vim Snippets engine [snippet engine] + [snippet templates]
+  {
+    "L3MON4D3/LuaSnip",
+    version = "2.*",
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+    },
+    config = function()
+      require("luasnip.loaders.from_vscode").lazy_load()
+    end,
+  },
+
   {
     "VonHeikemen/lsp-zero.nvim",
     event = { "BufReadPre", "BufNewFile" },
@@ -568,29 +637,8 @@ return {
       {
         "neovim/nvim-lspconfig",
       },
+      { "williamboman/mason.nvim" },
       { "williamboman/mason-lspconfig.nvim" },
-      {
-        "williamboman/mason.nvim",
-        cmd = {
-          "Mason",
-          "MasonInstall",
-          "MasonUninstall",
-          "MasonUninstallAll",
-          "MasonUpdate",
-          "MasonUpdateAll",
-        },
-        opts = {
-          ui = {
-            icons = {
-              package_installed = "✓",
-              package_uninstalled = "✗",
-              package_pending = "⟳",
-            },
-          },
-        },
-        -- :MasonUpdate updates registry contents
-        build = ":MasonUpdate",
-      },
 
       -- Completation engine
       { "hrsh7th/nvim-cmp" },
@@ -606,29 +654,8 @@ return {
         ft = { "gitcommit", "markdown" },
       },
 
-      -- Vim Snippets engine [snippet engine] + [snippet templates]
-      {
-        "L3MON4D3/LuaSnip",
-        version = "2.*",
-        dependencies = {
-          "rafamadriz/friendly-snippets",
-        },
-        -- opts = {
-        --   loaders_store_source = true,
-        -- },
-        config = function()
-          require("luasnip.loaders.from_vscode").lazy_load()
-        end,
-      },
-
-      -- linter + formatter
-      "nvimtools/none-ls.nvim",
-
-      -- brigde between mason and null-ls for linters and formatter
-      {
-        "jay-babu/mason-null-ls.nvim",
-        event = { "BufReadPre", "BufNewFile" },
-      },
+      -- Snippets
+      { "L3MON4D3/LuaSnip" },
 
       -- UI
       { "onsails/lspkind.nvim" },
