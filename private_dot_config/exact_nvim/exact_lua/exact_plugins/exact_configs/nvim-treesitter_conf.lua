@@ -42,7 +42,8 @@ return function(_, _)
       "yaml",
     },
     highlight = {
-      enable = true,
+      -- Getting problem with colors
+      enable = false,
       additional_vim_regex_highlighting = true,
       disable = function(_, bufnr)
         return vim.api.nvim_buf_line_count(bufnr) > 10000
