@@ -22,7 +22,7 @@ end
 map({ "i", "x", "n", "s" }, "<C-s>", "<CMD>w<CR><ESC>", { desc = "Save file" })
 
 -- Clipboard Paste
-map("i", "<C-V>", "<CMD>p", { desc = "Clipboard Paste" })
+map("i", "<C-v>", "<Esc>p", { desc = "Clipboard Paste" })
 
 ---
 -- Movement
@@ -35,11 +35,11 @@ map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev search r
 map({ "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
 -- Allow to use <Ctrl-z> in insert mode to move in the background
-map({ "i" }, "<C-z>", "<CMD><C-z>", { desc = "Close editor to background" })
+map({ "i" }, "<C-z>", "<Esc><C-z>", { desc = "Close editor to background" })
 
 -- Telescope mapping
-map("n", "<leader>g", ":Telescope pathogen live_grep<CR>", { desc = "Live Grep" })
-map("n", "<C-p>", ":Telescope pathogen find_files<CR>", { desc = "Find files" })
+map("n", "<leader>g", "<CMD>Telescope pathogen live_grep<CR>", { desc = "Live Grep" })
+map("n", "<C-p>", "<CMD>Telescope pathogen find_files<CR>", { desc = "Find files" })
 
 -- BufferLine mapping
 for i = 1, 9 do
@@ -56,10 +56,14 @@ map({ "n" }, ">", ">>_")
 -- Buffers
 ---
 -- BufDel/Quitting mapping
-map({ "n", "x" }, "q", ":BufDel<CR>", { desc = "Close buffer or Quit" })
+map({ "n", "x" }, "q", "<CMD>BufDel<CR>", { desc = "Close buffer or Quit" })
 map({ "n", "x" }, "Q", "<CMD>qa<CR>", { desc = "Close all buffers and Quit" })
 
 map("n", "<leader>`", "<CMD>e #<CR>", { desc = "Switch to other buffer" })
+
+for i = 1, 9 do
+  map("n", ("<Leader>%s"):format(i), (":BufferLineGoToBuffer %s<CR>"):format(i))
+end
 
 ---
 -- Windows
