@@ -537,14 +537,22 @@ return {
       },
       { "nvim-lua/popup.nvim" },
       { "nvim-lua/plenary.nvim" },
-      { "brookhong/telescope-pathogen.nvim" },
       -- { "rcarriga/nvim-notify" },
     },
     config = require("plugins.configs.telescope_conf"),
   },
 
   {
+    "linrongbin16/fzfx.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    cmd = "FzfxLiveGrepW",
+    dependencies = { "junegunn/fzf", "nvim-tree/nvim-web-devicons" },
+    config = true,
+  },
+
+  {
     "nvim-treesitter/nvim-treesitter-context",
+    event = { "BufReadPost", "BufNewFile" },
     opts = { max_lines = 3 },
   },
 
@@ -621,6 +629,7 @@ return {
   -- Vim Snippets engine [snippet engine] + [snippet templates]
   {
     "L3MON4D3/LuaSnip",
+    event = { "BufReadPre", "BufNewFile" },
     version = "2.*",
     dependencies = {
       "rafamadriz/friendly-snippets",
@@ -683,6 +692,14 @@ return {
     end,
   },
 
+  -- Automatically highlights other instances of the word under your cursor.
+  -- This works with LSP, Treesitter, and regexp matching to find the other
+  -- instances.
+  {
+    "RRethy/vim-illuminate",
+    event = "BufReadPre",
+  },
+
   -- {
   --   "sindrets/diffview.nvim",
   --   dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
@@ -691,18 +708,10 @@ return {
   -- },
 
   -- Smart selection of the closest text object
-  {
-    "sustech-data/wildfire.nvim",
-    event = "VeryLazy",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    config = true,
-  },
+  -- {
+  --   "sustech-data/wildfire.nvim",
+  --   event = "VeryLazy",
+  --   config = true,
+  -- },
 
-  -- Automatically highlights other instances of the word under your cursor.
-  -- This works with LSP, Treesitter, and regexp matching to find the other
-  -- instances.
-  {
-    "RRethy/vim-illuminate",
-    event = "BufReadPre",
-  },
 }

@@ -37,9 +37,11 @@ map({ "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev sear
 -- Allow to use <Ctrl-z> in insert mode to move in the background
 map({ "i" }, "<C-z>", "<Esc><C-z>", { desc = "Close editor to background" })
 
+-- Live Grep
+map("n", "<leader>g", "<CMD>FzfxLiveGrepW<CR>", { desc = "Live Grep word under cursor" })
+
 -- Telescope mapping
-map("n", "<leader>g", "<CMD>Telescope pathogen live_grep<CR>", { desc = "Live Grep" })
-map("n", "<C-p>", "<CMD>Telescope pathogen find_files<CR>", { desc = "Find files" })
+map("n", "<C-p>", "<CMD>Telescope find_files<CR>", { desc = "Find files" })
 
 -- BufferLine mapping
 for i = 1, 9 do

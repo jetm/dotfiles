@@ -32,14 +32,6 @@ return function (_,_)
     },
   })
 
-  telescope.load_extension("pathogen")
-
-  vim.keymap.set(
-    "v",
-    "<space>g",
-    require("telescope").extensions["pathogen"].live_grep
-  )
-
   telescope.load_extension("fzf")
   -- telescope.load_extension("notify")
 end
