@@ -449,6 +449,8 @@ return {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = {
+      -- continue the last search
+      continue = true,
       jump = {
         -- automatically jump when there is only one match
         autojump = true,
@@ -456,9 +458,10 @@ return {
       modes = {
         search = { enabled = false },
         char = {
+          enabled = true,
           jump_labels = true,
-          -- set to `false` to use the current line only
-          multi_line = false,
+          -- TODO: Change to `false` to use the current line only. Pending fix
+          multi_line = true,
         },
       },
     },
