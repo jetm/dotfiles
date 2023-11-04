@@ -12,7 +12,6 @@ o.smartcase = true -- Case sensitivie searching
 --
 -- displaying text
 --
-o.breakindent = true -- Wrap indent to match line start
 o.linebreak = true -- Wrap lines at 'breakat'. Do not break words
 o.list = true -- Display whitespace characters
 o.listchars = { tab = "→ ", trail = "·" }
@@ -61,6 +60,7 @@ o.undofile = true -- Enable persistent undo
 --
 -- tabs and indenting
 --
+o.breakindent = true -- Wrap indent to match line start
 o.copyindent = true -- Copy the previous indentation on autoindenting
 o.expandtab = true -- Enable the use of space in tab
 o.fillchars = { eob = " " } -- Disable `~` on nonexistent lines

@@ -358,6 +358,12 @@ return {
     config = require("plugins.configs.lualine_conf"),
   },
 
+  -- Cursor line number mode indicator
+  {
+    "mawkler/modicator.nvim",
+    config = true,
+  },
+
   -- Indent guides on blank lines for Neovim
   {
     "lukas-reineke/indent-blankline.nvim",
@@ -713,5 +719,4 @@ return {
   --   event = "VeryLazy",
   --   config = true,
   -- },
-
 }
