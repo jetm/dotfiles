@@ -6,14 +6,6 @@ if [ -z "$PS1" ]; then
     return
 fi
 
-if [ -d "$HOME"/local/share/man ]; then
-    if test -n "$MANPATH"; then
-        MANPATH=~/local/share/man:"${MANPATH}"
-    else
-        MANPATH=~/local/share/man
-    fi
-fi
-
 unset CDPATH
 
 export HOSTFILE=$HOME/.hosts # Put list of remote hosts in ~/.hosts
