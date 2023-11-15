@@ -338,7 +338,7 @@ return {
     event = "VeryLazy",
     opts = {
       options = {
-        show_buffer_icons = false,
+        show_buffer_icons = true,
         show_buffer_close_icons = false,
         always_show_bufferline = false,
         -- For 8 -
@@ -357,12 +357,6 @@ return {
     event = "VeryLazy",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = require("plugins.configs.lualine_conf"),
-  },
-
-  -- Cursor line number mode indicator
-  {
-    "mawkler/modicator.nvim",
-    config = true,
   },
 
   -- Indent guides on blank lines for Neovim
