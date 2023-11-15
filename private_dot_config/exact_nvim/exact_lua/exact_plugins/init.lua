@@ -650,6 +650,13 @@ return {
   },
 
   {
+    "Exafunction/codeium.nvim",
+    event = "BufEnter",
+    build = ":Codeium Auth",
+    config = true,
+  },
+
+  {
     "VonHeikemen/lsp-zero.nvim",
     event = { "BufReadPre", "BufNewFile" },
     branch = "v2.x",
@@ -675,7 +682,7 @@ return {
       },
 
       -- Snippets
-      { "L3MON4D3/LuaSnip" },
+      { "L3MON4D3/LuaSnip", },
 
       -- UI
       { "onsails/lspkind.nvim" },

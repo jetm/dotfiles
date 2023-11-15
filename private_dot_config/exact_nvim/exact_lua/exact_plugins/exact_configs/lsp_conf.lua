@@ -154,6 +154,13 @@ return function(_, _)
     end
   end
 
+  local lspkind = require("lspkind")
+  lspkind.init({
+    symbol_map = {
+      Codeium = "",
+    },
+  })
+
   local luasnip = require("luasnip")
 
   -- Must setup `cmp` after lsp-zero
@@ -207,10 +214,11 @@ return function(_, _)
       end, { "i", "s" }),
     },
     sources = cmp.config.sources({
-      { name = "nvim_lsp", priority = 1250 },
-      { name = "luasnip", priority = 1000 },
+      { name = "nvim_lsp", priority = 1250, max_item_count = 5 },
+      { name = "luasnip", priority = 1000, max_item_count = 5 },
       {
         name = "buffer",
+        max_item_count = 5,
         priority = 750,
         option = {
           get_bufnrs = function()
@@ -229,6 +237,10 @@ return function(_, _)
             return vim.tbl_keys(bufs)
           end,
         },
+      },
+      {
+        name = "codeium",
+        priority = 600,
       },
       {
         name = "rg",
@@ -253,7 +265,7 @@ return function(_, _)
       },
     }),
     formatting = {
-      format = require("lspkind").cmp_format({ with_text = false }),
+      format = lspkind.cmp_format({ with_text = false }),
     },
   })
 end
