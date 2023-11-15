@@ -190,11 +190,11 @@ bindkey -M viins '^p' fzf-file-widget
 bindkey '^P' fzf-file-widget
 
 # Insert a last word
-bindkey -M viins '^[' insert-last-word
+bindkey -M viins '^[n' insert-last-word
 
 # Iterate through arguments Ctrl + [ + ] (N times)
 autoload -Uz copy-earlier-word
 zle -N copy-earlier-word
-bindkey -M viins "^]" copy-earlier-word
+bindkey -M viins "^[m" copy-earlier-word
 
 # vim:set ft=zsh ts=2 sw=2 et:
