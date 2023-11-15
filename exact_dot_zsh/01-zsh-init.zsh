@@ -22,6 +22,9 @@ setopt NO_NOMATCH
 # Now we can pipe to multiple outputs!
 setopt MULTIOS
 
+# Time format using zsh time builtin
+export TIMEFMT="Time: %E"
+
 #
 # less pager
 #
