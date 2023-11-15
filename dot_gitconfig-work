@@ -1,3 +1,5 @@
 [user]
     email = javier.tia@linaro.org
-    name = Javier Tia
+
+[sendemail]
+    smtpuser = javier.tia@linaro.org

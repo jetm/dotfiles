@@ -15,6 +15,9 @@
 [includeIf "gitdir:~/.local/share/chezmoi/**"]
     path = ~/.gitconfig-personal
 
+[user]
+    name = Javier Tia
+
 [safe]
     directory = *
 
@@ -212,5 +215,12 @@
 
 [color]
     ui = auto
+
+[sendemail]
+    smtpencryption = tls
+    smtpserver = smtp.gmail.com
+    smtpserverport = 587
+    ; smtpServer = /usr/bin/msmtp
+    ; smtpServerOption = -v
 
 # vim:ft=gitconfig ts=4 sw=4

@@ -1,3 +1,5 @@
 [user]
     email = javier.tia@gmail.com
-    name = Javier Tia
+
+[sendemail]
+    smtpuser = javier.tia@gmail.com
