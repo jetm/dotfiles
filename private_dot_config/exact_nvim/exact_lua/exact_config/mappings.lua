@@ -45,8 +45,10 @@ map("n", "<C-p>", "<CMD>Telescope find_files<CR>", { desc = "Find files" })
 
 -- BufferLine mapping
 for i = 1, 9 do
-  map("n", ("<Leader>%s"):format(i), (":BufferLineGoToBuffer %s<CR>"):format(i))
+  map("n", ("<Leader>%s"):format(i), ("<cmd>lua require('bufferline').go_to(%s, true)<CR>"):format(i))
 end
+
+map({ "n" }, "<Leader>b", ":BufferLinePick<CR>")
 
 -- Visual shifting (does not exit Visual mode)
 map({ "v" }, "<", "<gv")
