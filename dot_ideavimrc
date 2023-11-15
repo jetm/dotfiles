@@ -1,180 +1,108 @@
-source ~/.vimrc
+Plug 'machakann/vim-highlightedyank'
+Plug 'tpope/vim-commentary'
 
-set relativenumber
-set number
-set ignorecase
-set smartcase
-set hlsearch
-set incsearch
-set showmode
-set showcmd
-set scrolloff=5
-set history=1000
-set viminfo
+" Search settings
+set incsearch hlsearch ignorecase smartcase gdefault
+
+set ideajoin                  " use the IDE's join/J behavior
+set selectmode=ideaselection  " use select mode only when IDE sets a selection
+set timeoutlen=1000           " timeout for keymappings
+set clipboard=unnamed,ideaput " use system clipboard with idea's pasting logic
+set scrolloff=1               " pad scrolling with one line
+set showmode                  " show current mode in statusbar
+set showcmd                   " show partial command in statusbar
+set visualbell                " removes errorbells
+set relativenumber number     " show number and relative number
 set idearefactormode=keep
-
-" In pure vim a timeout on the leader key results in a menu being displayed, hence we have a VERY
-" low timeout setting. Since that menu is not available in ideavim, the timeout has to be increased
-" in order to have a more realistic chance on hitting key combinations.
-set timeout
-set timeoutlen=1000
-
-" Copy to system clipboard as well
-set clipboard+=unnamed
-
-" https://superuser.com/questions/622898/how-to-turn-off-the-bell-sound-in-intellij
-" https://stackoverflow.com/questions/63386803/how-to-turn-off-a-bell-in-intellij-idea
-set visualbell
-
-""" 
-""" https://github.com/JetBrains/ideavim/wiki/Emulated-plugins
-""" 
-set quickscope
 
 " ys<motion|text object><desired char>      surround something
 " S<desired char>                           surround when in visual mode
 " ds<existing char>                         deletes existing surround
 " cs<existing char><desired char>           changes existing surround with desired
-"set surround
+Plug 'tpope/vim-surround'
+set surround
 
 " https://youtrack.jetbrains.com/issue/VIM-1970
 set highlightedyank
 
-" https://youtrack.jetbrains.com/issue/VIM-959
-"set ideamarks
+Plug 'vim-scripts/argtextobj.vim'
+set argtextobj
 
-set ideajoin
-
-" die dae cie cae
-"set textobj-entire
-
-" https://github.com/JetBrains/ideavim/wiki/Emulated-plugins#vim-indent-object
-"set textobj-indent
-
-" https://github.com/JetBrains/ideavim/wiki/sethandler
-" To be able to say 'same as regular Idea behaviour, but only on insert mode'.
-
-" Same as default IDEA action, but only in insert mode. Enter block-visual
-" mode in normal mode.
-sethandler <C-v> i:ide
+set easymotion
 
 " https://github.com/JetBrains/ideavim/wiki/Select-mode
 " set selectmode-=template
 
-" remember set to Vim the following shortcuts
-" C-h
-" C-l
-" C-o
-" C-i
-" C-v
-" C-w Vim uses it to switch windows, the IDE behaviour is mapped to C-k instead
-" C-k
-" C-m Enter alternative
-" C-[ A great Esc key alternative! In the ide, moves caret to code block start.
-" C-] Go to definition. In the ide, moves caret to code block end.
-
 " consider NOT assigning to Vim the following shortcuts:
 " C-e recent files popup window is very useful
 " C-b find occurrences in file popup
-" C-u go to super method
 " C-q info popup
 " C-j We already have j in Vim, better use it for Insert Live Template
-" C-n class search
 
-" unsure about assigning to Vim or to IDE
-" C-f find or move forward?
-" C-r replace or redo?
-" C-y
-" C-c We already have C-[, don't we?
-" C-p kind of not very used without C-n
-" C-s doesn't seem very useful in Vim
-" C-t update project in IDEA, something something tag stack in Vim
-" C-a I don't use it that much in Vim
-" C-x same as above
-
-" When pasting text over a selection, do keep the original text in the clipboard. Note, we have a
-" similar thing in .vimrc, however the vimrc variant is not supported by ideavim and hence we fall
-" back here to the less robust (cursor positioning is inconsistent when doing this at the end of a
-" line) version.
-"vnoremap p "_dP`]
-
-"""
-""" To get a list of Actions run `:actionlist `
-"""
-" https://github.com/JetBrains/ideavim
-" https://github.com/Valloric/dotfiles/blob/master/intellij/ideavimrc
-" https://resources.jetbrains.com/storage/products/intellij-idea/docs/IntelliJIDEA_ReferenceCard.pdf
 "" Remap space as leader key
 let mapleader = " "
-"nnoremap <Leader>i :action IdeaVim.ReloadVimRc.reload<CR>
+map <Leader>rc :source ~/.ideavimrc<CR>
 
-nnoremap Y y$
-nnoremap p :action EditorPaste<CR>
-nnoremap P :action EditorPaste<CR>
-vnoremap p :action EditorPaste<CR>
-vnoremap P :action EditorPaste<CR>
+" Use system clipboard by default for y and p operations
+nnoremap yy "+yy
+vnoremap y "+y
+nnoremap p "+p
+vnoremap p "+p
+nnoremap P "+P
+vnoremap P "+P
+
+" Search for selected text
+xnoremap * "zy/<C-R>z<CR>
+xnoremap # "zy?<C-R>z<CR>
+
+" Clear highlights
+nnoremap <Esc> <Esc>:noh<CR>
+
+nmap <Leader><Esc> <Action>(ClearAllNotifications)
 
 " Move text up and down
 inoremap <A-j> :action MoveLineDown<CR>
 inoremap <A-k> :action MoveLineUp<CR>
-nnoremap <A-j> :action MoveLineDown<CR>
-nnoremap <A-k> :action MoveLineUp<CR>
+map <A-j> :action MoveLineDown<CR>
+map <A-k> :action MoveLineUp<CR>
 vnoremap <A-j> :action MoveLineDown<CR>
 vnoremap <A-k> :action MoveLineUp<CR>
 
 " Smart select/unselect
-nmap <C-[> <Action>(EditorSelectWord)
-vmap <C-[> <Action>(EditorSelectWord)
-nmap <C-]> <Action>(EditorUnSelectWord)
-vmap <C-]> <Action>(EditorUnSelectWord)
+nnoremap + :<C-u>action EditorSelectWord<CR>
+nnoremap - :<C-u>action EditorUnSelectWord<CR>
 
-nnoremap <c-s> :write<CR>
-nnoremap s :action KJumpAction<CR>
+map <C-s> :write<CR>
 
-"nnoremap ge :action GotoNextError<CR>
-"nnoremap gE :action GotoPreviousError<CR>
+nmap s <Plug>(easymotion-s)
 
-""" Editing source code
-nnoremap < <<
-nnoremap > >>
+""" Indent
+map < <<
+map > >>
 vnoremap < <gv
 vnoremap > >gv
-"nnoremap [[ :action MethodUp<CR>
-"nnoremap ]] :action MethodDown<CR>
-"nnoremap zc :action CollapseRegion<CR>
-"nnoremap zo :action ExpandRegion<CR>
 
-""" Navigation
-"nnoremap <c-\> :action SplitVertically<CR>
-"nnoremap <c--> :action SplitHorizontally<CR>
-"nnoremap <c-=> :action Unsplit<CR>
-"nnoremap <c-m> :action MoveEditorToOppositeTabGroup<CR>
+""" Searching
+map <leader>g :action FindInPath<CR>
+map <c-a> :action GotoAction<CR>
+map <c-p> :action GotoFile<CR>
 
-""" Searching and Source Code Navigation
-nnoremap <c-/> :action FindInPath<CR>
-nnoremap <c-a> :action GotoAction<CR>
-nnoremap <c-p> :action GotoFile<CR>
-"nnoremap <leader>s :action GotoRelated<CR>
-"nnoremap <leader>h :action CallHierarchy<CR>
-"nnoremap <leader>b :action ShowNavBar<CR>
-"nnoremap <c-s> :action FileStructurePopup<CR>
-"nnoremap <c-o> :action GotoSymbol<CR>
-"nnoremap gc :action GotoClass<CR>
-nnoremap gu :action FindUsages<CR>
-nnoremap gi :action GotoImplementation<CR>
-"nnoremap gd :action GotToDeclaration<CR>
-"nnoremap gp :action GotToSuperMethod<CR>
+""" Source Code Navigation
+"map <leader>s :action GotoRelated<CR>
+"map <leader>h :action CallHierarchy<CR>
+"map <leader>b :action ShowNavBar<CR>
+"map <c-s> :action FileStructurePopup<CR>
+"map <c-o> :action GotoSymbol<CR>
+map gu :action FindUsages<CR>
+map gi :action GotoImplementation<CR>
 
-nnoremap <Leader>c :action CommentByLineComment<CR>
+map <c-/> :action CommentByLineComment<CR>
 
-nnoremap H :action PreviousTab<CR>
-nnoremap L :action NextTab<CR>
+""" Tabs
+map H :action PreviousTab<CR>
+map L :action NextTab<CR>
+nnoremap <leader>b :action RecentFiles<CR>
 
-nnoremap <Leader>q :action CloseContent<CR>
+map q :action CloseContent<CR>
 
-"nnoremap <Leader>n :action NextWindow<CR>
-"nnoremap <leader>zc :action CollapseAllRegions<CR>
-"nnoremap <leader>zo :action ExpandAllRegions<CR>
-"nnoremap <leader>r :action Refactorings.QuickListPopupAction<CR>
-"nnoremap <Leader>=  :action ReformatCode<CR>
-"nnoremap <leader>l :action RecentLocations<CR>
+sethandler <C-p> n:vim i-x:ide
