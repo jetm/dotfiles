@@ -143,7 +143,6 @@ zinit light tarrasch/zsh-bd
 zi0b id-as'fzf' \
   from'gh-r' \
   as'program' \
-  nocompile \
   bpick'*linux_amd64*' \
   dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh' \
   pick'fzf'
@@ -197,7 +196,6 @@ zinit snippet https://raw.githubusercontent.com/tj/git-extras/master/bin/git-und
 zi0c id-as'checkmake' \
   from'gh-r' \
   as'program' \
-  nocompile \
   bpick'*linux.amd64*' \
   mv'checkmake*->checkmake'
 zinit light mrtazz/checkmake
@@ -243,7 +241,6 @@ unset zi0c
 # zi0c id-as'zoxide' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   bpick'*x86_64*linux*' \
 #   mv'zoxide*/zoxide -> zoxide' \
 #   pick'zoxide' \
@@ -280,7 +277,6 @@ unset zi0c
  #  zi0c id-as'topgrade' \
  #    from'gh-r' \
  #    as'program' \
- #    nocompile \
  #    bpick'*x86_64-unknown-linux-musl*' \
  #    pick'topgrade'
  #  zinit light r-darwish/topgrade
@@ -298,7 +294,6 @@ unset zi0c
  #  zi0c id-as'ov' \
  #    from'gh-r' \
  #    as'program' \
- #    nocompile \
  #    bpick'*linux_amd64*' \
  #    pick'ov'
  #  zinit light noborus/ov
@@ -306,14 +301,12 @@ unset zi0c
  #  zi0c id-as'clangd' \
  #    from'gh-r' \
  #    as'program'  \
- #    nocompile \
  #    bpick'clangd-linux*' \
  #    mv'clangd*/bin/clangd -> clangd'
 	# zinit light clangd/clangd
 	#
  #  zinit id-as'git-interactive-rebase-tool' \
  #    as'readurl|null' \
- #    nocompile \
  #    dlink"/MitMaro/git-interactive-rebase-tool/releases/download/%VERSION%/git-interactive-rebase-tool-%VERSION%-ubuntu-16.04_amd64.deb" \
  #    atclone"ziextract --move --auto; \
  #      dpkg -x git-interactive-rebase-tool .; \
@@ -346,7 +339,6 @@ unset zi0c
   # looks the mv ice doesn't work with rustup cargo
 
   # zinit id-as'keychain' \
-  #   nocompile \
   #   dlink"/funtoo/keychain/archive/refs/tags/%VERSION%.zip" \
   #   as'readurl|null' \
   #   atclone"ziextract --move --auto; \
@@ -399,7 +391,6 @@ unset zi0c
 # zi0c id-as'fpp' \
 #   from"gh" \
 #   as"program" \
-#   nocompile \
 #   atinit"sed -i 's/python3/python3.7/g' fpp" \
 #   pick"fpp"
 # zinit light facebook/pathpicker
@@ -407,7 +398,6 @@ unset zi0c
 # zi0c id-as'navi' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   pick'navi' \
 #   atload'eval "$(navi widget zsh)";'
 # zinit light denisidoro/navi
@@ -424,7 +414,6 @@ unset zi0c
 # zi0c id-as'delta' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   bpick'*x86_64-unknown-linux-musl*' \
 #   mv'delta*/delta -> delta' \
 #   pick'delta'
@@ -454,7 +443,6 @@ unset zi0c
 # zi0c id-as'shellcheck' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   bpick'*linux.x86_64*' \
 #   mv'shellcheck*/shellcheck -> shellcheck' \
 #   pick'shellcheck'
@@ -463,7 +451,6 @@ unset zi0c
 # Installed by Neovim
 # zi0c id-as'shfmt' \
 #   from'gh-r' \
-#   nocompile \
 #   as'program' \
 #   mv'shfmt* -> shfmt'
 # zinit light mvdan/sh
@@ -474,7 +461,6 @@ unset zi0c
 # zi0c id-as'dust' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   bpick'*linux*gnu*' \
 #   mv'dust*/dust -> dust' \
 #   pick'dust'
@@ -484,7 +470,6 @@ unset zi0c
 # zi0b id-as'fd' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   mv'fd*/fd -> fd' \
 #   pick'fd'
 # zinit light sharkdp/fd
@@ -492,7 +477,6 @@ unset zi0c
 # zi0a id-as'exa' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   mv'bin/exa -> exa' \
 #   pick'exa'
 # zinit light ogham/exa
@@ -501,7 +485,6 @@ unset zi0c
 # zi0c id-as'sd' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   mv'sd-* -> sd' \
 #   pick'sd'
 # zinit light chmln/sd
@@ -509,7 +492,6 @@ unset zi0c
 # zi0c id-as'sad' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   bpick'*x86_64-unknown-linux-gnu*' \
 #   pick'sad'
 # zinit light ms-jpq/sad
@@ -517,7 +499,6 @@ unset zi0c
 # zi0c id-as'bat' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   bpick'*x86_64-unknown-linux-musl*' \
 #   mv'bat*/bat -> bat' \
 #   pick'bat'
@@ -525,7 +506,6 @@ unset zi0c
 
 # zi0c id-as'duf' \
 #   from'gh-r' \
-#   nocompile \
 #   as'program' \
 #   bpick'*linux_x86_64.tar.gz'
 # zinit light muesli/duf
@@ -533,7 +513,6 @@ unset zi0c
 # zi0c id-as'ouch' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   bpick'*x86_64-unknown-linux-gnu*' \
 #   mv'ouch*/ouch -> ouch' \
 #   pick'ouch'
@@ -542,7 +521,6 @@ unset zi0c
 # zi0c id-as'erdtree' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   bpick'*x86_64-unknown-linux-gnu*' \
 #   pick'erdtree'
 # zinit light solidiquis/erdtree
@@ -550,7 +528,6 @@ unset zi0c
 # zi0c id-as'codespelunker' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   bpick'*Linux_x86_64*' \
 #   pick'cs'
 # zinit light boyter/cs
@@ -568,7 +545,6 @@ unset zi0c
 # zi0c id-as'jq' \
 #   from'gh-r'  \
 #   as'program'  \
-#   nocompile \
 #   bpick'*linux64' \
 #   mv'jq-* -> jq'
 # zinit light stedolan/jq
@@ -605,7 +581,6 @@ unset zi0c
 # zi0c id-as'ripgrep' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   mv'ripgrep*/rg -> rg' \
 #   pick'rg'
 # zinit light BurntSushi/ripgrep
@@ -613,7 +588,6 @@ unset zi0c
 # zi0c id-as'igrep' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   bpick'*x86_64-unknown-linux-gnu*' \
 #   mv'igrep/ig -> ig' \
 #   pick'ig'
@@ -634,7 +608,6 @@ unset zi0c
 # neovim-nightlies
 #
 # zi0c id-as'nvim' \
-#   nocompile \
 #   atclone"wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz; \
 #     unzip -o nvim-linux64.zip; \
 #     fd nvim -x rm -vrf {} \; $ZPFX; \
@@ -646,7 +619,6 @@ unset zi0c
 # zi0c id-as'glow' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   bpick'*linux_x86_64.tar.gz' \
 #   pick'glow'
 # zinit light charmbracelet/glow
@@ -657,7 +629,6 @@ unset zi0c
 # zi0c id-as'nnn' \
 #   from'gh-r' \
 #   as'program'  \
-#   nocompile \
 #   bpick'nnn-static*x86_64*' \
 #   mv'nnn-static -> nnn' \
 #   pick'nnn'
@@ -684,7 +655,6 @@ unset zi0c
 # zi0c id-as'ninja' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   bpick'*linux*' \
 #   pick'ninja'
 # zinit light ninja-build/ninja
@@ -715,13 +685,11 @@ unset zi0c
 #
 # zi0c id-as'git-fuzzy' \
 #   as'program' \
-#   nocompile \
 #   pick'bin/git-fuzzy'
 # zinit light bigH/git-fuzzy
 
 # zi0c id-as'bugs' \
 #   as'program' \
-#   nocompile \
 #   pick'bugs'
 # zinit snippet https://raw.githubusercontent.com/reddit/bugs/main/bugs.sh
 
@@ -734,7 +702,6 @@ unset zi0c
 # zinit light askgitdev/askgit
 
 # Use backspace \ before $ for SHELL variable
-#   nocompile \
 # zi0c id-as'tabnine' \
 #   atclone"local VER
 #     local START_URL
@@ -774,7 +741,6 @@ unset zi0c
 # zi0c id-as'git-lfs' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   bpick'*linux-amd64*' \
 #   atclone"PREFIX=$ZPFX ./install.sh; \
 #     rm -f ./install.sh ./*.md; \
@@ -787,7 +753,6 @@ unset zi0c
 #
 # zinit id-as'parallel' \
 #   as'readurl|command' \
-#   nocompile \
 #   atclone'ziextract --auto --move && ./configure --disable-documentation' \
 #   atpull'%atclone' \
 #   make'' \
@@ -798,7 +763,6 @@ unset zi0c
 # interactive parallel ssh client
 # zi0c id-as'hss' \
 #   from'gh-r' \
-#   nocompile \
 #   as'program' \
 #   mv'hss-Linux-x86_64 -> hss'
 # zinit light six-ddc/hss
@@ -828,7 +792,6 @@ unset zi0c
 # zi0c id-as'stylua' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   bpick'*stylua*linux*' \
 #   pick'stylua'
 # zinit light JohnnyMorganz/StyLua
@@ -836,7 +799,6 @@ unset zi0c
 # zi0c id-as'gitui' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   bpick'*linux-musl*' \
 #   pick'gitui'
 # zinit light extrawurst/gitui
@@ -844,7 +806,6 @@ unset zi0c
 # zi0c id-as'direnv' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   pick'direnv' \
 #   mv'direnv*->direnv' \
 #   atload'eval "$(direnv hook zsh)"'
@@ -853,7 +814,6 @@ unset zi0c
 # zi_ice id-as'atuin' \
 #   from'gh-r' \
 #   as'program' \
-#   nocompile \
 #   sbin"**/atuin"
 # zinit light ellie/atuin
 
