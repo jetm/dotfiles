@@ -98,6 +98,7 @@ if (command -v atuin >/dev/null 2>&1); then
 fi
 
 zi0a id-as'zsh-autosuggestions' \
+  cloneopts="--branch develop" \
   depth=1
 zinit light zsh-users/zsh-autosuggestions
 
