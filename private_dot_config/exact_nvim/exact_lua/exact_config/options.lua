@@ -14,7 +14,7 @@ o.smartcase = true -- Case sensitivie searching
 --
 o.linebreak = true -- Wrap lines at 'breakat'. Do not break words
 o.list = true -- Display whitespace characters
-o.listchars = { tab = "→ ", trail = "·" }
+o.listchars = { tab = "├ ", trail = "·" }
 o.number = true -- Show numberline
 o.relativenumber = true -- Show relative numberline
 o.scrolloff = 16 -- Number of lines to keep above and below the cursor
