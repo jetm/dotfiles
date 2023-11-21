@@ -1,7 +1,5 @@
 #!/usr/bin/bash
 
-#!/usr/bin/env bash
-
 # Switch between Ripgrep launcher mode (CTRL-R) and fzf filtering mode (CTRL-F)
 RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
 INITIAL_QUERY="${*:-}"
@@ -22,4 +20,3 @@ IFS=: read -ra selected < <(
       --preview-window 'up,60%,border-bottom,+{2}+3/3,~3'
 )
 [ -n "${selected[0]}" ] && vim "${selected[0]}" "+${selected[1]}"
-
