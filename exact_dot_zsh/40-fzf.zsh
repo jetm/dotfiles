@@ -61,7 +61,6 @@ export FZF_DEFAULT_OPTS="
 -i
 --ansi
 --multi
---height=90%
 --info=inline
 --no-separator
 --layout=reverse
