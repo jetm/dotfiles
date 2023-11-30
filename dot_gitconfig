@@ -121,6 +121,8 @@
     # "log" format lists the commits in the range like git-submodule summary
     # does
     submodule = log
+
+    # Moved lines of code are colored differently
     colorMoved = default
 
 [status]
