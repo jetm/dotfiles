@@ -43,6 +43,15 @@ return {
   -- Generate table of contents for Markdown files
   -- { "mzlogin/vim-markdown-toc" },
 
+  -- {
+  --   "navarasu/onedark.nvim",
+  --   lazy = false,
+  --
+  --   config = function()
+  --     vim.cmd.colorscheme("onedark")
+  --   end,
+  -- },
+  -- More updated
   {
     "olimorris/onedarkpro.nvim",
     lazy = false,
@@ -699,7 +708,7 @@ return {
       },
 
       -- Snippets
-      { "L3MON4D3/LuaSnip", },
+      { "L3MON4D3/LuaSnip" },
 
       -- UI
       { "onsails/lspkind.nvim" },
