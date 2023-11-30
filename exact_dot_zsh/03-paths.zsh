@@ -7,12 +7,17 @@
 # shellcheck disable=2034
 typeset -gU cdpath fpath mailpath path
 
+add_path "${HOME}"/.local/bin
 # add_path "${HOME}"/go/bin
 # add_path "${HOME}"/.cabal/bin
-# add_path "${HOME}"/.cargo/bin
 # add_path "${HOME}"/.poetry/bin
-add_path "${HOME}"/.local/bin
-add_path "${HOME}"/.nix-profile/bin
+# add_path "${HOME}"/.nix-profile/bin
+
+_distro=$(lsb_release -si)
+
+if [ "$_distro" = "Debian" ] || [ "$_distro" = "Ubuntu" ]; then
+  add_path /usr/lib/cargo/bin
+fi
 
 # NPM_PACKAGES="${HOME}/.npm-packages"
 # add_path "${NPM_PACKAGES}"/bin
