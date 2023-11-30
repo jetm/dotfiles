@@ -17,6 +17,8 @@ return function(_, _)
       "devicetree",
       "diff",
       "dockerfile",
+      "git_rebase",
+      "gitcommit",
       "go",
       "json",
       "jsonc",
