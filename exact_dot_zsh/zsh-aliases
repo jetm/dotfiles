@@ -123,6 +123,7 @@ alias gs='git stash'
 alias gsd='git stash drop'
 alias gsp='git stash pop'
 alias gss='git stash show'
+alias gsP='git stash --patch'
 
 # Undo (u)
 alias gu='git undo'
