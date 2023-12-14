@@ -525,7 +525,7 @@ return {
     keys = {
       {
         -- Ctrl-/ as VSCode and Jetbrain
-        "<c-_>",
+        "<c-/>",
         function()
           return vim.v.count == 0 and "<Plug>(comment_toggle_linewise_current)"
             or "<Plug>(comment_toggle_linewise_count)"
@@ -534,7 +534,7 @@ return {
         expr = true,
       },
       {
-        "<c-_>",
+        "<c-/>",
         "<Plug>(comment_toggle_linewise_visual)",
         mode = { "x" },
       },
