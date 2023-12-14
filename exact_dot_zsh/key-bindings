@@ -197,4 +197,12 @@ autoload -Uz copy-earlier-word
 zle -N copy-earlier-word
 bindkey -M viins "^[m" copy-earlier-word
 
+ctrl_l() {
+  builtin print -rn -- $'\r\e[0J\e[H\e[22J' >"$TTY"
+  builtin zle .reset-prompt
+  builtin zle -R
+}
+zle -N ctrl_l
+bindkey '^l' ctrl_l
+
 # vim:set ft=zsh ts=2 sw=2 et:
