@@ -224,6 +224,8 @@ for file in "${HOME}"/.zsh/*.zsh; do
 done
 unset file
 
+zsh-defer turbo_source ~/.zsh/kitty
+
 # clear unused completions
 zinit cdclear -q
 

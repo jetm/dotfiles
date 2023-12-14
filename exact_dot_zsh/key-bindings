@@ -84,7 +84,7 @@ fzf-functions-widget() {
   LBUFFER="$LBUFFER$(FZF_DEFAULT_COMMAND=
     # ignore functions starting with "_ . +"
     # shellcheck disable=SC2296
-    print -l ${(ok)functions[(I)[^_.+]*]} |
+    print -l "${(ok)functions[(I)[^_.+]*]}" |
       fzf -q "$LBUFFER" --ansi --prompt=" Functions > "
   )"
 
