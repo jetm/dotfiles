@@ -164,16 +164,24 @@ return {
   },
 
   -- Automatic indentation style detection for Neovim
+  -- {
+  -- "nmac427/guess-indent.nvim",
+  -- event = { "BufReadPre", "BufNewFile" },
+  -- config = true,
+  -- },
+
+  -- Faster than guess-indent.nvim
+  -- Dumb automatic fast indentation detection for Neovim written in Lua
   {
-    "nmac427/guess-indent.nvim",
+    "Darazaki/indent-o-matic",
     event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      filetype_make = {
+        max_lines = 0,
+      },
+    },
     config = true,
   },
-  -- {
-  --   "Darazaki/indent-o-matic",
-  --   event = { "BufReadPre", "BufNewFile" },
-  --   config = true,
-  -- },
 
   -- add neovim in browser
   {
