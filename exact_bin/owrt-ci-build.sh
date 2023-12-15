@@ -1,11 +1,10 @@
 # shellcheck disable=SC2148
 # Update the feeds
-# ./scripts/feeds update -a
-# ./scripts/feeds install -a
+./scripts/feeds update -a
+./scripts/feeds install -a
 
 rm -f .config
 
-echo CONFIG_ALL=y >> .config
 echo CONFIG_TARGET_armsr=y >> .config
 echo CONFIG_TARGET_MULTI_PROFILE=y >> .config
 echo CONFIG_TARGET_PER_DEVICE_ROOTFS=y >> .config
@@ -35,8 +34,8 @@ echo CONFIG_MOLD=y >> .config
 make defconfig
 
 # make clean
-make -j $(nproc) tools/tar/compile
+# make -j $(nproc) tools/tar/compile
 # make -j $(nproc) package/download package/check FIXUP=1
-make -j $(nproc) tools/install
-make -j $(nproc) toolchain/install
-make -j $(nproc) target/compile
+# make -j $(nproc) tools/install
+# make -j $(nproc) toolchain/install
+# make -j $(nproc) target/compile
