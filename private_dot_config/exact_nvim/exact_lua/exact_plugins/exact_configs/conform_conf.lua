@@ -8,7 +8,9 @@ return function(_, _)
       zsh = { "shfmt", "shellharden" },
       bats = { "shfmt", "shellharden" },
     },
+
     format_on_save = false,
+
     -- Customize formatters
     formatters = {
       stylua = {
