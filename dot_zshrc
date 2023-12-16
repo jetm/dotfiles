@@ -162,13 +162,13 @@ zinit snippet https://cht.sh/:cht.sh
 #
 # neovim stable releases
 #
-zi0c id-as'nvim' \
-  ver'v0.9.4' \
-  as'program' \
-  make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
-  blockf \
-  bin"$ZPFX/bin/nvim"
-zinit light neovim/neovim
+# zi0c id-as'nvim' \
+#   ver'v0.9.4' \
+#   as'program' \
+#   make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
+#   blockf \
+#   bin"$ZPFX/bin/nvim"
+# zinit light neovim/neovim
 
 zi0c id-as'forgit' \
   depth=1 \
