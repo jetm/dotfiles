@@ -45,6 +45,7 @@ zle -N paste-from-clipboard
 
 # <Ctrl+V>
 bindkey '^V' paste-from-clipboard
+bindkey '^[[2;2~' paste-from-clipboard
 
 fancy-ctrl-z () {
   if [[ $#BUFFER = 0 ]]; then
