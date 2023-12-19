@@ -1,7 +1,7 @@
 # shellcheck disable=SC2148
 # Update the feeds
-# ./scripts/feeds update -a
-# ./scripts/feeds install -a
+./scripts/feeds update -a
+./scripts/feeds install -a
 
 rm -f .config
 
@@ -17,7 +17,7 @@ echo 'CONFIG_CCACHE_DIR="/home/tiamarin/repos/work/openwrt/.ccache"' >> .config
 
 make defconfig
 
-# make -j "$(nproc)" clean download world
+make -j "$(nproc)" clean download world
 
 # make -j $(nproc) tools/tar/compile
 # make -j $(nproc) package/download package/check FIXUP=1
