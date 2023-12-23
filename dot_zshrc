@@ -193,12 +193,12 @@ zi0c id-as'git-undo' \
   pick'git-undo'
 zinit snippet https://raw.githubusercontent.com/tj/git-extras/master/bin/git-undo
 
-zi0c id-as'checkmake' \
-  from'gh-r' \
-  as'program' \
-  bpick'*linux.amd64*' \
-  mv'checkmake*->checkmake'
-zinit light mrtazz/checkmake
+# zi0c id-as'checkmake' \
+#   from'gh-r' \
+#   as'program' \
+#   bpick'*linux.amd64*' \
+#   mv'checkmake*->checkmake'
+# zinit light mrtazz/checkmake
 
 #
 # prezto settings
