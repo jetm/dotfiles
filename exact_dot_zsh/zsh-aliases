@@ -23,34 +23,6 @@ alias mkdir='mkdir -p'
 alias ls='lsd --group-directories-first'
 alias l='ls --all --long --header --git'
 
-tree() {
-  [ "$1" = "-h" ] || [ "$1" = "--help" ] && {
-    echo "Usage: tree [directory name] [level (default: 3)]"
-    return 1
-  }
-
-  [ $# -gt 2 ] && {
-    echo -e "Error: Invalid number of arguments."
-    return 1
-  }
-
-  lsd --tree "${1:-}" --depth "${2:-3}"
-}
-
-# rg -o 'g\w+=' ~/.zsh/zsh-abbr-alias.conf | tr -d '=' | sort | xargs -n1 -I{} echo "'{}'"
-# export YSU_IGNORED_GLOBAL_ALIASES=(
-# '..' '...' 'up' 'cd-'
-# 'l' 'la' 'lt' 'ls'
-# 'e' 'vim' 'vimdiff'
-# 'pain' 'pains' 'paorph' 'parem' 'paremALL' 'pasp' 'paud'
-# 'fdi' 'list-path' 'reload'
-# 'zi' 'bb' 'g'
-# 'ga' 'gap' 'gb' 'gbd' 'gbm' 'gbv' 'gc' 'gc-' 'gca' 'gcb' 'gcf' 'gch' 'gcl'
-# 'gco' 'gcp' 'gcs' 'gd' 'gdc' 'gfcf' 'gfe' 'gfi' 'gg' 'gl' 'gla' 'gll' 'gls'
-# 'gp' 'gpp' 'gpr' 'gpu' 'gr' 'gra' 'grc' 'gre' 'grf' 'grh' 'gri' 'grs' 'gs'
-# 'gsd' 'gsp' 'gss' 'gt' 'gu' 'guh'
-# )
-
 # General
 alias e='nvim'
 alias vim='nvim'
@@ -90,7 +62,7 @@ alias gs-='git switch -'
 alias gr-='git restore -'
 alias gre='forgit::checkout::file'
 alias grE='git rE'
-alias grs='forgit::reset::head'
+alias grh='forgit::reset::head'
 
 # Grep (g)
 alias gg='git grep'
