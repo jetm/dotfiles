@@ -218,11 +218,8 @@
     username = javier.tia
 
 [credential "https://gitlab.com"]
-   helper =
-   helper = !/usr/bin/glab auth git-credential
-
-[color]
-    ui = auto
+    helper =
+    helper = !/usr/bin/glab auth git-credential
 
 [sendemail]
     smtpencryption = tls
