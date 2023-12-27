@@ -1,10 +1,5 @@
-**/*.luarc.json
-**/*.zwc
 .direnv
 .editorconfig
 .envrc
 .idea
-bin/makePipRecipes.py
-bin/tmux
-bin/unifdef
-install_chezmoi.sh
+.vscode
