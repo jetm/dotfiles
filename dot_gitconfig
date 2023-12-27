@@ -99,7 +99,7 @@
 
 [help]
     # Automatically correct and execute mistyped commands
-    autocorrect = 1
+    autocorrect = true
 
 [pull]
     # Preserve merges when you're rebasing against origin/BRANCH
@@ -107,7 +107,7 @@
 
 [fetch]
     # Always prune when fetching and pulling
-    prune = 1
+    prune = true
 
 [branch]
     # Rebase against tracking branch
@@ -157,6 +157,10 @@
 [interactive]
     # Enable single key presses in Interactive Mode
     singlekey = true
+
+[grep]
+    lineNumber = true
+    patternType = perl
 
 #
 # delta
