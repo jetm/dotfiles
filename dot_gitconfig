@@ -190,6 +190,10 @@
     side-by-side = false
     tabs = 2
 
+[pager]
+    # Workaround for https://github.com/dandavison/delta/issues/1259
+    grep = diff-so-fancy | less --tabs=2 -RFX
+
 #
 # nvim
 #
@@ -202,6 +206,7 @@
 [difftool]
     prompt = false
 
+# Global gitignore
 [core]
     excludesfile = ~/.gitignore
 
