@@ -25,11 +25,11 @@
     # Print the name of the current branch
     current = symbolic-ref --short HEAD
 
-    last = lg -1
-
     # Logs
     lol = log --topo-order --pretty=format:'%C(green)%h%C(reset) %s%C(red)%d%C(reset)'
     lg = log --topo-order --pretty=format:'%C(bold)Commit:%C(reset) %C(green)%H%C(red)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ai (%ar)%C(reset)%n%+B'
+
+    last = lg -1
 
     # List new commits, of current branch, have been created by last command
     # (typically used after a "git pull")
@@ -79,9 +79,6 @@
 
     # list files which have changed
     files = !git diff --name-only
-
-    # diff stat instead of just names
-    stat = !git diff --stat
 
     dt = "! args=$@; shift $#; nvim -c \"DiffviewOpen $args\""
 
