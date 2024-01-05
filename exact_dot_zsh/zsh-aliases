@@ -2,12 +2,7 @@
 # Remove all aliases
 unalias -m '*'
 
-#
-# Aliases
-#
-
-# Put it here because all aliases are removed
-# zoxide
+# Put just after removing all aliases
 command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh --cmd j)"
 
 # Disable correction
@@ -25,14 +20,11 @@ alias l='ls --all --long --header --git'
 
 # General
 alias e='nvim'
-alias vim='nvim'
 alias vimdiff='nvim -d'
 alias up='bd 1'
 alias cd-='cd -'
 alias df='duf'
 alias bbk='bitbake'
-alias ato='atool -x -E'
-alias halp='halp --no-version'
 alias pacdiff="DIFFPROG='nvim -d' pacdiff -s"
 
 #
@@ -114,7 +106,7 @@ alias gt='git status'
 #
 if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
   #
-  # Pacman abbrev-alias --globales
+  # Pacman aliases
   #
 
   # Recursively removing orphans (be careful)
