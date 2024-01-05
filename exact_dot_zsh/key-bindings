@@ -206,4 +206,11 @@ ctrl_l() {
 zle -N ctrl_l
 bindkey '^l' ctrl_l
 
+#
+# zsh-abbr
+#
+# bindkey -M viins " " abbr-expand-and-space
+# bindkey -M viins "^ " magic-space
+# bindkey -M viins "^M" abbr-expand-and-accept
+
 # vim:set ft=zsh ts=2 sw=2 et:

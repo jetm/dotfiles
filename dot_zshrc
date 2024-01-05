@@ -119,13 +119,19 @@ zi0b id-as'zsh-completions' \
   blockf
 zinit light zsh-users/zsh-completions
 
-# export ZPWR_EXPAND_TO_HISTORY=true
 # ignore expansion of these regular/global aliases
 export ZPWR_EXPAND_BLACKLIST=(rm mv cp ln mkdir ls l l. type)
+export ZPWR_EXPAND_TO_HISTORY=true
 zi0b id-as'zsh-expand' \
   depth=1 \
   src"${HOME}/.zsh/zsh-aliases"
 zinit light MenkeTechnologies/zsh-expand
+
+# zsh-abbr is slower than zsh-expand with zinit
+# zi0b id-as'zsh-abbr' \
+#   depth=1 \
+#   src"${HOME}/.zsh/zsh-aliases"
+# zinit light olets/zsh-abbr
 
 # Quicker doing manual initialization
 zi0b id-as'zsh-autopair' \
@@ -224,7 +230,7 @@ for file in "${HOME}"/.zsh/*.zsh; do
 done
 unset file
 
-zsh-defer turbo_source ~/.zsh/kitty
+zsh-defer turbo_source "${HOME}/.zsh/kitty"
 
 # clear unused completions
 zinit cdclear -q
@@ -373,13 +379,6 @@ unset zi0c
 # Forgot to use it
 # zi0a id-as'zsh-thefuck'
 # zinit light laggardkernel/zsh-thefuck
-
-# zi0a id-as'zsh-abbrev-alias' \
-#   src"${HOME}/.zsh/zsh-aliases"
-# zinit light momo-lab/zsh-abbrev-alias
-
-# zsh-expand is quicker than zsh-abbrev-alias, but it has issues expanding 2nd
-# command position
 
 #
 # Navigation/completion
