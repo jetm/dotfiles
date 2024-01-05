@@ -1,5 +1,6 @@
-local g = vim.g -- Global set options
-g.mapleader = " " -- set leader key
+-- Must be set before Lazy
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 local o = vim.opt -- to set options
 
