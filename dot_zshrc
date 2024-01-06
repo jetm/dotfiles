@@ -120,7 +120,7 @@ zi0b id-as'zsh-completions' \
 zinit light zsh-users/zsh-completions
 
 # ignore expansion of these regular/global aliases
-export ZPWR_EXPAND_BLACKLIST=(rm mv cp ln mkdir ls l l. type)
+export ZPWR_EXPAND_BLACKLIST=(rm mv cp ln mkdir ls l type ji)
 export ZPWR_EXPAND_TO_HISTORY=true
 zi0b id-as'zsh-expand' \
   depth=1 \
