@@ -114,3 +114,9 @@ O.diffopt:append("linematch:60") -- enable linematch diff algorithm
 O.signcolumn = "yes" -- Always show the sign column
 O.viewoptions:remove("curdir") -- disable saving current directory with views
 O.virtualedit = "block" -- allow going past end of line in visual block mode
+
+--
+-- fold
+--
+O.foldcolumn = "1";
+O.foldtext = 'v:lua.yet.custom_fold_text()'

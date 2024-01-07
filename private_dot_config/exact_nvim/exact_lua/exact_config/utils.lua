@@ -79,6 +79,12 @@ function yet.mason_update_all()
   end))
 end
 
+function yet.custom_fold_text()
+  local line = vim.fn.getline(vim.v.foldstart)
+
+  return "   "..line
+end
+
 local cmd = vim.api.nvim_create_user_command
 cmd("MasonUpdateAll", function()
   yet.mason_update_all()
