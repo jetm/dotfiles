@@ -21,6 +21,10 @@ O.relativenumber = true -- Show relative numberline
 O.scrolloff = 16 -- Number of lines to keep above and below the cursor
 O.sidescrolloff = 8 -- Number of columns to keep at the sides of the cursor
 
+if vim.fn.has("nvim-0.10") == 1 then
+  O.smoothscroll = true
+end
+
 --
 -- syntax, highlighting and spelling
 --
