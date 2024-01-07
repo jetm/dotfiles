@@ -16,11 +16,11 @@ vim.filetype.add({
 })
 
 for _, source in ipairs({
+  "config.utils",
   "config.options",
   "config.lazy",
   "config.autocmds",
   "config.mappings",
-  "config.utils",
 }) do
   local status_ok, fault = pcall(require, source)
   if not status_ok then

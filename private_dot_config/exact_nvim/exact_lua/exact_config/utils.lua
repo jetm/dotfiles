@@ -14,7 +14,7 @@ function yet.debug(...)
   return ...
 end
 
---- Serve a notification with a title of AstroNvim
+--- Serve a notification
 function yet.notify(msg, type, opts)
   vim.schedule(function()
     vim.notify(msg, type, opts)

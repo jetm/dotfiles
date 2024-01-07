@@ -42,22 +42,12 @@ return function(_, _)
     highlight = {
       -- Getting problem with colors
       enable = false,
-      additional_vim_regex_highlighting = true,
       disable = function(_, bufnr)
         return vim.api.nvim_buf_line_count(bufnr) > 10000
       end,
     },
     indent = {
       enable = true,
-    },
-    textobjects = {
-      move = {
-        enable = true,
-        goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer" },
-        goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer" },
-        goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer" },
-        goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer" },
-      },
     },
   })
 end
