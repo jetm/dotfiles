@@ -101,18 +101,3 @@ O.diffopt:append("linematch:60") -- enable linematch diff algorithm
 O.signcolumn = "yes" -- Always show the sign column
 O.viewoptions:remove("curdir") -- disable saving current directory with views
 O.virtualedit = "block" -- allow going past end of line in visual block mode
-
-vim.diagnostic.config({
-  virtual_text = false,
-  update_in_insert = false,
-  underline = true,
-  severity_sort = true,
-  float = {
-    focusable = true,
-    style = "minimal",
-    border = "rounded",
-    source = "always",
-    header = "",
-    prefix = "",
-  },
-})

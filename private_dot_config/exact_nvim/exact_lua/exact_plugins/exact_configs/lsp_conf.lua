@@ -43,6 +43,21 @@ return function(_, _)
     },
   })
 
+  vim.diagnostic.config({
+    virtual_text = false,
+    update_in_insert = true,
+    underline = true,
+    severity_sort = true,
+    float = {
+      focusable = true,
+      style = "minimal",
+      border = "rounded",
+      source = "always",
+      header = "",
+      prefix = "",
+    },
+  })
+
   local lspconfig = require("lspconfig")
   local lsp_defaults = lspconfig.util.default_config
 
