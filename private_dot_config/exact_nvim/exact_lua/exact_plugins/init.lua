@@ -135,9 +135,11 @@ return {
   -- list to help you solve all the trouble your code is causing.
   {
     "folke/trouble.nvim",
-    cmd = { "TroubleToggle", "Trouble" },
-    opts = { use_diagnostic_signs = true },
     dependencies = "nvim-tree/nvim-web-devicons",
+    cmd = { "TroubleToggle", "Trouble" },
+    opts = {
+      auto_close = true,
+    },
     config = true,
     keys = {
       {
