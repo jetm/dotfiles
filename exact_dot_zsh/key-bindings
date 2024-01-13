@@ -198,13 +198,15 @@ autoload -Uz copy-earlier-word
 zle -N copy-earlier-word
 bindkey -M viins "^[m" copy-earlier-word
 
-ctrl_l() {
+custom_clear_screen() {
   builtin print -rn -- $'\r\e[0J\e[H\e[22J' >"$TTY"
   builtin zle .reset-prompt
   builtin zle -R
 }
-zle -N ctrl_l
-bindkey '^l' ctrl_l
+zle -N custom_clear_screen
+
+# Conflict with Ctrl+l to change Kitty windows
+bindkey '^n' custom_clear_screen
 
 #
 # zsh-abbr

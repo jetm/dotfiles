@@ -796,6 +796,18 @@ return {
     end,
   },
 
+  -- Smart, seamless, directional navigation and resizing of Neovim + terminal multiplexer splits.
+  -- Supports tmux, Wezterm, and Kitty. Think about splits in terms of "up/down/left/right".
+  --
+  -- to use Kitty multiplexer support, run the post install hook
+  {
+    "mrjones2014/smart-splits.nvim",
+    build = "./kitty/install-kittens.bash",
+    lazy = false,
+    -- warp, default, doesn't work on kitty
+    opts = { at_edge = "stop" },
+  },
+
   -- {
   --   "sindrets/diffview.nvim",
   --   dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },

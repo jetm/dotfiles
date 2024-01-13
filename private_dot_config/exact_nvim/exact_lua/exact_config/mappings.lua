@@ -71,11 +71,10 @@ end
 ---
 -- Windows
 ---
--- Resize window using <ctrl> arrow keys
-map("n", "<C-Up>", "<CMD>resize +2<CR>", { desc = "Increase window height" })
-map("n", "<C-Down>", "<CMD>resize -2<CR>", { desc = "Decrease window height" })
-map("n", "<C-Left>", "<CMD>vertical resize -2<CR>", { desc = "Decrease window width" })
-map("n", "<C-Right>", "<CMD>vertical resize +2<CR>", { desc = "Increase window width" })
+map("n", "<C-h>", require("smart-splits").move_cursor_left)
+map("n", "<C-j>", require("smart-splits").move_cursor_down)
+map("n", "<C-k>", require("smart-splits").move_cursor_up)
+map("n", "<C-l>", require("smart-splits").move_cursor_right)
 
 ---
 -- Search
@@ -87,7 +86,7 @@ map({ "i", "n" }, "<ESC>", "<CMD>noh<CR><ESC>", { desc = "Escape and clear hlsea
 -- taken from runtime/lua/_editor.lua
 map(
   "n",
-  "<C-L>",
+  "L",
   "<CMD>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
   { desc = "Redraw / clear hlsearch / diff update" }
 )
