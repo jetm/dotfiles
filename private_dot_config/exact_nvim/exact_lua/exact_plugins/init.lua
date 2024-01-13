@@ -731,6 +731,15 @@ return {
     config = require("plugins.configs.lsp_conf"),
   },
 
+  -- Extensible UI for Neovim notifications and LSP progress messages
+  {
+    "j-hui/fidget.nvim",
+    event = { "LspAttach" },
+    opts = {
+      -- options
+    },
+  },
+
   -- better diffing
   -- ]x - move to previous conflict
   -- [x - move to next conflict
