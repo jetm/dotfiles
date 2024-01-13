@@ -137,26 +137,11 @@ autocmd("FileType", {
   end,
 })
 
--- Terminal settings:
----------------------
-
--- Open a Terminal on the right tab
-autocmd("CmdlineEnter", {
-  command = "command! Term :botright vsplit term://$SHELL",
-})
-
--- Enter insert mode when switching to terminal
-autocmd("TermOpen", {
-  command = "setlocal listchars= nonumber norelativenumber nocursorline",
-})
-
-autocmd("TermOpen", {
-  pattern = "",
-  command = "startinsert",
-})
-
--- Close terminal buffer on process exit
-autocmd("BufLeave", {
-  pattern = "term://*",
-  command = "stopinsert",
+autocmd("BufWritePre", {
+  desc = "Automatically create parent directories if they don't exist when saving a file",
+  group = augroup("create_dir"),
+  callback = function(args)
+    if args.match:match "^%w%w+://" then return end
+    vim.fn.mkdir(vim.fn.fnamemodify(vim.loop.fs_realpath(args.match) or args.match, ":p:h"), "p")
+  end,
 })
