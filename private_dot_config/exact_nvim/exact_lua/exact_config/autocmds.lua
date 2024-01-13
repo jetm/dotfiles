@@ -56,6 +56,30 @@ autocmd("BufWritePost", {
   command = "silent !chezmoi apply --source-path %",
 })
 
+-- Disable diagnostics in insert mode
+autocmd('ModeChanged', {
+  pattern = {'n:i', 'v:s'},
+  desc = 'Disable diagnostics in insert and select mode',
+  callback = function(e) vim.diagnostic.disable(e.buf) end
+})
+
+autocmd('ModeChanged', {
+  pattern = 'i:n',
+  desc = 'Enable diagnostics when leaving insert mode',
+  callback = function(e) vim.diagnostic.enable(e.buf) end
+})
+
+local function hide_semantic_highlights()
+  for _, group in ipairs(vim.fn.getcompletion('@lsp', 'highlight')) do
+    vim.api.nvim_set_hl(0, group, {})
+  end
+end
+
+autocmd('ColorScheme', {
+  desc = 'Clear LSP highlight groups',
+  callback = hide_semantic_highlights,
+})
+
 --
 -- Settings for filetypes:
 --
