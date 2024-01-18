@@ -1,0 +1,6 @@
+if [[ $- == *"i"* ]]; then
+  if command -v zsh > /dev/null; then
+    zsh --version > /dev/null && exec zsh
+    echo "Couldn't run 'zsh'" > /dev/stderr
+  fi
+fi

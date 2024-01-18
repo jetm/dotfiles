@@ -1,4 +1,12 @@
 # shellcheck disable=SC2148
+#
+# Executes commands at the start of an interactive session
+#
+if [ -z "$PS1" ] ; then
+  # If not running interactively, don't do anything
+  return
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # shellcheck disable=SC2296
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
