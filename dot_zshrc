@@ -83,14 +83,6 @@ zi_ice id-as'p10k' \
   src"${HOME}/.p10k.zsh"
 zinit light romkatv/powerlevel10k
 
-# p10k has a better default configuration
-# Git status is still slower than p10k gitstatusd
-# zi_ice id-as="starship" \
-#   from"gh-r" \
-#   as"program" \
-#   atload'eval "$(starship init zsh)"'
-# zinit load starship/starship
-
 zi_ice id-as'zsh-defer' \
   depth=1
 zinit light romkatv/zsh-defer
@@ -135,12 +127,6 @@ zi0b id-as'zsh-expand' \
   src"${HOME}/.zsh/zsh-aliases"
 zinit light MenkeTechnologies/zsh-expand
 
-# zsh-abbr is slower than zsh-expand with zinit
-# zi0b id-as'zsh-abbr' \
-#   depth=1 \
-#   src"${HOME}/.zsh/zsh-aliases"
-# zinit light olets/zsh-abbr
-
 # Quicker doing manual initialization
 zi0b id-as'zsh-autopair' \
   depth=1 \
@@ -172,17 +158,6 @@ zi0c id-as'cht.sh' \
   pick'cht.sh' \
   atload'export CHTSH="$XDG_CONFIG_HOME"'
 zinit snippet https://cht.sh/:cht.sh
-
-#
-# neovim stable releases
-#
-# zi0c id-as'nvim' \
-#   ver'v0.9.4' \
-#   as'program' \
-#   make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
-#   blockf \
-#   bin"$ZPFX/bin/nvim"
-# zinit light neovim/neovim
 
 zi0c id-as'forgit' \
   depth=1 \
@@ -248,6 +223,10 @@ unset z_ice
 unset zi0a
 unset zi0b
 unset zi0c
+
+######################################################################
+# Keep old configurations for future uses
+######################################################################
 
 # Alternative to fzf-tab, but less friendly
 # zi_ice id-as'fzf-tab-completion' \
@@ -854,5 +833,51 @@ unset zi0c
 #   as'program' \
 #   pick'lazydocker'
 # zinit light jesseduffield/lazydocker
+
+#
+# neovim stable releases
+#
+# zi0c id-as'nvim' \
+#   ver'v0.9.4' \
+#   as'program' \
+#   make"CMAKE_INSTALL_PREFIX=$ZPFX CMAKE_BUILD_TYPE=Release install" \
+#   blockf \
+#   bin"$ZPFX/bin/nvim"
+# zinit light neovim/neovim
+
+# zi0c id-as'checkmake' \
+#   from'gh-r' \
+#   as'program' \
+#   bpick'*linux.amd64*' \
+#   mv'checkmake*->checkmake'
+# zinit light mrtazz/checkmake
+
+# p10k has a better default configuration
+# Git status is still slower than p10k gitstatusd
+# zi_ice id-as="starship" \
+#   from"gh-r" \
+#   as"program" \
+#   atload'eval "$(starship init zsh)"'
+# zinit load starship/starship
+
+# zsh-abbr is slower than zsh-expand with zinit
+# zi0b id-as'zsh-abbr' \
+#   depth=1 \
+#   src"${HOME}/.zsh/zsh-aliases"
+# zinit light olets/zsh-abbr
+
+# zi0c id-as'git-update' \
+#   as'program' \
+#   atclone'go get && go build && mv -v gitupdate git-update' \
+#   atpull'%atclone' \
+#   pick'git-update'
+# zinit light nikitavoloboev/gitupdate
+
+
+# zi0b id-as'zsh-completions' \
+#   depth=1 \
+#   atload"zicompinit; zicdreplay" \
+#   blockf
+# zinit light zsh-users/zsh-completions
 
 # vim:ft=zsh ts=2 sw=2 et:
