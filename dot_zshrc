@@ -170,24 +170,17 @@ zinit light wfxr/forgit
 export FORGIT_NO_ALIASES=1
 turbo_source "${ZINIT[PLUGINS_DIR]}/forgit/forgit.plugin.sh"
 
-zi0c id-as'git-update' \
-  as'program' \
-  atclone'go get && go build && mv -v gitupdate git-update' \
-  atpull'%atclone' \
-  pick'git-update'
-zinit light nikitavoloboev/gitupdate
-
 zi0c id-as'git-undo' \
   as'program' \
   pick'git-undo'
 zinit snippet https://raw.githubusercontent.com/tj/git-extras/master/bin/git-undo
 
-# zi0c id-as'checkmake' \
-#   from'gh-r' \
-#   as'program' \
-#   bpick'*linux.amd64*' \
-#   mv'checkmake*->checkmake'
-# zinit light mrtazz/checkmake
+zi0c id-as'zsh_codex' \
+  depth=1 \
+  cloneonly \
+  atpull'%atclone' \
+  nocd
+zinit light tom-doerr/zsh_codex
 
 #
 # prezto settings
