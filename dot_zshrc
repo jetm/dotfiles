@@ -71,6 +71,13 @@ zvm_after_init() {
   # required to read custom key-bindings, otherwise they will be overwritten by
   # zsh-vi-mode
   turbo_source "${HOME}"/.zsh/key-bindings
+
+  export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+  turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  ZSH_HIGHLIGHT_STYLES[comment]='none'
+  turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-history-substring-search/zsh-history-substring-search.zsh"
+
+  turbo_source "${ZINIT[PLUGINS_DIR]}/zsh_codex/zsh_codex.plugin.zsh"
 }
 
 #
@@ -105,19 +112,23 @@ zinit light zsh-users/zsh-autosuggestions
 # zsh-syntax-highlighting is quicker than fast-syntax-highlighting
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 zi0a id-as'zsh-syntax-highlighting' \
-  depth=1
+  depth=1 \
+  cloneonly \
+  atpull'%atclone' \
+  nocd
 zinit light zsh-users/zsh-syntax-highlighting
+
+# zi0a id-as'fast-syntax-highlighting' \
+#   depth=1
+# zinit light zdharma-continuum/fast-syntax-highlighting
 
 # Must loaded after zsh-syntax-highlighting
 zi0a id-as'zsh-history-substring-search' \
-  depth=1
-zinit light zsh-users/zsh-history-substring-search
-
-zi0b id-as'zsh-completions' \
   depth=1 \
-  atload"zicompinit; zicdreplay" \
-  blockf
-zinit light zsh-users/zsh-completions
+  cloneonly \
+  atpull'%atclone' \
+  nocd
+zinit light zsh-users/zsh-history-substring-search
 
 # ignore expansion of these regular/global aliases
 export ZPWR_EXPAND_BLACKLIST=(rm mv cp ln mkdir ls l type ji)
