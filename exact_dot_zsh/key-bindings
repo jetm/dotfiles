@@ -208,6 +208,20 @@ zle -N custom_clear_screen
 # Conflict with Ctrl+l to change Kitty windows
 bindkey '^n' custom_clear_screen
 
+bindkey '^x' create_completion
+
+clear_screen_and_scrollback() {
+    echoti civis >"$TTY"
+    printf '%b' '\e[H\e[2J' >"$TTY"
+    zle .reset-prompt
+    zle -R
+    printf '%b' '\e[3J' >"$TTY"
+    echoti cnorm >"$TTY"
+}
+
+zle -N clear_screen_and_scrollback
+bindkey '^]' clear_screen_and_scrollback
+
 #
 # zsh-abbr
 #
