@@ -817,6 +817,24 @@ return {
     opts = { at_edge = "stop" },
   },
 
+  {
+    "epwalsh/obsidian.nvim",
+    lazy = true,
+    event = {
+      "BufReadPre " .. vim.fn.expand("~") .. "/MEGAsync/Obsidian/**.md",
+      "BufNewFile " .. vim.fn.expand("~") .. "/MEGAsync/Obsidian/jetm/**.md",
+    },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      workspaces = {
+        {
+          name = "jetm",
+          path = "~/MEGAsync/Obsidian/jetm",
+        },
+      },
+    },
+  },
+
   -- {
   --   "sindrets/diffview.nvim",
   --   dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
