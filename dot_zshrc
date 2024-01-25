@@ -2,12 +2,21 @@
 #
 # Executes commands at the start of an interactive session
 #
+# zmodload zsh/zprof
 if [ -z "$PS1" ] ; then
   # If not running interactively, don't do anything
   return
 fi
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+source() {
+  if [[ ! "${1}.zwc" -nt "${1}" ]]; then
+    zcompile "${1}" 2>/dev/null
+  fi
+
+  builtin source "$1"
+}
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc
 # shellcheck disable=SC2296
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   # shellcheck disable=SC2296
@@ -15,70 +24,25 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 ### Added by Zinit's installer
-if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-  print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-  command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-  command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
-    print -P "%F{33} %F{34}Installation successful.%f%b" || \
-    print -P "%F{160} The clone has failed.%f%b"
-fi
-
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit id-as'z-a-readurl' light-mode for zdharma-continuum/zinit-annex-readurl
-zinit id-as'z-a-as-monitor' light-mode for zdharma-continuum/zinit-annex-as-monitor
-zinit id-as'z-a-bin-mod-node' light-mode for zdharma-continuum/zinit-annex-bin-gem-node
-zinit id-as'z-a-path-dl' light-mode for zdharma-continuum/zinit-annex-patch-dl
-zinit id-as'z-a-rust' light-mode for zdharma-continuum/zinit-annex-rust
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && \
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
 ### End of Zinit's installer chunk
-
-turbo_source() {
-  if [[ -s "$1" && ( ! -s "$1.zwc" || "$1" -nt "$1.zwc" ) ]]; then
-    zcompile "$1"
-  fi
-  source "$1"
-}
 
 zi_ice() { zinit ice lucid silent "$@"; }
 zi0a() { zi_ice wait'0' "$@"; }
 zi0b() { zi_ice wait'1' "$@"; }
 zi0c() { zi_ice wait'2' "$@"; }
-zi0d() { zi_ice wait'3' "$@"; }
 
 # Use default installed in the Linux distribution. This version has bugs
 # zinit pack="default" for zsh
 
-#
-# vi-mode
-#
-ZVM_VI_SURROUND_BINDKEY=s-prefix
-ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-zi_ice id-as'zsh-vi-mode' \
+zi_ice id-as'zsh-defer' \
   depth=1
-zinit light jeffreytse/zsh-vi-mode
-
-# zsh-vi-mode will auto execute this zvm_after_init function
-zvm_after_init() {
-  # required to read fzf key-bindings after zsh-vi-mode, otherwise they will be
-  # overwritten by zsh-vi-mode
-  turbo_source "${ZINIT[PLUGINS_DIR]}/fzf/key-bindings.zsh"
-
-  # required to read custom key-bindings, otherwise they will be overwritten by
-  # zsh-vi-mode
-  turbo_source "${HOME}"/.zsh/key-bindings
-
-  export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-  turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-  ZSH_HIGHLIGHT_STYLES[comment]='none'
-  turbo_source "${ZINIT[PLUGINS_DIR]}/zsh-history-substring-search/zsh-history-substring-search.zsh"
-
-  turbo_source "${ZINIT[PLUGINS_DIR]}/zsh_codex/zsh_codex.plugin.zsh"
-}
+zinit light romkatv/zsh-defer
 
 #
 # Powerlevel10k
@@ -90,9 +54,33 @@ zi_ice id-as'p10k' \
   src"${HOME}/.p10k.zsh"
 zinit light romkatv/powerlevel10k
 
-zi_ice id-as'zsh-defer' \
+#
+# vi-mode
+#
+ZVM_VI_SURROUND_BINDKEY=s-prefix
+ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+zi0a id-as'zsh-vi-mode' \
   depth=1
-zinit light romkatv/zsh-defer
+zinit light jeffreytse/zsh-vi-mode
+
+# zsh-vi-mode will auto execute this zvm_after_init function
+zvm_after_init() {
+  # required to read custom key-bindings, otherwise they will be overwritten by
+  # zsh-vi-mode
+  source /usr/share/fzf/key-bindings.zsh
+  source "${HOME}"/.zsh/key-bindings
+
+  export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+  source "${ZINIT[PLUGINS_DIR]}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  ZSH_HIGHLIGHT_STYLES[comment]='none'
+  source "${ZINIT[PLUGINS_DIR]}/zsh-history-substring-search/zsh-history-substring-search.zsh"
+
+  source "${ZINIT[PLUGINS_DIR]}/zsh_codex/zsh_codex.plugin.zsh"
+
+  source "${ZINIT[PLUGINS_DIR]}/zsh-autopair/autopair.zsh"
+
+  zsh-defer unfunction source
+}
 
 if command -v keychain >/dev/null 2>&1 && [[ -f "$HOME/.ssh/id_rsa" ]]; then
   zsh-defer eval "$(keychain --eval --quiet --agents ssh id_rsa)"
@@ -104,26 +92,22 @@ if (command -v atuin >/dev/null 2>&1); then
   zsh-defer eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
 fi
 
-zi0a id-as'zsh-autosuggestions' \
+zi0b id-as'zsh-autosuggestions' \
   cloneopts="--branch develop" \
   depth=1
 zinit light zsh-users/zsh-autosuggestions
 
 # zsh-syntax-highlighting is quicker than fast-syntax-highlighting
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-zi0a id-as'zsh-syntax-highlighting' \
+zi0b id-as'zsh-syntax-highlighting' \
   depth=1 \
   cloneonly \
   atpull'%atclone' \
   nocd
 zinit light zsh-users/zsh-syntax-highlighting
 
-# zi0a id-as'fast-syntax-highlighting' \
-#   depth=1
-# zinit light zdharma-continuum/fast-syntax-highlighting
-
 # Must loaded after zsh-syntax-highlighting
-zi0a id-as'zsh-history-substring-search' \
+zi0b id-as'zsh-history-substring-search' \
   depth=1 \
   cloneonly \
   atpull'%atclone' \
@@ -133,7 +117,7 @@ zinit light zsh-users/zsh-history-substring-search
 # ignore expansion of these regular/global aliases
 export ZPWR_EXPAND_BLACKLIST=(rm mv cp ln mkdir ls l type ji)
 export ZPWR_EXPAND_TO_HISTORY=true
-zi0b id-as'zsh-expand' \
+zi0c id-as'zsh-expand' \
   depth=1 \
   src"${HOME}/.zsh/zsh-aliases"
 zinit light MenkeTechnologies/zsh-expand
@@ -142,7 +126,6 @@ zinit light MenkeTechnologies/zsh-expand
 zi0b id-as'zsh-autopair' \
   depth=1 \
   atinit'AUTOPAIR_INHIBIT_INIT=1' \
-  src"${ZINIT[PLUGINS_DIR]}/zsh-autopair/autopair.zsh" \
   atload'autopair-init'
 zinit light hlissner/zsh-autopair
 
@@ -151,15 +134,7 @@ zi0c id-as'zsh-bd' \
   src"${ZINIT[PLUGINS_DIR]}/zsh-bd/bd.zsh"
 zinit light tarrasch/zsh-bd
 
-zi0b id-as'fzf' \
-  from'gh-r' \
-  as'program' \
-  bpick'*linux_amd64*' \
-  dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh' \
-  pick'fzf'
-zinit light junegunn/fzf
-
-zi0b id-as'fzf-tab' \
+zi0c id-as'fzf-tab' \
   depth=1
 zinit light Aloxaf/fzf-tab
 
@@ -179,7 +154,7 @@ zinit light wfxr/forgit
 
 # forgit
 export FORGIT_NO_ALIASES=1
-turbo_source "${ZINIT[PLUGINS_DIR]}/forgit/forgit.plugin.sh"
+source "${ZINIT[PLUGINS_DIR]}/forgit/forgit.plugin.sh"
 
 zi0c id-as'git-undo' \
   as'program' \
@@ -213,20 +188,16 @@ zinit snippet OMZP::extract
 #
 # extensions dotfiles
 for file in "${HOME}"/.zsh/*.zsh; do
-  turbo_source "${file}"
+  source "${file}"
 done
 unset file
 
-zsh-defer turbo_source "${HOME}/.zsh/kitty"
+zsh-defer source "${HOME}/.zsh/kitty"
 
-# clear unused completions
-zinit cdclear -q
-
-unset turbo_source
-unset z_ice
-unset zi0a
-unset zi0b
-unset zi0c
+zsh-defer unset z_ice
+zsh-defer unset zi0a
+zsh-defer unset zi0b
+zsh-defer unset zi0c
 
 ######################################################################
 # Keep old configurations for future uses
@@ -271,7 +242,7 @@ unset zi0c
  #    atinit'export ASDF_DATA_DIR="$HOME/.asdf"; \
  #      export ASDF_CONFIG_FILE="$ASDF_DATA_DIR/.asdfrc";'
  #  zinit light asdf-vm/asdf
- #  turbo_source "${ZINIT[PLUGINS_DIR]}/asdf/asdf.sh"
+ #  source "${ZINIT[PLUGINS_DIR]}/asdf/asdf.sh"
 	#
  #  zi0c id-as'topgrade' \
  #    from'gh-r' \
@@ -877,6 +848,13 @@ unset zi0c
 #   pick'git-update'
 # zinit light nikitavoloboev/gitupdate
 
+# zi0c id-as'fzf' \
+#   from'gh-r' \
+#   as'program' \
+#   bpick'*linux_amd64*' \
+#   dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh' \
+#   pick'fzf'
+# zinit light junegunn/fzf
 
 # zi0b id-as'zsh-completions' \
 #   depth=1 \
@@ -884,4 +862,17 @@ unset zi0c
 #   blockf
 # zinit light zsh-users/zsh-completions
 
+# zi0a id-as'fast-syntax-highlighting' \
+#   depth=1
+# zinit light zdharma-continuum/fast-syntax-highlighting
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+# zinit id-as'z-a-readurl' light-mode for zdharma-continuum/zinit-annex-readurl
+# zinit id-as'z-a-as-monitor' light-mode for zdharma-continuum/zinit-annex-as-monitor
+# zinit id-as'z-a-bin-mod-node' light-mode for zdharma-continuum/zinit-annex-bin-gem-node
+# zinit id-as'z-a-path-dl' light-mode for zdharma-continuum/zinit-annex-patch-dl
+# zinit id-as'z-a-rust' light-mode for zdharma-continuum/zinit-annex-rust
+
+# zprof
 # vim:ft=zsh ts=2 sw=2 et:

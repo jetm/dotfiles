@@ -80,6 +80,10 @@ zle -N fzf-aliases-widget
 # <Alt+A>
 bindkey '^[a' fzf-aliases-widget
 
+# Workaround to avoid overwritten by zsh-vi-mode plugin
+# <Ctrl+r>
+bindkey -M viins '^r' fzf-history-widget
+
 fzf-functions-widget() {
   # shellcheck disable=SC2034
   LBUFFER="$LBUFFER$(FZF_DEFAULT_COMMAND=
