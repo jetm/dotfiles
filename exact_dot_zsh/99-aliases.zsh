@@ -27,6 +27,8 @@ alias df='duf'
 alias bbk='bitbake'
 alias pacdiff="DIFFPROG='nvim -d' pacdiff -s"
 
+alias zprofrc="ZPROFRC=1 zsh"
+
 #
 # Git
 #

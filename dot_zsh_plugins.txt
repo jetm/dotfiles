@@ -1,0 +1,23 @@
+#
+# .zsh_plugins.txt - antidote plugins file
+#
+romkatv/powerlevel10k kind:fpath
+jeffreytse/zsh-vi-mode
+
+sorin-ionescu/prezto path:modules/environment
+sorin-ionescu/prezto path:modules/history
+ohmyzsh/ohmyzsh path:plugins/extract
+
+MenkeTechnologies/zsh-expand kind:defer
+hlissner/zsh-autopair kind:defer
+
+zsh-users/zsh-syntax-highlighting kind:defer
+zsh-users/zsh-autosuggestions kind:defer
+zsh-users/zsh-history-substring-search kind:defer
+
+tarrasch/zsh-bd kind:defer
+Aloxaf/fzf-tab kind:defer
+wfxr/forgit kind:defer
+tom-doerr/zsh_codex kind:defer
+
+# vi: ft=config

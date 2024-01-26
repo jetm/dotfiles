@@ -1,4 +1,5 @@
 # shellcheck disable=SC2148
+
 # debug bash script
 debug() {
   local script="$1"; shift
@@ -21,17 +22,6 @@ remove_PATH_duplicates() {
     unset old_PATH x
     export PATH
   fi
-}
-
-mvI() {
-  if [ "$#" -ne 1 ] || [ ! -f "$1" ]; then
-    command mv "$@"
-    return
-  fi
-
-  newfilename="$1"
-  vared newfilename
-  command mv -v -- "$1" "$newfilename"
 }
 
 add_path() {
