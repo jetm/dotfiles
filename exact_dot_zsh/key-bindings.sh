@@ -84,6 +84,12 @@ bindkey '^[a' fzf-aliases-widget
 # <Ctrl+r>
 bindkey -M viins '^r' fzf-history-widget
 
+# <Ctrl+P>
+bindkey -r '^P'
+bindkey -M vicmd '^p' fzf-file-widget
+bindkey -M viins '^p' fzf-file-widget
+bindkey '^P' fzf-file-widget
+
 fzf-functions-widget() {
   # shellcheck disable=SC2034
   LBUFFER="$LBUFFER$(FZF_DEFAULT_COMMAND=

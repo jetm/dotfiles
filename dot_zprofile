@@ -1,0 +1,166 @@
+# Similar to .zlogin but will be sourced before .zshrc
+#
+# Both .zprofile and .zshrc are skipped in non-login non-interactive shells
+#
+# Declares environment variables in .zprofile and uses .zshenv to source
+# .zprofile. This way, non-login non-interactive shells will receive proper
+# variable initialisations
+
+# Avoid using .zshrc as it slower than .zprofile
+
+#
+# Paths
+#
+[[ -z "$ZPROFRC" ]] || zmodload zsh/zprof
+
+add_path() {
+  if [ -d $1 ]; then
+    # Set the list of directories that Zsh searches for programs.
+    path=($1 ${path})
+  fi
+}
+
+list_path() { echo "${PATH//:/\\n}"; }
+
+# Ensure path arrays do not contain duplicates
+# shellcheck disable=2034
+typeset -gU cdpath fpath path
+
+add_path "${HOME}"/.local/bin
+# add_path "${HOME}"/go/bin
+# add_path "${HOME}"/.cabal/bin
+# add_path "${HOME}"/.poetry/bin
+# add_path "${HOME}"/.nix-profile/bin
+
+_distro=$(lsb_release -si)
+
+if [ "$_distro" = "Debian" ] || [ "$_distro" = "Ubuntu" ]; then
+  add_path /usr/lib/cargo/bin
+fi
+
+# NPM_PACKAGES="${HOME}/.npm-packages"
+# add_path "${NPM_PACKAGES}"/bin
+
+if [ -d "${HOME}/go" ]; then
+  export GOPATH=${HOME}/go
+fi
+
+add_path "${HOME}"/bin
+
+if command -v ccache &> /dev/null; then
+  add_path /usr/lib/ccache/bin
+fi
+
+unset _distro
+unfunction add_path
+
+#
+# Yocto setup
+#
+export SSTATE_DIR="${HOME}"/repos/work/cache/sstate
+export DL_DIR="${HOME}"/repos/work/cache/downloads
+export NPROC=$(nproc)
+
+#
+# Editor
+#
+if command -v nvim &> /dev/null; then
+  export EDITOR="nvim"
+  export VISUAL="nvim"
+fi
+
+#
+# less pager
+#
+unset LESS
+
+# -F quit if one screen
+LESS="--quit-if-one-screen"
+
+# -g highlight only last match for searches
+LESS="${LESS} --hilite-search"
+
+# -i ignore case
+LESS="${LESS} --ignore-case"
+
+# -M
+LESS="${LESS} --long-prompt"
+
+# -R raw
+LESS="${LESS} --raw-control-chars"
+
+# # -S
+# LESS="${LESS} --chop-long-lines"
+
+# -w
+LESS="${LESS} --hilite-unread"
+
+# -X
+LESS="${LESS} --no-init"
+
+LESS="${LESS} -z-4"
+
+# --incsearch incremental search
+LESS="${LESS} --incsearch"
+
+# --no-histdups remove duplicates from command history
+LESS="${LESS} --no-histdups"
+
+# -~ --tilde Don't display tildes after end of file
+LESS="${LESS} --tilde"
+
+export LESS="${LESS}"
+
+#
+# PAGER
+#
+export PAGER=less
+
+#
+# History Stuff
+#
+
+export SAVEHIST=100000
+export HISTSIZE=120000 # $HISTSIZE should be at least 20% larger than $SAVEHIST
+
+#
+# Based on prezto
+#
+# BANG_HIST treats the ! character specially during expansion
+setopt EXTENDED_HISTORY       # writes the history file in the :start:elapsed;command format
+setopt HIST_EXPIRE_DUPS_FIRST # expires a duplicate event first when trimming history
+setopt HIST_FIND_NO_DUPS      # does not display a previously found event
+setopt HIST_IGNORE_ALL_DUPS   # deletes an old recorded event if a new event is a duplicate
+setopt HIST_IGNORE_DUPS       # does not record an event that was just recorded again
+setopt HIST_IGNORE_SPACE      # does not record an event starting with a space
+setopt HIST_SAVE_NO_DUPS      # does not write a duplicate event to the history file
+setopt HIST_VERIFY            # does not execute immediately upon history expansion
+setopt SHARE_HISTORY          # shares history between all sessions.
+# Note that SHARE_HISTORY, INC_APPEND_HISTORY, and
+# INC_APPEND_HISTORY_TIME are mutually exclusive
+
+setopt hist_reduce_blanks # Remove superfluous blanks
+
+#
+# prezto
+#
+zstyle ':prezto:module:history:alias' skip 'yes'
+
+# Set before loading prezto
+zstyle ':prezto:*:*' case-sensitive 'yes'
+zstyle ':prezto:*:*' color 'yes'
+
+#
+# utility -> plugins-settings -> antidote-init -> extensions
+#
+for e in "${HOME}"/.zsh/*.zsh; do
+  source "${e}"
+done
+
+# done profiling
+[[ -z "$ZPROFRC" ]] || zprof
+
+# cleanup
+unset ZPROFRC
+
+# vim:ft=zsh ts=2 sw=2 et:

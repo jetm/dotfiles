@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+# Will be loaded in login shells after .zshenv and .zprofile
+
+# Execute code in the background to not affect the current session
+(
+  setopt LOCAL_OPTIONS EXTENDED_GLOB
+  autoload -U zrecompile
+
+  zrecompile -pq ${ZDOTDIR:-${HOME}}/.zprofile
+  zrecompile -pq ${ZDOTDIR:-${HOME}}/.zshenv
+
+  # recompile all zsh or sh
+  for f in "${HOME}"/.zsh/*.*sh; do
+    zrecompile -pq $f
+  done
+) &!
+
+# vim:set ft=zsh ts=2 sw=2 et:
