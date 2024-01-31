@@ -4,9 +4,6 @@
 
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 
-# initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
-# antidote load
-
 zstyle ':antidote:bundle' use-friendly-names 'yes'
 
 # Set the name of the static .zsh plugins file antidote will generate

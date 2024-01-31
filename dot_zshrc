@@ -18,10 +18,10 @@ source() {
 }
 
 #
-# utility -> p10k-instant-prompt -> plugins-init -> antidote-init -> extensions
+# utility -> plugins-settings -> antidote-init -> extensions
 #
-for file in "${HOME}"/.zsh/*.zsh; do
-  source "${file}"
+for e in "${HOME}"/.zsh/*.zsh; do
+  source "${e}"
 done
 
 # done profiling
