@@ -22,3 +22,6 @@ setopt SHARE_HISTORY          # shares history between all sessions.
 # INC_APPEND_HISTORY_TIME are mutually exclusive
 
 setopt hist_reduce_blanks # Remove superfluous blanks
+
+# prezto
+zstyle ':prezto:module:history:alias' skip 'yes'

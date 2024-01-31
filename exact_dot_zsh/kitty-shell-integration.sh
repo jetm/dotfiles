@@ -4,3 +4,5 @@ if test -n "$KITTY_INSTALLATION_DIR"; then
   kitty-integration
   unfunction kitty-integration
 fi
+
+# vim:ft=zsh ts=2 sw=2 et:

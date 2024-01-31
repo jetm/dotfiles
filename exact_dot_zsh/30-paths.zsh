@@ -3,6 +3,15 @@
 # Paths
 #
 
+add_path() {
+  if [ -d $1 ]; then
+    # Set the list of directories that Zsh searches for programs.
+    path=($1 ${path})
+  fi
+}
+
+list_path() { echo "${PATH//:/\\n}"; }
+
 # Ensure path arrays do not contain duplicates
 # shellcheck disable=2034
 typeset -gU cdpath fpath mailpath path
@@ -33,5 +42,7 @@ add_path "${HOME}"/bin
 if command -v ccache &> /dev/null; then
   add_path /usr/lib/ccache/bin
 fi
+
+unfunction add_path
 
 # vim:set ts=2 sw=2 et:

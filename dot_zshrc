@@ -17,85 +17,9 @@ source() {
   \builtin source "$1"
 }
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc
-# shellcheck disable=SC2296
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  # shellcheck disable=SC2296
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# zsh-vi-mode
-ZVM_VI_SURROUND_BINDKEY=s-prefix
-ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-
-# fast-syntax-highlighting
-export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-
-# expand and alias
-export ZPWR_EXPAND_BLACKLIST=(rm mv cp ln mkdir ls l type ji)
-export ZPWR_EXPAND_TO_HISTORY=true
-
-# Git
-export FORGIT_NO_ALIASES=1
-
 #
-# antidote
+# utility -> p10k-instant-prompt -> plugins-init -> antidote-init -> extensions
 #
-# use antidote for plugin management
-[[ -d ${ZDOTDIR:-~}/.antidote ]] ||
-  git clone --depth 1 --quiet https://github.com/mattmc3/antidote ${ZDOTDIR:-~}/.antidote
-
-source ${ZDOTDIR:-~}/.antidote/antidote.zsh
-
-# initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
-# antidote load
-
-zstyle ':antidote:bundle' use-friendly-names 'yes'
-
-# Set the name of the static .zsh plugins file antidote will generate
-zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins.zsh
-
-# Ensure you have a .zsh_plugins.txt file where you can add plugins
-[[ -f ${zsh_plugins:r}.txt ]] || touch ${zsh_plugins:r}.txt
-
-# Lazy-load antidote
-fpath+=(${ZDOTDIR:-~}/.antidote)
-autoload -Uz $fpath[-1]/antidote
-
-# Generate static file in a subshell when .zsh_plugins.txt is updated
-if [[ ! $zsh_plugins -nt ${zsh_plugins:r}.txt ]]; then
-  (antidote bundle <${zsh_plugins:r}.txt >|$zsh_plugins)
-fi
-
-# Source static plugins file
-source $zsh_plugins
-unset zsh_plugins
-
-#
-# End antidote
-#
-
-# powerlevel10k
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-autoload -Uz promptinit && promptinit && prompt powerlevel10k
-
-# zsh-vi-mode will auto execute this zvm_after_init function
-zvm_after_init() {
-  source /usr/share/fzf/key-bindings.zsh
-  source "${HOME}"/.zsh/key-bindings
-
-  source "${HOME}"/.zsh/kitty-shell-integration
-}
-
-#
-# prezto settings
-#
-# Set before loading prezto
-zstyle ':prezto:*:*' case-sensitive 'yes'
-zstyle ':prezto:*:*' color 'yes'
-zstyle ':prezto:module:history:alias' skip 'yes'
-
-# extensions dotfiles
 for file in "${HOME}"/.zsh/*.zsh; do
   source "${file}"
 done
