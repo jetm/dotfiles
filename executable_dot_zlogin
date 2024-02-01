@@ -7,12 +7,13 @@
   setopt LOCAL_OPTIONS EXTENDED_GLOB
   autoload -U zrecompile
 
+  zrecompile -pq ${ZDOTDIR:-${HOME}}/.p10k.zsh
   zrecompile -pq ${ZDOTDIR:-${HOME}}/.zprofile
   zrecompile -pq ${ZDOTDIR:-${HOME}}/.zshenv
 
   # recompile all zsh or sh
   for f in "${HOME}"/.zsh/*.*sh; do
-    zrecompile -pq $f
+    zrecompile -pq "${f}"
   done
 ) &!
 

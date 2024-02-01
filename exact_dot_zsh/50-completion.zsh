@@ -16,25 +16,21 @@ run_compinit() {
   #   N - sets null_glob option (no error on 0 results)
   #   mh-20 - modified less than 20 hours ago
   ZSH_COMPDUMP="${HOME}/.zcompdump"
-  if [[ "$1" != "-f" ]] && [[ $ZSH_COMPDUMP(#qNmh-20) ]]; then
+  if [[ "$1" != "-f" ]] && [[ ${ZSH_COMPDUMP}(#qNmh-20) ]]; then
     # -C (skip function check) implies -i (skip security check).
-    compinit -C -d "$ZSH_COMPDUMP"
+    compinit -C -d "${ZSH_COMPDUMP}"
   else
-    compinit -i -d "$ZSH_COMPDUMP"
-    touch "$ZSH_COMPDUMP"
+    compinit -i -d "${ZSH_COMPDUMP}"
+    touch "${ZSH_COMPDUMP}"
   fi
 
-  # Compile zcompdump, if modified, in background to increase startup speed.
+  # Compile zcompdump, if modified, in background to increase startup speed
   {
-    local ZFILE=/tmp/zfile
-    touch "${ZFILE}"
-    if [[ -s "$ZSH_COMPDUMP" && \
-      (! -s "${ZSH_COMPDUMP}.zwc" || "$ZSH_COMPDUMP" -nt "${ZSH_COMPDUMP}.zwc") \
-      && ! -e ${ZFILE} ]]; then
+    if command mkdir "${ZSH_COMPDUMP}.zwc.lock" 2>/dev/null; then
       autoload -U zrecompile
-      zrecompile "$ZSH_COMPDUMP"
+      zrecompile -qp "${ZSH_COMPDUMP}"
+      command rmdir "${ZSH_COMPDUMP}.zwc.lock" 2>/dev/null
     fi
-    rm -f "${ZFILE}"
   } &!
 }
 
