@@ -104,6 +104,10 @@
     # Automatically correct and execute mistyped commands
     autocorrect = true
 
+[push]
+    ; automatically setup an upsteam tracking when you run git push from a new branch
+    autoSetupRemote = true
+
 [pull]
     # Preserve merges when you're rebasing against origin/BRANCH
     rebase = merges
