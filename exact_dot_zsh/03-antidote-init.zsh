@@ -25,4 +25,8 @@ fi
 source $zsh_plugins
 unset zsh_plugins
 
+# Make visible the comments
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[comment]='fg=#666B74'
+
 # vim:ft=zsh ts=2 sw=2 et:
