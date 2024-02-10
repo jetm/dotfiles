@@ -13,11 +13,13 @@
 # <DOWN>        => History search down for substring
 # <Ctrl+Z>      => Run fg
 # <Alt+A>       => Search for alias
-# <Alt+F>       => Search for functions
-# <Ctrl+F>      => Search for files
+# <Alt+F>       => Search for functions -- Disabled
+# <Ctrl+F>      => Grep in files
 # <Ctrl+T>      => Search in history
 # <Alt+S>       => Insert sudo word
-# <Alt+P>       => Call fzf
+# <Clrt+P>      => Seearch files
+# <Alt+D>       => Delete branch
+# <Ctrl+]>      => Clear screen and scrollback
 
 # <Ctrl+Right> => Forward word
 bindkey "^[[1;5C" forward-word
@@ -90,21 +92,21 @@ bindkey -M vicmd '^p' fzf-file-widget
 bindkey -M viins '^p' fzf-file-widget
 bindkey '^P' fzf-file-widget
 
-fzf-functions-widget() {
-  # shellcheck disable=SC2034
-  LBUFFER="$LBUFFER$(FZF_DEFAULT_COMMAND=
-    # ignore functions starting with "_ . +"
-    # shellcheck disable=SC2296
-    print -l "${(ok)functions[(I)[^_.+]*]}" |
-      fzf -q "$LBUFFER" --ansi --prompt=" Functions > "
-  )"
-
-  zle reset-prompt
-}
-zle -N fzf-functions-widget
+# fzf-functions-widget() {
+#   # shellcheck disable=SC2034
+#   LBUFFER="$LBUFFER$(FZF_DEFAULT_COMMAND=
+#     # ignore functions starting with "_ . +"
+#     # shellcheck disable=SC2296
+#     print -l "${(ok)functions[(I)[^_.+]*]}" |
+#       fzf -q "$LBUFFER" --ansi --prompt=" Functions > "
+#   )"
+#
+#   zle reset-prompt
+# }
+# zle -N fzf-functions-widget
 
 # <Alt+F>
-bindkey '^[f' fzf-functions-widget
+# bindkey '^[f' fzf-functions-widget
 
 _fzf-ripgrep_() {
 	RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
