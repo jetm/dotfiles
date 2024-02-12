@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 # Will be loaded in login shells after .zshenv and .zprofile
 
 # Execute code in the background to not affect the current session
