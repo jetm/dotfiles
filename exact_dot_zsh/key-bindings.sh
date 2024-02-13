@@ -229,6 +229,7 @@ clear_screen_and_scrollback() {
     zle -R
     printf '%b' '\e[3J' >"$TTY"
     echoti cnorm >"$TTY"
+    reset
 }
 
 zle -N clear_screen_and_scrollback
