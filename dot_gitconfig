@@ -135,6 +135,10 @@
 
     # Moved lines of code are colored differently
     colorMoved = default
+    colorMovedWS = allow-indentation-change
+
+    # Extends patience algorithm to support low-occurrence common elements
+    algorithm = histogram
 
 [status]
     # submodule summary will be enabled and a summary of commits for modified
