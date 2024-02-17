@@ -184,6 +184,20 @@
     lineNumber = true
     patternType = perl
 
+[log]
+    # display dates as 2023-05-25 13:54:51 instead of Thu May 25 13:54:51 2023
+    date = iso
+
+# Avoid data corruption
+[transfer]
+    fsckobjects = true
+
+[fetch]
+    fsckobjects = true
+
+[receive]
+    fsckObjects = true
+
 #
 # delta
 #
