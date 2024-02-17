@@ -87,6 +87,13 @@
     # Pull, Rebase, Origin Main branch
     prom = "!git pull --rebase origin $(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)"
 
+[core]
+    editor = nvim
+
+# Global gitignore
+[core]
+    excludesfile = ~/.gitignore
+
 [i18n]
     # Character encoding the commit messages are converted to when running git
     # log and friends
@@ -208,18 +215,12 @@
 #
 # nvim
 #
-[core]
-    editor = nvim
 [diff]
     tool = nvimdiff
 [difftool "nvimdiff"]
     cmd = nvim -c \"DiffviewOpen\"
 [difftool]
     prompt = false
-
-# Global gitignore
-[core]
-    excludesfile = ~/.gitignore
 
 [sequence]
     editor = interactive-rebase-tool
