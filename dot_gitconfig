@@ -205,8 +205,7 @@
     diffFilter = delta --color-only
 
 [core]
-    # delta --side-by-side -w $COLUMNS;                            \
-    # delta --side-by-side -w $FZF_PREVIEW_COLUMNS;                \
+    # Change to difft when it supports to act as pager
     pager = "{                                                           \
         COLUMNS=$(tput cols);                                            \
         if [ $COLUMNS -ge 80 ] && [ -z $FZF_PREVIEW_COLUMNS ]; then      \
@@ -227,18 +226,21 @@
     tabs = 2
 
 [pager]
-    # Workaround for https://github.com/dandavison/delta/issues/1259
-    grep = diff-so-fancy | less --tabs=2 -RFX
+    difftool = true
 
 #
-# nvim
+# diff tools
 #
-[diff]
-    tool = nvimdiff
-[difftool "nvimdiff"]
-    cmd = nvim -c \"DiffviewOpen\"
 [difftool]
     prompt = false
+
+; difftastic diff tool
+[diff]
+    tool = difftastic
+    ; Wait for more features
+    ; external = difft
+[difftool "difftastic"]
+    cmd = difft "$LOCAL" "$REMOTE"
 
 [sequence]
     editor = interactive-rebase-tool
