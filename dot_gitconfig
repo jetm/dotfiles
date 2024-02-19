@@ -90,8 +90,7 @@
 [core]
     editor = nvim
 
-# Global gitignore
-[core]
+    # Global gitignore
     excludesfile = ~/.gitignore
 
 [i18n]
@@ -122,6 +121,7 @@
 [fetch]
     # Always prune when fetching and pulling
     prune = true
+    prunetags = true
 
 [branch]
     # Rebase against tracking branch
