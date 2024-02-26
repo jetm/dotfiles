@@ -2,11 +2,12 @@
 "$schema" = "https://starship.rs/config-schema.json"
 
 # append newlines to command outputs
-add_newline = true
+add_newline = false
 
 # custom format
 format = """
 $directory\
+$container\
 $git_branch\
 $git_commit\
 $git_state\
@@ -21,21 +22,27 @@ $jobs\
 $status\
 $character"""
 
-# prompt chars
-[character]
-success_symbol = "[❯](bold green)"
-error_symbol = "[❯](bold red)"
-vimcmd_symbol = "[❮](bold green)"
-vimcmd_replace_one_symbol = "[❮](bold yellow)"
-vimcmd_replace_symbol = "[❮](bold yellow)"
-vimcmd_visual_symbol = "[❮](bold cyan)"
+[git_branch]
+style = '#D7AF00'
+symbol = ' '
+format = '[$symbol$branch(:$remote_branch)]($style) '
 
 [git_status]
-diverged = '↑$ahead_count↓$behind_count'
-conflicted = '$count'
-ahead = "⇡${count}"
-behind = "⇣${count}"
+style = '#D7AF00'
+format = '([❲${all_status}${ahead_behind}❳](${style}) )'
+conflicted = ' ${count} '
+up_to_date = '󰘽 '
+untracked = '󰋗 ${count} '
+ahead = ' ${count}'
+diverged = ' ${ahead_count}  ${behind_count}'
+behind = ' count}'
+stashed = ' ${count} '
+modified = '󰛿 ${count} '
+staged = '󰐗 ${count} '
+renamed = '󱍸 ${count} '
+deleted = '󰍶 ${count} '
 
 [directory]
+style = '#00AFFF'
 truncation_length = 10
 truncate_to_repo = false

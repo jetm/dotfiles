@@ -1,7 +1,7 @@
 #
 # .zsh_plugins.txt - antidote plugins file
 #
-romkatv/powerlevel10k kind:fpath
+# romkatv/powerlevel10k kind:fpath
 jeffreytse/zsh-vi-mode
 
 sorin-ionescu/prezto path:modules/environment

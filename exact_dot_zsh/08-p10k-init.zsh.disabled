@@ -1,4 +1,6 @@
 # powerlevel10k
+export POWERLEVEL9K_DISABLE_GITSTATUS=true
+
 [[ ! -f "${HOME}"/.p10k.zsh ]] || source "${HOME}"/.p10k.zsh
 
 autoload -Uz promptinit && promptinit && prompt powerlevel10k
