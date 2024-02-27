@@ -8,6 +8,7 @@ add_newline = false
 format = """
 $directory\
 $container\
+$python\
 $git_branch\
 $git_commit\
 $git_state\
@@ -21,6 +22,18 @@ $line_break\
 $jobs\
 $status\
 $character"""
+
+[directory]
+style = '#00AFFF'
+truncation_length = 10
+truncate_to_repo = false
+
+[python]
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+symbol = "󰌠 "
+python_binary = "python3"
+detect_files = []
+detect_extensions = []
 
 [git_branch]
 style = '#D7AF00'
@@ -41,8 +54,3 @@ modified = '󰛿 ${count} '
 staged = '󰐗 ${count} '
 renamed = '󱍸 ${count} '
 deleted = '󰍶 ${count} '
-
-[directory]
-style = '#00AFFF'
-truncation_length = 10
-truncate_to_repo = false
