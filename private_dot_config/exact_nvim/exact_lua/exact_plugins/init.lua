@@ -638,7 +638,7 @@ return {
         zsh = { "shellcheck" },
         bats = { "shellcheck" },
         lua = { "luacheck" },
-        yaml = { "yamlfmt" },
+        yaml = { "yamllint" },
       }
     end,
   },

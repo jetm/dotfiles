@@ -1,14 +1,18 @@
 return function(_, _)
-  -- Install formatters
+  -- Install formatters and linters
   require("mason").setup({
     opts = {
       ensure_installed = {
-        "shellcheck",
-        "luacheck",
-        "shellharden",
+        -- Formatters
         "shfmt",
         "stylua",
         "yamlfmt",
+        "yamllint",
+
+        -- Linters
+        "shellcheck",
+        "luacheck",
+        "shellharden",
       },
     },
     config = function(_, opts)
@@ -33,6 +37,7 @@ return function(_, _)
   -- Install LSP servers
   require("mason-lspconfig").setup({
     ensure_installed = {
+      -- Language servers
       "bashls",
       "clangd",
       "dockerls",
