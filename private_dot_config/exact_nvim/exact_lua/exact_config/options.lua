@@ -2,8 +2,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-O = vim.opt -- to set options
+vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 
+O = vim.opt -- to set options
 --
 -- moving around, search and patterns
 --

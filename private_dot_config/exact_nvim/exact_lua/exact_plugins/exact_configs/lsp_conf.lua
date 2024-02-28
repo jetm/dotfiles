@@ -174,13 +174,6 @@ return function(_, _)
     end
   end
 
-  local lspkind = require("lspkind")
-  lspkind.init({
-    symbol_map = {
-      Codeium = "",
-    },
-  })
-
   local luasnip = require("luasnip")
 
   -- Must setup `cmp` after lsp-zero
@@ -285,7 +278,13 @@ return function(_, _)
       },
     }),
     formatting = {
-      format = lspkind.cmp_format({ with_text = false }),
+      format = function(_, item)
+        local icons = yet.icons.kinds
+        if icons[item.kind] then
+          item.kind = icons[item.kind] .. item.kind
+        end
+        return item
+      end,
     },
   })
 end

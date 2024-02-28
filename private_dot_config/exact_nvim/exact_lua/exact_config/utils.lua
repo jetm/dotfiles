@@ -48,9 +48,7 @@ function yet.mason_update_all()
           pkg:check_new_version(function(update_available, version)
             if update_available then
               updated = true
-              mason_notify(
-                ("Updating `%s` to %s"):format(pkg.name, version.latest_version)
-              )
+              mason_notify(("Updating `%s` to %s"):format(pkg.name, version.latest_version))
               pkg:install():on("closed", function()
                 running = running - 1
                 if running == 0 then
@@ -71,10 +69,7 @@ function yet.mason_update_all()
         end
       end
     else
-      mason_notify(
-        ("Failed to update registries: %s"):format(updated_registries),
-        vim.log.levels.ERROR
-      )
+      mason_notify(("Failed to update registries: %s"):format(updated_registries), vim.log.levels.ERROR)
     end
   end))
 end
@@ -82,10 +77,54 @@ end
 function yet.custom_fold_text()
   local line = vim.fn.getline(vim.v.foldstart)
 
-  return "   "..line
+  return "   " .. line
 end
 
 local cmd = vim.api.nvim_create_user_command
 cmd("MasonUpdateAll", function()
   yet.mason_update_all()
 end, { desc = "Update Mason Packages" })
+
+yet.icons = {
+  kinds = {
+    Array = " ",
+    Boolean = "󰨙 ",
+    Class = " ",
+    Codeium = "󰘦 ",
+    Color = " ",
+    Control = " ",
+    Collapsed = " ",
+    Constant = "󰏿 ",
+    Constructor = " ",
+    Copilot = " ",
+    Enum = " ",
+    EnumMember = " ",
+    Event = " ",
+    Field = " ",
+    File = " ",
+    Folder = " ",
+    Function = "󰊕 ",
+    Interface = " ",
+    Key = " ",
+    Keyword = " ",
+    Method = "󰊕 ",
+    Module = " ",
+    Namespace = "󰦮 ",
+    Null = " ",
+    Number = "󰎠 ",
+    Object = " ",
+    Operator = " ",
+    Package = " ",
+    Property = " ",
+    Reference = " ",
+    Snippet = " ",
+    String = " ",
+    Struct = "󰆼 ",
+    TabNine = "󰏚 ",
+    Text = " ",
+    TypeParameter = " ",
+    Unit = " ",
+    Value = " ",
+    Variable = "󰀫 ",
+  },
+}

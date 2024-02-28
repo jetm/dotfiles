@@ -31,13 +31,13 @@ return {
   },
 
   -- measure startuptime
-  {
-    "dstein64/vim-startuptime",
-    cmd = "StartupTime",
-    config = function()
-      vim.g.startuptime_tries = 10
-    end,
-  },
+  -- {
+  --   "dstein64/vim-startuptime",
+  --   cmd = "StartupTime",
+  --   config = function()
+  --     vim.g.startuptime_tries = 10
+  --   end,
+  -- },
 
   -- Markdown support
   -- Generate table of contents for Markdown files
@@ -370,18 +370,36 @@ return {
         numbers = function(opts)
           return string.format("%s", opts.ordinal)
         end,
+        offsets = {
+          {
+            filetype = "neo-tree",
+            text = "Neo-tree",
+            highlight = "Directory",
+            text_align = "left",
+          },
+        },
       },
     },
   },
 
   -- status line
   -- lualine has better structure and theme, it's more like spaceline
-  -- heirline lacks of onedark color scheme
+  -- heirline needs more work. Test it later
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = require("plugins.configs.lualine_conf"),
+    dependencies = { "nvim-tree/nvim-web-devicons", "meuter/lualine-so-fancy.nvim" },
+    init = function()
+      vim.g.lualine_laststatus = vim.o.laststatus
+      if vim.fn.argc(-1) > 0 then
+        -- set an empty statusline till lualine loads
+        vim.o.statusline = " "
+      else
+        -- hide the statusline on the starter page
+        vim.o.laststatus = 0
+      end
+    end,
+    opts = require("plugins.configs.lualine_conf"),
   },
 
   -- Indent guides on blank lines for Neovim
@@ -725,9 +743,6 @@ return {
 
       -- Snippets
       { "L3MON4D3/LuaSnip" },
-
-      -- UI
-      { "onsails/lspkind.nvim" },
     },
     config = require("plugins.configs.lsp_conf"),
   },
