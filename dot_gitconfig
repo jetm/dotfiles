@@ -21,6 +21,9 @@
 [safe]
     directory = *
 
+[init]
+    defaultBranch = main
+
 [alias]
     # Print the name of the current branch
     current = symbolic-ref --short HEAD
