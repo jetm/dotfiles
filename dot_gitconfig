@@ -130,6 +130,9 @@
     # Rebase against tracking branch
     autoSetupRebase = always
 
+    # Sort branch by the commit date
+    sort = -committerdate
+
 [diff]
     # Specify the format in which differences in submodules are shown. The
     # "log" format lists the commits in the range like git-submodule summary
