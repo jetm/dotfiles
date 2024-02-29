@@ -47,6 +47,7 @@ map("n", "<leader>g", "<CMD>FzfxLiveGrep cword<CR>", { desc = "Live Grep word un
 
 -- Telescope mapping
 map("n", "<C-p>", "<CMD>Telescope find_files<CR>", { desc = "Find files" })
+map("n", "<C-S-p>", "<CMD>Telescope frecency workspace=CWD<CR>", { desc = "Find files" })
 
 -- BufferLine mapping
 for i = 1, 9 do

@@ -612,6 +612,14 @@ return {
     config = require("plugins.configs.telescope_conf"),
   },
 
+  -- A telescope.nvim extension that offers intelligent prioritization when selecting files from your editing history
+  {
+    "nvim-telescope/telescope-frecency.nvim",
+    config = function()
+      require("telescope").load_extension("frecency")
+    end,
+  },
+
   {
     "linrongbin16/fzfx.nvim",
     event = { "BufReadPost", "BufNewFile" },
