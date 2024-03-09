@@ -21,13 +21,14 @@ alias l='ls --all --long --header --git'
 # General
 alias e='nvim'
 alias vimdiff='nvim -d'
-alias up='bd 1'
+alias up='bd'
+alias ..='cd ../'
 alias cd-='cd -'
 alias df='duf'
 alias bbk='bitbake'
 alias pacdiff="DIFFPROG='nvim -d' pacdiff -s"
-
 alias zprofrc="ZPROFRC=1 zsh"
+alias fix=fuck
 
 #
 # Git
