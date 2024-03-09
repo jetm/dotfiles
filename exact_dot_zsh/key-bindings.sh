@@ -8,7 +8,7 @@
 # <Ctrl+Right>  => Forward word
 # <Ctrl+Left>   => Backward word
 # <Ctrl+E>      => Edit command in $EDITOR
-# <Ctrl+V>      => Paste from system clipboard
+# <Ctrl+V>      => Paste from system clipboard -- Disabled
 # <UP>          => History search up for substring
 # <DOWN>        => History search down for substring
 # <Ctrl+Z>      => Run fg
@@ -16,7 +16,7 @@
 # <Alt+F>       => Search for functions -- Disabled
 # <Ctrl+F>      => Grep in files
 # <Ctrl+T>      => Search in history
-# <Alt+S>       => Insert sudo word
+# <Alt+S>       => Insert sudo word -- Disabled
 # <Clrt+P>      => Seearch files
 # <Alt+D>       => Delete branch
 # <Ctrl+]>      => Clear screen and scrollback
@@ -146,8 +146,7 @@ exit_zsh() {
 }
 zle -N exit_zsh
 
-# pressing CTRL-D will not close zsh
-# if there's a text filled this one fixes it
+# Make sure to always close zsh
 bindkey '^D' exit_zsh
 
 # ls automatically after cd and git status if on a git repo
@@ -171,16 +170,16 @@ function cd () {
 }
 
 # Insert sudo at the beggining of the line
-function insert_sudo() {
-  BUFFER="sudo $BUFFER"
-  zle end-of-line;
-}
-zle -N insert_sudo
+# function insert_sudo() {
+#   BUFFER="sudo $BUFFER"
+#   zle end-of-line;
+# }
+# zle -N insert_sudo
 
 # <Alt+S>
-bindkey '^[s' insert_sudo
-bindkey -M vicmd '^[s' insert_sudo
-bindkey -M viins '^[s' insert_sudo
+# bindkey '^[s' insert_sudo
+# bindkey -M vicmd '^[s' insert_sudo
+# bindkey -M viins '^[s' insert_sudo
 
 # Delete Git branch
 function forgit_delete_branch() {
@@ -203,7 +202,7 @@ bindkey -M viins '^p' fzf-file-widget
 bindkey '^P' fzf-file-widget
 
 # Insert a last word
-bindkey -M viins '^[n' insert-last-word
+bindkey -M viins '\e.' insert-last-word
 
 # Iterate through arguments Ctrl + [ + ] (N times)
 autoload -Uz copy-earlier-word
@@ -220,7 +219,7 @@ zle -N custom_clear_screen
 # Conflict with Ctrl+l to change Kitty windows
 bindkey '^n' custom_clear_screen
 
-bindkey '^x' create_completion
+# bindkey '^x' create_completion
 
 clear_screen_and_scrollback() {
     echoti civis >"$TTY"
