@@ -27,6 +27,7 @@ list_path() { echo "${PATH//:/\\n}"; }
 typeset -gU cdpath fpath path
 
 add_path "${HOME}"/.local/bin
+add_path /opt/llvm/bin
 # add_path "${HOME}"/go/bin
 # add_path "${HOME}"/.cabal/bin
 # add_path "${HOME}"/.poetry/bin
@@ -49,10 +50,6 @@ add_path "${HOME}"/bin
 
 if command -v ccache &> /dev/null; then
   add_path /usr/lib/ccache/bin
-fi
-
-if [ -d "/opt/clang/latest/bin" ]; then
-  add_path /opt/clang/latest/bin
 fi
 
 unset _distro
