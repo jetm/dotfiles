@@ -60,7 +60,7 @@ unfunction add_path
 #
 export SSTATE_DIR="${HOME}"/repos/work/cache/sstate
 export DL_DIR="${HOME}"/repos/work/cache/downloads
-export NPROC=$(nproc)
+export NPROC=$(($(nproc)+1))
 
 #
 # Editor
