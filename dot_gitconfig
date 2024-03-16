@@ -44,7 +44,7 @@
     newp = "!f() { git log ${1}@{1}..${1}@{0} \"$@\"; }; f"
 
     # Update local repo and all submodules
-    spull = "!__git_spull() { git pull \"$@\" && \
+    pull-submodules = "!__git_spull() { git pull \"$@\" && \
         git submodule sync --recursive && \
         git submodule update --init --recursive; }; __git_spull"
 
@@ -111,7 +111,7 @@
 
 [help]
     # Automatically correct and execute mistyped commands
-    autocorrect = true
+    autocorrect = 1
 
 [push]
     # automatically setup an upsteam tracking when you run git push from a new branch
