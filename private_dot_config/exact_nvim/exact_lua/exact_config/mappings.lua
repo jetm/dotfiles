@@ -43,7 +43,7 @@ map({ "x", "o" }, "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev sear
 map({ "i" }, "<C-z>", "<Esc><C-z>", { desc = "Close editor to background" })
 
 -- Live Grep
-map("n", "<leader>g", "<CMD>FzfxLiveGrep cword<CR>", { desc = "Live Grep word under cursor" })
+map("n", "<leader>g", "<CMD>FzfxLiveGrep cword<CR>", {silent = true, noremap = true, desc = "Live Grep word under cursor" })
 
 -- Telescope mapping
 map("n", "<C-p>", "<CMD>Telescope find_files<CR>", { desc = "Find files" })
