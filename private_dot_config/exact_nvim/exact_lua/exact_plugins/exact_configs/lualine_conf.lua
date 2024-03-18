@@ -5,28 +5,10 @@ return function(_, _)
     return ("%s: %s"):format(indent_type, indent_size)
   end
 
-  local function root_dir()
-    local rootdir
-    for dir in vim.fs.parents(vim.api.nvim_buf_get_name(0)) do
-      if vim.fn.isdirectory(dir .. "/.git") == 1 then
-        rootdir = dir
-        break
-      end
-    end
-
-    if rootdir then
-      return "󰉖 /" .. vim.fs.basename(rootdir)
-    else
-      return ""
-    end
-  end
-
   local lualine_require = require("lualine_require")
   lualine_require.require = require
 
   vim.o.laststatus = vim.g.lualine_laststatus
-
-  local util_lualine = require("config.lualine")
 
   return {
     options = {
@@ -36,14 +18,20 @@ return function(_, _)
     },
     sections = {
       lualine_a = { { "fancy_mode", width = 3 } },
-      lualine_b = { { "fancy_branch" } },
+      lualine_b = { { "branch" } },
 
       lualine_c = {
         { "fancy_lsp_servers" },
-        root_dir,
         { "fancy_diagnostics" },
         { "fancy_filetype" },
-        { util_lualine.pretty_path() },
+        { "ex.cwd" },
+        {
+          "ex.relative_filename",
+          shorten = {
+            -- count of letters, which will be taken from every part of the path
+            lenght = 1,
+          },
+        },
       },
 
       lualine_x = {
@@ -66,7 +54,6 @@ return function(_, _)
             local ret, _ = (vim.bo.fenc or vim.go.enc):gsub("^utf%-8$", "")
             return ret
           end,
-          padding = { left = 0, right = 1 },
         },
         {
           -- fileformat: Don't display if unix
@@ -74,14 +61,16 @@ return function(_, _)
             local ret, _ = vim.bo.fileformat:gsub("^unix$", "")
             return ret
           end,
-          padding = { left = 0, right = 1 },
         },
       },
 
       lualine_y = {
         indent_size,
-        { "progress", separator = " ", padding = { left = 1, right = 0 } },
-        { "fancy_location", padding = { left = 0, right = 1 } },
+      },
+
+      lualine_z = {
+        { "ex.progress" },
+        { "ex.location", pattern = "%3L:%-2C" },
       },
     },
     extensions = { "neo-tree" },

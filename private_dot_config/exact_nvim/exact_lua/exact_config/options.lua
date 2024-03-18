@@ -120,7 +120,7 @@ O.virtualedit = "block" -- allow going past end of line in visual block mode
 -- fold
 --
 O.foldcolumn = "1"
-O.foldtext = "v:lua.yet.custom_fold_text()"
+O.foldtext = "v:lua.yet._custom_fold_text()"
 
 -- Required by Obisidian-nvim
 O.conceallevel = 2

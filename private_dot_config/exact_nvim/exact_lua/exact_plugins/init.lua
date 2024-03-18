@@ -388,7 +388,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    dependencies = { "nvim-tree/nvim-web-devicons", "meuter/lualine-so-fancy.nvim" },
+    dependencies = { "nvim-tree/nvim-web-devicons", "meuter/lualine-so-fancy.nvim", "dokwork/lualine-ex" },
     init = function()
       vim.g.lualine_laststatus = vim.o.laststatus
       if vim.fn.argc(-1) > 0 then

@@ -15,18 +15,18 @@ function yet.debug(...)
 end
 
 --- Serve a notification
-function yet.notify(msg, type, opts)
+function yet._notify(msg, type, opts)
   vim.schedule(function()
     vim.notify(msg, type, opts)
   end)
 end
 
 local function mason_notify(msg, type)
-  yet.notify(msg, type, { title = "Mason" })
+  yet._notify(msg, type, { title = "Mason" })
 end
 
 --- Update all packages in Mason
-function yet.mason_update_all()
+function yet._mason_update_all()
   local registry_avail, registry = pcall(require, "mason-registry")
   if not registry_avail then
     vim.api.nvim_err_writeln("Unable to access mason registry")
@@ -74,7 +74,7 @@ function yet.mason_update_all()
   end))
 end
 
-function yet.custom_fold_text()
+function yet._custom_fold_text()
   local line = vim.fn.getline(vim.v.foldstart)
 
   return "   " .. line
@@ -82,7 +82,7 @@ end
 
 local cmd = vim.api.nvim_create_user_command
 cmd("MasonUpdateAll", function()
-  yet.mason_update_all()
+  yet._mason_update_all()
 end, { desc = "Update Mason Packages" })
 
 yet.icons = {
