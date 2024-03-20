@@ -727,13 +727,23 @@ return {
   {
     "VonHeikemen/lsp-zero.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    branch = "v2.x",
+    branch = "v3.x",
     dependencies = {
       {
         "neovim/nvim-lspconfig",
       },
       { "williamboman/mason.nvim" },
       { "williamboman/mason-lspconfig.nvim" },
+
+      -- A more complete solution for make an IDE
+      -- {
+      --   "ray-x/navigator.lua",
+      --   dependencies = {
+      --     { "ray-x/guihua.lua", build = "cd lua/fzy && make" },
+      --     { "neovim/nvim-lspconfig" },
+      --     { "nvim-treesitter/nvim-treesitter" },
+      --   },
+      -- },
 
       -- Completation engine
       { "hrsh7th/nvim-cmp" },
@@ -743,7 +753,6 @@ return {
       { "hrsh7th/cmp-buffer" },
       { "lukas-reineke/cmp-rg" },
       { "FelipeLema/cmp-async-path" },
-      { "antznin/cmp-bitbake-path" },
       {
         "f3fora/cmp-spell",
         ft = { "gitcommit", "markdown" },

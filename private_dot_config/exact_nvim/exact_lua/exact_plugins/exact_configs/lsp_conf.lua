@@ -34,6 +34,16 @@ return function(_, _)
     end,
   })
 
+  local lsp_zero = require("lsp-zero")
+
+  lsp_zero.on_attach(function(client, bufnr)
+    -- see :help lsp-zero-keybindings
+    -- to learn the available actions
+    lsp_zero.default_keymaps({buffer = bufnr})
+  end)
+
+  local lspconfig = require("lspconfig")
+
   -- Install LSP servers
   require("mason-lspconfig").setup({
     ensure_installed = {
@@ -46,124 +56,106 @@ return function(_, _)
       "ruff_lsp",
       "yamlls",
     },
-  })
+    handlers = {
+      lsp_zero.default_setup,
 
-  vim.diagnostic.config({
-    virtual_text = false,
-    update_in_insert = true,
-    underline = true,
-    severity_sort = true,
-    float = {
-      focusable = true,
-      style = "minimal",
-      border = "rounded",
-      source = "always",
-      header = "",
-      prefix = "",
-    },
-  })
-
-  local lspconfig = require("lspconfig")
-  local lsp_defaults = lspconfig.util.default_config
-
-  lsp_defaults.capabilities =
-    vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
-
-  lspconfig.lua_ls.setup({
-    settings = {
-      Lua = {
-        diagnostics = {
-          -- Required to fix vim global warning
-          -- Get the language server to recognize the `vim` global
-          globals = {
-            "vim",
-            "require",
+      lua_ls = function()
+        lspconfig.lua_ls.setup({
+          settings = {
+            Lua = {
+              diagnostics = {
+                -- Required to fix vim global warning
+                -- Get the language server to recognize the `vim` global
+                globals = {
+                  "vim",
+                  "require",
+                },
+              },
+              format = { enable = false },
+              completion = {
+                callSnippet = "Replace",
+              },
+              workspace = {
+                checkThirdParty = false,
+              },
+              telemetry = { enable = false },
+            },
           },
-        },
-        format = { enable = false },
-        completion = {
-          callSnippet = "Replace",
-        },
-        workspace = {
-          checkThirdParty = false,
-        },
-        telemetry = { enable = false },
-      },
+        })
+      end,
+
+      clangd = function()
+        lspconfig.clangd.setup({
+          root_dir = function(fname)
+            return require("lspconfig.util").root_pattern(
+              "Makefile",
+              "configure.ac",
+              "configure.in",
+              "config.h.in",
+              "meson.build",
+              "meson_options.txt",
+              "build.ninja"
+            )(fname) or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(
+              fname
+            ) or require("lspconfig.util").find_git_ancestor(fname)
+          end,
+          cmd = {
+            "clangd",
+            "--background-index",
+            "--clang-tidy",
+            "--header-insertion=iwyu",
+            "--completion-style=detailed",
+            "--function-arg-placeholders",
+            "--fallback-style=llvm",
+          },
+          init_options = {
+            usePlaceholders = true,
+            completeUnimported = true,
+            clangdFileStatus = true,
+          },
+        })
+      end,
+
+      yamlls = function()
+        lspconfig.yamlls.setup({
+          settings = {
+            redhat = { telemetry = { enabled = false } },
+            yaml = {
+              format = { enable = false },
+              keyOrdering = false,
+              completion = true,
+              validate = { enable = true },
+              schemaStore = {
+                -- Must disable built-in schemaStore support to use
+                -- schemas from SchemaStore.nvim plugin
+                enable = false,
+                -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                url = "",
+              },
+              schemas = require("schemastore").yaml.schemas(),
+            },
+          },
+        })
+      end,
+
+      jsonls = function()
+        lspconfig.jsonls.setup({
+          settings = {
+            jsonls = {
+              format = { enable = false },
+              validate = { enable = true },
+              schemaStore = {
+                -- Must disable built-in schemaStore support to use
+                -- schemas from SchemaStore.nvim plugin
+                enable = false,
+              },
+              schemas = require("schemastore").yaml.schemas(),
+            },
+          },
+        })
+      end,
     },
   })
-
-  lspconfig.jsonls.setup({
-    settings = {
-      jsonls = {
-        format = { enable = false },
-        validate = { enable = true },
-        schemaStore = {
-          -- Must disable built-in schemaStore support to use
-          -- schemas from SchemaStore.nvim plugin
-          enable = false,
-        },
-        schemas = require("schemastore").yaml.schemas(),
-      },
-    },
-  })
-
-  lspconfig.yamlls.setup({
-    settings = {
-      redhat = { telemetry = { enabled = false } },
-      yaml = {
-        format = { enable = false },
-        keyOrdering = false,
-        completion = true,
-        validate = { enable = true },
-        schemaStore = {
-          -- Must disable built-in schemaStore support to use
-          -- schemas from SchemaStore.nvim plugin
-          enable = false,
-          -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
-          url = "",
-        },
-        schemas = require("schemastore").yaml.schemas(),
-      },
-    },
-  })
-
-  lspconfig.clangd.setup({
-    root_dir = function(fname)
-      return require("lspconfig.util").root_pattern(
-        "Makefile",
-        "configure.ac",
-        "configure.in",
-        "config.h.in",
-        "meson.build",
-        "meson_options.txt",
-        "build.ninja"
-      )(fname) or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(fname) or require(
-        "lspconfig.util"
-      ).find_git_ancestor(fname)
-    end,
-    cmd = {
-      "clangd",
-      "--background-index",
-      "--clang-tidy",
-      "--header-insertion=iwyu",
-      "--completion-style=detailed",
-      "--function-arg-placeholders",
-      "--fallback-style=llvm",
-    },
-    init_options = {
-      usePlaceholders = true,
-      completeUnimported = true,
-      clangdFileStatus = true,
-    },
-  })
-  local lsp = require("lsp-zero").preset({})
-
-  lsp.on_attach(function(_, bufnr)
-    lsp.default_keymaps({ buffer = bufnr })
-  end)
-
-  -- Configure lua language server for neovim
-  lsp.setup()
 
   local function check_back_space()
     local col = vim.fn.col(".") - 1
@@ -185,8 +177,10 @@ return function(_, _)
         luasnip.lsp_expand(args.body)
       end,
     },
-    window = {
-      documentation = cmp.config.window.bordered(),
+    performance = {
+      trigger_debounce_time = 500,
+      throttle = 550,
+      fetching_timeout = 80,
     },
     mapping = {
       -- `Enter` key to confirm completion
@@ -227,12 +221,12 @@ return function(_, _)
       end, { "i", "s" }),
     },
     sources = cmp.config.sources({
-      { name = "nvim_lsp", priority = 1250, max_item_count = 5 },
-      { name = "luasnip", priority = 1000, max_item_count = 5 },
+      { name = "nvim_lsp", priority = 70, max_item_count = 5 },
+      { name = "luasnip", priority = 60, max_item_count = 5 },
       {
         name = "buffer",
+        priority = 50,
         max_item_count = 5,
-        priority = 750,
         option = {
           get_bufnrs = function()
             local LIMIT = 1024 * 1024 -- 1 Megabyte max
@@ -251,24 +245,20 @@ return function(_, _)
           end,
         },
       },
-      {
-        name = "codeium",
-        priority = 600,
-      },
+      { name = "codeium", priority = 40 },
       {
         name = "rg",
-        priority = 500,
+        priority = 30,
         keyword_length = 3,
         max_item_count = 5,
         option = {
           additional_arguments = "--smart-case",
         },
       },
-      { name = "async_path", priority = 250 },
-      { name = "bitbake_path", priority = 250 },
+      { name = "async_path", priority = 20 },
       {
         name = "spell",
-        priority = 100,
+        priority = 1,
         option = {
           keep_all_entries = false,
           enable_in_context = function()
@@ -287,4 +277,53 @@ return function(_, _)
       end,
     },
   })
+
+  vim.diagnostic.config({
+    virtual_text = false,
+    update_in_insert = true,
+    underline = true,
+    severity_sort = true,
+    float = {
+      focusable = true,
+      style = "minimal",
+      border = "rounded",
+      source = "always",
+      header = "",
+      prefix = "",
+    },
+  })
+
+  --
+  -- Has issues with neovim nightly
+  --
+  -- require("navigator").setup({
+  --   treesitter_navigation = false, -- bool|table false: use lsp to navigate between symbol ']r/[r', table: a list of
+  --   transparency = 100,
+  --   lsp_signature_help = true, -- if you would like to hook ray-x/lsp_signature plugin in navigator
+  --   mason = true, -- set to true if you would like use the lsp installed by williamboman/mason
+  --   lsp = {
+  --     code_action = { enable = false, sign = false, virtual_text = false },
+  --     code_lens_action = { enable = false, sign = false, virtual_text = false },
+  --     document_highlight = true, -- LSP reference highlight,
+  --     -- it might already supported by you setup, e.g. LunarVim
+  --     format_on_save = false,
+  --     diagnostic = {
+  --       underline = true,
+  --       virtual_text = false, -- show virtual for diagnostic message
+  --       update_in_insert = false, -- update diagnostic message in insert mode
+  --       severity_sort = true,
+  --       float = {
+  --         focusable = false,
+  --         style = "minimal",
+  --         border = "rounded",
+  --         source = "always",
+  --         header = "",
+  --         prefix = "",
+  --       },
+  --     },
+  --     diagnostic_virtual_text = false,
+  --     diagnostic_update_in_insert = true,
+  --     display_diagnostic_qf = 'trouble',
+  --   },
+  -- })
 end
