@@ -1,0 +1,33 @@
+{
+  "include": "~/.config/hypr/waybar/modules",
+  "layer": "top",
+  "mod": "dock",
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  "height": 0,
+  "position": "top",
+  "spacing": 0,
+  "fixed-center": true,
+  "ipc": true,
+  "margin-left": 0,
+  "margin-right": 0,
+
+  "modules-left": ["hyprland/workspaces", "temperature", "cpu", "memory"],
+  "modules-right": ["hyprland/language", "network", "custom/padd", "pulseaudio", "tray", "clock"],
+
+// modules for padding //
+
+  "custom/bar": {
+    "format": "|",
+    "interval": "once",
+    "tooltip": false
+  },
+
+  "custom/padd": {
+      "format": " ",
+      "interval" : "once",
+      "tooltip": false
+  },
+
+}

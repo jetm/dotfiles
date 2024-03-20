@@ -1,0 +1,92 @@
+{
+
+  "hyprland/window": {
+     "format": "{}"
+  },
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "all-outputs": true,
+    "sort-by-number": true,
+    "format-icons": {
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "focused": "",
+      "default": ""
+    },
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+  },
+
+  "clock": {
+    "interval": 60,
+    "align": 0,
+    "rotate": 0,
+    "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": " {:%H:%M}",
+    "format": "{:%a %b %d, %G, %H:%M}",
+  },
+
+  "cpu": {
+    "format": " {usage}",
+    "interval": 1,
+  },
+
+  "memory": {
+    "interval": 10,
+    "format": "{used:0.1f}G/{total:0.1f}G ",
+  },
+
+  "network": {
+    "interval": 5,
+    "format-wifi": " ",
+    "format-ethernet": "󰈀 ",
+    "format-linked": "󰈀 {ifname} (No IP)",
+    "format-disconnected": "󰤭 Disconnected",
+    "format-disabled": "󰤭 Disabled",
+    "format-alt": " {bandwidthUpBits} |  {bandwidthDownBits}",
+    "tooltip-format": " {ifname} via {gwaddr}",
+    "on-click-right": "nmtui"
+  },
+
+  "custom/weather": {
+    "format": "{}",
+    "format-alt": "{alt}: {}",
+    "format-alt-click": "click-right",
+    "interval": 1800,
+    "return-type": "json",
+    "exec": "~/.config/hypr/scripts/weather.sh Heredia_Costa_Rica",
+    "exec-if": "ping wttr.in -c1"
+  },
+
+  "pulseaudio": {
+    // "format": "{icon} {volume} {format_source}",
+    "format": "{icon} {volume}",
+    "format-muted": " Mute",
+    "format-source": " {volume}",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "default": ["󰕿", "󰖀", "󰕾"]
+    },
+    "scroll-step": 5.0,
+    "on-click": "pavucontrol-qt",
+    "smooth-scrolling-threshold": 1,
+  },
+
+  "tray": {
+    "icon-size": 18,
+    "spacing": 6
+  },
+
+  "temperature": {
+      // "thermal-zone": 2,
+      // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+      "critical-threshold": 95,
+      "format": "{temperatureC}°C "
+  },
+}
