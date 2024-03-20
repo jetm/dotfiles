@@ -4,6 +4,7 @@
 	font-family: "Noto Sans";
 	font-size: 12px;
 	min-height: 10px;
+	color: #e0def4;
 }
 
 window#waybar {
@@ -12,7 +13,7 @@ window#waybar {
 
 tooltip {
 	border-radius: 10px;
-	/* background: #000000; */
+	background: #000000;
 	color: #cdd6f4;
 	border-radius: 7px;
 	border-width: 0px;
@@ -62,9 +63,9 @@ tooltip {
 #workspaces,
 #window,
 #temperature,
+#weather,
 #language,
 #network {
-	color: #e0def4;
 	/* background: #000000; */
 	opacity: 1;
 	margin: 3px 0px 3px 0px;

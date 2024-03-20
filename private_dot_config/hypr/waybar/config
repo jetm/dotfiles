@@ -13,8 +13,23 @@
   "margin-left": 0,
   "margin-right": 0,
 
-  "modules-left": ["hyprland/workspaces", "temperature", "cpu", "memory"],
-  "modules-right": ["hyprland/language", "network", "custom/padd", "pulseaudio", "tray", "clock"],
+  "modules-left": [
+    "hyprland/workspaces",
+    "temperature",
+    "cpu",
+    "memory",
+    "custom/padd",
+    "custom/weather"
+  ],
+
+  "modules-right": [
+    "hyprland/language",
+    "network",
+    "custom/padd",
+    "pulseaudio",
+    "tray",
+    "clock"
+  ],
 
 // modules for padding //
 
