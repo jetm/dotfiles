@@ -16,9 +16,9 @@ fi
 # SSH
 #
 # settings for systemd ssh-agent.service
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+# export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # Depends on prezto module ssh
-zstyle ':prezto:module:ssh:load' identities 'id_rsa'
+# zstyle ':prezto:module:ssh:load' identities 'id_rsa'
 
 # vim:set ts=2 sw=2 et:

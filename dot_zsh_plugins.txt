@@ -6,7 +6,7 @@ jeffreytse/zsh-vi-mode
 
 sorin-ionescu/prezto path:modules/environment
 sorin-ionescu/prezto path:modules/history
-sorin-ionescu/prezto path:modules/ssh kind:defer
+#sorin-ionescu/prezto path:modules/ssh kind:defer
 ohmyzsh/ohmyzsh path:plugins/extract kind:defer
 
 MenkeTechnologies/zsh-expand kind:defer
