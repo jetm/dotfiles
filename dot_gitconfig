@@ -209,6 +209,9 @@
     strategy = incremental
     repo = ${HOME}/repos/work/linux-stable
 
+[tag]
+    sort = version:refname
+
 #
 # delta
 #
