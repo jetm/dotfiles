@@ -24,7 +24,7 @@ tooltip {
 	padding-left: 10px;
 	padding-right: 10px;
 	color: #585b70;
-	/* background: #000000; */
+	background: #000000;
 	animation: gradient_f 20s ease-in infinite;
 	transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682);
 }
@@ -35,7 +35,7 @@ tooltip {
 	padding-right: 10px;
 	color: #e0def4;
 	color: #f6c177;
-	/* background: #000000; */
+	background: #000000;
 	animation: gradient_f 20s ease-in infinite;
 	transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
 }
@@ -46,7 +46,7 @@ tooltip {
 	padding-left: 10px;
 	padding-right: 10px;
 	color: #e0def4;
-	/* background: #000000; */
+	background: #000000;
 	animation: gradient_f 20s ease-in infinite;
 	transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
 }
@@ -66,14 +66,13 @@ tooltip {
 #weather,
 #language,
 #network {
-	/* background: #000000; */
-	opacity: 1;
+	background: #000000;
+	/* opacity: 1; */
 	margin: 3px 0px 3px 0px;
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-right: 0px;
 	margin-top: 4px;
-	/* margin-bottom: 2px; */
 }
 
 #window {
