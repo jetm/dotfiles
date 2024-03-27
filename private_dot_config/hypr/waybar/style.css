@@ -13,10 +13,10 @@ window#waybar {
 
 tooltip {
 	border-radius: 10px;
-	background: #000000;
 	color: #cdd6f4;
 	border-radius: 7px;
 	border-width: 0px;
+	background: rgba(0, 0, 0, 0.7);
 }
 
 #workspaces button {
@@ -24,9 +24,6 @@ tooltip {
 	padding-left: 10px;
 	padding-right: 10px;
 	color: #585b70;
-	background: #000000;
-	animation: gradient_f 20s ease-in infinite;
-	transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
 #workspaces button.active {
@@ -34,11 +31,8 @@ tooltip {
 	padding-left: 10px;
 	padding-right: 10px;
 	color: #e0def4;
-	color: #f6c177;
-	background: #000000;
-	animation: gradient_f 20s ease-in infinite;
-	transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
-}
+  animation: gradient_f 20s ease-in infinite;
+  transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);}
 
 #workspaces button:hover {
 	padding: 0px;
@@ -46,19 +40,13 @@ tooltip {
 	padding-left: 10px;
 	padding-right: 10px;
 	color: #e0def4;
-	background: #000000;
-	animation: gradient_f 20s ease-in infinite;
-	transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
-}
-
-#workspaces button.urgent {
-	color: #f38ba8;
+  animation: gradient_f 20s ease-in infinite;
+  transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
 #cpu,
 #memory,
 #clock,
-#tray,
 #pulseaudio,
 #workspaces,
 #window,
@@ -66,13 +54,16 @@ tooltip {
 #weather,
 #language,
 #network {
-	background: #000000;
-	/* opacity: 1; */
 	margin: 3px 0px 3px 0px;
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-right: 0px;
 	margin-top: 4px;
+}
+
+#tray menu {
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 1;
 }
 
 #window {

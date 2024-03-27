@@ -12,9 +12,12 @@
   "ipc": true,
   "margin-left": 0,
   "margin-right": 0,
+  "exclusive": "false",
+  "reload_style_on_change": true,
 
   "modules-left": [
     "hyprland/workspaces",
+    "wlr/taskbar",
     "temperature",
     "cpu",
     "memory",
@@ -28,6 +31,9 @@
     "custom/padd",
     "pulseaudio",
     "tray",
+    "custom/padd",
+    "custom/mako",
+    "custom/padd",
     "clock"
   ],
 

@@ -1,25 +1,28 @@
 {
 
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "tooltip-format": "{title}",
+    "ignore-list": [
+      "kitty"
+    ],
+  },
+
   "hyprland/window": {
-     "format": "{}"
+    "format": "{}",
+    "separate-outputs": true,
   },
 
   "hyprland/workspaces": {
+    "show-special": true,
     "format": "{icon}",
-    "on-click": "activate",
-    "all-outputs": true,
     "sort-by-number": true,
     "format-icons": {
-      "1": "1",
-      "2": "2",
-      "3": "3",
-      // "4": "4",
-      // "5": "5",
-      "focused": "",
-      "default": ""
+      "1": "󰲠 ",
+      "2": "󰲢 ",
+      "3": "󰲤 ",
+      "special": " ",
     },
-    "on-scroll-up": "hyprctl dispatch workspace e+1",
-    "on-scroll-down": "hyprctl dispatch workspace e-1",
   },
 
   "clock": {
@@ -88,5 +91,12 @@
       "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
       "critical-threshold": 95,
       "format": "{temperatureC}°C "
+  },
+
+ "custom/mako": {
+      "format": " ",
+      "on-click": "notify-send 'no disturb on' && sleep 1 && makoctl mode -a do-not-disturb",
+      "on-click-right": "makoctl mode -r do-not-disturb && sleep 1 && notify-send 'no disturb off'",
+      "on-click-middle": "makoctl restore",
   },
 }
