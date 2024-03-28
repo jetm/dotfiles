@@ -264,6 +264,9 @@
     # Gerrit username
     username = javier.tia
 
+[credential]
+    helper = /usr/lib/git-core/git-credential-libsecret
+
 [credential "https://gitlab.com"]
     helper =
     helper = !/usr/bin/glab auth git-credential
