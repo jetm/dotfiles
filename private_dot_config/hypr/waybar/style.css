@@ -1,8 +1,8 @@
 * {
 	border: none;
 	border-radius: 0px;
-	font-family: "Noto Sans";
-	font-size: 12px;
+	font-family: "IosevkaTerm Nerd Font Propo";
+	font-size: 13px;
 	min-height: 10px;
 	color: #e0def4;
 }
@@ -20,35 +20,59 @@ tooltip {
 }
 
 #workspaces button {
-	padding: 0px;
-	padding-left: 10px;
-	padding-right: 10px;
-	color: #585b70;
+    color:         @font;
+    padding:       0px 5px;
+    border-bottom: 4px solid transparent;
+}
+
+#workspaces button:hover {
+    color:         @font;
+    border-bottom: 4px dotted @font;
+    font-weight:   bold;
 }
 
 #workspaces button.active {
-	padding: 0px;
-	padding-left: 10px;
-	padding-right: 10px;
-	color: #e0def4;
-  animation: gradient_f 20s ease-in infinite;
-  transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);}
+    color:         @workspaces-button_active;
+    border-bottom: 3px solid @workspaces-button_active;
+}
 
-#workspaces button:hover {
-	padding: 0px;
-	border-radius: 5px;
-	padding-left: 10px;
-	padding-right: 10px;
-	color: #e0def4;
-  animation: gradient_f 20s ease-in infinite;
-  transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+#workspaces button.active:hover {
+    color:         @workspaces-button_active;
+    border-bottom: 4px dotted @workspaces-button_active;
+    font-weight:   bold;
+}
+
+#workspaces button.urgent {
+    color:         @workspaces-button_urgent;
+    border-bottom: 3px dotted @workspaces-button_urgent;
+    font-weight:   bold;
+    animation:     workspace-blinker 1s linear infinite;
+}
+
+#workspaces button.special {
+    color:         @font;
+    border-bottom: 3px dotted @font;
+    font-weight:   bold;
+}
+
+#workspaces button.special.active {
+    color:         @workspaces-button_special;
+    border-bottom: 3px dotted @workspaces-button_special;
+    font-weight:   bold;
+}
+
+@keyframes workspace-blinker {
+    50% {
+        color:        @font;
+        border-color: @font;
+        background:   @workspaces-button_urgent;
+    }
 }
 
 #cpu,
 #memory,
 #clock,
 #pulseaudio,
-#workspaces,
 #window,
 #temperature,
 #weather,

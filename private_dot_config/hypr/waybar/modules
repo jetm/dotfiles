@@ -30,7 +30,6 @@
     "align": 0,
     "rotate": 0,
     "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
-    //"format-alt": "{:%H:%M} ",
     "format": "{:%a %b %d, %G, %H:%M} ",
   },
 
@@ -68,12 +67,11 @@
   },
 
   "pulseaudio": {
-    "format": "{volume} {icon} {format_source}",
+    "format": "{volume}{icon} {format_source}",
     "format-muted": "Mute  ",
     "format-source": "{volume} ",
     "format-source-muted": " ",
     "format-icons": {
-      "headphone": "",
       "default": [" 󰕿 ", " 󰖀", " 󰕾"]
     },
     "scroll-step": 5.0,
@@ -82,12 +80,11 @@
   },
 
   "tray": {
-    "icon-size": 18,
+    "icon-size": 16,
     "spacing": 6
   },
 
   "temperature": {
-      // "thermal-zone": 2,
       "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
       "critical-threshold": 95,
       "format": "{temperatureC}°C "
