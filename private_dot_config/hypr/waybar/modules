@@ -96,4 +96,16 @@
       "on-click-right": "makoctl mode -r do-not-disturb && sleep 1 && notify-send 'no disturb off'",
       "on-click-middle": "makoctl restore",
   },
+
+  "custom/arch-updates": {
+     "format": "{} {icon}",
+     "return-type": "json",
+     "format-icons": {
+         "has-updates": "󱍷",
+         "updated": "󰂪"
+     },
+     "exec-if": "which waybar-module-pacman-updates",
+     "exec": "waybar-module-pacman-updates --interval-seconds 21600 --network-interval-seconds 300"
+  },
+
 }
