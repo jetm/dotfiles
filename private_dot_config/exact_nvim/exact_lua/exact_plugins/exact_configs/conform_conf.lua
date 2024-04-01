@@ -8,6 +8,7 @@ return function(_, _)
       zsh = { "shfmt", "shellharden" },
       bats = { "shfmt", "shellharden" },
       yaml = { "yamlfmt" },
+      css = { "prettier" },
     },
 
     format_on_save = false,

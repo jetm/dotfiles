@@ -1,5 +1,4 @@
 {
-
   "wlr/taskbar": {
     "format": "{icon}",
     "tooltip-format": "{title}",
@@ -7,12 +6,10 @@
       "kitty"
     ],
   },
-
   "hyprland/window": {
     "format": "{}",
     "separate-outputs": true,
   },
-
   "hyprland/workspaces": {
     "show-special": true,
     "format": "{icon}",
@@ -24,7 +21,6 @@
       "special": " ",
     },
   },
-
   "clock": {
     "interval": 60,
     "align": 0,
@@ -32,18 +28,14 @@
     "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
     "format": "{:%a %b %d, %G, %H:%M} ",
   },
-
   "cpu": {
     "format": "{usage}  ",
     "interval": 1,
-    "spacing": 6
   },
-
   "memory": {
     "interval": 10,
     "format": "{used:0.1f}G/{total:0.1f}G ",
   },
-
   "network": {
     "interval": 5,
     "format-wifi": " ",
@@ -55,7 +47,6 @@
     "tooltip-format": "{ifname} via {gwaddr} ",
     "on-click-right": "nm-connection-editor"
   },
-
   "custom/weather": {
     "format": "{}",
     "format-alt": "{alt}: {}",
@@ -65,47 +56,46 @@
     "exec": "${HOME}/.config/hypr/scripts/weather.sh Heredia_Costa_Rica",
     "exec-if": "ping wttr.in -c1"
   },
-
   "pulseaudio": {
     "format": "{volume}{icon} {format_source}",
     "format-muted": "Mute  ",
     "format-source": "{volume} ",
     "format-source-muted": " ",
     "format-icons": {
-      "default": [" 󰕿 ", " 󰖀", " 󰕾"]
+      "default": [
+        " 󰕿 ",
+        " 󰖀",
+        " 󰕾"
+      ]
     },
     "scroll-step": 5.0,
     "on-click": "pavucontrol-qt",
     "smooth-scrolling-threshold": 1,
   },
-
-  "tray": {
-    "icon-size": 16,
-    "spacing": 6
-  },
-
   "temperature": {
-      "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
-      "critical-threshold": 95,
-      "format": "{temperatureC}°C "
+    "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
+    "critical-threshold": 95,
+    "format": "{temperatureC}°C "
   },
-
- "custom/mako": {
-      "format": " ",
-      "on-click": "notify-send 'no disturb on' && sleep 1 && makoctl mode -a do-not-disturb",
-      "on-click-right": "makoctl mode -r do-not-disturb && sleep 1 && notify-send 'no disturb off'",
-      "on-click-middle": "makoctl restore",
+  "custom/mako": {
+    "format": " ",
+    "on-click": "notify-send 'no disturb on' && sleep 1 && makoctl mode -a do-not-disturb",
+    "on-click-right": "makoctl mode -r do-not-disturb && sleep 1 && notify-send 'no disturb off'",
+    "on-click-middle": "makoctl restore",
   },
-
   "custom/arch-updates": {
-     "format": "{} {icon}",
-     "return-type": "json",
-     "format-icons": {
-         "has-updates": "󱍷",
-         "updated": "󰂪"
-     },
-     "exec-if": "which waybar-module-pacman-updates",
-     "exec": "waybar-module-pacman-updates --interval-seconds 21600 --network-interval-seconds 300"
+    "format": "{} {icon}",
+    "return-type": "json",
+    "format-icons": {
+      "has-updates": "󱍷",
+      "updated": "󰂪"
+    },
+    "exec-if": "which waybar-module-pacman-updates",
+    "exec": "waybar-module-pacman-updates --interval-seconds 21600 --network-interval-seconds 300"
   },
-
+  "tray": {
+    "spacing": 5,
+  }
 }
+
+# vim:ft=json

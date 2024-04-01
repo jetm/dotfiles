@@ -8,6 +8,7 @@ return function(_, _)
         "stylua",
         "yamlfmt",
         "yamllint",
+        "prettier",
 
         -- Linters
         "shellcheck",
