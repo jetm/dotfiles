@@ -38,3 +38,5 @@ filter_rate=100
 ## Keys
 key_expand=Tab
 key_exit=Escape
+
+# vim:ft=cfg
