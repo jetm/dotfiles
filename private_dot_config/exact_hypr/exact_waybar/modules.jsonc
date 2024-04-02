@@ -49,12 +49,11 @@
   },
   "custom/weather": {
     "format": "{}",
-    "format-alt": "{alt}: {}",
-    "format-alt-click": "click-right",
+    "tooltip": true,
     "interval": 1800,
+    "exec": "wttrbar --location Heredia_Costa_Rica --custom-indicator '{ICON} {temp_C}°({FeelsLikeC}°)'",
     "return-type": "json",
-    "exec": "${HOME}/.config/hypr/scripts/weather.sh Heredia_Costa_Rica",
-    "exec-if": "ping wttr.in -c1"
+    "exec-if": "which wttrbar",
   },
   "pulseaudio": {
     "format": "{volume}{icon} {format_source}",
@@ -87,15 +86,15 @@
     "format": "{} {icon}",
     "return-type": "json",
     "format-icons": {
-      "has-updates": "󱍷",
-      "updated": "󰂪"
+      "has-updates": "",
+      "updated": ""
     },
     "exec-if": "which waybar-module-pacman-updates",
-    "exec": "waybar-module-pacman-updates --interval-seconds 21600 --network-interval-seconds 300"
+    "exec": "waybar-module-pacman-updates --interval-seconds 21600 --network-interval-seconds 300",
+    "on-click": "timeout 3s waybar-module-pacman-updates",
+    "on-click-right": "kitty topgrade -k --no-self-update --only system"
   },
   "tray": {
     "spacing": 5,
   }
 }
-
-# vim:ft=json

@@ -1,5 +1,6 @@
 {
-  "include": "~/.config/hypr/waybar/modules",
+  "include": "~/.config/hypr/waybar/modules.jsonc",
+
   "exclusive": true,
   "fixed-center": true,
   "height": 0,
