@@ -1,6 +1,4 @@
-## Wofi Config
-
-## General
+# General
 show=drun
 prompt=Apps
 normal_window=true
@@ -8,7 +6,7 @@ layer=top
 term=kitty
 columns=1
 
-## Geometry
+# Geometry
 width=600px
 height=400px
 location=0
@@ -17,25 +15,25 @@ halign=fill
 line_wrap=off
 dynamic_lines=false
 
-## Images
+# Images
 allow_markup=true
 allow_images=true
 image_size=24
 
-## Search
+# Search
 exec_search=false
 hide_search=false
 parse_search=false
 insensitive=false
 
-## Other
+# Other
 hide_scroll=true
 no_actions=true
 sort_order=default
 gtk_dark=true
 filter_rate=100
 
-## Keys
+# Keys
 key_expand=Tab
 key_exit=Escape
 
