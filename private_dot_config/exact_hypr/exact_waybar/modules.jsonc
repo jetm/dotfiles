@@ -30,7 +30,7 @@
   },
   "cpu": {
     "format": "{usage}  ",
-    "interval": 1,
+    "interval": 1
   },
   "memory": {
     "interval": 10,
@@ -90,11 +90,11 @@
       "updated": ""
     },
     "exec-if": "which waybar-module-pacman-updates",
-    "exec": "waybar-module-pacman-updates --interval-seconds 21600 --network-interval-seconds 300",
+    "exec": "waybar-module-pacman-updates --interval-seconds 21600 --network-interval-seconds 21600",
     "on-click": "timeout 3s waybar-module-pacman-updates",
     "on-click-right": "kitty topgrade -k --no-self-update --only system"
   },
   "tray": {
     "spacing": 5,
-  }
+  },
 }

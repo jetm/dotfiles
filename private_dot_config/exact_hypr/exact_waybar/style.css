@@ -61,21 +61,24 @@ tooltip {
   font-weight: bold;
 }
 
-#cpu,
-#memory,
 #clock,
-#pulseaudio,
-#window,
-#temperature,
-#weather,
+#cpu,
+#custom-arch-updates,
+#custom-mako,
+#hyprland-language,
 #language,
-#arch-updates,
-#network {
-  margin: 3px 0px 3px 0px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-right: 0px;
-  margin-top: 4px;
+#memory,
+#network,
+#pulseaudio,
+#taskbar,
+#temperature,
+#tray,
+#window,
+#workspaces
+{
+  padding-left: 5px;
+  padding-right: 5px;
+  border-right: 1px solid #313136;
 }
 
 #tray menu {

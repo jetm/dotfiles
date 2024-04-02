@@ -1,8 +1,6 @@
 {
   "include": "~/.config/hypr/waybar/modules.jsonc",
-
   "exclusive": true,
-  "fixed-center": true,
   "height": 0,
   "ipc": true,
   "layer": "top",
@@ -18,7 +16,6 @@
     "temperature",
     "cpu",
     "memory",
-    "custom/padd",
     "custom/weather"
   ],
   "modules-right": [
@@ -27,19 +24,7 @@
     "custom/arch-updates",
     "pulseaudio",
     "tray",
-    "custom/padd",
     "custom/mako",
     "clock"
   ],
-  // modules for padding //
-  "custom/bar": {
-    "format": "|",
-    "interval": "once",
-    "tooltip": false
-  },
-  "custom/padd": {
-    "format": " ",
-    "interval": "once",
-    "tooltip": false
-  },
 }
