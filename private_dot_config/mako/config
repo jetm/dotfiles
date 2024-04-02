@@ -8,7 +8,7 @@ on-button-right=dismiss-all
 on-touch=dismiss
 
 # STYLE OPTIONS
-font="IosevkaTerm Nerd Font" 14
+font="IosevkaTerm Nerd Font" 12
 width=300
 height=50
 margin=30
