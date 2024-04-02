@@ -1,11 +1,11 @@
-#!/usr/bin/env bash
+#!/usr/bin/sh
 
-CONFIG="${HOME}/.config/hypr/wofi/config"
+CONFIG="${HOME}/.config/hypr/wofi/config.jsonc"
 STYLE="${HOME}/.config/hypr/wofi/style.css"
 COLORS="${HOME}/.config/hypr/wofi/colors"
 
-if [[ ! $(pidof wofi) ]]; then
-	wofi --show drun --prompt 'Search...' --conf "${CONFIG}" --style "${STYLE}" --color "${COLORS}"
+if [ ! "$(pidof wofi)" ]; then
+	wofi --show drun --prompt 'Search...' --conf "$CONFIG" --style "$STYLE" --color "$COLORS"
 else
 	pkill wofi
 fi

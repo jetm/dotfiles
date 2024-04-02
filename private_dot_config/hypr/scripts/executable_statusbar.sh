@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-CONFIG="$HOME/.config/hypr/waybar/config"
+CONFIG="$HOME/.config/hypr/waybar/config.jsonc"
 STYLE="$HOME/.config/hypr/waybar/style.css"
 
 trap "killall waybar" EXIT
