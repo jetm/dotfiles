@@ -71,7 +71,7 @@ tooltip {
 #tray menuitem,
 #tray window,
 #tray menu {
-  background: transparent;
+  background: #23272E;
 }
 
 #tray menu menuitem:hover {
