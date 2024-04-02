@@ -8,7 +8,7 @@ on-button-right=dismiss-all
 on-touch=dismiss
 
 # STYLE OPTIONS
-font="Noto Nerd Font" 12
+font="IosevkaTerm Nerd Font" 14
 width=300
 height=50
 margin=30
@@ -45,3 +45,5 @@ default-timeout=5000
 border-color=#f38ba8
 text-color=#f38ba8
 default-timeout=0
+
+# vim:ft=cfg
