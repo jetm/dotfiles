@@ -21,43 +21,30 @@ tooltip {
 
 #workspaces button {
   color: @font;
-  padding: 0px 5px;
-  border-bottom: 4px solid transparent;
-}
-
-#workspaces button:hover {
-  color: @font;
-  border-bottom: 4px dotted @font;
-  font-weight: bold;
+  border-bottom: 2px solid transparent;
 }
 
 #workspaces button.active {
   color: @workspaces-button_active;
-  border-bottom: 3px solid @workspaces-button_active;
-}
-
-#workspaces button.active:hover {
-  color: @workspaces-button_active;
-  border-bottom: 4px dotted @workspaces-button_active;
-  font-weight: bold;
+  border-bottom: 2px solid @workspaces-button_active;
 }
 
 #workspaces button.urgent {
   color: @workspaces-button_urgent;
-  border-bottom: 3px dotted @workspaces-button_urgent;
+  border-bottom: 2px solid @workspaces-button_urgent;
   font-weight: bold;
   animation: workspace-blinker 1s linear infinite;
 }
 
 #workspaces button.special {
   color: @font;
-  border-bottom: 3px dotted @font;
+  border-bottom: 2px solid transparent;
   font-weight: bold;
 }
 
 #workspaces button.special.active {
   color: @workspaces-button_special;
-  border-bottom: 3px dotted @workspaces-button_special;
+  border-bottom: 2px solid @workspaces-button_special;
   font-weight: bold;
 }
 
@@ -73,20 +60,32 @@ tooltip {
 #taskbar,
 #temperature,
 #tray,
+#weather,
 #window,
-#workspaces
-{
+#workspaces {
   padding-left: 5px;
   padding-right: 5px;
-  border-right: 1px solid #313136;
+  border-right: 1px dotted #313136;
 }
 
+#tray menuitem,
+#tray window,
 #tray menu {
-  background-color: rgba(0, 0, 0, 0.8);
-  opacity: 1;
+  background: transparent;
 }
 
-#window {
-  margin-right: 10px;
-  margin-left: 10px;
+#tray menu menuitem:hover {
+  border-radius: 10px;
+  background: #313136;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+}
+
+#tray > .active {
 }
