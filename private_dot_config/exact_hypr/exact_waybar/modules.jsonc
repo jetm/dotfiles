@@ -99,7 +99,7 @@
   },
   "custom/clipmgr": {
     "format": "📋",
-    "on-click": "systemctl --user start clipmgr.service",
-    "on-click-right": "systemctl --user stop clipmgr.service",
+    "on-click": "systemctl --user start clipmgr.service && notify-send 'clipmgr on'",
+    "on-click-right": "systemctl --user stop clipmgr.service && notify-send 'clipmgr off'",
   }
 }
