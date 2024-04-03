@@ -90,9 +90,9 @@
       "updated": ""
     },
     "exec-if": "which waybar-module-pacman-updates",
-    "exec": "waybar-module-pacman-updates --interval-seconds 21600 --network-interval-seconds 21600",
+    "exec": "waybar-module-pacman-updates",
     "on-click": "timeout 3s waybar-module-pacman-updates",
-    "on-click-right": "kitty topgrade -k --no-self-update --only system"
+    "on-click-right": "kitty yay -Syu --devel"
   },
   "tray": {
     "spacing": 5,
