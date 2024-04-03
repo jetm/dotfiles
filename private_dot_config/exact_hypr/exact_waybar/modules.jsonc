@@ -97,4 +97,9 @@
   "tray": {
     "spacing": 5,
   },
+  "custom/clipmgr": {
+    "format": "📋",
+    "on-click": "systemctl --user start clipmgr.service",
+    "on-click-right": "systemctl --user stop clipmgr.service",
+  }
 }
