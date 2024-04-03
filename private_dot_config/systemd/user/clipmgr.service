@@ -7,7 +7,7 @@ Requisite=basic.target
 [Service]
 Type=simple
 # A wait is required to avoid failures
-ExecStartPre=/usr/bin/sleep 1
+ExecStartPre=/usr/bin/sleep 2
 ExecStartPre=/usr/bin/pgrep -x "Hyprland"
 ; exec-once = wl-paste --primary --type image --watch ~/.config/hypr/scripts/clipmgr.sh
 ExecStart=/usr/bin/sh -c 'wl-paste --primary --type text --watch ~/.config/hypr/scripts/clipmgr.sh'
