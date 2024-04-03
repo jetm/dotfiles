@@ -72,7 +72,7 @@
     "smooth-scrolling-threshold": 1,
   },
   "temperature": {
-    "hwmon-path": "/sys/class/hwmon/hwmon5/temp2_input",
+    "hwmon-path": "/sys/devices/platform/asus-ec-sensors/hwmon/hwmon5/temp2_input",
     "critical-threshold": 95,
     "format": "{temperatureC}°C "
   },
