@@ -1,20 +1,14 @@
 [Unit]
 Description=Clipboard management service
-PartOf=basic.target
-After=basic.target
-Requisite=basic.target
+After=gnome-keyring-daemon
 
 [Service]
 Type=simple
-# A wait is required to avoid failures
-ExecStartPre=/usr/bin/sleep 2
 ExecStartPre=/usr/bin/pgrep -x "Hyprland"
 ; exec-once = wl-paste --primary --type image --watch ~/.config/hypr/scripts/clipmgr.sh
 ExecStart=/usr/bin/sh -c 'wl-paste --primary --type text --watch ~/.config/hypr/scripts/clipmgr.sh'
 Restart=on-failure
-# We don't need to do any clean up, so if something hangs (borked xclip, etc),
-# it's going to stay that way. Just forcefully kill and get it over with.
-TimeoutStopSec=2
+RestartSec=5
 
 [Install]
 WantedBy=basic.target
