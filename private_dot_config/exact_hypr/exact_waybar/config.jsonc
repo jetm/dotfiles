@@ -11,6 +11,7 @@
   "mod": "dock",
   "passthrough": false,
   "modules-left": [
+    "upower",
     "memory",
     "temperature",
     "cpu",

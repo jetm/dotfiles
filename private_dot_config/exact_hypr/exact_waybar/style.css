@@ -48,6 +48,7 @@ tooltip {
   font-weight: bold;
 }
 
+#upower,
 #clock,
 #cpu,
 #custom-arch-updates,
@@ -89,4 +90,8 @@ tooltip {
 }
 
 #tray > .active {
+}
+
+#upower {
+  background: rgba(0, 0, 0, 0.7);
 }

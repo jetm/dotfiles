@@ -99,8 +99,26 @@
     "spacing": 5,
   },
   "custom/clipmgr": {
-    "format": "📋",
+    "format": "",
     "on-click": "systemctl --user start clipmgr.service && notify-send 'clipmgr on'",
     "on-click-right": "systemctl --user stop clipmgr.service && notify-send 'clipmgr off'",
+  },
+  "upower": {
+    // Mouse battery
+    "native-path": "hidpp_battery_0",
+    "icon-size": 14,
+    "format-icons": [
+      "󰂎",
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ],
   }
 }
