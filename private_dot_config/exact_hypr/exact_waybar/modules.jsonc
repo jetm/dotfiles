@@ -29,7 +29,7 @@
     "format": "{:%a %b %d, %G, %H:%M} ",
   },
   "cpu": {
-    "format": "{usage}  ",
+    "format": "{usage:3}%  ",
     "interval": 1
   },
   "memory": {
