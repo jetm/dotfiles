@@ -145,4 +145,4 @@ export HISTSIZE=${HISTFILESIZE} # increase history size (default is 500)
 # ensure synchronization between Bash memory and history file
 export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
 
-# vim:ft=bash set ts=4 sw=4
+# vim:ft=bash ts=4 sw=4
