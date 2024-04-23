@@ -54,7 +54,7 @@ return function(_, _)
       "dockerls",
       "jsonls",
       "lua_ls",
-      "ruff_lsp",
+      "ruff",
       "yamlls",
     },
     handlers = {
