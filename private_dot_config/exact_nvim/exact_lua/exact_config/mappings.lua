@@ -49,11 +49,6 @@ map("n", "<leader>g", "<CMD>FzfxLiveGrep cword<CR>", {silent = true, noremap = t
 map("n", "<C-p>", "<CMD>Telescope find_files<CR>", { desc = "Find files" })
 map("n", "<C-S-p>", "<CMD>Telescope frecency workspace=CWD<CR>", { desc = "Find files" })
 
--- BufferLine mapping
-for i = 1, 9 do
-  map("n", ("<Leader>%s"):format(i), ("<cmd>lua require('bufferline').go_to(%s, true)<CR>"):format(i))
-end
-
 map({ "n" }, "<Leader>b", ":BufferLinePick<CR>")
 
 -- Visual shifting (does not exit Visual mode)
@@ -71,8 +66,9 @@ map({ "n", "x" }, "Q", "<CMD>qa<CR>", { desc = "Close all buffers and Quit" })
 
 map("n", "<leader>`", "<CMD>e #<CR>", { desc = "Switch to other buffer" })
 
+-- BufferLine mapping
 for i = 1, 9 do
-  map("n", ("<Leader>%s"):format(i), (":BufferLineGoToBuffer %s<CR>"):format(i))
+  map("n", ("<Leader>%s"):format(i), ("<cmd>lua require('bufferline').go_to(%s, true)<CR>"):format(i))
 end
 
 ---
