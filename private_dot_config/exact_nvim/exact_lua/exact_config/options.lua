@@ -69,8 +69,22 @@ O.backspace:append({ "nostop" }) -- Don't stop backspace at insert
 O.completeopt = { "menu", "menuone", "noselect" } -- Options for insert mode completion
 O.infercase = true -- Infer cases in keyword completion
 O.pumheight = 10 -- Height of the pop up menu
-O.undodir = os.getenv("HOME") .. "/.vim_data/undofile" -- Where to save undofile
-O.undofile = true -- Enable persistent undo
+
+-- Enable swap, backup, and persistant undo
+O.directory = os.getenv("HOME") .. "/.nvim/swap" -- Where to save undofile
+O.backupdir = os.getenv("HOME") .. "/.nvim/backup" -- Where to save undofile
+O.undodir = os.getenv("HOME") .. "/.nvim/undofile" -- Where to save undofile
+O.swapfile = true
+O.backup = true
+O.undofile = true
+
+-- Append backup files with timestamp
+vim.api.nvim_create_autocmd("BufWritePre", {
+	callback = function()
+		local extension = "~" .. vim.fn.strftime("%Y-%m-%d-%H%M%S")
+		vim.o.backupext = extension
+	end,
+})
 
 --
 -- tabs and indenting
