@@ -136,6 +136,7 @@ return {
   -- list to help you solve all the trouble your code is causing.
   {
     "folke/trouble.nvim",
+    branch = "dev",
     dependencies = "nvim-tree/nvim-web-devicons",
     cmd = { "TroubleToggle", "Trouble" },
     opts = {
@@ -145,7 +146,7 @@ return {
     keys = {
       {
         "<F5>",
-        "<cmd>TroubleToggle document_diagnostics<CR>",
+        "<cmd>Trouble document_diagnostics<CR>",
         mode = { "n" },
         desc = "Open diagnostics",
       },
@@ -514,6 +515,51 @@ return {
       },
     },
   },
+
+  -- {
+  --   "ThePrimeagen/harpoon",
+  --   branch = "harpoon2",
+  --   -- config = require("plugins.configs.harpoon_conf"),
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   opts = {
+  --     menu = {
+  --       width = vim.api.nvim_win_get_width(0) - 4,
+  --     },
+  --     settings = {
+  --       save_on_toggle = true,
+  --     },
+  --   },
+  --   keys = function()
+  --     local keys = {
+  --       {
+  --         "<leader>H",
+  --         function()
+  --           require("harpoon"):list():add()
+  --         end,
+  --         desc = "Harpoon File",
+  --       },
+  --       {
+  --         "<leader>h",
+  --         function()
+  --           local harpoon = require("harpoon")
+  --           harpoon.ui:toggle_quick_menu(harpoon:list())
+  --         end,
+  --         desc = "Harpoon Quick Menu",
+  --       },
+  --     }
+  --
+  --     for i = 1, 5 do
+  --       table.insert(keys, {
+  --         "<leader>" .. i,
+  --         function()
+  --           require("harpoon"):list():select(i)
+  --         end,
+  --         desc = "Harpoon to File " .. i,
+  --       })
+  --     end
+  --     return keys
+  --   end,
+  -- },
 
   -- Use the w, e, b motions. Move by subwords and skip insignificant punctuation
   -- Prefer the vim way
