@@ -10,8 +10,6 @@ return function(_, _)
 
   nvim_treesitter.setup({
     ensure_installed = {
-      "bash",
-      "c",
       "cmake",
       "comment",
       "devicetree",
@@ -23,20 +21,16 @@ return function(_, _)
       "json",
       "jsonc",
       "kconfig",
-      "lua",
       "luadoc",
       "luap",
       "make",
-      "markdown",
       "markdown_inline",
       "ninja",
-      "python",
       "regex",
       "rust",
       "ssh_config",
       "toml",
       "vim",
-      "vimdoc",
       "yaml",
     },
     highlight = {
