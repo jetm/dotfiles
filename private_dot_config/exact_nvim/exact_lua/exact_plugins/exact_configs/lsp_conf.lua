@@ -246,7 +246,8 @@ return function(_, _)
           end,
         },
       },
-      { name = "codeium", priority = 40 },
+      { name = "codeium", priority = 45 },
+      { name = "kitty", priority = 40 },
       {
         name = "rg",
         priority = 30,

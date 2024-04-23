@@ -718,10 +718,19 @@ return {
   },
 
   {
-    "Exafunction/codeium.nvim",
+    "Exafunction/codeium.vim",
     event = "BufEnter",
     build = ":Codeium Auth",
-    config = true,
+  },
+
+  {
+    "garyhurtz/cmp_kitty",
+    dependencies = {
+      { "hrsh7th/nvim-cmp" },
+    },
+    init = function()
+      require("cmp_kitty"):setup()
+    end,
   },
 
   {
