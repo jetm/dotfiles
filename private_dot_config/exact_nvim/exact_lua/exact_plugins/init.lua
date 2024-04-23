@@ -146,7 +146,7 @@ return {
     keys = {
       {
         "<F5>",
-        "<cmd>Trouble document_diagnostics<CR>",
+        "<cmd>Trouble diagnostics toggle<CR>",
         mode = { "n" },
         desc = "Open diagnostics",
       },

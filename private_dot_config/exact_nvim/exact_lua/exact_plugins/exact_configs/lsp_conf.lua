@@ -40,7 +40,7 @@ return function(_, _)
   lsp_zero.on_attach(function(client, bufnr)
     -- see :help lsp-zero-keybindings
     -- to learn the available actions
-    lsp_zero.default_keymaps({buffer = bufnr})
+    lsp_zero.default_keymaps({ buffer = bufnr })
   end)
 
   local lspconfig = require("lspconfig")
@@ -158,7 +158,7 @@ return function(_, _)
     },
   })
 
-  local function check_back_space()
+  local function check_backspace()
     local col = vim.fn.col(".") - 1
     if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
       return true
@@ -172,6 +172,18 @@ return function(_, _)
   -- Must setup `cmp` after lsp-zero
   local cmp = require("cmp")
 
+  local select_option = {
+    behavior = cmp.SelectBehavior.Insert,
+  }
+
+  local has_words_before = function()
+    if vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "prompt" then
+      return false
+    end
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+  end
+
   cmp.setup({
     snippet = {
       expand = function(args)
@@ -182,52 +194,38 @@ return function(_, _)
       trigger_debounce_time = 500,
       throttle = 550,
       fetching_timeout = 80,
+      maxi_view_entries = 15,
+    },
+    completion = {
+      -- this is important
+      -- @see https://github.com/hrsh7th/nvim-cmp/discussions/1411
+      completeopt = "menuone,noinsert,noselect",
     },
     mapping = {
       -- `Enter` key to confirm completion
       ["<CR>"] = cmp.mapping.confirm({ select = false }),
 
-      -- Accept currently selected item
-      ["<S-CR>"] = cmp.mapping.confirm({
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = true,
-      }),
-
-      -- Abort cmp and enter a new line
-      ["<C-CR>"] = function(fallback)
-        cmp.abort()
-        fallback()
-      end,
-
       ["<Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
+        if cmp.visible() and has_words_before() then
+          cmp.select_next_item(select_option)
+        elseif luasnip.expandable() then
+          luasnip.expand()
         elseif luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
-        elseif check_back_space() then
+        elseif check_backspace() then
           fallback()
-        else
-          cmp.complete()
-        end
-      end, { "i", "s" }),
-
-      ["<S-Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item()
-        elseif luasnip.jumpable(-1) then
-          luasnip.jump(-1)
         else
           fallback()
         end
       end, { "i", "s" }),
     },
     sources = cmp.config.sources({
-      { name = "nvim_lsp", priority = 70, max_item_count = 5 },
-      { name = "luasnip", priority = 60, max_item_count = 5 },
+      { name = "nvim_lsp", priority = 70, max_item_count = 3 },
+      { name = "luasnip", priority = 60, max_item_count = 3 },
       {
         name = "buffer",
         priority = 50,
-        max_item_count = 5,
+        max_item_count = 3,
         option = {
           get_bufnrs = function()
             local LIMIT = 1024 * 1024 -- 1 Megabyte max
@@ -246,20 +244,20 @@ return function(_, _)
           end,
         },
       },
-      { name = "codeium", priority = 45 },
-      { name = "kitty", priority = 40 },
+      { name = "kitty", priority = 40, max_item_count = 2 },
       {
         name = "rg",
         priority = 30,
         keyword_length = 3,
-        max_item_count = 5,
+        max_item_count = 3,
         option = {
           additional_arguments = "--smart-case",
         },
       },
-      { name = "async_path", priority = 20 },
+      { name = "async_path", priority = 20, max_item_count = 2 },
       {
         name = "spell",
+        max_item_count = 2,
         priority = 1,
         option = {
           keep_all_entries = false,
