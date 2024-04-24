@@ -2,6 +2,11 @@
 export FZF_ALT_C_COMMAND="fd --type=d --color=never --hidden --exclude .git --ignore"
 export FZF_CTRL_T_COMMAND="fd --hidden --color=never --exclude .git --exclude .repo --ignore"
 
+#
+# forgit
+#
+export FORGIT_FZF_DEFAULT_OPTS="${FORGIT_FZF_DEFAULT_OPTS} --ansi --tabstop=2 --layout=reverse"
+
 # Show proper colors and not %F{yellow}
 zstyle -d ':completion:*' format
 zstyle ':completion:*:descriptions' format '[%d]'
@@ -109,21 +114,7 @@ eval "$(fzf --zsh)"
 # _fzf_compgen_dir() {
 #   fd --color=never --type d --hidden --follow --exclude ".git" . "$1"
 # }
-
-# #
-# # forgit
-# #
-# # Use a limited fzf option or it will mess with tmux-thumbs text selection
-# export FORGIT_FZF_DEFAULT_OPTS="
-# ${FORGIT_FZF_DEFAULT_OPTS}
-# ${FZF_PREVIEW_OPTS}
-# --ansi
-# --tabstop=4
-# --layout=reverse
-# --preview-window 'nohidden,<50(down,75%,border-top)'
-# --preview='bat --style=full --color=always {}'
-# "
-
+#
 #
 # BUGS: no all history is shown
 # atuin is good to sync history between devices

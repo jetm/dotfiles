@@ -242,6 +242,7 @@
 
 [pager]
     difftool = true
+    diff = delta
 
 #
 # diff tools
