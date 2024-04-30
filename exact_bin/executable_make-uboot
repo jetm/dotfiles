@@ -1,0 +1,3 @@
+#!/bin/bash
+
+make clean && make qemu_arm64_defconfig && bear -- make -j$(nproc) CROSS_COMPILE="ccache aarch64-linux-gnu-" all
