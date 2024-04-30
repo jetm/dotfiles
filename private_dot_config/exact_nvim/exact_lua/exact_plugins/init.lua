@@ -774,10 +774,18 @@ return {
       vim.g.codeium_filetypes = {
         ["neo-tree-popup"] = false,
       }
-      vim.keymap.set("i", "<C-CR>", function() return vim.fn["codeium#Accept"]() end, { expr = true })
-      vim.keymap.set("i", "<C-.>", function() return vim.fn["codeium#CycleCompletions"](1) end, { expr = true })
-      vim.keymap.set("i", "<C-,>", function() return vim.fn["codeium#CycleCompletions"](-1) end, { expr = true })
-      vim.keymap.set("i", "<C-x>", function() return vim.fn["codeium#Clear"]() end, { expr = true })
+      vim.keymap.set("i", "<C-CR>", function()
+        return vim.fn["codeium#Accept"]()
+      end, { expr = true })
+      vim.keymap.set("i", "<C-.>", function()
+        return vim.fn["codeium#CycleCompletions"](1)
+      end, { expr = true })
+      vim.keymap.set("i", "<C-,>", function()
+        return vim.fn["codeium#CycleCompletions"](-1)
+      end, { expr = true })
+      vim.keymap.set("i", "<C-x>", function()
+        return vim.fn["codeium#Clear"]()
+      end, { expr = true })
     end,
   },
 
@@ -820,6 +828,11 @@ return {
       { "hrsh7th/cmp-buffer" },
       { "lukas-reineke/cmp-rg" },
       { "FelipeLema/cmp-async-path" },
+      { "https://git.sr.ht/~p00f/clangd_extensions.nvim" },
+      {
+        "petertriho/cmp-git",
+        ft = { "gitcommit" },
+      },
       {
         "f3fora/cmp-spell",
         ft = { "gitcommit", "markdown" },

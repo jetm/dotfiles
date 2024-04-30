@@ -222,10 +222,47 @@ return function(_, _)
     sources = cmp.config.sources({
       { name = "nvim_lsp", priority = 70, max_item_count = 3 },
       { name = "luasnip", priority = 60, max_item_count = 3 },
+      { name = "kitty", priority = 40, max_item_count = 2 },
+      {
+        name = "rg",
+        priority = 30,
+        keyword_length = 3,
+        max_item_count = 3,
+        option = {
+          additional_arguments = "--smart-case",
+        },
+      },
+      { name = "async_path", priority = 20, max_item_count = 2 },
+    }),
+    formatting = {
+      format = function(_, item)
+        local icons = yet.icons.kinds
+        if icons[item.kind] then
+          item.kind = icons[item.kind] .. item.kind
+        end
+        return item
+      end,
+    },
+    sorting = {
+      comparators = {
+        cmp.config.compare.offset,
+        cmp.config.compare.exact,
+        cmp.config.compare.recently_used,
+        require("clangd_extensions.cmp_scores"),
+        cmp.config.compare.kind,
+        cmp.config.compare.sort_text,
+        cmp.config.compare.length,
+        cmp.config.compare.order,
+      },
+    },
+  })
+
+  cmp.setup.filetype("gitcommit", {
+    sources = cmp.config.sources({
+      { name = "git" },
+    }, {
       {
         name = "buffer",
-        priority = 50,
-        max_item_count = 3,
         option = {
           get_bufnrs = function()
             local LIMIT = 1024 * 1024 -- 1 Megabyte max
@@ -244,38 +281,7 @@ return function(_, _)
           end,
         },
       },
-      { name = "kitty", priority = 40, max_item_count = 2 },
-      {
-        name = "rg",
-        priority = 30,
-        keyword_length = 3,
-        max_item_count = 3,
-        option = {
-          additional_arguments = "--smart-case",
-        },
-      },
-      { name = "async_path", priority = 20, max_item_count = 2 },
-      {
-        name = "spell",
-        max_item_count = 2,
-        priority = 1,
-        option = {
-          keep_all_entries = false,
-          enable_in_context = function()
-            return true
-          end,
-        },
-      },
-    }),
-    formatting = {
-      format = function(_, item)
-        local icons = yet.icons.kinds
-        if icons[item.kind] then
-          item.kind = icons[item.kind] .. item.kind
-        end
-        return item
-      end,
-    },
+    }, { { name = "spell" } }),
   })
 
   vim.diagnostic.config({
