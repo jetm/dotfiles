@@ -20,5 +20,6 @@ tarrasch/zsh-bd kind:defer
 Aloxaf/fzf-tab kind:defer
 wfxr/forgit kind:defer
 tom-doerr/zsh_codex kind:defer
+ttkalcevic/pwp kind:defer
 
-# vi: ft=config
+# vim: ft=config
