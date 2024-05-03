@@ -9,6 +9,7 @@ return function(_, _)
       bats = { "shfmt", "shellharden" },
       yaml = { "yamlfmt" },
       css = { "prettier" },
+      c = { "clang_format" },
     },
 
     format_on_save = false,

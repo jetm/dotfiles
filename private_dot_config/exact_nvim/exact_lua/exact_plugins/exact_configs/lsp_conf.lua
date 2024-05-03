@@ -9,6 +9,7 @@ return function(_, _)
         "yamlfmt",
         "yamllint",
         "prettier",
+        "clang-format",
 
         -- Linters
         "shellcheck",
