@@ -6,6 +6,12 @@
       "kitty"
     ],
   },
+  "hyprland/language": {
+    "format": "󰌌 {}",
+    "format-us": "English (US)",
+    "format-us-intl": "English (US, alt. intl.)",
+    "keyboard-name": "keyd-virtual-keyboard",
+  },
   "hyprland/window": {
     "format": "{}",
     "separate-outputs": true,
