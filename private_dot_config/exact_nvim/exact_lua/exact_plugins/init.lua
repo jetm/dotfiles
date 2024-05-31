@@ -136,7 +136,6 @@ return {
   -- list to help you solve all the trouble your code is causing.
   {
     "folke/trouble.nvim",
-    branch = "dev",
     dependencies = "nvim-tree/nvim-web-devicons",
     cmd = { "TroubleToggle", "Trouble" },
     opts = {
