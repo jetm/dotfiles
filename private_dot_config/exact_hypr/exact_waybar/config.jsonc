@@ -22,7 +22,7 @@
   "modules-right": [
     "hyprland/language",
     "custom/clipmgr",
-    "custom/arch-updates",
+    // "custom/arch-updates",
     "tray",
     "network",
     "pulseaudio",
