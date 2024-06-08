@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# -bios output/images/u-boot.bin \
+qemu-system-aarch64 \
+	-M virt \
+	-cpu cortex-a57 \
+	-m 512 \
+	-nographic \
+	-bios ~/repos/work/u-boot/u-boot.bin \
+	-drive file=output/images/disk.img,if=none,format=raw,id=hd0 \
+	-device virtio-blk-device,drive=hd0 \
+	-netdev user,id=eth0 \
+	-device virtio-net-device,netdev=eth0
