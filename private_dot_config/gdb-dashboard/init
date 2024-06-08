@@ -1,0 +1,13 @@
+set breakpoint pending on
+set confirm off
+dashboard -style syntax_highlighting "one-dark"
+dashboard -layout breakpoints source stack threads variables
+
+define u-boot
+    target remote localhost:1234
+    add-symbol-file u-boot
+    b relocate_done
+    c
+    print/x $x9
+    add-symbol-file u-boot $1
+end
