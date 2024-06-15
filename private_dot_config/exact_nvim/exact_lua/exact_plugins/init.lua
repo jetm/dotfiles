@@ -768,31 +768,31 @@ return {
     end,
   },
 
-  {
-    "Exafunction/codeium.vim",
-    event = "BufEnter",
-    build = ":Codeium Auth",
-    config = function()
-      vim.g.codeium_idle_delay = 250
-      vim.g.codeium_disable_bindings = 1
-      vim.g.codeium_no_map_tab = true
-      vim.g.codeium_filetypes = {
-        ["neo-tree-popup"] = false,
-      }
-      vim.keymap.set("i", "<C-CR>", function()
-        return vim.fn["codeium#Accept"]()
-      end, { expr = true })
-      vim.keymap.set("i", "<C-.>", function()
-        return vim.fn["codeium#CycleCompletions"](1)
-      end, { expr = true })
-      vim.keymap.set("i", "<C-,>", function()
-        return vim.fn["codeium#CycleCompletions"](-1)
-      end, { expr = true })
-      vim.keymap.set("i", "<C-x>", function()
-        return vim.fn["codeium#Clear"]()
-      end, { expr = true })
-    end,
-  },
+  -- {
+  --   "Exafunction/codeium.vim",
+  --   event = "BufEnter",
+  --   build = ":Codeium Auth",
+  --   config = function()
+  --     vim.g.codeium_idle_delay = 250
+  --     vim.g.codeium_disable_bindings = 1
+  --     vim.g.codeium_no_map_tab = true
+  --     vim.g.codeium_filetypes = {
+  --       ["neo-tree-popup"] = false,
+  --     }
+  --     vim.keymap.set("i", "<C-CR>", function()
+  --       return vim.fn["codeium#Accept"]()
+  --     end, { expr = true })
+  --     vim.keymap.set("i", "<C-.>", function()
+  --       return vim.fn["codeium#CycleCompletions"](1)
+  --     end, { expr = true })
+  --     vim.keymap.set("i", "<C-,>", function()
+  --       return vim.fn["codeium#CycleCompletions"](-1)
+  --     end, { expr = true })
+  --     vim.keymap.set("i", "<C-x>", function()
+  --       return vim.fn["codeium#Clear"]()
+  --     end, { expr = true })
+  --   end,
+  -- },
 
   {
     "garyhurtz/cmp_kitty",
