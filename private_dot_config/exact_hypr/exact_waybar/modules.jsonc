@@ -18,6 +18,7 @@
   },
   "hyprland/workspaces": {
     "show-special": true,
+    "on-click": "activate",
     "format": "{icon}",
     "sort-by-number": true,
     "format-icons": {
