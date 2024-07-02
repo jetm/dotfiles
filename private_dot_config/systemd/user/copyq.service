@@ -1,0 +1,12 @@
+[Unit]
+Description=CopyQ Clipboard Manager
+
+[Service]
+Type=simple
+ExecStart=copyq
+ExecStop=copyq exit
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=basic.target
