@@ -45,4 +45,8 @@ aurgen() {
   fi
 }
 
+extract_srt() {
+  mkvextract tracks "$1" $2:"$(basename $1 .mkv)".srt
+}
+
 # vim:set ft=sh ts=2 sw=2 et:
