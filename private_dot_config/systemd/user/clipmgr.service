@@ -5,7 +5,7 @@ After=gnome-keyring-daemon
 [Service]
 Type=simple
 ExecStartPre=/usr/bin/pgrep -x "Hyprland"
-; exec-once = wl-paste --primary --type image --watch ~/.config/hypr/scripts/clipmgr.sh
+; ExecStartPre=/usr/bin/sh -c 'wl-paste --primary --type image --watch cliphist'
 ExecStart=/usr/bin/sh -c 'wl-paste --primary --type text --watch ~/.config/hypr/scripts/clipmgr.sh'
 Restart=on-failure
 RestartSec=5
