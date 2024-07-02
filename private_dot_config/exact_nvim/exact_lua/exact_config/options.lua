@@ -97,10 +97,10 @@ O.breakindent = true -- Wrap indent to match line start
 O.copyindent = true -- Copy the previous indentation on autoindenting
 O.expandtab = true -- Enable the use of space in tab
 O.preserveindent = true -- Preserve indent structure as much as possible
-O.shiftwidth = 2 -- Number of space inserted for indentation
+O.shiftwidth = 4 -- Number of space inserted for indentation
 O.smartindent = true -- Smarter autoindentation
-O.softtabstop = 2
-O.tabstop = 2 -- Tab width
+O.softtabstop = 4
+O.tabstop = 4 -- Tab width
 
 --
 -- multi-byte characters
