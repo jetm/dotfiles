@@ -106,6 +106,7 @@ return {
   -- Add/change/delete surrounding delimiter pairs with ease
   {
     "kylechui/nvim-surround",
+    version = "*", -- try installing the latest stable version for plugins that support semver
     event = { "BufReadPre", "BufNewFile" },
     config = true,
   },
