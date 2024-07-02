@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 -- Must be set before Lazy
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "

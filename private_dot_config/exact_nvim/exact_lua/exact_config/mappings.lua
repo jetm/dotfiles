@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
   local modes = type(mode) == "string" and { mode } or mode

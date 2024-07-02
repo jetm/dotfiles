@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 local function augroup(name)
   return vim.api.nvim_create_augroup("yet_" .. name, { clear = true })
 end

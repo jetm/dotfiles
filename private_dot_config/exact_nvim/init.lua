@@ -1,7 +1,3 @@
-if vim.g.vscode then
-  return
-end
-
 -- Manually add new filetypes
 vim.filetype.add({
   filename = {},

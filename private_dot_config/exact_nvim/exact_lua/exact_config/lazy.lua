@@ -34,6 +34,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  defaults = {
+    cond = not vim.g.vscode,
+    version = false, -- always use the latest git commit
+  },
   spec = {
     { import = "plugins" },
   },

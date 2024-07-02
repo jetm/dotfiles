@@ -229,6 +229,7 @@ return {
   -- Peek lines just when you intend
   {
     "nacro90/numb.nvim",
+    cond = not vim.g.vscode,
     event = { "BufRead", "BufNewFile" },
     config = true,
   },

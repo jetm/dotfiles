@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 _G.yet = {}
 
 -- For debugging purpose
