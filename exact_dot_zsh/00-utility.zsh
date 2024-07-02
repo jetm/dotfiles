@@ -49,4 +49,8 @@ extract_srt() {
   mkvextract tracks "$1" $2:"$(basename $1 .mkv)".srt
 }
 
+rm_audio() {
+  ffmpeg -i "$1" -map 0 -map -0:a -map 0:m:language:$2 -c copy "$(basename $1 .mkv)_$2.mkv"
+}
+
 # vim:set ft=sh ts=2 sw=2 et:
