@@ -105,11 +105,11 @@
   "tray": {
     "spacing": 5,
   },
-  "custom/clipmgr": {
-    "format": "",
-    "on-click": "systemctl --user start clipmgr.service && notify-send 'clipmgr on'",
-    "on-click-right": "systemctl --user stop clipmgr.service && notify-send 'clipmgr off'",
-  },
+  // "custom/clipmgr": {
+  //   "format": "",
+  //   "on-click": "systemctl --user start clipmgr.service && notify-send 'clipmgr on'",
+  //   "on-click-right": "systemctl --user stop clipmgr.service && notify-send 'clipmgr off'",
+  // },
   "upower": {
     // Mouse battery
     "native-path": "hidpp_battery_0",
