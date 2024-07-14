@@ -38,13 +38,33 @@ return function(_, _)
 
   local lsp_zero = require("lsp-zero")
 
-  lsp_zero.on_attach(function(client, bufnr)
+  lsp_zero.on_attach(function(_, bufnr)
     -- see :help lsp-zero-keybindings
     -- to learn the available actions
     lsp_zero.default_keymaps({ buffer = bufnr })
   end)
 
   local lspconfig = require("lspconfig")
+
+  local capabilities = {
+    textDocument = {
+      completion = {
+        completionItem = {
+          documentationFormat = { "markdown", "plaintext" },
+          snippetSupport = true,
+          preselectSupport = true,
+          insertReplaceSupport = true,
+          labelDetailsSupport = true,
+          deprecatedSupport = true,
+          commitCharactersSupport = true,
+          tagSupport = { valueSet = { 1 } },
+          resolveSupport = { properties = { "documentation", "detail", "additionalTextEdits" } },
+        },
+      },
+    },
+  }
+
+  require("cmp_nvim_lsp").default_capabilities(capabilities)
 
   -- Install LSP servers
   require("mason-lspconfig").setup({
@@ -159,62 +179,63 @@ return function(_, _)
     },
   })
 
-  local function check_backspace()
-    local col = vim.fn.col(".") - 1
-    if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
-      return true
-    else
-      return false
-    end
-  end
-
-  local luasnip = require("luasnip")
-
   -- Must setup `cmp` after lsp-zero
   local cmp = require("cmp")
 
-  local select_option = {
-    behavior = cmp.SelectBehavior.Insert,
-  }
-
   local has_words_before = function()
-    if vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "prompt" then
-      return false
+    local line, col = (unpack or table.unpack)(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  end
+  local function is_visible(cmp)
+    return cmp.core.view:visible() or vim.fn.pumvisible() == 1
+  end
+
+  local get_icon_provider = function()
+    local _, mini_icons = pcall(require, "mini.icons")
+    if _G.MiniIcons then
+      return function(kind)
+        return mini_icons.get("lsp", kind)
+      end
     end
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+  end
+  local icon_provider = get_icon_provider()
+
+  local format = function(entry, item)
+    local highlight_colors_avail, highlight_colors = pcall(require, "nvim-highlight-colors")
+    local color_item = highlight_colors_avail and highlight_colors.format(entry, { kind = item.kind })
+    if icon_provider then
+      local icon = icon_provider(item.kind)
+      if icon then
+        item.kind = icon
+      end
+    end
+    if color_item and color_item.abbr_hl_group then
+      item.kind, item.kind_hl_group = color_item.abbr, color_item.abbr_hl_group
+    end
+    return item
   end
 
   cmp.setup({
-    snippet = {
-      expand = function(args)
-        luasnip.lsp_expand(args.body)
-      end,
-    },
-    performance = {
-      trigger_debounce_time = 500,
-      throttle = 550,
-      fetching_timeout = 80,
-      maxi_view_entries = 15,
-    },
     completion = {
       -- this is important
       -- @see https://github.com/hrsh7th/nvim-cmp/discussions/1411
       completeopt = "menuone,noinsert,noselect",
     },
     mapping = {
+      ["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+      ["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
       -- `Enter` key to confirm completion
-      ["<CR>"] = cmp.mapping.confirm({ select = false }),
+      ["<CR>"] = cmp.mapping(cmp.mapping.confirm({ select = false }), { "i", "c" }),
 
       ["<Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() and has_words_before() then
-          cmp.select_next_item(select_option)
-        elseif luasnip.expandable() then
-          luasnip.expand()
-        elseif luasnip.expand_or_jumpable() then
-          luasnip.expand_or_jump()
-        elseif check_backspace() then
-          fallback()
+        if is_visible(cmp) then
+          cmp.select_next_item()
+        elseif vim.api.nvim_get_mode().mode ~= "c" and vim.snippet and vim.snippet.active({ direction = 1 }) then
+          vim.schedule(function()
+            vim.snippet.jump(1)
+          end)
+        elseif has_words_before() then
+          cmp.complete()
         else
           fallback()
         end
@@ -223,6 +244,7 @@ return function(_, _)
     sources = cmp.config.sources({
       { name = "nvim_lsp", priority = 70, max_item_count = 3 },
       { name = "luasnip", priority = 60, max_item_count = 3 },
+      { name = "buffer", priority = 50, max_item_count = 2 },
       { name = "kitty", priority = 40, max_item_count = 2 },
       {
         name = "rg",
@@ -235,26 +257,10 @@ return function(_, _)
       },
       { name = "async_path", priority = 20, max_item_count = 2 },
     }),
-    formatting = {
-      format = function(_, item)
-        local icons = yet.icons.kinds
-        if icons[item.kind] then
-          item.kind = icons[item.kind] .. item.kind
-        end
-        return item
-      end,
-    },
-    sorting = {
-      comparators = {
-        cmp.config.compare.offset,
-        cmp.config.compare.exact,
-        cmp.config.compare.recently_used,
-        require("clangd_extensions.cmp_scores"),
-        cmp.config.compare.kind,
-        cmp.config.compare.sort_text,
-        cmp.config.compare.length,
-        cmp.config.compare.order,
-      },
+    formatting = { fields = { "kind", "abbr", "menu" }, format = format },
+    confirm_opts = {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = false,
     },
   })
 

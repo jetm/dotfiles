@@ -363,6 +363,8 @@ return {
     opts = { "*" },
   },
 
+  { "brenoprata10/nvim-highlight-colors" },
+
   -- A snazzy bufferline for neovim
   -- bufferline is faster than nvim-cokeline and barbar
   {
@@ -756,19 +758,6 @@ return {
     build = ":MasonUpdate",
   },
 
-  -- Vim Snippets engine [snippet engine] + [snippet templates]
-  {
-    "L3MON4D3/LuaSnip",
-    event = { "BufReadPre", "BufNewFile" },
-    version = "2.*",
-    dependencies = {
-      "rafamadriz/friendly-snippets",
-    },
-    config = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
-    end,
-  },
-
   -- {
   --   "Exafunction/codeium.vim",
   --   event = "BufEnter",
@@ -794,6 +783,25 @@ return {
   --     end, { expr = true })
   --   end,
   -- },
+
+  {
+    "sourcegraph/sg.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = true,
+    opts = {
+      enable_cody = true,
+      accept_tos = true,
+    },
+  },
+
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      { "hrsh7th/cmp-buffer", lazy = true },
+      { "hrsh7th/cmp-nvim-lsp", lazy = true },
+    },
+    event = "InsertCharPre",
+  },
 
   {
     "garyhurtz/cmp_kitty",
@@ -856,6 +864,23 @@ return {
     event = { "LspAttach" },
     opts = {
       -- options
+    },
+  },
+
+  -- Vim Snippets engine [snippet engine] + [snippet templates]
+  {
+    "L3MON4D3/LuaSnip",
+    lazy = true,
+    specs = {
+      "hrsh7th/nvim-cmp",
+      optional = true,
+      dependencies = { { "saadparwaiz1/cmp_luasnip", lazy = true } },
+    },
+    dependencies = { "rafamadriz/friendly-snippets", lazy = true },
+    opts = {
+      history = true,
+      delete_check_events = "TextChanged",
+      region_check_events = "CursorMoved",
     },
   },
 
