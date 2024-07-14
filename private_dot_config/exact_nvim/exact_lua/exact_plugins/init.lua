@@ -174,13 +174,6 @@ return {
     },
   },
 
-  -- Automatically manage hlsearch setting
-  {
-    "asiryk/auto-hlsearch.nvim",
-    lazy = true,
-    config = true,
-  },
-
   -- search/replace in multiple files
   {
     "nvim-pack/nvim-spectre",
