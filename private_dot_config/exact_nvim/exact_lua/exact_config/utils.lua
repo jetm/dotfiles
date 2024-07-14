@@ -109,7 +109,6 @@ yet.icons = {
     Folder = " ",
     Function = "󰊕 ",
     Interface = " ",
-    Key = " ",
     Keyword = " ",
     Method = "󰊕 ",
     Module = " ",
