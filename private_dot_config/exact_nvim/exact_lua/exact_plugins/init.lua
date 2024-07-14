@@ -962,6 +962,14 @@ return {
   {
     "RRethy/vim-illuminate",
     event = "BufReadPre",
+    config = function()
+      require("illuminate").configure({
+        delay = 200,
+        min_count_to_highlight = 2,
+        large_file_cutoff = 2000,
+        large_file_overrides = { providers = { "lsp" } },
+      })
+    end,
   },
 
   -- 😽 Open your Kitty scrollback buffer with Neovim
