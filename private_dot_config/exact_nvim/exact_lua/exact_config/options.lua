@@ -14,6 +14,7 @@ O = vim.opt -- to set options
 --
 O.ignorecase = true -- Case insensitive searching
 O.smartcase = true -- Case sensitivie searching
+O.inccommand = "split" -- "for incsearch while sub
 
 --
 -- displaying text
