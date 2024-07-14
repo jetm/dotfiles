@@ -513,9 +513,7 @@ return {
         autojump = true,
       },
       modes = {
-        search = { enabled = false },
         char = {
-          enabled = true,
           jump_labels = true,
           -- TODO: Change to `false` to use the current line only. Pending fix
           multi_line = true,
@@ -676,14 +674,6 @@ return {
     config = require("plugins.configs.telescope_conf"),
   },
 
-  -- A telescope.nvim extension that offers intelligent prioritization when selecting files from your editing history
-  {
-    "nvim-telescope/telescope-frecency.nvim",
-    config = function()
-      require("telescope").load_extension("frecency")
-    end,
-  },
-
   {
     "linrongbin16/fzfx.nvim",
     event = { "BufReadPost", "BufNewFile" },
@@ -693,10 +683,37 @@ return {
   },
 
   -- {
-  --   "nvim-treesitter/nvim-treesitter-context",
-  --   event = { "BufReadPost", "BufNewFile" },
-  --   opts = { max_lines = 3 },
+  --   "ibhagwan/fzf-lua",
+  --   -- optional for icon support
+  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  --   config = function()
+  --     -- calling `setup` is optional for customization
+  --     require("fzf-lua").setup({
+  --       grep = {
+  --         rg_glob = true,
+  --       },
+  --       winopts = {
+  --         preview = {
+  --           horizontal = "right:40%",
+  --         },
+  --       },
+  --     })
+  --   end,
   -- },
+
+  -- A telescope.nvim extension that offers intelligent prioritization when selecting files from your editing history
+  {
+    "nvim-telescope/telescope-frecency.nvim",
+    config = function()
+      require("telescope").load_extension("frecency")
+    end,
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = { max_lines = 3 },
+  },
 
   {
     "nvim-treesitter/nvim-treesitter",
