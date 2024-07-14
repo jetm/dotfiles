@@ -103,7 +103,28 @@ return {
     lazy = true,
   },
 
+  {
+    "echasnovski/mini.icons",
+    lazy = true,
+    opts = {},
+    init = function()
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end,
+  },
+
   -- Add/change/delete surrounding delimiter pairs with ease
+  --
+  -- surr*ound_words             ysiw)           (surround_words)
+  -- *make strings               ys$"            "make strings"
+  -- [delete ar*ound me!]        ds]             delete around me!
+  -- remove <b>HTML t*ags</b>    dst             remove HTML tags
+  -- 'change quot*es'            cs'"            "change quotes"
+  -- <b>or tag* types</b>        csth1<CR>       <h1>or tag types</h1>
+  -- delete(functi*on calls)     dsf             function calls
+
   {
     "kylechui/nvim-surround",
     version = "*", -- try installing the latest stable version for plugins that support semver
