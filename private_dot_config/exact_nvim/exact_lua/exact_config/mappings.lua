@@ -27,12 +27,6 @@ map({ "i", "x", "n", "s" }, "<C-s>", "<CMD>w<CR><ESC>", { desc = "Save file" })
 -- Clipboard Paste
 map("i", "<C-v>", "<Esc>p", { desc = "Clipboard Paste" })
 
---- substitute
-map("n", "m", require('substitute').operator, { noremap = true })
-map("n", "mm", require('substitute').line, { noremap = true })
-map("n", "M", require('substitute').eol, { noremap = true })
-map("x", "M", require('substitute').visual, { noremap = true })
-
 ---
 -- Movement
 ---
