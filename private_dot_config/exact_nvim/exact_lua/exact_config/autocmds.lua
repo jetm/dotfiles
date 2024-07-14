@@ -34,7 +34,7 @@ autocmd("BufReadPost", {
     if vim.tbl_contains(exclude, vim.bo[buf].filetype) then
       return
     end
-    local mark = vim.api.nvim_buf_get_mark(buf, '"')
+    local mark = vim.api.nvim_buf_get_mark(buf, "\"")
     local lcount = vim.api.nvim_buf_line_count(buf)
     if mark[1] > 0 and mark[1] <= lcount then
       pcall(vim.api.nvim_win_set_cursor, 0, mark)
@@ -61,26 +61,30 @@ autocmd("BufWritePost", {
 })
 
 -- Disable diagnostics in insert mode
-autocmd('ModeChanged', {
-  pattern = {'n:i', 'v:s'},
-  desc = 'Disable diagnostics in insert and select mode',
-  callback = function(e) vim.diagnostic.disable(e.buf) end
+autocmd("ModeChanged", {
+  pattern = { "n:i", "v:s" },
+  desc = "Disable diagnostics in insert and select mode",
+  callback = function(e)
+    vim.diagnostic.disable(e.buf)
+  end,
 })
 
-autocmd('ModeChanged', {
-  pattern = 'i:n',
-  desc = 'Enable diagnostics when leaving insert mode',
-  callback = function(e) vim.diagnostic.enable(e.buf) end
+autocmd("ModeChanged", {
+  pattern = "i:n",
+  desc = "Enable diagnostics when leaving insert mode",
+  callback = function(e)
+    vim.diagnostic.enable(e.buf)
+  end,
 })
 
 local function hide_semantic_highlights()
-  for _, group in ipairs(vim.fn.getcompletion('@lsp', 'highlight')) do
+  for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
     vim.api.nvim_set_hl(0, group, {})
   end
 end
 
-autocmd('ColorScheme', {
-  desc = 'Clear LSP highlight groups',
+autocmd("ColorScheme", {
+  desc = "Clear LSP highlight groups",
   callback = hide_semantic_highlights,
 })
 
@@ -145,7 +149,58 @@ autocmd("BufWritePre", {
   desc = "Automatically create parent directories if they don't exist when saving a file",
   group = augroup("create_dir"),
   callback = function(args)
-    if args.match:match "^%w%w+://" then return end
+    if args.match:match("^%w%w+://") then
+      return
+    end
     vim.fn.mkdir(vim.fn.fnamemodify(vim.loop.fs_realpath(args.match) or args.match, ":p:h"), "p")
   end,
+})
+
+-- Based on https://gist.github.com/traut/cd19ae2817ab13e0bade1f8a9995029f
+local gpgGroup = augroup("gpgGroup")
+
+-- autocmds execute in the order in which they were defined.
+-- https://neovim.io/doc/user/autocmd.html#autocmd-define
+
+autocmd({ "BufReadPre", "FileReadPre" }, {
+  pattern = "*.gpg",
+  group = gpgGroup,
+  callback = function()
+    -- Make sure nothing is written to shada file while editing an encrypted file.
+    vim.opt_local.shada = nil
+    -- We don't want a swap file, as it writes unencrypted data to disk
+    vim.opt_local.swapfile = false
+    -- Switch to binary mode to read the encrypted file
+    vim.opt_local.bin = true
+
+    vim.cmd("let ch_save = &ch|set ch=2")
+  end,
+})
+
+autocmd({ "BufReadPost", "FileReadPost" }, {
+  pattern = "*.gpg",
+  group = gpgGroup,
+  callback = function()
+    vim.cmd("'[,']!gpg --decrypt 2> /dev/null")
+
+    -- Switch to normal mode for editing
+    vim.opt_local.bin = false
+
+    vim.cmd("let &ch = ch_save|unlet ch_save")
+    vim.cmd(":doautocmd BufReadPost " .. vim.fn.expand("%:r"))
+  end,
+})
+
+-- Convert all text to encrypted text before writing
+autocmd({ "BufWritePre", "FileWritePre" }, {
+  pattern = "*.gpg",
+  group = gpgGroup,
+  command = "'[,']!gpg --default-recipient-self -ae 2>/dev/null",
+})
+-- Undo the encryption so we are back in the normal text, directly
+-- after the file has been written.
+autocmd({ "BufWritePost", "FileWritePost" }, {
+  pattern = "*.gpg",
+  group = gpgGroup,
+  command = "u",
 })
