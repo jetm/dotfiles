@@ -266,10 +266,11 @@ return function(_, _)
 
   cmp.setup.filetype("gitcommit", {
     sources = cmp.config.sources({
-      { name = "git" },
-    }, {
+      { name = "spell", max_item_count = 5 },
+      { name = "git", max_item_count = 3 },
       {
         name = "buffer",
+        max_item_count = 3,
         option = {
           get_bufnrs = function()
             local LIMIT = 1024 * 1024 -- 1 Megabyte max
@@ -288,7 +289,7 @@ return function(_, _)
           end,
         },
       },
-    }, { { name = "spell" } }),
+    }),
   })
 
   vim.diagnostic.config({
