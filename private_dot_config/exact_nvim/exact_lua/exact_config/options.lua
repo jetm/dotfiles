@@ -9,6 +9,7 @@ vim.g.maplocalleader = " "
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 
 O = vim.opt -- to set options
+
 --
 -- moving around, search and patterns
 --
@@ -36,9 +37,7 @@ O.relativenumber = true -- Show relative numberline
 O.scrolloff = 16 -- Number of lines to keep above and below the cursor
 O.sidescrolloff = 8 -- Number of columns to keep at the sides of the cursor
 
-if vim.fn.has("nvim-0.10") == 1 then
-  O.smoothscroll = true
-end
+O.smoothscroll = true
 
 --
 -- syntax, highlighting and spelling

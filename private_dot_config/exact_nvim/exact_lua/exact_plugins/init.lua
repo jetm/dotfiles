@@ -80,6 +80,15 @@ return {
     },
   },
 
+  -- Close Neovim buffers, windows, or exit Vim with the same single keypress
+  -- {
+  --   "psjay/buffer-closer.nvim",
+  --   lazy = false,
+  --   config = function()
+  --     require("buffer-closer").setup()
+  --   end,
+  -- },
+
   -- Neovim setup for init.lua and plugin development with full signature help,
   -- docs and completion for the nvim lua API
   -- Enable to get more get help from Lua API
