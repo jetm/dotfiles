@@ -420,13 +420,13 @@ return {
     },
   },
 
-  {
-    "NvChad/nvim-colorizer.lua",
-    lazy = true,
-    opts = { "*" },
-  },
+  -- {
+  --   "NvChad/nvim-colorizer.lua",
+  --   lazy = true,
+  --   opts = { "*" },
+  -- },
 
-  { "brenoprata10/nvim-highlight-colors" },
+  { "brenoprata10/nvim-highlight-colors", config = true },
 
   -- A snazzy bufferline for neovim
   -- bufferline is faster than nvim-cokeline and barbar
