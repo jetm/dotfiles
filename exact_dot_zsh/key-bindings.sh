@@ -5,8 +5,8 @@
 # Use cat -v > /dev/null to know the keybinding
 #
 
-# <Ctrl+Right>  => Forward word
-# <Ctrl+Left>   => Backward word
+# <Ctrl+Right>  => Forward word -- Disabled
+# <Ctrl+Left>   => Backward word -- Disabled
 # <Ctrl+E>      => Edit command in $EDITOR
 # <Ctrl+V>      => Paste from system clipboard -- Disabled
 # <UP>          => History search up for substring
@@ -17,15 +17,15 @@
 # <Ctrl+F>      => Grep in files
 # <Ctrl+T>      => Search in history
 # <Alt+S>       => Insert sudo word -- Disabled
-# <Clrt+P>      => Seearch files
+# <Clrt+P>      => Search files
 # <Alt+D>       => Delete branch
-# <Ctrl+]>      => Clear screen and scrollback
+# <Ctrl+]>      => Clear screen and scrollback -- Disabled
 
 # <Ctrl+Right> => Forward word
-bindkey "^[[1;5C" forward-word
+# bindkey "^[[1;5C" forward-word
 
 # <Ctrl+Left> => Backward word
-bindkey "^[[1;5D" backward-word
+# bindkey "^[[1;5D" backward-word
 
 # same behavior from bash for vi-mode
 autoload edit-command-line
@@ -37,17 +37,17 @@ bindkey -M vicmd '^E' edit-command-line
 bindkey -M viins '^[[A' history-substring-search-up
 bindkey -M viins '^[[B' history-substring-search-down
 
-paste-from-clipboard() {
-  local clipboard
-  clipboard=$(cb paste 2> /dev/null | cat -)
-  BUFFER="$LBUFFER$clipboard$RBUFFER"
-  CURSOR="$(($CURSOR + ${#clipboard}))"
-}
-zle -N paste-from-clipboard
+# paste-from-clipboard() {
+#   local clipboard
+#   clipboard=$(cb paste 2> /dev/null | cat -)
+#   BUFFER="$LBUFFER$clipboard$RBUFFER"
+#   CURSOR="$(($CURSOR + ${#clipboard}))"
+# }
+# zle -N paste-from-clipboard
 
 # <Ctrl+V>
-bindkey '^V' paste-from-clipboard
-bindkey '^[[2;2~' paste-from-clipboard
+# bindkey '^V' paste-from-clipboard
+# bindkey '^[[2;2~' paste-from-clipboard
 
 fancy-ctrl-z () {
   if [[ $#BUFFER = 0 ]]; then
@@ -86,12 +86,6 @@ bindkey '^[a' fzf-aliases-widget
 # <Ctrl+r>
 bindkey -M viins '^r' fzf-history-widget
 
-# <Ctrl+P>
-bindkey -r '^P'
-bindkey -M vicmd '^p' fzf-file-widget
-bindkey -M viins '^p' fzf-file-widget
-bindkey '^P' fzf-file-widget
-
 # fzf-functions-widget() {
 #   # shellcheck disable=SC2034
 #   LBUFFER="$LBUFFER$(FZF_DEFAULT_COMMAND=
@@ -109,20 +103,20 @@ bindkey '^P' fzf-file-widget
 # bindkey '^[f' fzf-functions-widget
 
 _fzf-ripgrep_() {
-	RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
-	INITIAL_QUERY="${*:-}"
+  RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
+  INITIAL_QUERY="${*:-}"
 
-	fzf_options=(
-		--ansi
-		--color "hl:-1:underline,hl+:-1:underline:reverse"
-		--disabled --query "$INITIAL_QUERY"
-		--bind "change:reload:sleep 0.1 && $RG_PREFIX {q} || true"
-		--prompt '  ripgrep > '
-		--delimiter :
-		--header 'Ctrl-r ripgrep mode | Ctrl-f fzf mode '
-		--preview 'bat --color=always {1} --highlight-line {2}'
-		--preview-window 'nohidden,<60(nohidden,up,60%,border-bottom,+{2}+3/3,~3)'
-	)
+  fzf_options=(
+    --ansi
+    --color "hl:-1:underline,hl+:-1:underline:reverse"
+    --disabled --query "$INITIAL_QUERY"
+    --bind "change:reload:sleep 0.1 && $RG_PREFIX {q} || true"
+    --prompt '  ripgrep > '
+    --delimiter :
+    --header 'Ctrl-r ripgrep mode | Ctrl-f fzf mode '
+    --preview 'bat --color=always {1} --highlight-line {2}'
+    --preview-window 'nohidden,<60(nohidden,up,60%,border-bottom,+{2}+3/3,~3)'
+  )
 
   command rm -f /tmp/rg-fzf-{r,f}
   FZF_DEFAULT_COMMAND="$RG_PREFIX $(printf %q "$INITIAL_QUERY")" fzf "${fzf_options[@]}" \
@@ -202,12 +196,12 @@ bindkey -M viins '^p' fzf-file-widget
 bindkey '^P' fzf-file-widget
 
 # Insert a last word
-bindkey -M viins '\e.' insert-last-word
+# bindkey -M viins '\e.' insert-last-word
 
 # Iterate through arguments Ctrl + [ + ] (N times)
-autoload -Uz copy-earlier-word
-zle -N copy-earlier-word
-bindkey -M viins "^[m" copy-earlier-word
+# autoload -Uz copy-earlier-word
+# zle -N copy-earlier-word
+# bindkey -M viins "^[m" copy-earlier-word
 
 custom_clear_screen() {
   builtin print -rn -- $'\r\e[0J\e[H\e[22J' >"$TTY"
@@ -221,18 +215,18 @@ bindkey '^n' custom_clear_screen
 
 # bindkey '^x' create_completion
 
-clear_screen_and_scrollback() {
-    echoti civis >"$TTY"
-    printf '%b' '\e[H\e[2J' >"$TTY"
-    zle .reset-prompt
-    zle -R
-    printf '%b' '\e[3J' >"$TTY"
-    echoti cnorm >"$TTY"
-    reset
-}
+# clear_screen_and_scrollback() {
+#     echoti civis >"$TTY"
+#     printf '%b' '\e[H\e[2J' >"$TTY"
+#     zle .reset-prompt
+#     zle -R
+#     printf '%b' '\e[3J' >"$TTY"
+#     echoti cnorm >"$TTY"
+#     reset
+# }
 
-zle -N clear_screen_and_scrollback
-bindkey '^]' clear_screen_and_scrollback
+# zle -N clear_screen_and_scrollback
+# bindkey '^]' clear_screen_and_scrollback
 
 #
 # zsh-abbr
