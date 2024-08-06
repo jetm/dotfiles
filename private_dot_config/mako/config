@@ -9,6 +9,7 @@ on-button-right=dismiss-all
 # STYLE OPTIONS
 font="IosevkaTerm Nerd Font" 12
 height=50
+width=450
 border-size=0
 border-radius=5
 icon-location=left
