@@ -19,7 +19,7 @@
   "hyprland/workspaces": {
     "show-special": true,
     "on-click": "activate",
-    "format": "{icon}",
+    "format": "{icon} {windows}",
     "sort-by-number": true,
     "format-icons": {
       "1": "󰲠 ",
@@ -75,7 +75,7 @@
       ]
     },
     "scroll-step": 5.0,
-    "on-click": "pavucontrol-qt",
+    "on-click": "pavucontrol",
     "smooth-scrolling-threshold": 1,
   },
   "temperature": {
