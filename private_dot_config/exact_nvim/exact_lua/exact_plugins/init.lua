@@ -711,15 +711,33 @@ return {
   },
 
   {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    lazy = true,
+    enabled = vim.fn.executable("cmake") == 1,
+    build = vim.fn.executable("cmake") == 1
+      and "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+    config = function(plugin)
+      local ok, err = pcall(require("telescope").load_extension, "fzf")
+      if not ok then
+        local lib = plugin.dir .. "/build/libfzf.so"
+        if not (vim.uv or vim.loop).fs_stat(lib) then
+          vim.notify("`telescope-fzf-native.nvim` not built. Rebuilding...", vim.log.levels.WARN)
+          require("lazy").build({ plugins = { plugin }, show = false }):wait(function()
+            vim.notify("Rebuilding `telescope-fzf-native.nvim` done.\nPlease restart Neovim.")
+          end)
+        else
+          vim.notify("Failed to load `telescope-fzf-native.nvim`:\n" .. err, vim.log.levels.ERROR)
+        end
+      end
+    end,
+  },
+
+  {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     version = false,
     dependencies = {
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        enabled = vim.fn.executable("make") == 1,
-        build = "make",
-      },
+      { "nvim-telescope/telescope-fzf-native.nvim" },
       { "nvim-lua/popup.nvim" },
       { "nvim-lua/plenary.nvim" },
       -- { "rcarriga/nvim-notify" },
