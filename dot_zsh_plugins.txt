@@ -21,5 +21,6 @@ Aloxaf/fzf-tab kind:defer
 wfxr/forgit kind:defer
 tom-doerr/zsh_codex kind:defer
 ttkalcevic/pwp kind:defer
+marlonrichert/zsh-edit kind:defer
 
 # vim: ft=config
