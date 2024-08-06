@@ -746,10 +746,8 @@ return {
   },
 
   {
-    "linrongbin16/fzfx.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    cmd = "FzfxLiveGrepW",
-    dependencies = { "junegunn/fzf", "nvim-tree/nvim-web-devicons" },
+    "xvzc/chezmoi.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
     config = true,
   },
 
