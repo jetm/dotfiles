@@ -183,6 +183,50 @@ return {
     },
   },
 
+  -- Find And Replace plugin for neovim
+  {
+    "MagicDuck/grug-far.nvim",
+    opts = { headerMaxWidth = 80, maxWorkers = 16 },
+    cmd = "GrugFar",
+    keys = {
+      {
+        "<leader>g",
+        function()
+          local grug = require("grug-far")
+          grug.grug_far({
+            prefills = {
+              search = vim.fn.expand("<cword>"),
+            },
+          })
+        end,
+        mode = { "n" },
+        desc = "Search and Replace current word",
+      },
+      {
+        "<leader>gv",
+        function()
+          local grug = require("grug-far")
+          local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
+          grug.grug_far({
+            prefills = {
+              filesFilter = ext and ext ~= "" and "*." .. ext or nil,
+            },
+          })
+        end,
+        mode = { "n", "v" },
+        desc = "Search and Replace viusal selection",
+      },
+    },
+  },
+
+  -- {
+  --   "linrongbin16/fzfx.nvim",
+  --   event = { "BufReadPost", "BufNewFile" },
+  --   cmd = "FzfxLiveGrepW",
+  --   dependencies = { "junegunn/fzf", "nvim-tree/nvim-web-devicons" },
+  --   config = true,
+  -- },
+
   -- search/replace in multiple files
   -- {
   --   "nvim-pack/nvim-spectre",
