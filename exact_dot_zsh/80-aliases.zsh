@@ -118,21 +118,21 @@ if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
   # Remove ALL packages from cache
   alias paremALL='sudo pacman -Scc'
 
-  if (command -v yay > /dev/null 2>&1); then
+  if (command -v paru > /dev/null 2>&1); then
     # Remove the specified package(s), its configuration(s) and unneeded
     # dependencies
-    alias parem='yay -Rns'
+    alias parem='paru -Rns'
 
     # Upgrade all packages
-    alias paud='yay -Syu --devel'
+    alias paud='paru -Syu --devel'
 
     # Install specific package(s) from local and AUR
-    alias pain='yay -S'
+    alias pain='paru -S'
 
     # Install specific package from source package
-    alias pains='yay -U'
+    alias pains='paru -U'
 
     # Search for package(s) for local and AUR
-    alias pasp='yay'
+    alias pasp='paru'
   fi
 fi
