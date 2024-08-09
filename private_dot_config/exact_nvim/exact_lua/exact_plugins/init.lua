@@ -785,6 +785,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPost", "BufNewFile" },
+    cmd = "TSUpdateSync",
     version = false,
     dependencies = {
       {
@@ -840,16 +841,21 @@ return {
   --
   {
     "williamboman/mason.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     cmd = {
       "Mason",
       "MasonInstall",
       "MasonUninstall",
       "MasonUninstallAll",
+      "MasonLog",
       "MasonUpdate",
       "MasonUpdateAll",
     },
+    config = true,
     -- :MasonUpdate updates registry contents
     build = ":MasonUpdate",
+    -- Add ":MasonUpdateAll"
+    dependencies = { "Zeioth/mason-extra-cmds", opts = {} },
   },
 
   -- {
