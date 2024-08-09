@@ -20,6 +20,7 @@ alias l='ls --all --long --header --git'
 
 # General
 alias e='nvim'
+alias ep='chef plugins/init.lua'
 alias vimdiff='nvim -d'
 alias up='bd'
 # alias ..='cd ../'
