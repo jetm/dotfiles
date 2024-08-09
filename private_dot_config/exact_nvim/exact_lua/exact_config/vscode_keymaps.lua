@@ -15,3 +15,5 @@ keymap("x", "<M-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- paste preserves primal yanked piece
 keymap("v", "p", '"_dP', opts)
+
+keymap({"n", "v"}, "<leader>f", "<cmd>lua require('vscode').action('editor.action.formatDocument')<CR>")
