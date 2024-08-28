@@ -24,7 +24,7 @@
     "custom/clipmgr",
     // "custom/arch-updates",
     "tray",
-    "network",
+    // "network",
     "pulseaudio",
     "custom/mako",
     "clock"
