@@ -238,7 +238,7 @@
     line-numbers = false
     light = false
     side-by-side = false
-    tabs = 2
+    tabs = 4
 
 [pager]
     difftool = true
