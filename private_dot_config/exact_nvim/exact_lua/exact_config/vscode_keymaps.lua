@@ -17,3 +17,4 @@ keymap("x", "<M-k>", ":move '<-2<CR>gv-gv", opts)
 keymap("v", "p", '"_dP', opts)
 
 keymap({"n", "v"}, "<leader>f", "<cmd>lua require('vscode').action('editor.action.formatDocument')<CR>")
+keymap({"n", "v"}, "gq", "<cmd>lua require('vscode').action('rewrap.rewrapComment')<CR>")
