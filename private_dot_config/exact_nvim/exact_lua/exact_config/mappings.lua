@@ -5,7 +5,7 @@ local keymap_opts = { noremap = true, silent = true }
 keymap("n", "<Space>", "", keymap_opts)
 
 -- removes highlighting after escaping vim search
-keymap("n", "<Esc>", "<Esc>:noh<CR>", keymap_opts)
+keymap("n", "<Esc>", "<Esc><CMD>noh<CR>", keymap_opts)
 
 -- Visual shifting (does not exit Visual mode)
 keymap("v", "<", "<gv")
@@ -65,7 +65,7 @@ else
   telescope.load_extension("chezmoi")
   map("n", "<C-c>", telescope.extensions.chezmoi.find_files, { desc = "Find chezmoi files" })
 
-  map("n", "<Leader>b", ":BufferLinePick<CR>")
+  map("n", "<Leader>b", "<CMD>BufferLinePick<CR>")
 
   ---
   -- Buffers
@@ -79,7 +79,7 @@ else
 
   -- BufferLine mapping
   for i = 1, 9 do
-    map("n", ("<Leader>%s"):format(i), ("<cmd>lua require('bufferline').go_to(%s, true)<CR>"):format(i))
+    map("n", ("<Leader>%s"):format(i), ("<CMD>lua require('bufferline').go_to(%s, true)<CR>"):format(i))
   end
 
   ---
