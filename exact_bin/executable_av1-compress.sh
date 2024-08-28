@@ -6,6 +6,14 @@ v="${1}"
 n=$(ffmpeg -i "${v}" 2>&1 | awk '/bitrate/ {print $6}')
 r=$(((n + 700) / 1000))
 
+# Copy two audio tracks and transcode video
+#   -map 0:0 \
+#   -c:v
+#   ...
+#   -map 0:1 \
+#   -map 0:2 \
+#   -c:a copy \
+
 ffmpeg -i "${v}" \
     -c:v libsvtav1 \
     -b:v "${r}M" \
