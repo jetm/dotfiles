@@ -971,6 +971,7 @@ return {
   {
     "L3MON4D3/LuaSnip",
     lazy = true,
+    version = "v2.*",
     specs = {
       "hrsh7th/nvim-cmp",
       optional = true,
@@ -982,6 +983,7 @@ return {
       delete_check_events = "TextChanged",
       region_check_events = "CursorMoved",
     },
+    build = "make install_jsregexp",
   },
 
   -- better diffing
