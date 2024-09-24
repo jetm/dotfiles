@@ -967,6 +967,12 @@ return {
     },
   },
 
+  -- LSP signature hint as you type
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+  },
+
   -- Vim Snippets engine [snippet engine] + [snippet templates]
   {
     "L3MON4D3/LuaSnip",

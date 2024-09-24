@@ -38,10 +38,19 @@ return function(_, _)
 
   local lsp_zero = require("lsp-zero")
 
+  local lsp_signature_setup = {
+    hint_prefix = "",
+    handler_opts = {
+      border = "none",
+    },
+    padding = " ",
+  }
+
   lsp_zero.on_attach(function(_, bufnr)
     -- see :help lsp-zero-keybindings
     -- to learn the available actions
     lsp_zero.default_keymaps({ buffer = bufnr })
+    require("lsp_signature").on_attach(lsp_signature_setup, bufnr)
   end)
 
   local lspconfig = require("lspconfig")
