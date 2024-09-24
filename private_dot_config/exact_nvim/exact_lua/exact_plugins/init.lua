@@ -992,6 +992,16 @@ return {
     build = "make install_jsregexp",
   },
 
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+    config = true,
+  },
+
   -- better diffing
   -- ]x - move to previous conflict
   -- [x - move to next conflict
