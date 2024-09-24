@@ -14,10 +14,19 @@ r=$(((n + 700) / 1000))
 #   -map 0:2 \
 #   -c:a copy \
 
+    # -pix_fmt yuv420p10le \
 ffmpeg -i "${v}" \
     -c:v libsvtav1 \
+    -movflags +faststart \
     -b:v "${r}M" \
-    -pix_fmt yuv420p10le \
     -svtav1-params tune=0 \
     -sn \
     "$(basename "${v}" .mkv)"_AV1.mkv
+
+# libx264
+# ffmpeg -i "${v}" \
+#     -c:v libx264 \
+#     -b:v "${r}M" \
+#     -movflags +faststart \
+#     -sn \
+#     "$(basename "${v}" .mkv)"_x264.mkv
