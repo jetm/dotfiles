@@ -110,6 +110,11 @@ LESS="${LESS} --no-histdups"
 # -~ --tilde Don't display tildes after end of file
 LESS="${LESS} --tilde"
 
+# -q Don't ring the terminal bell in all such cases
+LESS="${LESS} --quiet"
+
+# -s Causes consecutive blank lines to be squeezed into a single blank line
+LESS="${LESS} --squeeze-blank-lines"
 export LESS="${LESS}"
 
 #
