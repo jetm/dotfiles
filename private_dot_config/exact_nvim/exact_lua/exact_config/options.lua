@@ -2,13 +2,9 @@ if vim.g.vscode then
   return
 end
 
--- Must be set before Lazy
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
-vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
-
-O = vim.opt -- to set options
+local Opt = vim.opt -- to set options
+local O = vim.o -- to set options
+local G = vim.g -- to set options
 
 --
 -- moving around, search and patterns
@@ -22,8 +18,8 @@ O.inccommand = "split" -- "for incsearch while sub
 --
 O.linebreak = true -- Wrap lines at 'breakat'. Do not break words
 O.list = true -- Display whitespace characters
-O.listchars = { tab = "├ ", trail = "·" }
-O.fillchars = {
+Opt.listchars = { tab = "├ ", trail = "·" }
+Opt.fillchars = {
   foldopen = "",
   foldclose = "",
   -- fold = "⸱",
@@ -59,7 +55,7 @@ O.mouse = "a" -- Enable mouse support
 --
 -- message and info
 --
-O.shortmess:append({ I = true }) -- disable startup message
+Opt.shortmess:append({ I = true }) -- disable startup message
 
 --
 -- selecting clipboard
@@ -69,8 +65,8 @@ O.clipboard = "unnamedplus" -- Connection to the system clipboard
 --
 -- editing text
 --
-O.backspace:append({ "nostop" }) -- Don't stop backspace at insert
-O.completeopt = { "menu", "menuone", "noselect" } -- Options for insert mode completion
+Opt.backspace:append({ "nostop" }) -- Don't stop backspace at insert
+Opt.completeopt = { "menu", "menuone", "noselect" } -- Options for insert mode completion
 O.infercase = true -- Infer cases in keyword completion
 O.pumheight = 10 -- Height of the pop up menu
 
@@ -81,6 +77,13 @@ O.undodir = os.getenv("HOME") .. "/.nvim/undofile" -- Where to save undofile
 O.swapfile = true
 O.backup = true
 O.undofile = true
+
+-- interval for writing swap file to disk, also used by gitsigns
+O.updatetime = 250
+
+-- go to previous/next line with h,l,left arrow and right arrow
+-- when cursor reaches end/beginning of line
+Opt.whichwrap:append "<>[]hl"
 
 -- Append backup files with timestamp
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -125,19 +128,19 @@ O.writebackup = false -- Disable making a backup before overwriting a file
 --
 -- diff mode
 --
-O.diffopt:append("linematch:60") -- enable linematch diff algorithm
+Opt.diffopt:append("linematch:60") -- enable linematch diff algorithm
 
 --
 -- various
 --
 O.signcolumn = "yes" -- Always show the sign column
-O.viewoptions:remove("curdir") -- disable saving current directory with views
+Opt.viewoptions:remove("curdir") -- disable saving current directory with views
 O.virtualedit = "block" -- allow going past end of line in visual block mode
 O.smoothscroll = true
 
 O.wildmode = "list:longest,list:full" -- for : stuff
-O.wildignore:append({"node_modules", "*.pyc"})
-O.wildignore:append({
+Opt.wildignore:append({"node_modules", "*.pyc"})
+Opt.wildignore:append({
     ".o", ".obj",  ".so", ".a", ".lib", ".pyc", ".pyo", ".pyd",
     ".swp", ".swo", ".git", ".orig"
 })
@@ -150,3 +153,7 @@ O.foldtext = "v:lua.yet._custom_fold_text()"
 
 -- Required by Obisidian-nvim
 O.conceallevel = 2
+
+-- disable some default providers
+G.loaded_perl_provider = 0
+G.loaded_ruby_provider = 0
