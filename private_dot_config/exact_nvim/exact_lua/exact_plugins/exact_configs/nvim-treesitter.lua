@@ -1,4 +1,9 @@
 return function(_, _)
+  pcall(function()
+    dofile(vim.g.base46_cache .. "syntax")
+    dofile(vim.g.base46_cache .. "treesitter")
+  end)
+
   local ok, nvim_treesitter = pcall(require, "nvim-treesitter.configs")
   if not ok then
     error("Loading nvim-treesitter.configs")
@@ -34,8 +39,8 @@ return function(_, _)
       "yaml",
     },
     highlight = {
-      -- Getting problem with colors
-      enable = false,
+      enable = true,
+      use_languagetree = true,
       disable = function(_, bufnr)
         return vim.api.nvim_buf_line_count(bufnr) > 10000
       end,

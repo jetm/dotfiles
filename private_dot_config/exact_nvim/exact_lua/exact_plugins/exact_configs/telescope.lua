@@ -1,4 +1,6 @@
 return function (_,_)
+  dofile(vim.g.base46_cache .. "telescope")
+
   local ok, telescope = pcall(require, "telescope")
   if not ok then
     error("Loading telescope")
@@ -16,11 +18,14 @@ return function (_,_)
       mappings = {
         n = { q = telescope_actions.close },
       },
-      prompt_prefix = "🔍 ",
-      selection_caret = "  ",
-      initial_mode = "insert",
       path_display = {},
+      prompt_prefix = "   ",
+      selection_caret = " ",
+      entry_prefix = " ",
+      sorting_strategy = "ascending",
+      initial_mode = "insert",
       layout_config = {
+        prompt_position = "top",
         horizontal = { preview_width = 0.55 },
         vertical = { mirror = false },
         height = 0.95,
