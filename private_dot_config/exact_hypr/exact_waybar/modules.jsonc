@@ -100,7 +100,17 @@
     "exec-if": "which waybar-module-pacman-updates",
     "exec": "waybar-module-pacman-updates",
     "on-click": "timeout 3s waybar-module-pacman-updates",
-    "on-click-right": "kitty yay -Syu --devel"
+    "on-click-right": "kitty pikaur -Syu"
+  },
+  "custom/arch-linux-updates": {
+    "format": "{} {icon}",
+    "return-type": "json",
+    "format-icons": {
+      "pending-updates": " ",
+      "updated": ""
+    },
+    "exec-if": "which waybar-updates",
+    "exec": "waybar-updates"
   },
   "tray": {
     "spacing": 5,

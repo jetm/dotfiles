@@ -22,9 +22,10 @@
   "modules-right": [
     "hyprland/language",
     "custom/clipmgr",
-    // "custom/arch-updates",
+    "custom/arch-updates",
+    // "custom/arch-linux-updates",
     "tray",
-    // "network",
+    "network",
     "pulseaudio",
     "custom/mako",
     "clock"
