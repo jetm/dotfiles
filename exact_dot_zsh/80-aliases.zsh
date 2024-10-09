@@ -20,7 +20,6 @@ alias l='ls --all --long --header --git'
 
 # General
 alias e='nvim'
-alias ep='chef plugins/init.lua'
 alias vimdiff='nvim -d'
 alias up='bd'
 # alias ..='cd ../'
@@ -41,6 +40,9 @@ alias gb='git branch'
 alias gbd='git branch -D'
 alias gbv='git branch -vv'
 alias gbm='git branch -M'
+alias gbs='git switch'
+alias gbc='git switch -c'
+alias gb-='git switch -'
 
 # Commit (c)
 alias gc='git commit -s'
@@ -51,13 +53,8 @@ alias gch='git cherry-pick -x'
 alias gcs='git show'
 
 # Checkout (c)
-alias gsb='git switch'
 alias grp='git restore --patch'
-alias gsc='git switch -c'
-alias gs-='git switch -'
-alias gr-='git restore -'
-alias gre='forgit::checkout::file'
-alias grE='git rE'
+alias grf='forgit::checkout::file'
 alias grh='forgit::reset::head'
 
 # Grep (g)
@@ -97,7 +94,7 @@ alias gsP='git stash --patch'
 alias gu='git undo'
 alias guh='git undo -h'
 
-# rest
+# Misc
 alias gfi='git fixup-prev-ci'
 alias gcl='git clone'
 alias gfe='git fetch'
