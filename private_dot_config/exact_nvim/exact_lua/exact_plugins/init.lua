@@ -81,6 +81,12 @@ return {
     },
   },
 
+  -- Jinja2 syntax support
+  -- {
+  --   "glench/vim-jinja2-syntax",
+  --   event = { "BufReadPre", "BufNewFile" },
+  -- },
+
   -- measure startuptime
   -- {
   --   "dstein64/vim-startuptime",
