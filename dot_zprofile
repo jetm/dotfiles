@@ -15,7 +15,14 @@
 
 add_path() {
   if [ -d $1 ]; then
-    # Set the list of directories that Zsh searches for programs.
+    # Set the list of directories that Zsh searches for programs
+    path=($1 ${path})
+  fi
+}
+
+add_path_file() {
+  if [ -x $1 ]; then
+    # Set paths that Zsh searches for programs
     path=($1 ${path})
   fi
 }
