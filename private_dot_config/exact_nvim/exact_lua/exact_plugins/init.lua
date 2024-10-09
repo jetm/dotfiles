@@ -1,4 +1,52 @@
 return {
+  -- {
+  --   "navarasu/onedark.nvim",
+  --   lazy = false,
+  --
+  --   config = function()
+  --     vim.cmd.colorscheme("onedark")
+  --   end,
+  -- },
+  -- More updated
+  -- {
+  --   "olimorris/onedarkpro.nvim",
+  --   lazy = false,
+  --   -- make sure we load this during startup if it is your main colorscheme
+  --   priority = 1000,
+  --   config = function()
+  --     require("onedarkpro").setup({
+  --       caching = true,
+  --       colors = {
+  --         onedark = { bg = "#23272E", black = "#23272E" },
+  --         -- onedark = { bg = "#1c2025", black = "#1c2025" }, -- darker
+  --         -- onedark = { bg = "#15181C", black = "#15181C" }, -- darker plus
+  --       },
+  --     })
+  --     vim.cmd.colorscheme("onedark")
+  --   end,
+  -- },
+
+  "nvim-lua/plenary.nvim",
+
+  {
+    "nvchad/base46",
+    build = function()
+      require("base46").load_all_highlights()
+    end,
+  },
+
+  {
+    "nvchad/ui",
+    lazy = false,
+    config = function()
+      require("nvchad")
+    end,
+  },
+
+  "nvchad/volt",
+  "nvchad/minty",
+  "nvchad/menu",
+
   -- Enable opening a file in a given line
   {
     "wsdjeg/vim-fetch",
