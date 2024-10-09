@@ -185,15 +185,6 @@ return {
     },
   },
 
-  -- YAML syntax support
-  {
-    "cuducos/yaml.nvim",
-    ft = { "yaml" },
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-    },
-  },
-
   -- A pretty diagnostics, references, telescope results, quickfix and location
   -- list to help you solve all the trouble your code is causing.
   {
@@ -212,6 +203,15 @@ return {
         desc = "Open diagnostics",
       },
     },
+  },
+
+  -- file managing , picker etc
+  {
+    "nvim-tree/nvim-tree.lua",
+    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    opts = function()
+      return require("plugins.configs.nvim-tree")
+    end,
   },
 
   -- Find And Replace plugin for neovim
@@ -249,29 +249,6 @@ return {
       },
     },
   },
-
-  -- {
-  --   "linrongbin16/fzfx.nvim",
-  --   event = { "BufReadPost", "BufNewFile" },
-  --   cmd = "FzfxLiveGrepW",
-  --   dependencies = { "junegunn/fzf", "nvim-tree/nvim-web-devicons" },
-  --   config = true,
-  -- },
-
-  -- search/replace in multiple files
-  -- {
-  --   "nvim-pack/nvim-spectre",
-  --   build = false,
-  --   cmd = "Spectre",
-  --   opts = { open_cmd = "noswapfile vnew" },
-  -- },
-
-  -- Automatic indentation style detection for Neovim
-  -- {
-  -- "nmac427/guess-indent.nvim",
-  -- event = { "BufReadPre", "BufNewFile" },
-  -- config = true,
-  -- },
 
   -- Faster than guess-indent.nvim
   -- Dumb automatic fast indentation detection for Neovim written in Lua
