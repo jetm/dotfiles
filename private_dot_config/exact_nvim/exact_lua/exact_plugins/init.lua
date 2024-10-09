@@ -765,7 +765,7 @@ return {
       { "nvim-lua/plenary.nvim" },
       -- { "rcarriga/nvim-notify" },
     },
-    config = require("plugins.configs.telescope_conf"),
+    config = require("plugins.configs.telescope"),
   },
 
   {
@@ -811,14 +811,14 @@ return {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPost", "BufNewFile" },
     cmd = "TSUpdateSync",
+    build = ":TSUpdate",
     version = false,
     dependencies = {
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
       },
     },
-    build = ":TSUpdate",
-    config = require("plugins.configs.nvim-treesitter_conf"),
+    config = require("plugins.configs.nvim-treesitter"),
   },
 
   -- yaml schema support
@@ -858,7 +858,7 @@ return {
         desc = "Format buffer",
       },
     },
-    config = require("plugins.configs.conform_conf"),
+    config = require("plugins.configs.conform"),
   },
 
   --
@@ -866,7 +866,6 @@ return {
   --
   {
     "williamboman/mason.nvim",
-    event = { "BufReadPre", "BufNewFile" },
     cmd = {
       "Mason",
       "MasonInstall",
@@ -876,13 +875,22 @@ return {
       "MasonUpdate",
       "MasonUpdateAll",
     },
-    config = true,
+    opt = function()
+      require("plugins.configs.mason")
+    end,
     -- :MasonUpdate updates registry contents
     build = ":MasonUpdate",
     -- Add ":MasonUpdateAll"
     dependencies = { "Zeioth/mason-extra-cmds", opts = {} },
   },
 
+  {
+    "neovim/nvim-lspconfig",
+    event = "User FilePost",
+    config = function()
+      require("plugins.configs.lspconfig").defaults()
+    end,
+  },
   -- {
   --   "Exafunction/codeium.vim",
   --   event = "BufEnter",
