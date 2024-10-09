@@ -928,12 +928,41 @@ return {
   },
 
   {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      { "hrsh7th/cmp-buffer", lazy = true },
-      { "hrsh7th/cmp-nvim-lsp", lazy = true },
-    },
+    -- "hrsh7th/nvim-cmp",
+    name = "nvim-cmp",
+    "iguanacucumber/magazine.nvim",
     event = "InsertCharPre",
+    opts = function()
+      return require("plugins.configs.cmp")
+    end,
+    dependencies = {
+      {
+        -- snippet plugin
+        "L3MON4D3/LuaSnip",
+        dependencies = "rafamadriz/friendly-snippets",
+        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+        config = function(_, opts)
+          require("luasnip").config.set_config(opts)
+          require("plugins.configs.luasnip")
+        end,
+      },
+
+      -- cmp sources plugins
+      {
+        "saadparwaiz1/cmp_luasnip",
+        "hrsh7th/cmp-nvim-lua",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+      },
+      {
+        "f3fora/cmp-spell",
+        ft = { "gitcommit", "markdown" },
+      },
+      { "lukas-reineke/cmp-rg" },
+      { "FelipeLema/cmp-async-path" },
+      { "https://git.sr.ht/~p00f/clangd_extensions.nvim" },
+    },
   },
 
   {
