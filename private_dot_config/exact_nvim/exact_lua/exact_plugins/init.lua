@@ -434,53 +434,53 @@ return {
   --   opts = { "*" },
   -- },
 
-  { "brenoprata10/nvim-highlight-colors", config = true },
+  -- { "brenoprata10/nvim-highlight-colors", config = true },
 
   -- A snazzy bufferline for neovim
   -- bufferline is faster than nvim-cokeline and barbar
-  {
-    "akinsho/bufferline.nvim",
-    event = "VeryLazy",
-    opts = {
-      options = {
-        show_buffer_icons = true,
-        show_buffer_close_icons = false,
-        always_show_bufferline = false,
-        -- For 8 -
-        numbers = function(opts)
-          return string.format("%s", opts.ordinal)
-        end,
-        offsets = {
-          {
-            filetype = "neo-tree",
-            text = "Neo-tree",
-            highlight = "Directory",
-            text_align = "left",
-          },
-        },
-      },
-    },
-  },
-
-  -- status line
-  -- lualine has better structure and theme, it's more like spaceline
-  -- heirline needs more work. Test it later
-  {
-    "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
-    dependencies = { "nvim-tree/nvim-web-devicons", "meuter/lualine-so-fancy.nvim", "dokwork/lualine-ex" },
-    init = function()
-      vim.g.lualine_laststatus = vim.o.laststatus
-      if vim.fn.argc(-1) > 0 then
-        -- set an empty statusline till lualine loads
-        vim.o.statusline = " "
-      else
-        -- hide the statusline on the starter page
-        vim.o.laststatus = 0
-      end
-    end,
-    opts = require("plugins.configs.lualine_conf"),
-  },
+  -- {
+  --   "akinsho/bufferline.nvim",
+  --   event = "VeryLazy",
+  --   opts = {
+  --     options = {
+  --       show_buffer_icons = true,
+  --       show_buffer_close_icons = false,
+  --       always_show_bufferline = false,
+  --       -- For 8 -
+  --       numbers = function(opts)
+  --         return string.format("%s", opts.ordinal)
+  --       end,
+  --       offsets = {
+  --         {
+  --           filetype = "neo-tree",
+  --           text = "Neo-tree",
+  --           highlight = "Directory",
+  --           text_align = "left",
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
+  --
+  -- -- status line
+  -- -- lualine has better structure and theme, it's more like spaceline
+  -- -- heirline needs more work. Test it later
+  -- {
+  --   "nvim-lualine/lualine.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = { "nvim-tree/nvim-web-devicons", "meuter/lualine-so-fancy.nvim", "dokwork/lualine-ex" },
+  --   init = function()
+  --     vim.g.lualine_laststatus = vim.o.laststatus
+  --     if vim.fn.argc(-1) > 0 then
+  --       -- set an empty statusline till lualine loads
+  --       vim.o.statusline = " "
+  --     else
+  --       -- hide the statusline on the starter page
+  --       vim.o.laststatus = 0
+  --     end
+  --   end,
+  --   opts = require("plugins.configs.lualine"),
+  -- },
 
   -- Indent guides on blank lines for Neovim
   {
