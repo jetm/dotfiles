@@ -22,5 +22,6 @@ wfxr/forgit kind:defer
 tom-doerr/zsh_codex kind:defer
 ttkalcevic/pwp kind:defer
 marlonrichert/zsh-edit kind:defer
+LucasLarson/gunstage kind:defer
 
 # vim: ft=config
