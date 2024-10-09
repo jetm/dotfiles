@@ -72,10 +72,13 @@ return {
     event = { "BufReadPre", "BufNewFile" },
   },
 
-  -- Jinja2 syntax support
+  -- YAML syntax support
   {
-    "glench/vim-jinja2-syntax",
-    event = { "BufReadPre", "BufNewFile" },
+    "cuducos/yaml.nvim",
+    ft = { "yaml" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
   },
 
   -- measure startuptime
