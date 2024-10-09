@@ -14,12 +14,11 @@ r=$(((n + 700) / 1000))
 #   -map 0:2 \
 #   -c:a copy \
 
-    # -pix_fmt yuv420p10le \
 ffmpeg -i "${v}" \
-    -c:v libsvtav1 \
     -movflags +faststart \
-    -b:v "${r}M" \
-    -svtav1-params tune=0 \
+    -c:v libsvtav1 \
+    -svtav1-params "tune=0:rc=1:tbr=${r}m:enable-hdr=1:enable-variance-boost=1" \
+    -c:a copy \
     -sn \
     "$(basename "${v}" .mkv)"_AV1.mkv
 
