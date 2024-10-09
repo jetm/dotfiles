@@ -488,10 +488,8 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     main = "ibl",
     opts = {
-      indent = {
-        char = "│",
-        tab_char = "├",
-      },
+      indent = { char = "│", tab_char = "├", highlight = "IblChar" },
+      scope = { char = "│", highlight = "IblScopeChar" },
       exclude = {
         buftypes = {
           "nofile",
@@ -511,7 +509,15 @@ return {
         },
       },
     },
-    config = true,
+    config = function(_, opts)
+      dofile(vim.g.base46_cache .. "blankline")
+
+      local hooks = require("ibl.hooks")
+      hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
+      require("ibl").setup(opts)
+
+      dofile(vim.g.base46_cache .. "blankline")
+    end,
   },
 
   -- Active indent guide and indent text objects. When you're browsing
