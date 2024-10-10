@@ -26,7 +26,7 @@ return {
     end,
   },
 
-  "nvim-lua/plenary.nvim",
+  { "nvim-lua/plenary.nvim" },
 
   {
     "nvchad/base46",
@@ -43,9 +43,9 @@ return {
     end,
   },
 
-  "nvchad/volt",
-  "nvchad/minty",
-  "nvchad/menu",
+  { "nvchad/volt" },
+  { "nvchad/minty" },
+  { "nvchad/menu" },
 
   -- Enable opening a file in a given line
   {
@@ -403,22 +403,22 @@ return {
   },
 
   -- Neovim UI Enhancer
-  {
-    "stevearc/dressing.nvim",
-    lazy = true,
-    opts = {
-      input = {
-        default_prompt = "➤ ",
-        win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" },
-      },
-      select = {
-        backend = { "telescope", "builtin" },
-        builtin = {
-          win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" },
-        },
-      },
-    },
-  },
+  -- {
+  --   "stevearc/dressing.nvim",
+  --   lazy = true,
+  --   opts = {
+  --     input = {
+  --       default_prompt = "➤ ",
+  --       win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" },
+  --     },
+  --     select = {
+  --       backend = { "telescope", "builtin" },
+  --       builtin = {
+  --         win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" },
+  --       },
+  --     },
+  --   },
+  -- },
 
   -- move and duplicate blocks and lines, with complete fold handling,
   -- reindent, and undone in one go
