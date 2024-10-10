@@ -1,7 +1,8 @@
 return function(_, _)
   local indent_size = function()
-    local indent_type = vim.api.nvim_buf_get_option(0, "expandtab") and "spaces" or "tab"
-    local indent_size = vim.api.nvim_buf_get_option(0, "tabstop")
+    local bufnr = vim.api.nvim_get_current_buf()
+    local indent_type = vim.api.nvim_get_option_value("expandtab", {buf = bufnr}) and "spaces" or "tab"
+    local indent_size = vim.api.nvim("tabstop", {buf = bufnr})
     return ("%s: %s"):format(indent_type, indent_size)
   end
 
