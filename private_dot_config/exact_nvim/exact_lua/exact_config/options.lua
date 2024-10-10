@@ -70,12 +70,15 @@ O.shortmess:append({ I = true }) -- disable startup message
 --
 -- selecting clipboard
 --
-O.clipboard = "unnamedplus" -- Connection to the system clipboard
+-- only set clipboard if not in ssh, to make sure the OSC 52
+-- integration works automatically. Requires Neovim >= 0.10.0
+O.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 
 --
 -- editing text
 --
 O.backspace:append({ "nostop" }) -- Don't stop backspace at insert
+O.completeopt = "menu,menuone,noselect"
 O.infercase = true -- Infer cases in keyword completion
 O.pumheight = 10 -- Height of the pop up menu
 
