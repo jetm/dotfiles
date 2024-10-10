@@ -11,6 +11,40 @@ local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 -- General settings:
 --------------------
 
+-- WAR: E21: Cannot make changes, 'modifiable' is off
+-- autocmd({ "BufReadPost" }, {
+--   pattern = "",
+--   callback = function()
+--     vim.cmd("if &modifiable | set modifiable | set write | endif")
+--   end,
+-- })
+
+-- user event that loads after UIEnter + only if file buf is there
+autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
+  group = vim.api.nvim_create_augroup("NvFilePost", { clear = true }),
+  callback = function(args)
+    local file = vim.api.nvim_buf_get_name(args.buf)
+    local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
+
+    if not vim.g.ui_entered and args.event == "UIEnter" then
+      vim.g.ui_entered = true
+    end
+
+    if file ~= "" and buftype ~= "nofile" and vim.g.ui_entered then
+      vim.api.nvim_exec_autocmds("User", { pattern = "FilePost", modeline = false })
+      vim.api.nvim_del_augroup_by_name("NvFilePost")
+
+      vim.schedule(function()
+        vim.api.nvim_exec_autocmds("FileType", {})
+
+        if vim.g.editorconfig then
+          require("editorconfig").config(args.buf)
+        end
+      end)
+    end
+  end,
+})
+
 -- Highlight on yank
 autocmd("TextYankPost", {
   group = augroup("highlight_yank"),
@@ -42,18 +76,6 @@ autocmd("BufReadPost", {
   end,
 })
 
--- Auto create dir when saving a file, in case some intermediate directory does not exist
-autocmd({ "BufWritePre" }, {
-  group = augroup("auto_create_dir"),
-  callback = function(event)
-    if event.match:match("^%w%w+://") then
-      return
-    end
-    local file = vim.loop.fs_realpath(event.match) or event.match
-    vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
-  end,
-})
-
 -- Apply changes in chezmoi managed files
 autocmd("BufWritePost", {
   pattern = os.getenv("HOME") .. "/.local/share/chezmoi/*",
@@ -63,9 +85,9 @@ autocmd("BufWritePost", {
 -- Disable diagnostics in insert mode
 autocmd("ModeChanged", {
   pattern = { "n:i", "v:s" },
-  desc = "Disable diagnostics in insert and select mode",
+  desc = "Disable diagnostics while typing",
   callback = function(e)
-    vim.diagnostic.disable(e.buf)
+    vim.diagnostic.enable(false, { bufnr = e.buf })
   end,
 })
 
@@ -73,20 +95,20 @@ autocmd("ModeChanged", {
   pattern = "i:n",
   desc = "Enable diagnostics when leaving insert mode",
   callback = function(e)
-    vim.diagnostic.enable(e.buf)
+    vim.diagnostic.enable(true, { bufnr = e.buf })
   end,
 })
 
-local function hide_semantic_highlights()
-  for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
-    vim.api.nvim_set_hl(0, group, {})
-  end
-end
-
-autocmd("ColorScheme", {
-  desc = "Clear LSP highlight groups",
-  callback = hide_semantic_highlights,
-})
+-- local function hide_semantic_highlights()
+--   for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
+--     vim.api.nvim_set_hl(0, group, {})
+--   end
+-- end
+--
+-- autocmd("ColorScheme", {
+--   desc = "Clear LSP highlight groups",
+--   callback = hide_semantic_highlights,
+-- })
 
 --
 -- Settings for filetypes:
@@ -145,6 +167,7 @@ autocmd("FileType", {
   end,
 })
 
+-- Auto create dir when saving a file, in case some intermediate directory does not exist
 autocmd("BufWritePre", {
   desc = "Automatically create parent directories if they don't exist when saving a file",
   group = augroup("create_dir"),
@@ -203,30 +226,4 @@ autocmd({ "BufWritePost", "FileWritePost" }, {
   pattern = "*.gpg",
   group = gpgGroup,
   command = "u",
-})
-
--- user event that loads after UIEnter + only if file buf is there
-autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
-  group = vim.api.nvim_create_augroup("NvFilePost", { clear = true }),
-  callback = function(args)
-    local file = vim.api.nvim_buf_get_name(args.buf)
-    local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
-
-    if not vim.g.ui_entered and args.event == "UIEnter" then
-      vim.g.ui_entered = true
-    end
-
-    if file ~= "" and buftype ~= "nofile" and vim.g.ui_entered then
-      vim.api.nvim_exec_autocmds("User", { pattern = "FilePost", modeline = false })
-      vim.api.nvim_del_augroup_by_name "NvFilePost"
-
-      vim.schedule(function()
-        vim.api.nvim_exec_autocmds("FileType", {})
-
-        if vim.g.editorconfig then
-          require("editorconfig").config(args.buf)
-        end
-      end)
-    end
-  end,
 })
