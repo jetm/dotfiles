@@ -110,7 +110,9 @@ else
     require("lint").try_lint()
   end, { desc = "Lint Current Buffer" })
 
-  map("n", "<leader>d", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+  -- Using trouble
+  -- map("n", "<leader>d", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+  -- map("n", "<leader>D", "<CMD>lua vim.diagnostic.reset()<CR>", { desc = "clear diagnostics" })
 
   map("n", "<leader>D", "<CMD>lua vim.diagnostic.reset()<CR>", { desc = "clear diagnostics" })
 end
