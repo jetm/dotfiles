@@ -437,12 +437,6 @@ return {
     },
   },
 
-  -- {
-  --   "NvChad/nvim-colorizer.lua",
-  --   lazy = true,
-  --   opts = { "*" },
-  -- },
-
   -- { "brenoprata10/nvim-highlight-colors", config = true },
 
   -- A snazzy bufferline for neovim
