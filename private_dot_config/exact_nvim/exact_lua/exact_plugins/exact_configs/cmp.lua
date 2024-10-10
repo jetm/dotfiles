@@ -2,48 +2,21 @@
 dofile(vim.g.base46_cache .. "cmp")
 local cmp = require("cmp")
 
-local has_words_before = function()
-  local line, col = (table.unpack)(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
 local function is_visible(_cmp)
   return _cmp.core.view:visible() or vim.fn.pumvisible() == 1
 end
 
--- local get_icon_provider = function()
---   local _, mini_icons = pcall(require, "mini.icons")
---   if _G.MiniIcons then
---     return function(kind)
---       return mini_icons.get("lsp", kind)
---     end
---   end
--- end
--- local icon_provider = get_icon_provider()
-
--- local format = function(entry, item)
---   local highlight_colors_avail, highlight_colors = pcall(require, "nvim-highlight-colors")
---   local color_item = highlight_colors_avail and highlight_colors.format(entry, { kind = item.kind })
---   if icon_provider then
---     local icon = icon_provider(item.kind)
---     if icon then
---       item.kind = icon
---     end
---   end
---   if color_item and color_item.abbr_hl_group then
---     item.kind, item.kind_hl_group = color_item.abbr, color_item.abbr_hl_group
---   end
---   return item
--- end
-
 local options = {
+  -- Avoid preselecting one item in completion menu
+  -- @see https://github.com/hrsh7th/nvim-cmp/discussions/1411
+  preselect = cmp.PreselectMode.None,
   completion = {
-    -- this is important
-    -- @see https://github.com/hrsh7th/nvim-cmp/discussions/1411
-    completeopt = "menuone,noinsert,noselect",
+    completeopt = "menu,menuone,noselect",
   },
   mapping = {
     ["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
     ["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+
     -- `Enter` key to confirm completion
     ["<CR>"] = cmp.mapping(cmp.mapping.confirm({ select = false }), { "i", "c" }),
 
@@ -54,8 +27,6 @@ local options = {
         vim.schedule(function()
           vim.snippet.jump(1)
         end)
-      elseif has_words_before() then
-        cmp.complete()
       else
         fallback()
       end
@@ -77,7 +48,6 @@ local options = {
     },
     { name = "async_path", priority = 20, max_item_count = 2 },
   }),
-  -- formatting = { fields = { "kind", "abbr", "menu" }, format = format },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
