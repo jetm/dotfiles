@@ -985,39 +985,8 @@ return {
       },
       { "williamboman/mason.nvim" },
       { "williamboman/mason-lspconfig.nvim" },
-
-      -- A more complete solution for make an IDE
-      -- {
-      --   "ray-x/navigator.lua",
-      --   dependencies = {
-      --     { "ray-x/guihua.lua", build = "cd lua/fzy && make" },
-      --     { "neovim/nvim-lspconfig" },
-      --     { "nvim-treesitter/nvim-treesitter" },
-      --   },
-      -- },
-
-      -- Completation engine
-      { "hrsh7th/nvim-cmp" },
-
-      -- Completation sources
-      { "hrsh7th/cmp-nvim-lsp" },
-      { "hrsh7th/cmp-buffer" },
-      { "lukas-reineke/cmp-rg" },
-      { "FelipeLema/cmp-async-path" },
-      { "https://git.sr.ht/~p00f/clangd_extensions.nvim" },
-      {
-        "petertriho/cmp-git",
-        ft = { "gitcommit" },
-      },
-      {
-        "f3fora/cmp-spell",
-        ft = { "gitcommit", "markdown" },
-      },
-
-      -- Snippets
-      { "L3MON4D3/LuaSnip" },
     },
-    config = require("plugins.configs.lsp_conf"),
+    config = require("plugins.configs.lsp"),
   },
 
   -- Extensible UI for Neovim notifications and LSP progress messages
