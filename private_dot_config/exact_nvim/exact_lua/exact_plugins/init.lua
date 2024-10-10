@@ -887,6 +887,10 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = "User FilePost",
+    dependencies = {
+      { "williamboman/mason.nvim" },
+      { "williamboman/mason-lspconfig.nvim" },
+    },
     config = function()
       require("plugins.configs.lspconfig").defaults()
     end,
@@ -975,19 +979,19 @@ return {
     end,
   },
 
-  {
-    "VonHeikemen/lsp-zero.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    branch = "v3.x",
-    dependencies = {
-      {
-        "neovim/nvim-lspconfig",
-      },
-      { "williamboman/mason.nvim" },
-      { "williamboman/mason-lspconfig.nvim" },
-    },
-    config = require("plugins.configs.lsp"),
-  },
+  -- {
+  --   "VonHeikemen/lsp-zero.nvim",
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   branch = "v3.x",
+  --   dependencies = {
+  --     {
+  --       "neovim/nvim-lspconfig",
+  --     },
+  --     { "williamboman/mason.nvim" },
+  --     { "williamboman/mason-lspconfig.nvim" },
+  --   },
+  --   config = require("plugins.configs.lsp"),
+  -- },
 
   -- Extensible UI for Neovim notifications and LSP progress messages
   -- {
