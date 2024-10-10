@@ -1062,15 +1062,15 @@ return {
   --   },
   -- },
 
-  -- Introduce a new operators motions to quickly replace and exchange text
-  --  {
-  --    "gbprod/substitute.nvim",
-  --    opts = {
-  --      -- your configuration comes here
-  --      -- or leave it empty to use the default settings
-  --      -- refer to the configuration section below
-  --    },
-  --  },
+  -- Debugging in NeoVim the print() way!
+  -- {
+  --   "andrewferrier/debugprint.nvim",
+  --
+  --   dependencies = {
+  --     "echasnovski/mini.nvim", -- Needed for :ToggleCommentDebugPrints (not needed for NeoVim 0.10+)
+  --   },
+  --   config = true,
+  -- },
 
   -- {
   --   "sindrets/diffview.nvim",
