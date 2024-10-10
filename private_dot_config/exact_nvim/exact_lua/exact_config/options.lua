@@ -2,9 +2,19 @@ if vim.g.vscode then
   return
 end
 
-local Opt = vim.opt -- to set options
-local O = vim.o -- to set options
-local G = vim.g -- to set options
+local O = vim.opt
+local G = vim.g
+
+-- disable some default providers
+G.loaded_perl_provider = 0
+G.loaded_ruby_provider = 0
+G.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
+
+-- Set filetype to `bigfile` for files larger than 1.5 MB
+-- Only vim syntax will be enabled (with the correct filetype)
+-- LSP, treesitter and other ft plugins will be disabled.
+-- mini.animate will also be disabled.
+G.bigfile_size = 1024 * 1024 * 1.5 -- 1.5 MB
 
 --
 -- moving around, search and patterns
@@ -18,8 +28,8 @@ O.inccommand = "split" -- "for incsearch while sub
 --
 O.linebreak = true -- Wrap lines at 'breakat'. Do not break words
 O.list = true -- Display whitespace characters
-Opt.listchars = { tab = "├ ", trail = "·" }
-Opt.fillchars = {
+O.listchars = { tab = "├ ", trail = "·" }
+O.fillchars = {
   foldopen = "",
   foldclose = "",
   -- fold = "⸱",
@@ -55,7 +65,7 @@ O.mouse = "a" -- Enable mouse support
 --
 -- message and info
 --
-Opt.shortmess:append({ I = true }) -- disable startup message
+O.shortmess:append({ I = true }) -- disable startup message
 
 --
 -- selecting clipboard
@@ -65,8 +75,7 @@ O.clipboard = "unnamedplus" -- Connection to the system clipboard
 --
 -- editing text
 --
-Opt.backspace:append({ "nostop" }) -- Don't stop backspace at insert
-Opt.completeopt = { "menu", "menuone", "noselect" } -- Options for insert mode completion
+O.backspace:append({ "nostop" }) -- Don't stop backspace at insert
 O.infercase = true -- Infer cases in keyword completion
 O.pumheight = 10 -- Height of the pop up menu
 
@@ -83,7 +92,7 @@ O.updatetime = 250
 
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
-Opt.whichwrap:append "<>[]hl"
+O.whichwrap:append "<>[]hl"
 
 -- Append backup files with timestamp
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -106,11 +115,6 @@ O.softtabstop = 4
 O.tabstop = 4 -- Tab width
 
 --
--- multi-byte characters
---
-O.fileencoding = "utf-8" -- File content encoding for the buffer
-
---
 -- multiple windows
 --
 O.laststatus = 3 -- globalstatus
@@ -128,19 +132,19 @@ O.writebackup = false -- Disable making a backup before overwriting a file
 --
 -- diff mode
 --
-Opt.diffopt:append("linematch:60") -- enable linematch diff algorithm
+O.diffopt:append("linematch:60") -- enable linematch diff algorithm
 
 --
 -- various
 --
 O.signcolumn = "yes" -- Always show the sign column
-Opt.viewoptions:remove("curdir") -- disable saving current directory with views
+O.viewoptions:remove("curdir") -- disable saving current directory with views
 O.virtualedit = "block" -- allow going past end of line in visual block mode
 O.smoothscroll = true
 
 O.wildmode = "list:longest,list:full" -- for : stuff
-Opt.wildignore:append({"node_modules", "*.pyc"})
-Opt.wildignore:append({
+O.wildignore:append({"node_modules", "*.pyc"})
+O.wildignore:append({
     ".o", ".obj",  ".so", ".a", ".lib", ".pyc", ".pyo", ".pyd",
     ".swp", ".swo", ".git", ".orig"
 })
@@ -153,7 +157,3 @@ O.foldtext = "v:lua.yet._custom_fold_text()"
 
 -- Required by Obisidian-nvim
 O.conceallevel = 2
-
--- disable some default providers
-G.loaded_perl_provider = 0
-G.loaded_ruby_provider = 0
