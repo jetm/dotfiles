@@ -25,7 +25,7 @@
     "custom/arch-updates",
     // "custom/arch-linux-updates",
     "tray",
-    "network",
+    // "network",
     "pulseaudio",
     "custom/mako",
     "clock"
