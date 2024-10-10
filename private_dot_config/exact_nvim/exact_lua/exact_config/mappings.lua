@@ -23,12 +23,7 @@ if vim.g.vscode then
   end
 else
   local function map(mode, lhs, rhs, opts)
-    local keys = require("lazy.core.handler").handlers.keys
     local modes = type(mode) == "string" and { mode } or mode
-
-    modes = vim.tbl_filter(function(m)
-      return not (keys.have and keys:have(lhs, m))
-    end, modes)
 
     -- do not create the keymap if a lazy keys handler exists
     if #modes > 0 then
@@ -78,8 +73,10 @@ else
   map("n", "<leader>`", "<CMD>e #<CR>", { desc = "Switch to other buffer" })
 
   -- BufferLine mapping
-  for i = 1, 9 do
-    map("n", ("<Leader>%s"):format(i), ("<CMD>lua require('bufferline').go_to(%s, true)<CR>"):format(i))
+  for i = 1, 9, 1 do
+    map("n", string.format("<Leader>%s", i), function()
+      vim.api.nvim_set_current_buf(vim.t.bufs[i])
+    end)
   end
 
   ---
