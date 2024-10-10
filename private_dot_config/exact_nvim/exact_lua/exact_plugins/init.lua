@@ -172,6 +172,15 @@ return {
     config = true,
   },
 
+  -- Introduce a new operators motions to quickly replace and exchange text
+  {
+    "gbprod/substitute.nvim",
+    config = function()
+      -- Required to play well with yank
+      require("substitute").setup({})
+    end,
+  },
+
   -- enhanced increment/decrement plugin for Neovim
   -- { "monaqa/dial.nvim", lazy = true },
 

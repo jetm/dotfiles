@@ -114,5 +114,6 @@ else
   -- map("n", "<leader>d", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
   -- map("n", "<leader>D", "<CMD>lua vim.diagnostic.reset()<CR>", { desc = "clear diagnostics" })
 
-  map("n", "<leader>D", "<CMD>lua vim.diagnostic.reset()<CR>", { desc = "clear diagnostics" })
+  -- substitute
+  map({"n", "x"}, "<Leader>s", require('substitute').operator, { noremap = true })
 end
