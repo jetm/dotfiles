@@ -1,3 +1,9 @@
+-- Must be set before Lazy
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
+
 -- Manually add new filetypes
 vim.filetype.add({
   filename = {},

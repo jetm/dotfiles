@@ -1107,7 +1107,7 @@ return {
   --   "sindrets/diffview.nvim",
   --   dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
   --   cmd = { "DiffviewOpen", "DiffviewClose" },
-  --   config = require("plugins.configs.diffview_conf"),
+  --   config = require("plugins.configs.diffview"),
   -- },
 
   -- Smart selection of the closest text object
