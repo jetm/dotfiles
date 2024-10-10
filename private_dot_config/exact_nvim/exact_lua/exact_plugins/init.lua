@@ -990,48 +990,20 @@ return {
   },
 
   -- Extensible UI for Neovim notifications and LSP progress messages
-  {
-    "j-hui/fidget.nvim",
-    event = { "LspAttach" },
-    opts = {
-      -- options
-    },
-  },
+  -- {
+  --   "j-hui/fidget.nvim",
+  --   event = { "LspAttach" },
+  -- },
 
-  -- LSP signature hint as you type
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
-  },
-
-  -- Vim Snippets engine [snippet engine] + [snippet templates]
-  {
-    "L3MON4D3/LuaSnip",
-    lazy = true,
-    version = "v2.*",
-    specs = {
-      "hrsh7th/nvim-cmp",
-      optional = true,
-      dependencies = { { "saadparwaiz1/cmp_luasnip", lazy = true } },
-    },
-    dependencies = { "rafamadriz/friendly-snippets", lazy = true },
-    opts = {
-      history = true,
-      delete_check_events = "TextChanged",
-      region_check_events = "CursorMoved",
-    },
-    build = "make install_jsregexp",
-  },
-
-  {
-    "NeogitOrg/neogit",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-    config = true,
-  },
+  -- {
+  --   "NeogitOrg/neogit",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "sindrets/diffview.nvim",
+  --     "nvim-telescope/telescope.nvim",
+  --   },
+  --   config = true,
+  -- },
 
   -- better diffing
   -- ]x - move to previous conflict
