@@ -1029,25 +1029,10 @@ return {
   -- hunks in a commit
   {
     "lewis6991/gitsigns.nvim",
-    event = "BufEnter",
-    opts = {
-      signs = {
-        add = { text = "▎" },
-        change = { text = "▎" },
-        delete = { text = "" },
-        topdelete = { text = "" },
-        changedelete = { text = "▎" },
-        untracked = { text = "▎" },
-      },
-      on_attach = function(buffer)
-        local function map(mode, l, r, desc)
-          vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
-        end
-
-        -- stylua: ignore start
-        map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
-      end,
-    },
+    event = "User FilePost",
+    opts = function()
+      return require("plugins.configs.gitsigns")
+    end,
   },
 
   -- Automatically highlights other instances of the word under your cursor.
