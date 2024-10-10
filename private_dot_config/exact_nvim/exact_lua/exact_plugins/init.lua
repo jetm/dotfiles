@@ -777,32 +777,13 @@ return {
     config = true,
   },
 
+  -- A telescope.nvim extension that offers intelligent prioritization when selecting files from your editing history
   -- {
-  --   "ibhagwan/fzf-lua",
-  --   -- optional for icon support
-  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  --   "nvim-telescope/telescope-frecency.nvim",
   --   config = function()
-  --     -- calling `setup` is optional for customization
-  --     require("fzf-lua").setup({
-  --       grep = {
-  --         rg_glob = true,
-  --       },
-  --       winopts = {
-  --         preview = {
-  --           horizontal = "right:40%",
-  --         },
-  --       },
-  --     })
+  --     require("telescope").load_extension("frecency")
   --   end,
   -- },
-
-  -- A telescope.nvim extension that offers intelligent prioritization when selecting files from your editing history
-  {
-    "nvim-telescope/telescope-frecency.nvim",
-    config = function()
-      require("telescope").load_extension("frecency")
-    end,
-  },
 
   {
     "nvim-treesitter/nvim-treesitter-context",
@@ -898,6 +879,7 @@ return {
       require("plugins.configs.lspconfig").defaults()
     end,
   },
+
   -- {
   --   "Exafunction/codeium.vim",
   --   event = "BufEnter",
@@ -981,26 +963,6 @@ return {
       require("cmp_kitty"):setup()
     end,
   },
-
-  -- {
-  --   "VonHeikemen/lsp-zero.nvim",
-  --   event = { "BufReadPre", "BufNewFile" },
-  --   branch = "v3.x",
-  --   dependencies = {
-  --     {
-  --       "neovim/nvim-lspconfig",
-  --     },
-  --     { "williamboman/mason.nvim" },
-  --     { "williamboman/mason-lspconfig.nvim" },
-  --   },
-  --   config = require("plugins.configs.lsp"),
-  -- },
-
-  -- Extensible UI for Neovim notifications and LSP progress messages
-  -- {
-  --   "j-hui/fidget.nvim",
-  --   event = { "LspAttach" },
-  -- },
 
   -- {
   --   "NeogitOrg/neogit",
