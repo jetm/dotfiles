@@ -2,8 +2,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
-
 -- Manually add new filetypes
 vim.filetype.add({
   filename = {},
@@ -55,17 +53,12 @@ require("lazy").setup({
 }, lazy_config)
 
 -- load theme
+dofile(vim.g.base46_cache .. "syntax")
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
-for _, source in ipairs({
-  "config.utils",
-  "config.options",
-  "config.autocmds",
-  "config.mappings",
-}) do
-  local status_ok, fault = pcall(require, source)
-  if not status_ok then
-    vim.api.nvim_err_writeln("Failed to load " .. source .. "\n\n" .. fault)
-  end
-end
+-- Load local changes
+local configs = vim.fn.stdpath("config") .. "/lua/config/"
+dofile(configs .. "options.lua")
+dofile(configs .. "autocmds.lua")
+dofile(configs .. "mappings.lua")
