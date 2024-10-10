@@ -1044,23 +1044,23 @@ return {
     opts = { at_edge = "stop" },
   },
 
-  {
-    "epwalsh/obsidian.nvim",
-    lazy = true,
-    event = {
-      "BufReadPre " .. vim.fn.expand("~") .. "/MEGAsync/Obsidian/**.md",
-      "BufNewFile " .. vim.fn.expand("~") .. "/MEGAsync/Obsidian/jetm/**.md",
-    },
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {
-      workspaces = {
-        {
-          name = "jetm",
-          path = "~/MEGAsync/Obsidian/jetm",
-        },
-      },
-    },
-  },
+  -- {
+  --   "epwalsh/obsidian.nvim",
+  --   lazy = true,
+  --   event = {
+  --     "BufReadPre " .. vim.fn.expand("~") .. "/MEGAsync/Obsidian/**.md",
+  --     "BufNewFile " .. vim.fn.expand("~") .. "/MEGAsync/Obsidian/jetm/**.md",
+  --   },
+  --   dependencies = { "nvim-lua/plenary.nvim" },
+  --   opts = {
+  --     workspaces = {
+  --       {
+  --         name = "jetm",
+  --         path = "~/MEGAsync/Obsidian/jetm",
+  --       },
+  --     },
+  --   },
+  -- },
 
   -- Introduce a new operators motions to quickly replace and exchange text
   --  {
