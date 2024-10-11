@@ -160,3 +160,5 @@ O.foldtext = "v:lua.yet._custom_fold_text()"
 
 -- Required by Obisidian-nvim
 O.conceallevel = 2
+
+O.sessionoptions = "buffers,curdir,folds,globals,tabpages,winpos,winsize"
