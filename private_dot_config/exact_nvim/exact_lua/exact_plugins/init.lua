@@ -1,31 +1,4 @@
 return {
-  -- {
-  --   "navarasu/onedark.nvim",
-  --   lazy = false,
-  --
-  --   config = function()
-  --     vim.cmd.colorscheme("onedark")
-  --   end,
-  -- },
-  -- More updated
-  {
-    "olimorris/onedarkpro.nvim",
-    lazy = false,
-    -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000,
-    config = function()
-      require("onedarkpro").setup({
-        caching = true,
-        colors = {
-          -- onedark = { bg = "#23272E", black = "#23272E" },
-          -- onedark = { bg = "#1c2025", black = "#1c2025" }, -- darker
-          -- onedark = { bg = "#15181C", black = "#15181C" }, -- darker plus
-        },
-      })
-      vim.cmd.colorscheme("onedark")
-    end,
-  },
-
   { "nvim-lua/plenary.nvim" },
 
   {
@@ -56,7 +29,49 @@ return {
     },
     config = true,
   },
-  -- { "lewis6991/fileline.nvim" },
+
+  -- {
+  --   "navarasu/onedark.nvim",
+  --   lazy = false,
+  --
+  --   config = function()
+  --     vim.cmd.colorscheme("onedark")
+  --   end,
+  -- },
+  --
+  -- onedarkpro is more updated
+  {
+    "olimorris/onedarkpro.nvim",
+    lazy = false,
+    -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000,
+    config = function()
+      require("onedarkpro").setup({
+        caching = true,
+        colors = {
+          -- onedark = { bg = "#23272E", black = "#23272E" },
+          -- onedark = { bg = "#1c2025", black = "#1c2025" }, -- darker
+          -- onedark = { bg = "#15181C", black = "#15181C" }, -- darker plus
+        },
+      })
+      vim.cmd.colorscheme("onedark")
+    end,
+  },
+
+  -- Enable opening a file in a given line
+  -- {
+  --   "wsdjeg/vim-fetch",
+  --   lazy = false,
+  -- },
+
+  -- Goto filenames with line info
+  { "lewis6991/fileline.nvim", lazy = false },
+
+  -- Gives basic functionality for error messages with format filename:line:column  -- {
+  --   "Dr-42/error-jump.nvim",
+  --   name = "error-jump",
+  --   lazy = false,
+  -- },
 
   -- Enable repeating supported plugin maps with '.'
   {
