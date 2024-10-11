@@ -47,10 +47,14 @@ return {
   { "nvchad/minty" },
   { "nvchad/menu" },
 
-  -- Enable opening a file in a given line
+  -- Simple session management for Neovim with git branching, autoloading and Telescope support
   {
-    "wsdjeg/vim-fetch",
-    lazy = false,
+    "olimorris/persisted.nvim",
+    lazy = false, -- make sure the plugin is always loaded at startup
+    opts = {
+      autoload = true,
+    },
+    config = true,
   },
   -- { "lewis6991/fileline.nvim" },
 
