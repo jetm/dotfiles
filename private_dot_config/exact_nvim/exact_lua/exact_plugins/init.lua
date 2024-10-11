@@ -949,19 +949,16 @@ return {
 
   -- codeium
   {
-    "sourcegraph/sg.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    "Exafunction/codeium.nvim",
+    cmd = "Codeium",
+    build = ":Codeium Auth",
     config = true,
-    opts = {
-      enable_cody = true,
-      accept_tos = true,
-    },
   },
 
   {
     -- "hrsh7th/nvim-cmp",
-    name = "nvim-cmp",
     "iguanacucumber/magazine.nvim",
+    name = "nvim-cmp",
     event = "InsertCharPre",
     opts = function()
       return require("plugins.configs.cmp")

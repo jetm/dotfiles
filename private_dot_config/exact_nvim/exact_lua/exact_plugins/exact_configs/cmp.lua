@@ -33,6 +33,7 @@ local options = {
     end, { "i", "s" }),
   },
   sources = cmp.config.sources({
+    { name = "codeium", priority = 80, max_item_count = 3 },
     { name = "nvim_lsp", priority = 70, max_item_count = 3 },
     { name = "luasnip", priority = 60, max_item_count = 3 },
     { name = "buffer", priority = 50, max_item_count = 2 },
