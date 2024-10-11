@@ -906,6 +906,21 @@ return {
   --   end,
   -- },
 
+  -- Still experimental
+  -- {
+  --   "sourcegraph/sg.nvim",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-telescope/telescope.nvim",
+  --   },
+  --   config = true,
+  --   opts = {
+  --     enable_cody = true,
+  --     accept_tos = true,
+  --   },
+  -- },
+
+  -- codeium
   {
     "sourcegraph/sg.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
