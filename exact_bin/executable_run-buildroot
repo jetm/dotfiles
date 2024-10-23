@@ -2,12 +2,16 @@
 
 # -bios output/images/u-boot.bin \
 qemu-system-aarch64 \
-	-M virt \
-	-cpu cortex-a57 \
-	-m 512 \
-	-nographic \
+	-M virt,acpi=off \
+	-cpu cortex-a53 \
+	-m 2048 \
 	-bios ~/repos/work/u-boot/u-boot.bin \
-	-drive file=output/images/disk.img,if=none,format=raw,id=hd0 \
+	-nographic \
 	-device virtio-blk-device,drive=hd0 \
+	-drive file=output/images/disk.img,if=none,format=raw,id=hd0 \
+	-device virtio-net-device,netdev=eth0 \
 	-netdev user,id=eth0 \
-	-device virtio-net-device,netdev=eth0
+	-device virtio-rng-device,rng=rng0 \
+	-object rng-random,filename=/dev/urandom,id=rng0 \
+	-rtc base=utc,clock=host \
+	-smp 2
