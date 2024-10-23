@@ -49,7 +49,7 @@ srt_extract() {
   mkvextract tracks "$1" $2:"$(basename $1 .mkv)".srt
 }
 
-rm_audio() {
+audio_rm() {
   # ffmpeg -i "$1" -map 0 -map -0:a -map 0:m:language:$2 -c copy "$(basename $1 .mkv)_$2.mkv"
   ffmpeg -i "$1" -map 0:v -map 0:a:"$2" -c copy "$(basename $1 .mkv)_$2.mkv"
 }
