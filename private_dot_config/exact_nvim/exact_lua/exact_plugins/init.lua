@@ -635,70 +635,18 @@ return {
     },
   },
 
+  -- Precognition uses virtual text and gutter signs to show available motions
+  -- Missing more hints
   -- {
-  --   "ThePrimeagen/harpoon",
-  --   branch = "harpoon2",
-  --   -- config = require("plugins.configs.harpoon"),
-  --   event = { "BufReadPre", "BufNewFile" },
-  --   opts = {
-  --     menu = {
-  --       width = vim.api.nvim_win_get_width(0) - 4,
-  --     },
-  --     settings = {
-  --       save_on_toggle = true,
-  --     },
-  --   },
-  --   keys = function()
-  --     local keys = {
-  --       {
-  --         "<leader>H",
-  --         function()
-  --           require("harpoon"):list():add()
-  --         end,
-  --         desc = "Harpoon File",
-  --       },
-  --       {
-  --         "<leader>h",
-  --         function()
-  --           local harpoon = require("harpoon")
-  --           harpoon.ui:toggle_quick_menu(harpoon:list())
-  --         end,
-  --         desc = "Harpoon Quick Menu",
-  --       },
-  --     }
-  --
-  --     for i = 1, 5 do
-  --       table.insert(keys, {
-  --         "<leader>" .. i,
-  --         function()
-  --           require("harpoon"):list():select(i)
-  --         end,
-  --         desc = "Harpoon to File " .. i,
-  --       })
-  --     end
-  --     return keys
-  --   end,
-  -- },
-
-  -- Use the w, e, b motions. Move by subwords and skip insignificant punctuation
-  -- Prefer the vim way
-  -- {
-  --   "chrisgrieser/nvim-spider",
+  --   "tris203/precognition.nvim",
   --   keys = {
   --     {
-  --       "e",
-  --       "<cmd>lua require('spider').motion('e')<CR>",
-  --       mode = { "n", "o", "x" },
-  --     },
-  --     {
-  --       "w",
-  --       "<cmd>lua require('spider').motion('w')<CR>",
-  --       mode = { "n", "o", "x" },
-  --     },
-  --     {
-  --       "b",
-  --       "<cmd>lua require('spider').motion('b')<CR>",
-  --       mode = { "n", "o", "x" },
+  --       "<leader>f",
+  --       mode = { "n", "x", "o" },
+  --       function()
+  --         require("precognition").peek()
+  --       end,
+  --       desc = "Precognition",
   --     },
   --   },
   -- },
