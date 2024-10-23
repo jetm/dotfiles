@@ -245,7 +245,13 @@ return {
   -- Find And Replace plugin for neovim
   {
     "MagicDuck/grug-far.nvim",
-    opts = { headerMaxWidth = 80, maxWorkers = 16 },
+    opts = {
+      headerMaxWidth = 80,
+      maxWorkers = 16,
+      keymaps = {
+        close = { n = "q"},
+      },
+    },
     cmd = "GrugFar",
     keys = {
       {
