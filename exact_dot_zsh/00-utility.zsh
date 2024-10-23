@@ -45,7 +45,7 @@ aurgen() {
   fi
 }
 
-extract_srt() {
+srt_extract() {
   mkvextract tracks "$1" $2:"$(basename $1 .mkv)".srt
 }
 
