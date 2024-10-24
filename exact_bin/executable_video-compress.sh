@@ -12,4 +12,9 @@ ab-av1 auto-encode \
         -i "${v}" \
         -o "${nv}" \
         --min-crf 13 --max-crf 18 \
+        --acodec aac ||
+    ab-av1 auto-encode \
+        -i "${v}" \
+        -o "${nv}" \
+        --min-crf 19 --max-crf 25 \
         --acodec aac
