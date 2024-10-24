@@ -249,7 +249,7 @@ return {
       headerMaxWidth = 80,
       maxWorkers = 16,
       keymaps = {
-        close = { n = "q"},
+        close = { n = "q" },
       },
     },
     cmd = "GrugFar",
@@ -1036,6 +1036,26 @@ return {
     -- warp, default, doesn't work on kitty
     opts = { at_edge = "stop" },
   },
+
+  -- A spelling auto correct plugin for Neovim including over 20k entries
+  {
+    "https://github.com/ck-zhang/mistake.nvim",
+  },
+
+  -- run lines/blocs of code (independently of the rest of the file), supporting multiples languages
+  -- {
+  --   "michaelb/sniprun",
+  --   branch = "master",
+  --   opts = {
+  --     interpreter_options = {
+  --       C_original = {
+  --         compiler = "clang",
+  --       },
+  --     },
+  --   },
+  --   build = "sh install.sh",
+  --   config = true,
+  -- },
 
   -- {
   --   "epwalsh/obsidian.nvim",
