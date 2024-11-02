@@ -32,7 +32,8 @@ M.on_init = function(client, _)
   end
 end
 
-M.capabilities = vim.lsp.protocol.make_client_capabilities()
+M.default_capabilities = vim.lsp.protocol.make_client_capabilities()
+M.capabilities = require('blink.cmp').get_lsp_capabilities(M.default_capabilities)
 
 M.capabilities.textDocument.completion.completionItem = {
   documentationFormat = { "markdown", "plaintext" },
@@ -136,6 +137,7 @@ require("mason-lspconfig").setup({
   handlers = {
     lua_ls = function()
       lspconfig.lua_ls.setup({
+        capabilities = M.capabilities,
         settings = {
           Lua = {
             diagnostics = {
@@ -164,6 +166,7 @@ require("mason-lspconfig").setup({
 
     clangd = function()
       lspconfig.clangd.setup({
+        capabilities = M.capabilities,
         root_dir = function(fname)
           return require("lspconfig.util").root_pattern(
             "Makefile",
@@ -196,6 +199,7 @@ require("mason-lspconfig").setup({
 
     yamlls = function()
       lspconfig.yamlls.setup({
+        capabilities = M.capabilities,
         settings = {
           redhat = { telemetry = { enabled = false } },
           yaml = {
@@ -218,6 +222,7 @@ require("mason-lspconfig").setup({
 
     jsonls = function()
       lspconfig.jsonls.setup({
+        capabilities = M.capabilities,
         settings = {
           jsonls = {
             format = { enable = false },

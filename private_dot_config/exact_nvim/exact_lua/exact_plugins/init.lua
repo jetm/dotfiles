@@ -699,23 +699,23 @@ return {
   },
 
   -- Vim plugin, insert or delete brackets, parens, quotes in pair
-  {
-    "windwp/nvim-autopairs",
-    dependencies = {
-      { "hrsh7th/nvim-cmp" },
-    },
-    opts = {
-      fast_wrap = {},
-      disable_filetype = { "TelescopePrompt", "vim" },
-    },
-    config = function(_, opts)
-      require("nvim-autopairs").setup(opts)
-
-      -- setup cmp for autopairs
-      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-      require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
-    end,
-  },
+  -- {
+  --   "windwp/nvim-autopairs",
+  --   dependencies = {
+  --     { "hrsh7th/nvim-cmp" },
+  --   },
+  --   opts = {
+  --     fast_wrap = {},
+  --     disable_filetype = { "TelescopePrompt", "vim" },
+  --   },
+  --   config = function(_, opts)
+  --     require("nvim-autopairs").setup(opts)
+  --
+  --     -- setup cmp for autopairs
+  --     local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+  --     require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+  --   end,
+  -- },
 
   {
     "nvim-telescope/telescope-fzf-native.nvim",
@@ -909,53 +909,91 @@ return {
     config = true,
   },
 
+  -- Performant, batteries-included completion plugin for Neovim
   {
-    -- "hrsh7th/nvim-cmp",
-    "iguanacucumber/magazine.nvim",
-    name = "nvim-cmp",
+    "saghen/blink.cmp",
+    lazy = false, -- lazy loading handled internally
     event = "InsertCharPre",
-    opts = function()
-      return require("plugins.configs.cmp")
-    end,
-    dependencies = {
-      {
-        -- snippet plugin
-        "L3MON4D3/LuaSnip",
-        dependencies = "rafamadriz/friendly-snippets",
-        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-        config = function(_, opts)
-          require("luasnip").config.set_config(opts)
-          require("plugins.configs.luasnip")
-        end,
+    dependencies = { "rafamadriz/friendly-snippets" },
+    build = "cargo build --release",
+    opts = {
+      keymap = {
+        ["<Tab>"] = {
+          function(cmp)
+            if cmp.is_in_snippet() then
+              return cmp.accept()
+            else
+              return cmp.select_and_accept()
+            end
+          end,
+          "snippet_forward",
+          "fallback",
+        },
+        ["<S-Tab>"] = { "snippet_backward", "fallback" },
+        ["<Up>"] = { "select_prev", "fallback" },
+        ["<Down>"] = { "select_next", "fallback" },
+        ['<CR>'] = { 'accept', 'fallback' },
       },
-
-      -- cmp sources plugins
-      {
-        "saadparwaiz1/cmp_luasnip",
-        "hrsh7th/cmp-nvim-lua",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
+      nerd_font_variant = "mono",
+      accept = { auto_brackets = { enabled = true } },
+      windows = {
+        autocomplete = {
+          draw = "reversed",
+        },
+        documentation = {
+          auto_show = true,
+        },
       },
-      {
-        "f3fora/cmp-spell",
-        ft = { "gitcommit", "markdown" },
-      },
-      { "lukas-reineke/cmp-rg" },
-      { "FelipeLema/cmp-async-path" },
-      { "https://git.sr.ht/~p00f/clangd_extensions.nvim" },
     },
   },
 
-  {
-    "garyhurtz/cmp_kitty",
-    dependencies = {
-      { "hrsh7th/nvim-cmp" },
-    },
-    init = function()
-      require("cmp_kitty"):setup()
-    end,
-  },
+  -- {
+  --   -- "hrsh7th/nvim-cmp",
+  --   "iguanacucumber/magazine.nvim",
+  --   name = "nvim-cmp",
+  --   event = "InsertCharPre",
+  --   opts = function()
+  --     return require("plugins.configs.cmp")
+  --   end,
+  --   dependencies = {
+  --     {
+  --       -- snippet plugin
+  --       "L3MON4D3/LuaSnip",
+  --       dependencies = "rafamadriz/friendly-snippets",
+  --       opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+  --       config = function(_, opts)
+  --         require("luasnip").config.set_config(opts)
+  --         require("plugins.configs.luasnip")
+  --       end,
+  --     },
+  --
+  --     -- cmp sources plugins
+  --     {
+  --       "saadparwaiz1/cmp_luasnip",
+  --       "hrsh7th/cmp-nvim-lua",
+  --       "hrsh7th/cmp-nvim-lsp",
+  --       "hrsh7th/cmp-buffer",
+  --       "hrsh7th/cmp-path",
+  --     },
+  --     {
+  --       "f3fora/cmp-spell",
+  --       ft = { "gitcommit", "markdown" },
+  --     },
+  --     { "lukas-reineke/cmp-rg" },
+  --     { "FelipeLema/cmp-async-path" },
+  --     { "https://git.sr.ht/~p00f/clangd_extensions.nvim" },
+  --   },
+  -- },
+  --
+  -- {
+  --   "garyhurtz/cmp_kitty",
+  --   dependencies = {
+  --     { "hrsh7th/nvim-cmp" },
+  --   },
+  --   init = function()
+  --     require("cmp_kitty"):setup()
+  --   end,
+  -- },
 
   -- {
   --   "NeogitOrg/neogit",
