@@ -3,3 +3,5 @@
 .envrc
 .idea
 .vscode
+.cache
+compile_commands.json
