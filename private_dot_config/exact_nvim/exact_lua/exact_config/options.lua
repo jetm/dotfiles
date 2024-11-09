@@ -28,15 +28,17 @@ O.inccommand = "split" -- "for incsearch while sub
 --
 O.linebreak = true -- Wrap lines at 'breakat'. Do not break words
 O.list = true -- Display whitespace characters
-O.listchars = { tab = "├ ", trail = "·" }
+-- O.listchars = { tab = "├ ", trail = "·" }
+O.listchars = { tab = "› ", trail = "·", extends = "»", precedes = "«", nbsp = "␣" }
 O.fillchars = {
   foldopen = "",
   foldclose = "",
-  -- fold = "⸱",
-  fold = " ",
+  fold = "•",
   foldsep = " ",
   diff = "╱",
   eob = " ",
+  msgsep = " ",
+  vert = "│",
 }
 O.number = true -- Show numberline
 O.relativenumber = true -- Show relative numberline
@@ -95,14 +97,14 @@ O.updatetime = 250
 
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
-O.whichwrap:append "<>[]hl"
+O.whichwrap:append("<>[]hl")
 
 -- Append backup files with timestamp
 vim.api.nvim_create_autocmd("BufWritePre", {
-	callback = function()
-		local extension = "~" .. vim.fn.strftime("%Y-%m-%d-%H%M%S")
-		vim.o.backupext = extension
-	end,
+  callback = function()
+    local extension = "~" .. vim.fn.strftime("%Y-%m-%d-%H%M%S")
+    vim.o.backupext = extension
+  end,
 })
 
 --
@@ -146,10 +148,20 @@ O.virtualedit = "block" -- allow going past end of line in visual block mode
 O.smoothscroll = true
 
 O.wildmode = "list:longest,list:full" -- for : stuff
-O.wildignore:append({"node_modules", "*.pyc"})
+O.wildignore:append({ "node_modules", "*.pyc" })
 O.wildignore:append({
-    ".o", ".obj",  ".so", ".a", ".lib", ".pyc", ".pyo", ".pyd",
-    ".swp", ".swo", ".git", ".orig"
+  ".o",
+  ".obj",
+  ".so",
+  ".a",
+  ".lib",
+  ".pyc",
+  ".pyo",
+  ".pyd",
+  ".swp",
+  ".swo",
+  ".git",
+  ".orig",
 })
 
 --
