@@ -82,6 +82,7 @@ O.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipbo
 O.backspace:append({ "nostop" }) -- Don't stop backspace at insert
 O.completeopt = "menu,menuone,noselect"
 O.infercase = true -- Infer cases in keyword completion
+O.pumblend = 10 -- Popup blend
 O.pumheight = 10 -- Height of the pop up menu
 
 -- Enable swap, backup, and persistant undo
