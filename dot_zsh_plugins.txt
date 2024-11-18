@@ -23,5 +23,7 @@ tom-doerr/zsh_codex kind:defer
 ttkalcevic/pwp kind:defer
 marlonrichert/zsh-edit kind:defer
 LucasLarson/gunstage kind:defer
+nyoungstudios/zsh-history-on-success kind:defer
+aemonge/zsh-cycle-jobs kind:defer
 
 # vim: ft=config
