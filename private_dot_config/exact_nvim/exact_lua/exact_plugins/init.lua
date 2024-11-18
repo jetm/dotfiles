@@ -1131,13 +1131,10 @@ return {
   -- 😽 Open your Kitty scrollback buffer with Neovim
   {
     "mikesmithgh/kitty-scrollback.nvim",
-    enabled = true,
     lazy = true,
     cmd = { "KittyScrollbackGenerateKittens", "KittyScrollbackCheckHealth" },
     event = { "User KittyScrollbackLaunch" },
-    config = function()
-      require("kitty-scrollback").setup()
-    end,
+    config = true,
   },
 
   -- Smart, seamless, directional navigation and resizing of Neovim + terminal multiplexer splits.
