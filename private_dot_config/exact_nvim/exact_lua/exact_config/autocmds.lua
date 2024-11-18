@@ -49,7 +49,7 @@ autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
 autocmd("TextYankPost", {
   group = augroup("highlight_yank"),
   callback = function()
-    vim.highlight.on_yank({ higroup = "IncSearch", timeout = "300" })
+    (vim.hl or vim.highlight).on_yank({ higroup = "IncSearch", timeout = "300" })
   end,
 })
 
