@@ -734,6 +734,7 @@ return {
     build = vim.fn.executable("cmake") == 1
       and "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
     config = function(plugin)
+      ---@diagnostic disable-next-line: undefined-field
       local ok, err = pcall(require("telescope").load_extension, "fzf")
       if not ok then
         local lib = plugin.dir .. "/build/libfzf.so"
@@ -827,6 +828,7 @@ return {
       {
         "<leader>f",
         function()
+          ---@diagnostic disable-next-line: undefined-field
           require("conform").format({ async = true, lsp_fallback = true })
         end,
         mode = { "n", "v" },
