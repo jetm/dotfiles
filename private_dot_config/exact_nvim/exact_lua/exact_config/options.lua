@@ -111,14 +111,15 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 --
 -- tabs and indenting
 --
-O.breakindent = true -- Wrap indent to match line start
-O.copyindent = true -- Copy the previous indentation on autoindenting
 O.expandtab = true -- Enable the use of space in tab
-O.preserveindent = true -- Preserve indent structure as much as possible
-O.shiftwidth = 4 -- Number of space inserted for indentation
-O.smartindent = true -- Smarter autoindentation
 O.softtabstop = 4
 O.tabstop = 4 -- Tab width
+O.shiftwidth = 4 -- Number of space inserted for indentation
+O.breakindent = true -- Wrap indent to match line start
+O.copyindent = true -- Copy the previous indentation on autoindenting
+O.preserveindent = true -- Preserve indent structure as much as possible
+O.smartindent = true -- Smarter autoindentation
+O.shiftround = true
 
 --
 -- multiple windows
