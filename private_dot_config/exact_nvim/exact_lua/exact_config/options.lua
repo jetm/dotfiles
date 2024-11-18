@@ -145,11 +145,12 @@ O.diffopt:append("linematch:60") -- enable linematch diff algorithm
 -- various
 --
 O.signcolumn = "yes" -- Always show the sign column
+O.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 O.viewoptions:remove("curdir") -- disable saving current directory with views
 O.virtualedit = "block" -- allow going past end of line in visual block mode
 O.smoothscroll = true
 
-O.wildmode = "list:longest,list:full" -- for : stuff
+O.wildmode = "longest:full,full" -- for : Completion
 O.wildignore:append({ "node_modules", "*.pyc" })
 O.wildignore:append({
   ".o",
