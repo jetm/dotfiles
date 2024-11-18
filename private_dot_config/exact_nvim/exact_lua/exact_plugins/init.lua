@@ -990,7 +990,7 @@ return {
   {
     "saghen/blink.cmp",
     lazy = false, -- lazy loading handled internally
-    event = "InsertCharPre",
+    event = "InsertEnter",
     dependencies = { "rafamadriz/friendly-snippets" },
     build = "cargo build --release",
     opts = {
@@ -1009,13 +1009,13 @@ return {
         ["<S-Tab>"] = { "snippet_backward", "fallback" },
         ["<Up>"] = { "select_prev", "fallback" },
         ["<Down>"] = { "select_next", "fallback" },
-        ['<CR>'] = { 'accept', 'fallback' },
+        ["<CR>"] = { "accept", "fallback" },
       },
       nerd_font_variant = "mono",
       accept = { auto_brackets = { enabled = true } },
       windows = {
         autocomplete = {
-          draw = "reversed",
+          winblend = vim.o.pumblend,
         },
         documentation = {
           auto_show = true,
