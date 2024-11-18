@@ -276,6 +276,7 @@
     smtpencryption = tls
     smtpserver = smtp.gmail.com
     smtpserverport = 587
+    suppresscc = self
     ; smtpServer = /usr/bin/msmtp
     ; smtpServerOption = -v
 
