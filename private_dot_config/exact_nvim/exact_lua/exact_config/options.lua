@@ -197,4 +197,6 @@ O.foldexpr = "v:lua.M.foldexpr()"
 -- Required by Obisidian-nvim
 O.conceallevel = 2
 
-O.sessionoptions = "buffers,curdir,folds,globals,tabpages,winpos,winsize"
+O.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
+
+O.formatoptions = "jcroqlnt" -- tcqj
