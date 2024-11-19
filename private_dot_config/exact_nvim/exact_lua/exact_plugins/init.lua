@@ -90,12 +90,6 @@ return {
   --   lazy = false,
   -- },
 
-  -- Enable repeating supported plugin maps with '.'
-  {
-    "tpope/vim-repeat",
-    lazy = true,
-  },
-
   -- bitbake support
   {
     "kergoth/vim-bitbake",
