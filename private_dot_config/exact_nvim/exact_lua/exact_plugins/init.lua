@@ -1049,15 +1049,15 @@ return {
         ["<Up>"] = { "select_prev", "fallback" },
         ["<Down>"] = { "select_next", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
+        ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
       },
       nerd_font_variant = "mono",
       accept = { auto_brackets = { enabled = true } },
       windows = {
         autocomplete = {
           winblend = vim.o.pumblend,
-        },
-        documentation = {
-          auto_show = true,
+          -- 'manual' will not select any item by default
+          selection = "manual",
         },
       },
     },
