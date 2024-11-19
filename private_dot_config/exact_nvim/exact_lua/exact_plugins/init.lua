@@ -989,10 +989,50 @@ return {
   {
     "saghen/blink.cmp",
     lazy = false, -- lazy loading handled internally
-    event = "InsertEnter",
-    dependencies = { "rafamadriz/friendly-snippets" },
+    event = "InsertCharPre",
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      "niuiic/blink-cmp-rg.nvim",
+    },
     build = "cargo build --release",
     opts = {
+      sources = {
+        completion = {
+          enabled_providers = {
+            "lsp",
+            "path",
+            "snippets",
+            "buffer",
+            "ripgrep",
+          },
+        },
+        providers = {
+          ripgrep = {
+            module = "blink-cmp-rg",
+            name = "Ripgrep",
+            opts = {
+              get_command = function(_, prefix)
+                return {
+                  "rg",
+                  "--no-config",
+                  "--json",
+                  "--word-regexp",
+                  "--ignore-case",
+                  "--",
+                  prefix .. "[\\w_-]+",
+                  vim.fs.root(0, ".git") or vim.fn.getcwd(),
+                }
+              end,
+              get_prefix = function()
+                local col = vim.api.nvim_win_get_cursor(0)[2]
+                local line = vim.api.nvim_get_current_line()
+                local prefix = line:sub(1, col):match("[%w_-]+$") or ""
+                return prefix
+              end,
+            },
+          },
+        },
+      },
       keymap = {
         ["<Tab>"] = {
           function(cmp)
