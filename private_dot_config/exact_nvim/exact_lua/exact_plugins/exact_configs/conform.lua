@@ -10,6 +10,7 @@ return function(_, _)
       yaml = { "yamlfmt" },
       css = { "prettier" },
       c = { "clang_format" },
+      gitcommit = { "commitmsgfmt"},
     },
 
     format_on_save = false,
