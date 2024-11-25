@@ -274,9 +274,8 @@
 
 [sendemail]
     smtpencryption = tls
-    smtpserver = smtp.gmail.com
-    smtpserverport = 587
     suppresscc = self
+    smtpserverport = 587
     ; smtpServer = /usr/bin/msmtp
     ; smtpServerOption = -v
 
