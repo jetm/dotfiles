@@ -81,6 +81,9 @@ return {
   --   lazy = false,
   -- },
 
+  -- Enable repeating supported plugin maps with "."
+  { "tpope/vim-repeat", event = "VeryLazy", keys = "." },
+
   -- Goto filenames with line info
   { "lewis6991/fileline.nvim", lazy = false },
 
