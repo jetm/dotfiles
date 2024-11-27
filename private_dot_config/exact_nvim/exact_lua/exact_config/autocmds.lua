@@ -28,6 +28,13 @@ autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
 
     if not vim.g.ui_entered and args.event == "UIEnter" then
       vim.g.ui_entered = true
+
+      -- Firenvim
+      local client = vim.api.nvim_get_chan_info(vim.v.event.chan).client
+      if client ~= nil and client.name == "Firenvim" then
+        vim.o.laststatus = 0
+        vim.o.cmdheight = 0
+      end
     end
 
     if file ~= "" and buftype ~= "nofile" and vim.g.ui_entered then

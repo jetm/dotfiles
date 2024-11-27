@@ -317,34 +317,6 @@ return {
     config = true,
   },
 
-  -- add neovim in browser
-  -- {
-  --   "glacambre/firenvim",
-  --   -- Lazy load firenvim
-  --   -- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
-  --   cond = not not vim.g.started_by_firenvim,
-  --   build = function()
-  --     require("lazy").load({ plugins = "firenvim", wait = true })
-  --     vim.fn["firenvim#install"](0)
-  --   end,
-  --   config = function()
-  --     vim.g.firenvim_config = {
-  --       globalSettigs = {
-  --         alt = "all",
-  --       },
-  --       localSettings = {
-  --         [".*"] = {
-  --           cmdline = "neovim",
-  --           content = "text",
-  --           priority = 0,
-  --           selector = "div",
-  --           takeover = "never",
-  --         },
-  --       },
-  --     }
-  --   end,
-  -- },
-
   -- Peek lines just when you intend
   {
     "nacro90/numb.nvim",
@@ -1194,6 +1166,32 @@ return {
   -- A spelling auto correct plugin for Neovim including over 20k entries
   {
     "https://github.com/ck-zhang/mistake.nvim",
+  },
+
+  -- add neovim in browser
+  {
+    "glacambre/firenvim",
+    lazy = not vim.g.started_by_firenvim,
+    module = false,
+    build = function()
+      vim.fn["firenvim#install"](0)
+    end,
+    config = function()
+      vim.g.firenvim_config = {
+        globalSettigs = {
+          alt = "all",
+        },
+        localSettings = {
+          [".*"] = {
+            cmdline = "neovim",
+            content = "text",
+            priority = 0,
+            selector = "textarea",
+            takeover = "never",
+          },
+        },
+      }
+    end,
   },
 
   -- run lines/blocs of code (independently of the rest of the file), supporting multiples languages
