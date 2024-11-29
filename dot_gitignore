@@ -5,3 +5,5 @@
 .vscode
 .cache
 compile_commands.json
+.aider*
+.env
