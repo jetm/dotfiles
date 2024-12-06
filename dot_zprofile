@@ -20,13 +20,6 @@ add_path() {
   fi
 }
 
-add_path_file() {
-  if [ -x $1 ]; then
-    # Set paths that Zsh searches for programs
-    path=($1 ${path})
-  fi
-}
-
 list_path() { echo "${PATH//:/\\n}"; }
 
 # Ensure path arrays do not contain duplicates
@@ -35,7 +28,7 @@ typeset -gU cdpath fpath path
 
 add_path "${HOME}"/.local/bin
 add_path /opt/llvm/bin
-add_path_file "${HOME}"/.cache/antidote/xvoland/Extract/extract.sh
+
 # add_path "${HOME}"/go/bin
 # add_path "${HOME}"/.cabal/bin
 # add_path "${HOME}"/.poetry/bin
@@ -170,6 +163,10 @@ zstyle ':prezto:*:*' color 'yes'
 for e in "${HOME}"/.zsh/*.zsh; do
   source "${e}"
 done
+
+if [[ -f "${HOME}"/.cache/antidote/xvoland/Extract/extract.sh ]]; then
+  source "${HOME}"/.cache/antidote/xvoland/Extract/extract.sh
+fi
 
 # done profiling
 [[ -z "$ZPROFRC" ]] || zprof
