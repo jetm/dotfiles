@@ -1011,7 +1011,7 @@ return {
       keymap = {
         ["<Tab>"] = {
           function(cmp)
-            if cmp.is_in_snippet() then
+            if cmp.snippet_active() then
               return cmp.accept()
             else
               return cmp.select_and_accept()
@@ -1030,9 +1030,9 @@ return {
       accept = { auto_brackets = { enabled = true } },
       windows = {
         autocomplete = {
-          winblend = vim.o.pumblend,
           -- 'manual' will not select any item by default
           selection = "manual",
+          draw = { treesitter = true },
         },
       },
     },
@@ -1109,7 +1109,7 @@ return {
     event = "BufReadPre",
     config = function()
       require("git-conflict").setup({
-        default_mappings = true,
+        default_commands = true,
         disable_diagnostics = true,
       })
     end,
@@ -1128,7 +1128,7 @@ return {
 
   -- Automatically highlights other instances of the word under your cursor.
   -- This works with LSP, Treesitter, and regexp matching to find the other
-  -- instances.
+  -- instances
   {
     "RRethy/vim-illuminate",
     event = "BufReadPre",
