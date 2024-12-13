@@ -996,14 +996,14 @@ return {
     build = "cargo build --release",
     opts = {
       sources = {
-        completion = {
-          enabled_providers = {
-            "lsp",
-            "path",
-            "snippets",
-            "buffer",
-            "ripgrep",
-          },
+        -- it's broken
+        cmdline = {},
+        default = {
+          "lsp",
+          "path",
+          "snippets",
+          "buffer",
+          "ripgrep",
         },
         providers = {
           ripgrep = {
@@ -1050,12 +1050,12 @@ return {
         ["<CR>"] = { "accept", "fallback" },
         ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
       },
-      nerd_font_variant = "mono",
-      accept = { auto_brackets = { enabled = true } },
-      windows = {
-        autocomplete = {
-          -- 'manual' will not select any item by default
+      completion = {
+        list = {
+          max_items = 10,
           selection = "manual",
+        },
+        menu = {
           draw = { treesitter = true },
         },
       },
