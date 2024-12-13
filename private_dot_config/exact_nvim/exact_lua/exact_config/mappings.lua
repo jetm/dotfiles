@@ -57,7 +57,9 @@ else
   map("n", "<C-S-p>", "<CMD>Telescope frecency workspace=CWD<CR>", { desc = "Find files" })
 
   local telescope = require("telescope")
+  ---@diagnostic disable-next-line: undefined-field
   telescope.load_extension("chezmoi")
+  ---@diagnostic disable-next-line: undefined-field
   map("n", "<C-c>", telescope.extensions.chezmoi.find_files, { desc = "Find chezmoi files" })
 
   map("n", "<Leader>b", "<CMD>BufferLinePick<CR>")
@@ -65,10 +67,6 @@ else
   ---
   -- Buffers
   ---
-  -- Quitting
-  map({ "n", "x" }, "q", "<CMD>BufDel<CR>", { desc = "Close buffer or Quit" })
-  map({ "n", "x" }, "Q", "<CMD>qa<CR>", { desc = "Close all buffers and Quit" })
-
   -- Switching
   map("n", "<leader>`", "<CMD>e #<CR>", { desc = "Switch to other buffer" })
 

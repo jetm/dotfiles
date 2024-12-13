@@ -1,4 +1,5 @@
 return {
+  -- plenary: full; complete; entire; absolute; unqualified. All the lua functions I don't want to write twice
   { "nvim-lua/plenary.nvim" },
 
   {
@@ -44,6 +45,41 @@ return {
       quickfile = { enabled = true },
       statuscolumn = { enabled = true },
       words = { enabled = true },
+    },
+    keys = {
+      {
+        "q",
+        function()
+          ---@diagnostic disable-next-line: undefined-global
+          Snacks.bufdelete()
+        end,
+        mode = { "n", "x" },
+        desc = "Delete Buffer",
+      },
+      {
+        "Q",
+        "<CMD>qa<CR>",
+        mode = { "n", "x" },
+        desc = "Quit",
+      },
+      {
+        "<leader>Q",
+        function()
+          ---@diagnostic disable-next-line: undefined-global
+          Snacks.bufdelete.all()
+        end,
+        mode = { "n", "x" },
+        desc = "Delete All Buffers",
+      },
+      {
+        "<leader>n",
+        function()
+          ---@diagnostic disable-next-line: undefined-global
+          Snacks.notifier.show_history()
+        end,
+        mode = { "n", "x" },
+        desc = "Show Notifier History",
+      },
     },
   },
 
@@ -134,14 +170,14 @@ return {
   -- { "mzlogin/vim-markdown-toc" },
 
   -- improve buffer deletion
-  {
-    "ojroques/nvim-bufdel",
-    lazy = false,
-    opts = {
-      -- quit Neovim when last buffer is closed
-      quit = true,
-    },
-  },
+  -- {
+  --   "ojroques/nvim-bufdel",
+  --   lazy = false,
+  --   opts = {
+  --     -- quit Neovim when last buffer is closed
+  --     quit = true,
+  --   },
+  -- },
 
   -- Close Neovim buffers, windows, or exit Vim with the same single keypress
   -- {
@@ -339,17 +375,6 @@ return {
     event = "BufRead",
     config = vim.api.nvim_set_var("suda_smart_edit", 1),
   },
-
-  -- {
-  --   "rcarriga/nvim-notify",
-  --   opts = {
-  --     stages = "static",
-  --     timeout = 2000,
-  --   },
-  --   config = function()
-  --     vim.notify = require("notify")
-  --   end,
-  -- },
 
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -732,7 +757,6 @@ return {
       { "nvim-telescope/telescope-fzf-native.nvim" },
       { "nvim-lua/popup.nvim" },
       { "nvim-lua/plenary.nvim" },
-      -- { "rcarriga/nvim-notify" },
     },
     config = require("plugins.configs.telescope"),
   },
