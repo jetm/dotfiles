@@ -21,7 +21,7 @@ return {
   { "nvchad/minty" },
   { "nvchad/menu" },
 
-  -- Simple session management for Neovim with git branching, autoloading and Telescope support
+  -- Simple session management for Neovim with git branching and autoloading support
   {
     "olimorris/persisted.nvim",
     lazy = false, -- make sure the plugin is always loaded at startup
@@ -200,7 +200,6 @@ return {
   },
 
   -- Provide Icons
-  -- Required by telescope and others
   {
     "nvim-tree/nvim-web-devicons",
     opts = function()
@@ -258,7 +257,7 @@ return {
     },
   },
 
-  -- A pretty diagnostics, references, telescope results, quickfix and location
+  -- A pretty diagnostics, references, quickfix and location
   -- list to help you solve all the trouble your code is causing.
   {
     "folke/trouble.nvim",
@@ -442,24 +441,6 @@ return {
     },
     config = true,
   },
-
-  -- Neovim UI Enhancer
-  -- {
-  --   "stevearc/dressing.nvim",
-  --   lazy = true,
-  --   opts = {
-  --     input = {
-  --       default_prompt = "➤ ",
-  --       win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" },
-  --     },
-  --     select = {
-  --       backend = { "telescope", "builtin" },
-  --       builtin = {
-  --         win_options = { winhighlight = "Normal:Normal,NormalNC:Normal" },
-  --       },
-  --     },
-  --   },
-  -- },
 
   -- move and duplicate blocks and lines, with complete fold handling,
   -- reindent, and undone in one go
@@ -722,53 +703,46 @@ return {
   },
 
   {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    lazy = true,
-    enabled = vim.fn.executable("cmake") == 1,
-    build = vim.fn.executable("cmake") == 1
-      and "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-    config = function(plugin)
-      ---@diagnostic disable-next-line: undefined-field
-      local ok, err = pcall(require("telescope").load_extension, "fzf")
-      if not ok then
-        local lib = plugin.dir .. "/build/libfzf.so"
-        if not (vim.uv or vim.loop).fs_stat(lib) then
-          vim.notify("`telescope-fzf-native.nvim` not built. Rebuilding...", vim.log.levels.WARN)
-          require("lazy").build({ plugins = { plugin }, show = false }):wait(function()
-            vim.notify("Rebuilding `telescope-fzf-native.nvim` done.\nPlease restart Neovim.")
-          end)
-        else
-          vim.notify("Failed to load `telescope-fzf-native.nvim`:\n" .. err, vim.log.levels.ERROR)
-        end
-      end
-    end,
-  },
-
-  {
-    "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
-    version = false,
-    dependencies = {
-      { "nvim-telescope/telescope-fzf-native.nvim" },
-      { "nvim-lua/popup.nvim" },
-      { "nvim-lua/plenary.nvim" },
+    "ibhagwan/fzf-lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      winopts = {
+        border = "none",
+      },
     },
-    config = require("plugins.configs.telescope"),
+    config = true,
   },
 
   {
     "xvzc/chezmoi.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    config = true,
-  },
+    config = function()
+      require("chezmoi").setup({
+        edit = {
+          watch = true,
+          force = true,
+        },
+        notification = {
+          on_open = false,
+        },
+      })
+      Fzf_chezmoi = function()
+        ---@diagnostic disable-next-line: undefined-field
+        require("fzf-lua").fzf_exec(require("chezmoi.commands").list(), {
+          actions = {
+            ["default"] = function(selected)
+              require("chezmoi.commands").edit({
+                targets = { "~/" .. selected[1] },
+                args = { "--watch" },
+              })
+            end,
+          },
+        })
+      end
 
-  -- A telescope.nvim extension that offers intelligent prioritization when selecting files from your editing history
-  -- {
-  --   "nvim-telescope/telescope-frecency.nvim",
-  --   config = function()
-  --     require("telescope").load_extension("frecency")
-  --   end,
-  -- },
+      vim.api.nvim_command("command! ChezmoiFzf lua Fzf_chezmoi()")
+    end,
+  },
 
   {
     "nvim-treesitter/nvim-treesitter-context",
@@ -957,27 +931,13 @@ return {
   --   end,
   -- },
 
-  -- Still experimental
-  -- {
-  --   "sourcegraph/sg.nvim",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-telescope/telescope.nvim",
-  --   },
-  --   config = true,
-  --   opts = {
-  --     enable_cody = true,
-  --     accept_tos = true,
-  --   },
-  -- },
-
   -- codeium
-  {
-    "Exafunction/codeium.nvim",
-    cmd = "Codeium",
-    build = ":Codeium Auth",
-    config = true,
-  },
+  -- {
+  --   "Exafunction/codeium.nvim",
+  --   cmd = "Codeium",
+  --   build = ":Codeium Auth",
+  --   config = true,
+  -- },
 
   -- Performant, batteries-included completion plugin for Neovim
   {
@@ -991,8 +951,6 @@ return {
     build = "cargo build --release",
     opts = {
       sources = {
-        -- it's broken
-        cmdline = {},
         default = {
           "lsp",
           "path",
@@ -1103,16 +1061,6 @@ return {
   --   init = function()
   --     require("cmp_kitty"):setup()
   --   end,
-  -- },
-
-  -- {
-  --   "NeogitOrg/neogit",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "sindrets/diffview.nvim",
-  --     "nvim-telescope/telescope.nvim",
-  --   },
-  --   config = true,
   -- },
 
   -- better diffing
