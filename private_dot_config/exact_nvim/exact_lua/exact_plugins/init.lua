@@ -986,18 +986,8 @@ return {
         },
       },
       keymap = {
-        ["<Tab>"] = {
-          function(cmp)
-            if cmp.snippet_active() then
-              return cmp.accept()
-            else
-              return cmp.select_and_accept()
-            end
-          end,
-          "snippet_forward",
-          "fallback",
-        },
-        ["<S-Tab>"] = { "snippet_backward", "fallback" },
+        ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
         ["<Up>"] = { "select_prev", "fallback" },
         ["<Down>"] = { "select_next", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
@@ -1009,7 +999,7 @@ return {
           selection = "manual",
         },
         menu = {
-          draw = { treesitter = {"lsp"} },
+          draw = { treesitter = { "lsp" } },
         },
       },
     },
