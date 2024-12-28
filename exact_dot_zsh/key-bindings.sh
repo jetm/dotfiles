@@ -5,49 +5,32 @@
 # Use cat -v > /dev/null to know the keybinding
 #
 
-# <Ctrl+Right>  => Forward word -- Disabled
-# <Ctrl+Left>   => Backward word -- Disabled
 # <Ctrl+E>      => Edit command in $EDITOR
-# <Ctrl+V>      => Paste from system clipboard -- Disabled
 # <UP>          => History search up for substring
 # <DOWN>        => History search down for substring
 # <Ctrl+Z>      => Run fg
 # <Alt+A>       => Search for alias
-# <Alt+F>       => Search for functions -- Disabled
 # <Ctrl+F>      => Grep in files
 # <Ctrl+T>      => Search in history
-# <Alt+S>       => Insert sudo word -- Disabled
 # <Clrt+P>      => Search files
 # <Alt+D>       => Delete branch
-# <Ctrl+]>      => Clear screen and scrollback -- Disabled
 
-# <Ctrl+Right> => Forward word
-# bindkey "^[[1;5C" forward-word
-
-# <Ctrl+Left> => Backward word
-# bindkey "^[[1;5D" backward-word
-
-# same behavior from bash for vi-mode
-autoload edit-command-line
+autoload -Uz edit-command-line
 zle -N edit-command-line
 
-# <Ctrl+E>
-bindkey -M vicmd '^E' edit-command-line
+function kitty_scrollback_edit_command_line() {
+  local VISUAL='/home/tiamarin/.local/share/nvim/lazy/kitty-scrollback.nvim/scripts/edit_command_line.sh'
+  zle edit-command-line
+  zle kill-whole-line
+}
+zle -N kitty_scrollback_edit_command_line
 
+bindkey -M vicmd '^e' kitty_scrollback_edit_command_line
+
+# Key Up
 bindkey -M viins '^[[A' history-substring-search-up
+# Key Down
 bindkey -M viins '^[[B' history-substring-search-down
-
-# paste-from-clipboard() {
-#   local clipboard
-#   clipboard=$(cb paste 2> /dev/null | cat -)
-#   BUFFER="$LBUFFER$clipboard$RBUFFER"
-#   CURSOR="$(($CURSOR + ${#clipboard}))"
-# }
-# zle -N paste-from-clipboard
-
-# <Ctrl+V>
-# bindkey '^V' paste-from-clipboard
-# bindkey '^[[2;2~' paste-from-clipboard
 
 fancy-ctrl-z () {
   if [[ $#BUFFER = 0 ]]; then
@@ -85,22 +68,6 @@ bindkey '^[a' fzf-aliases-widget
 # Workaround to avoid overwritten by zsh-vi-mode plugin
 # <Ctrl+r>
 bindkey -M viins '^r' fzf-history-widget
-
-# fzf-functions-widget() {
-#   # shellcheck disable=SC2034
-#   LBUFFER="$LBUFFER$(FZF_DEFAULT_COMMAND=
-#     # ignore functions starting with "_ . +"
-#     # shellcheck disable=SC2296
-#     print -l "${(ok)functions[(I)[^_.+]*]}" |
-#       fzf -q "$LBUFFER" --ansi --prompt=" Functions > "
-#   )"
-#
-#   zle reset-prompt
-# }
-# zle -N fzf-functions-widget
-
-# <Alt+F>
-# bindkey '^[f' fzf-functions-widget
 
 _fzf-ripgrep_() {
   RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
@@ -163,18 +130,6 @@ function cd () {
   fi
 }
 
-# Insert sudo at the beggining of the line
-# function insert_sudo() {
-#   BUFFER="sudo $BUFFER"
-#   zle end-of-line;
-# }
-# zle -N insert_sudo
-
-# <Alt+S>
-# bindkey '^[s' insert_sudo
-# bindkey -M vicmd '^[s' insert_sudo
-# bindkey -M viins '^[s' insert_sudo
-
 # Delete Git branch
 function forgit_delete_branch() {
   git-switch-default-branch
@@ -195,14 +150,6 @@ bindkey -M vicmd '^p' fzf-file-widget
 bindkey -M viins '^p' fzf-file-widget
 bindkey '^P' fzf-file-widget
 
-# Insert a last word
-# bindkey -M viins '\e.' insert-last-word
-
-# Iterate through arguments Ctrl + [ + ] (N times)
-# autoload -Uz copy-earlier-word
-# zle -N copy-earlier-word
-# bindkey -M viins "^[m" copy-earlier-word
-
 custom_clear_screen() {
   builtin print -rn -- $'\r\e[0J\e[H\e[22J' >"$TTY"
   builtin zle .reset-prompt
@@ -212,27 +159,5 @@ zle -N custom_clear_screen
 
 # Conflict with Ctrl+l to change Kitty windows
 bindkey '^n' custom_clear_screen
-
-# bindkey '^x' create_completion
-
-# clear_screen_and_scrollback() {
-#     echoti civis >"$TTY"
-#     printf '%b' '\e[H\e[2J' >"$TTY"
-#     zle .reset-prompt
-#     zle -R
-#     printf '%b' '\e[3J' >"$TTY"
-#     echoti cnorm >"$TTY"
-#     reset
-# }
-
-# zle -N clear_screen_and_scrollback
-# bindkey '^]' clear_screen_and_scrollback
-
-#
-# zsh-abbr
-#
-# bindkey -M viins " " abbr-expand-and-space
-# bindkey -M viins "^ " magic-space
-# bindkey -M viins "^M" abbr-expand-and-accept
 
 # vim:set ft=zsh ts=2 sw=2 et:
