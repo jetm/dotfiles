@@ -946,7 +946,7 @@ return {
     event = "InsertCharPre",
     dependencies = {
       "rafamadriz/friendly-snippets",
-      "niuiic/blink-cmp-rg.nvim",
+      "mikavilpas/blink-ripgrep.nvim",
     },
     build = "cargo build --release",
     opts = {
@@ -960,7 +960,7 @@ return {
         },
         providers = {
           ripgrep = {
-            module = "blink-cmp-rg",
+            module = "blink-ripgrep",
             name = "Ripgrep",
             opts = {
               get_command = function(_, prefix)
@@ -996,7 +996,7 @@ return {
       completion = {
         list = {
           max_items = 10,
-          selection = "manual",
+          selection = function(ctx) return ctx.mode == 'cmdline' and 'auto_insert' or 'preselect' end,
         },
         menu = {
           draw = { treesitter = { "lsp" } },
