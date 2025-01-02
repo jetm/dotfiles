@@ -109,4 +109,6 @@ else
 
   -- substitute
   map({"n", "x"}, "<Leader>s", require('substitute').operator, { noremap = true })
+
+  -- vim.keymap.set('n', 'yc', 'yy<cmd>normal gcc<CR>p')
 end

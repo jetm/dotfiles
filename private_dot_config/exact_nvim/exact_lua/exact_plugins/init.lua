@@ -996,7 +996,9 @@ return {
       completion = {
         list = {
           max_items = 10,
-          selection = function(ctx) return ctx.mode == 'cmdline' and 'auto_insert' or 'preselect' end,
+          selection = function(ctx)
+            return ctx.mode == "cmdline" and "auto_insert" or "preselect"
+          end,
         },
         menu = {
           draw = { treesitter = { "lsp" } },
@@ -1146,6 +1148,13 @@ return {
           },
         },
       }
+    end,
+  },
+
+  {
+    "ZWindL/orphans.nvim",
+    config = function()
+      require("orphans").setup({})
     end,
   },
 
