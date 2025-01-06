@@ -98,9 +98,7 @@
       "updated": ""
     },
     "exec-if": "which waybar-module-pacman-updates",
-    "exec": "waybar-module-pacman-updates",
-    "on-click": "timeout 3s waybar-module-pacman-updates",
-    "on-click-right": "kitty pikaur -Syu"
+    "exec": "waybar-module-pacman-updates --network-interval-seconds 14400 --no-zero-output",
   },
   "custom/arch-linux-updates": {
     "format": "{} {icon}",
