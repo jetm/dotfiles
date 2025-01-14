@@ -994,14 +994,22 @@ return {
         ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
       },
       completion = {
+        accept = { auto_brackets = { enabled = true } },
         list = {
           max_items = 10,
-          selection = function(ctx)
-            return ctx.mode == "cmdline" and "auto_insert" or "preselect"
-          end,
+          selection = {
+            preselect = function(ctx)
+              return ctx.mode ~= "cmdline"
+            end,
+            auto_insert = function(ctx)
+              return ctx.mode ~= "cmdline"
+            end,
+          },
         },
         menu = {
-          draw = { treesitter = { "lsp" } },
+          draw = {
+            treesitter = { "lsp" },
+          },
         },
       },
     },
