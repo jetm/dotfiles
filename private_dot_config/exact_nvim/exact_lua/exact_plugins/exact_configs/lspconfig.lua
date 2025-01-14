@@ -220,6 +220,18 @@ require("mason-lspconfig").setup({
       })
     end,
 
+    bashls = function()
+      lspconfig.bashls.setup({
+        capabilities = M.capabilities,
+        settings = {
+          bashsl = {
+            format = { enable = false },
+            validate = { enable = true },
+          },
+        },
+      })
+    end,
+
     jsonls = function()
       lspconfig.jsonls.setup({
         capabilities = M.capabilities,
