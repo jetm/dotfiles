@@ -265,7 +265,8 @@
     username = javier.tia
 
 [credential]
-    helper = /usr/lib/git-core/git-credential-libsecret
+    helper = "cache --timeout 21600"
+    helper = oauth
 
 [credential "https://gitlab.com"]
     helper =
