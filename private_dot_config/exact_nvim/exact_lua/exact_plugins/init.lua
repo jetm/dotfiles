@@ -40,6 +40,7 @@ return {
       bigfile = { enabled = true },
       notifier = { enabled = true },
       quickfile = { enabled = true },
+      picker = { enabled = true },
     },
     keys = {
       {
@@ -74,6 +75,14 @@ return {
         end,
         mode = { "n", "x" },
         desc = "Show Notifier History",
+      },
+      {
+        "<C-p>",
+        function()
+          ---@diagnostic disable-next-line: undefined-global
+          Snacks.picker.files()
+        end,
+        desc = "Find Files",
       },
     },
   },
@@ -703,45 +712,75 @@ return {
   },
 
   {
-    "ibhagwan/fzf-lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-      winopts = {
-        border = "none",
-      },
-    },
-    config = true,
-  },
-
-  {
     "xvzc/chezmoi.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require("chezmoi").setup({
-        edit = {
-          watch = true,
-          force = true,
-        },
-        notification = {
-          on_open = false,
-        },
+    init = function()
+      vim.g["chezmoi#use_tmp_buffer"] = 1
+      vim.g["chezmoi#source_dir_path"] = os.getenv("HOME") .. "/.local/share/chezmoi"
+
+      -- run chezmoi edit on file enter
+      vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+        pattern = { os.getenv("HOME") .. "/.local/share/chezmoi/*" },
+        callback = function()
+          vim.schedule(require("chezmoi.commands.__edit").watch)
+        end,
       })
-      Fzf_chezmoi = function()
-        ---@diagnostic disable-next-line: undefined-field
-        require("fzf-lua").fzf_exec(require("chezmoi.commands").list(), {
-          actions = {
-            ["default"] = function(selected)
-              require("chezmoi.commands").edit({
-                targets = { "~/" .. selected[1] },
-                args = { "--watch" },
-              })
-            end,
+
+      Pick_chezmoi = function()
+        local results = require("chezmoi.commands").list({
+          args = {
+            "--path-style",
+            "absolute",
+            "--include",
+            "files",
+            "--exclude",
+            "externals",
           },
         })
-      end
+        local items = {}
 
-      vim.api.nvim_command("command! ChezmoiFzf lua Fzf_chezmoi()")
+        for _, czFile in ipairs(results) do
+          table.insert(items, {
+            text = czFile,
+            file = czFile,
+          })
+        end
+
+        local opts = {
+          items = items,
+          confirm = function(picker, item)
+            picker:close()
+            require("chezmoi.commands").edit({
+              targets = { item.text },
+              args = { "--watch" },
+            })
+          end,
+        }
+
+        ---@diagnostic disable-next-line: undefined-global
+        Snacks.picker.pick(opts)
+      end
     end,
+    opts = {
+      edit = {
+        watch = false,
+        force = false,
+      },
+      notification = {
+        on_open = true,
+        on_apply = true,
+        on_watch = false,
+      },
+    },
+    keys = {
+      {
+        "<C-c>",
+        function()
+          Pick_chezmoi()
+        end,
+        desc = "Chezmoi",
+      },
+    },
   },
 
   {

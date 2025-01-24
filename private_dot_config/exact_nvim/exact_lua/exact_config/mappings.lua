@@ -52,11 +52,6 @@ else
   -- Allow to use <Ctrl-z> in insert mode to move in the background
   map("i", "<C-z>", "<Esc><C-z>", { desc = "Close editor to background" })
 
-  -- fzf-lua mapping
-  map("n", "<C-p>", "<CMD>FzfLua files<CR>", { desc = "Find files" })
-
-  map("n", "<C-c>", "<CMD>ChezmoiFzf<CR>", { desc = "Find chezmoi files" })
-
   map("n", "<Leader>b", "<CMD>BufferLinePick<CR>")
 
   ---
