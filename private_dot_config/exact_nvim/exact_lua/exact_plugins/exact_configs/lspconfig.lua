@@ -88,16 +88,17 @@ require("mason").setup({
   opts = {
     ensure_installed = {
       -- Formatters
+      "clang-format",
+      "prettier",
       "shfmt",
       "stylua",
       "yamlfmt",
       "yamllint",
-      "prettier",
-      "clang-format",
 
       -- Linters
-      "shellcheck",
       "luacheck",
+      "ruff",
+      "shellcheck",
       "shellharden",
     },
   },
@@ -220,11 +221,23 @@ require("mason-lspconfig").setup({
       })
     end,
 
+    -- basedpyright = function()
+    --   lspconfig.basedpyright.setup({
+    --     capabilities = M.capabilities,
+    --     settings = {
+    --       basedpyright = {
+    --         format = { enable = false },
+    --         validate = { enable = true },
+    --       },
+    --     },
+    --   })
+    -- end,
+
     bashls = function()
       lspconfig.bashls.setup({
         capabilities = M.capabilities,
         settings = {
-          bashsl = {
+          bashls = {
             format = { enable = false },
             validate = { enable = true },
           },
