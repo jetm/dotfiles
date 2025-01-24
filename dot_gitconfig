@@ -208,7 +208,6 @@
     auto = false
     strategy = incremental
     repo = ~/repos/work/linux-stable
-    repo = ~/repos/work/linux
 
 [tag]
     sort = version:refname
