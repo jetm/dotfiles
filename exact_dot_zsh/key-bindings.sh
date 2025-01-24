@@ -32,8 +32,8 @@ bindkey -M viins '^[[A' history-substring-search-up
 # Key Down
 bindkey -M viins '^[[B' history-substring-search-down
 
-fancy-ctrl-z () {
-  if [[ $#BUFFER = 0 ]]; then
+fancy-ctrl-z() {
+  if [[ $#BUFFER == 0 ]]; then
     BUFFER="fg"
     zle accept-line -w
   else
@@ -47,17 +47,19 @@ zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
 fzf-aliases-widget() {
-  LBUFFER="$LBUFFER$(FZF_DEFAULT_COMMAND=
-  alias | sed 's/=/ --- /' | \
-    awk -F '---' \
-      '{
+  LBUFFER="$LBUFFER$(
+    FZF_DEFAULT_COMMAND=
+    alias | sed 's/=/ --- /' |
+      awk -F '---' \
+        '{
         print $1 "--" $2
-      }' | \
-    tr -d "'" | column -tl2 | \
-    fzf --prompt=" Aliases > " \
+      }' |
+      tr -d "'" | column -tl2 |
+      fzf --prompt=" Aliases > " \
         --ansi \
         --preview 'echo {3..} | bat --color=always --plain --language=sh' \
-        --preview-window 'up:4:nohidden:wrap' | cut -d' ' -f 1)"
+        --preview-window 'up:4:nohidden:wrap' | cut -d' ' -f 1
+  )"
   zle reset-prompt
 }
 zle -N fzf-aliases-widget
@@ -111,7 +113,7 @@ zle -N exit_zsh
 bindkey '^D' exit_zsh
 
 # ls automatically after cd and git status if on a git repo
-function cd () {
+function cd() {
   auto_ls() {
     if command -v lsd > /dev/null; then
       lsd --all --group-directories-first
@@ -123,7 +125,8 @@ function cd () {
   builtin cd "$@"
 
   if [[ -d .git ]]; then
-    git status; echo ""
+    git status
+    echo ""
     auto_ls
   else
     auto_ls
@@ -151,7 +154,7 @@ bindkey -M viins '^p' fzf-file-widget
 bindkey '^P' fzf-file-widget
 
 custom_clear_screen() {
-  builtin print -rn -- $'\r\e[0J\e[H\e[22J' >"$TTY"
+  builtin print -rn -- $'\r\e[0J\e[H\e[22J' > "$TTY"
   builtin zle .reset-prompt
   builtin zle -R
 }
