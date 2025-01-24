@@ -1175,28 +1175,29 @@ return {
   },
 
   -- add neovim in browser
-  {
-    "glacambre/firenvim",
-    lazy = not vim.g.started_by_firenvim,
-    module = false,
-    build = ":call firenvim#install(0)",
-    config = function()
-      vim.g.firenvim_config = {
-        globalSettigs = {
-          alt = "all",
-        },
-        localSettings = {
-          [".*"] = {
-            cmdline = "neovim",
-            content = "text",
-            priority = 0,
-            selector = "textarea",
-            takeover = "never",
-          },
-        },
-      }
-    end,
-  },
+  -- {
+  --   "glacambre/firenvim",
+  --   lazy = not vim.g.started_by_firenvim,
+  --   module = false,
+  --   build = ":call firenvim#install(0)",
+  --   config = function()
+  --     vim.g.firenvim_config = {
+  --       globalSettigs = {
+  --         alt = "all",
+  --       },
+  --       localSettings = {
+  --         [".*"] = {
+  --           cmdline = "neovim",
+  --           content = "text",
+  --           priority = 0,
+  --           selector = "textarea",
+  --           takeover = "never",
+  --         },
+  --       },
+  --     }
+  --   end,
+  -- },
+  { 'subnut/nvim-ghost.nvim' },
 
   {
     "ZWindL/orphans.nvim",
