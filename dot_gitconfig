@@ -272,6 +272,15 @@
     helper =
     helper = !/usr/bin/glab auth git-credential
 
+[maintenance "repack"]
+    enabled = true
+[maintenance "gc"]
+    enabled = true
+[maintenance "commit-graph"]
+    enabled = true
+[maintenance "prefetch"]
+    enabled = true
+
 [sendemail]
     smtpencryption = tls
     suppresscc = self
