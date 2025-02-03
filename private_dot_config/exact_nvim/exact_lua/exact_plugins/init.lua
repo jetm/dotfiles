@@ -1137,6 +1137,9 @@ return {
     "https://github.com/ck-zhang/mistake.nvim",
   },
 
+  -- Sync textarea against Neovim in terminal
+  { "subnut/nvim-ghost.nvim" },
+
   -- add neovim in browser
   -- {
   --   "glacambre/firenvim",
@@ -1160,7 +1163,6 @@ return {
   --     }
   --   end,
   -- },
-  { 'subnut/nvim-ghost.nvim' },
 
   {
     "ZWindL/orphans.nvim",
