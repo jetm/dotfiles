@@ -133,4 +133,8 @@ if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
     # Search for package(s) for local and AUR
     alias pasp='pikaur'
   fi
+
+  if (command -v paccache > /dev/null 2>&1); then
+    alias paclear='sudo paccache -rvk3'
+  fi
 fi
