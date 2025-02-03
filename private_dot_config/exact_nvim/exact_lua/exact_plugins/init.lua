@@ -1054,53 +1054,16 @@ return {
     },
   },
 
-  -- {
-  --   -- "hrsh7th/nvim-cmp",
-  --   "iguanacucumber/magazine.nvim",
-  --   name = "nvim-cmp",
-  --   event = "InsertCharPre",
-  --   opts = function()
-  --     return require("plugins.configs.cmp")
-  --   end,
-  --   dependencies = {
-  --     {
-  --       -- snippet plugin
-  --       "L3MON4D3/LuaSnip",
-  --       dependencies = "rafamadriz/friendly-snippets",
-  --       opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-  --       config = function(_, opts)
-  --         require("luasnip").config.set_config(opts)
-  --         require("plugins.configs.luasnip")
-  --       end,
-  --     },
-  --
-  --     -- cmp sources plugins
-  --     {
-  --       "saadparwaiz1/cmp_luasnip",
-  --       "hrsh7th/cmp-nvim-lua",
-  --       "hrsh7th/cmp-nvim-lsp",
-  --       "hrsh7th/cmp-buffer",
-  --       "hrsh7th/cmp-path",
-  --     },
-  --     {
-  --       "f3fora/cmp-spell",
-  --       ft = { "gitcommit", "markdown" },
-  --     },
-  --     { "lukas-reineke/cmp-rg" },
-  --     { "FelipeLema/cmp-async-path" },
-  --     { "https://git.sr.ht/~p00f/clangd_extensions.nvim" },
-  --   },
-  -- },
-  --
-  -- {
-  --   "garyhurtz/cmp_kitty",
-  --   dependencies = {
-  --     { "hrsh7th/nvim-cmp" },
-  --   },
-  --   init = function()
-  --     require("cmp_kitty"):setup()
-  --   end,
-  -- },
+  -- A Neovim plugin that display prettier diagnostic messages. Display diagnostic messages where the cursor is, with icons and colors.
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy", -- Or `LspAttach`
+    priority = 1000, -- needs to be loaded in first
+    config = function()
+      require("tiny-inline-diagnostic").setup()
+      vim.diagnostic.config({ virtual_text = false }) -- Only if needed in your configuration, if you already have native LSP diagnostics
+    end,
+  },
 
   -- better diffing
   -- ]x - move to previous conflict
