@@ -40,7 +40,13 @@ return {
       bigfile = { enabled = true },
       notifier = { enabled = true },
       quickfile = { enabled = true },
-      picker = { enabled = true },
+      picker = {
+        enabled = true,
+        cycle = true,
+        layout = function()
+          return vim.o.columns >= 120 and "vscode" or "vertical"
+        end,
+      },
     },
     keys = {
       {
