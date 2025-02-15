@@ -54,6 +54,15 @@ audio_rm() {
   ffmpeg -i "$1" -map 0:v -map 0:a:"$2" -c copy "$(basename $1 .mkv)_$2.mkv"
 }
 
+add_path() {
+  if [ -d $1 ]; then
+    # Set the list of directories that Zsh searches for programs
+    path=($1 ${path})
+  fi
+}
+
+list_path() { echo "${PATH//:/\\n}"; }
+
 # In case a command is not found, try to find the package that has it
 function command_not_found_handler {
     local purple='\e[1;35m' bright='\e[0;1m' green='\e[1;32m' reset='\e[0m'
