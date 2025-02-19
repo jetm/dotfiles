@@ -33,7 +33,7 @@ M.on_init = function(client, _)
 end
 
 M.default_capabilities = vim.lsp.protocol.make_client_capabilities()
-M.capabilities = require('blink.cmp').get_lsp_capabilities(M.default_capabilities)
+M.capabilities = require("blink.cmp").get_lsp_capabilities(M.default_capabilities)
 
 M.capabilities.textDocument.completion.completionItem = {
   documentationFormat = { "markdown", "plaintext" },
@@ -90,14 +90,14 @@ require("mason").setup({
       -- Formatters
       "clang-format",
       "prettier",
+      "ruff",
       "shfmt",
       "stylua",
       "yamlfmt",
-      "yamllint",
 
       -- Linters
+      "yamllint",
       "luacheck",
-      "ruff",
       "shellcheck",
       "shellharden",
     },
@@ -132,7 +132,7 @@ require("mason-lspconfig").setup({
     "dockerls",
     "jsonls",
     "lua_ls",
-    "ruff",
+    "pyright",
     "yamlls",
   },
   handlers = {
@@ -221,17 +221,25 @@ require("mason-lspconfig").setup({
       })
     end,
 
-    -- basedpyright = function()
-    --   lspconfig.basedpyright.setup({
-    --     capabilities = M.capabilities,
-    --     settings = {
-    --       basedpyright = {
-    --         format = { enable = false },
-    --         validate = { enable = true },
-    --       },
-    --     },
-    --   })
-    -- end,
+    -- Use Ruff exclusively for linting, formatting and organizing imports, and disable those capabilities in Pyright
+    -- https://github.com/astral-sh/ruff-lsp?tab=readme-ov-file#example-neovim
+    pyright = function()
+      lspconfig.pyright.setup({
+        capabilities = M.capabilities,
+        settings = {
+          pyright = {
+            -- Using Ruff's import organizer
+            disableOrganizeImports = true,
+          },
+          python = {
+            analysis = {
+              -- Ignore all files for analysis to exclusively use Ruff for linting
+              ignore = { "*" },
+            },
+          },
+        },
+      })
+    end,
 
     bashls = function()
       lspconfig.bashls.setup({
