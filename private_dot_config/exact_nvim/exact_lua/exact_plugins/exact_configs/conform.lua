@@ -3,14 +3,15 @@ return function(_, _)
     -- Everything in opts will be passed to setup()
     -- Define your formatters
     formatters_by_ft = {
-      lua = { "stylua" },
-      sh = { "shfmt", "shellharden" },
-      zsh = { "shfmt", "shellharden" },
       bats = { "shfmt", "shellharden" },
-      yaml = { "yamlfmt" },
-      css = { "prettier" },
       c = { "clang_format" },
+      css = { "prettier" },
       gitcommit = { "commitmsgfmt"},
+      lua = { "stylua" },
+      python = { "ruff_fix", "ruff_format" },
+      sh = { "shfmt", "shellharden" },
+      yaml = { "yamlfmt" },
+      zsh = { "shfmt", "shellharden" },
     },
 
     format_on_save = false,
