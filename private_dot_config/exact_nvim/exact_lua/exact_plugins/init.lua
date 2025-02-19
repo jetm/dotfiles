@@ -820,15 +820,27 @@ return {
   {
     "mfussenegger/nvim-lint",
     event = "VeryLazy",
-    config = function()
-      require("lint").linters_by_ft = {
+    opts = {
+      -- Event to trigger linters
+      events = { "BufWritePost", "BufReadPost", "InsertLeave" },
+      linters_by_ft = {
         sh = { "shellcheck" },
         zsh = { "shellcheck" },
         bats = { "shellcheck" },
         lua = { "luacheck" },
         yaml = { "yamllint" },
-      }
-    end,
+        fish = { "fish" },
+      },
+      linters = {
+        sh = { "shellcheck" },
+        zsh = { "shellcheck" },
+        bats = { "shellcheck" },
+        lua = { "luacheck" },
+        yaml = { "yamllint" },
+        fish = { "fish" },
+      },
+    },
+    config = require("plugins.configs.nvim-lint"),
   },
 
   -- Lightweight yet powerful formatter
