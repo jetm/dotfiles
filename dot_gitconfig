@@ -136,6 +136,7 @@
     # Always prune when fetching and pulling
     prune = true
     prunetags = true
+    all = true
 
 [branch]
     # Rebase against tracking branch
