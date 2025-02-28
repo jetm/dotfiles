@@ -120,7 +120,7 @@
 
 [help]
     # Automatically correct and execute mistyped commands
-    autocorrect = 1
+    autocorrect = prompt
 
 [push]
     # automatically setup an upsteam tracking when you run git push from a new branch
