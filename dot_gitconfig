@@ -125,6 +125,8 @@
 [push]
     # automatically setup an upsteam tracking when you run git push from a new branch
     autoSetupRemote = true
+    default = simple
+    followTags = true
 
 [pull]
     # Preserve merges when you're rebasing against origin/BRANCH
