@@ -24,6 +24,10 @@
 [init]
     defaultBranch = main
 
+[column]
+    # show in columns if the output is to the terminal
+    ui = auto
+
 [alias]
     # Print the name of the current branch
     current = symbolic-ref --short HEAD
