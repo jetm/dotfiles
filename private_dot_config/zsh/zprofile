@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148
 # Similar to .zlogin but will be sourced before .zshrc
 #
 # Both .zprofile and .zshrc are skipped in non-login non-interactive shells
@@ -16,7 +17,7 @@
 #
 # utility -> plugins-settings -> antidote-init -> extensions
 #
-for e in "${HOME}"/.zsh/*.zsh; do
+for e in "${ZDOTDIR}"/zsh-config/*.zsh; do
   source "${e}"
 done
 

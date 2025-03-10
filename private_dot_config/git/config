@@ -98,7 +98,7 @@
     editor = nvim
 
     # Global gitignore
-    excludesfile = ~/.gitignore
+    excludesfile = ~/.config/git/ignore
 
 [feature]
     ; Enable config options that optimize for repos with many files in the
@@ -114,9 +114,10 @@
     # Extend rename limit
     renamelimit = 0
 
-    # delta will display diffs between the ancestral commit and each of the two
-    # merge parents
-    ; conflictstyle = diff3
+    ; similar to diff3 but removes matching lines on the two sides from the
+    ; conflict region when those matching lines appear near either the beginning
+    ; or end of a conflict region
+    conflictstyle = zdiff3
 
 [help]
     # Automatically correct and execute mistyped commands
@@ -152,7 +153,8 @@
     submodule = log
 
     # Moved lines of code are colored differently
-    colorMoved = default
+    ; colorMoved = default
+    colorMoved = plain
     colorMovedWS = allow-indentation-change
 
     # Extends patience algorithm to support low-occurrence common elements

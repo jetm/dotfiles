@@ -4,5 +4,9 @@ scripts
 install_chezmoi.sh
 srtadrm
 **/*.zwc
+**/*.zwc.old
 KDE_JETM_Shortcuts.kksrc
 **/lazy-lock.json
+disabled/
+.config/nvim/mistake_custom_dict.lua
+build/

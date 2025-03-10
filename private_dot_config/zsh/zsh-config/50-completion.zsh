@@ -2,6 +2,9 @@
 # Completion
 #
 
+# Prevent default zshrc on Ubuntu from running compinit too early
+skip_global_compinit=1
+
 # run compinit in a smarter, faster way
 run_compinit() {
   setopt localoptions extendedglob
@@ -15,7 +18,7 @@ run_compinit() {
   #   #q expands globs in conditional expressions
   #   N - sets null_glob option (no error on 0 results)
   #   mh-20 - modified less than 20 hours ago
-  ZSH_COMPDUMP="${HOME}/.zcompdump"
+  ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
   if [[ "$1" != "-f" ]] && [[ ${ZSH_COMPDUMP}(#qNmh-20) ]]; then
     # -C (skip function check) implies -i (skip security check).
     compinit -C -d "${ZSH_COMPDUMP}"
@@ -68,7 +71,9 @@ unsetopt FLOW_CONTROL      # Disable start/stop characters in shell editor.
 
 # Use caching to make completion for commands such as dpkg and apt usable.
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path "${ZDOTDIR:-$HOME}/.zcompcache"
+# zstyle ':completion::complete:*' cache-path "${ZDOTDIR:-$HOME}/.zcompcache"
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 
 # Case-insensitive (all), partial-word, and then substring completion.
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'

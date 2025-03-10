@@ -61,7 +61,7 @@ zvm_after_lazy_keybindings() {
 # zsh-vi-mode will auto execute this zvm_after_init function
 zvm_after_init() {
     # Require load it here as it's
-    source "$HOME"/.zsh/00-utility.zsh
+    source "$ZDOTDIR"/zsh-config/00-utility.zsh
 
     _distro=$(lsb_release -si)
     if [ "$_distro" = "Fedora" ]; then
@@ -71,9 +71,9 @@ zvm_after_init() {
     fi
     unset _distro
 
-    source "$HOME"/.zsh/key-bindings.sh
+    source "$ZDOTDIR"/zsh-config/key-bindings.sh
 
-    source "$HOME"/.zsh/kitty-shell-integration.sh
+    source "$ZDOTDIR"/zsh-config/kitty-shell-integration.sh
 }
 
 # vim:set ts=2 sw=2 et:

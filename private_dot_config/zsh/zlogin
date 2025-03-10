@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148
 # Will be loaded in login shells after .zshenv and .zprofile
 
 # Execute code in the background to not affect the current session
@@ -5,12 +6,12 @@
   setopt LOCAL_OPTIONS EXTENDED_GLOB
   autoload -U zrecompile
 
-  zrecompile -pq ${ZDOTDIR:-${HOME}}/.p10k.zsh
-  zrecompile -pq ${ZDOTDIR:-${HOME}}/.zprofile
-  zrecompile -pq ${ZDOTDIR:-${HOME}}/.zshenv
+  # zrecompile -pq ${ZDOTDIR}/p10k.zsh
+  zrecompile -pq ${ZDOTDIR}/zprofile
+  # zrecompile -pq ${ZDOTDIR}/.zshenv
 
   # recompile all zsh or sh
-  for f in "${HOME}"/.zsh/*.*sh; do
+  for f in "${ZDOTDIR}"/zsh-config/*.*sh; do
     zrecompile -pq "${f}"
   done
 ) &!

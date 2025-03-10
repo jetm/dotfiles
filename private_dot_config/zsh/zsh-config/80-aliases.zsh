@@ -16,7 +16,7 @@ alias mkdir='mkdir -p'
 
 # lsd
 alias ls='lsd --group-directories-first'
-alias l='ls --all --long --header --git'
+alias l='ls --all --long --header'
 
 # General
 alias e='nvim'
@@ -40,9 +40,9 @@ alias gb='git branch'
 alias gbd='git branch -D'
 alias gbv='git branch -vv'
 alias gbm='git branch -M'
-alias gbs='git switch'
-alias gbc='git switch -c'
-alias gb-='git switch -'
+alias gsb='git switch'
+alias gsc='git switch -c'
+alias gs-='git switch -'
 
 # Commit (c)
 alias gc='git commit -s'
@@ -101,6 +101,11 @@ alias gfe='git fetch'
 alias gls='git ls-files'
 alias gP='git pull'
 alias gt='git status'
+
+# xdg
+alias svn='svn --config-dir $XDG_CONFIG_HOME/subversion'
+alias units='units --history $XDG_DATA_HOME/units_history'
+alias wget='wget --hsts-file $XDG_DATA_HOME/wget-hsts'
 
 #
 # Arch Linux Stuff

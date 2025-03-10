@@ -1,0 +1,3 @@
+[rockpi4]
+device = /dev/ttyUSB0
+baudrate = 1500000

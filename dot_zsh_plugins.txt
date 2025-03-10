@@ -25,5 +25,6 @@ marlonrichert/zsh-edit kind:defer
 # LucasLarson/gunstage kind:defer
 nyoungstudios/zsh-history-on-success kind:defer
 aemonge/zsh-cycle-jobs kind:defer
+# vxfemboy/zsh-smart-files kind:defer
 
 # vim: ft=config

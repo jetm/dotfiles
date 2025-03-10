@@ -474,7 +474,10 @@ return {
     },
   },
 
-  -- { "brenoprata10/nvim-highlight-colors", config = true },
+  {
+    "voxelprismatic/rabbit.nvim",
+    config = true,
+  },
 
   -- A snazzy bufferline for neovim
   -- bufferline is faster than nvim-cokeline and barbar
@@ -973,14 +976,16 @@ return {
     },
   },
 
-  -- A Neovim plugin that display prettier diagnostic messages. Display diagnostic messages where the cursor is, with icons and colors.
+  -- A Neovim plugin that display prettier diagnostic messages
+  -- Display diagnostic messages where the cursor is, with icons and colors
   {
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "VeryLazy", -- Or `LspAttach`
     priority = 1000, -- needs to be loaded in first
     config = function()
       require("tiny-inline-diagnostic").setup()
-      vim.diagnostic.config({ virtual_text = false }) -- Only if needed in your configuration, if you already have native LSP diagnostics
+      -- Only if needed in your configuration, if you already have native LSP diagnostics
+      vim.diagnostic.config({ virtual_text = false })
     end,
   },
 

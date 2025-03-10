@@ -1,19 +1,19 @@
 # use antidote for plugin management
-[[ -d ${ZDOTDIR:-~}/.antidote ]] ||
-  git clone --depth 1 --quiet https://github.com/mattmc3/antidote ${ZDOTDIR:-~}/.antidote
+[[ -d ${HOME}/.antidote ]] ||
+  git clone --depth 1 --quiet https://github.com/mattmc3/antidote ${HOME}/.antidote
 
-source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+source ${HOME}/.antidote/antidote.zsh
 
 zstyle ':antidote:bundle' use-friendly-names 'yes'
 
 # Set the name of the static .zsh plugins file antidote will generate
-zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins.zsh
+zsh_plugins=${HOME}/.zsh_plugins.zsh
 
 # Ensure you have a .zsh_plugins.txt file where you can add plugins
 [[ -f ${zsh_plugins:r}.txt ]] || touch ${zsh_plugins:r}.txt
 
 # Lazy-load antidote
-fpath+=(${ZDOTDIR:-~}/.antidote)
+fpath+=(${HOME}/.antidote)
 autoload -Uz $fpath[-1]/antidote
 
 # Generate static file in a subshell when .zsh_plugins.txt is updated

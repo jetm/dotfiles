@@ -4,6 +4,7 @@
 
 export SAVEHIST=100000
 export HISTSIZE=120000 # $HISTSIZE should be at least 20% larger than $SAVEHIST
+export HISTFILE="$HOME"/.zsh_history
 
 #
 # Based on prezto
