@@ -879,25 +879,62 @@ return {
       "MasonUpdate",
       "MasonUpdateAll",
     },
-    opt = function()
-      require("plugins.configs.mason")
-    end,
+    opts = {
+      ui = {
+        icons = {
+          package_pending = " ",
+          package_installed = " ",
+          package_uninstalled = " ",
+        },
+      },
+      ensure_installed = {
+        -- Formatters
+        "clang-format",
+        "prettier",
+        "ruff",
+        "shfmt",
+        "stylua",
+        "yamlfmt",
+
+        -- Linters
+        "yamllint",
+        "luacheck",
+        "shellcheck",
+        "shellharden",
+      },
+      max_concurrent_installers = 10,
+    },
+
     -- :MasonUpdate updates registry contents
     build = ":MasonUpdate",
     -- Add ":MasonUpdateAll"
     dependencies = { "Zeioth/mason-extra-cmds", opts = {} },
+    config = function(_, opts)
+      require("mason").setup(opts)
+      local mr = require("mason-registry")
+      local function ensure_installed()
+        for _, tool in ipairs(opts.ensure_installed) do
+          local p = mr.get_package(tool)
+          if not p:is_installed() then
+            p:install()
+          end
+        end
+      end
+      if mr.refresh then
+        mr.refresh(ensure_installed)
+      else
+        ensure_installed()
+      end
+    end,
   },
 
   {
     "neovim/nvim-lspconfig",
-    event = "User FilePost",
+    event = "BufReadPre",
     dependencies = {
-      { "williamboman/mason.nvim" },
       { "williamboman/mason-lspconfig.nvim" },
     },
-    config = function()
-      require("plugins.configs.lspconfig").defaults()
-    end,
+    config = require("plugins.configs.lspconfig"),
   },
 
   -- Performant, batteries-included completion plugin for Neovim

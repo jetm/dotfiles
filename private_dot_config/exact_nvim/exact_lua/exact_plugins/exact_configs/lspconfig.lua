@@ -1,173 +1,72 @@
-local M = {}
-local map = vim.keymap.set
-
--- export on_attach & capabilities
-M.on_attach = function(_, bufnr)
-  local function opts(desc)
-    return { buffer = bufnr, desc = "LSP " .. desc }
-  end
-
-  map("n", "gD", vim.lsp.buf.declaration, opts("Go to declaration"))
-  map("n", "gd", vim.lsp.buf.definition, opts("Go to definition"))
-  map("n", "gi", vim.lsp.buf.implementation, opts("Go to implementation"))
-  map("n", "<leader>sh", vim.lsp.buf.signature_help, opts("Show signature help"))
-  map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts("Add workspace folder"))
-  map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts("Remove workspace folder"))
-
-  map("n", "<leader>wl", function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, opts("List workspace folders"))
-
-  map("n", "<leader>D", vim.lsp.buf.type_definition, opts("Go to type definition"))
-  map("n", "<leader>ra", require("nvchad.lsp.renamer"), opts("NvRenamer"))
-
-  map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts("Code action"))
-  map("n", "gr", vim.lsp.buf.references, opts("Show references"))
-end
-
--- disable semanticTokens
-M.on_init = function(client, _)
-  if client.supports_method("textDocument/semanticTokens") then
-    client.server_capabilities.semanticTokensProvider = nil
-  end
-end
-
-M.default_capabilities = vim.lsp.protocol.make_client_capabilities()
-M.capabilities = require("blink.cmp").get_lsp_capabilities(M.default_capabilities)
-
-M.capabilities.textDocument.completion.completionItem = {
-  documentationFormat = { "markdown", "plaintext" },
-  snippetSupport = true,
-  preselectSupport = true,
-  insertReplaceSupport = true,
-  labelDetailsSupport = true,
-  deprecatedSupport = true,
-  commitCharactersSupport = true,
-  tagSupport = { valueSet = { 1 } },
-  resolveSupport = {
-    properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
-    },
-  },
-}
-
-M.defaults = function()
+return function(_, opts)
   dofile(vim.g.base46_cache .. "lsp")
   require("nvchad.lsp").diagnostic_config()
 
-  require("lspconfig").lua_ls.setup({
-    on_attach = M.on_attach,
-    capabilities = M.capabilities,
-    on_init = M.on_init,
+  local lspconfig = require("lspconfig")
 
-    settings = {
-      Lua = {
-        diagnostics = {
-          globals = { "vim" },
-        },
-        workspace = {
-          library = {
-            vim.fn.expand("$VIMRUNTIME/lua"),
-            vim.fn.expand("$VIMRUNTIME/lua/vim/lsp"),
-            vim.fn.stdpath("data") .. "/lazy/ui/nvchad_types",
-            vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy",
-            "${3rd}/luv/library",
-          },
-          maxPreload = 100000,
-          preloadFileSize = 10000,
-        },
-      },
-    },
-  })
-end
+  local default_setup = function(server)
+    lspconfig[server].setup({
+      capabilities = require("blink.cmp").get_lsp_capabilities(),
+    })
+  end
 
--- Install formatters and linters
-require("mason").setup({
-  opts = {
-    ensure_installed = {
-      -- Formatters
-      "clang-format",
-      "prettier",
-      "ruff",
-      "shfmt",
-      "stylua",
-      "yamlfmt",
+  local handlers = {
+    default_setup,
 
-      -- Linters
-      "yamllint",
-      "luacheck",
-      "shellcheck",
-      "shellharden",
-    },
-  },
-  config = function(_, opts)
-    require("mason").setup(opts)
-    local mr = require("mason-registry")
-    local function ensure_installed()
-      for _, tool in ipairs(opts.ensure_installed) do
-        local p = mr.get_package(tool)
-        if not p:is_installed() then
-          p:install()
-        end
-      end
-    end
-    if mr.refresh then
-      mr.refresh(ensure_installed)
-    else
-      ensure_installed()
-    end
-  end,
-})
-
-local lspconfig = require("lspconfig")
-
--- Install LSP servers
-require("mason-lspconfig").setup({
-  ensure_installed = {
-    -- Language servers
-    "bashls",
-    "clangd",
-    "dockerls",
-    "jsonls",
-    "lua_ls",
-    "pyright",
-    "yamlls",
-  },
-  handlers = {
-    lua_ls = function()
-      lspconfig.lua_ls.setup({
-        capabilities = M.capabilities,
+    ["bashls"] = function()
+      lspconfig.bashls.setup({
         settings = {
-          Lua = {
-            diagnostics = {
-              -- Required to fix vim global warning
-              -- Get the language server to recognize the `vim` global
-              globals = {
-                "vim",
-                "require",
-              },
-            },
-            workspace = {
-              library = {
-                vim.fn.expand("$VIMRUNTIME/lua"),
-                vim.fn.expand("$VIMRUNTIME/lua/vim/lsp"),
-                vim.fn.stdpath("data") .. "/lazy/ui/nvchad_types",
-                vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy",
-                "${3rd}/luv/library",
-              },
-              maxPreload = 100000,
-              preloadFileSize = 10000,
-            },
+          bashls = {
+            format = { enable = false },
+            validate = { enable = true },
           },
         },
       })
     end,
 
-    clangd = function()
+    ["lua_ls"] = function()
+      lspconfig.lua_ls.setup({
+        Lua = {
+          runtime = { version = "LuaJIT" },
+          workspace = {
+            checkThirdParty = false,
+            library = {
+              library = vim.api.nvim_get_runtime_file("", true),
+            },
+          },
+          hint = {
+            enable = true,
+          },
+          diagnostics = {
+            globals = { "vim", "require" },
+            disable = { "missing-fields" },
+          },
+        },
+      })
+    end,
+    ["harper_ls"] = function()
+      lspconfig.harper_ls.setup({
+        cmd = { "harper-ls", "--stdio" },
+        filetypes = { "gitcommit", "markdown", "text" },
+        settings = {
+          ["harper-ls"] = {
+            codeActions = {
+              forceStable = true,
+            },
+            -- typos handles spell checking
+            linters = {
+              sentence_capitalization = false,
+              spell_check = false,
+            },
+            userDictPath = vim.env.XDG_CONFIG_HOME .. "/harper/dict.txt",
+          },
+        },
+        single_file_support = true,
+      })
+    end,
+
+    ["clangd"] = function()
       lspconfig.clangd.setup({
-        capabilities = M.capabilities,
         root_dir = function(fname)
           return require("lspconfig.util").root_pattern(
             "Makefile",
@@ -198,9 +97,8 @@ require("mason-lspconfig").setup({
       })
     end,
 
-    yamlls = function()
+    ["yamlls"] = function()
       lspconfig.yamlls.setup({
-        capabilities = M.capabilities,
         settings = {
           redhat = { telemetry = { enabled = false } },
           yaml = {
@@ -221,41 +119,8 @@ require("mason-lspconfig").setup({
       })
     end,
 
-    -- Use Ruff exclusively for linting, formatting and organizing imports, and disable those capabilities in Pyright
-    -- https://github.com/astral-sh/ruff-lsp?tab=readme-ov-file#example-neovim
-    pyright = function()
-      lspconfig.pyright.setup({
-        capabilities = M.capabilities,
-        settings = {
-          pyright = {
-            -- Using Ruff's import organizer
-            disableOrganizeImports = true,
-          },
-          python = {
-            analysis = {
-              -- Ignore all files for analysis to exclusively use Ruff for linting
-              ignore = { "*" },
-            },
-          },
-        },
-      })
-    end,
-
-    bashls = function()
-      lspconfig.bashls.setup({
-        capabilities = M.capabilities,
-        settings = {
-          bashls = {
-            format = { enable = false },
-            validate = { enable = true },
-          },
-        },
-      })
-    end,
-
-    jsonls = function()
+    ["jsonls"] = function()
       lspconfig.jsonls.setup({
-        capabilities = M.capabilities,
         settings = {
           jsonls = {
             format = { enable = false },
@@ -270,7 +135,41 @@ require("mason-lspconfig").setup({
         },
       })
     end,
-  },
-})
 
-return M
+    ["pyright"] = function()
+      -- Use Ruff exclusively for linting, formatting and organizing imports, and disable those capabilities in Pyright
+      -- https://github.com/astral-sh/ruff-lsp?tab=readme-ov-file#example-neovim
+      lspconfig.pyright.setup({
+        settings = {
+          pyright = {
+            -- Using Ruff's import organizer
+            disableOrganizeImports = true,
+          },
+          python = {
+            analysis = {
+              -- Ignore all files for analysis to exclusively use Ruff for linting
+              ignore = { "*" },
+            },
+          },
+        },
+      })
+    end,
+  }
+
+  -- Install LSP servers
+  require("mason-lspconfig").setup({
+    ensure_installed = {
+      -- Language servers
+      "bashls",
+      "clangd",
+      "dockerls",
+      "jsonls",
+      "harper_ls",
+      "lua_ls",
+      "pyright",
+      "yamlls",
+    },
+    automatic_installation = true,
+    handlers = handlers,
+  })
+end
