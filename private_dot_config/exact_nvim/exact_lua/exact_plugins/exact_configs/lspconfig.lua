@@ -1,4 +1,4 @@
-return function(_, opts)
+return function(_, _)
   dofile(vim.g.base46_cache .. "lsp")
   require("nvchad.lsp").diagnostic_config()
 
@@ -17,8 +17,12 @@ return function(_, opts)
       lspconfig.bashls.setup({
         settings = {
           bashls = {
-            format = { enable = false },
+            format = { enable = true },
             validate = { enable = true },
+            filetypes = { "bash", "sh", "zsh" },
+            bashIde = {
+              globPattern = "*@(.sh|.inc|.bash|.command|.zsh)",
+            },
           },
         },
       })
