@@ -48,6 +48,7 @@ return function(_, _)
         },
       })
     end,
+
     ["harper_ls"] = function()
       lspconfig.harper_ls.setup({
         cmd = { "harper-ls", "--stdio" },

@@ -31,6 +31,19 @@ return {
     config = true,
   },
 
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    cmd = "LazyDev",
+    opts = {
+      library = {
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        { path = "snacks.nvim", words = { "Snacks" } },
+        { path = "lazy.nvim", words = { "LazyVim" } },
+      },
+    },
+  },
+
   -- A collection of small QoL plugins for Neovim
   {
     "folke/snacks.nvim",
