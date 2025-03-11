@@ -840,20 +840,18 @@ return {
       -- Event to trigger linters
       events = { "BufWritePost", "BufReadPost", "InsertLeave" },
       linters_by_ft = {
-        sh = { "shellcheck" },
-        zsh = { "shellcheck" },
-        bats = { "shellcheck" },
-        lua = { "luacheck" },
+        sh = { "shellcheck", "shellharden" },
+        zsh = { "shellcheck", "shellharden" },
+        bats = { "shellcheck", "shellharden" },
+        -- lua = { "luacheck" }, -- No required. Called by LSP
         yaml = { "yamllint" },
-        fish = { "fish" },
       },
       linters = {
-        sh = { "shellcheck" },
-        zsh = { "shellcheck" },
-        bats = { "shellcheck" },
-        lua = { "luacheck" },
+        sh = { "shellcheck", "shellharden" },
+        zsh = { "shellcheck", "shellharden" },
+        bats = { "shellcheck", "shellharden" },
+        -- lua = { "luacheck" }, -- No required. Called by LSP
         yaml = { "yamllint" },
-        fish = { "fish" },
       },
     },
     config = require("plugins.configs.nvim-lint"),
