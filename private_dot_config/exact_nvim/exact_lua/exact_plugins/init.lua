@@ -1105,9 +1105,9 @@ return {
   },
 
   -- A spelling auto correct plugin for Neovim including over 20k entries
-  {
-    "https://github.com/ck-zhang/mistake.nvim",
-  },
+  -- {
+  --   "https://github.com/ck-zhang/mistake.nvim",
+  -- },
 
   -- Sync textarea against Neovim in terminal
   { "subnut/nvim-ghost.nvim" },
