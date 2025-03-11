@@ -1,3 +1,5 @@
+# shellcheck disable=2148
+#
 # Set up fzf key bindings and fuzzy completion
 export FZF_ALT_C_COMMAND="fd --type=d --color=never --hidden --exclude .git --ignore"
 export FZF_CTRL_T_COMMAND="fd --hidden --color=never --exclude .git --exclude .repo --ignore"

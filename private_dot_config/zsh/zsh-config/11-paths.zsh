@@ -1,3 +1,4 @@
+# shellcheck disable=2148
 # Ensure path arrays do not contain duplicates
 # shellcheck disable=2034
 typeset -gU cdpath fpath path
