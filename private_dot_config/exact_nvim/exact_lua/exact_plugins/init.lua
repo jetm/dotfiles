@@ -1114,33 +1114,34 @@ return {
 
   -- add neovim in browser
   -- {
-  --   "glacambre/firenvim",
-  --   lazy = not vim.g.started_by_firenvim,
-  --   module = false,
-  --   build = ":call firenvim#install(0)",
-  --   config = function()
-  --     vim.g.firenvim_config = {
-  --       globalSettigs = {
-  --         alt = "all",
-  --       },
-  --       localSettings = {
-  --         [".*"] = {
-  --           cmdline = "neovim",
-  --           content = "text",
-  --           priority = 0,
-  --           selector = "textarea",
-  --           takeover = "never",
-  --         },
-  --       },
-  --     }
-  --   end,
+  --   "https://github.com/ThePrimeagen/refactoring.nvim",
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   dependencies = {
+  --     "https://github.com/nvim-lua/plenary.nvim",
+  --     "https://github.com/nvim-treesitter/nvim-treesitter",
+  --   },
+  --   keys = {
+  --     {
+  --       "<leader>cr",
+  --       function()
+  --         require("refactoring").select_refactor()
+  --       end,
+  --       mode = { "n", "v" },
+  --       desc = "List refactoring",
+  --     },
+  --     {
+  --       "<leader>cv",
+  --       ":Refactor extract_var<CR>",
+  --       mode = { "n", "v" },
+  --       desc = "Refactor Variables",
+  --     },
+  --   },
   -- },
 
+  -- Notify when a plugin has been abandoned
   {
     "ZWindL/orphans.nvim",
-    config = function()
-      require("orphans").setup({})
-    end,
+    config = true,
   },
 
   -- run lines/blocs of code (independently of the rest of the file), supporting multiples languages
@@ -1156,24 +1157,6 @@ return {
   --   },
   --   build = "sh install.sh",
   --   config = true,
-  -- },
-
-  -- {
-  --   "epwalsh/obsidian.nvim",
-  --   lazy = true,
-  --   event = {
-  --     "BufReadPre " .. vim.fn.expand("~") .. "/MEGAsync/Obsidian/**.md",
-  --     "BufNewFile " .. vim.fn.expand("~") .. "/MEGAsync/Obsidian/jetm/**.md",
-  --   },
-  --   dependencies = { "nvim-lua/plenary.nvim" },
-  --   opts = {
-  --     workspaces = {
-  --       {
-  --         name = "jetm",
-  --         path = "~/MEGAsync/Obsidian/jetm",
-  --       },
-  --     },
-  --   },
   -- },
 
   -- Debugging in NeoVim the print() way!
