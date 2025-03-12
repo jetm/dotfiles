@@ -168,7 +168,7 @@ return function(_, _)
       "clangd",
       "dockerls",
       "jsonls",
-      "harper_ls",
+      -- "harper_ls",
       "lua_ls",
       "pyright",
       "yamlls",
