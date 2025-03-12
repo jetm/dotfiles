@@ -9,7 +9,7 @@ ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 
 # expand and alias
-export ZPWR_EXPAND_BLACKLIST=(rm mv cp ln mkdir ls l type ji)
+export ZPWR_EXPAND_BLACKLIST=(rm mv cp ln mkdir ls l type ji wget)
 export ZPWR_EXPAND_TO_HISTORY=true
 
 # Git
