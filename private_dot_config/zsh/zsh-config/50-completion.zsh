@@ -18,6 +18,7 @@ run_compinit() {
   #   #q expands globs in conditional expressions
   #   N - sets null_glob option (no error on 0 results)
   #   mh-20 - modified less than 20 hours ago
+  [ ! -d "$XDG_CACHE_HOME"/zsh ] && mkdir "$XDG_CACHE_HOME"/zsh
   ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
   if [[ "$1" != "-f" ]] && [[ ${ZSH_COMPDUMP}(#qNmh-20) ]]; then
     # -C (skip function check) implies -i (skip security check).
