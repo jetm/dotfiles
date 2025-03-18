@@ -28,27 +28,6 @@ return function(_, _)
       })
     end,
 
-    ["lua_ls"] = function()
-      lspconfig.lua_ls.setup({
-        Lua = {
-          runtime = { version = "LuaJIT" },
-          workspace = {
-            checkThirdParty = false,
-            library = {
-              library = vim.api.nvim_get_runtime_file("", true),
-            },
-          },
-          hint = {
-            enable = true,
-          },
-          diagnostics = {
-            globals = { "vim", "require" },
-            disable = { "missing-fields" },
-          },
-        },
-      })
-    end,
-
     -- Disable it from now. Too slow
     -- ["harper_ls"] = function()
     --   lspconfig.harper_ls.setup({
@@ -82,7 +61,7 @@ return function(_, _)
             "build.ninja"
           )(fname) or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(
             fname
-          ) or require("lspconfig.util").find_git_ancestor(fname)
+          ) or vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1])
         end,
         cmd = {
           "clangd",
@@ -101,28 +80,6 @@ return function(_, _)
       })
     end,
 
-    ["yamlls"] = function()
-      lspconfig.yamlls.setup({
-        settings = {
-          redhat = { telemetry = { enabled = false } },
-          yaml = {
-            format = { enable = false },
-            keyOrdering = false,
-            completion = true,
-            validate = { enable = true },
-            schemaStore = {
-              -- Must disable built-in schemaStore support to use
-              -- schemas from SchemaStore.nvim plugin
-              enable = false,
-              -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
-              url = "",
-            },
-            schemas = require("schemastore").yaml.schemas(),
-          },
-        },
-      })
-    end,
-
     ["jsonls"] = function()
       lspconfig.jsonls.setup({
         settings = {
@@ -135,6 +92,27 @@ return function(_, _)
               enable = false,
             },
             schemas = require("schemastore").yaml.schemas(),
+          },
+        },
+      })
+    end,
+
+    ["lua_ls"] = function()
+      lspconfig.lua_ls.setup({
+        Lua = {
+          runtime = { version = "LuaJIT" },
+          workspace = {
+            checkThirdParty = false,
+            library = {
+              library = vim.api.nvim_get_runtime_file("", true),
+            },
+          },
+          hint = {
+            enable = true,
+          },
+          diagnostics = {
+            globals = { "vim", "require" },
+            disable = { "missing-fields" },
           },
         },
       })
@@ -158,6 +136,27 @@ return function(_, _)
         },
       })
     end,
+
+    ["yamlls"] = function()
+      lspconfig.yamlls.setup({
+        settings = {
+          redhat = { telemetry = { enabled = false } },
+          yaml = {
+            format = { enable = true, singleQuote = true },
+            validate = true,
+            hover = true,
+            completion = true,
+            schemaStore = {
+              enable = true,
+              url = "https://www.schemastore.org/api/json/catalog.json",
+            },
+            schemas = require("schemastore").yaml.schemas({
+              ["http://json.schemastore.org/gitlab-ci.json"] = "/*lab-ci.{yml,yaml}",
+            }),
+          },
+        },
+      })
+    end,
   }
 
   -- Install LSP servers
@@ -166,7 +165,8 @@ return function(_, _)
       -- Language servers
       "bashls",
       "clangd",
-      "dockerls",
+      -- "dockerls",
+      "jinja_lsp",
       "jsonls",
       -- "harper_ls",
       "lua_ls",
