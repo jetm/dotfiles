@@ -139,7 +139,13 @@ O.writebackup = false -- Disable making a backup before overwriting a file
 --
 -- diff mode
 --
-O.diffopt:append("linematch:60") -- enable linematch diff algorithm
+O.diffopt:append("linematch:200") -- enable linematch diff algorithm
+O.diffopt:append("internal")
+O.diffopt:append("context:12")
+O.diffopt:append("filler")
+O.diffopt:append("closeoff")
+O.diffopt:append("indent-heuristic")
+O.diffopt:append("algorithm:histogram")
 
 --
 -- various
