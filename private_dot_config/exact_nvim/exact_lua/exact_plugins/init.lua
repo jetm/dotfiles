@@ -106,15 +106,6 @@ return {
     },
   },
 
-  -- {
-  --   "navarasu/onedark.nvim",
-  --   lazy = false,
-  --
-  --   config = function()
-  --     vim.cmd.colorscheme("onedark")
-  --   end,
-  -- },
-  --
   -- onedarkpro is more updated
   {
     "olimorris/onedarkpro.nvim",
@@ -134,23 +125,18 @@ return {
     end,
   },
 
-  -- Enable opening a file in a given line
-  -- {
-  --   "wsdjeg/vim-fetch",
-  --   lazy = false,
-  -- },
-
   -- Enable repeating supported plugin maps with "."
   { "tpope/vim-repeat", event = "VeryLazy", keys = "." },
 
   -- Goto filenames with line info
   { "lewis6991/fileline.nvim", lazy = false },
 
-  -- Gives basic functionality for error messages with format filename:line:column  -- {
-  --   "Dr-42/error-jump.nvim",
-  --   name = "error-jump",
-  --   lazy = false,
-  -- },
+  -- Gives basic functionality for error messages with format filename:line:column
+  {
+    "Dr-42/error-jump.nvim",
+    name = "error-jump",
+    lazy = false,
+  },
 
   -- bitbake support
   {
@@ -173,53 +159,34 @@ return {
     },
   },
 
-  -- Jinja2 syntax support
-  -- {
-  --   "glench/vim-jinja2-syntax",
-  --   event = { "BufReadPre", "BufNewFile" },
-  -- },
-
-  -- measure startuptime
-  -- {
-  --   "dstein64/vim-startuptime",
-  --   cmd = "StartupTime",
-  --   config = function()
-  --     vim.g.startuptime_tries = 10
-  --   end,
-  -- },
-
-  -- Markdown support
-  -- Generate table of contents for Markdown files
-  -- { "mzlogin/vim-markdown-toc" },
-
-  -- improve buffer deletion
-  -- {
-  --   "ojroques/nvim-bufdel",
-  --   lazy = false,
-  --   opts = {
-  --     -- quit Neovim when last buffer is closed
-  --     quit = true,
-  --   },
-  -- },
-
-  -- Close Neovim buffers, windows, or exit Vim with the same single keypress
-  -- {
-  --   "psjay/buffer-closer.nvim",
-  --   lazy = false,
-  --   config = function()
-  --     require("buffer-closer").setup()
-  --   end,
-  -- },
-
-  -- Neovim setup for init.lua and plugin development with full signature help,
-  -- docs and completion for the nvim lua API
-  -- Enable to get more get help from Lua API
-  -- {
-  --   "folke/neodev.nvim",
-  --   config = true,
-  --   lazy = true,
-  --   ft = "lua",
-  -- },
+  -- Jump to last edition
+  {
+    "bloznelis/before.nvim",
+    event = { "InsertEnter", "TextChanged" },
+    keys = {
+      {
+        "<C-n>",
+        function()
+          require("before").jump_to_last_edit()
+        end,
+        desc = "Jump last edit",
+      },
+      {
+        "<C-m>",
+        function()
+          require("before").jump_to_next_edit()
+        end,
+        desc = "Jump next edit",
+      },
+    },
+    opts = {
+      -- How many edit locations to store in memory (default: 10)
+      history_size = 42,
+      -- Wrap around the ends of the edit history (default: false)
+      history_wrap_enabled = true,
+    },
+    config = true,
+  },
 
   {
     "HiPhish/rainbow-delimiters.nvim",
@@ -235,18 +202,6 @@ return {
       return { override = require("nvchad.icons.devicons") }
     end,
   },
-
-  -- {
-  --   "echasnovski/mini.icons",
-  --   lazy = true,
-  --   opts = {},
-  --   init = function()
-  --     package.preload["nvim-web-devicons"] = function()
-  --       require("mini.icons").mock_nvim_web_devicons()
-  --       return package.loaded["nvim-web-devicons"]
-  --     end
-  --   end,
-  -- },
 
   -- Add/change/delete surrounding delimiter pairs with ease
   --
@@ -487,55 +442,10 @@ return {
     },
   },
 
-  {
-    "voxelprismatic/rabbit.nvim",
-    config = true,
-  },
-
-  -- A snazzy bufferline for neovim
-  -- bufferline is faster than nvim-cokeline and barbar
+  -- Jump between buffers faster than ever before
   -- {
-  --   "akinsho/bufferline.nvim",
-  --   event = "VeryLazy",
-  --   opts = {
-  --     options = {
-  --       show_buffer_icons = true,
-  --       show_buffer_close_icons = false,
-  --       always_show_bufferline = false,
-  --       -- For 8 -
-  --       numbers = function(opts)
-  --         return string.format("%s", opts.ordinal)
-  --       end,
-  --       offsets = {
-  --         {
-  --           filetype = "neo-tree",
-  --           text = "Neo-tree",
-  --           highlight = "Directory",
-  --           text_align = "left",
-  --         },
-  --       },
-  --     },
-  --   },
-  -- },
-  --
-  -- -- status line
-  -- -- lualine has better structure and theme, it's more like spaceline
-  -- -- heirline needs more work. Test it later
-  -- {
-  --   "nvim-lualine/lualine.nvim",
-  --   event = "VeryLazy",
-  --   dependencies = { "nvim-tree/nvim-web-devicons", "meuter/lualine-so-fancy.nvim", "dokwork/lualine-ex" },
-  --   init = function()
-  --     vim.g.lualine_laststatus = vim.o.laststatus
-  --     if vim.fn.argc(-1) > 0 then
-  --       -- set an empty statusline till lualine loads
-  --       vim.o.statusline = " "
-  --     else
-  --       -- hide the statusline on the starter page
-  --       vim.o.laststatus = 0
-  --     end
-  --   end,
-  --   opts = require("plugins.configs.lualine"),
+  --   "voxelprismatic/rabbit.nvim",
+  --   config = true,
   -- },
 
   -- Indent guides on blank lines for Neovim
@@ -1173,6 +1083,19 @@ return {
   --   "sindrets/diffview.nvim",
   --   dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
   --   cmd = { "DiffviewOpen", "DiffviewClose" },
+  --   keys = {
+  --     {
+  --       "<leader>gd",
+  --       function()
+  --         if next(require("diffview.lib").views) == nil then
+  --           vim.cmd("DiffviewOpen")
+  --         else
+  --           vim.cmd("DiffviewClose")
+  --         end
+  --       end,
+  --       desc = "Diff Index",
+  --     },
+  --   },
   --   config = require("plugins.configs.diffview"),
   -- },
 
