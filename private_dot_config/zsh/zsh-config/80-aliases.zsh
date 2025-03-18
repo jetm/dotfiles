@@ -104,7 +104,7 @@ alias gt='git status'
 
 # xdg
 alias svn='svn --config-dir $XDG_CONFIG_HOME/subversion'
-alias units='units --history $XDG_DATA_HOME/units_history'
+alias units='units --history $XDG_DATA_HOME/units_history -u si'
 alias wget='wget --hsts-file $XDG_DATA_HOME/wget-hsts'
 
 #
