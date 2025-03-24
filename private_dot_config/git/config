@@ -82,7 +82,8 @@
 
     # Commit any files changes, squash them into the last commit and update
     # its date
-    fixup-prev-ci = !git commit --all --amend --reuse-message=HEAD --date=\"$(date)\"
+    ; Replaced with git-fixup
+    ; fixup-prev-ci = !git commit --all --amend --reuse-message=HEAD --date=\"$(date)\"
 
     # list files which have changed
     files = !git diff --name-only

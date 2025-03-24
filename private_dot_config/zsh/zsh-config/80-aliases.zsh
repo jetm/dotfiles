@@ -95,7 +95,7 @@ alias gu='git undo'
 alias guh='git undo -h'
 
 # Misc
-alias gfi='git fixup-prev-ci'
+alias gfc='git fixup --rebase'
 alias gcl='git clone'
 alias gfe='git fetch'
 alias gls='git ls-files'
