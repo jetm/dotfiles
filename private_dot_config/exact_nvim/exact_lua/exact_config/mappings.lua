@@ -1,5 +1,6 @@
 -- Must be set before Lazy
 -- remap leader key
+-- Mapping for both env: CLI and VSCode
 local keymap = vim.keymap.set
 local keymap_opts = { noremap = true, silent = true }
 keymap("n", "<Space>", "", keymap_opts)
@@ -19,7 +20,7 @@ keymap({ "i", "x", "n", "s" }, "<C-s>", "<CMD>w<CR><ESC>", { desc = "Save file" 
 if vim.g.vscode then
   local status_ok, fault = pcall(require, "config.vscode_keymaps")
   if not status_ok then
-    vim.api.nvim_err_writeln("Failed to load config.vscode_keymaps" .. fault)
+    vim.notify("Failed to load config.vscode_keymaps" .. fault)
   end
 else
   local function map(mode, lhs, rhs, opts)
@@ -36,9 +37,6 @@ else
     end
   end
 
-  -- Clipboard Paste
-  -- map("i", "<C-v>", "<Esc>p", { desc = "Clipboard Paste" })
-
   ---
   -- Movement
   ---
@@ -52,13 +50,11 @@ else
   -- Allow to use <Ctrl-z> in insert mode to move in the background
   map("i", "<C-z>", "<Esc><C-z>", { desc = "Close editor to background" })
 
-  map("n", "<Leader>b", "<CMD>BufferLinePick<CR>")
-
   ---
   -- Buffers
   ---
   -- Switching
-  map("n", "<leader>`", "<CMD>e #<CR>", { desc = "Switch to other buffer" })
+  map("n", "<leader>`", "<CMD>e #<CR>", { desc = "Switch to previous buffer" })
 
   -- BufferLine mapping
   for i = 1, 9, 1 do
@@ -91,19 +87,6 @@ else
     { desc = "Redraw / clear hlsearch / diff update" }
   )
 
-  ---
-  -- Diagnostic
-  ---
-  map("n", "<leader>l", function()
-    require("lint").try_lint()
-  end, { desc = "Lint Current Buffer" })
-
-  -- Using trouble
-  -- map("n", "<leader>d", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-  -- map("n", "<leader>D", "<CMD>lua vim.diagnostic.reset()<CR>", { desc = "clear diagnostics" })
-
   -- substitute
-  map({"n", "x"}, "<Leader>s", require('substitute').operator, { noremap = true })
-
-  -- vim.keymap.set('n', 'yc', 'yy<cmd>normal gcc<CR>p')
+  map({ "n", "x" }, "<Leader>s", require("substitute").operator, { noremap = true })
 end
