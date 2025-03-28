@@ -1057,7 +1057,14 @@ return {
   -- Sync textarea against Neovim in terminal
   { "subnut/nvim-ghost.nvim" },
 
-  -- add neovim in browser
+
+  -- Notify when a plugin has been abandoned
+  {
+    "ZWindL/orphans.nvim",
+    config = true,
+  },
+
+  -- Just work with a little set of languages
   -- {
   --   "https://github.com/ThePrimeagen/refactoring.nvim",
   --   event = { "BufReadPre", "BufNewFile" },
