@@ -196,8 +196,19 @@ return {
 
   -- Provide Icons
   {
-    "nvim-tree/nvim-web-devicons",
-    opts = function()
+    "echasnovski/mini.icons",
+    lazy = true,
+    init = function()
+      ---@diagnostic disable-next-line: duplicate-set-field
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end,
+    opts = function(_, opts)
+      if vim.g.icons_enabled == false then
+        opts.style = "ascii"
+      end
       dofile(vim.g.base46_cache .. "devicons")
       return { override = require("nvchad.icons.devicons") }
     end,
@@ -244,7 +255,6 @@ return {
   -- list to help you solve all the trouble your code is causing.
   {
     "folke/trouble.nvim",
-    dependencies = "nvim-tree/nvim-web-devicons",
     cmd = { "TroubleToggle", "Trouble" },
     opts = {
       auto_close = true,
@@ -252,7 +262,7 @@ return {
     config = true,
     keys = {
       {
-        "<F5>",
+        "<leader>d",
         "<cmd>Trouble diagnostics toggle<CR>",
         mode = { "n" },
         desc = "Open diagnostics",
@@ -358,7 +368,6 @@ return {
     branch = "v3.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
     },
     cmd = "Neotree",
@@ -419,6 +428,32 @@ return {
           expander_collapsed = "",
           expander_expanded = "",
           expander_highlight = "NeoTreeExpander",
+        },
+        icon = {
+          provider = function(icon, node)
+            local text, hl
+            local mini_icons = require("mini.icons")
+            if node.type == "file" then
+              text, hl = mini_icons.get("file", node.name)
+            elseif node.type == "directory" then
+              text, hl = mini_icons.get("directory", node.name)
+              if node:is_expanded() then
+                text = nil
+              end
+            end
+
+            if text then
+              icon.text = text
+            end
+            if hl then
+              icon.highlight = hl
+            end
+          end,
+        },
+        kind_icon = {
+          provider = function(icon, node)
+            icon.text, icon.highlight = require("mini.icons").get("lsp", node.extra.kind.name)
+          end,
         },
       },
     },
@@ -1081,7 +1116,7 @@ return {
 
   -- {
   --   "sindrets/diffview.nvim",
-  --   dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+  --   dependencies = { "nvim-lua/plenary.nvim" },
   --   cmd = { "DiffviewOpen", "DiffviewClose" },
   --   keys = {
   --     {

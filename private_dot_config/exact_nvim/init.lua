@@ -32,7 +32,7 @@ if not luv.fs_stat(lazypath) then
     lazypath,
   })
   if vim.api.nvim_get_vvar("shell_error") ~= 0 then
-    vim.api.nvim_err_writeln("Error cloning lazy.nvim repository...\n\n" .. output)
+    vim.notify("Error cloning lazy.nvim repository...\n\n" .. output)
   end
   vim.notify("Please wait while plugins are installed...")
   vim.api.nvim_create_autocmd("User", {
