@@ -92,8 +92,8 @@
 
     rE = "!f() { git restore -S $@ && git restore $@; }; f"
 
-    # Pull, Rebase, Origin Main branch
-    update-vs-origin = "!git pull --rebase origin $(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)"
+    # Pull, Rebase, Origin Master/Main branch
+    rebase-origin = "!git pull --rebase origin $(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)"
 
 [core]
     editor = nvim
