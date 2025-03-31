@@ -1096,6 +1096,16 @@ return {
     config = true,
   },
 
+  -- A simply utility for loading encrypted secrets from an age encrypted file
+  {
+    "histrio/age-secret.nvim",
+    opts = {
+      identity = vim.fn.expand('$HOME/.config/age/identity.key'),
+      recipient = 'age15pv6yqycjhzs7x2jpafwce0qkvnjpkyrv77lrdsd5l4azt7zudzsmqedjs',
+    },
+    config = true,
+  },
+
   -- run lines/blocs of code (independently of the rest of the file), supporting multiples languages
   -- {
   --   "michaelb/sniprun",
