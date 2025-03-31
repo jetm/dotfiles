@@ -176,29 +176,29 @@ O.wildignore:append({
 --
 -- fold
 --
----@diagnostic disable-next-line: unused-local
-local M = {}
+-- ---@diagnostic disable-next-line: unused-local
+-- local M = {}
+--
+-- -- optimized treesitter foldexpr for Neovim >= 0.10.0
+-- ---@diagnostic disable-next-line: unused-function
+-- ---@diagnostic disable-next-line: unused-local
+-- function M.foldexpr()
+--   local buf = vim.api.nvim_get_current_buf()
+--   if vim.b[buf].ts_folds == nil then
+--     -- as long as we don't have a filetype, don't bother
+--     -- checking if treesitter is available (it won't)
+--     if vim.bo[buf].filetype == "" then
+--       return "0"
+--     end
+--     vim.b[buf].ts_folds = pcall(vim.treesitter.get_parser, buf)
+--   end
+--   return vim.b[buf].ts_folds and vim.treesitter.foldexpr() or "0"
+-- end
 
--- optimized treesitter foldexpr for Neovim >= 0.10.0
----@diagnostic disable-next-line: unused-function
----@diagnostic disable-next-line: unused-local
-function M.foldexpr()
-  local buf = vim.api.nvim_get_current_buf()
-  if vim.b[buf].ts_folds == nil then
-    -- as long as we don't have a filetype, don't bother
-    -- checking if treesitter is available (it won't)
-    if vim.bo[buf].filetype == "" then
-      return "0"
-    end
-    vim.b[buf].ts_folds = pcall(vim.treesitter.get_parser, buf)
-  end
-  return vim.b[buf].ts_folds and vim.treesitter.foldexpr() or "0"
-end
-
-O.foldcolumn = "1"
-O.foldmethod = "expr"
-O.foldtext = ""
-O.foldexpr = "v:lua.M.foldexpr()"
+-- O.foldcolumn = "1"
+-- O.foldmethod = "expr"
+-- O.foldtext = ""
+-- O.foldexpr = "v:lua.M.foldexpr()"
 
 -- Required by Obisidian-nvim
 O.conceallevel = 2
