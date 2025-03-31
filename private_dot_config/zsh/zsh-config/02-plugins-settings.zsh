@@ -1,8 +1,11 @@
+# shellcheck disable=2148
 #
 # Plugins settings
 #
 # zsh-vi-mode
+# shellcheck disable=2034
 ZVM_VI_SURROUND_BINDKEY=s-prefix
+# shellcheck disable=2034
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 
 # fast-syntax-highlighting
