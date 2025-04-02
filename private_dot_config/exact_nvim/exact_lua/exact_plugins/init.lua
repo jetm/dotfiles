@@ -1100,8 +1100,8 @@ return {
   {
     "histrio/age-secret.nvim",
     opts = {
-      identity = vim.fn.expand('$HOME/.config/age/identity.key'),
-      recipient = 'age15pv6yqycjhzs7x2jpafwce0qkvnjpkyrv77lrdsd5l4azt7zudzsmqedjs',
+      identity = vim.fn.expand("$HOME/.config/age/identity.key"),
+      recipient = "age15pv6yqycjhzs7x2jpafwce0qkvnjpkyrv77lrdsd5l4azt7zudzsmqedjs",
     },
     config = true,
   },
