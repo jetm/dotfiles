@@ -907,16 +907,18 @@ return {
     dependencies = {
       "rafamadriz/friendly-snippets",
       "mikavilpas/blink-ripgrep.nvim",
+      "Kaiser-Yang/blink-cmp-avante",
     },
     build = "cargo build --release",
     opts = {
       sources = {
         default = {
           "lsp",
-          "path",
+          "avante",
           "snippets",
           "buffer",
           "ripgrep",
+          "path",
         },
         providers = {
           ripgrep = {
@@ -942,6 +944,11 @@ return {
                 return prefix
               end,
             },
+          },
+          avante = {
+            module = "blink-cmp-avante",
+            name = "Avante",
+            opts = {},
           },
         },
       },
@@ -973,6 +980,59 @@ return {
         },
       },
     },
+  },
+  {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    version = false, -- Never set this value to "*"! Never!
+    opts = {
+      -- provider = "openai",
+      provider = "claude",
+      behaviour = {
+        enable_token_counting = false,
+        enable_claude_text_editor_tool_mode = true,
+      },
+      hints = { enabled = false },
+      openai = {
+        timeout = 30000,
+      },
+      cursor_applying_provider = "claude",
+      windows = {
+        width = 45,
+      },
+    },
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    build = "make",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+  },
+
+  {
+    "GeorgesAlkhouri/nvim-aider",
+    cmd = {
+      "AiderTerminalToggle",
+      "AiderHealth",
+    },
+    keys = {
+      { "<leader>a/", "<cmd>AiderTerminalToggle<cr>", desc = "Open Aider" },
+      -- { "<leader>as", "<cmd>AiderTerminalSend<cr>", desc = "Send to Aider", mode = { "n", "v" } },
+      -- { "<leader>ac", "<cmd>AiderQuickSendCommand<cr>", desc = "Send Command To Aider" },
+      -- { "<leader>ab", "<cmd>AiderQuickSendBuffer<cr>", desc = "Send Buffer To Aider" },
+      -- { "<leader>a+", "<cmd>AiderQuickAddFile<cr>", desc = "Add File to Aider" },
+      -- { "<leader>a-", "<cmd>AiderQuickDropFile<cr>", desc = "Drop File from Aider" },
+      -- { "<leader>ar", "<cmd>AiderQuickReadOnlyFile<cr>", desc = "Add File as Read-Only" },
+      -- -- Example nvim-tree.lua integration if needed
+      -- { "<leader>a+", "<cmd>AiderTreeAddFile<cr>", desc = "Add File from Tree to Aider", ft = "NvimTree" },
+      -- { "<leader>a-", "<cmd>AiderTreeDropFile<cr>", desc = "Drop File from Tree from Aider", ft = "NvimTree" },
+    },
+    dependencies = {
+      "folke/snacks.nvim",
+    },
+    config = true,
   },
 
   -- A Neovim plugin that display prettier diagnostic messages
