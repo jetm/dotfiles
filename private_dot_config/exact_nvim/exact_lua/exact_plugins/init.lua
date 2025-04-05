@@ -960,6 +960,8 @@ return {
         ["<CR>"] = { "accept", "fallback" },
         ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
       },
+      fuzzy = { implementation = "prefer_rust" },
+      cmdline = { completion = { ghost_text = { enabled = false } } },
       completion = {
         accept = { auto_brackets = { enabled = true } },
         list = {
