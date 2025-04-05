@@ -214,6 +214,12 @@ return {
     end,
   },
 
+  -- Wildmenu replacement for Neovim inspired by Helix
+  {
+    "vzze/cmdline.nvim",
+    config = true,
+  },
+
   -- Add/change/delete surrounding delimiter pairs with ease
   --
   -- surr*ound_words             ysiw)           (surround_words)
