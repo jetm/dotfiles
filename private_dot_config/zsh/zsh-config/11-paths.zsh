@@ -4,12 +4,6 @@
 typeset -gU cdpath fpath path
 
 add_path "${HOME}"/.local/bin
-add_path /opt/llvm/bin
-
-# add_path "${HOME}"/go/bin
-# add_path "${HOME}"/.cabal/bin
-# add_path "${HOME}"/.poetry/bin
-# add_path "${HOME}"/.nix-profile/bin
 
 _distro=$(lsb_release -si)
 

@@ -47,7 +47,9 @@ __export_env() {
 # only for interactive shell
 if [[ $- == *"i"* ]]; then
   __export_env
-  source ${ZDOTDIR}/zprofile
+
+  # shellcheck disable=SC1091
+  source "${ZDOTDIR}"/zprofile
 fi
 
 # vim:set ft=zsh ts=2 sw=2 et:

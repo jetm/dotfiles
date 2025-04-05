@@ -163,10 +163,11 @@ zle -N custom_clear_screen
 # Conflict with Ctrl+l to change Kitty windows
 bindkey '^n' custom_clear_screen
 
-if [[ -f /usr/share/fzf-help/fzf-help.zsh ]]; then
-  source /usr/share/fzf-help/fzf-help.zsh
-  zle -N fzf-help-widget
-  bindkey "^A" fzf-help-widget
-fi
+# if [[ -f /usr/share/fzf-help/fzf-help.zsh ]]; then
+#   # shellcheck disable=SC1090
+#   source "/usr/share/fzf-help/fzf-help.zsh"
+#   zle -N fzf-help-widget
+#   bindkey "^A" fzf-help-widget
+# fi
 
 # vim:set ft=zsh ts=2 sw=2 et:
