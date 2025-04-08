@@ -94,6 +94,10 @@
     lg = log --topo-order
     last = lg -1
 
+    # Difftastic logs
+    ld = -c diff.external=difft lg --ext-diff -p
+    sd = -c diff.external=difft show --ext-diff
+
 [core]
     editor = nvim
 
@@ -202,7 +206,7 @@
 [format]
     # Enable the -s/--signoff option by default in the patches
     signOff = true
-    pretty =%C(auto)Commit:%C(reset) %C(auto)%H%d%n%C(reset)Author: %an <%ae>%nDate:   %ai (%ar)%n%+B%C(reset)
+    pretty = %C(auto)Commit:%C(reset) %C(auto)%H%d%n%C(reset)Author: %an <%ae>%nDate:   %ai (%ar)%n%+B%C(reset)
 
 [interactive]
     # Enable single key presses in Interactive Mode
@@ -224,48 +228,29 @@
 [tag]
     sort = version:refname
 
-#
-# delta
-#
-[interactive]
-    diffFilter = delta --color-only
-
-[core]
-    # Change to difft when it supports to act as pager
-    pager = "{                                                           \
-        COLUMNS=$(tput cols);                                            \
-        if [ $COLUMNS -ge 80 ] && [ -z $FZF_PREVIEW_COLUMNS ]; then      \
-            delta -w $COLUMNS;                                           \
-        elif [ $COLUMNS -ge 160 ] && [ ! -z $FZF_PREVIEW_COLUMNS ]; then \
-            delta -w $FZF_PREVIEW_COLUMNS;                               \
-        else                                                             \
-            delta;                                                       \
-        fi                                                               \
-    }"
-
-[delta]
-    # use n and N to move between diff sections
-    navigate = true
-    line-numbers = false
-    light = false
-    side-by-side = false
-    tabs = 4
+[apply]
+    # Detect whitespace errors when applying a patch
+    whitespace = fix
 
 [pager]
+    # Use a pager if the difftool output is larger than one screenful,
+    # consistent with the behaviour of `git diff`.
     difftool = true
-    diff = delta
 
 #
 # diff tools
 #
 [difftool]
+    # Run the difftool immediately, don't ask 'are you sure' each time.
     prompt = false
 
 ; difftastic diff tool
 [diff]
+    # Set difftastic as the default difftool, so we don't need to specify
+    # `-t difftastic` every time.
     tool = difftastic
-    ; Wait for more features
-    ; external = difft
+    external = difft
+
 [difftool "difftastic"]
     cmd = difft "$LOCAL" "$REMOTE"
 
