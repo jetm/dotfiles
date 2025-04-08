@@ -4,6 +4,16 @@ return function(_, _)
 
   local lspconfig = require("lspconfig")
 
+  -- Uncomment until finding a better implementation
+  -- Diagnostics
+  -- vim.diagnostic.config({
+  --   underline = true,
+  --   update_in_insert = false, -- false so diags are updated on InsertLeave
+  --   virtual_text = { current_line = true, },
+  --   virtual_lines = { current_line = true, },
+  --   severity_sort = true,
+  -- })
+
   local default_setup = function(server)
     lspconfig[server].setup({
       capabilities = require("blink.cmp").get_lsp_capabilities(),
