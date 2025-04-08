@@ -131,20 +131,7 @@ return function(_, _)
     ["pyright"] = function()
       -- Use Ruff exclusively for linting, formatting and organizing imports, and disable those capabilities in Pyright
       -- https://github.com/astral-sh/ruff-lsp?tab=readme-ov-file#example-neovim
-      lspconfig.pyright.setup({
-        settings = {
-          pyright = {
-            -- Using Ruff's import organizer
-            disableOrganizeImports = true,
-          },
-          python = {
-            analysis = {
-              -- Ignore all files for analysis to exclusively use Ruff for linting
-              ignore = { "*" },
-            },
-          },
-        },
-      })
+      lspconfig.pyright.setup({ })
     end,
 
     ["yamlls"] = function()
