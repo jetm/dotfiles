@@ -18,6 +18,7 @@
 # utility -> plugins-settings -> antidote-init -> extensions
 #
 for e in "${ZDOTDIR}"/zsh-config/*.zsh; do
+  # shellcheck disable=SC1090
   source "${e}"
 done
 
