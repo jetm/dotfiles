@@ -211,6 +211,7 @@
 [interactive]
     # Enable single key presses in Interactive Mode
     singlekey = true
+    ; diffFilter = "riff --color=on"
 
 [grep]
     lineNumber = true
@@ -236,6 +237,9 @@
     # Use a pager if the difftool output is larger than one screenful,
     # consistent with the behaviour of `git diff`.
     difftool = true
+    ; diff = riff
+    ; show = riff
+    ; log  = riff
 
 #
 # diff tools
