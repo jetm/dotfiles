@@ -80,6 +80,12 @@ zvm_after_init() {
     # shellcheck disable=SC1091
     source "$ZDOTDIR"/zsh-config/kitty-shell-integration.sh
   fi
+
+  if [ -f /usr/share/zsh/plugins/forgit/forgit.plugin.zsh ]; then
+    export FORGIT_NO_ALIASES=1
+    # shellcheck disable=SC1091
+    source /usr/share/zsh/plugins/forgit/forgit.plugin.zsh
+  fi
 }
 
 # vim:set ts=2 sw=2 et:

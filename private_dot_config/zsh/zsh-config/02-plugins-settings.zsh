@@ -16,6 +16,6 @@ export ZPWR_EXPAND_BLACKLIST=(rm mv cp ln mkdir ls l type ji wget units svn)
 export ZPWR_EXPAND_TO_HISTORY=true
 
 # Git
-export FORGIT_NO_ALIASES=1
+# export FORGIT_NO_ALIASES=1
 
 # vim:ft=sh ts=2 sw=2 et:

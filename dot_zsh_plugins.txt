@@ -18,7 +18,7 @@ zsh-users/zsh-history-substring-search kind:defer
 
 tarrasch/zsh-bd kind:defer
 Aloxaf/fzf-tab kind:defer
-wfxr/forgit kind:defer
+# wfxr/forgit kind:defer
 tom-doerr/zsh_codex kind:defer
 ttkalcevic/pwp kind:defer
 marlonrichert/zsh-edit kind:defer

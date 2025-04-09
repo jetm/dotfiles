@@ -53,19 +53,19 @@ alias gcs='git show'
 
 # Checkout (c)
 alias grp='git restore --patch'
-alias grf='forgit::checkout::file'
-alias grh='forgit::reset::head'
+alias grf='git forgit checkout_file'
+alias grh='git forgit reset_head'
 
 # Grep (g)
 alias gg='git grep'
 
 # Index (a)
-alias ga='forgit::add'
+alias ga='git forgit add'
 alias gap='git add --patch'
 
 # Diff (d)
-alias gd='forgit::diff'
-alias gdc='forgit::diff --cached'
+alias gd='git forgit diff'
+alias gdc='git forgit diff --cached'
 
 # Log (l)
 alias gl='git lg'
