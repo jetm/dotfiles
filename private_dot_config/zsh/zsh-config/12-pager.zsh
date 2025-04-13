@@ -49,4 +49,7 @@ export LESS="${LESS}"
 #
 # PAGER
 #
-export PAGER=less
+# export PAGER=less
+
+export PAGER=moar
+export MOAR='-statusbar bold -quit-if-one-screen -no-clear-on-exit -style onedark'
