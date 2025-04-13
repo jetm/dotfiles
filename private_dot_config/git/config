@@ -236,8 +236,9 @@
 [pager]
     # Use a pager if the difftool output is larger than one screenful,
     # consistent with the behaviour of `git diff`.
-    difftool = true
-    ; diff = riff
+    difftool = false
+    # riff and difftastic doesn't work with forgit
+    diff = delta
     ; show = riff
     ; log  = riff
 
@@ -253,7 +254,6 @@
     # Set difftastic as the default difftool, so we don't need to specify
     # `-t difftastic` every time.
     tool = difftastic
-    external = difft
 
 [difftool "difftastic"]
     cmd = difft "$LOCAL" "$REMOTE"
