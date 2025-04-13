@@ -128,10 +128,24 @@ return function(_, _)
       })
     end,
 
+    ["ruff"] = function()
+      lspconfig.ruff.setup({
+        -- disable it to use pyright as LSP client
+        autostart = false,
+      })
+    end,
+
     ["pyright"] = function()
       -- Use Ruff exclusively for linting, formatting and organizing imports, and disable those capabilities in Pyright
       -- https://github.com/astral-sh/ruff-lsp?tab=readme-ov-file#example-neovim
-      lspconfig.pyright.setup({ })
+      lspconfig.pyright.setup({
+        settings = {
+          pyright = {
+            -- disable import sorting and use Ruff for this
+            disableOrganizeImports = true,
+          },
+        },
+      })
     end,
 
     ["yamlls"] = function()

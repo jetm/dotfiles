@@ -75,9 +75,6 @@ else
   ---
   -- Search
   ---
-  -- Clear search with <ESC>
-  map({ "i", "n" }, "<ESC>", "<CMD>noh<CR><ESC>", { desc = "Escape and clear hlsearch" })
-
   -- Clear search, diff update and redraw
   -- taken from runtime/lua/_editor.lua
   map(

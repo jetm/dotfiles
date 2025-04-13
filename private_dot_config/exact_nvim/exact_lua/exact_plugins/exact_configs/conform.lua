@@ -8,13 +8,11 @@ return function(_, _)
       css = { "prettier" },
       gitcommit = { "commitmsgfmt"},
       lua = { "stylua" },
-      python = { "ruff_fix", "ruff_format" },
+      python = { "ruff_format" },
       sh = { "shfmt", "shellharden" },
       yaml = { "yamlfmt" },
       zsh = { "shfmt", "shellharden" },
     },
-
-    format_on_save = false,
 
     -- Customize formatters
     formatters = {

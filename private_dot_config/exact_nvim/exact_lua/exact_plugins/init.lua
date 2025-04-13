@@ -1009,87 +1009,38 @@ return {
     },
   },
 
+  -- codecompanion has many bugs
+  -- nvim-aider needs a lot of dependcies
   {
-    "olimorris/codecompanion.nvim",
-    config = true,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    version = false, -- Never set this value to "*"! Never!
     opts = {
-      strategies = {
-        chat = {
-          adapter = "anthropic",
-        },
-        inline = {
-          adapter = "anthropic",
-        },
+      provider = "openai",
+      -- provider = "claude",
+      behaviour = {
+        enable_token_counting = false,
+        -- still buggy
+        enable_claude_text_editor_tool_mode = false,
       },
-      display = {
-        window = {
-          width = 0.50,
-        },
+      hints = { enabled = false },
+      openai = {
+        timeout = 30000,
+      },
+      cursor_applying_provider = "claude",
+      windows = {
+        width = 45,
       },
     },
-    keys = {
-      {
-        "<c-/>",
-        "<Plug>(comment_toggle_linewise_visual)",
-        mode = { "x" },
-      },
-      {
-        "<Leader>a",
-        mode = { "n", "v" },
-        "<cmd>CodeCompanionChat Toggle<cr>",
-      },
-      { "ga", "<cmd>CodeCompanaionChat Add<cr>", mode = "v" },
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    build = "make",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
     },
   },
-
-  -- {
-  --   "yetone/avante.nvim",
-  --   event = "VeryLazy",
-  --   version = false, -- Never set this value to "*"! Never!
-  --   opts = {
-  --     -- provider = "openai",
-  --     provider = "claude",
-  --     behaviour = {
-  --       enable_token_counting = false,
-  --       enable_claude_text_editor_tool_mode = true,
-  --     },
-  --     hints = { enabled = false },
-  --     openai = {
-  --       timeout = 30000,
-  --     },
-  --     cursor_applying_provider = "claude",
-  --     windows = {
-  --       width = 45,
-  --     },
-  --   },
-  --   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-  --   build = "make",
-  --   dependencies = {
-  --     "nvim-treesitter/nvim-treesitter",
-  --     "stevearc/dressing.nvim",
-  --     "nvim-lua/plenary.nvim",
-  --     "MunifTanjim/nui.nvim",
-  --   },
-  -- },
-
-  -- {
-  --   "GeorgesAlkhouri/nvim-aider",
-  --   cmd = {
-  --     "AiderTerminalToggle",
-  --     "AiderHealth",
-  --   },
-  --   keys = {
-  --     { "<leader>a/", "<cmd>AiderTerminalToggle<cr>", desc = "Open Aider" },
-  --   },
-  --   dependencies = {
-  --     "folke/snacks.nvim",
-  --   },
-  --   config = true,
-  -- },
 
   -- better diffing
   -- ]x - move to previous conflict
@@ -1166,11 +1117,27 @@ return {
   -- Sync textarea against Neovim in terminal
   { "subnut/nvim-ghost.nvim" },
 
-
-  -- Notify when a plugin has been abandoned
+  -- Change multiple words at once
   {
-    "ZWindL/orphans.nvim",
-    config = true,
+    "jake-stewart/multicursor.nvim",
+    event = "VeryLazy",
+    config = function()
+      local mc = require("multicursor-nvim")
+      mc.setup()
+      local map = vim.keymap.set
+
+      map({ "n", "v" }, "<M-Down>", function()
+        mc.matchAddCursor(1)
+      end)
+      map({ "n", "v" }, "<M-Left>", function()
+        mc.matchSkipCursor(1)
+      end)
+      map("n", "<Esc>", function()
+        if mc.cursorsEnabled() then
+          mc.clearCursors()
+        end
+      end)
+    end,
   },
 
   -- Just work with a little set of languages
@@ -1214,6 +1181,9 @@ return {
     },
     config = true,
   },
+
+  -- enhance gf/gF with look ahead and provide target-based file hopping
+  { "HawkinsT/pathfinder.nvim" },
 
   -- run lines/blocs of code (independently of the rest of the file), supporting multiples languages
   -- {
