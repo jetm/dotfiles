@@ -97,6 +97,7 @@
     # Difftastic logs
     ld = -c diff.external=difft lg --ext-diff -p
     sd = -c diff.external=difft show --ext-diff
+    dd = -c diff.external=difft diff --ext-diff
 
 [core]
     editor = nvim
