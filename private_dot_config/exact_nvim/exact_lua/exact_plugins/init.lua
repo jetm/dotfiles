@@ -1009,38 +1009,138 @@ return {
     },
   },
 
-  -- codecompanion has many bugs
-  -- nvim-aider needs a lot of dependcies
+  -- Has many bugs and Git issues without solving
+  -- {
+  --   "yetone/avante.nvim",
+  --   event = "VeryLazy",
+  --   version = false, -- Never set this value to "*"! Never!
+  --   opts = {
+  --     provider = "openai",
+  --     -- claude is too slow
+  --     -- provider = "claude",
+  --     openai = {
+  --       model = "gpt-4.1-2025-04-14",
+  --     },
+  --     behaviour = {
+  --       enable_token_counting = false,
+  --       -- still buggy
+  --       enable_claude_text_editor_tool_mode = false,
+  --     },
+  --     hints = { enabled = false },
+  --     cursor_applying_provider = "claude",
+  --     windows = {
+  --       width = 45,
+  --     },
+  --   },
+  --   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+  --   build = "make",
+  --   dependencies = {
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "stevearc/dressing.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "MunifTanjim/nui.nvim",
+  --   },
+  -- },
+
+  -- It has been working better. No bugs so far
   {
-    "yetone/avante.nvim",
-    event = "VeryLazy",
-    version = false, -- Never set this value to "*"! Never!
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
     opts = {
-      provider = "openai",
-      -- provider = "claude",
-      behaviour = {
-        enable_token_counting = false,
-        -- still buggy
-        enable_claude_text_editor_tool_mode = false,
+      strategies = {
+        chat = {
+          adapter = "gemini",
+        },
+        inline = {
+          adapter = "openai",
+        },
       },
-      hints = { enabled = false },
-      openai = {
-        timeout = 30000,
-      },
-      cursor_applying_provider = "claude",
-      windows = {
-        width = 45,
+      adapters = {
+        gemini = function()
+          return require("codecompanion.adapters").extend("gemini", {
+            schema = {
+              model = {
+                default = "gemini-2.5-pro-preview-03-25",
+              },
+            },
+          })
+        end,
+        openai = function()
+          return require("codecompanion.adapters").extend("openai", {
+            schema = {
+              model = {
+                default = "gpt-4.1-2025-04-14",
+              },
+            },
+          })
+        end,
       },
     },
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = "make",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
+    keys = {
+      {
+        "<leader>a",
+        "<cmd>CodeCompanionChat Toggle<cr>",
+        mode = { "n" },
+        desc = "Toggle Chat",
+      },
     },
   },
+
+  -- More testing is required
+  -- {
+  --   "azorng/goose.nvim",
+  --   branch = "main",
+  --   config = function()
+  --     require("goose").setup({})
+  --   end,
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     {
+  --       "MeanderingProgrammer/render-markdown.nvim",
+  --       opts = {
+  --         anti_conceal = { enabled = false },
+  --       },
+  --     },
+  --   },
+  -- },
+
+  -- It's not well integrated with neovim. neovim keys doesn't work
+  -- {
+  --   "GeorgesAlkhouri/nvim-aider",
+  --   cmd = "Aider",
+  --   keys = {
+  --     { "<leader>a", "<cmd>Aider toggle<cr>", desc = "Toggle Aider" },
+  --     -- { "<leader>as", "<cmd>Aider send<cr>", desc = "Send to Aider", mode = { "n", "v" } },
+  --     -- { "<leader>ac", "<cmd>Aider command<cr>", desc = "Aider Commands" },
+  --     { "<leader>ab", "<cmd>Aider buffer<cr>", desc = "Send Buffer" },
+  --     { "<leader>a+", "<cmd>Aider add<cr>", desc = "Add File" },
+  --     { "<leader>a-", "<cmd>Aider drop<cr>", desc = "Drop File" },
+  --     -- { "<leader>ar", "<cmd>Aider add readonly<cr>", desc = "Add Read-Only" },
+  --     -- Example nvim-tree.lua integration if needed
+  --   },
+  --   dependencies = {
+  --     "folke/snacks.nvim",
+  --     "nvim-tree/nvim-tree.lua",
+  --     --- Neo-tree integration
+  --     {
+  --       "nvim-neo-tree/neo-tree.nvim",
+  --       opts = function(_, opts)
+  --         -- Example mapping configuration (already set by default)
+  --         -- opts.window = {
+  --         --   mappings = {
+  --         --     ["+"] = { "nvim_aider_add", desc = "add to aider" },
+  --         --     ["-"] = { "nvim_aider_drop", desc = "drop from aider" }
+  --         --   }
+  --         -- }
+  --         require("nvim_aider.neo_tree").setup(opts)
+  --       end,
+  --     },
+  --   },
+  --   config = true,
+  -- },
 
   -- better diffing
   -- ]x - move to previous conflict
