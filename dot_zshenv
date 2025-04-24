@@ -42,6 +42,10 @@ __export_env() {
   export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 
   export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
+
+  # Disable pre-commit colors
+  export PRE_COMMIT_COLOR=never
+
 }
 
 # only for interactive shell
