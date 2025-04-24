@@ -162,7 +162,7 @@ return function(_, _)
               url = "https://www.schemastore.org/api/json/catalog.json",
             },
             schemas = require("schemastore").yaml.schemas({
-              ["http://json.schemastore.org/gitlab-ci.json"] = "/*lab-ci.{yml,yaml}",
+              ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = ".gitlab-ci.{yml,yaml}",
             }),
           },
         },
