@@ -787,25 +787,36 @@ return {
   {
     "mfussenegger/nvim-lint",
     event = "VeryLazy",
-    opts = {
-      -- Event to trigger linters
-      events = { "BufWritePost", "BufReadPost", "InsertLeave" },
-      linters_by_ft = {
-        sh = { "shellcheck", "shellharden" },
-        zsh = { "shellcheck", "shellharden" },
-        bats = { "shellcheck", "shellharden" },
+    config = function()
+      local lint = require("lint")
+
+      lint.linters_by_ft = {
+        sh = { "shellcheck" },
+        zsh = { "shellcheck" },
+        bats = { "shellcheck" },
         -- lua = { "luacheck" }, -- No required. Called by LSP
         yaml = { "yamllint" },
-      },
-      linters = {
-        sh = { "shellcheck", "shellharden" },
-        zsh = { "shellcheck", "shellharden" },
-        bats = { "shellcheck", "shellharden" },
-        -- lua = { "luacheck" }, -- No required. Called by LSP
-        yaml = { "yamllint" },
-      },
-    },
-    config = require("plugins.configs.nvim-lint"),
+      }
+
+      -- Configure yamllint options
+      lint.linters.yamllint.args = {
+        "--format=parsable", -- Required by nvim to parse output
+        "-d",
+        "rules: {indentation: {indent-sequences: consistent}}",
+        "-",
+      }
+
+      local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+
+      vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+        group = lint_augroup,
+        callback = function()
+          lint.try_lint()
+        end,
+      })
+
+      lint.try_lint()
+    end,
   },
 
   -- Lightweight yet powerful formatter
@@ -862,7 +873,6 @@ return {
         "yamllint",
         "luacheck",
         "shellcheck",
-        "shellharden",
       },
       max_concurrent_installers = 10,
     },
