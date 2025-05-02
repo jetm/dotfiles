@@ -1,5 +1,6 @@
 return {
-  -- plenary: full; complete; entire; absolute; unqualified. All the lua functions I don't want to write twice
+  -- plenary: full; complete; entire; absolute; unqualified.
+  -- All the lua functions I don't want to write twice
   { "nvim-lua/plenary.nvim" },
 
   {
@@ -243,9 +244,6 @@ return {
       require("substitute").setup({})
     end,
   },
-
-  -- enhanced increment/decrement plugin for Neovim
-  -- { "monaqa/dial.nvim", lazy = true },
 
   -- Removes trailing whitespace from *modified* lines on save
   {
@@ -776,13 +774,6 @@ return {
     config = require("plugins.configs.nvim-treesitter"),
   },
 
-  -- yaml schema support
-  {
-    "b0o/SchemaStore.nvim",
-    lazy = true,
-    version = false, -- last release is way too old
-  },
-
   -- Linter
   {
     "mfussenegger/nvim-lint",
@@ -796,6 +787,7 @@ return {
         bats = { "shellcheck" },
         -- lua = { "luacheck" }, -- No required. Called by LSP
         yaml = { "yamllint" },
+        -- python = { "ruff" }, -- Enabled by pyls
       }
 
       -- Configure yamllint options
@@ -901,12 +893,200 @@ return {
   },
 
   {
+    "b0o/schemastore.nvim",
+    lazy = true,
+    config = function()
+      require("schemastore").setup({
+        settings = {
+          json = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
+          },
+          yaml = {
+            format = { enable = true, singleQuote = true },
+            validate = true,
+            hover = true,
+            completion = true,
+            schemaStore = {
+              enable = true,
+              url = "https://www.schemastore.org/api/json/catalog.json",
+            },
+            schemas = require("schemastore").yaml.schemas({
+              ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = ".gitlab-ci.{yml,yaml}",
+            }),
+          },
+        },
+      })
+    end,
+  },
+
+  {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
     dependencies = {
-      { "williamboman/mason-lspconfig.nvim" },
+      {
+        "AstroNvim/astrolsp",
+        opts = {
+          features = {
+            semantic_tokens = true,
+          },
+          servers = {
+            "bashls",
+            "clangd",
+            "jinja_lsp",
+            "jsonls",
+            "lua_ls",
+            "pylsp",
+            "yamlls",
+          },
+          config = {
+            bashls = {
+              format = { enable = true },
+              validate = { enable = true },
+              filetypes = { "bash", "sh", "zsh" },
+              bashIde = {
+                globPattern = "*@(.sh|.inc|.bash|.command|.zsh)",
+              },
+            },
+
+            pylsp = {
+              settings = {
+                pylsp = {
+                  plugins = {
+                    autopep8 = {
+                      enabled = false,
+                    },
+                    pycodestyle = {
+                      enabled = false,
+                    },
+                    ruff = {
+                      enabled = true,
+                    },
+                  },
+                },
+              },
+            },
+
+            -- Still a new project. Many false positive
+            -- pylyzer = {
+            --   settings = {
+            --     python = {
+            --       checkOnType = false,
+            --       diagnostic = false,
+            --       inlayHints = false,
+            --       smartCompletion = true,
+            --     },
+            --   },
+            --
+            --   single_file_support = true,
+            -- },
+
+            -- It crashes
+            -- basedpyright = {
+            --   settings = {
+            --     basedpyright = {
+            --       analysis = {
+            --         inlayHints = {
+            --           callArgumentNames = true,
+            --         },
+            --         autoImportCompletions = true,
+            --         autoSearchPaths = true,
+            --         typeCheckingMode = "off", -- standard, strict, all, off, basic
+            --       },
+            --     },
+            --   },
+            -- },
+
+            clangd = {
+              root_dir = function(fname)
+                return require("lspconfig.util").root_pattern(
+                  "Makefile",
+                  "configure.ac",
+                  "configure.in",
+                  "config.h.in",
+                  "meson.build",
+                  "meson_options.txt",
+                  "build.ninja"
+                )(fname) or require("lspconfig.util").root_pattern(
+                  "compile_commands.json",
+                  "compile_flags.txt"
+                )(fname) or vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1])
+              end,
+              cmd = {
+                "clangd",
+                "--background-index",
+                "--clang-tidy",
+                "--header-insertion=iwyu",
+                "--completion-style=detailed",
+                "--function-arg-placeholders",
+                "--fallback-style=llvm",
+              },
+              init_options = {
+                usePlaceholders = true,
+                completeUnimported = true,
+                clangdFileStatus = true,
+              },
+            },
+
+            jsonls = {
+              format = { enable = false },
+            },
+
+            lua_ls = {
+              Lua = {
+                runtime = { version = "LuaJIT" },
+                workspace = {
+                  checkThirdParty = false,
+                  library = {
+                    library = vim.api.nvim_get_runtime_file("", true),
+                  },
+                },
+                hint = {
+                  enable = true,
+                },
+                diagnostics = {
+                  globals = { "vim", "require" },
+                  disable = { "missing-fields" },
+                },
+              },
+            },
+
+            ruff = {
+              -- disable it to use pyright as LSP client
+              autostart = false,
+            },
+
+            yamlls = {
+              redhat = { telemetry = { enabled = false } },
+            },
+          },
+        },
+      },
+      {
+        "williamboman/mason-lspconfig.nvim", -- MUST be set up before `nvim-lspconfig`
+        dependencies = { "williamboman/mason.nvim" },
+        opts = {
+          -- use AstroLSP setup for mason-lspconfig
+          handlers = {
+            function(server)
+              require("astrolsp").lsp_setup(server)
+            end,
+          },
+        },
+        config = function(_, opts)
+          -- Optionally tell AstroLSP to register new language servers before calling the `setup` function
+          -- this enables the `mason-lspconfig.servers` option in the AstroLSP configuration
+          require("astrolsp.mason-lspconfig").register_servers()
+          require("mason-lspconfig").setup(opts)
+        end,
+      },
     },
-    config = require("plugins.configs.lspconfig"),
+    config = function()
+      -- set up servers configured with AstroLSP
+      vim.tbl_map(require("astrolsp").lsp_setup, require("astrolsp").config.servers)
+      dofile(vim.g.base46_cache .. "lsp")
+      require("nvchad.lsp").diagnostic_config()
+    end,
   },
 
   -- Performant, batteries-included completion plugin for Neovim
@@ -917,14 +1097,12 @@ return {
     dependencies = {
       "rafamadriz/friendly-snippets",
       "mikavilpas/blink-ripgrep.nvim",
-      "Kaiser-Yang/blink-cmp-avante",
     },
     build = "cargo build --release",
     opts = {
       sources = {
         default = {
           "lsp",
-          "avante",
           "snippets",
           "buffer",
           "ripgrep",
@@ -954,11 +1132,6 @@ return {
                 return prefix
               end,
             },
-          },
-          avante = {
-            module = "blink-cmp-avante",
-            name = "Avante",
-            opts = {},
           },
         },
       },
@@ -1019,7 +1192,7 @@ return {
     },
   },
 
-  -- Has many bugs and Git issues without solving
+  -- Has many bugs
   -- {
   --   "yetone/avante.nvim",
   --   event = "VeryLazy",
@@ -1219,11 +1392,6 @@ return {
     opts = { at_edge = "stop" },
   },
 
-  -- A spelling auto correct plugin for Neovim including over 20k entries
-  -- {
-  --   "https://github.com/ck-zhang/mistake.nvim",
-  -- },
-
   -- Sync textarea against Neovim in terminal
   { "subnut/nvim-ghost.nvim" },
 
@@ -1293,33 +1461,17 @@ return {
   },
 
   -- enhance gf/gF with look ahead and provide target-based file hopping
-  { "HawkinsT/pathfinder.nvim" },
-
-  -- run lines/blocs of code (independently of the rest of the file), supporting multiples languages
-  -- {
-  --   "michaelb/sniprun",
-  --   branch = "master",
-  --   opts = {
-  --     interpreter_options = {
-  --       C_original = {
-  --         compiler = "clang",
-  --       },
-  --     },
-  --   },
-  --   build = "sh install.sh",
-  --   config = true,
-  -- },
+  -- Need to test it more
+  -- { "HawkinsT/pathfinder.nvim" },
 
   -- Debugging in NeoVim the print() way!
   -- {
   --   "andrewferrier/debugprint.nvim",
   --
-  --   dependencies = {
-  --     "echasnovski/mini.nvim", -- Needed for :ToggleCommentDebugPrints (not needed for NeoVim 0.10+)
-  --   },
   --   config = true,
   -- },
 
+  -- Not used a lot
   -- {
   --   "sindrets/diffview.nvim",
   --   dependencies = { "nvim-lua/plenary.nvim" },
@@ -1338,12 +1490,5 @@ return {
   --     },
   --   },
   --   config = require("plugins.configs.diffview"),
-  -- },
-
-  -- Smart selection of the closest text object
-  -- {
-  --   "sustech-data/wildfire.nvim",
-  --   event = "VeryLazy",
-  --   config = true,
   -- },
 }
