@@ -591,6 +591,10 @@ return {
           multi_line = true,
         },
       },
+      -- remote_op = {
+      --   restore = true,
+      --   motion = true,
+      -- },
     },
     keys = {
       {
@@ -608,6 +612,14 @@ return {
           require("flash").treesitter()
         end,
         desc = "Flash Treesitter",
+      },
+      {
+        "r",
+        mode = "o",
+        function()
+          require("flash").remote()
+        end,
+        desc = "Remote Flash",
       },
     },
   },
@@ -834,7 +846,7 @@ return {
   -- LSP setup
   --
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     cmd = {
       "Mason",
       "MasonInstall",
@@ -927,9 +939,6 @@ return {
       {
         "AstroNvim/astrolsp",
         opts = {
-          features = {
-            semantic_tokens = true,
-          },
           servers = {
             "bashls",
             "clangd",
@@ -1063,8 +1072,8 @@ return {
         },
       },
       {
-        "williamboman/mason-lspconfig.nvim", -- MUST be set up before `nvim-lspconfig`
-        dependencies = { "williamboman/mason.nvim" },
+        "mason-org/mason-lspconfig.nvim", -- MUST be set up before `nvim-lspconfig`
+        dependencies = { "mason-org/mason.nvim" },
         opts = {
           -- use AstroLSP setup for mason-lspconfig
           handlers = {
