@@ -105,6 +105,9 @@
     # Global gitignore
     excludesfile = ~/.config/git/ignore
 
+    # Global attributesfile
+    attributesfile = ~/.config/git/attributes
+
 [feature]
     ; Enable config options that optimize for repos with many files in the
     ; working directory
@@ -123,6 +126,10 @@
     ; conflict region when those matching lines appear near either the beginning
     ; or end of a conflict region
     conflictstyle = zdiff3
+
+[merge "mergiraf"]
+    name = mergiraf
+    driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
 
 [help]
     # Automatically correct and execute mistyped commands
