@@ -2,6 +2,20 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+if vim.g.vscode then
+  local status_ok, fault = pcall(require, "config.vscode_options")
+  if not status_ok then
+    vim.notify("Failed to load config.vscode_options" .. fault)
+  end
+
+  status_ok, fault = pcall(require, "config.vscode_keymaps")
+  if not status_ok then
+    vim.notify("Failed to load config.vscode_keymaps" .. fault)
+  end
+
+  return
+end
+
 -- Manually add new filetypes
 vim.filetype.add({
   extension = {

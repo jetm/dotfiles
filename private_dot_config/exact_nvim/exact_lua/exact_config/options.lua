@@ -1,7 +1,3 @@
-if vim.g.vscode then
-  return
-end
-
 local O = vim.opt
 local G = vim.g
 
