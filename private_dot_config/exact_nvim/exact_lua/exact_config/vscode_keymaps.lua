@@ -96,6 +96,10 @@ keymap({ "n", "v" }, "<Leader>ff", function()
   vscode.action("workbench.action.findInFiles")
 end)
 
+keymap({ "n", "v" }, "<Leader>e", function()
+  vscode.action("workbench.files.action.focusFilesExplorer")
+end)
+
 keymap({ "n", "v" }, "gd", function()
   vscode.action("editor.action.revealDefinition")
 end)
@@ -154,14 +158,13 @@ end)
 -- Search improvements
 keymap("n", "<Esc>", "<Esc>:noh<CR>", opts)
 
--- File Explorer
-keymap("n", "<Leader>e", function()
-  vscode.action("workbench.action.toggleSidebarVisibility")
-end)
-
 -- Problems/Diagnostics
 keymap("n", "<Leader>d", function()
   vscode.action("workbench.actions.view.problems")
+end)
+
+keymap("n", "<Leader>a", function()
+  vscode.action("cody.chat.toggle")
 end)
 
 --
