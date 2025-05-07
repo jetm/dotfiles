@@ -1219,7 +1219,8 @@ return {
     opts = {
       strategies = {
         chat = {
-          adapter = "gemini",
+          -- adapter = "gemini",
+          adapter = "openai",
         },
         inline = {
           adapter = "openai",
