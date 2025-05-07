@@ -1,19 +1,35 @@
+"
+" General settings
+"
 " Search settings
-set incsearch hlsearch ignorecase smartcase gdefault
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+set gdefault
 
-set ideajoin                  " use the IDE's join/J behavior
-set selectmode=ideaselection  " use select mode only when IDE sets a selection
-set notimeout
+" Clipboard"
 set clipboard+=unnamedplus    " use system clipboard
 set clipboard+=ideaput        " use idea's pasting logic
+
+set notimeout
 set scrolloff=1               " pad scrolling with one line
 set showmode                  " show current mode in statusbar
 set showcmd                   " show partial command in statusbar
 set visualbell                " removes errorbells
 set relativenumber number     " show number and relative number
-" Stay in the mode in which the editing started
-set idearefactormode=keep
 set paste
+
+" Stay in the mode in which the editing started
+set idearefactormode=normal
+set ideajoin                  " use the IDE's join/J behavior
+set selectmode=ideaselection  " use select mode only when IDE sets a selection
+set ideastatusicon=gray       " Configures the status icon color for IdeaVim, providing a visual indicator in the IDE.
+
+"
+" Plugins
+"
+set commentary
 
 " ys<motion|text object><desired char>      surround something
 " S<desired char>                           surround when in visual mode
@@ -21,7 +37,6 @@ set paste
 " cs<existing char><desired char>           changes existing surround with desired
 set surround
 
-" https://youtrack.jetbrains.com/issue/VIM-1970
 set highlightedyank
 
 set argtextobj
@@ -30,15 +45,28 @@ let g:argtextobj_pairs="(:),{:},<:>"
 set ideavimsupport+=dialog
 set ideaenabledbufs+=singleline
 
+set easymotion
+let g:EasyMotion_do_mapping = 0
+" let g:EasyMotion_smartcase = 1
+
 set quickscope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:qs_primary_color = '#e64553'
 let g:qs_secondary_color = '#fe640b'
-let g:qs_accepted_chars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '{', '}', '[', ']', '<', '>']
+
+set NERDTree
+
+"
+" Mappings
+"
 
 "" Remap space as leader key
-let mapleader = " "
+let mapleader=" "
 map <Leader>rc :source ~/.ideavimrc<CR>
+
+map <C-s> :write<CR>
+
+map s <Plug>(easymotion-jumptoanywhere)
 
 " Use system clipboard by default for y and p operations
 nnoremap yy "+yy
@@ -53,17 +81,11 @@ xnoremap * "zy/<C-R>z<CR>
 xnoremap # "zy?<C-R>z<CR>
 
 " Clear highlights
-nnoremap <Esc> <Esc>:noh<CR>
+nnoremap <C-[> :noh<CR>
 
 " Move text up and down
-inoremap <A-j> :action MoveLineDown<CR>
-inoremap <A-k> :action MoveLineUp<CR>
-map <A-j> :action MoveLineDown<CR>
-map <A-k> :action MoveLineUp<CR>
-vnoremap <A-j> :action MoveLineDown<CR>
-vnoremap <A-k> :action MoveLineUp<CR>
-
-map <C-s> :write<CR>
+map <A-j> <Action>(MoveLineDown)
+map <A-k> <Action>(MoveLineUp)
 
 """ Indent
 map < <<
@@ -72,57 +94,49 @@ vnoremap < <gv
 vnoremap > >gv
 
 """ Source Code Navigation
-map gi :action GotoImplementation<CR>
+nmap gi <Action>(GotoImplementation)
 
-""" Tabs
-map H :action PreviousTab<CR>
-map L :action NextTab<CR>
-" nnoremap <leader>b :action RecentFiles<CR>
-
-map q :action CloseContent<CR>
-
-" Workaround for unifying navigation history:
-" https://youtrack.jetbrains.com/issue/VIM-44/Unify-navigation-history-between-ideavim-and-idea"
-nmap <C-o> <Action>(Back)
-nmap <C-i> <Action>(Forward)
-
-map <leader>q <Action>(CloseAllEditorsButActive)
-map <leader>x <Action>(HideAllWindows)
-map <Leader><Esc> <Action>(ClearAllNotifications)
+nmap <leader><Esc> <Action>(ClearAllNotifications)
 
 " Focus project window
-set NERDTree
-map <leader>e :NERDTreeFocus<CR>
+map <leader>e :NERDTreeToggle<CR>
 
-""" Searching
-map <c-a> :action GotoAction<CR>
+" Searching
+nmap ga <Action>(GotoAction)
+
 sethandler <C-p> n:vim i-x:ide
-map <c-p> :action GotoFile<CR>
+nmap <c-p> <Action>(GotoFile)
 
-" Vim search is simply outclassed here
-map / <Action>(Find)
-nnoremap ' <ESC>:action Replace<CR>
+nmap / <Action>(Find)
+nmap ' <Action>(Replace)
+nmap <leader>st <Action>(TextSearchAction)
 
-nnoremap <C-F> :action FindInPath<CR>
-vnoremap <C-F> :action FindInPath<CR>
+nmap <leader>g <Action>(FindInPath)
+nmap <leader>G <Action>(ReplaceInPath)
 
-nmap <silent> <leader>1 1gt<CR>
-nmap <silent> <leader>2 2gt<CR>
-nmap <silent> <leader>3 3gt<CR>
-nmap <silent> <leader>4 4gt<CR>
-nmap <silent> <leader>5 5gt<CR>
-nmap <silent> <leader>6 6gt<CR>
-nmap <silent> <leader>7 7gt<CR>
-nmap <silent> <leader>8 8gt<CR>
-nmap <silent> <leader>9 9gt<CR>
+" Tab movements
+nmap <leader>1 <Action>(GoToTab1)
+nmap <leader>2 <Action>(GoToTab2)
+nmap <leader>3 <Action>(GoToTab3)
+nmap <leader>4 <Action>(GoToTab4)
+nmap <leader>5 <Action>(GoToTab5)
 
-nnoremap <C-.> :action ShowIntentionActions<CR>
-nnoremap <C-/> :action CommentByLineComment<CR>
-vnoremap <C-/> :action CommentByLineComment<CR>
-inoremap <C-/> <Esc>:action CommentByLineComment<CR>
+" Closing
+map q <Action>(CloseContent)
+map <C-q> <Action>(Exit)
+nmap <leader>A <Action>(CloseAllEditorsButActive)
 
-nnoremap <A-/> :action CommentByBlockComment<CR>
-vnoremap <A-/> :action CommentByBlockComment<CR>
-inoremap <A-/> <Esc>:action CommentByBlockComment<CR>
+map <C-.> <Action>(ShowIntentionActions)
+map <C-/> <Action>(CommentByLineComment)
+map <A-/> <Action>(CommentByBlockComment)
+map <leader>f <Action>(ReformatCode)
 
-vnoremap = :action ReformatCode<CR>
+nmap <C-b> <Action>(Back)
+nmap <C-f> <Action>(Forward)
+
+" Moves the cursor to the previous method in the code
+nmap [[ <Action>(MethodUp)
+nmap ]] <Action>(MethodDown)
+
+nmap <leader>a <Action>(cody.openChat)
+imap <C-s> <Action>(cody.acceptAutoCompleteAction)
