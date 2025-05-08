@@ -54,6 +54,10 @@ keymap("n", "q", function()
   vscode.action("workbench.action.closeActiveEditor")
 end)
 
+keymap({ "n", "x" }, "s", function()
+  vscode.call("metaGo.gotoSmart")
+end)
+
 keymap({ "n" }, "<leader>RE", function()
   vscode.call("workbench.action.reloadWindow")
 end)
