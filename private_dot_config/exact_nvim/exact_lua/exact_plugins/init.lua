@@ -949,7 +949,7 @@ return {
             "jinja_lsp",
             "jsonls",
             "lua_ls",
-            "pylsp",
+            "ruff",
             "yamlls",
           },
           config = {
@@ -962,23 +962,24 @@ return {
               },
             },
 
-            pylsp = {
-              settings = {
-                pylsp = {
-                  plugins = {
-                    autopep8 = {
-                      enabled = false,
-                    },
-                    pycodestyle = {
-                      enabled = false,
-                    },
-                    ruff = {
-                      enabled = true,
-                    },
-                  },
-                },
-              },
-            },
+            -- Use ruff instead
+            -- pylsp = {
+            --   settings = {
+            --     pylsp = {
+            --       plugins = {
+            --         autopep8 = {
+            --           enabled = false,
+            --         },
+            --         pycodestyle = {
+            --           enabled = false,
+            --         },
+            --         ruff = {
+            --           enabled = true,
+            --         },
+            --       },
+            --     },
+            --   },
+            -- },
 
             -- Still a new project. Many false positive
             -- pylyzer = {
@@ -1064,10 +1065,10 @@ return {
               },
             },
 
-            ruff = {
-              -- disable it to use pyright as LSP client
-              autostart = false,
-            },
+            -- ruff = {
+            --   -- disable it to use pyright as LSP client
+            --   autostart = false,
+            -- },
 
             yamlls = {
               redhat = { telemetry = { enabled = false } },
