@@ -1,14 +1,51 @@
+--
+-- Plugins
+--
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy-vscode/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+
+vim.opt.rtp:prepend(lazypath)
+
+local plugins = {
+  { "tpope/vim-repeat" },
+  { "echasnovski/mini.move", config = true },
+  { "echasnovski/mini.pairs", config = true },
+  { "echasnovski/mini.surround", opts = { mappings = { add = "ys" } }, config = true },
+}
+
+local lazy_opts = {
+  root = vim.fn.stdpath("data") .. "/lazy-vscode",
+  lockfile = vim.fn.stdpath("config") .. "/lazy-lock-vscode.json",
+  pkg = {
+    cache = vim.fn.stdpath("state") .. "/pkg-cache-vscode.lua",
+  },
+  state = vim.fn.stdpath("state") .. "/state-vscode.json",
+}
+
+-- Only load minimal plugin set that works well with VSCode
+require("lazy").setup(plugins, lazy_opts)
+
 local keymap = vim.keymap.set
 local vscode = require("vscode")
 local opts = { noremap = true, silent = true }
 
 -- move text up and down
-keymap({ "n", "v" }, "<M-j>", function()
-  vscode.action("editor.action.moveLinesDownAction")
-end)
-keymap({ "n", "v" }, "<M-k>", function()
-  vscode.action("editor.action.moveLinesUpAction")
-end)
+-- keymap({ "n", "v" }, "<M-j>", function()
+--   vscode.action("editor.action.moveLinesDownAction")
+-- end)
+-- keymap({ "n", "v" }, "<M-k>", function()
+--   vscode.action("editor.action.moveLinesUpAction")
+-- end)
 
 -- paste preserves primal yanked piece
 keymap("v", "p", "\"_dP", opts)
@@ -166,28 +203,3 @@ end)
 keymap("n", "<Leader>a", function()
   vscode.action("cody.chat.toggle")
 end)
-
---
--- Plugins
---
-
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-
-vim.opt.rtp:prepend(lazypath)
-
--- Only load minimal plugin set that works well with VSCode
-require("lazy").setup({
-  { "tpope/vim-repeat" },
-  { "tpope/vim-surround" },
-  { "kana/vim-niceblock" },
-})
