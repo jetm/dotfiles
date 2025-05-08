@@ -94,6 +94,10 @@ keymap("n", "Y", "y$", opts)
 -- Keep cursor position when joining lines
 keymap("n", "J", ":let p=getpos('.')<CR>:join<CR>:call setpos('.', p)<CR>", opts)
 
+-- Keep undo/redo lists in sync with VsCode
+keymap("n", "u", "<Cmd>call VSCodeNotify('undo')<CR>")
+keymap("n", "<C-r>", "<Cmd>call VSCodeNotify('redo')<CR>")
+
 --
 -- Navigation
 --
