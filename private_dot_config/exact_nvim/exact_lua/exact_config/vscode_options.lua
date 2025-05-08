@@ -27,6 +27,7 @@ O.fillchars = {
 O.number = true -- Show numberline
 O.relativenumber = true -- Show relative numberline
 O.scrolloff = 16 -- Number of lines to keep above and below the cursor
+O.smoothscroll = true
 O.laststatus = 2
 
 --
@@ -73,7 +74,13 @@ O.shiftround = true
 -- various
 --
 O.virtualedit = "block" -- allow going past end of line in visual block mode
-O.smoothscroll = true
+
+O.undofile = true
+O.undolevels = 1000
+O.undolevels = 10000
+O.virtualedit = 'block'
+O.wildmode = 'longest:full,full'
+O.scrolloff = 5
 
 vim.cmd([[
   augroup YankHighlight
