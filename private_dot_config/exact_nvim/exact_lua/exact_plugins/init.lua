@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 return {
   -- plenary: full; complete; entire; absolute; unqualified.
   -- All the lua functions I don't want to write twice
