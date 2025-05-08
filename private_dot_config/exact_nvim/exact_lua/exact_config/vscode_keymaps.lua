@@ -183,6 +183,10 @@ keymap("n", "<leader>6", function()
   vscode.call("workbench.action.openEditorAtIndex6")
 end)
 
+-- Navigate VSCode tabs like lazyvim buffers
+keymap("n", "<S-h>", "<Cmd>call VSCodeNotify('workbench.action.previousEditor')<CR>")
+keymap("n", "<S-l>", "<Cmd>call VSCodeNotify('workbench.action.nextEditor')<CR>")
+
 -- Code Actions
 keymap({ "n", "v" }, "<Leader>ca", function()
   vscode.action("editor.action.quickFix")
