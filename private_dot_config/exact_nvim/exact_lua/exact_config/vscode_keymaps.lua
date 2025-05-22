@@ -74,7 +74,7 @@ keymap({ "n", "v" }, "=", function()
 end)
 
 keymap("n", "/", function()
-  vscode.action("action.Find")
+  vscode.action("actions.find")
 end)
 
 keymap("n", "<C-s>", function()
