@@ -86,6 +86,10 @@ zvm_after_init() {
     # shellcheck disable=SC1091
     source /usr/share/zsh/plugins/forgit/forgit.plugin.zsh
   fi
+
+  if (command -v atuin > /dev/null 2>&1); then
+    eval "$(atuin init zsh)"
+  fi
 }
 
 # vim:set ts=2 sw=2 et:
