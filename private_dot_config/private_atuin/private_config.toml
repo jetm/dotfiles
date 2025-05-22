@@ -1,0 +1,9 @@
+style = "compact"
+enter_accept = true
+keymap_mode = "vim-insert"
+inline_height = 20
+keymap_cursor = { vim_insert = "blink-block", vim_normal = "steady-block" }
+prefers_reduced_motion = true
+
+[sync]
+records = true
