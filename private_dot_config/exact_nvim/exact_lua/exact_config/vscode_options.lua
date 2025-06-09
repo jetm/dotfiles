@@ -75,13 +75,6 @@ O.shiftround = true
 --
 O.virtualedit = "block" -- allow going past end of line in visual block mode
 
-O.undofile = true
-O.undolevels = 1000
-O.undolevels = 10000
-O.virtualedit = 'block'
-O.wildmode = 'longest:full,full'
-O.scrolloff = 5
-
 vim.cmd([[
   augroup YankHighlight
     autocmd!
