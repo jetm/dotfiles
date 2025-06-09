@@ -99,22 +99,6 @@ keymap("n", "u", "<Cmd>call VSCodeNotify('undo')<CR>")
 keymap("n", "<C-r>", "<Cmd>call VSCodeNotify('redo')<CR>")
 
 --
--- Navigation
---
-keymap({ "n", "v" }, "<C-j>", function()
-  vscode.action("workbench.action.navigateDown")
-end)
-keymap({ "n", "v" }, "<C-k>", function()
-  vscode.action("workbench.action.navigateUp")
-end)
-keymap({ "n", "v" }, "<C-h>", function()
-  vscode.action("workbench.action.navigateLeft")
-end)
-keymap({ "n", "v" }, "<C-l>", function()
-  vscode.action("workbench.action.navigateRight")
-end)
-
---
 -- Window Management
 --
 keymap("n", "<C-w>s", function()
@@ -183,10 +167,6 @@ keymap("n", "<leader>6", function()
   vscode.call("workbench.action.openEditorAtIndex6")
 end)
 
--- Navigate VSCode tabs like lazyvim buffers
-keymap("n", "<S-h>", "<Cmd>call VSCodeNotify('workbench.action.previousEditor')<CR>")
-keymap("n", "<S-l>", "<Cmd>call VSCodeNotify('workbench.action.nextEditor')<CR>")
-
 -- Code Actions
 keymap({ "n", "v" }, "<Leader>ca", function()
   vscode.action("editor.action.quickFix")
@@ -213,5 +193,5 @@ keymap("n", "<Leader>d", function()
 end)
 
 keymap("n", "<Leader>a", function()
-  vscode.action("cody.chat.toggle")
+  vscode.action("roo-cline.openInNewTab")
 end)
