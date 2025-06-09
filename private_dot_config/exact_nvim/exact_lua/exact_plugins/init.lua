@@ -1225,10 +1225,10 @@ return {
       strategies = {
         chat = {
           -- adapter = "gemini",
-          adapter = "openai",
+          adapter = "anthropic",
         },
         inline = {
-          adapter = "openai",
+          adapter = "anthropic",
         },
       },
       adapters = {
@@ -1246,6 +1246,15 @@ return {
             schema = {
               model = {
                 default = "gpt-4.1-2025-04-14",
+              },
+            },
+          })
+        end,
+        anthropic = function()
+          return require("codecompanion.adapters").extend("anthropic", {
+            schema = {
+              model = {
+                default = "claude-sonnet-4-20250514",
               },
             },
           })
