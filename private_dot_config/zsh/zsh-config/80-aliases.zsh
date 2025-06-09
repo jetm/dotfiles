@@ -52,7 +52,8 @@ alias gch='git cherry-pick -x'
 alias gcs='git show'
 
 # Checkout (c)
-alias grp='git restore --patch'
+alias grp='gai --patch=checkout --'
+alias grr='gai --patch=reset --'
 alias grf='git forgit checkout_file'
 alias grh='git forgit reset_head'
 
@@ -61,7 +62,7 @@ alias gg='git grep'
 
 # Index (a)
 alias ga='git forgit add'
-alias gap='git add --patch'
+alias gap='gai --patch --'
 
 # Diff (d)
 alias gd='git forgit diff'
