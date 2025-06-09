@@ -88,7 +88,6 @@ keymap("n", "<", "<<_")
 keymap("n", ">", ">>_")
 
 -- Keep cursor at the bottom of visual selection after yanking
-keymap("v", "y", "ygv<Esc>", opts)
 keymap("n", "Y", "y$", opts)
 
 -- Keep cursor position when joining lines
