@@ -82,6 +82,7 @@ alias gr='git rebase'
 alias gra='git rebase --abort'
 alias grc='git rebase --continue'
 alias gri='git rebase --interactive'
+alias gro='git rebase-origin'
 
 # Stash (s)
 alias gs='git stash'
