@@ -878,7 +878,7 @@ return {
         "yamlfmt",
 
         -- Linters
-        "yamllint",
+        -- "yamllint",
         "luacheck",
         "shellcheck",
       },
@@ -950,7 +950,7 @@ return {
             "jsonls",
             "lua_ls",
             "ruff",
-            "yamlls",
+            -- "yamlls",
           },
           config = {
             bashls = {
@@ -1070,9 +1070,9 @@ return {
             --   autostart = false,
             -- },
 
-            yamlls = {
-              redhat = { telemetry = { enabled = false } },
-            },
+            -- yamlls = {
+            --   redhat = { telemetry = { enabled = false } },
+            -- },
           },
         },
       },
