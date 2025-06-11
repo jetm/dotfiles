@@ -51,12 +51,12 @@ export LESS="${LESS}"
 #
 # export PAGER=less
 
-MOAR="--colors=auto"
-MOAR="${MOAR} --no-linenumbers"
-MOAR="${MOAR} --statusbar bold"
-MOAR="${MOAR} --quit-if-one-screen"
-MOAR="${MOAR} --no-clear-on-exit"
-MOAR="${MOAR} --style onedark"
+MOAR="-colors=auto"
+MOAR="${MOAR} -no-linenumbers"
+MOAR="${MOAR} -statusbar bold"
+MOAR="${MOAR} -quit-if-one-screen"
+MOAR="${MOAR} -no-clear-on-exit"
+MOAR="${MOAR} -style onedark"
 export MOAR="${MOAR}"
 
 export PAGER=moar
