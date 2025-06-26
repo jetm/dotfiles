@@ -39,17 +39,6 @@ local keymap = vim.keymap.set
 local vscode = require("vscode")
 local opts = { noremap = true, silent = true }
 
--- move text up and down
--- keymap({ "n", "v" }, "<M-j>", function()
---   vscode.action("editor.action.moveLinesDownAction")
--- end)
--- keymap({ "n", "v" }, "<M-k>", function()
---   vscode.action("editor.action.moveLinesUpAction")
--- end)
-
--- paste preserves primal yanked piece
-keymap("v", "p", "\"_dP", opts)
-
 keymap("n", "q", function()
   vscode.action("workbench.action.closeActiveEditor")
 end)
@@ -66,12 +55,6 @@ end)
 keymap({ "n" }, "<leader>f", function()
   vscode.action("editor.action.formatDocument")
 end, opts)
-keymap({ "n", "v" }, "gq", function()
-  vscode.action("rewrap.rewrapComment")
-end)
-keymap({ "n", "v" }, "=", function()
-  vscode.action("editor.action.formatSelection")
-end)
 
 keymap("n", "/", function()
   vscode.action("actions.find")
@@ -100,15 +83,6 @@ keymap("n", "<C-r>", "<Cmd>call VSCodeNotify('redo')<CR>")
 --
 -- Window Management
 --
-keymap("n", "<C-w>s", function()
-  vscode.action("workbench.action.splitEditorDown")
-end)
-keymap("n", "<C-w>v", function()
-  vscode.action("workbench.action.splitEditorRight")
-end)
-keymap("n", "<C-w>c", function()
-  vscode.action("workbench.action.closeActiveEditor")
-end)
 keymap("n", "<C-w>=", function()
   vscode.action("workbench.action.evenEditorWidths")
 end)
@@ -118,10 +92,6 @@ end)
 --
 keymap({ "n", "v" }, "<c-p>", function()
   vscode.action("workbench.action.quickOpen")
-end)
-
-keymap({ "n", "v" }, "<Leader>ff", function()
-  vscode.action("workbench.action.findInFiles")
 end)
 
 keymap({ "n", "v" }, "<Leader>e", function()
@@ -164,33 +134,4 @@ keymap("n", "<leader>5", function()
 end)
 keymap("n", "<leader>6", function()
   vscode.call("workbench.action.openEditorAtIndex6")
-end)
-
--- Code Actions
-keymap({ "n", "v" }, "<Leader>ca", function()
-  vscode.action("editor.action.quickFix")
-end)
-
-keymap({ "n", "v" }, "<Leader>rn", function()
-  vscode.action("editor.action.rename")
-end)
-
-keymap({ "n", "v" }, "<Leader>.", function()
-  vscode.action("editor.action.quickFix")
-end)
-
-keymap({ "n" }, "K", function()
-  vscode.action("editor.action.showHover")
-end)
-
--- Search improvements
-keymap("n", "<Esc>", "<Esc>:noh<CR>", opts)
-
--- Problems/Diagnostics
-keymap("n", "<Leader>d", function()
-  vscode.action("workbench.actions.view.problems")
-end)
-
-keymap("n", "<Leader>a", function()
-  vscode.action("roo-cline.openInNewTab")
 end)
