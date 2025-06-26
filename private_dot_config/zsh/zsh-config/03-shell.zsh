@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148
 # If I could disable Ctrl-s completely I would!
 setopt NO_FLOW_CONTROL
 

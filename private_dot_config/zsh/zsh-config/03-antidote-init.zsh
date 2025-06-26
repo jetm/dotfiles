@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148
 # use antidote for plugin management
 [[ -d ${HOME}/.antidote ]] ||
   git clone --depth 1 --quiet https://github.com/mattmc3/antidote ${HOME}/.antidote

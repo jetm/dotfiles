@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148
 if [[ -f "${HOME}"/.cache/antidote/xvoland/Extract/extract.sh ]]; then
   source "${HOME}"/.cache/antidote/xvoland/Extract/extract.sh
 fi

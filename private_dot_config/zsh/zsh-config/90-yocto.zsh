@@ -1,3 +1,4 @@
+# shellcheck disable=2148
 #
 # Yocto setup
 #
@@ -7,4 +8,4 @@ export NPROC=$(($(nproc)+1))
 
 # Yocto/Poky/OE
 export KAS_CONTAINER_ENGINE=podman
-export KAS_CONTAINER_IMAGE=ghcr.io/siemens/kas/kas:next
+export KAS_CONTAINER_IMAGE=ghcr.io/siemens/kas/kas:latest
