@@ -938,7 +938,6 @@ return {
 
   {
     "neovim/nvim-lspconfig",
-    event = "BufReadPre",
     dependencies = {
       {
         "AstroNvim/astrolsp",
