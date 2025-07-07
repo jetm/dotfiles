@@ -20,7 +20,7 @@ local plugins = {
   { "tpope/vim-repeat" },
   { "echasnovski/mini.move", config = true },
   { "echasnovski/mini.pairs", config = true },
-  { "echasnovski/mini.surround", opts = { mappings = { add = "ys" } }, config = true },
+  { "echasnovski/mini.surround", opts = { mappings = { add = "ys", replace = "cs" } }, config = true },
 }
 
 local lazy_opts = {
