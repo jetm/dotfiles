@@ -46,8 +46,8 @@ __export_env() {
   # Disable pre-commit colors
   export PRE_COMMIT_COLOR=never
 
-  # A better man page viewer
-  export MANPAGER='nvim +Man!'
+  # A better man page viewer. Break several tools that uses man
+  # export MANPAGER='nvim +Man!'
 }
 
 # only for interactive shell
