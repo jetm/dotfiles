@@ -1390,7 +1390,14 @@ return {
   },
 
   -- Sync textarea against Neovim in terminal
-  { "subnut/nvim-ghost.nvim" },
+  {
+    "subnut/nvim-ghost.nvim",
+    cmd = "GhostTextStart",
+    init = function()
+        -- Start manually
+        vim.g.nvim_ghost_autostart = 0
+    end,
+  },
 
   -- Change multiple words at once
   {
