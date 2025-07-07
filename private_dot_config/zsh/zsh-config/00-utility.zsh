@@ -45,8 +45,9 @@ aurgen() {
   fi
 }
 
-srt_extract() {
-  mkvextract tracks "$1" $2:"$(basename $1 .mkv)".srt
+extract_srt() {
+  srt_id=$(( $2 - 1 ))
+  mkvextract tracks "$1" $srt_id:"$(basename $1 .mkv)".srt
 }
 
 audio_rm() {
