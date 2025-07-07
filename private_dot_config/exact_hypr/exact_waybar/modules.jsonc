@@ -22,10 +22,11 @@
     "format": "{icon} {windows}",
     "sort-by-number": true,
     "format-icons": {
-      "1": "󰲠 ",
-      "2": "󰲢 ",
-      "3": "󰲤 ",
-      "special": " ",
+      "1": "<span font='11'>󰲠 </span>",
+      "2": "<span font='11'>󰲢 </span>",
+      "3": "<span font='11'>󰲤 </span>",
+      "4": "<span font='11'>󰲦</span>",
+      "special": "<span font='11'> </span>",
     },
   },
   "clock": {
