@@ -384,7 +384,8 @@ return {
         function()
           require("neo-tree.command").execute({
             toggle = true,
-            dir = vim.loop.cwd(),
+            ---@diagnostic disable-next-line: undefined-field
+            dir = vim.uv.cwd(),
           })
         end,
         desc = "Explorer NeoTree (cwd)",
@@ -402,7 +403,7 @@ return {
           if package.loaded["neo-tree"] then
             return
           else
-            ---@diagnostic disable-next-line: param-type-mismatch
+            ---@diagnostic disable-next-line: undefined-field, param-type-mismatch
             local stats = vim.uv.fs_stat(vim.fn.argv(0))
             if stats and stats.type == "directory" then
               require("neo-tree")
