@@ -56,10 +56,6 @@ keymap({ "n" }, "<leader>f", function()
   vscode.action("editor.action.formatDocument")
 end, opts)
 
-keymap("n", "/", function()
-  vscode.action("actions.find")
-end)
-
 keymap("n", "<C-s>", function()
   vscode.action("workbench.action.files.save")
 end)
