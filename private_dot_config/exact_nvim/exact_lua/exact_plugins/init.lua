@@ -1221,13 +1221,16 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     opts = {
+      system_prompt = function()
+        local path = vim.fn.expand("~/.config/ai_prompts/gpt-4.1.md")
+        return vim.fn.readfile(path)
+      end,
       strategies = {
         chat = {
-          -- adapter = "gemini",
-          adapter = "anthropic",
+          adapter = "openai",
         },
         inline = {
-          adapter = "anthropic",
+          adapter = "openai",
         },
       },
       adapters = {
@@ -1235,7 +1238,7 @@ return {
           return require("codecompanion.adapters").extend("gemini", {
             schema = {
               model = {
-                default = "gemini-2.5-pro-preview-03-25",
+                default = "gemini-2.5-pro",
               },
             },
           })
@@ -1395,8 +1398,8 @@ return {
     "subnut/nvim-ghost.nvim",
     cmd = "GhostTextStart",
     init = function()
-        -- Start manually
-        vim.g.nvim_ghost_autostart = 0
+      -- Start manually
+      vim.g.nvim_ghost_autostart = 0
     end,
   },
 
