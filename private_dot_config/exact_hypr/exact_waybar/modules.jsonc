@@ -59,7 +59,7 @@
     "format": "{}",
     "tooltip": true,
     "interval": 1800,
-    "exec": "wttrbar --location Escazu --custom-indicator '{ICON} {temp_C}°({FeelsLikeC}°)'",
+    "exec": "wttrbar --location 'San José, Costa Rica' --custom-indicator '{ICON} {temp_C}°({FeelsLikeC}°)'",
     "return-type": "json",
     "exec-if": "which wttrbar",
   },
