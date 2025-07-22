@@ -76,6 +76,7 @@ alias gll='git lol'
 
 # Push (p)
 alias gp='git push'
+alias gpf='git push -f'
 alias gpr='git publish -t'
 
 # Rebase (r)
