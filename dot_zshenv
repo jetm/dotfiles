@@ -48,6 +48,9 @@ __export_env() {
 
   # A better man page viewer. Break several tools that uses man
   # export MANPAGER='nvim +Man!'
+
+  # zsh profile
+  # export ZPROFRC=1
 }
 
 # only for interactive shell

@@ -12,7 +12,7 @@
 #
 # Paths
 #
-[[ -z "$ZPROFRC" ]] || zmodload zsh/zprof
+[[ -n "$ZPROFRC" ]] && zmodload zsh/zprof
 
 #
 # utility -> plugins-settings -> antidote-init -> extensions
@@ -23,9 +23,9 @@ for e in "${ZDOTDIR}"/zsh-config/*.zsh; do
 done
 
 # done profiling
-[[ -z "$ZPROFRC" ]] || zprof
+[[ -n "$ZPROFRC" ]] && zprof
 
 # cleanup
-unset ZPROFRC
+[[ -n "$ZPROFRC" ]] && unset ZPROFRC
 
 # vim:ft=zsh ts=2 sw=2 et:
