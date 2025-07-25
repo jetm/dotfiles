@@ -102,57 +102,6 @@ check_disk_space() {
     success "Sufficient disk space available"
 }
 
-# Source filesystem health check
-check_source_health() {
-    log "Checking source filesystem health..."
-
-    # Detect filesystem type of root partition
-    local fs_type
-    fs_type=$(lsblk -f -o FSTYPE "$(findmnt -n -o SOURCE /)" | tail -n1)
-    log "Detected root filesystem type: $fs_type"
-
-    case "$fs_type" in
-    ext2 | ext3 | ext4)
-        log "Running e2fsck on source filesystem..."
-        if [[ "$DRY_RUN" == "false" ]]; then
-            e2fsck -f -y "$(findmnt -n -o SOURCE /)" || {
-                error "Source filesystem check failed"
-                exit 1
-            }
-        else
-            log "[DRY RUN] Would run: e2fsck -f -y $(findmnt -n -o SOURCE /)"
-        fi
-        ;;
-    xfs)
-        log "Running xfs_repair on source filesystem..."
-        if [[ "$DRY_RUN" == "false" ]]; then
-            xfs_repair "$(findmnt -n -o SOURCE /)" || {
-                error "Source filesystem check failed"
-                exit 1
-            }
-        else
-            log "[DRY RUN] Would run: xfs_repair $(findmnt -n -o SOURCE /)"
-        fi
-        ;;
-    btrfs)
-        log "Running btrfs check on source filesystem..."
-        if [[ "$DRY_RUN" == "false" ]]; then
-            btrfs check "$(findmnt -n -o SOURCE /)" || {
-                error "Source filesystem check failed"
-                exit 1
-            }
-        else
-            log "[DRY RUN] Would run: btrfs check $(findmnt -n -o SOURCE /)"
-        fi
-        ;;
-    *)
-        warning "Unknown filesystem type '$fs_type', skipping health check"
-        ;;
-    esac
-
-    success "Source filesystem health check completed"
-}
-
 # Dynamic partition detection
 wait_for_partition() {
     local partition="$1"
@@ -172,88 +121,6 @@ wait_for_partition() {
 
     error "Timeout waiting for partition $partition"
     exit 1
-}
-
-# NVMe thermal and power management checks
-check_nvme_thermal() {
-    local drive="$1"
-
-    log "Checking NVMe thermal and power management..."
-
-    # Extract NVMe device name (e.g., nvme0 from /dev/nvme0n1)
-    local nvme_dev
-    nvme_dev=$(basename "$drive" | sed 's/n[0-9]*$//')
-
-    if [[ -f "/sys/class/nvme/$nvme_dev/temperature" ]]; then
-        local temp
-        temp=$(cat "/sys/class/nvme/$nvme_dev/temperature")
-        log "NVMe temperature: ${temp}°C"
-
-        if [[ $temp -gt 70 ]]; then
-            warning "NVMe temperature is high ($temp°C). Consider cooling before migration."
-        fi
-    else
-        warning "Cannot read NVMe temperature"
-    fi
-
-    # Check power management
-    if [[ -f "/sys/class/nvme/$nvme_dev/power/control" ]]; then
-        local power_control
-        power_control=$(cat "/sys/class/nvme/$nvme_dev/power/control")
-        log "NVMe power control: $power_control"
-
-        if [[ "$power_control" != "on" ]]; then
-            warning "NVMe power management may affect performance during migration"
-        fi
-    fi
-
-    success "NVMe thermal check completed"
-}
-
-# NVMe performance verification
-verify_nvme_performance() {
-    local drive="$1"
-
-    log "Verifying NVMe performance settings..."
-
-    # Extract NVMe device name
-    local nvme_dev
-    nvme_dev=$(basename "$drive" | sed 's/n[0-9]*$//')
-
-    # Check queue depth
-    if [[ -f "/sys/block/$(basename "$drive")/queue/nr_requests" ]]; then
-        local queue_depth
-        queue_depth=$(cat "/sys/block/$(basename "$drive")/queue/nr_requests")
-        log "NVMe queue depth: $queue_depth"
-
-        if [[ $queue_depth -lt 128 ]]; then
-            warning "Low queue depth ($queue_depth). Consider increasing for better performance."
-        fi
-    fi
-
-    # Check scheduler
-    if [[ -f "/sys/block/$(basename "$drive")/queue/scheduler" ]]; then
-        local scheduler
-        scheduler=$(cat "/sys/block/$(basename "$drive")/queue/scheduler")
-        log "I/O scheduler: $scheduler"
-
-        if [[ "$scheduler" != *"none"* ]] && [[ "$scheduler" != *"mq-deadline"* ]]; then
-            warning "Consider using 'none' or 'mq-deadline' scheduler for NVMe drives"
-        fi
-    fi
-
-    # Check if TRIM/discard is enabled
-    if [[ -f "/sys/block/$(basename "$drive")/queue/discard_max_bytes" ]]; then
-        local discard_max
-        discard_max=$(cat "/sys/block/$(basename "$drive")/queue/discard_max_bytes")
-        if [[ $discard_max -gt 0 ]]; then
-            success "TRIM/discard is supported and enabled"
-        else
-            warning "TRIM/discard may not be properly configured"
-        fi
-    fi
-
-    success "NVMe performance verification completed"
 }
 
 # Cleanup function for error handling
@@ -353,17 +220,8 @@ success "All dependencies found"
 # Check boot mode
 check_boot_mode
 
-# Check NVMe thermal conditions
-# check_nvme_thermal "$NEW_DRIVE"
-
-# Verify NVMe performance settings
-# verify_nvme_performance "$NEW_DRIVE"
-
 # Check disk space requirements
 check_disk_space "$NEW_DRIVE"
-
-# Check source filesystem health
-# check_source_health
 
 # Validate UUIDs
 log "Validating UUIDs..."
@@ -528,7 +386,7 @@ if [[ "$DRY_RUN" == "false" ]]; then
         }
     }
     { print }
-    END { 
+    END {
         if (root_updated != 1) exit 1
         print "# Updated " root_updated " root entry and " efi_updated " EFI entry" > "/dev/stderr"
     }' "$MNT/etc/fstab" >"$MNT/etc/fstab.new"
@@ -709,7 +567,6 @@ if [[ "$DRY_RUN" == "true" ]]; then
     echo
     log "Summary of what would be done:"
     log "  - Validate UEFI boot mode and system health"
-    log "  - Check NVMe thermal conditions and performance"
     log "  - Create new 256MB EFI partition: $NEW_EFI"
     log "  - Create new XFS root partition: $NEW_ROOT with NVMe optimization"
     log "  - Preserve EFI boot files from source partition"
@@ -737,5 +594,4 @@ else
     warning "  3. Boot from the new drive"
     warning "  4. Verify system functionality"
     warning "  5. Keep the old drive as backup until confirmed working"
-    warning "  6. Monitor NVMe temperature and performance after migration"
 fi
