@@ -225,9 +225,9 @@
     date = iso
 
 [maintenance]
-    auto = false
+    auto = true
     strategy = incremental
-    repo = ~/repos/work/linux-stable
+    ; repo = ~/repos/work/linux-stable
 
 [tag]
     sort = version:refname
