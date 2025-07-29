@@ -74,15 +74,8 @@
 
     add-unmerged = "!f() { git diff --name-only --diff-filter=U ; }; git add `f`"
 
-    # Commit any files changes, squash them into the last commit and update
-    # its date
-    ; Replaced with git-fixup
-    ; fixup-prev-ci = !git commit --all --amend --reuse-message=HEAD --date=\"$(date)\"
-
     # list files which have changed
     files = !git diff --name-only
-
-    dt = "! args=$@; shift $#; nvim -c \"DiffviewOpen $args\""
 
     rE = "!f() { git restore -S $@ && git restore $@; }; f"
 
