@@ -32,8 +32,15 @@
   "clock": {
     "align": 0,
     "rotate": 0,
-    "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
     "format": "{:%a %b %d, %G, %R} ",
+    "tooltip-format": "<span color='#CECDC3'><tt>{calendar}</tt></span>",
+    "calendar": {
+      "format": {
+        "months": "<span color='#CECDC3'><b>{}</b></span>",
+        "weekdays": "<span color='#24837B'><b>{}</b></span>",
+        "today": "<span color='#24837B'><b>{}</b></span>",
+      },
+    },
     "timezone": "America/Costa_Rica",
   },
   "cpu": {
