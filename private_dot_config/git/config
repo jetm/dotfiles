@@ -241,7 +241,7 @@
     # consistent with the behaviour of `git diff`.
     difftool = false
     # riff and difftastic doesn't work with forgit
-    diff = delta
+    diff = delta --tabs 4
     ; show = riff
     ; log  = riff
 
