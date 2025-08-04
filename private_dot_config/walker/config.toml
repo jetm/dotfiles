@@ -1,0 +1,71 @@
+app_launch_prefix = "uwsm app -- "
+terminal_title_flag = ""
+locale = ""
+close_when_open = true
+theme = "default"
+theme_base = []
+theme_location = []
+monitor = ""
+hotreload_theme = true
+as_window = false
+timeout = 0
+disable_click_to_close = false
+force_keyboard_focus = true
+disabled = [
+    "clipboard",
+    "translation",
+    "commands",
+    "custom_commands",
+    "bookmarks",
+    "runner",
+    "windows",
+    "ssh",
+    "finder",
+    "calc",
+    "websearch",
+    "emojis",
+    "hyprland_keybinds",
+]
+
+[keys]
+accept_typeahead = ["tab"]
+trigger_labels = "lalt"
+next = ["down"]
+prev = ["up"]
+close = ["esc"]
+remove_from_history = ["shift backspace"]
+resume_query = ["ctrl r"]
+toggle_exact_search = ["ctrl m"]
+
+[keys.activation_modifiers]
+keep_open = "shift"
+alternate = "alt"
+
+[events]
+on_activate = ""
+on_selection = ""
+on_exit = ""
+on_launch = ""
+on_query_change = ""
+
+[activation_mode]
+labels = "jkl;asdf"
+
+[builtins.applications]
+weight = 5
+name = "applications"
+placeholder = " Search..."
+prioritize_new = false
+hide_actions_with_empty_query = true
+context_aware = true
+refresh = true
+show_sub_when_single = false
+show_icon_when_single = true
+show_generic = true
+history = true
+icon = ""
+
+[builtins.applications.actions]
+enabled = false
+hide_category = true
+hide_without_query = true
