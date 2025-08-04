@@ -857,8 +857,6 @@ return {
       "MasonUninstall",
       "MasonUninstallAll",
       "MasonLog",
-      "MasonUpdate",
-      "MasonUpdateAll",
     },
     opts = {
       ui = {
@@ -868,44 +866,7 @@ return {
           package_uninstalled = " ",
         },
       },
-      ensure_installed = {
-        -- Formatters
-        "clang-format",
-        "prettier",
-        "ruff",
-        "shfmt",
-        "stylua",
-        "yamlfmt",
-
-        -- Linters
-        -- "yamllint",
-        "luacheck",
-        "shellcheck",
-      },
-      max_concurrent_installers = 10,
     },
-
-    -- :MasonUpdate updates registry contents
-    build = ":MasonUpdate",
-    -- Add ":MasonUpdateAll"
-    dependencies = { "Zeioth/mason-extra-cmds", opts = {} },
-    config = function(_, opts)
-      require("mason").setup(opts)
-      local mr = require("mason-registry")
-      local function ensure_installed()
-        for _, tool in ipairs(opts.ensure_installed) do
-          local p = mr.get_package(tool)
-          if not p:is_installed() then
-            p:install()
-          end
-        end
-      end
-      if mr.refresh then
-        mr.refresh(ensure_installed)
-      else
-        ensure_installed()
-      end
-    end,
   },
 
   {
@@ -937,148 +898,267 @@ return {
   },
 
   {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      {
-        "AstroNvim/astrolsp",
-        opts = {
-          servers = {
-            "bashls",
-            "clangd",
-            "jinja_lsp",
-            "jsonls",
-            "lua_ls",
-            "ruff",
-            -- "yamlls",
+    "p00f/clangd_extensions.nvim",
+    lazy = true,
+    opts = {},
+  },
+
+  {
+    "AstroNvim/astrolsp",
+    lazy = true,
+    opts = {
+      -- configuration table of features provided by AstroLSP
+      features = {
+        codelens = true, -- enable/disable codelens refresh on start
+        inlay_hints = true, -- enable/disable inlay hints on start
+        semantic_tokens = true, -- enable/disable semantic token highlighting
+      },
+      -- lsp client capabilities
+      capabilities = vim.lsp.protocol.make_client_capabilities(),
+      -- use conform.nvim for formatting
+      formatting = { disabled = true },
+      -- enable servers that you already have installed without mason
+      servers = {},
+      -- customize language server configuration options passed to `lspconfig`
+      ---@diagnostic disable: missing-fields
+      config = {
+        bashls = {
+          filetypes = { "bash", "sh", "zsh" },
+          bashIde = {
+            globPattern = "*@(.sh|.inc|.bash|.command|.zsh)",
           },
-          config = {
-            bashls = {
-              format = { enable = true },
-              validate = { enable = true },
-              filetypes = { "bash", "sh", "zsh" },
-              bashIde = {
-                globPattern = "*@(.sh|.inc|.bash|.command|.zsh)",
+        },
+
+        -- Use ruff instead
+        -- pylsp = {
+        --   settings = {
+        --     pylsp = {
+        --       plugins = {
+        --         autopep8 = {
+        --           enabled = false,
+        --         },
+        --         pycodestyle = {
+        --           enabled = false,
+        --         },
+        --         ruff = {
+        --           enabled = true,
+        --         },
+        --       },
+        --     },
+        --   },
+        -- },
+
+        -- Still a new project. Many false positive
+        -- pylyzer = {
+        --   settings = {
+        --     python = {
+        --       checkOnType = false,
+        --       diagnostic = false,
+        --       inlayHints = false,
+        --       smartCompletion = true,
+        --     },
+        --   },
+        --
+        --   single_file_support = true,
+        -- },
+
+        -- It crashes
+        -- basedpyright = {
+        --   settings = {
+        --     basedpyright = {
+        --       analysis = {
+        --         inlayHints = {
+        --           callArgumentNames = true,
+        --         },
+        --         autoImportCompletions = true,
+        --         autoSearchPaths = true,
+        --         typeCheckingMode = "off", -- standard, strict, all, off, basic
+        --       },
+        --     },
+        --   },
+        -- },
+
+        clangd = {
+          root_dir = function(fname)
+            return require("lspconfig.util").root_pattern(
+              "Makefile",
+              "configure.ac",
+              "configure.in",
+              "config.h.in",
+              "meson.build",
+              "meson_options.txt",
+              "build.ninja"
+            )(fname) or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(
+              fname
+            ) or vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1])
+          end,
+          capabilities = {
+            offsetEncoding = "utf-8",
+          },
+          cmd = {
+            "clangd",
+            "--background-index",
+            "-j=16",
+            "--clang-tidy",
+            "--all-scopes-completion",
+            "--header-insertion=iwyu",
+            "--completion-style=detailed",
+            "--function-arg-placeholders=0",
+            "--fallback-style=LLVM",
+          },
+          init_options = {
+            usePlaceholders = true,
+            completeUnimported = true,
+            clangdFileStatus = true,
+          },
+          on_attach = function()
+            require("clangd_extensions")
+          end,
+        },
+
+        jsonls = {
+          format = { enable = false },
+        },
+
+        lua_ls = {
+          Lua = {
+            runtime = { version = "LuaJIT" },
+            workspace = {
+              checkThirdParty = false,
+              library = {
+                library = vim.api.nvim_get_runtime_file("", true),
               },
             },
-
-            -- Use ruff instead
-            -- pylsp = {
-            --   settings = {
-            --     pylsp = {
-            --       plugins = {
-            --         autopep8 = {
-            --           enabled = false,
-            --         },
-            --         pycodestyle = {
-            --           enabled = false,
-            --         },
-            --         ruff = {
-            --           enabled = true,
-            --         },
-            --       },
-            --     },
-            --   },
-            -- },
-
-            -- Still a new project. Many false positive
-            -- pylyzer = {
-            --   settings = {
-            --     python = {
-            --       checkOnType = false,
-            --       diagnostic = false,
-            --       inlayHints = false,
-            --       smartCompletion = true,
-            --     },
-            --   },
-            --
-            --   single_file_support = true,
-            -- },
-
-            -- It crashes
-            -- basedpyright = {
-            --   settings = {
-            --     basedpyright = {
-            --       analysis = {
-            --         inlayHints = {
-            --           callArgumentNames = true,
-            --         },
-            --         autoImportCompletions = true,
-            --         autoSearchPaths = true,
-            --         typeCheckingMode = "off", -- standard, strict, all, off, basic
-            --       },
-            --     },
-            --   },
-            -- },
-
-            clangd = {
-              root_dir = function(fname)
-                return require("lspconfig.util").root_pattern(
-                  "Makefile",
-                  "configure.ac",
-                  "configure.in",
-                  "config.h.in",
-                  "meson.build",
-                  "meson_options.txt",
-                  "build.ninja"
-                )(fname) or require("lspconfig.util").root_pattern(
-                  "compile_commands.json",
-                  "compile_flags.txt"
-                )(fname) or vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1])
-              end,
-              cmd = {
-                "clangd",
-                "--background-index",
-                "--clang-tidy",
-                "--header-insertion=iwyu",
-                "--completion-style=detailed",
-                "--function-arg-placeholders",
-                "--fallback-style=llvm",
-              },
-              init_options = {
-                usePlaceholders = true,
-                completeUnimported = true,
-                clangdFileStatus = true,
-              },
+            hint = {
+              enable = true,
             },
-
-            jsonls = {
-              format = { enable = false },
+            diagnostics = {
+              globals = { "vim", "require" },
+              disable = { "missing-fields" },
             },
+          },
+        },
 
-            lua_ls = {
-              Lua = {
-                runtime = { version = "LuaJIT" },
-                workspace = {
-                  checkThirdParty = false,
-                  library = {
-                    library = vim.api.nvim_get_runtime_file("", true),
-                  },
-                },
-                hint = {
-                  enable = true,
-                },
-                diagnostics = {
-                  globals = { "vim", "require" },
-                  disable = { "missing-fields" },
-                },
-              },
-            },
+        ruff = {
+          -- disable it to use pyright as LSP client
+          autostart = false,
+          on_attach = function(client)
+            client.server_capabilities.hoverProvider = false
+          end,
+        },
 
-            -- ruff = {
-            --   -- disable it to use pyright as LSP client
-            --   autostart = false,
-            -- },
-
-            -- yamlls = {
-            --   redhat = { telemetry = { enabled = false } },
-            -- },
+        -- yamlls = {
+        --   redhat = { telemetry = { enabled = false } },
+        -- },
+      },
+      -- customize how language servers are attached
+      handlers = {
+        function(server, server_opts)
+          require("lspconfig")[server].setup(server_opts)
+        end,
+      },
+      -- configuration of LSP file operation functionality
+      file_operations = {
+        -- the timeout when executing LSP client operations
+        timeout = 10000,
+        -- fully disable/enable file operation methods
+        -- don't need any of these since already does these things
+        operations = {
+          willRename = false,
+          didRename = false,
+          willCreate = false,
+          didCreate = false,
+          willDelete = false,
+          didDelete = false,
+        },
+      },
+      -- custom `on_attach` function to be run after the default `on_attach` function, takes two parameters `client` and `bufnr`
+      on_attach = nil,
+      -- configure buffer local auto commands to add when attaching a language server
+      autocmds = {
+        -- first key is the `augroup` to add the auto commands to (:h augroup)
+        lsp_document_highlight = {
+          cond = "textDocument/documentHighlight",
+          -- list of auto commands to set
+          {
+            -- events to trigger
+            event = { "CursorHold", "CursorHoldI" },
+            -- the rest of the autocmd options (:h nvim_create_autocmd)
+            desc = "Document Highlighting",
+            callback = function()
+              vim.lsp.buf.document_highlight()
+            end,
+          },
+          {
+            event = { "CursorMoved", "CursorMovedI", "BufLeave" },
+            desc = "Document Highlighting Clear",
+            callback = function()
+              vim.lsp.buf.clear_references()
+            end,
+          },
+        },
+        lsp_codelens_refresh = {
+          cond = "textDocument/codeLens",
+          {
+            event = { "TextChanged", "InsertLeave", "BufEnter" },
+            desc = "Refresh codelens (buffer)",
+            callback = function(args)
+              if require("astrolsp").config.features.codelens then
+                vim.lsp.codelens.refresh({ bufnr = args.buf })
+              end
+            end,
+          },
+        },
+        disable_inlay_hints_on_insert = {
+          -- only create for language servers that support inlay hints
+          -- (and only if vim.lsp.inlay_hint is available)
+          cond = vim.lsp.inlay_hint and "textDocument/inlayHint" or false,
+          {
+            -- when going into insert mode
+            event = "InsertEnter",
+            desc = "Disable inlay hints on insert",
+            callback = function(args)
+              local filter = { bufnr = args.buf }
+              -- if the inlay hints are currently enabled
+              if vim.lsp.inlay_hint.is_enabled(filter) then
+                -- disable the inlay hints
+                vim.lsp.inlay_hint.enable(false, filter)
+                -- create a single use autocommand to turn the inlay hints back on
+                -- when leaving insert mode
+                vim.api.nvim_create_autocmd("InsertLeave", {
+                  buffer = args.buf,
+                  once = true,
+                  callback = function()
+                    vim.lsp.inlay_hint.enable(true, filter)
+                  end,
+                })
+              end
+            end,
+          },
+        },
+        disable_virtual_lines_on_cursor_move = {
+          {
+            event = "CursorMoved",
+            desc = "Disable virtual lines on cursor move",
+            callback = function()
+              vim.diagnostic.config({ virtual_lines = false, virtual_text = true })
+            end,
           },
         },
       },
+    },
+  },
+
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      { "AstroNvim/astrolsp" },
       {
         "mason-org/mason-lspconfig.nvim", -- MUST be set up before `nvim-lspconfig`
         dependencies = { "mason-org/mason.nvim" },
+        opts_extend = { "ensure_installed" },
         opts = {
+          ensure_installed = {},
           -- use AstroLSP setup for mason-lspconfig
           handlers = {
             function(server)
@@ -1087,19 +1167,60 @@ return {
           },
         },
         config = function(_, opts)
+          opts.ensure_installed = nil
           -- Optionally tell AstroLSP to register new language servers before calling the `setup` function
           -- this enables the `mason-lspconfig.servers` option in the AstroLSP configuration
           require("astrolsp.mason-lspconfig").register_servers()
           require("mason-lspconfig").setup(opts)
         end,
       },
+      {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        cmd = {
+          "MasonToolsInstall",
+          "MasonToolsInstallSync",
+          "MasonToolsUpdate",
+          "MasonToolsUpdateSync",
+          "MasonToolsClean",
+        },
+        opts = {
+          ensure_installed = {
+            -- LSP servers
+            "bashls",
+            "clangd",
+            "jinja_lsp",
+            "jsonls",
+            "lua_ls",
+            "ruff",
+            -- Formatters
+            "clang-format",
+            "prettier",
+            "ruff",
+            "shfmt",
+            "stylua",
+            "yamlfmt",
+
+            -- Linters
+            -- "yamllint",
+            "luacheck",
+            "shellcheck",
+          },
+        },
+        config = function(_, opts)
+          local mason_tool_installer = require("mason-tool-installer")
+          mason_tool_installer.setup(opts)
+          if opts.run_on_start ~= false then
+            mason_tool_installer.run_on_start()
+          end
+        end,
+      },
+      config = function()
+        -- set up servers configured with AstroLSP
+        dofile(vim.g.base46_cache .. "lsp")
+        require("nvchad.lsp").diagnostic_config()
+        vim.tbl_map(require("astrolsp").lsp_setup, require("astrolsp").config.servers)
+      end,
     },
-    config = function()
-      -- set up servers configured with AstroLSP
-      vim.tbl_map(require("astrolsp").lsp_setup, require("astrolsp").config.servers)
-      dofile(vim.g.base46_cache .. "lsp")
-      require("nvchad.lsp").diagnostic_config()
-    end,
   },
 
   -- Performant, batteries-included completion plugin for Neovim
