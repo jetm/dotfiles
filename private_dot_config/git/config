@@ -242,8 +242,8 @@
     difftool = false
     # riff and difftastic doesn't work with forgit
     diff = delta --tabs 4
-    ; show = riff
-    ; log  = riff
+    show = delta --tabs 4
+    log = delta --tabs 4
 
 #
 # diff tools
