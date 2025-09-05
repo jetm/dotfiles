@@ -1064,6 +1064,10 @@ return {
               checkThirdParty = false,
               library = {
                 library = vim.api.nvim_get_runtime_file("", true),
+                "$VIMRUNTIME",
+                "$XDG_DATA_HOME/nvim",
+                "$HOME/.local/share/nvim",
+                "${3rd}/luv/library",
               },
             },
             hint = {
