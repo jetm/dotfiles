@@ -234,7 +234,8 @@
 
 [apply]
     # Detect whitespace errors when applying a patch
-    whitespace = fix
+    ; Disable as it doesn't work with patches file
+    ; whitespace = fix
 
 [pager]
     # Use a pager if the difftool output is larger than one screenful,
