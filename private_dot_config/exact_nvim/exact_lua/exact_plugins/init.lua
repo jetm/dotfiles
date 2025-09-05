@@ -1630,6 +1630,10 @@ return {
     config = true,
   },
 
+  {
+    "fei6409/log-highlight.nvim",
+  },
+
   -- enhance gf/gF with look ahead and provide target-based file hopping
   -- Need to test it more
   -- { "HawkinsT/pathfinder.nvim" },
