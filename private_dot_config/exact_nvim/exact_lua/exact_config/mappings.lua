@@ -79,7 +79,7 @@ map(
 )
 
 -- substitute
-map({ "n", "x" }, "<Leader>s", require("substitute").operator, { noremap = true })
+map({ "n", "x" }, "<Leader>s", require("substitute").operator)
 
 -- duplicate and comment
 map("n", "ycc", '"yy" . v:count1 . "gcc\']p"')
@@ -92,3 +92,5 @@ map("i", ";;", "<ESC>A;")
 map("i", ",,", "<ESC>A,")
 map("n", ";;", "A;<ESC>")
 map("n", ",,", "A,<ESC>")
+
+map({ "n", "x" }, "<C-p>", "<cmd>FzfLua combine pickers=buffers,files,oldfiles<CR>")

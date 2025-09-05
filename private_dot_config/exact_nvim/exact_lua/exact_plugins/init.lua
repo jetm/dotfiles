@@ -49,6 +49,13 @@ return {
     },
   },
 
+  {
+    "ibhagwan/fzf-lua",
+    lazy = false,
+    -- optional for icon support
+    dependencies = { "echasnovski/mini.icons" },
+  },
+
   -- A collection of small QoL plugins for Neovim
   {
     "folke/snacks.nvim",
@@ -59,7 +66,7 @@ return {
       notifier = { enabled = true },
       quickfile = { enabled = true },
       picker = {
-        enabled = true,
+        enabled = false,
         cycle = true,
         layout = function()
           return vim.o.columns >= 120 and "vscode" or "vertical"
@@ -100,14 +107,14 @@ return {
         mode = { "n", "x" },
         desc = "Show Notifier History",
       },
-      {
-        "<C-p>",
-        function()
-          ---@diagnostic disable-next-line: undefined-global
-          Snacks.picker.files()
-        end,
-        desc = "Find Files",
-      },
+      -- {
+      --   "<C-p>",
+      --   function()
+      --     ---@diagnostic disable-next-line: undefined-global
+      --     Snacks.picker.files()
+      --   end,
+      --   desc = "Find Files",
+      -- },
     },
   },
 
@@ -713,39 +720,69 @@ return {
         end,
       })
 
+      -- Pick_chezmoi = function()
+      --   local results = require("chezmoi.commands").list({
+      --     args = {
+      --       "--path-style=absolute",
+      --       "--include=files",
+      --       "--exclude=externals",
+      --     },
+      --   })
+      --   local items = {}
+      --
+      --   for _, czFile in ipairs(results) do
+      --     table.insert(items, {
+      --       text = czFile,
+      --       file = czFile,
+      --     })
+      --   end
+      --
+      --   local opts = {
+      --     items = items,
+      --     confirm = function(picker, item)
+      --       picker:close()
+      --       require("chezmoi.commands").edit({
+      --         targets = { item.text },
+      --         args = { "--watch" },
+      --       })
+      --     end,
+      --   }
+      --
+      --   ---@diagnostic disable-next-line: undefined-global
+      --   Snacks.picker.pick(opts)
+      -- end
+
+      -- fzf-lua
       Pick_chezmoi = function()
-        local results = require("chezmoi.commands").list({
+        local fzf_lua = require("fzf-lua")
+        local chezmoi = require("chezmoi.commands")
+        local files = chezmoi.list({
           args = {
-            "--path-style",
-            "absolute",
-            "--include",
-            "files",
-            "--exclude",
-            "externals",
+            "--path-style=absolute",
+            "--include=files",
+            "--exclude=externals",
           },
         })
-        local items = {}
-
-        for _, czFile in ipairs(results) do
-          table.insert(items, {
-            text = czFile,
-            file = czFile,
-          })
-        end
-
         local opts = {
-          items = items,
-          confirm = function(picker, item)
-            picker:close()
-            require("chezmoi.commands").edit({
-              targets = { item.text },
-              args = { "--watch" },
-            })
-          end,
+          fzf_opts = {},
+          file_icons = true,
+          actions = {
+            ["default"] = function(selected)
+              -- Remove the icon and leading whitespace from selected[1]
+              local sanitized_path = selected[1]:gsub("^[^%w~/.]+", "") -- Matches the icon and trims it
+              -- Use the sanitized path with chezmoi
+              chezmoi.edit({
+                targets = { sanitized_path },
+                args = { "--watch" },
+              })
+            end,
+          },
         }
 
-        ---@diagnostic disable-next-line: undefined-global
-        Snacks.picker.pick(opts)
+        files = vim.tbl_map(function(x)
+          return fzf_lua.make_entry.file(x, { file_icons = true, color_icons = true })
+        end, files)
+        fzf_lua.fzf_exec(files, opts)
       end
     end,
     opts = {
