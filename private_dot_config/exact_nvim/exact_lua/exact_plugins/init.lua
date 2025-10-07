@@ -815,16 +815,51 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    event = { "BufReadPost", "BufNewFile" },
-    cmd = "TSUpdateSync",
+    branch = "main",
+    version = false, -- last release too old
+    cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
     build = ":TSUpdate",
-    version = false,
-    dependencies = {
-      {
-        "nvim-treesitter/nvim-treesitter-textobjects",
+    lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+    -- event = { "VeryLazy" },
+    opts_extend = { "ensure_installed" },
+    opts = {
+      ensure_installed = {
+        "bash",
+        "cmake",
+        "comment",
+        "devicetree",
+        "diff",
+        "dockerfile",
+        "git_rebase",
+        "gitcommit",
+        "go",
+        "json",
+        "jsonc",
+        "kconfig",
+        "luadoc",
+        "luap",
+        "make",
+        "markdown_inline",
+        "ninja",
+        "python",
+        "regex",
+        "rust",
+        "ssh_config",
+        "toml",
+        -- "vim",
+        "yaml",
+      },
+      highlight = {
+        enable = true,
+        use_languagetree = true,
+        disable = function(_, bufnr)
+          return vim.api.nvim_buf_line_count(bufnr) > 10000
+        end,
+      },
+      indent = {
+        enable = true,
       },
     },
-    config = require("plugins.configs.nvim-treesitter"),
   },
 
   -- Linter
