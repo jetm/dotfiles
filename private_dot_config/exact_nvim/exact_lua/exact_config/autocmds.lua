@@ -19,7 +19,7 @@ local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 --   end,
 -- })
 
--- user event that loads after UIEnter + only if file buf is there
+-- User event that loads after UIEnter + only if file buf is there
 autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
   group = vim.api.nvim_create_augroup("NvFilePost", { clear = true }),
   callback = function(args)
@@ -106,21 +106,6 @@ autocmd("ModeChanged", {
   end,
 })
 
--- local function hide_semantic_highlights()
---   for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
---     vim.api.nvim_set_hl(0, group, {})
---   end
--- end
---
--- autocmd("ColorScheme", {
---   desc = "Clear LSP highlight groups",
---   callback = hide_semantic_highlights,
--- })
-
---
--- Settings for filetypes:
---
-
 -- Set indentation to 2 spaces
 autocmd("Filetype", {
   group = augroup("setIndent"),
@@ -142,7 +127,7 @@ autocmd("Filetype", {
   command = "setlocal wrap",
 })
 
--- wrap and check for spell in text filetypes
+-- Wrap and check for spell in text filetypes
 autocmd("FileType", {
   group = augroup("spell"),
   pattern = { "gitcommit", "markdown" },
@@ -243,6 +228,7 @@ autocmd({ "BufWritePre", "FileWritePre" }, {
   group = gpgGroup,
   command = "'[,']!gpg --default-recipient-self -ae 2>/dev/null",
 })
+
 -- Undo the encryption so we are back in the normal text, directly
 -- after the file has been written.
 autocmd({ "BufWritePost", "FileWritePost" }, {
@@ -266,7 +252,7 @@ vim.filetype.add({
   },
 })
 
-vim.api.nvim_create_autocmd({ "FileType" }, {
+autocmd({ "FileType" }, {
   group = augroup("bigfile"),
   pattern = "bigfile",
   callback = function(ev)
@@ -277,8 +263,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
--- make it easier to close man-files when opened inline
-vim.api.nvim_create_autocmd("FileType", {
+-- Make it easier to close man-files when opened inline
+autocmd({ "FileType" }, {
   group = augroup("man_unlisted"),
   pattern = { "man" },
   callback = function(event)
@@ -286,8 +272,8 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- wrap and check for spell in text filetypes
-vim.api.nvim_create_autocmd("FileType", {
+-- Wrap and check for spell in text filetypes
+autocmd({ "FileType" }, {
   group = augroup("wrap_spell"),
   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
   callback = function()
