@@ -42,7 +42,7 @@ aurgen() {
     namcap PKGBUILD &&
       updpkgsums &&
       makepkg --cleanbuild --syncdeps --force &&
-      makepkg --printsrcinfo .SRCINFO > !
+      makepkg --printsrcinfo > .SRCINFO
   fi
 }
 
