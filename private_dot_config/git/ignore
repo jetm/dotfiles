@@ -4,6 +4,9 @@
 .idea
 .vscode
 .cache
-compile_commands.json
-.aider*
 .env
+.gibrconfig
+.zencoder/
+.agents/
+
+compile_commands.json
