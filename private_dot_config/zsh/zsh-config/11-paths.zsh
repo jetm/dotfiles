@@ -4,6 +4,7 @@
 typeset -gU cdpath fpath path
 
 add_path "${HOME}"/.local/bin
+add_path "${HOME}"/.local/share/cargo/bin
 
 _distro=$(lsb_release -si)
 
@@ -16,8 +17,10 @@ fi
 
 if [ -d "${HOME}/go" ]; then
   export GOPATH=${HOME}/go
+  add_path "${HOME}"/go/bin
 fi
 
+# last to have as preference over other paths
 add_path "${HOME}"/bin
 
 if command -v ccache &> /dev/null; then
