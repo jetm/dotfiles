@@ -221,9 +221,9 @@
     date = iso
 
 [maintenance]
-    auto = true
-    strategy = incremental
-    ; repo = ~/repos/work/linux-stable
+    # Full replacement for the gc strategy and is recommended for large
+    # repositories
+    strategy = geometric
 
 [tag]
     sort = version:refname
