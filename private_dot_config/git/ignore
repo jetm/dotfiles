@@ -1,12 +1,23 @@
 .direnv
 .editorconfig
-.envrc
-.idea
-.vscode
-.cache
 .env
+.envrc
 .gibrconfig
-.zencoder/
+
+.cache/
+.idea/
+.vscode/
+
 .agents/
+.kiro/
+.zencoder/
 
 compile_commands.json
+
+**/AGENTS.md
+
+.gitlab-ci-local/
+
+# Claude
+.claude/
+CLAUDE.md
