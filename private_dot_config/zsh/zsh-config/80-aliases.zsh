@@ -40,19 +40,18 @@ alias gb='git branch'
 alias gbd='git branch -D'
 alias gbv='git branch -vv'
 alias gbm='git branch -M'
-alias gsb='git switch'
+alias gs='git switch'
 alias gsc='git switch -c'
 alias gs-='git switch -'
 
 # Commit (c)
 alias gc='git commit -s'
 alias gcm='git commit -s -m'
-alias gca='git commit --all'
-alias gcf='git commit --amend -s'
-alias gch='git cherry-pick -x'
+alias gca='git commit -s --all'
+alias gcf='git commit -s --amend'
 alias gcs='git show'
 
-# Checkout (c)
+# Checkout (r)
 alias grp='gai --patch=checkout --'
 alias grr='gai --patch=reset --'
 alias grf='git forgit checkout_file'
@@ -86,12 +85,12 @@ alias grc='git rebase --continue'
 alias gri='git rebase --interactive'
 alias gro='git rebase-origin'
 
-# Stash (s)
-alias gs='git stash'
-alias gsd='git stash drop'
-alias gsp='git stash pop'
-alias gss='git stash show'
-alias gsP='git stash --patch'
+# Stash (S)
+alias gS='git stash'
+alias gSd='git stash drop'
+alias gSp='git stash pop'
+alias gSs='git stash show'
+alias gSP='git stash --patch'
 
 # Undo (u)
 alias gu='git undo'
