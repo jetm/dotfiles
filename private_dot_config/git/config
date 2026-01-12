@@ -200,11 +200,15 @@
     verbose = true
 
     # All commits should be GPG signed
-    gpgsign = true
+    gpgSign = true
+
+[user]
+    signingKey = B5EEC30BA867771F
 
 [format]
     # Enable the -s/--signoff option by default in the patches
     signOff = true
+
     pretty = %C(auto)Commit:%C(reset) %C(auto)%H%d%n%C(reset)Author: %an <%ae>%nDate:   %ai (%ar)%n%+B%C(reset)
 
 [interactive]

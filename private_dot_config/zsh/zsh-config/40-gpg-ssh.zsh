@@ -1,16 +1,16 @@
 # shellcheck disable=SC2148
 
-# if type "gpg-agent" >/dev/null; then
-#   if [ -n "${TTY}" ]; then
-#     export GPG_TTY="${TTY}"
-#   else
-#     _file=$(basename "$0")
-#     echo "something went wrong with tty in ${_file} run this: "
-#     echo "    export GPG_TTY=\$(tty)"
-#   fi
-#
-#   gpg-connect-agent updatestartuptty /bye >/dev/null
-# fi
+if type "gpg-agent" >/dev/null; then
+  if [ -n "${TTY}" ]; then
+    export GPG_TTY="${TTY}"
+  else
+    _file=$(basename "$0")
+    echo "something went wrong with tty in ${_file} run this: "
+    echo "    export GPG_TTY=\$(tty)"
+  fi
+
+  gpg-connect-agent updatestartuptty /bye >/dev/null
+fi
 
 #
 # SSH
