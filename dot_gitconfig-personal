@@ -1,0 +1,7 @@
+[user]
+    email = floss@jetm.me
+
+[sendemail]
+    smtpserver = smtp.fastmail.com
+    smtpuser = javier@jetm.me
+    smtppass = 6s7u9r8e9p6t5f2p

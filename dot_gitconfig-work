@@ -1,0 +1,6 @@
+[user]
+    email = javier.tia@linaro.org
+
+[sendemail]
+    smtpserver = smtp.gmail.com
+    smtpuser = javier.tia@linaro.org
