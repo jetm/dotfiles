@@ -45,11 +45,8 @@ return function(_, _)
         end,
       },
       yamlfmt = {
-        prepend_args = {
-          "--formatter",
-          "retain_line_breaks_single=true,entless_arrays=true,include_document_start=true"
-        }
-      }
+        stdin = false,
+      },
     },
   })
 end
