@@ -1425,64 +1425,64 @@ return {
   -- },
 
   -- It has been working better. No bugs so far
-  {
-    "olimorris/codecompanion.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    opts = {
-      system_prompt = function()
-        local path = vim.fn.expand("~/.config/ai_prompts/gpt-4.1.md")
-        return vim.fn.readfile(path)
-      end,
-      strategies = {
-        chat = {
-          adapter = "openai",
-        },
-        inline = {
-          adapter = "openai",
-        },
-      },
-      adapters = {
-        gemini = function()
-          return require("codecompanion.adapters").extend("gemini", {
-            schema = {
-              model = {
-                default = "gemini-2.5-pro",
-              },
-            },
-          })
-        end,
-        openai = function()
-          return require("codecompanion.adapters").extend("openai", {
-            schema = {
-              model = {
-                default = "gpt-4.1-2025-04-14",
-              },
-            },
-          })
-        end,
-        anthropic = function()
-          return require("codecompanion.adapters").extend("anthropic", {
-            schema = {
-              model = {
-                default = "claude-sonnet-4-20250514",
-              },
-            },
-          })
-        end,
-      },
-    },
-    keys = {
-      {
-        "<leader>a",
-        "<cmd>CodeCompanionChat Toggle<cr>",
-        mode = { "n" },
-        desc = "Toggle Chat",
-      },
-    },
-  },
+  -- {
+  --   "olimorris/codecompanion.nvim",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-treesitter/nvim-treesitter",
+  --   },
+  --   opts = {
+  --     system_prompt = function()
+  --       local path = vim.fn.expand("~/.config/ai_prompts/gpt-4.1.md")
+  --       return vim.fn.readfile(path)
+  --     end,
+  --     strategies = {
+  --       chat = {
+  --         adapter = "openai",
+  --       },
+  --       inline = {
+  --         adapter = "openai",
+  --       },
+  --     },
+  --     adapters = {
+  --       gemini = function()
+  --         return require("codecompanion.adapters").extend("gemini", {
+  --           schema = {
+  --             model = {
+  --               default = "gemini-2.5-pro",
+  --             },
+  --           },
+  --         })
+  --       end,
+  --       openai = function()
+  --         return require("codecompanion.adapters").extend("openai", {
+  --           schema = {
+  --             model = {
+  --               default = "gpt-4.1-2025-04-14",
+  --             },
+  --           },
+  --         })
+  --       end,
+  --       anthropic = function()
+  --         return require("codecompanion.adapters").extend("anthropic", {
+  --           schema = {
+  --             model = {
+  --               default = "claude-sonnet-4-20250514",
+  --             },
+  --           },
+  --         })
+  --       end,
+  --     },
+  --   },
+  --   keys = {
+  --     {
+  --       "<leader>a",
+  --       "<cmd>CodeCompanionChat Toggle<cr>",
+  --       mode = { "n" },
+  --       desc = "Toggle Chat",
+  --     },
+  --   },
+  -- },
 
   -- More testing is required
   -- {
