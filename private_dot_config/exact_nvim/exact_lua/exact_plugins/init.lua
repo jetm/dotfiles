@@ -804,11 +804,16 @@ return {
     cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
     build = ":TSUpdate",
     lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
-    -- event = { "VeryLazy" },
-    opts_extend = { "ensure_installed" },
+  },
+
+  -- wrapper around new rewrite of nvim-treesitter in main branch
+  {
+    "MeanderingProgrammer/treesitter-modules.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
     opts = {
       ensure_installed = {
         "bash",
+        "c",
         "cmake",
         "comment",
         "devicetree",
@@ -820,29 +825,30 @@ return {
         "json",
         "jsonc",
         "kconfig",
+        "lua",
         "luadoc",
         "luap",
         "make",
+        "markdown",
         "markdown_inline",
         "ninja",
+        "printf",
         "python",
+        "query",
         "regex",
         "rust",
         "ssh_config",
         "toml",
-        -- "vim",
+        "typescript",
+        "vim",
+        "vimdoc",
+        "xml",
         "yaml",
       },
-      highlight = {
-        enable = true,
-        use_languagetree = true,
-        disable = function(_, bufnr)
-          return vim.api.nvim_buf_line_count(bufnr) > 10000
-        end,
-      },
-      indent = {
-        enable = true,
-      },
+      fold = { enable = false },
+      highlight = { enable = true },
+      indent = { enable = true },
+      incremental_selection = { enable = true },
     },
   },
 
