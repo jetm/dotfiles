@@ -11,6 +11,8 @@
 .agents/
 .kiro/
 .zencoder/
+.serena/
+.taskmaster/
 
 compile_commands.json
 
