@@ -47,6 +47,36 @@ return function(_, _)
       yamlfmt = {
         stdin = false,
       },
+      ruff_fix = {
+        args = {
+          "check",
+          "--fix",
+          "--select",
+          "I",
+          "--stdin-filename",
+          "$FILENAME",
+          "-",
+        },
+      },
+      ruff_format = {
+        args = {
+          "format",
+          "--stdin-filename",
+          "$FILENAME",
+          "-",
+        },
+      },
+      ruff_organize_imports = {
+        args = {
+          "check",
+          "--fix",
+          "--select",
+          "I",
+          "--stdin-filename",
+          "$FILENAME",
+          "-",
+        },
+      },
     },
   })
 end
