@@ -56,6 +56,8 @@ __export_env() {
 
   # zsh profile
   # export ZPROFRC=1
+
+  # export PRE_COMMIT_ALLOW_NO_CONFIG=1
 }
 
 # only for interactive shell
