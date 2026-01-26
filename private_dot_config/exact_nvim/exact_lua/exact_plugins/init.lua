@@ -200,11 +200,11 @@ return {
     config = true,
   },
 
-  {
-    "HiPhish/rainbow-delimiters.nvim",
-    submodules = false,
-    event = { "BufReadPre", "BufNewFile" },
-  },
+  -- {
+  --   "HiPhish/rainbow-delimiters.nvim",
+  --   submodules = false,
+  --   event = { "BufReadPre", "BufNewFile" },
+  -- },
 
   -- Provide Icons
   {
@@ -294,46 +294,46 @@ return {
   },
 
   -- Find And Replace plugin for neovim
-  {
-    "MagicDuck/grug-far.nvim",
-    opts = {
-      headerMaxWidth = 80,
-      maxWorkers = 16,
-      keymaps = {
-        close = { n = "q" },
-      },
-    },
-    cmd = "GrugFar",
-    keys = {
-      {
-        "<leader>g",
-        function()
-          local grug = require("grug-far")
-          grug.open({
-            prefills = {
-              search = vim.fn.expand("<cword>"),
-            },
-          })
-        end,
-        mode = { "n" },
-        desc = "Search and Replace current word",
-      },
-      {
-        "<leader>gv",
-        function()
-          local grug = require("grug-far")
-          local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
-          grug.open({
-            prefills = {
-              filesFilter = ext and ext ~= "" and "*." .. ext or nil,
-            },
-          })
-        end,
-        mode = { "n", "v" },
-        desc = "Search and Replace viusal selection",
-      },
-    },
-  },
+  -- {
+  --   "MagicDuck/grug-far.nvim",
+  --   opts = {
+  --     headerMaxWidth = 80,
+  --     maxWorkers = 16,
+  --     keymaps = {
+  --       close = { n = "q" },
+  --     },
+  --   },
+  --   cmd = "GrugFar",
+  --   keys = {
+  --     {
+  --       "<leader>g",
+  --       function()
+  --         local grug = require("grug-far")
+  --         grug.open({
+  --           prefills = {
+  --             search = vim.fn.expand("<cword>"),
+  --           },
+  --         })
+  --       end,
+  --       mode = { "n" },
+  --       desc = "Search and Replace current word",
+  --     },
+  --     {
+  --       "<leader>gv",
+  --       function()
+  --         local grug = require("grug-far")
+  --         local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
+  --         grug.open({
+  --           prefills = {
+  --             filesFilter = ext and ext ~= "" and "*." .. ext or nil,
+  --           },
+  --         })
+  --       end,
+  --       mode = { "n", "v" },
+  --       desc = "Search and Replace viusal selection",
+  --     },
+  --   },
+  -- },
 
   -- Faster than guess-indent.nvim
   -- Dumb automatic fast indentation detection for Neovim written in Lua
@@ -377,103 +377,103 @@ return {
     config = vim.api.nvim_set_var("suda_smart_edit", 1),
   },
 
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-    },
-    cmd = "Neotree",
-    keys = {
-      {
-        "<leader>e",
-        function()
-          require("neo-tree.command").execute({
-            toggle = true,
-            ---@diagnostic disable-next-line: undefined-field
-            dir = vim.uv.cwd(),
-          })
-        end,
-        desc = "Explorer NeoTree (cwd)",
-      },
-    },
-    deactivate = function()
-      vim.cmd([[Neotree close]])
-    end,
-    init = function()
-      vim.api.nvim_create_autocmd("BufEnter", {
-        group = vim.api.nvim_create_augroup("Neotree_start_directory", { clear = true }),
-        desc = "Start Neo-tree with directory",
-        once = true,
-        callback = function()
-          if package.loaded["neo-tree"] then
-            return
-          else
-            ---@diagnostic disable-next-line: undefined-field, param-type-mismatch
-            local stats = vim.uv.fs_stat(vim.fn.argv(0))
-            if stats and stats.type == "directory" then
-              require("neo-tree")
-            end
-          end
-        end,
-      })
-    end,
-    opts = {
-      sources = { "filesystem", "buffers", "git_status", "document_symbols" },
-      open_files_do_not_replace_types = {
-        "terminal",
-        "Trouble",
-        "qf",
-        "Outline",
-      },
-      filesystem = {
-        bind_to_cwd = false,
-        follow_current_file = { enabled = true },
-        use_libuv_file_watcher = true,
-      },
-      window = {
-        mappings = {
-          ["<space>"] = "none",
-        },
-      },
-      default_component_configs = {
-        indent = {
-          with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
-          expander_collapsed = "",
-          expander_expanded = "",
-          expander_highlight = "NeoTreeExpander",
-        },
-        icon = {
-          provider = function(icon, node)
-            local text, hl
-            local mini_icons = require("mini.icons")
-            if node.type == "file" then
-              text, hl = mini_icons.get("file", node.name)
-            elseif node.type == "directory" then
-              text, hl = mini_icons.get("directory", node.name)
-              if node:is_expanded() then
-                text = nil
-              end
-            end
-
-            if text then
-              icon.text = text
-            end
-            if hl then
-              icon.highlight = hl
-            end
-          end,
-        },
-        kind_icon = {
-          provider = function(icon, node)
-            icon.text, icon.highlight = require("mini.icons").get("lsp", node.extra.kind.name)
-          end,
-        },
-      },
-    },
-    config = true,
-  },
+  -- {
+  --   "nvim-neo-tree/neo-tree.nvim",
+  --   branch = "v3.x",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "MunifTanjim/nui.nvim",
+  --   },
+  --   cmd = "Neotree",
+  --   keys = {
+  --     {
+  --       "<leader>e",
+  --       function()
+  --         require("neo-tree.command").execute({
+  --           toggle = true,
+  --           ---@diagnostic disable-next-line: undefined-field
+  --           dir = vim.uv.cwd(),
+  --         })
+  --       end,
+  --       desc = "Explorer NeoTree (cwd)",
+  --     },
+  --   },
+  --   deactivate = function()
+  --     vim.cmd([[Neotree close]])
+  --   end,
+  --   init = function()
+  --     vim.api.nvim_create_autocmd("BufEnter", {
+  --       group = vim.api.nvim_create_augroup("Neotree_start_directory", { clear = true }),
+  --       desc = "Start Neo-tree with directory",
+  --       once = true,
+  --       callback = function()
+  --         if package.loaded["neo-tree"] then
+  --           return
+  --         else
+  --           ---@diagnostic disable-next-line: undefined-field, param-type-mismatch
+  --           local stats = vim.uv.fs_stat(vim.fn.argv(0))
+  --           if stats and stats.type == "directory" then
+  --             require("neo-tree")
+  --           end
+  --         end
+  --       end,
+  --     })
+  --   end,
+  --   opts = {
+  --     sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+  --     open_files_do_not_replace_types = {
+  --       "terminal",
+  --       "Trouble",
+  --       "qf",
+  --       "Outline",
+  --     },
+  --     filesystem = {
+  --       bind_to_cwd = false,
+  --       follow_current_file = { enabled = true },
+  --       use_libuv_file_watcher = true,
+  --     },
+  --     window = {
+  --       mappings = {
+  --         ["<space>"] = "none",
+  --       },
+  --     },
+  --     default_component_configs = {
+  --       indent = {
+  --         with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+  --         expander_collapsed = "",
+  --         expander_expanded = "",
+  --         expander_highlight = "NeoTreeExpander",
+  --       },
+  --       icon = {
+  --         provider = function(icon, node)
+  --           local text, hl
+  --           local mini_icons = require("mini.icons")
+  --           if node.type == "file" then
+  --             text, hl = mini_icons.get("file", node.name)
+  --           elseif node.type == "directory" then
+  --             text, hl = mini_icons.get("directory", node.name)
+  --             if node:is_expanded() then
+  --               text = nil
+  --             end
+  --           end
+  --
+  --           if text then
+  --             icon.text = text
+  --           end
+  --           if hl then
+  --             icon.highlight = hl
+  --           end
+  --         end,
+  --       },
+  --       kind_icon = {
+  --         provider = function(icon, node)
+  --           icon.text, icon.highlight = require("mini.icons").get("lsp", node.extra.kind.name)
+  --         end,
+  --       },
+  --     },
+  --   },
+  --   config = true,
+  -- },
 
   -- move and duplicate blocks and lines, with complete fold handling,
   -- reindent, and undone in one go
@@ -499,42 +499,42 @@ return {
   -- },
 
   -- Indent guides on blank lines for Neovim
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    main = "ibl",
-    opts = {
-      indent = { char = "│", tab_char = "├", highlight = "IblChar" },
-      scope = { char = "│", highlight = "IblScopeChar" },
-      exclude = {
-        buftypes = {
-          "nofile",
-          "terminal",
-        },
-        filetypes = {
-          "help",
-          "startify",
-          "aerial",
-          "alpha",
-          "dashboard",
-          "lazy",
-          "neogitstatus",
-          "NvimTree",
-          "neo-tree",
-          "Trouble",
-        },
-      },
-    },
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "blankline")
-
-      local hooks = require("ibl.hooks")
-      hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
-      require("ibl").setup(opts)
-
-      dofile(vim.g.base46_cache .. "blankline")
-    end,
-  },
+  -- {
+  --   "lukas-reineke/indent-blankline.nvim",
+  --   event = { "BufReadPost", "BufNewFile" },
+  --   main = "ibl",
+  --   opts = {
+  --     indent = { char = "│", tab_char = "├", highlight = "IblChar" },
+  --     scope = { char = "│", highlight = "IblScopeChar" },
+  --     exclude = {
+  --       buftypes = {
+  --         "nofile",
+  --         "terminal",
+  --       },
+  --       filetypes = {
+  --         "help",
+  --         "startify",
+  --         "aerial",
+  --         "alpha",
+  --         "dashboard",
+  --         "lazy",
+  --         "neogitstatus",
+  --         "NvimTree",
+  --         "neo-tree",
+  --         "Trouble",
+  --       },
+  --     },
+  --   },
+  --   config = function(_, opts)
+  --     dofile(vim.g.base46_cache .. "blankline")
+  --
+  --     local hooks = require("ibl.hooks")
+  --     hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
+  --     require("ibl").setup(opts)
+  --
+  --     dofile(vim.g.base46_cache .. "blankline")
+  --   end,
+  -- },
 
   -- Active indent guide and indent text objects. When you're browsing
   -- code, this highlights the current level of indentation
@@ -576,12 +576,12 @@ return {
 
   -- Align text interactively
   -- keys: gas and gAs (preview)
-  {
-    "echasnovski/mini.align",
-    event = "InsertEnter",
-    version = false,
-    config = true,
-  },
+  -- {
+  --   "echasnovski/mini.align",
+  --   event = "InsertEnter",
+  --   version = false,
+  --   config = true,
+  -- },
 
   -- Navigate your code with search labels, enhanced character motions and
   -- Treesitter integration
@@ -664,23 +664,23 @@ return {
     },
   },
 
-  {
-    "m4xshen/hardtime.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = "neovim/nvim-lspconfig",
-    opts = {
-      disable_mouse = false,
-      restricted_keys = {
-        ["h"] = { "n", "v" },
-        ["j"] = { "n", "v" },
-        ["k"] = { "n", "v" },
-        ["l"] = { "n", "v" },
-        ["gj"] = { "n", "v" },
-        ["gk"] = { "n", "v" },
-        ["<CR>"] = { "n", "v" },
-      },
-    },
-  },
+  -- {
+  --   "m4xshen/hardtime.nvim",
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   dependencies = "neovim/nvim-lspconfig",
+  --   opts = {
+  --     disable_mouse = false,
+  --     restricted_keys = {
+  --       ["h"] = { "n", "v" },
+  --       ["j"] = { "n", "v" },
+  --       ["k"] = { "n", "v" },
+  --       ["l"] = { "n", "v" },
+  --       ["gj"] = { "n", "v" },
+  --       ["gk"] = { "n", "v" },
+  --       ["<CR>"] = { "n", "v" },
+  --     },
+  --   },
+  -- },
 
   -- autopairs for neovim written in lua
   {
@@ -823,7 +823,6 @@ return {
         "gitcommit",
         "go",
         "json",
-        "jsonc",
         "kconfig",
         "lua",
         "luadoc",
@@ -1318,19 +1317,19 @@ return {
     },
   },
 
-  {
-    "Bekaboo/dropbar.nvim",
-    dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make -j${nproc}",
-    },
-    config = function()
-      local dropbar_api = require("dropbar.api")
-      vim.keymap.set("n", "<Leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
-      vim.keymap.set("n", "[;", dropbar_api.goto_context_start, { desc = "Go to start of current context" })
-      vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
-    end,
-  },
+  -- {
+  --   "Bekaboo/dropbar.nvim",
+  --   dependencies = {
+  --     "nvim-telescope/telescope-fzf-native.nvim",
+  --     build = "make -j${nproc}",
+  --   },
+  --   config = function()
+  --     local dropbar_api = require("dropbar.api")
+  --     vim.keymap.set("n", "<Leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
+  --     vim.keymap.set("n", "[;", dropbar_api.goto_context_start, { desc = "Go to start of current context" })
+  --     vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
+  --   end,
+  -- },
 
   -- better diffing
   -- ]x - move to previous conflict
@@ -1340,6 +1339,17 @@ return {
   -- cb - choose both
   -- c0 - choose none
   -- Visualise and resolve merge conflicts in neovim
+  -- {
+  --   "akinsho/git-conflict.nvim",
+  --   event = "BufReadPre",
+  --   config = function()
+  --     require("git-conflict").setup({
+  --       default_commands = true,
+  --       disable_diagnostics = true,
+  --     })
+  --   end,
+  -- },
+
   {
     "akinsho/git-conflict.nvim",
     event = "BufReadPre",
@@ -1410,33 +1420,33 @@ return {
   },
 
   -- Change multiple words at once
-  {
-    "jake-stewart/multicursor.nvim",
-    event = "VeryLazy",
-    config = function()
-      local mc = require("multicursor-nvim")
-      mc.setup()
-      local map = vim.keymap.set
-
-      map({ "n", "v" }, "<M-Down>", function()
-        mc.matchAddCursor(1)
-      end)
-      map({ "n", "v" }, "<M-Left>", function()
-        mc.matchSkipCursor(1)
-      end)
-      map("n", "<Esc>", function()
-        if mc.cursorsEnabled() then
-          mc.clearCursors()
-        end
-      end)
-    end,
-  },
-
-  -- Notify when a plugin has been abandoned
-  {
-    "ZWindL/orphans.nvim",
-    config = true,
-  },
+  -- {
+  --   "jake-stewart/multicursor.nvim",
+  --   event = "VeryLazy",
+  --   config = function()
+  --     local mc = require("multicursor-nvim")
+  --     mc.setup()
+  --     local map = vim.keymap.set
+  --
+  --     map({ "n", "v" }, "<M-Down>", function()
+  --       mc.matchAddCursor(1)
+  --     end)
+  --     map({ "n", "v" }, "<M-Left>", function()
+  --       mc.matchSkipCursor(1)
+  --     end)
+  --     map("n", "<Esc>", function()
+  --       if mc.cursorsEnabled() then
+  --         mc.clearCursors()
+  --       end
+  --     end)
+  --   end,
+  -- },
+  --
+  -- -- Notify when a plugin has been abandoned
+  -- {
+  --   "ZWindL/orphans.nvim",
+  --   config = true,
+  -- },
 
   -- A simply utility for loading encrypted secrets from an age encrypted file
   {
@@ -1448,9 +1458,9 @@ return {
     config = true,
   },
 
-  {
-    "fei6409/log-highlight.nvim",
-  },
+  -- {
+  --   "fei6409/log-highlight.nvim",
+  -- },
 
   -- enhance gf/gF with look ahead and provide target-based file hopping
   -- Need to test it more
