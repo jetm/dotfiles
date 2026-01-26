@@ -51,6 +51,9 @@ __export_env() {
 
   export SUPPRESS_BOLTDB_WARNING=yes
 
+  # Install node binaries under bin
+  export npm_config_prefix="$HOME/.local"
+
   # A better man page viewer. Break several tools that uses man
   # export MANPAGER='nvim +Man!'
 
