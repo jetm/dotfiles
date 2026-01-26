@@ -1122,6 +1122,7 @@ return {
             "jinja_lsp",
             "jsonls",
             "lua_ls",
+            "pyright",
             "ruff",
             -- Formatters
             "clang-format",
