@@ -1,5 +1,6 @@
 README.md
 LICENSE
+CLAUDE.md
 scripts
 install_chezmoi.sh
 srtadrm
@@ -10,3 +11,4 @@ KDE_JETM_Shortcuts.kksrc
 disabled/
 .config/nvim/mistake_custom_dict.lua
 build/
+logs/
