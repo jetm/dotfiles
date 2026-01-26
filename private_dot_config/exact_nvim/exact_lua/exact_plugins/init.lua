@@ -980,93 +980,8 @@ return {
       formatting = { disabled = true },
       -- enable servers that you already have installed without mason
       servers = {},
-      -- customize language server configuration options passed to `lspconfig`
-      ---@diagnostic disable: missing-fields
-      config = {
-        bashls = {
-          filetypes = { "bash", "sh", "zsh" },
-          bashIde = {
-            globPattern = "*@(.sh|.inc|.bash|.command|.zsh)",
-          },
-        },
-
-        clangd = {
-          root_dir = function(fname)
-            return require("lspconfig.util").root_pattern(
-              "Makefile",
-              "configure.ac",
-              "configure.in",
-              "config.h.in",
-              "meson.build",
-              "meson_options.txt",
-              "build.ninja"
-            )(fname) or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(
-              fname
-            ) or vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1])
-          end,
-          capabilities = {
-            offsetEncoding = "utf-8",
-          },
-          cmd = {
-            "clangd",
-            "--background-index",
-            "-j=16",
-            "--clang-tidy",
-            "--all-scopes-completion",
-            "--header-insertion=iwyu",
-            "--completion-style=detailed",
-            "--function-arg-placeholders=0",
-            "--fallback-style=LLVM",
-          },
-          init_options = {
-            usePlaceholders = true,
-            completeUnimported = true,
-            clangdFileStatus = true,
-          },
-          on_attach = function()
-            require("clangd_extensions")
-          end,
-        },
-
-        jsonls = {
-          format = { enable = false },
-        },
-
-        lua_ls = {
-          Lua = {
-            runtime = { version = "LuaJIT" },
-            workspace = {
-              checkThirdParty = false,
-              library = {
-                library = vim.api.nvim_get_runtime_file("", true),
-                "$VIMRUNTIME",
-                "$XDG_DATA_HOME/nvim",
-                "$HOME/.local/share/nvim",
-                "${3rd}/luv/library",
-              },
-            },
-            hint = {
-              enable = true,
-            },
-            diagnostics = {
-              globals = { "vim", "require" },
-              disable = { "missing-fields" },
-            },
-          },
-        },
-
-        ruff = {
-          -- disable it to use pyright as LSP client
-          autostart = false,
-          on_attach = function(client)
-            client.server_capabilities.hoverProvider = false
-          end,
-        },
-
-        -- yamlls = {
-        --   redhat = { telemetry = { enabled = false } },
-        -- },
-      },
+      -- LSP server configurations are in init.lua via vim.lsp.config()
+      config = {},
       -- customize how language servers are attached
       handlers = {
         function(server, server_opts)
@@ -1230,13 +1145,13 @@ return {
           end
         end,
       },
-      config = function()
-        -- set up servers configured with AstroLSP
-        dofile(vim.g.base46_cache .. "lsp")
-        require("nvchad.lsp").diagnostic_config()
-        vim.tbl_map(require("astrolsp").lsp_setup, require("astrolsp").config.servers)
-      end,
     },
+    config = function()
+      -- set up servers configured with AstroLSP
+      dofile(vim.g.base46_cache .. "lsp")
+      require("nvchad.lsp").diagnostic_config()
+      vim.tbl_map(require("astrolsp").lsp_setup, require("astrolsp").config.servers)
+    end,
   },
 
   -- Performant, batteries-included completion plugin for Neovim
