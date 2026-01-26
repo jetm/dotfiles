@@ -179,3 +179,5 @@ source <(delta --generate-completion zsh)
 # Still missing more commands
 # zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 # source <(carapace _carapace)
+
+# vim:set ft=zsh ts=2 sw=2 et:

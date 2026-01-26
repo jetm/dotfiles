@@ -28,8 +28,6 @@ LESS="${LESS} --hilite-unread"
 # -X
 LESS="${LESS} --no-init"
 
-LESS="${LESS} -z-4"
-
 # --incsearch incremental search
 LESS="${LESS} --incsearch"
 
@@ -61,3 +59,5 @@ export PAGER=less
 # export MOAR="${MOAR}"
 #
 # export PAGER=moar
+
+# vim:set ft=zsh ts=2 sw=2 et:
