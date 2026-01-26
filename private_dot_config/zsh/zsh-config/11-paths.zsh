@@ -29,3 +29,5 @@ fi
 
 unset _distro
 unfunction add_path
+
+# vim:set ft=zsh ts=2 sw=2 et:

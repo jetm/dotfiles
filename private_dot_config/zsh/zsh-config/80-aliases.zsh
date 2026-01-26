@@ -145,3 +145,5 @@ if [ -f /etc/arch-release ] || [ -f /etc/manjaro-release ]; then
     alias paclear='sudo paccache -rvk3'
   fi
 fi
+
+# vim:ft=zsh ts=2 sw=2 et:

@@ -34,4 +34,4 @@
 #   done
 # fi
 
-# vim:set ts=2 sw=2 et:
+# vim:ft=zsh ts=2 sw=2 et:

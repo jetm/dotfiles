@@ -13,3 +13,5 @@ setopt MULTIOS
 
 # Time format using zsh time builtin
 export TIMEFMT="Time: %E"
+
+# vim:set ft=zsh ts=2 sw=2 et:

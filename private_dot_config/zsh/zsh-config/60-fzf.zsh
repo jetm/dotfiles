@@ -17,4 +17,4 @@ zstyle ':completion:*:descriptions' format '[%d]'
 
 eval "$(fzf --zsh)"
 
-# vim:ft=sh ts=2 sw=2 et:
+# vim:ft=zsh ts=2 sw=2 et:

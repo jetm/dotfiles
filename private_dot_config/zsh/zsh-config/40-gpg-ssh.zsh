@@ -21,4 +21,4 @@ fi
 # Depends on prezto module ssh
 # zstyle ':prezto:module:ssh:load' identities 'id_rsa'
 
-# vim:set ts=2 sw=2 et:
+# vim:set ft=zsh ts=2 sw=2 et:

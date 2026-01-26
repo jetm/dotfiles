@@ -18,4 +18,4 @@ export ZPWR_EXPAND_TO_HISTORY=true
 # Git
 # export FORGIT_NO_ALIASES=1
 
-# vim:ft=sh ts=2 sw=2 et:
+# vim:set ft=zsh ts=2 sw=2 et:

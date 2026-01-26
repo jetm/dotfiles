@@ -33,3 +33,5 @@ zstyle ':prezto:module:history:alias' skip 'yes'
 # Set before loading prezto
 zstyle ':prezto:*:*' case-sensitive 'yes'
 zstyle ':prezto:*:*' color 'yes'
+
+# vim:set ft=zsh ts=2 sw=2 et:

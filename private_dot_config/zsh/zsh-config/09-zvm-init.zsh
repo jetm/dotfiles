@@ -92,4 +92,4 @@ zvm_after_init() {
   fi
 }
 
-# vim:set ts=2 sw=2 et:
+# vim:set ft=zsh ts=2 sw=2 et:

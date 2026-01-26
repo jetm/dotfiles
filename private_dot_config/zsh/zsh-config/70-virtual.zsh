@@ -6,3 +6,5 @@ fi
 if [[ -x "${HOME}/.local/bin/mise" ]]; then
   eval "$(${HOME}/.local/bin/mise activate zsh)"
 fi
+
+# vim:set ft=zsh ts=2 sw=2 et:
