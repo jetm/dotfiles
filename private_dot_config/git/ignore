@@ -13,6 +13,8 @@
 .zencoder/
 .serena/
 .taskmaster/
+.codemap/
+.cursor/
 
 compile_commands.json
 
