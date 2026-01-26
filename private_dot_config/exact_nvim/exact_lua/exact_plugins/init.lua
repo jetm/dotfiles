@@ -1133,7 +1133,7 @@ return {
             "yamlfmt",
 
             -- Linters
-            -- "yamllint",
+            "yamllint",
             "luacheck",
             "shellcheck",
           },
