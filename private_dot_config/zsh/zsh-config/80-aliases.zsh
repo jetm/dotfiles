@@ -3,6 +3,7 @@
 unalias -m '*'
 
 # Put just after removing all aliases
+command -v lacy >/dev/null 2>&1 && eval "$(lacy init zsh)"
 command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh --cmd j)"
 
 # Disable correction

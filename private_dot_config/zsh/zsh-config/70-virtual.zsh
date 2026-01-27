@@ -1,10 +1,10 @@
-# shellcheck disable=SC2148
+# shellcheck disable=SC2148,SC1091
 if [[ -f "${HOME}"/.cache/antidote/xvoland/Extract/extract.sh ]]; then
   source "${HOME}"/.cache/antidote/xvoland/Extract/extract.sh
 fi
 
 if [[ -x "${HOME}/.local/bin/mise" ]]; then
-  eval "$(${HOME}/.local/bin/mise activate zsh)"
+  eval "$("${HOME}/.local/bin/mise" activate zsh)"
 fi
 
 # vim:set ft=zsh ts=2 sw=2 et:

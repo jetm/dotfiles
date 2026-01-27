@@ -1,7 +1,10 @@
-# shellcheck disable=SC2148
+# shellcheck disable=SC2148,SC2206,SC1009,SC1036,SC1072,SC1073
 #
 # Completion
 #
+
+# add local completion
+fpath=(~/.zsh/completion $fpath)
 
 # Prevent default zshrc on Ubuntu from running compinit too early
 skip_global_compinit=1

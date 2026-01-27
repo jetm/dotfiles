@@ -1,4 +1,4 @@
-# shellcheck disable=SC2148
+# shellcheck disable=SC2148,SC2123
 
 # debug bash script
 debug() {
@@ -48,7 +48,7 @@ aurgen() {
 
 extract_srt() {
   srt_id=$(($2 - 1))
-  mkvextract tracks "$1" $srt_id:"$(basename "$1" .mkv)".srt
+  mkvextract tracks "$1" "$srt_id":"$(basename "$1" .mkv)".srt
 }
 
 extract_audio() {
@@ -93,9 +93,9 @@ extract_audio() {
   echo "Extracting English audio stream (position $eng_stream) from '$input_file'..."
 
   # Extract with ffmpeg - copy video and specified audio stream
-  ffmpeg -i "$input_file" -map 0:v -map 0:a:$ffmpeg_audio_index -c copy "$output_file"
+  ffmpeg -i "$input_file" -map 0:v -map "0:a:$ffmpeg_audio_index" -c copy "$output_file"
 
-  if ffmpeg -i "$input_file" -map 0:v -map 0:a:$ffmpeg_audio_index -c copy "$output_file"; then
+  if ffmpeg -i "$input_file" -map 0:v -map "0:a:$ffmpeg_audio_index" -c copy "$output_file"; then
     echo "Successfully created '$output_file' with English audio only"
   else
     echo "Error: Failed to create output file"
@@ -106,6 +106,7 @@ extract_audio() {
 add_path() {
   if [ -d "$1" ]; then
     # Set the list of directories that Zsh searches for programs
+    # shellcheck disable=SC2206
     path=($1 ${path})
   fi
 }
