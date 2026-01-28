@@ -17,8 +17,11 @@
 
 [user]
     name = Javier Tia
+    signingKey = B5EEC30BA867771F
 
 [safe]
+    # Allow all directories - needed for chezmoi conditional includes
+    # and working with repos in various locations
     directory = *
 
 [init]
@@ -53,10 +56,10 @@
     theirs = "!f() { git checkout --theirs -- $@ && git add $@; }; f"
 
     # Show ours changes
-    show-ours = !git-show :3:"${1}"
+    show-ours = "!git show :3:\"${1}\""
 
     # Show theirs changes
-    show-theirs = !git-show :2:"${1}"
+    show-theirs = "!git show :2:\"${1}\""
 
     # Summarizes commits, sort based on numbers commits and show each author
     # email
@@ -140,11 +143,19 @@
     # Preserve merges when you're rebasing against origin/BRANCH
     rebase = merges
 
+[transfer]
+    # Validate objects during fetch/push to protect against corruption
+    fsckObjects = true
+
 [fetch]
     # Always prune when fetching and pulling
     prune = true
     prunetags = true
     all = true
+    # Validate objects during fetch
+    fsckObjects = true
+    # Build commit-graph during fetch for faster log operations
+    writeCommitGraph = true
 
 [branch]
     # Rebase against tracking branch
@@ -174,6 +185,17 @@
     ; Detect renames
     renames = true
 
+    # Custom diff prefixes for more readable output (Git 2.45+)
+    srcPrefix = "before/"
+    dstPrefix = "after/"
+
+    # Set difftastic as the default difftool
+    tool = difftastic
+
+[pack]
+    # Auto-detect CPU count for parallel packing
+    threads = 0
+
 [status]
     # submodule summary will be enabled and a summary of commits for modified
     # submodules will be shown
@@ -201,9 +223,6 @@
 
     # All commits should be GPG signed
     gpgSign = true
-
-[user]
-    signingKey = B5EEC30BA867771F
 
 [format]
     # Enable the -s/--signoff option by default in the patches
@@ -252,12 +271,6 @@
 [difftool]
     # Run the difftool immediately, don't ask 'are you sure' each time.
     prompt = false
-
-; difftastic diff tool
-[diff]
-    # Set difftastic as the default difftool, so we don't need to specify
-    # `-t difftastic` every time.
-    tool = difftastic
 
 [difftool "difftastic"]
     cmd = difft "$LOCAL" "$REMOTE"
