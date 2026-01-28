@@ -31,6 +31,9 @@ vim.filetype.add({
     [".*%.zsh"] = "sh",
     [".*%.rules"] = "udevrules",
     [".*%.service"] = "systemd",
+    -- Age encrypted files: handled by age-secret.nvim plugin
+    -- Filetype "age" allows nvim-lint skip pattern to work
+    [".*%.age$"] = "age",
   },
 })
 
@@ -79,5 +82,5 @@ dofile(vim.g.base46_cache .. "statusline")
 -- Load local changes
 local configs = vim.fn.stdpath("config") .. "/lua/config/"
 dofile(configs .. "options.lua")
-dofile(configs .. "autocmds.lua")
+require("config.autocmds")
 dofile(configs .. "mappings.lua")

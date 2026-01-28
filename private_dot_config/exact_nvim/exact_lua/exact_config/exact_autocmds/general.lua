@@ -1,23 +1,7 @@
-if vim.g.vscode then
-  return
-end
-
-local function augroup(name)
-  return vim.api.nvim_create_augroup("yet_" .. name, { clear = true })
-end
-
-local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
-
--- General settings:
---------------------
-
--- WAR: E21: Cannot make changes, 'modifiable' is off
--- autocmd({ "BufReadPost" }, {
---   pattern = "",
---   callback = function()
---     vim.cmd("if &modifiable | set modifiable | set write | endif")
---   end,
--- })
+-- General autocmds: core editor behavior
+local loader = require("config.autocmds.loader")
+local augroup = loader.augroup
+local autocmd = loader.autocmd
 
 -- User event that loads after UIEnter + only if file buf is there
 autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
@@ -106,36 +90,6 @@ autocmd("ModeChanged", {
   end,
 })
 
--- Set indentation to 2 spaces
-autocmd("Filetype", {
-  group = augroup("setIndent"),
-  pattern = { "yaml", "lua" },
-  command = "setlocal shiftwidth=2 tabstop=2 sts=2 expandtab",
-})
-
--- Show by default 4 spaces for a tab
-autocmd("Filetype", {
-  group = augroup("setIndent"),
-  pattern = { "go" },
-  command = "setlocal shiftwidth=4 tabstop=4 sts=4 noexpandtab",
-})
-
--- Enable wrap
-autocmd("Filetype", {
-  group = augroup("wrap"),
-  pattern = { "markdown", "gitcommit" },
-  command = "setlocal wrap",
-})
-
--- Wrap and check for spell in text filetypes
-autocmd("FileType", {
-  group = augroup("spell"),
-  pattern = { "gitcommit", "markdown" },
-  callback = function()
-    vim.opt_local.spell = true
-  end,
-})
-
 -- Close some filetypes with <q>
 autocmd("FileType", {
   group = augroup("close_with_q"),
@@ -176,7 +130,7 @@ autocmd("FileType", {
 })
 
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+autocmd({ "BufWritePre" }, {
   group = augroup("auto_create_dir"),
   callback = function(event)
     if event.match:match("^%w%w+:[\\/][\\/]") then
@@ -187,56 +141,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
--- Based on https://gist.github.com/traut/cd19ae2817ab13e0bade1f8a9995029f
-local gpgGroup = augroup("gpgGroup")
-
--- autocmds execute in the order in which they were defined.
--- https://neovim.io/doc/user/autocmd.html#autocmd-define
-
-autocmd({ "BufReadPre", "FileReadPre" }, {
-  pattern = "*.gpg",
-  group = gpgGroup,
-  callback = function()
-    -- Make sure nothing is written to shada file while editing an encrypted file.
-    vim.opt_local.shada = nil
-    -- We don't want a swap file, as it writes unencrypted data to disk
-    vim.opt_local.swapfile = false
-    -- Switch to binary mode to read the encrypted file
-    vim.opt_local.bin = true
-
-    vim.cmd("let ch_save = &ch|set ch=2")
-  end,
-})
-
-autocmd({ "BufReadPost", "FileReadPost" }, {
-  pattern = "*.gpg",
-  group = gpgGroup,
-  callback = function()
-    vim.cmd("'[,']!gpg --decrypt 2> /dev/null")
-
-    -- Switch to normal mode for editing
-    vim.opt_local.bin = false
-
-    vim.cmd("let &ch = ch_save|unlet ch_save")
-    vim.cmd(":doautocmd BufReadPost " .. vim.fn.expand("%:r"))
-  end,
-})
-
--- Convert all text to encrypted text before writing
-autocmd({ "BufWritePre", "FileWritePre" }, {
-  pattern = "*.gpg",
-  group = gpgGroup,
-  command = "'[,']!gpg --default-recipient-self -ae 2>/dev/null",
-})
-
--- Undo the encryption so we are back in the normal text, directly
--- after the file has been written.
-autocmd({ "BufWritePost", "FileWritePost" }, {
-  pattern = "*.gpg",
-  group = gpgGroup,
-  command = "u",
-})
-
+-- Bigfile detection
 vim.filetype.add({
   pattern = {
     [".*"] = {
@@ -269,15 +174,5 @@ autocmd({ "FileType" }, {
   pattern = { "man" },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-  end,
-})
-
--- Wrap and check for spell in text filetypes
-autocmd({ "FileType" }, {
-  group = augroup("wrap_spell"),
-  pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
-  callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.spell = true
   end,
 })

@@ -881,6 +881,11 @@ return {
       vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
         group = lint_augroup,
         callback = function()
+          -- Skip linting for .age files (decrypted content triggers false positives)
+          local filename = vim.fn.expand("%:t")
+          if filename:match("%.age$") then
+            return
+          end
           lint.try_lint()
         end,
       })
@@ -1174,7 +1179,7 @@ return {
           "path",
         },
         providers = {
-           lazydev = {
+          lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
             -- make lazydev completions top priority (see `:h blink.cmp`)
@@ -1450,15 +1455,8 @@ return {
   --   config = true,
   -- },
 
-  -- A simply utility for loading encrypted secrets from an age encrypted file
-  {
-    "histrio/age-secret.nvim",
-    opts = {
-      identity = vim.fn.expand("$HOME/.config/age/identity.key"),
-      recipient = "age15pv6yqycjhzs7x2jpafwce0qkvnjpkyrv77lrdsd5l4azt7zudzsmqedjs",
-    },
-    config = true,
-  },
+  -- Age encryption is handled by custom autocmds in autocmds.lua
+  -- (avoids Neovim undo bug that caused crashes with age-secret.nvim)
 
   -- {
   --   "fei6409/log-highlight.nvim",
