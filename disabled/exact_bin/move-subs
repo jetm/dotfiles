@@ -1,0 +1,6 @@
+for mp4 in *.mp4; do
+  name="${mp4%.mp4}"
+  if [ -d "Subs/$name" ]; then
+      mv -v "Subs/${name}/"2_English.srt "${name}.srt"
+  fi
+done
