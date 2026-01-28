@@ -6,9 +6,7 @@ typeset -gU cdpath fpath path
 add_path "${HOME}"/.local/bin
 add_path "${HOME}"/.local/share/cargo/bin
 
-_distro=$(lsb_release -si)
-
-if [ "$_distro" = "Debian" ] || [ "$_distro" = "Ubuntu" ]; then
+if [[ "$(_cached_distro_id)" == "Debian" ]] || [[ "$(_cached_distro_id)" == "Ubuntu" ]]; then
   add_path /usr/lib/cargo/bin
 fi
 
@@ -27,7 +25,6 @@ if command -v ccache &> /dev/null; then
   add_path /usr/lib/ccache/bin
 fi
 
-unset _distro
 unfunction add_path
 
 # vim:set ft=zsh ts=2 sw=2 et:

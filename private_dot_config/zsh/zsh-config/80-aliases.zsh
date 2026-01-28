@@ -3,8 +3,9 @@
 unalias -m '*'
 
 # Put just after removing all aliases
-command -v lacy >/dev/null 2>&1 && eval "$(lacy init zsh)"
-command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh --cmd j)"
+# Defer lacy/zoxide init - `j` command delayed until first prompt
+zsh-defer _cached_init lacy lacy init zsh
+zsh-defer _cached_init zoxide zoxide init zsh --cmd j
 
 # Disable correction
 alias type='type -a'
@@ -16,7 +17,7 @@ alias ln='ln -i'
 alias mkdir='mkdir -p'
 
 # lsd
-alias ls='lsd --group-directories-first'
+alias ls='eza --group-directories-first --icons=always'
 alias l='ls --all --long --header'
 
 # General
@@ -29,7 +30,7 @@ alias df='duf'
 alias bbk='bitbake'
 alias pacdiff="DIFFPROG='nvim -d' pacdiff -s"
 alias zprofrc="ZPROFRC=1 zsh"
-alias host=dog
+alias host=doggo
 
 #
 # Git

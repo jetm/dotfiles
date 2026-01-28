@@ -15,6 +15,7 @@ export FORGIT_FZF_DEFAULT_OPTS="${FORGIT_FZF_DEFAULT_OPTS} --ansi --tabstop=2 --
 zstyle -d ':completion:*' format
 zstyle ':completion:*:descriptions' format '[%d]'
 
-eval "$(fzf --zsh)"
+# Defer fzf init - completion delayed until first prompt
+zsh-defer _cached_init fzf fzf --zsh
 
 # vim:ft=zsh ts=2 sw=2 et:

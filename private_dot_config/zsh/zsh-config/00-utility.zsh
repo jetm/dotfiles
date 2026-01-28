@@ -119,4 +119,50 @@ if (command -v filkoll > /dev/null 2>&1); then
   source /usr/share/doc/filkoll/command-not-found.zsh
 fi
 
+# Cache distro detection to avoid multiple lsb_release calls
+_cached_distro_id() {
+  if [[ -z "$_DISTRO_ID" ]]; then
+    if [[ -f /etc/arch-release ]]; then
+      _DISTRO_ID="Arch"
+    elif [[ -f /etc/manjaro-release ]]; then
+      _DISTRO_ID="Manjaro"
+    elif [[ -f /etc/fedora-release ]]; then
+      _DISTRO_ID="Fedora"
+    elif [[ -f /etc/debian_version ]]; then
+      if [[ -f /etc/lsb-release ]] && grep -q Ubuntu /etc/lsb-release 2>/dev/null; then
+        _DISTRO_ID="Ubuntu"
+      else
+        _DISTRO_ID="Debian"
+      fi
+    elif command -v lsb_release &>/dev/null; then
+      _DISTRO_ID="$(lsb_release -si)"
+    else
+      _DISTRO_ID="Unknown"
+    fi
+    typeset -g _DISTRO_ID
+  fi
+  echo "$_DISTRO_ID"
+}
+
+# Reusable function to cache and source shell init scripts
+# Usage: _cached_init <name> <command> [args...]
+# Example: _cached_init starship starship init zsh
+_cached_init() {
+  local name="$1"
+  shift
+  local cmd="$1"
+
+  # Use zsh hash lookup instead of subprocess
+  (( $+commands[$cmd] )) || return 0
+  local bin_path="${commands[$cmd]}"
+
+  local cache_file="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/${name}-init.zsh"
+
+  if [[ ! -f "$cache_file" ]] || [[ "$bin_path" -nt "$cache_file" ]]; then
+    mkdir -p "${cache_file:h}"
+    "$@" > "$cache_file"
+  fi
+  source "$cache_file"
+}
+
 # vim:set ft=zsh ts=2 sw=2 et:

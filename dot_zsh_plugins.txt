@@ -2,6 +2,7 @@
 # .zsh_plugins.txt - antidote plugins file
 #
 # romkatv/powerlevel10k kind:fpath
+zsh-users/zsh-completions kind:fpath
 jeffreytse/zsh-vi-mode
 
 sorin-ionescu/prezto path:modules/environment
@@ -19,8 +20,6 @@ zsh-users/zsh-history-substring-search kind:defer
 # tarrasch/zsh-bd kind:defer
 Aloxaf/fzf-tab kind:defer
 # wfxr/forgit kind:defer
-tom-doerr/zsh_codex kind:defer
-ttkalcevic/pwp kind:defer
 marlonrichert/zsh-edit kind:defer
 # LucasLarson/gunstage kind:defer
 nyoungstudios/zsh-history-on-success kind:defer

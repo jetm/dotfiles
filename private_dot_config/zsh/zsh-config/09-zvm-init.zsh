@@ -61,14 +61,10 @@ zvm_after_lazy_keybindings() {
 
 # zsh-vi-mode will auto execute this zvm_after_init function
 zvm_after_init() {
-  # Require load it here as it's
   # shellcheck disable=SC1091
-  source "$ZDOTDIR"/zsh-config/00-utility.zsh
-  # shellcheck disable=SC1091
-  source "$ZDOTDIR"/zsh-config/key-bindings.sh
+  source "$ZDOTDIR"/zsh-config/key-bindings.zsh
 
-  _distro=$(lsb_release -si)
-  if [ "$_distro" = "Fedora" ]; then
+  if [[ "$(_cached_distro_id)" == "Fedora" ]]; then
     # shellcheck disable=SC1091
     source /usr/share/fzf/shell/key-bindings.zsh
   else
@@ -76,9 +72,9 @@ zvm_after_init() {
     source /usr/share/fzf/key-bindings.zsh
   fi
 
-  if [[ -f "$ZDOTDIR"/zsh-config/kitty-shell-integration.sh ]]; then
+  if [[ -f "$ZDOTDIR"/zsh-config/kitty-shell-integration.zsh ]]; then
     # shellcheck disable=SC1091
-    source "$ZDOTDIR"/zsh-config/kitty-shell-integration.sh
+    source "$ZDOTDIR"/zsh-config/kitty-shell-integration.zsh
   fi
 
   if [ -f /usr/share/zsh/plugins/forgit/forgit.plugin.zsh ]; then
@@ -87,9 +83,7 @@ zvm_after_init() {
     source /usr/share/zsh/plugins/forgit/forgit.plugin.zsh
   fi
 
-  if (command -v atuin > /dev/null 2>&1); then
-    eval "$(atuin init zsh)"
-  fi
+  _cached_init atuin atuin init zsh
 }
 
 # vim:set ft=zsh ts=2 sw=2 et:
