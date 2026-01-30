@@ -83,7 +83,7 @@ zvm_after_init() {
     source /usr/share/zsh/plugins/forgit/forgit.plugin.zsh
   fi
 
-  _cached_init atuin atuin init zsh
+  eval "$(atuin init zsh)"
 }
 
 # vim:set ft=zsh ts=2 sw=2 et:
