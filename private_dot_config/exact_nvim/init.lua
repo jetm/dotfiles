@@ -16,26 +16,8 @@ if vim.g.vscode then
   return
 end
 
--- Manually add new filetypes
-vim.filetype.add({
-  extension = {
-    jinja = "jinja",
-    jinja2 = "jinja",
-    j2 = "jinja",
-  },
-  filename = {},
-  pattern = {
-    [".*%.bb%..*"] = "bitbake",
-    [".*%.inc"] = "bitbake",
-    [".*%.bats"] = "bash",
-    [".*%.zsh"] = "sh",
-    [".*%.rules"] = "udevrules",
-    [".*%.service"] = "systemd",
-    -- Age encrypted files: handled by age-secret.nvim plugin
-    -- Filetype "age" allows nvim-lint skip pattern to work
-    [".*%.age$"] = "age",
-  },
-})
+-- Filetype detection (must load before lazy.nvim)
+require("filetype")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local luv = vim.uv
