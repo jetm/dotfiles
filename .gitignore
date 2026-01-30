@@ -1,2 +1,3 @@
 **/*.zwc
 logs/
+.chezmoi.toml.tmpl
