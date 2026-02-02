@@ -1426,6 +1426,11 @@ return {
     end,
   },
 
+  {
+    "jetm/rehunk.nvim",
+    ft = "diff", -- Load when opening diff files
+  },
+
   -- Change multiple words at once
   -- {
   --   "jake-stewart/multicursor.nvim",
