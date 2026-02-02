@@ -12,3 +12,4 @@ disabled/
 .config/nvim/mistake_custom_dict.lua
 build/
 logs/
+.config/k9s/aliases.yaml

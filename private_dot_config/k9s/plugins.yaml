@@ -1,0 +1,434 @@
+# k9s plugins configuration
+# These add custom actions available via Ctrl-<key> or shortcuts on resources
+
+plugins:
+  #---------------------------------------------------------------------------
+  # POD OPERATIONS
+  #---------------------------------------------------------------------------
+
+  # Debug a pod with ephemeral container (Ctrl-D on a pod)
+  debug:
+    shortCut: Ctrl-D
+    confirm: true
+    description: Add debug container
+    scopes:
+      - pods
+    command: kubectl
+    background: false
+    args:
+      - debug
+      - -it
+      - --image=nicolaka/netshoot
+      - $NAME
+      - -n
+      - $NAMESPACE
+      - --
+      - /bin/bash
+
+  # Debug with busybox (lighter) - Shift-D
+  debug-busybox:
+    shortCut: Shift-B
+    confirm: true
+    description: Debug with busybox
+    scopes:
+      - pods
+    command: kubectl
+    background: false
+    args:
+      - debug
+      - -it
+      - --image=busybox:1.36
+      - $NAME
+      - -n
+      - $NAMESPACE
+
+  # Get pod logs with stern (multi-container aware) - Ctrl-L
+  stern-logs:
+    shortCut: Ctrl-L
+    confirm: false
+    description: Stern logs (follow)
+    scopes:
+      - pods
+      - deployments
+    command: stern
+    background: false
+    args:
+      - $NAME
+      - -n
+      - $NAMESPACE
+      - --tail
+      - "100"
+
+  # Get all logs since 1 hour
+  stern-1h:
+    shortCut: Shift-H
+    confirm: false
+    description: Stern logs (1h)
+    scopes:
+      - pods
+      - deployments
+    command: stern
+    background: false
+    args:
+      - $NAME
+      - -n
+      - $NAMESPACE
+      - --since
+      - 1h
+
+  # Get error logs only
+  stern-errors:
+    shortCut: Shift-X
+    confirm: false
+    description: Stern error logs
+    scopes:
+      - pods
+      - deployments
+    command: stern
+    background: false
+    args:
+      - $NAME
+      - -n
+      - $NAMESPACE
+      - --tail
+      - "500"
+      - -i
+      - error|Error|ERROR|exception|Exception|EXCEPTION|panic|Panic|PANIC|fatal|Fatal|FATAL
+
+  #---------------------------------------------------------------------------
+  # RESOURCE INSPECTION
+  #---------------------------------------------------------------------------
+
+  # Describe resource in less - Ctrl-Y
+  describe:
+    shortCut: Ctrl-Y
+    confirm: false
+    description: Describe resource
+    scopes:
+      - all
+    command: sh
+    background: false
+    args:
+      - -c
+      - "kubectl describe $RESOURCE_NAME $NAME -n $NAMESPACE | less"
+
+  # Get YAML output - Ctrl-O
+  get-yaml:
+    shortCut: Ctrl-O
+    confirm: false
+    description: Get YAML
+    scopes:
+      - all
+    command: sh
+    background: false
+    args:
+      - -c
+      - "kubectl get $RESOURCE_NAME $NAME -n $NAMESPACE -o yaml | less"
+
+  # Get JSON output
+  get-json:
+    shortCut: Ctrl-J
+    confirm: false
+    description: Get JSON
+    scopes:
+      - all
+    command: sh
+    background: false
+    args:
+      - -c
+      - "kubectl get $RESOURCE_NAME $NAME -n $NAMESPACE -o json | jq | less"
+
+  # Show resource events
+  events:
+    shortCut: Shift-V
+    confirm: false
+    description: Show events
+    scopes:
+      - pods
+      - deployments
+      - statefulsets
+      - daemonsets
+      - jobs
+    command: sh
+    background: false
+    args:
+      - -c
+      - "kubectl get events -n $NAMESPACE --field-selector involvedObject.name=$NAME --sort-by='.lastTimestamp' | less"
+
+  #---------------------------------------------------------------------------
+  # NETWORK OPERATIONS
+  #---------------------------------------------------------------------------
+
+  # Port forward - Ctrl-F on a pod or service
+  port-forward-8080:
+    shortCut: Ctrl-F
+    confirm: true
+    description: Port forward 8080
+    scopes:
+      - pods
+      - services
+    command: kubectl
+    background: true
+    args:
+      - port-forward
+      - $NAME
+      - -n
+      - $NAMESPACE
+      - "8080:8080"
+
+  # Port forward custom (prompts for ports)
+  port-forward-custom:
+    shortCut: Shift-F
+    confirm: true
+    description: Port forward (custom)
+    scopes:
+      - pods
+      - services
+    command: sh
+    background: false
+    args:
+      - -c
+      - "read -p 'Local:Remote ports (e.g., 9000:8080): ' PORTS && kubectl port-forward $NAME -n $NAMESPACE $PORTS"
+
+  # Test connectivity to a service
+  test-connectivity:
+    shortCut: Ctrl-T
+    confirm: false
+    description: Test connectivity
+    scopes:
+      - services
+    command: sh
+    background: false
+    args:
+      - -c
+      - "kubectl run -it --rm debug-$RANDOM --image=nicolaka/netshoot --restart=Never -n $NAMESPACE -- curl -v $NAME:80"
+
+  #---------------------------------------------------------------------------
+  # DEPLOYMENT OPERATIONS
+  #---------------------------------------------------------------------------
+
+  # Restart deployment - Ctrl-R on deployment
+  restart-deploy:
+    shortCut: Ctrl-R
+    confirm: true
+    description: Restart deployment
+    scopes:
+      - deployments
+    command: kubectl
+    background: true
+    args:
+      - rollout
+      - restart
+      - deployment
+      - $NAME
+      - -n
+      - $NAMESPACE
+
+  # Scale deployment
+  scale-replicas:
+    shortCut: Ctrl-S
+    confirm: true
+    description: Scale replicas
+    scopes:
+      - deployments
+      - statefulsets
+    command: sh
+    background: false
+    args:
+      - -c
+      - "read -p 'Number of replicas: ' REPLICAS && kubectl scale $RESOURCE_NAME $NAME -n $NAMESPACE --replicas=$REPLICAS"
+
+  # Rollout status
+  rollout-status:
+    shortCut: Shift-R
+    confirm: false
+    description: Rollout status
+    scopes:
+      - deployments
+      - statefulsets
+      - daemonsets
+    command: sh
+    background: false
+    args:
+      - -c
+      - "kubectl rollout status $RESOURCE_NAME $NAME -n $NAMESPACE"
+
+  # Rollout history
+  rollout-history:
+    shortCut: Ctrl-H
+    confirm: false
+    description: Rollout history
+    scopes:
+      - deployments
+      - statefulsets
+      - daemonsets
+    command: sh
+    background: false
+    args:
+      - -c
+      - "kubectl rollout history $RESOURCE_NAME $NAME -n $NAMESPACE | less"
+
+  # Undo rollout
+  rollout-undo:
+    shortCut: Ctrl-U
+    confirm: true
+    description: Undo rollout
+    scopes:
+      - deployments
+      - statefulsets
+      - daemonsets
+    command: kubectl
+    background: false
+    args:
+      - rollout
+      - undo
+      - $RESOURCE_NAME
+      - $NAME
+      - -n
+      - $NAMESPACE
+
+  #---------------------------------------------------------------------------
+  # SECRETS AND CONFIGMAPS
+  #---------------------------------------------------------------------------
+
+  # Decode secret
+  decode-secret:
+    shortCut: Ctrl-E
+    confirm: false
+    description: Decode secret
+    scopes:
+      - secrets
+    command: sh
+    background: false
+    args:
+      - -c
+      - "kubectl get secret $NAME -n $NAMESPACE -o json | jq -r '.data | to_entries[] | \"\\(.key): \\(.value | @base64d)\"' | less"
+
+  #---------------------------------------------------------------------------
+  # CLIPBOARD OPERATIONS
+  #---------------------------------------------------------------------------
+
+  # Copy pod name to clipboard - Ctrl-X
+  copy-name:
+    shortCut: Ctrl-X
+    confirm: false
+    description: Copy name
+    scopes:
+      - all
+    command: sh
+    background: true
+    args:
+      - -c
+      - "echo -n $NAME | xclip -selection clipboard && echo 'Copied: $NAME'"
+
+  # Copy pod logs to clipboard
+  copy-logs:
+    shortCut: Shift-C
+    confirm: false
+    description: Copy logs (100 lines)
+    scopes:
+      - pods
+    command: sh
+    background: true
+    args:
+      - -c
+      - "kubectl logs $NAME -n $NAMESPACE --tail=100 | xclip -selection clipboard && echo 'Copied logs to clipboard'"
+
+  #---------------------------------------------------------------------------
+  # TOP / METRICS
+  #---------------------------------------------------------------------------
+
+  # Show pod resource usage
+  top-pod:
+    shortCut: Ctrl-M
+    confirm: false
+    description: Show metrics
+    scopes:
+      - pods
+    command: sh
+    background: false
+    args:
+      - -c
+      - "watch -n 2 kubectl top pod $NAME -n $NAMESPACE --containers"
+
+  # Show node resources
+  top-node:
+    shortCut: Ctrl-N
+    confirm: false
+    description: Show node metrics
+    scopes:
+      - nodes
+    command: sh
+    background: false
+    args:
+      - -c
+      - "watch -n 2 kubectl top node $NAME"
+
+  #---------------------------------------------------------------------------
+  # PRODUCTION VS STAGING HELPERS
+  #---------------------------------------------------------------------------
+
+  # Quick switch to production namespace
+  goto-production:
+    shortCut: F1
+    confirm: false
+    description: Go to production
+    scopes:
+      - all
+    command: sh
+    background: false
+    args:
+      - -c
+      - "k9s -n production"
+
+  # Quick switch to staging namespace
+  goto-staging:
+    shortCut: F2
+    confirm: false
+    description: Go to staging
+    scopes:
+      - all
+    command: sh
+    background: false
+    args:
+      - -c
+      - "k9s -n staging"
+
+  # Quick switch to default namespace
+  goto-default:
+    shortCut: F3
+    confirm: false
+    description: Go to default
+    scopes:
+      - all
+    command: sh
+    background: false
+    args:
+      - -c
+      - "k9s -n default"
+
+  #---------------------------------------------------------------------------
+  # COMPARISON / DIFF
+  #---------------------------------------------------------------------------
+
+  # Diff YAML with previous revision
+  diff-revision:
+    shortCut: Ctrl-I
+    confirm: false
+    description: Diff with previous
+    scopes:
+      - deployments
+      - statefulsets
+    command: sh
+    background: false
+    args:
+      - -c
+      - |
+        CURRENT=$(kubectl get $RESOURCE_NAME $NAME -n $NAMESPACE -o yaml)
+        REVISION=$(kubectl rollout history $RESOURCE_NAME $NAME -n $NAMESPACE | tail -2 | head -1 | awk '{print $1}')
+        if [ -n "$REVISION" ]; then
+          PREVIOUS=$(kubectl rollout history $RESOURCE_NAME $NAME -n $NAMESPACE --revision=$REVISION -o yaml)
+          diff <(echo "$PREVIOUS") <(echo "$CURRENT") | less
+        else
+          echo "No previous revision found"
+        fi

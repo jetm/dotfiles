@@ -1,0 +1,52 @@
+# k9s custom hotkeys
+# Press '?' in k9s to see all available hotkeys
+
+hotKeys:
+  # Quick access to common resources
+  # Shift+P - Jump to pods view
+  shift-p:
+    shortCut: Shift-P
+    description: View pods
+    command: pods
+
+  # Shift+D - Jump to deployments
+  shift-d:
+    shortCut: Shift-D
+    description: View deployments
+    command: deployments
+
+  # Shift+S - Jump to services
+  shift-s:
+    shortCut: Shift-S
+    description: View services
+    command: services
+
+  # Shift+L - Jump to logs (current pod)
+  shift-l:
+    shortCut: Shift-L
+    description: View logs
+    command: logs
+
+  # Shift+N - Jump to namespaces
+  shift-n:
+    shortCut: Shift-N
+    description: View namespaces
+    command: namespaces
+
+  # Shift+C - Jump to configmaps
+  shift-c:
+    shortCut: Shift-C
+    description: View configmaps
+    command: configmaps
+
+  # Shift+E - Jump to events
+  shift-e:
+    shortCut: Shift-E
+    description: View events
+    command: events
+
+  # Shift+I - Jump to ingresses
+  shift-i:
+    shortCut: Shift-I
+    description: View ingresses
+    command: ingresses
