@@ -3,13 +3,6 @@
 # zsh-vi-mode
 #
 
-cb_copy() {
-  copyq copy - > /dev/null
-}
-cb_paste() {
-  copyq clipboard
-}
-
 my_zvm_vi_yank() {
   zvm_vi_yank
   echo -en "$CUTBUFFER" | cb_copy

@@ -25,13 +25,13 @@ sleep $_sleep1
 
 # Set required environment variables
 dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=hyprland
-dbus-update-activation-environment --systemd --all # for XDPH
+dbus-update-activation-environment --systemd --all                      # for XDPH
 systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP # for XDPH
 
 # Start xdg-desktop-portal-gtk
 if [ -f /usr/lib/xdg-desktop-portal-gtk ]; then
-    /usr/lib/xdg-desktop-portal-gtk &
-    sleep $_sleep1
+  /usr/lib/xdg-desktop-portal-gtk &
+  sleep $_sleep1
 fi
 
 # Start xdg-desktop-portal
