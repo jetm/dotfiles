@@ -1,9 +1,0 @@
-CODEX=$HOME/.cache/antidote/tom-doerr/zsh_codex/zsh_codex.plugin.zsh
-
-if [[ -f $CODEX ]]; then
-    export ZSH_CODEX_PREEXECUTE_COMMENT="true"
-    # shellcheck disable=1090
-    source "$CODEX"
-    bindkey -r '^x'
-    bindkey -M viins "^x" create_completion
-fi
