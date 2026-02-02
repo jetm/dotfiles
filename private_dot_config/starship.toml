@@ -4,7 +4,12 @@
 # append newlines to command outputs
 add_newline = false
 
-# custom format
+#
+# custom format (optimized for performance)
+#
+# increase scan timeout for larger repos (default is 30ms)
+scan_timeout = 100
+
 format = """
 $directory\
 $container\
@@ -12,11 +17,7 @@ $python\
 $git_branch\
 $git_commit\
 $git_state\
-$git_metrics\
 $git_status\
-$env_var\
-$custom\
-$sudo\
 $cmd_duration\
 $line_break\
 $jobs\
@@ -40,12 +41,18 @@ style = '#D7AF00'
 symbol = ' '
 format = '[$symbol$branch(:$remote_branch)]($style) '
 
+[git_commit]
+disabled = false
+only_detached = true
+tag_disabled = false
+format = '[\($hash$tag\)]($style) '
+
 [git_status]
 style = '#D7AF00'
 format = '([❲${all_status}${ahead_behind}❳](${style}) )'
+untracked = ''  # disabled for performance in large repos
 conflicted = ' ${count} '
 up_to_date = '󰘽 '
-untracked = '󰋗 ${count}'
 ahead = ' ${count}'
 diverged = ' ${ahead_count}  ${behind_count}'
 behind = ' count}'
@@ -54,3 +61,22 @@ modified = '󰛿 ${count} '
 staged = '󰐗 ${count} '
 renamed = '󱍸 ${count} '
 deleted = '󰍶 ${count} '
+
+[container]
+format = '[$symbol]($style) '
+symbol = '⬡'
+
+[cmd_duration]
+min_time = 5_000  # show after 5 seconds
+format = '[󱎫 $duration]($style) '
+style = 'yellow'
+
+[jobs]
+threshold = 1
+format = '[$symbol$number]($style) '
+symbol = '✦ '
+
+[status]
+disabled = false
+format = '[$symbol$status]($style) '
+symbol = '✖ '
