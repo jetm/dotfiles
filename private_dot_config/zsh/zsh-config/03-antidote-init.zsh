@@ -20,7 +20,11 @@ autoload -Uz "${fpath[-1]}"/antidote
 
 # Generate static file in a subshell when .zsh_plugins.txt is updated
 if [[ ! "$zsh_plugins" -nt "${zsh_plugins:r}.txt" ]]; then
-  (antidote bundle <"${zsh_plugins:r}.txt" >|"$zsh_plugins")
+  (
+    antidote bundle <"${zsh_plugins:r}.txt" >|"$zsh_plugins"
+    # Compile for faster sourcing
+    zcompile "$zsh_plugins"
+  )
 fi
 
 # Source static plugins file
