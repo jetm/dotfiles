@@ -1,9 +1,49 @@
+## Search & Display
 style = "compact"
-enter_accept = true
-keymap_mode = "vim-insert"
+search_mode = "skim"
+filter_mode = "global"
 inline_height = 20
+show_preview = true
+max_preview_height = 4
+show_help = false                    # saves space in compact mode
+show_tabs = true
+exit_mode = "return-original"
+
+## Shell Up-Key behavior (global prefix matching)
+filter_mode_shell_up_key_binding = "global"
+search_mode_shell_up_key_binding = "skim"
+
+## Vim keymap
+keymap_mode = "auto"
 keymap_cursor = { vim_insert = "blink-block", vim_normal = "steady-block" }
+
+## Accept behavior
+enter_accept = true
+
+## Privacy & filtering
+secrets_filter = true
+store_failed = true
+
+## Workspace support (git-aware directory filtering)
+workspaces = true
+
+## Performance
 prefers_reduced_motion = true
+
+[keys]
+scroll_exits = true
 
 [sync]
 records = true
+
+[stats]
+common_subcommands = [
+  "cargo", "chezmoi", "docker", "git", "pacman",
+  "kubectl", "npm", "pacman", "pikaur", "systemctl",
+]
+common_prefix = ["sudo"]
+ignored_commands = [
+  "cd", "ls", "l", "ll", "la", "e", "v", "q",
+  "exit", "clear", "fg", "bg", "pwd", "type",
+  "which", "whoami", "date", "history", "jobs",
+]
