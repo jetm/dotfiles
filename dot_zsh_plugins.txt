@@ -2,7 +2,7 @@
 # .zsh_plugins.txt - antidote plugins file
 #
 # romkatv/powerlevel10k kind:fpath
-zsh-users/zsh-completions kind:fpath
+zsh-users/zsh-completions kind:fpath path:src
 jeffreytse/zsh-vi-mode
 
 sorin-ionescu/prezto path:modules/environment
@@ -13,17 +13,18 @@ xvoland/Extract kind:clone
 MenkeTechnologies/zsh-expand kind:defer
 hlissner/zsh-autopair kind:defer
 
-zsh-users/zsh-syntax-highlighting kind:defer
+# Replace with full fzf
+# Aloxaf/fzf-tab kind:defer
+zdharma-continuum/fast-syntax-highlighting kind:defer
 zsh-users/zsh-autosuggestions kind:defer
-zsh-users/zsh-history-substring-search kind:defer
+# Replace with atuin
+# zsh-users/zsh-history-substring-search kind:defer
 
 # tarrasch/zsh-bd kind:defer
-Aloxaf/fzf-tab kind:defer
-# wfxr/forgit kind:defer
+jetm/forgit kind:defer
 marlonrichert/zsh-edit kind:defer
-# LucasLarson/gunstage kind:defer
 nyoungstudios/zsh-history-on-success kind:defer
 aemonge/zsh-cycle-jobs kind:defer
-# vxfemboy/zsh-smart-files kind:defer
+vxfemboy/zsh-smart-files kind:defer
 
 # vim: ft=config
