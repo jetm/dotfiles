@@ -47,9 +47,6 @@ unfunction run_compinit
 
 TRAPUSR1() { rehash }
 
-# Carapace completion engine (after compinit)
-zsh-defer _cached_init carapace carapace _carapace
-
 #
 # From https://github.com/sorin-ionescu/prezto/modules/completion/init.zsh
 #
