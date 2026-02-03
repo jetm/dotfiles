@@ -25,6 +25,10 @@ setopt SHARE_HISTORY          # shares history between all sessions.
 
 setopt hist_reduce_blanks # Remove superfluous blanks
 
+# Don't record trivial/short commands in history
+# Pattern: (cmd1|cmd2|...) matches exact commands, * for prefix patterns
+HISTORY_IGNORE="(|ls|l|ll|la|cd|cd *|pwd|exit|clear|fg|bg|e|v|q|type|which|whoami|date|history|jobs)"
+
 #
 # prezto
 #
