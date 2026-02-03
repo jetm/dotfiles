@@ -80,7 +80,7 @@
     # list files which have changed
     files = !git diff --name-only
 
-    rE = "!f() { git restore -S $@ && git restore $@; }; f"
+    discard = "!f() { git restore -S $@ && git restore $@; }; f"
 
     # Pull, Rebase, Origin Master/Main branch
     rebase-origin = "!git pull --rebase origin $(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)"
