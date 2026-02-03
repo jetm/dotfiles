@@ -88,6 +88,93 @@ my_zvm_vi_put_before() {
   zvm_highlight clear # zvm_vi_put_before introduces weird highlighting for me
 }
 
+# --- Widget Definitions ---
+autoload -Uz edit-command-line
+zle -N edit-command-line
+
+function kitty_scrollback_edit_command_line() {
+  local VISUAL='~/.local/share/nvim/lazy/kitty-scrollback.nvim/scripts/edit_command_line.sh'
+  zle edit-command-line
+  zle kill-whole-line
+}
+zle -N kitty_scrollback_edit_command_line
+
+fancy-ctrl-z() {
+  if [[ $#BUFFER == 0 ]]; then
+    BUFFER="fg"
+    zle accept-line -w
+  else
+    zle push-input -w
+    zle clear-screen -w
+  fi
+}
+zle -N fancy-ctrl-z
+
+_fzf-ripgrep_() {
+  RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
+  INITIAL_QUERY="${*:-}"
+
+  fzf_options=(
+    --ansi
+    --color "hl:-1:underline,hl+:-1:underline:reverse"
+    --disabled --query "$INITIAL_QUERY"
+    --bind "change:reload:sleep 0.1 && $RG_PREFIX {q} || true"
+    --prompt '  ripgrep > '
+    --ghost='Search content...'
+    --delimiter :
+    --header 'Ctrl-r ripgrep | Ctrl-f fzf | Alt-n scope '
+    --preview 'bat --color=always {1} --highlight-line {2}'
+    --preview-window 'nohidden,<60(nohidden,up,60%,border-bottom,+{2}+3/3,~3)'
+  )
+
+  command rm -f /tmp/rg-fzf-{r,f}
+  FZF_DEFAULT_COMMAND="$RG_PREFIX $(printf %q "$INITIAL_QUERY")" fzf "${fzf_options[@]}" \
+    --bind "ctrl-f:unbind(change,ctrl-f)+change-prompt(  fzf > )+enable-search+rebind(ctrl-r)+transform-query(echo {q} > /tmp/rg-fzf-r; cat /tmp/rg-fzf-f)" \
+    --bind "ctrl-r:unbind(ctrl-r)+change-prompt(  ripgrep > )+disable-search+reload($RG_PREFIX {q} || true)+rebind(change,ctrl-f)+transform-query(echo {q} > /tmp/rg-fzf-f; cat /tmp/rg-fzf-r)" \
+    --bind "start:unbind(ctrl-r)" \
+    --bind "alt-n:transform-nth(if [[ -z \$FZF_NTH ]]; then echo 1; elif [[ \$FZF_NTH == 1 ]]; then echo 4..; else echo ''; fi)+transform-prompt(if [[ -z \$FZF_NTH ]]; then echo '  file > '; elif [[ \$FZF_NTH == 1 ]]; then echo '  content > '; else echo '  fzf > '; fi)" \
+    --bind "enter:become(${EDITOR:-vim} {1} +{2})"
+}
+
+fzf-ripgrep-widget() {
+  _fzf-ripgrep_"$*" < "$TTY"
+  zle redisplay
+}
+zle -N fzf-ripgrep-widget
+
+exit_zsh() {
+  exit
+}
+zle -N exit_zsh
+
+# ls automatically after cd and git status if on a git repo
+function cd() {
+  auto_ls() {
+    if command -v eza > /dev/null; then
+      lsd --all --group-directories-first
+    else
+      ls -Fh --color=auto --group-directories-first
+    fi
+  }
+
+  builtin cd "$@"
+
+  if [[ -d .git ]]; then
+    git status
+    echo ""
+    auto_ls
+  else
+    auto_ls
+  fi
+}
+
+custom_clear_screen() {
+  builtin print -rn -- $'\r\e[0J\e[H\e[22J' > "$TTY"
+  builtin zle .reset-prompt
+  builtin zle -R
+}
+zle -N custom_clear_screen
+
 # --- Keybindings ---
 zvm_after_lazy_keybindings() {
   # Visual mode widgets
@@ -128,8 +215,8 @@ zvm_after_lazy_keybindings() {
 
 # zsh-vi-mode will auto execute this zvm_after_init function
 zvm_after_init() {
-  # shellcheck disable=SC1091
-  source "$ZDOTDIR"/zsh-config/key-bindings.zsh
+  # 1. FZF init (must precede atuin — fzf --zsh clobbers ^r)
+  _cached_init fzf fzf --zsh
 
   if [[ "$(_cached_distro_id)" == "Fedora" ]]; then
     # shellcheck disable=SC1091
@@ -139,19 +226,38 @@ zvm_after_init() {
     source /usr/share/fzf/key-bindings.zsh
   fi
 
+  # 2. Kitty shell integration
   if [[ -f "$ZDOTDIR"/zsh-config/kitty-shell-integration.zsh ]]; then
     # shellcheck disable=SC1091
     source "$ZDOTDIR"/zsh-config/kitty-shell-integration.zsh
   fi
 
-  if [ -f /usr/share/zsh/plugins/forgit/forgit.plugin.zsh ]; then
-    export FORGIT_NO_ALIASES=1
-    # shellcheck disable=SC1091
-    source /usr/share/zsh/plugins/forgit/forgit.plugin.zsh
-  fi
-
+  # 3. Atuin init
   eval "$(atuin init zsh)"
-  eval "$(wtp shell-init zsh)"
+
+  # 4. Misc
+  bindkey -M vicmd '^e' kitty_scrollback_edit_command_line
+  bindkey '^Z' fancy-ctrl-z
+  bindkey '^F' fzf-ripgrep-widget
+  bindkey '^D' exit_zsh
+  bindkey -r '^P'
+  bindkey -r '^T'
+  bindkey -M vicmd '^p' fzf-file-widget
+  bindkey -M viins '^p' fzf-file-widget
+  bindkey '^P' fzf-file-widget
+  bindkey '^n' custom_clear_screen
+
+  # 5. atuin reclaims ^r from fzf)
+  bindkey -M emacs '^r' atuin-search
+  bindkey -M viins '^r' atuin-search-viins
+  bindkey -M vicmd '/' atuin-search
+  bindkey -M viins '^t' fzf-history-widget
+  bindkey -M viins '^[[A' atuin-up-search-viins
+  bindkey -M vicmd '^[[A' atuin-up-search
+  bindkey -M vicmd 'k' atuin-up-search
+
+  # 6. WTP init
+  _cached_init wtp wtp shell-init zsh
 }
 
 # vim:set ft=zsh ts=2 sw=2 et:
