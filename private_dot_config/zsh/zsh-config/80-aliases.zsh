@@ -23,8 +23,8 @@ alias l='ls --all --long --header'
 # General
 alias e='nvim'
 alias vimdiff='nvim -d'
-alias up='bd'
-# alias ..='cd ../'
+# alias up='bd'
+alias ..='cd ../'
 alias cd-='cd -'
 alias df='duf'
 alias bbk='bitbake'
@@ -56,19 +56,19 @@ alias gcs='git show'
 # Checkout (r)
 alias grp='gai --patch=checkout --'
 alias grr='gai --patch=reset --'
-alias grf='git forgit checkout_file'
-alias grh='git forgit reset_head'
+alias grf='forgit::checkout_file::file'
+alias grh='forgit::reset::head'
 
 # Grep (g)
 alias gg='git grep'
 
 # Index (a)
-alias ga='git forgit add'
+alias ga='forgit::add'
 alias gap='gai --patch --'
 
 # Diff (d)
-alias gd='git forgit diff'
-alias gdc='git forgit diff --cached'
+alias gd='forgit::diff'
+alias gdc='forgit::diff --cached'
 
 # Log (l)
 alias gl='git lg'
@@ -99,7 +99,7 @@ alias gu='git undo'
 alias guh='git undo -h'
 
 # Misc
-alias gfc='git forgit fixup'
+alias gfc='forgit::fixup'
 alias gcl='git clone'
 alias gfe='git fetch'
 alias gls='git ls-files'
