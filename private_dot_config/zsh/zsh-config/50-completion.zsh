@@ -47,10 +47,8 @@ unfunction run_compinit
 
 TRAPUSR1() { rehash }
 
-# Not mature enough. Try again later. Disable fzf-tab to avoid conflicts
-# if (command -v carapace >/dev/null 2>&1); then
-#   source <(carapace _carapace)
-# fi
+# Carapace completion engine (after compinit)
+zsh-defer _cached_init carapace carapace _carapace
 
 #
 # From https://github.com/sorin-ionescu/prezto/modules/completion/init.zsh
@@ -181,11 +179,5 @@ zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<-
 
 # Cache delta completion (invalidates when binary updates)
 zsh-defer _cached_init delta delta --generate-completion zsh
-
-# carapace
-#
-# Still missing more commands
-# zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-# source <(carapace _carapace)
 
 # vim:set ft=zsh ts=2 sw=2 et:
