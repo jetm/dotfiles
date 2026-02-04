@@ -4,7 +4,7 @@ unalias -m '*'
 
 # Put just after removing all aliases
 # Defer lacy/zoxide init - `j` command delayed until first prompt
-zsh-defer _cached_init lacy lacy init zsh
+# zsh-defer _cached_init lacy lacy init zsh
 zsh-defer _cached_init zoxide zoxide init zsh --cmd j
 
 # Disable correction
@@ -56,7 +56,7 @@ alias gcs='git show'
 # Checkout (r)
 alias grp='gai --patch=checkout --'
 alias grr='gai --patch=reset --'
-alias grf='forgit::checkout_file::file'
+alias grf='forgit::checkout::file'
 alias grh='forgit::reset::head'
 
 # Grep (g)
@@ -105,6 +105,7 @@ alias gfe='git fetch'
 alias gls='git ls-files'
 alias gP='git pull'
 alias gt='git status'
+alias gsm='git-switch-main'
 
 # xdg
 alias svn='svn --config-dir $XDG_CONFIG_HOME/subversion'
