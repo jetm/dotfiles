@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Enable gpg-agent-updatetty.service for graphical-session.target
+# hash: {{ include "private_dot_config/systemd/user/gpg-agent-updatetty.service" | sha256sum }}
+set -euo pipefail
+
+systemctl --user daemon-reload
+systemctl --user enable gpg-agent-updatetty.service

@@ -1,0 +1,11 @@
+[Unit]
+Description=Update GPG agent with session display variables
+After=gpg-agent.socket graphical-session-pre.target
+Requires=gpg-agent.socket
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/gpg-connect-agent updatestartuptty /bye
+
+[Install]
+WantedBy=graphical-session.target
