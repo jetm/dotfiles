@@ -151,7 +151,7 @@ zle -N exit_zsh
 function cd() {
   auto_ls() {
     if command -v eza > /dev/null; then
-      lsd --all --group-directories-first
+      eza --all --group-directories-first --icons=always
     else
       ls -Fh --color=auto --group-directories-first
     fi
