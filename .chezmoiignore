@@ -13,3 +13,10 @@ disabled/
 build/
 logs/
 .config/k9s/aliases.yaml
+
+# Fish shell - dynamic files managed by fish/fisher
+.config/fish/fish_variables
+.config/fish/completions/**
+.config/fish/.fish_history
+
+specs/
