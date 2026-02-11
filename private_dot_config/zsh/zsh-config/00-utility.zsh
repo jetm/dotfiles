@@ -93,8 +93,6 @@ extract_audio() {
   echo "Extracting English audio stream (position $eng_stream) from '$input_file'..."
 
   # Extract with ffmpeg - copy video and specified audio stream
-  ffmpeg -i "$input_file" -map 0:v -map "0:a:$ffmpeg_audio_index" -c copy "$output_file"
-
   if ffmpeg -i "$input_file" -map 0:v -map "0:a:$ffmpeg_audio_index" -c copy "$output_file"; then
     echo "Successfully created '$output_file' with English audio only"
   else
