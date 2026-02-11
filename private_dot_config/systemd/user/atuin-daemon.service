@@ -1,0 +1,13 @@
+[Unit]
+Description=Atuin history daemon
+After=default.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/atuin daemon
+Restart=on-failure
+RestartSec=5
+Environment=ATUIN_LOG=error
+
+[Install]
+WantedBy=default.target

@@ -9,9 +9,9 @@ show_help = false                    # saves space in compact mode
 show_tabs = true
 exit_mode = "return-original"
 
-## Shell Up-Key behavior (global prefix matching)
-filter_mode_shell_up_key_binding = "global"
-search_mode_shell_up_key_binding = "skim"
+## Shell Up-Key behavior (prefix matching, host-scoped for speed)
+filter_mode_shell_up_key_binding = "host"
+search_mode_shell_up_key_binding = "prefix"
 
 ## Vim keymap
 keymap_mode = "auto"
@@ -29,6 +29,10 @@ workspaces = true
 
 ## Performance
 prefers_reduced_motion = true
+
+[daemon]
+enabled = true
+sync_frequency = 300
 
 [keys]
 scroll_exits = true
