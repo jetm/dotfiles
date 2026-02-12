@@ -70,33 +70,81 @@
     "return-type": "json",
     "exec-if": "which wttrbar",
   },
-  "pulseaudio": {
-    "format": "{volume}{icon} {format_source}",
-    "format-muted": "Mute  ",
-    "format-source": "{volume} ",
-    "format-source-muted": " ",
-    "format-icons": {
-      "default": [
-        " 󰕿 ",
-        " 󰖀",
-        " 󰕾"
-      ]
-    },
+  "wireplumber": {
+    "format": "{volume}% {icon}",
+    "format-muted": "Mute 󰖁 ",
+    "format-icons": [
+      " 󰕿 ",
+      " 󰖀",
+      " 󰕾"
+    ],
     "scroll-step": 5.0,
     "on-click": "pavucontrol",
-    "smooth-scrolling-threshold": 1,
+    "max-volume": 100,
+    "tooltip-format": "{node_name}",
+  },
+  "wireplumber#source": {
+    "node-type": "Audio/Source",
+    "format": "{volume}% ",
+    "format-muted": "󰍭 ",
+    "scroll-step": 5.0,
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "tooltip-format": "{node_name}",
   },
   "temperature": {
-    // CPUTIN
-    "hwmon-path": "/sys/devices/platform/nct6775.656/hwmon/hwmon9/temp2_input",
+    // CPU die (k10temp Tctl)
+    "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:18.3/hwmon",
+    "input-filename": "temp1_input",
+    "warning-threshold": 80,
     "critical-threshold": 95,
-    "format": "{temperatureC}°C "
+    "format": "{temperatureC}°C ",
   },
-  "custom/mako": {
-    "format": " ",
-    "on-click": "notify-send 'no disturb on' && sleep 1 && makoctl mode -a do-not-disturb",
-    "on-click-right": "makoctl mode -r do-not-disturb && sleep 1 && notify-send 'no disturb off'",
-    "on-click-middle": "makoctl restore",
+  "temperature#gpu": {
+    // GPU (amdgpu edge)
+    "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:01.1/0000:01:00.0/0000:02:00.0/0000:03:00.0/hwmon",
+    "input-filename": "temp1_input",
+    "warning-threshold": 85,
+    "critical-threshold": 100,
+    "format": "{temperatureC}°C 󰢮",
+  },
+  "bluetooth": {
+    "format": "󰂯",
+    "format-connected": "󰂱 {device_alias}",
+    "format-disabled": "󰂲",
+    "format-off": "󰂲",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "on-click": "blueman-manager",
+  },
+  "privacy": {
+    "icon-spacing": 4,
+    "icon-size": 14,
+    "transition-duration": 250,
+    "modules": [
+      { "type": "screenshare", "tooltip": true, "tooltip-icon-size": 24 },
+      { "type": "audio-in", "tooltip": true, "tooltip-icon-size": 24 },
+    ],
+  },
+  "custom/notification": {
+    "tooltip": true,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "󱅫",
+      "none": "󰂜",
+      "dnd-notification": "󰂠",
+      "dnd-none": "󰪓",
+      "inhibited-notification": "󰂛",
+      "inhibited-none": "󰪑",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰪑"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true,
   },
   "custom/arch-updates": {
     "format": "{} {icon}",
@@ -106,26 +154,12 @@
       "updated": ""
     },
     "exec-if": "which waybar-module-pacman-updates",
-    "exec": "waybar-module-pacman-updates --network-interval-seconds 14400 --no-zero-output",
-  },
-  "custom/arch-linux-updates": {
-    "format": "{} {icon}",
-    "return-type": "json",
-    "format-icons": {
-      "pending-updates": " ",
-      "updated": ""
-    },
-    "exec-if": "which waybar-updates",
-    "exec": "waybar-updates"
+    "exec": "waybar-module-pacman-updates --network-interval-seconds 14400 --no-zero-output --tooltip-align-columns monospace --color-semver-updates",
+    "on-click": "kitty --hold -e yay -Syu",
   },
   "tray": {
     "spacing": 5,
   },
-  // "custom/clipmgr": {
-  //   "format": "",
-  //   "on-click": "systemctl --user start clipmgr.service && notify-send 'clipmgr on'",
-  //   "on-click-right": "systemctl --user stop clipmgr.service && notify-send 'clipmgr off'",
-  // },
   "upower": {
     // Mouse battery
     "native-path": "hidpp_battery_0",
