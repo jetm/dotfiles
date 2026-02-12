@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Reload systemd user daemon when service/timer files change
+# {{ include "private_dot_config/systemd/exact_user/atuin-daemon.service" | sha256sum }}
+# {{ include "private_dot_config/systemd/exact_user/cameractrlsd.service" | sha256sum }}
+# {{ include "private_dot_config/systemd/exact_user/git-maintenance@.service" | sha256sum }}
+# {{ include "private_dot_config/systemd/exact_user/gpg-agent-updatetty.service" | sha256sum }}
+# {{ include "private_dot_config/systemd/exact_user/rustup-update.service" | sha256sum }}
+# {{ include "private_dot_config/systemd/exact_user/git-maintenance@daily.timer" | sha256sum }}
+# {{ include "private_dot_config/systemd/exact_user/git-maintenance@hourly.timer" | sha256sum }}
+# {{ include "private_dot_config/systemd/exact_user/git-maintenance@weekly.timer" | sha256sum }}
+# {{ include "private_dot_config/systemd/exact_user/rustup-update.timer" | sha256sum }}
+set -euo pipefail
+
+systemctl --user daemon-reload
