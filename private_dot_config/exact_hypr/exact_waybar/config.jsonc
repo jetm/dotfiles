@@ -8,12 +8,13 @@
   "margin-left": 0,
   "margin-right": 0,
   "spacing": 0,
-  "mod": "dock",
   "passthrough": false,
   "modules-left": [
-    "upower",
+    "privacy",
+    // "upower", // disabled: Portoarc mouse doesn't expose battery via HID++
     "memory",
     "temperature",
+    "temperature#gpu",
     "cpu",
     "custom/weather",
     "wlr/taskbar",
@@ -21,13 +22,12 @@
   ],
   "modules-right": [
     "hyprland/language",
-    "custom/clipmgr",
+    // "bluetooth",
     "custom/arch-updates",
-    // "custom/arch-linux-updates",
     "tray",
-    // "network",
-    "pulseaudio",
-    "custom/mako",
+    "wireplumber",
+    "wireplumber#source",
+    "custom/notification",
     "clock"
   ],
 }
