@@ -1,0 +1,9 @@
+[Unit]
+Description=Check for rust updates every day.
+
+[Timer]
+OnCalendar=*-*-* 13:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

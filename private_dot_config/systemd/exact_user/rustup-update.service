@@ -1,0 +1,10 @@
+[Unit]
+Description=Check Rust updates.
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/tiamarin
+ExecStart=/usr/bin/rustup update
+
+[Install]
+WantedBy=default.target
