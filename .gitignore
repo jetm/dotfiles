@@ -1,3 +1,4 @@
 **/*.zwc
 logs/
 .chezmoi.toml.tmpl
+__pycache__/
