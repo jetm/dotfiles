@@ -1,84 +1,102 @@
+@define-color bg rgba(0, 0, 0, 0.7);
+@define-color text #e0def4;
+@define-color subtle #CECDC3;
+@define-color accent #24837B;
+@define-color urgent #eb6f92;
+@define-color special #c4a7e7;
+@define-color warning #f6c177;
+@define-color border #313136;
+@define-color surface #23272e;
+
 * {
   border: none;
   border-radius: 0px;
   font-family: "IosevkaTerm Nerd Font Propo";
   font-size: 14px;
   min-height: 10px;
-  color: #e0def4;
+  color: @text;
 }
 
 window#waybar {
-  background: rgba(0, 0, 0, 0.7);
+  background: @bg;
 }
 
 tooltip {
-  border-radius: 10px;
-  color: #cdd6f4;
   border-radius: 7px;
   border-width: 0px;
-  background: rgba(0, 0, 0, 0.7);
+  color: @subtle;
+  background: @bg;
 }
 
 #workspaces button {
-  color: @font;
+  color: @text;
   border-bottom: 2px solid transparent;
 }
 
 #workspaces button.active {
-  color: @workspaces-button_active;
-  border-bottom: 2px solid @workspaces-button_active;
+  color: @accent;
+  border-bottom: 2px solid @accent;
 }
 
 #workspaces button.urgent {
-  color: @workspaces-button_urgent;
-  border-bottom: 2px solid @workspaces-button_urgent;
+  color: @urgent;
+  border-bottom: 2px solid @urgent;
   font-weight: bold;
   animation: workspace-blinker 1s linear infinite;
 }
 
 #workspaces button.special {
-  color: @font;
+  color: @text;
   border-bottom: 2px solid transparent;
   font-weight: bold;
 }
 
 #workspaces button.special.active {
-  color: @workspaces-button_special;
-  border-bottom: 2px solid @workspaces-button_special;
+  color: @special;
+  border-bottom: 2px solid @special;
   font-weight: bold;
 }
 
-#upower,
+#bluetooth,
 #clock,
 #cpu,
 #custom-arch-updates,
-#custom-clipmgr,
-#custom-mako,
+#custom-notification,
 #hyprland-language,
 #language,
 #memory,
 #network,
-#pulseaudio,
+#privacy,
 #taskbar,
 #temperature,
 #tray,
+#upower,
 #weather,
 #window,
+#wireplumber,
 #workspaces {
   padding-left: 5px;
   padding-right: 5px;
-  border-right: 1px dotted #313136;
+  border-right: 1px dotted @border;
+}
+
+#temperature.warning {
+  color: @warning;
+}
+
+#temperature.critical {
+  color: @urgent;
 }
 
 #tray menuitem,
 #tray window,
 #tray menu {
-  background: #23272e;
+  background: @surface;
 }
 
 #tray menu menuitem:hover {
   border-radius: 10px;
-  background: #313136;
+  background: @border;
 }
 
 #tray > .passive {
@@ -93,5 +111,5 @@ tooltip {
 }
 
 #upower {
-  background: rgba(0, 0, 0, 0.7);
+  background: @bg;
 }
