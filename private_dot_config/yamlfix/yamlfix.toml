@@ -1,0 +1,4 @@
+line_length = 120
+whitelines = 1
+section_whitelines = 1
+sequence_style = block_style
