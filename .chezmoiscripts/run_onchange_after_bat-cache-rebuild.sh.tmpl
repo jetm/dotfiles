@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Rebuild bat cache when theme files change
+# {{ include "private_dot_config/bat/exact_themes/OneDark.tmTheme" | sha256sum }}
+set -euo pipefail
+
+bat cache --build
