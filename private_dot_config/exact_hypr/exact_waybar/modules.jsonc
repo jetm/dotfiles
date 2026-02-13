@@ -154,7 +154,7 @@
       "updated": ""
     },
     "exec-if": "which waybar-module-pacman-updates",
-    "exec": "waybar-module-pacman-updates --network-interval-seconds 14400 --no-zero-output --tooltip-align-columns monospace --color-semver-updates",
+    "exec": "waybar-module-pacman-updates --network-interval-seconds 14400 --no-zero-output",
     "on-click": "kitty --hold -e yay -Syu",
   },
   "tray": {
