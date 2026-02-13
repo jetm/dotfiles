@@ -1,0 +1,327 @@
+# Ghostty configuration
+# Ported from kitty.conf — see TODOs for features without Ghostty equivalents
+
+# Font {{{
+
+font-family = IosevkaTerm Nerd Font
+font-size = 12
+font-feature = calt
+
+# }}}
+
+# Scrollback {{{
+
+# Kitty uses scrollback_lines -1 (unlimited). Ghostty uses byte-based limit.
+# 100MB should provide extensive scrollback history.
+scrollback-limit = 100000000
+
+# }}}
+
+# Cursor {{{
+
+cursor-style = block
+cursor-style-blink = true
+cursor-opacity = 1
+
+# }}}
+
+# Mouse {{{
+
+copy-on-select = true
+clipboard-trim-trailing-spaces = true
+mouse-hide-while-typing = true
+link-url = true
+
+# }}}
+
+# Terminal bell {{{
+
+# Kitty: enable_audio_bell no
+bell-features = title,attention
+
+# }}}
+
+# Window layout / decoration {{{
+
+# Kitty: hide_window_decorations yes
+window-decoration = none
+
+# Kitty: inactive_text_alpha 0.3 — Ghostty uses split opacity (0.15-1 range)
+unfocused-split-opacity = 0.3
+
+# Kitty: active_border_color #00ff00, inactive_border_color #cccccc
+split-divider-color = #cccccc
+
+# Kitty: confirm_os_window_close 0
+confirm-close-surface = false
+
+focus-follows-mouse = false
+window-inherit-working-directory = true
+
+# }}}
+
+# Tab bar {{{
+
+# Kitty: tab_bar_edge top, tab_bar_align center, tab_bar_style separator
+gtk-tabs-location = top
+gtk-wide-tabs = false
+adw-toolbar-style = flat
+window-show-tab-bar = always
+
+# Kitty tab title colors (from OneDark.conf)
+window-titlebar-foreground = #d7a1e7
+window-titlebar-background = #282c34
+
+# TODO: Ghostty lacks custom tab title templates with Unicode indicators.
+# Kitty uses: ○ index:title (inactive) / ◉ index:title (active)
+# Ghostty uses native GTK/Adwaita tab styling — no custom format strings.
+
+# TODO: Ghostty lacks tab_bar_align (center) equivalent.
+# Tabs use native GTK positioning.
+
+# }}}
+
+# Color scheme — OneDark Pro (olimorris/onedarkpro.nvim) {{{
+
+# Background: nvchad variant
+background = #1e222a
+foreground = #abb2bf
+
+# Normal colors
+palette = 0=#282c34
+palette = 1=#e06c75
+palette = 2=#98c379
+palette = 3=#e5c07b
+palette = 4=#61afef
+palette = 5=#c678dd
+palette = 6=#56b6c2
+palette = 7=#abb2bf
+
+# Bright colors
+palette = 8=#5c6370
+palette = 9=#e9969d
+palette = 10=#b3d39c
+palette = 11=#edd4a6
+palette = 12=#8fc6f4
+palette = 13=#d7a1e7
+palette = 14=#7bc6d0
+palette = 15=#c8cdd5
+
+# Kitty uses cursor=none (follows foreground/background).
+# Ghostty: omit cursor-color to use theme defaults.
+
+# }}}
+
+# Shell {{{
+
+# Kitty: shell_integration no-cursor, shell fish --login
+# Ghostty: full shell integration including cursor
+shell-integration = detect
+shell-integration-features = cursor,sudo,title
+
+# }}}
+
+# Keybindings {{{
+
+# Clear defaults to start fresh (like Kitty's clear_all_shortcuts yes)
+keybind = clear
+
+# Clipboard {{{
+
+# Kitty: map shift+insert paste_from_clipboard
+keybind = shift+insert=paste_from_clipboard
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+
+# }}}
+
+# Scrolling {{{
+
+# TODO: Ghostty has no equivalent to kitty-scrollback.nvim (browse scrollback in nvim).
+# Kitty: map kitty_mod+/ kitty_scrollback_nvim
+# Kitty: map kitty_mod+h kitty_scrollback_nvim --config ksb_builtin_last_cmd_output
+
+# TODO: Ghostty has no Vim-aware smart scroll (smart_scroll.py kitten).
+# These bindings scroll directly without checking if Vim is active.
+# In practice, Vim captures these keys when focused, so basic scrolling
+# works when not in an alternate screen application.
+keybind = ctrl+up=scroll_page_lines:-1
+keybind = ctrl+down=scroll_page_lines:1
+keybind = ctrl+page_up=scroll_page_up
+keybind = ctrl+page_down=scroll_page_down
+keybind = ctrl+home=scroll_to_top
+keybind = ctrl+end=scroll_to_bottom
+
+# Prompt navigation (requires shell integration)
+keybind = ctrl+shift+up=jump_to_prompt:-1
+keybind = ctrl+shift+down=jump_to_prompt:1
+
+# }}}
+
+# Window management {{{
+
+# Kitty: map ctrl+a>x close_window
+keybind = ctrl+shift+w=close_surface
+
+# Splits
+# Kitty: map ctrl+\ launch --location=vsplit --cwd=current
+# Kitty: map ctrl+minus launch --location=hsplit --cwd=current
+keybind = ctrl+backslash=new_split:right
+keybind = ctrl+minus=new_split:down
+
+# Split navigation
+# TODO: Ghostty has no Vim-aware passthrough (pass_keys.py kitten).
+# These go directly to Ghostty split navigation without checking if
+# the focused pane is running Vim. For Vim-aware navigation, consider
+# using a Neovim plugin that detects the terminal emulator.
+# Kitty: map ctrl+j kitten pass_keys.py neighboring_window bottom ctrl+j
+# Kitty: map ctrl+k kitten pass_keys.py neighboring_window top    ctrl+k
+# Kitty: map ctrl+h kitten pass_keys.py neighboring_window left   ctrl+h
+# Kitty: map ctrl+l kitten pass_keys.py neighboring_window right  ctrl+l
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+l=goto_split:right
+
+# Split resizing
+# TODO: Ghostty has no Vim-aware resize passthrough (pass_keys.py kitten).
+# Kitty: map ctrl+alt+{direction} kitten pass_keys.py relative_resize {direction} 3
+keybind = ctrl+alt+left=resize_split:left,30
+keybind = ctrl+alt+right=resize_split:right,30
+keybind = ctrl+alt+up=resize_split:up,30
+keybind = ctrl+alt+down=resize_split:down,30
+
+# Split zoom (Kitty: map ctrl+a>z toggle_layout stack)
+keybind = ctrl+shift+z=toggle_split_zoom
+keybind = ctrl+shift+e=equalize_splits
+
+# }}}
+
+# Tab management {{{
+
+# Kitty: map ctrl+a>c new_tab
+keybind = ctrl+shift+t=new_tab
+
+# Tab navigation
+# Kitty: map ctrl+a>1..9 goto_tab N
+keybind = ctrl+shift+one=goto_tab:1
+keybind = ctrl+shift+two=goto_tab:2
+keybind = ctrl+shift+three=goto_tab:3
+keybind = ctrl+shift+four=goto_tab:4
+keybind = ctrl+shift+five=goto_tab:5
+keybind = ctrl+shift+six=goto_tab:6
+keybind = ctrl+shift+seven=goto_tab:7
+keybind = ctrl+shift+eight=goto_tab:8
+keybind = ctrl+shift+nine=goto_tab:9
+
+# Kitty: map ctrl+a>ctrl+a goto_tab -1 (last visited)
+keybind = ctrl+shift+tab=last_tab
+
+# }}}
+
+# Font size {{{
+
+keybind = ctrl+shift+equal=increase_font_size:1
+keybind = ctrl+shift+minus=decrease_font_size:1
+keybind = ctrl+shift+zero=reset_font_size
+
+# }}}
+
+# Miscellaneous {{{
+
+# Kitty: map kitty_mod+f5 load_config_file
+keybind = ctrl+shift+f5=reload_config
+
+# Kitty: map kitty_mod+alt+x quit
+keybind = ctrl+shift+alt+x=quit
+
+# }}}
+
+# TODO: Ghostty has no equivalent to Kitty hints mode (kitten hints).
+# Kitty provides: path, word, line, url, hash, linenum selection via hints.
+# Ghostty supports automatic URL detection (link-url) but no hint overlays
+# for arbitrary text selection.
+
+# }}}
+
+# Performance / rendering {{{
+
+window-vsync = true
+
+# }}}
+
+# Single instance {{{
+
+# Kitty: --single-instance flag
+# Ghostty auto-detects; force it on for consistent behavior
+gtk-single-instance = true
+
+# }}}
+
+# Opacity {{{
+
+background-opacity = 1
+
+# }}}
+
+# Padding {{{
+
+window-padding-x = 0
+window-padding-y = 0
+window-padding-balance = true
+
+# }}}
+
+# Environment {{{
+
+term = xterm-ghostty
+
+# }}}
+
+# Ghostty-unique features {{{
+
+# Quick terminal (dropdown/quake-style — no Kitty equivalent)
+# Toggle with keybind below; configure position and size
+quick-terminal-position = top
+quick-terminal-size = 50%
+quick-terminal-autohide = true
+
+# }}}
+
+# TODO: Features without Ghostty equivalents {{{
+#
+# Session startup tabs:
+#   Kitty loads session.conf with predefined tabs (HOME, tooling, iotil, claude.md).
+#   Ghostty has no session file support. Use a shell script or systemd to open
+#   multiple tabs on startup if needed.
+#
+# Vim-aware window navigation (pass_keys.py):
+#   Kitty's pass_keys.py kitten detects if Vim is running in a pane and
+#   forwards Ctrl+hjkl to Vim instead of performing Kitty navigation.
+#   Ghostty has no kitten/plugin system. Consider using a Neovim plugin
+#   (e.g., vim-kitty-navigator equivalent for Ghostty) if one becomes available.
+#
+# Vim-aware scrolling (smart_scroll.py):
+#   Kitty's smart_scroll.py detects Vim and forwards scroll keys accordingly.
+#   Not available in Ghostty.
+#
+# kitty-scrollback.nvim:
+#   Opens Kitty scrollback buffer in Neovim for searching/copying.
+#   Ghostty alternative: use write_scrollback_file action to export scrollback,
+#   then open in an editor.
+#
+# Remote control over socket:
+#   Kitty: allow_remote_control socket-only, listen_on unix:/tmp/kitty
+#   Ghostty has no remote control socket API.
+#
+# Custom tab title templates:
+#   Kitty uses Python-style format strings with Unicode indicators (○/◉).
+#   Ghostty uses native GTK tab styling.
+#
+# Hints mode:
+#   Kitty's hints kitten provides overlay selection for paths, words, lines,
+#   URLs, git hashes, and line numbers. Ghostty only has automatic URL detection.
+#
+# }}}
+
+# vim:foldmethod=marker
