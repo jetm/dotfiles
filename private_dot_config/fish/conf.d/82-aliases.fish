@@ -18,7 +18,7 @@ alias type 'type -a'
 
 # Listing (avoid long eza expansion in abbreviations)
 alias ls 'eza --group-directories-first --icons=always'
-alias l 'ls --all --long --header'
+alias l 'eza --all --long --header'
 
 # XDG overrides
 alias svn 'svn --config-dir $XDG_CONFIG_HOME/subversion'
