@@ -1,27 +1,26 @@
+# Environment & secrets
 .direnv
-.editorconfig
 .env
 .envrc
-.gibrconfig
 
-.cache/
+# Editor/IDE
+.editorconfig
+.gibrconfig
 .idea/
 .vscode/
 
+# AI tooling
 .agents/
-.kiro/
-.zencoder/
+.claude/
+.omc/
 .serena/
-.taskmaster/
-.codemap/
-.cursor/
+AGENTS.md
+CLAUDE.md
 
+# Build artifacts & caches
+build/
+.cache/
 compile_commands.json
 
-**/AGENTS.md
-
+# CI
 .gitlab-ci-local/
-
-# Claude
-.claude/
-CLAUDE.md
