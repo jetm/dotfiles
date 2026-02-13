@@ -1230,7 +1230,6 @@ return {
         ["<Down>"] = { "select_next", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
         ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-        --['<A-y>'] = require('minuet').make_blink_map(),
       },
       fuzzy = { implementation = "prefer_rust" },
       cmdline = { completion = { ghost_text = { enabled = false } } },
