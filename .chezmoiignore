@@ -1,22 +1,18 @@
-README.md
-LICENSE
+# AI tooling
 CLAUDE.md
-scripts
-install_chezmoi.sh
-srtadrm
+AGENTS.md
+
+# Build & logs
+logs/
+
+# Zsh compiled files
 **/*.zwc
 **/*.zwc.old
-KDE_JETM_Shortcuts.kksrc
+
+# Neovim - lazy.nvim lock file
 **/lazy-lock.json
-disabled/
-.config/nvim/mistake_custom_dict.lua
-build/
-logs/
-.config/k9s/aliases.yaml
 
 # Fish shell - dynamic files managed by fish/fisher
 .config/fish/fish_variables
 .config/fish/completions/**
 .config/fish/.fish_history
-
-specs/
