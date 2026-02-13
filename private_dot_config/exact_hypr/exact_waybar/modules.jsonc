@@ -7,7 +7,7 @@
     ],
   },
   "hyprland/language": {
-    "format": "{} 󰌌",
+    "format": "{} <span color='#24837B'>󰌌</span>",
     "format-us": "English (US)",
     "format-us-intl": "English (US, alt. intl.)",
     "keyboard-name": "keyd-virtual-keyboard",
@@ -32,7 +32,7 @@
   "clock": {
     "align": 0,
     "rotate": 0,
-    "format": "{:%a %b %d, %G, %R} ",
+    "format": "{:%a %b %d, %G, %R} <span color='#24837B'></span>",
     "tooltip-format": "<span color='#CECDC3'><tt>{calendar}</tt></span>",
     "calendar": {
       "format": {
@@ -44,21 +44,21 @@
     "timezone": "America/Costa_Rica",
   },
   "cpu": {
-    "format": "{usage:3}%  ",
+    "format": "{usage:3}% <span color='#24837B'></span> ",
     "interval": 1
   },
   "memory": {
     "interval": 10,
-    "format": "{used:0.1f}G/{total:0.1f}G ",
+    "format": "{used:0.1f}G/{total:0.1f}G <span color='#24837B'></span>",
   },
   "network": {
     "interval": 5,
-    "format-wifi": " ",
-    "format-ethernet": "󰈀 ",
-    "format-linked": "{ifname} (No IP) 󰈀 ",
-    "format-disconnected": "Disconnected 󰤭 ",
-    "format-disabled": "Disabled 󰤭 ",
-    "format-alt": "{bandwidthUpBits}  | {bandwidthDownBits} ",
+    "format-wifi": "<span color='#24837B'></span> ",
+    "format-ethernet": "<span color='#24837B'>󰈀</span> ",
+    "format-linked": "{ifname} (No IP) <span color='#24837B'>󰈀</span> ",
+    "format-disconnected": "Disconnected <span color='#24837B'>󰤭</span> ",
+    "format-disabled": "Disabled <span color='#24837B'>󰤭</span> ",
+    "format-alt": "{bandwidthUpBits} <span color='#24837B'></span> | {bandwidthDownBits} <span color='#24837B'></span>",
     "tooltip-format": "{ifname} via {gwaddr} ",
     "on-click-right": "nm-connection-editor"
   },
@@ -71,8 +71,8 @@
     "exec-if": "which wttrbar",
   },
   "wireplumber": {
-    "format": "{volume}% {icon}",
-    "format-muted": "Mute 󰖁 ",
+    "format": "{volume}% <span color='#24837B'>{icon}</span>",
+    "format-muted": "Mute <span color='#24837B'>󰖁</span> ",
     "format-icons": [
       " 󰕿 ",
       " 󰖀",
@@ -86,7 +86,7 @@
   "wireplumber#source": {
     "node-type": "Audio/Source",
     "format": "{volume}% ",
-    "format-muted": "󰍭 ",
+    "format-muted": "<span color='#24837B'>󰍭</span> ",
     "scroll-step": 5.0,
     "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
     "tooltip-format": "{node_name}",
@@ -97,7 +97,7 @@
     "input-filename": "temp1_input",
     "warning-threshold": 80,
     "critical-threshold": 95,
-    "format": "{temperatureC}°C ",
+    "format": "{temperatureC}°C <span color='#24837B'></span>",
   },
   "temperature#gpu": {
     // GPU (amdgpu edge)
@@ -105,13 +105,13 @@
     "input-filename": "temp1_input",
     "warning-threshold": 85,
     "critical-threshold": 100,
-    "format": "{temperatureC}°C 󰢮",
+    "format": "{temperatureC}°C <span color='#24837B'>󰢮</span>",
   },
   "bluetooth": {
-    "format": "󰂯",
-    "format-connected": "󰂱 {device_alias}",
-    "format-disabled": "󰂲",
-    "format-off": "󰂲",
+    "format": "<span color='#24837B'>󰂯</span>",
+    "format-connected": "<span color='#24837B'>󰂱</span> {device_alias}",
+    "format-disabled": "<span color='#24837B'>󰂲</span>",
+    "format-off": "<span color='#24837B'>󰂲</span>",
     "tooltip-format": "{controller_alias}\t{controller_address}",
     "tooltip-format-connected": "{controller_alias}\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
@@ -128,7 +128,7 @@
   },
   "custom/notification": {
     "tooltip": true,
-    "format": "{icon}",
+    "format": "<span color='#24837B'>{icon}</span>",
     "format-icons": {
       "notification": "󱅫",
       "none": "󰂜",
@@ -147,7 +147,7 @@
     "escape": true,
   },
   "custom/arch-updates": {
-    "format": "{} {icon}",
+    "format": "{} <span color='#24837B'>{icon}</span>",
     "return-type": "json",
     "format-icons": {
       "has-updates": "",
