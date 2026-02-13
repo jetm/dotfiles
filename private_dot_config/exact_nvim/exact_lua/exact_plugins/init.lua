@@ -98,6 +98,9 @@ return {
         mode = { "n", "x" },
         desc = "Delete All Buffers",
       },
+      -- snacks.nvim replaces vim.notify with floating windows, making :messages
+      -- empty. This keymap is essential to review dismissed notifications
+      -- (e.g. minuet-ai errors that flash too quickly to read).
       {
         "<leader>n",
         function()
@@ -128,6 +131,7 @@ return {
       require("onedarkpro").setup({
         caching = true,
         colors = {
+          onedark = { bg = "#121418", black = "#121418" }, -- swaync darker variant
           -- onedark = { bg = "#23272E", black = "#23272E" },
           -- onedark = { bg = "#1c2025", black = "#1c2025" }, -- darker
           -- onedark = { bg = "#15181C", black = "#15181C" }, -- darker plus
@@ -1173,6 +1177,7 @@ return {
         default = {
           "lazydev",
           "lsp",
+          "minuet",
           "snippets",
           "buffer",
           "ripgrep",
@@ -1184,6 +1189,13 @@ return {
             module = "lazydev.integrations.blink",
             -- make lazydev completions top priority (see `:h blink.cmp`)
             score_offset = 100,
+          },
+          minuet = {
+            name = "minuet",
+            module = "minuet.blink",
+            async = true,
+            timeout_ms = 3000,
+            score_offset = 50,
           },
           ripgrep = {
             module = "blink-ripgrep",
@@ -1218,10 +1230,12 @@ return {
         ["<Down>"] = { "select_next", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
         ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+        --['<A-y>'] = require('minuet').make_blink_map(),
       },
       fuzzy = { implementation = "prefer_rust" },
       cmdline = { completion = { ghost_text = { enabled = false } } },
       completion = {
+        trigger = { prefetch_on_insert = false },
         accept = { auto_brackets = { enabled = true } },
         list = {
           max_items = 10,
@@ -1241,6 +1255,43 @@ return {
         },
       },
     },
+  },
+
+  {
+    "milanglacier/minuet-ai.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("minuet").setup({
+        provider = "codestral",
+        request_timeout = 3,
+        throttle = 1500,
+        debounce = 600,
+        context_window = 16000,
+        notify = "warn",
+        virtualtext = {
+          auto_trigger_ft = { "python", "lua", "sh", "bash", "zsh", "fish" },
+          show_on_completion_menu = true,
+          keymap = {
+            accept = "<A-A>",
+            accept_line = "<A-a>",
+            accept_n_lines = "<A-z>",
+            prev = "<A-[>",
+            next = "<A-]>",
+            dismiss = "<A-e>",
+          },
+        },
+        provider_options = {
+          codestral = {
+            api_key = "CODESTRAL_API_KEY",
+            model = "codestral-latest",
+            optional = {
+              max_tokens = 56,
+              stop = { "\n\n" },
+            },
+          },
+        },
+      })
+    end,
   },
 
   -- {
