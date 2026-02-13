@@ -25,9 +25,8 @@
     // "bluetooth",
     "custom/arch-updates",
     "tray",
-    "wireplumber",
-    "wireplumber#source",
     "custom/notification",
+    "pulseaudio",
     "clock"
   ],
 }

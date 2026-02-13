@@ -70,26 +70,26 @@
     "return-type": "json",
     "exec-if": "which wttrbar",
   },
-  "wireplumber": {
-    "format": "{volume}% <span color='#24837B'>{icon}</span>",
-    "format-muted": "Mute <span color='#24837B'>󰖁</span> ",
-    "format-icons": [
-      " 󰕿 ",
-      " 󰖀",
-      " 󰕾"
-    ],
+  // Using pulseaudio module instead of wireplumber due to waybar
+  // wireplumber module intermittently resetting volume display to 0%
+  // (https://github.com/Alexays/Waybar/issues/2086)
+  // Works with PipeWire via its PulseAudio compatibility layer.
+  "pulseaudio": {
+    "format": "{volume}% <span color='#24837B'>{icon}</span> {format_source}",
+    "format-muted": "Mute <span color='#24837B'>󰖁</span> {format_source}",
+    "format-source": "{volume}% <span color='#24837B'>󰍬</span>",
+    "format-source-muted": "<span color='#24837B'>󰍭</span>",
+    "format-icons": {
+      "default": [
+        " 󰕿 ",
+        " 󰖀",
+        " 󰕾"
+      ]
+    },
     "scroll-step": 5.0,
     "on-click": "pavucontrol",
     "max-volume": 100,
-    "tooltip-format": "{node_name}",
-  },
-  "wireplumber#source": {
-    "node-type": "Audio/Source",
-    "format": "{volume}% ",
-    "format-muted": "<span color='#24837B'>󰍭</span> ",
-    "scroll-step": 5.0,
-    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-    "tooltip-format": "{node_name}",
+    "tooltip-format": "{desc}",
   },
   "temperature": {
     // CPU die (k10temp Tctl)
