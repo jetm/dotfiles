@@ -1,0 +1,11 @@
+[misc]
+assume_yes = true
+no_retry = true
+no_self_update = true
+skip_notify = false
+only = ["rustup", "shell", "vim", "custom_commands"]
+
+[commands]
+"Neovim Mason Tools" = "nvim --headless -c 'autocmd User MasonToolsUpdateCompleted qall' -c 'autocmd User MasonUpdateCompleted MasonToolsUpdate' -c 'MasonUpdate'"
+"UV Tools" = "uv tool upgrade --all"
+"NPM Global Packages" = "npm update -g"

@@ -1,0 +1,9 @@
+[Unit]
+Description=Run topgrade weekly on Fridays at noon
+
+[Timer]
+OnCalendar=Fri *-*-* 12:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

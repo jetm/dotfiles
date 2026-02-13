@@ -1,0 +1,9 @@
+[Unit]
+Description=Run topgrade for dev tool updates
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/topgrade --no-self-update
+
+[Install]
+WantedBy=default.target
